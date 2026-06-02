@@ -1,0 +1,42 @@
+<svg width="512" height="512" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AlphaTrack Logo">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0f1e"/>
+      <stop offset="100%" stop-color="#0f1f3d"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.2" result="blur1"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="clip">
+      <rect width="40" height="40" rx="9" ry="9"/>
+    </clipPath>
+    <linearGradient id="line-grad" x1="5" y1="28" x2="35" y2="12" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00c9a7"/>
+      <stop offset="50%" stop-color="#06d6a0"/>
+      <stop offset="100%" stop-color="#00e5ff"/>
+    </linearGradient>
+    <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#06d6a0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#06d6a0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="9" ry="9" fill="url(#bg-grad)"/>
+  <g clip-path="url(#clip)">
+    <line x1="5" y1="14" x2="35" y2="14" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <line x1="5" y1="21" x2="35" y2="21" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <line x1="5" y1="28" x2="35" y2="28" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <line x1="13" y1="8" x2="13" y2="34" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <line x1="20" y1="8" x2="20" y2="34" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <line x1="27" y1="8" x2="27" y2="34" stroke="#ffffff" stroke-opacity="0.04" stroke-width="0.5"/>
+    <path d="M 5 28 C 7 26,9 24,11 23 C 12.5 22.2,13.5 23.5,14.5 22 C 15.2 21,15.8 18.5,16.8 19.5 C 17.5 20.2,17.8 21.5,18.5 20.5 C 19.2 19.5,19.5 17,20.5 13 C 21 11,21.8 10.5,22.5 12 L 35 29 L 35 34 L 5 34 Z" fill="url(#area-grad)"/>
+    <path d="M 5 28 C 7 26,9 24,11 23 C 12.5 22.2,13.5 23.5,14.5 22 C 15.2 21,15.8 18.5,16.8 19.5 C 17.5 20.2,17.8 21.5,18.5 20.5 C 19.2 19.5,19.5 17,20.5 13 C 21 11,21.8 10.5,22.5 12 L 35 29" stroke="url(#line-grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)"/>
+    <circle cx="20.5" cy="13" r="1.4" fill="#06d6a0" filter="url(#glow)"/>
+    <rect width="40" height="40" rx="9" ry="9" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="0.8"/>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "80tuuF44AD",
+    "timestamp": "2026-05-29T15:45:24.136Z",
+    "level": "error",
+    "message": "MT5-Verbindung unterbrochen!",
+    "details": "State: error",
+    "botId": "HtmRZMdjGa",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "FEzrZZhuZo",
+    "timestamp": "2026-05-29T15:44:03.236Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "HtmRZMdjGa",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "mV9p572eYE",
+    "timestamp": "2026-05-29T15:44:02.644Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.05 GBPUSDp",
+    "botId": "HtmRZMdjGa",
+    "botName": "MT5 Test Bot"
+  }
+]

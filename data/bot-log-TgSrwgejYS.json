@@ -1,0 +1,2383 @@
+[
+  {
+    "id": "c30629e7b7",
+    "timestamp": "2026-06-02T17:03:24.469081+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: NZDUSDp | Ticket #pos_150101145 | PnL: +2.06",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6b94099047",
+    "timestamp": "2026-06-02T17:03:24.445029+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_150099936 | PnL: -4.16",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "02236cfd8c",
+    "timestamp": "2026-06-02T17:03:24.424598+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_150098004 | PnL: -3.50",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "53bafd010c",
+    "timestamp": "2026-06-02T17:03:24.398375+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_150097710 | PnL: -2.74",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b9c0e48a92",
+    "timestamp": "2026-06-02T17:03:24.373993+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_150096716 | PnL: +8.32",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c7e0c2d56f",
+    "timestamp": "2026-06-02T17:03:24.350754+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149931633 | PnL: -10.97",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4a217b8b37",
+    "timestamp": "2026-06-02T17:03:24.330366+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149888821 | PnL: +3.26",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a4852afa58",
+    "timestamp": "2026-06-02T17:03:24.290719+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149887193 | PnL: +6.60",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "26573a563e",
+    "timestamp": "2026-06-02T17:03:24.257474+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149851519 | PnL: +5.15",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bd998db542",
+    "timestamp": "2026-06-02T17:03:24.237159+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791770 | PnL: +2.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3891ebdd84",
+    "timestamp": "2026-06-02T17:03:24.193781+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791569 | PnL: +21.40",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a1c4780eec",
+    "timestamp": "2026-06-02T17:03:24.163977+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149784640 | PnL: -9.70",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a68b0e77f4",
+    "timestamp": "2026-06-02T17:03:24.140745+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149587109 | PnL: +4.63",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dbf937f987",
+    "timestamp": "2026-06-02T17:03:24.121794+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149402916 | PnL: -5.23",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c3200c49ee",
+    "timestamp": "2026-06-02T17:03:24.101878+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149343654 | PnL: +8.04",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c2a913f823",
+    "timestamp": "2026-06-02T17:03:24.081563+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149336597 | PnL: -14.37",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "081a7a3a09",
+    "timestamp": "2026-06-02T17:03:24.060027+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149336191 | PnL: +14.92",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3169e8aa41",
+    "timestamp": "2026-06-02T17:03:24.034171+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149322055 | PnL: -0.16",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "9f7922bb89",
+    "timestamp": "2026-06-02T17:03:23.998405+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149319801 | PnL: +19.74",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "8252ad2d2f",
+    "timestamp": "2026-06-02T17:03:23.951916+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149315635 | PnL: +18.01",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b925757e83",
+    "timestamp": "2026-06-02T17:03:23.931876+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCADp | Ticket #pos_149313088 | PnL: -0.22",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6a8d9741fa",
+    "timestamp": "2026-06-02T17:03:23.912474+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_149312468 | PnL: +0.22",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "9da5501b70",
+    "timestamp": "2026-06-02T17:03:23.885961+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149311702 | PnL: +0.30",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4e6129a12c",
+    "timestamp": "2026-06-02T17:03:23.867415+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149311129 | PnL: +0.25",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "97fe0b708b",
+    "timestamp": "2026-06-02T17:03:23.848328+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149306562 | PnL: +0.65",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "aa74421e29",
+    "timestamp": "2026-06-02T17:03:23.829812+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149305018 | PnL: -0.20",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "02c77ea5ac",
+    "timestamp": "2026-06-02T17:03:23.811392+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149304537 | PnL: -0.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7c46d132cd",
+    "timestamp": "2026-06-02T17:03:23.792457+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293342 | PnL: +0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "79af8ee7f4",
+    "timestamp": "2026-06-02T17:03:23.773939+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293044 | PnL: -0.16",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "67cfad1771",
+    "timestamp": "2026-06-02T17:03:23.756140+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149291021 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6a68fadd96",
+    "timestamp": "2026-06-02T17:03:23.731999+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149283054 | PnL: +0.60",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "8b7dd62139",
+    "timestamp": "2026-06-02T17:03:23.713004+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149279096 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "40954135d9",
+    "timestamp": "2026-06-02T17:03:23.694736+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149278248 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5a679376e7",
+    "timestamp": "2026-06-02T17:03:23.649201+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149277897 | PnL: -10.27",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "094cc6891b",
+    "timestamp": "2026-06-02T17:03:23.630038+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149276274 | PnL: -0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "af3ecc66a1",
+    "timestamp": "2026-06-02T17:03:23.611653+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_145925871 | PnL: -12.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2e4b26f54c",
+    "timestamp": "2026-06-02T17:03:23.592921+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145148966 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "edc56a6d42",
+    "timestamp": "2026-06-02T17:03:23.565909+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145130445 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "084f3e387a",
+    "timestamp": "2026-06-02T17:03:23.547598+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073118 | PnL: +0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "901342a018",
+    "timestamp": "2026-06-02T17:03:23.527275+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073116 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2b23ca7ebb",
+    "timestamp": "2026-06-02T17:03:23.508291+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062343 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3afeeda770",
+    "timestamp": "2026-06-02T17:03:23.482991+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062342 | PnL: -0.75",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3245346f1e",
+    "timestamp": "2026-06-02T17:03:23.463994+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061388 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "cf3bda85a2",
+    "timestamp": "2026-06-02T17:03:23.433826+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061380 | PnL: -0.45",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ac646e6c70",
+    "timestamp": "2026-06-02T17:03:23.412673+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145029912 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dd9c9c22c9",
+    "timestamp": "2026-06-02T17:03:23.382736+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994624 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "0b625e1fbd",
+    "timestamp": "2026-06-02T17:03:23.357937+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994623 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "46a180d156",
+    "timestamp": "2026-06-02T17:03:23.338142+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990949 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "64fd51774b",
+    "timestamp": "2026-06-02T17:03:23.320049+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990948 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bf762a5903",
+    "timestamp": "2026-06-02T17:03:23.284955+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990938 | PnL: +0.00",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6b5d84f128",
+    "timestamp": "2026-06-02T17:03:23.267025+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990937 | PnL: -0.02",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "04fac54c03",
+    "timestamp": "2026-06-02T17:03:23.246708+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970543 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c5d8f3d4fc",
+    "timestamp": "2026-06-02T17:03:23.229105+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970541 | PnL: -0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "d1c3bfe655",
+    "timestamp": "2026-06-02T17:03:23.211530+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950734 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "281ff23de1",
+    "timestamp": "2026-06-02T17:03:23.193036+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950733 | PnL: -1.73",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "f063d8370e",
+    "timestamp": "2026-06-02T17:03:23.174795+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936035 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7fe9252761",
+    "timestamp": "2026-06-02T17:03:23.139846+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936034 | PnL: -2.38",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c89235b8c5",
+    "timestamp": "2026-06-02T17:03:23.121114+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931851 | PnL: +0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "e0b464b32a",
+    "timestamp": "2026-06-02T17:03:23.100895+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931850 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2376e2288a",
+    "timestamp": "2026-06-02T17:03:23.081507+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924148 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bdf0fc2b93",
+    "timestamp": "2026-06-02T17:03:23.061732+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924147 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3aa512ef9e",
+    "timestamp": "2026-06-02T17:03:23.041183+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918064 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "68e1634aee",
+    "timestamp": "2026-06-02T17:03:23.020912+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918063 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "9aad4190f5",
+    "timestamp": "2026-06-02T17:03:23.001478+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764528 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "64991060b7",
+    "timestamp": "2026-06-02T17:03:22.983732+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764525 | PnL: -1.27",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dc6f34d6f7",
+    "timestamp": "2026-06-02T17:03:22.966362+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680764 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "70270e5a43",
+    "timestamp": "2026-06-02T17:03:22.948208+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680763 | PnL: -1.94",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b95cc49d6d",
+    "timestamp": "2026-06-02T17:03:22.930598+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649659 | PnL: +0.88",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7f11c1a131",
+    "timestamp": "2026-06-02T17:03:22.913057+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649658 | PnL: -0.90",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7d9ef4e523",
+    "timestamp": "2026-06-02T17:03:22.894806+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560719 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "022b4ea787",
+    "timestamp": "2026-06-02T17:03:22.877060+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560718 | PnL: -2.19",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "084d6a2861",
+    "timestamp": "2026-06-02T17:03:22.853617+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552783 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2789b302ae",
+    "timestamp": "2026-06-02T17:03:22.825039+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552782 | PnL: -1.54",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "0597029ecf",
+    "timestamp": "2026-06-02T17:03:22.808331+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506997 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bfccb9fc3f",
+    "timestamp": "2026-06-02T17:03:22.790847+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506994 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "8172e4cd26",
+    "timestamp": "2026-06-02T17:03:22.773076+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144452972 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ec27fad90b",
+    "timestamp": "2026-06-02T17:03:22.749541+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451907 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "cc65d9c012",
+    "timestamp": "2026-06-02T17:03:22.732668+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451905 | PnL: -2.15",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "f5377243aa",
+    "timestamp": "2026-06-02T17:03:22.715656+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446493 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c07f93727f",
+    "timestamp": "2026-06-02T17:03:22.698882+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446492 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "e662f5c762",
+    "timestamp": "2026-06-02T17:03:22.681597+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417469 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2c6d6e42ff",
+    "timestamp": "2026-06-02T17:03:22.663971+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417468 | PnL: -0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "8a87adc172",
+    "timestamp": "2026-06-02T17:03:22.634414+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144345610 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2337014151",
+    "timestamp": "2026-06-02T17:03:22.617036+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336549 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "21a2d6d0b7",
+    "timestamp": "2026-06-02T17:03:22.597766+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336546 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "1d4ea96c7f",
+    "timestamp": "2026-06-02T17:03:22.578422+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321046 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a55f70affa",
+    "timestamp": "2026-06-02T17:03:22.553732+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321045 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5d3663d61c",
+    "timestamp": "2026-06-02T17:03:22.536282+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316502 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "f276ac85ed",
+    "timestamp": "2026-06-02T17:03:22.517714+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316501 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "618644143b",
+    "timestamp": "2026-06-02T17:03:22.497866+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144126581 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "25a9d25151",
+    "timestamp": "2026-06-02T17:03:22.479099+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045914 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a8ee92d56a",
+    "timestamp": "2026-06-02T17:03:22.456944+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045912 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "04507a07d0",
+    "timestamp": "2026-06-02T17:03:22.407398+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009283 | PnL: -1.06",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "29df5268c4",
+    "timestamp": "2026-06-02T17:03:22.390345+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009282 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "10134772a2",
+    "timestamp": "2026-06-02T17:03:22.371750+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006353 | PnL: -0.66",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b1bf1df9fd",
+    "timestamp": "2026-06-02T17:03:22.354742+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006331 | PnL: -0.29",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "afed1d5cde",
+    "timestamp": "2026-06-02T17:03:22.337195+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143999906 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bb2627bab1",
+    "timestamp": "2026-06-02T17:03:22.317504+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143972799 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "1970b3abc9",
+    "timestamp": "2026-06-02T17:03:22.299200+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922226 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "0a69a20f8f",
+    "timestamp": "2026-06-02T17:03:22.267674+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922223 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "572abaf325",
+    "timestamp": "2026-06-02T17:03:22.239394+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915559 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a90ad623ef",
+    "timestamp": "2026-06-02T17:03:22.220075+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915558 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c3e06da4b6",
+    "timestamp": "2026-06-02T17:03:22.202797+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893053 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "8273c7ff24",
+    "timestamp": "2026-06-02T17:03:22.176304+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893051 | PnL: -0.88",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "aefb537ba0",
+    "timestamp": "2026-06-02T17:03:22.158410+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822864 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5dae0b0b57",
+    "timestamp": "2026-06-02T17:03:22.138834+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822863 | PnL: -2.18",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "105d673c53",
+    "timestamp": "2026-06-02T17:03:22.114727+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757541 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "90c129c5e7",
+    "timestamp": "2026-06-02T17:03:22.095819+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757540 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "a8589fbdac",
+    "timestamp": "2026-06-02T17:03:22.078607+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732398 | PnL: -0.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5fb440add1",
+    "timestamp": "2026-06-02T17:03:22.060780+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732397 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dd1cf170f2",
+    "timestamp": "2026-06-02T17:03:22.043005+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682413 | PnL: -1.20",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4d9405ad2d",
+    "timestamp": "2026-06-02T17:03:22.025722+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682411 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "94ec250f78",
+    "timestamp": "2026-06-02T17:03:22.006523+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678456 | PnL: -1.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4bee7b76b2",
+    "timestamp": "2026-06-02T17:03:21.989855+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678454 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "60b1e618d6",
+    "timestamp": "2026-06-02T17:03:21.961519+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635711 | PnL: +0.82",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "efdc60099e",
+    "timestamp": "2026-06-02T17:03:21.944461+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635706 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c79c92115b",
+    "timestamp": "2026-06-02T17:03:21.927444+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143619957 | PnL: -1.67",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "38ec25a882",
+    "timestamp": "2026-06-02T17:03:21.909308+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143607237 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b3fd0e16c6",
+    "timestamp": "2026-06-02T17:03:21.892091+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583092 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "9695122c02",
+    "timestamp": "2026-06-02T17:03:21.873443+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583091 | PnL: -2.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "1ce3109262",
+    "timestamp": "2026-06-02T17:03:21.856127+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571064 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bdca88632a",
+    "timestamp": "2026-06-02T17:03:21.838395+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571063 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c9d1ca7a16",
+    "timestamp": "2026-06-02T17:03:21.819295+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495430 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "e0f543c76e",
+    "timestamp": "2026-06-02T17:03:21.803081+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495429 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5f08f7c9e1",
+    "timestamp": "2026-06-02T17:03:21.784735+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143476203 | PnL: -1.70",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b3814b998e",
+    "timestamp": "2026-06-02T17:03:21.767378+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470597 | PnL: +0.91",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6ce7a64242",
+    "timestamp": "2026-06-02T17:03:21.750656+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470583 | PnL: -2.17",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "64f4817205",
+    "timestamp": "2026-06-02T17:03:21.731571+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467527 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "475acfbed4",
+    "timestamp": "2026-06-02T17:03:21.714859+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467526 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "b25ac4220a",
+    "timestamp": "2026-06-02T17:03:21.689782+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367751 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bb433ab65d",
+    "timestamp": "2026-06-02T17:03:21.666604+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367750 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "597a9526b4",
+    "timestamp": "2026-06-02T17:03:21.648385+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143343578 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "29bb2db2a4",
+    "timestamp": "2026-06-02T17:03:21.627512+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319472 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3ad7a260ea",
+    "timestamp": "2026-06-02T17:03:21.605792+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319468 | PnL: -2.31",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bf8a949af0",
+    "timestamp": "2026-06-02T17:03:21.586920+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246939 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "45de5559de",
+    "timestamp": "2026-06-02T17:03:21.570018+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246937 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "516ff8f253",
+    "timestamp": "2026-06-02T17:03:21.550572+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133655 | PnL: +0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "00018840b1",
+    "timestamp": "2026-06-02T17:03:21.531226+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133653 | PnL: -0.41",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "f4c37a54eb",
+    "timestamp": "2026-06-02T17:03:21.511532+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143109160 | PnL: -0.41",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "69008cc92e",
+    "timestamp": "2026-06-02T17:03:21.473263+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064823 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3dc25c4aca",
+    "timestamp": "2026-06-02T17:03:21.452734+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042562 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "50b0c2bff9",
+    "timestamp": "2026-06-02T17:03:21.433116+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042560 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "47acb5ebb0",
+    "timestamp": "2026-06-02T17:03:21.411841+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032443 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2f9cb2bdcf",
+    "timestamp": "2026-06-02T17:03:21.393330+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032441 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "1307274918",
+    "timestamp": "2026-06-02T17:03:21.368385+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001779 | PnL: -0.42",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "37f6c00bc1",
+    "timestamp": "2026-06-02T17:03:21.350144+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001778 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "d4f48e99ad",
+    "timestamp": "2026-06-02T17:03:21.331651+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988340 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "55f8e51c12",
+    "timestamp": "2026-06-02T17:03:21.309190+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988339 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "81673c3ee0",
+    "timestamp": "2026-06-02T17:03:21.147938+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3169abdccc",
+    "timestamp": "2026-06-02T17:03:17.813991+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "HaqMOBTeRe",
+    "timestamp": "2026-06-02T17:02:21.418Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "iNDWVyQwh8",
+    "timestamp": "2026-06-02T17:02:20.380Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c7f6HOfMdM",
+    "timestamp": "2026-06-02T17:02:19.347Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "BiAjMqmZ1d",
+    "timestamp": "2026-06-02T17:02:18.255Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "hVB33VuyCM",
+    "timestamp": "2026-06-02T17:02:17.224Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "l0LXW49phw",
+    "timestamp": "2026-06-02T17:02:16.170Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6qJOj72J9f",
+    "timestamp": "2026-06-02T17:02:15.129Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "yt6Ttswk38",
+    "timestamp": "2026-06-02T17:02:14.100Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "QM1BhiCDRp",
+    "timestamp": "2026-06-02T17:02:12.998Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "Uj_C0Oem3w",
+    "timestamp": "2026-06-02T17:02:11.956Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "qJM7t3KjQI",
+    "timestamp": "2026-06-02T17:02:10.927Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "lokdGHsNjA",
+    "timestamp": "2026-06-02T17:02:09.879Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "YY4RpLMMpS",
+    "timestamp": "2026-06-02T17:02:08.840Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "Bsd6i4S3Fq",
+    "timestamp": "2026-06-02T17:02:07.717Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "H-LEEJiwS1",
+    "timestamp": "2026-06-02T17:02:06.684Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "mDykiEIYPS",
+    "timestamp": "2026-06-02T17:02:05.655Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "-vkt2xI4tR",
+    "timestamp": "2026-06-02T17:02:04.627Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "uiNLVLvV5-",
+    "timestamp": "2026-06-02T17:02:03.600Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "jqS7X6sOgp",
+    "timestamp": "2026-06-02T17:02:02.509Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ZfHro3jb-w",
+    "timestamp": "2026-06-02T17:02:01.477Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "K2qSg9EQXr",
+    "timestamp": "2026-06-02T17:02:00.452Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "CIfLSYPzJ2",
+    "timestamp": "2026-06-02T17:01:59.424Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7sNSKVwmBF",
+    "timestamp": "2026-06-02T17:01:58.392Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dxxcs7zMUH",
+    "timestamp": "2026-06-02T17:01:57.288Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "OT152cEV3S",
+    "timestamp": "2026-06-02T17:01:56.257Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "wQxVgFdBlt",
+    "timestamp": "2026-06-02T17:01:55.231Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "GIRH7ONBPB",
+    "timestamp": "2026-06-02T17:01:54.191Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "Xvz4HOYarV",
+    "timestamp": "2026-06-02T17:01:53.162Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "L8IYf5pC2U",
+    "timestamp": "2026-06-02T17:01:52.052Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "yljZB91QIU",
+    "timestamp": "2026-06-02T17:01:51.019Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "JmP20g_BKT",
+    "timestamp": "2026-06-02T17:01:49.979Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5kxNLbP_iG",
+    "timestamp": "2026-06-02T17:01:48.949Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "zm_xxjnD1V",
+    "timestamp": "2026-06-02T17:01:47.923Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "Z41xrNLq9q",
+    "timestamp": "2026-06-02T17:01:46.825Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "VBdl7mXHn8",
+    "timestamp": "2026-06-02T17:01:45.801Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "w4_OmywTqV",
+    "timestamp": "2026-06-02T17:01:44.766Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "6ZUXIJOap7",
+    "timestamp": "2026-06-02T17:01:43.735Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "pLSGH6b1EO",
+    "timestamp": "2026-06-02T17:01:42.687Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "v-V8e5lDBi",
+    "timestamp": "2026-06-02T17:01:41.579Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "YXExexTHzY",
+    "timestamp": "2026-06-02T17:01:40.548Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dgrSed1FGX",
+    "timestamp": "2026-06-02T17:01:39.490Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "diCtbjGzBr",
+    "timestamp": "2026-06-02T17:01:38.463Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "shATARPrYX",
+    "timestamp": "2026-06-02T17:01:37.427Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "XqyLivxXwv",
+    "timestamp": "2026-06-02T17:01:36.281Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "iGuolC9Rq8",
+    "timestamp": "2026-06-02T17:01:35.252Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "gyw3Ck7aQY",
+    "timestamp": "2026-06-02T17:01:34.215Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "_c66Mt2IWS",
+    "timestamp": "2026-06-02T17:01:33.170Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ullmZ-i9C2",
+    "timestamp": "2026-06-02T17:01:32.141Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "93QgDB7Wv3",
+    "timestamp": "2026-06-02T17:01:31.032Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "EHKSmuAmX-",
+    "timestamp": "2026-06-02T17:01:29.999Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "Nx2graglEd",
+    "timestamp": "2026-06-02T17:01:28.970Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "DLbf2oRuio",
+    "timestamp": "2026-06-02T17:01:27.944Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "kqn8b6Efd9",
+    "timestamp": "2026-06-02T17:01:26.904Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2ASDUhv0tT",
+    "timestamp": "2026-06-02T17:01:25.801Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "N_70bOkQaU",
+    "timestamp": "2026-06-02T17:01:24.774Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "7K6aK79R1A",
+    "timestamp": "2026-06-02T17:01:23.744Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "g-_uD5JE2N",
+    "timestamp": "2026-06-02T17:01:22.703Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "jWqPHL-JUv",
+    "timestamp": "2026-06-02T17:01:21.673Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "OOgqgcVLrt",
+    "timestamp": "2026-06-02T17:01:21.587Z",
+    "level": "info",
+    "message": "Bridge-Status geändert: stopped → running",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3011792b12",
+    "timestamp": "2026-06-02T17:01:21.197452+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "d383da88f2",
+    "timestamp": "2026-06-02T17:01:21.066568+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "XaeWQulssa",
+    "timestamp": "2026-06-02T17:01:17.838Z",
+    "level": "info",
+    "message": "Bridge-Status geändert: running → stopped",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "79785f7780",
+    "timestamp": "2026-06-02T17:01:17.538128+00:00",
+    "level": "info",
+    "message": "Bridge beendet",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "IRZp_tvi0H",
+    "timestamp": "2026-06-02T17:01:16.806Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "dbaf2bf0cd",
+    "timestamp": "2026-06-02T17:01:16.436162+00:00",
+    "level": "warn",
+    "message": "Bridge-Neustart angefordert",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "AqEJgiman9",
+    "timestamp": "2026-06-02T17:01:16.420Z",
+    "level": "info",
+    "message": "Command gesendet: restart",
+    "details": "ID: rjpluy81W6",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5wq804s9yZ",
+    "timestamp": "2026-06-02T17:01:15.740Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "PC8pvU-SG-",
+    "timestamp": "2026-06-02T17:01:14.707Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ka0ATW-HqB",
+    "timestamp": "2026-06-02T17:01:13.680Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "OVaDYEJbSd",
+    "timestamp": "2026-06-02T17:01:12.651Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "spm5nCL8ct",
+    "timestamp": "2026-06-02T17:01:11.556Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2a-qAAzkYX",
+    "timestamp": "2026-06-02T17:01:10.527Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "byaQ6IVtiX",
+    "timestamp": "2026-06-02T17:01:09.501Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "GHmsikFg6X",
+    "timestamp": "2026-06-02T17:01:08.452Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "tO-3tabW3F",
+    "timestamp": "2026-06-02T17:01:07.416Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ztwa6rckyZ",
+    "timestamp": "2026-06-02T17:01:06.280Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "gAirNlUnar",
+    "timestamp": "2026-06-02T17:01:05.240Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "yayDApUyZQ",
+    "timestamp": "2026-06-02T17:01:04.203Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "hiuk1PXCA4",
+    "timestamp": "2026-06-02T17:01:03.166Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "vZUTGRurON",
+    "timestamp": "2026-06-02T17:01:02.130Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "BC3ezKjrXa",
+    "timestamp": "2026-06-02T17:01:01.021Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "tRICAd1W6W",
+    "timestamp": "2026-06-02T17:00:59.993Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4MbZexzIVD",
+    "timestamp": "2026-06-02T17:00:58.942Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "cqsDIfU9-S",
+    "timestamp": "2026-06-02T17:00:57.916Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c98FMzAh_p",
+    "timestamp": "2026-06-02T17:00:56.882Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "RjiO3VKy6u",
+    "timestamp": "2026-06-02T17:00:55.789Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4wiVrBH5Zj",
+    "timestamp": "2026-06-02T17:00:54.764Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "v4gunBc_YK",
+    "timestamp": "2026-06-02T17:00:53.735Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "2LvyBABybD",
+    "timestamp": "2026-06-02T17:00:52.701Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "xGmcmeSaOj",
+    "timestamp": "2026-06-02T17:00:51.675Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "XPdC9Ayw-5",
+    "timestamp": "2026-06-02T17:00:50.552Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "CLv4LZWAnj",
+    "timestamp": "2026-06-02T17:00:49.525Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "XJnArC00Yw",
+    "timestamp": "2026-06-02T17:00:48.490Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "go3u2kI6Wu",
+    "timestamp": "2026-06-02T17:00:47.446Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "CAcKXm3pJC",
+    "timestamp": "2026-06-02T17:00:46.421Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "mckuHjG41J",
+    "timestamp": "2026-06-02T17:00:45.316Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "yIA-0iFuDf",
+    "timestamp": "2026-06-02T17:00:44.269Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "e2xli-9r-k",
+    "timestamp": "2026-06-02T17:00:43.237Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "o3nurlpYXQ",
+    "timestamp": "2026-06-02T17:00:42.212Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "KY18bthHZg",
+    "timestamp": "2026-06-02T17:00:41.185Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "63nukq3zwe",
+    "timestamp": "2026-06-02T17:00:40.053Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "nvCk-gJ5fS",
+    "timestamp": "2026-06-02T17:00:39.028Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "ZIczWMgVew",
+    "timestamp": "2026-06-02T17:00:37.999Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "D66rpXPdvR",
+    "timestamp": "2026-06-02T17:00:36.940Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "o-cVWIuM2m",
+    "timestamp": "2026-06-02T17:00:35.913Z",
+    "level": "warn",
+    "message": "Profil-ID nicht gefunden: rTxDMdynXZ",
+    "details": "Bitte Bridge-Profil in den Einstellungen korrigieren",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "3-4VxppwTv",
+    "timestamp": "2026-06-02T17:00:35.835Z",
+    "level": "info",
+    "message": "Bridge-Status geändert: stopped → running",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "5e559fb411",
+    "timestamp": "2026-06-02T17:00:35.481660+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c03089e1da",
+    "timestamp": "2026-06-02T17:00:35.050676+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "_2_DvgfKn2",
+    "timestamp": "2026-06-02T17:00:31.615Z",
+    "level": "info",
+    "message": "Bridge-Status geändert: running → stopped",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "hmVNpdIW7U",
+    "timestamp": "2026-06-02T17:00:29.545Z",
+    "level": "info",
+    "message": "Command gesendet: restart",
+    "details": "ID: -lPMdfpTw-",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "s8xa3ZujBF",
+    "timestamp": "2026-06-02T16:28:51.300Z",
+    "level": "info",
+    "message": "Command gesendet: close_position",
+    "details": "Ticket #150738945",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "bgN5U5zqWr",
+    "timestamp": "2026-06-02T16:28:33.071Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "4uXrGEv6cC",
+    "timestamp": "2026-06-02T16:28:07.529Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "SELL 0.07 EURUSDp SL:1.16415 TP:1.1627",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "AkqnnqeMqk",
+    "timestamp": "2026-06-02T16:27:31.447Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "0qL1_sLpJ0",
+    "timestamp": "2026-06-02T16:27:22.034Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDp",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  }
+]

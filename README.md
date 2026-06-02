@@ -1,0 +1,305 @@
+# AlphaTrack
+
+**Lokales Trading Journal + Bot-Analyser - läuft auf deinem PC oder NAS, kein Cloud-Account nötig.**
+
+Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Performance mit KI-Unterstützung.
+
+---
+
+[![Version](https://img.shields.io/badge/version-1.1.16-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/license-private-red?style=flat-square)](./LICENSE)
+
+---
+
+## Inhaltsverzeichnis
+
+- [Features](#features)
+- [Navigation](#navigation)
+- [Schnellstart](#schnellstart)
+- [Docker / NAS-Deployment](#docker--nas-deployment)
+- [Konfiguration](#konfiguration)
+- [Projektstruktur](#projektstruktur)
+- [Datenspeicherung](#datenspeicherung)
+- [Tech Stack](#tech-stack)
+- [PWA / Mobile](#pwa--mobile)
+- [Lizenz](#lizenz)
+
+---
+
+## Features
+
+### Trading Journal
+
+| Feature | Beschreibung |
+|---|---|
+| **Dashboard** | PnL-Karten, Win-Rate, Risk/Reward, Equity-Kurve, letzte Trades, Warnungen bei langen offenen Positionen |
+| **Trading Journal** | Trades vollständig erfassen mit Einstieg, Ausstieg, SL/TP, Gebühren, Strategie, Tags, Notizen und Chart-Screenshots |
+| **Statistiken** | Tiefgehende Auswertungen nach Strategie und Instrument, R-Multiple-Verteilung, Wochentagsanalyse, monatliches PnL-Chart |
+| **Strategien** | Trading-Strategien anlegen, mit Trades verknüpfen und Performance je Strategie automatisch auswerten |
+| **Wirtschaftskalender** | Wirtschaftsdaten der nächsten 2 Wochen (via Tradays/MQL5), filterbar nach Wichtigkeit und Währung |
+| **KI-Marktanalyse** | Echtzeit-Kerzenanalyse via MT5-Bot - Bias, Entry, SL/TP und R/R Empfehlung per Claude AI |
+| **KI-Erklärungen** | Wirtschaftsereignisse automatisch per Claude AI auf Deutsch erklären lassen (gecacht) |
+| **Multi-Profile** | Mehrere Konten parallel verwalten (Live, Demo) mit eigenem Startkapital, Broker und Währung |
+| **Backup & Restore** | Vollständige Datensicherung als ZIP-Bundle inkl. Screenshots; Import zum Wiederherstellen |
+| **PWA-fähig** | Als App auf dem Smartphone oder Tablet installierbar |
+| **Lokale Datenspeicherung** | Alle Daten bleiben lokal als JSON-Dateien - keine Cloud, keine Abhängigkeiten |
+
+### Bot-Analyser (Bridge)
+
+| Feature | Beschreibung |
+|---|---|
+| **Bridge Dashboard** | Live-Status aller verbundenen Bots mit Verbindungsanzeige (MT5, Bridge, AlphaTrack) |
+| **Live Trades** | Offene Positionen des Bots in Echtzeit, inkl. Schliessen-Funktion |
+| **Trade Analyzer** | KI-gestützte Marktanalyse auf Basis echter MT5-Kerzen (M5 Scalping / H1 Intraday) |
+| **Bot Log** | Bridge-Logs nach Level (INFO/WARN/ERR) filterbar, mit CSV/JSON-Export |
+| **Bot Settings** | Bot konfigurieren, Bridge per Auto-Discovery im LAN finden |
+| **Trade-Executor** | Trades direkt in MT5 ausführen (Symbol, Richtung, Lots, SL/TP) |
+| **Watchdog-Panel** | Bridge-Status, Neustart-Funktion und Bot-Steuerung (Start/Pause/Stop) |
+| **TradingLockContext** | Sicherheits-Schutzschalter in der Sidebar - sperrt alle Trade-Buttons standardmäßig |
+
+---
+
+## Navigation
+
+Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
+
+**Trading Journal:** Dashboard - Trades - Statistiken - Strategien - Kalender
+
+**Bot-Analyser:** Bridge - Live Trades - Trade Analyzer - Performance - Bot Log - Bot Settings
+
+**Schutzschalter:** Neben dem Logo in der Sidebar - `ShieldCheck` (grün = gesperrt/sicher) / `ShieldOff` (rot = Trading aktiv). Standard: gesperrt.
+
+**Farbthemen:** 3 wählbare Akzentfarben - Blau (Standard), Crimson (`#f43f5e`), Violett (`#a855f7`)
+
+---
+
+## Schnellstart
+
+**Voraussetzungen:** [Node.js](https://nodejs.org/) >= 18
+
+```bash
+# 1. Repository klonen
+git clone https://github.com/G99SEMAN/AlphaTrack.git
+cd AlphaTrack
+
+# 2. Abhängigkeiten installieren
+npm install
+
+# 3. Umgebungsvariablen einrichten
+cp .env.example .env.local
+# .env.local mit deinen Keys befüllen
+
+# 4. Entwicklungsserver starten
+npm run dev
+```
+
+App läuft unter: **http://localhost:3000**
+
+---
+
+## Docker / NAS-Deployment
+
+AlphaTrack läuft als Docker-Container - getestet auf **Synology NAS**.
+
+### Starten
+
+```bash
+docker compose up -d
+```
+
+App erreichbar unter: **http://\<NAS-IP\>:3002**
+
+### docker-compose.yml
+
+```yaml
+version: '3.8'
+services:
+  alphatrack:
+    build: .
+    container_name: alphatrack
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    env_file:
+      - .env.local
+    volumes:
+      - ./data:/app/data
+```
+
+> Das `data/`-Volume sichert alle Trades, Profile, Bot-Daten und gecachte KI-Erklärungen persistent ausserhalb des Containers.
+
+### Update auf NAS ausrollen
+
+```bash
+# 1. Änderungen lokal committen und pushen
+git push
+
+# 2. Per SSH auf das NAS verbinden und Update-Script starten
+ssh user@nas-ip "cd /volume1/docker/alphatrack && bash scripts/nas-update.sh"
+```
+
+Das Script stoppt den Container, sichert die Daten, pullt den neuen Code von GitHub, stellt die Daten wieder her und baut den Container neu.
+
+---
+
+## Konfiguration
+
+Erstelle eine `.env.local` im Projektroot:
+
+```env
+# Anthropic API - für KI-Marktanalyse und Wirtschaftskalender-Erklärungen
+ANTHROPIC_API_KEY=sk-ant-...
+
+# Twelve Data API - für Kursdaten in der Analyse
+TWELVE_DATA_API_KEY=...
+
+# Bot-Authentifizierung - muss mit der Python-Bridge übereinstimmen
+BOT_API_KEY=REDACTED-API-KEY
+```
+
+| Variable | Pflicht | Zweck |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | Optional | KI-Marktanalyse, Wirtschaftskalender-Erklärungen |
+| `TWELVE_DATA_API_KEY` | Optional | Kursdaten |
+| `BOT_API_KEY` | Nur mit Bridge | Authentifizierung der Python-Bridge gegen AlphaTrack |
+
+> Auf dem NAS importierte API-Keys werden in `data/api-keys.json` persistiert und überleben Container-Rebuilds.
+
+---
+
+## Projektstruktur
+
+```
+AlphaTrack/
++-- src/
+|   +-- app/                      # Next.js App Router - Seiten
+|   |   +-- dashboard/            # Dashboard mit PnL, Equity-Kurve
+|   |   +-- journal/              # Trading Journal
+|   |   +-- statistiken/          # Performance-Auswertung
+|   |   +-- strategien/           # Strategien-Verwaltung
+|   |   +-- kalender/             # Wirtschaftskalender
+|   |   +-- analyse/              # KI-Marktanalyse
+|   |   +-- einstellungen/        # App-Einstellungen & Backup
+|   |   +-- bridge/               # Bot-Analyser (Bridge, Log, Trades, Settings)
+|   |   +-- setup/                # Ersteinrichtung / Profil anlegen
+|   |   +-- api/                  # API-Routen (bot/*, analyse/*, kalender/*)
+|   +-- components/               # Wiederverwendbare UI-Komponenten
+|   |   +-- layout/               # Sidebar, BottomNav, MarketSessions
+|   |   +-- dashboard/            # Dashboard-Karten und Charts
+|   |   +-- journal/              # Trade-Modal, Trade-Liste, Import
+|   |   +-- statistiken/          # Statistik-Panels und Diagramme
+|   |   +-- strategien/           # Strategie-Verwaltung
+|   |   +-- bot/                  # Bot-Komponenten (Controls, Watchdog, LiveFeed)
+|   |   +-- bridge/               # Bridge-Komponenten (Status, Discovery)
+|   |   +-- analyse/              # Analyse-Komponenten
+|   |   +-- profile/              # Profil-Switcher, Profil-Modal
+|   +-- context/                  # React Contexts
+|   |   +-- TradingLockContext.tsx # Schutzschalter (gesperrt/entsperrt)
+|   |   +-- BotStatusContext.tsx  # Zentrales Bot-Status-Polling (5s)
+|   +-- lib/                      # Datenlogik & Hilfsfunktionen
+|   |   +-- data.ts               # Trade CRUD + Stats-Berechnung
+|   |   +-- bot-data.ts           # Bot/Bridge Datenzugriff (atomicWrite)
+|   |   +-- profiles.ts           # Profil CRUD
+|   |   +-- strategies.ts         # Strategien CRUD
+|   |   +-- api-keys.ts           # API-Key Verwaltung (env + data/ Fallback)
+|   |   +-- analyse-data.ts       # Analyse-History
+|   +-- types/                    # TypeScript-Typdefinitionen
++-- scripts/
+|   +-- docker-entrypoint.sh      # Docker-Startskript (erstellt data/)
+|   +-- nas-update.sh             # NAS-Update via SSH
++-- data/                         # Lokale JSON-Datenspeicherung (nicht in Git)
++-- Dockerfile
++-- docker-compose.yml
++-- package.json
+```
+
+---
+
+## Datenspeicherung
+
+Alle Daten liegen lokal im `data/` Ordner als JSON-Dateien. Kein Server, keine Datenbank, kein Account.
+
+```
+data/
++-- profiles.json                     # Alle angelegten Profile
++-- active.json                       # ID des aktiven Profils
++-- trades-[PROFIL-ID].json           # Trades je Profil
++-- strategies-[PROFIL-ID].json       # Strategien je Profil
++-- bots.json                         # Bot-Konfigurationen
++-- bot-status-[BOT-ID].json          # Letzter Bot-Status (Heartbeat)
++-- bot-log-[BOT-ID].json             # Bridge-Log-Einträge (max 5000)
++-- bot-commands-[BOT-ID].json        # Ausstehende Bot-Commands
++-- bot-trades-[PROFIL-ID].json       # Vom Bot synchronisierte Trades
++-- event-explanations.json           # KI-Erklärungen zu Wirtschaftsereignissen (Cache)
++-- api-keys.json                     # Via UI importierte API-Keys (NAS-persistent)
++-- analyse-history.json              # Letzte 10 KI-Marktanalysen
+```
+
+> Alle Schreibvorgänge nutzen atomares Schreiben (tmp-Datei + rename) - kein korruptes JSON bei gleichzeitigen Requests.
+
+Trade-Screenshots werden unter `data/screenshots/` gespeichert.
+
+> Der `data/`-Ordner ist in `.gitignore` - deine Handelsdaten werden niemals zu GitHub gepusht.
+
+### Backup & Restore
+
+Über die Einstellungen lässt sich ein vollständiges Backup als `.zip` exportieren (inkl. Screenshots) und auf einem anderen Gerät wieder importieren.
+
+---
+
+## Tech Stack
+
+| Technologie | Version | Zweck |
+|---|---|---|
+| [Next.js](https://nextjs.org/) | 15 | React Framework mit App Router und Server Components |
+| [React](https://react.dev/) | 19 | UI-Bibliothek |
+| [TypeScript](https://www.typescriptlang.org/) | 5 | Typsichere Entwicklung |
+| [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-First Styling |
+| [Framer Motion](https://www.framer.com/motion/) | 12 | Animationen und UI-Übergänge |
+| [Recharts](https://recharts.org/) | 3 | Equity-Kurven und Statistik-Diagramme |
+| [Lucide React](https://lucide.dev/) | 1 | Icon-Bibliothek |
+| [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-typescript) | 0.92 | Claude KI-Integration |
+| [JSZip](https://stuk.github.io/jszip/) | 3 | Backup-Bundle erstellen und importieren |
+| [html2canvas](https://html2canvas.hertzen.com/) | 1 | Screenshot-Export |
+| [nanoid](https://github.com/ai/nanoid) | 5 | ID-Generierung |
+| [Docker](https://www.docker.com/) | - | Container-Deployment für NAS |
+
+---
+
+## PWA / Mobile
+
+AlphaTrack ist als **Progressive Web App (PWA)** konfiguriert:
+
+- Installierbar auf iOS (Safari: "Zum Home-Bildschirm") und Android (Chrome: "App installieren")
+- Service Worker für Offline-Fähigkeit
+- Native App-Feeling ohne App Store
+
+**Mobile Navigation:**
+- Smartphone/Tablet: fixe Bottom-Navigation
+- Vollständige Navigation über die Sidebar
+- Responsive Layout optimiert für alle Bildschirmgrößen
+
+---
+
+## Heimnetz-Infrastruktur (Empfehlung)
+
+```
+PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
+                             ^
+                             | Heartbeat / Commands
+                             |
+                        Mini PC (MT5 + Python-Bridge)
+```
+
+- **AlphaTrack** läuft auf dem NAS (Docker) oder lokal auf dem PC
+- **Python-Bridge** läuft auf dem Bot-PC neben MT5 und sendet Heartbeats an AlphaTrack
+- **Kommunikation** ausschliesslich im lokalen Netzwerk - kein Internet nötig
+
+---
+
+## Lizenz
+
+Copyright (c) G99SEMAN - Privates Projekt, nicht für öffentliche Verbreitung vorgesehen.

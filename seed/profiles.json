@@ -1,0 +1,14 @@
+[
+  {
+    "id": "demo001",
+    "name": "Demo Account",
+    "type": "live",
+    "broker": "FTMO",
+    "startCapital": 5000,
+    "currency": "USD",
+    "color": "#06d6a0",
+    "icon": "TrendingUp",
+    "createdAt": "2025-10-01T00:00:00.000Z",
+    "isDemo": true
+  }
+]

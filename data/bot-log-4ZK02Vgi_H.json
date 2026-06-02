@@ -1,0 +1,11 @@
+[
+  {
+    "id": "fj3C96QLvb",
+    "timestamp": "2026-05-31T12:40:34.395Z",
+    "level": "error",
+    "message": "MT5-Verbindung unterbrochen!",
+    "details": "State: error",
+    "botId": "4ZK02Vgi_H",
+    "botName": "MT5 Test Bot"
+  }
+]

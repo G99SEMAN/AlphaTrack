@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bjxDo2fsaB",
+    "timestamp": "2026-05-29T16:50:07.474Z",
+    "level": "error",
+    "message": "MT5-Verbindung unterbrochen!",
+    "details": "State: error",
+    "botId": "QV_f9rrPkJ",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "mfQoJmT625",
+    "timestamp": "2026-05-29T16:40:02.550Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "QV_f9rrPkJ",
+    "botName": "MT5 Test Bot"
+  }
+]

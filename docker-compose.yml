@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  alphatrack:
+    build: .
+    container_name: alphatrack
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    env_file:
+      - .env.local
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s

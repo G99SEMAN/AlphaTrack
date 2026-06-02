@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cX9Rge49Sh",
+    "timestamp": "2026-05-29T19:02:04.537Z",
+    "level": "error",
+    "message": "MT5-Verbindung unterbrochen!",
+    "details": "State: error",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "hhLoMo4abZ",
+    "timestamp": "2026-05-29T18:37:58.551Z",
+    "level": "info",
+    "message": "0 neue, 1 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "DRaC6wRN7j",
+    "timestamp": "2026-05-29T18:06:04.235Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "N9bZ5aQXCc",
+    "timestamp": "2026-05-29T18:05:37.560Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 USDJPYp SL:159.255 TP:159.31",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "SPnLedg9Cm",
+    "timestamp": "2026-05-29T17:58:58.832Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "6rMromCaUP",
+    "timestamp": "2026-05-29T17:58:54.486Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "SELL 0.3 EURGBPp SL:0.86682 TP:0.86615",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "-rSxgjwZ0f",
+    "timestamp": "2026-05-29T17:40:44.156Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "PAQJtcrFmj",
+    "timestamp": "2026-05-29T17:40:13.342Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "SELL 0.5 EURUSDp SL:1.16715 TP:1.1661",
+    "botId": "ubecwouC_2",
+    "botName": "MT5 Test Bot"
+  }
+]

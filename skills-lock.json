@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "market-news-analyst": {
+      "source": "tradermonty/claude-trading-skills",
+      "sourceType": "github",
+      "skillPath": "skills/market-news-analyst/SKILL.md",
+      "computedHash": "3e61a6a96b874f63223aa787b76878ec02094eaf237bc63c29d500d7d1857ad8"
+    }
+  }
+}

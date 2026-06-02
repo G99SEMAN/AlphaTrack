@@ -1,0 +1,1325 @@
+[
+  {
+    "id": "bb3f16c470",
+    "timestamp": "2026-06-01T20:50:14.810747+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: NZDUSDp | Ticket #pos_150101145 | PnL: +2.06",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e3f17aca9a",
+    "timestamp": "2026-06-01T20:50:14.796889+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_150099936 | PnL: -4.16",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b1376447ed",
+    "timestamp": "2026-06-01T20:50:14.783115+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_150098004 | PnL: -3.50",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7e9b15fe76",
+    "timestamp": "2026-06-01T20:50:14.739145+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149931633 | PnL: -10.97",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "96edef47d4",
+    "timestamp": "2026-06-01T20:50:14.723454+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149888821 | PnL: +3.26",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "82a1049d29",
+    "timestamp": "2026-06-01T20:50:14.709353+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149887193 | PnL: +6.60",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "da06b4f8f1",
+    "timestamp": "2026-06-01T20:50:14.695340+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149851519 | PnL: +5.15",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "738ee9d86b",
+    "timestamp": "2026-06-01T20:50:14.681052+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791770 | PnL: +2.13",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e06816fcfc",
+    "timestamp": "2026-06-01T20:50:14.664771+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791569 | PnL: +21.40",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "72e0ab501b",
+    "timestamp": "2026-06-01T20:50:14.649622+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149784640 | PnL: -9.70",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "365057253f",
+    "timestamp": "2026-06-01T20:50:14.627922+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149587109 | PnL: +4.63",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7b806a0e24",
+    "timestamp": "2026-06-01T20:50:14.612023+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149402916 | PnL: -5.23",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "080a68254a",
+    "timestamp": "2026-06-01T20:50:14.591928+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149343654 | PnL: +8.04",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "893b2175cc",
+    "timestamp": "2026-06-01T20:50:14.563159+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149336597 | PnL: -14.37",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5ee880ac7c",
+    "timestamp": "2026-06-01T20:50:14.548812+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149336191 | PnL: +14.92",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f5d75a1078",
+    "timestamp": "2026-06-01T20:50:14.531573+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149322055 | PnL: -0.16",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "667fa80d99",
+    "timestamp": "2026-06-01T20:50:14.517773+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149319801 | PnL: +19.74",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a33e0d6269",
+    "timestamp": "2026-06-01T20:50:14.503206+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149315635 | PnL: +18.01",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "abe815e922",
+    "timestamp": "2026-06-01T20:50:14.487121+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCADp | Ticket #pos_149313088 | PnL: -0.22",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4f2fc5bbb3",
+    "timestamp": "2026-06-01T20:50:14.472747+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_149312468 | PnL: +0.22",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "02a329def9",
+    "timestamp": "2026-06-01T20:50:14.456156+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149311702 | PnL: +0.30",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f508360efc",
+    "timestamp": "2026-06-01T20:50:14.436818+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149311129 | PnL: +0.25",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "8840adb979",
+    "timestamp": "2026-06-01T20:50:14.423250+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149306562 | PnL: +0.65",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "47d504b261",
+    "timestamp": "2026-06-01T20:50:14.409204+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149305018 | PnL: -0.20",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "732507178c",
+    "timestamp": "2026-06-01T20:50:14.395444+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149304537 | PnL: -0.13",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ddac4d9656",
+    "timestamp": "2026-06-01T20:50:14.381920+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293342 | PnL: +0.39",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "62cfdcf505",
+    "timestamp": "2026-06-01T20:50:14.368470+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293044 | PnL: -0.16",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "bae49f1a99",
+    "timestamp": "2026-06-01T20:50:14.354014+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149291021 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "55dcc8b39d",
+    "timestamp": "2026-06-01T20:50:14.338693+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149283054 | PnL: +0.60",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4206b726b6",
+    "timestamp": "2026-06-01T20:50:14.320683+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149279096 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f431cc2c2c",
+    "timestamp": "2026-06-01T20:50:14.307065+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149278248 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ff205728e4",
+    "timestamp": "2026-06-01T20:50:14.292395+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149277897 | PnL: -10.27",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7f4d2911e1",
+    "timestamp": "2026-06-01T20:50:14.275862+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149276274 | PnL: -0.03",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a74f4412de",
+    "timestamp": "2026-06-01T20:50:14.263073+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_145925871 | PnL: -12.03",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "94cfb0dff0",
+    "timestamp": "2026-06-01T20:50:14.249327+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145148966 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "072fee0172",
+    "timestamp": "2026-06-01T20:50:14.234752+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145130445 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5931ef584f",
+    "timestamp": "2026-06-01T20:50:14.215966+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073118 | PnL: +0.09",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "d331957f1a",
+    "timestamp": "2026-06-01T20:50:14.200432+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073116 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "841fa98aa7",
+    "timestamp": "2026-06-01T20:50:14.185741+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062343 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "893547f730",
+    "timestamp": "2026-06-01T20:50:14.169579+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062342 | PnL: -0.75",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "740af2b7fa",
+    "timestamp": "2026-06-01T20:50:14.155854+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061388 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "46e4e94f36",
+    "timestamp": "2026-06-01T20:50:14.136511+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061380 | PnL: -0.45",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "62e711ba6b",
+    "timestamp": "2026-06-01T20:50:14.119969+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145029912 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4e411753ff",
+    "timestamp": "2026-06-01T20:50:14.079462+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994624 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a45343ba7b",
+    "timestamp": "2026-06-01T20:50:14.057431+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994623 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2e8ed7eec5",
+    "timestamp": "2026-06-01T20:50:14.039935+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990949 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "dd61f6be4f",
+    "timestamp": "2026-06-01T20:50:14.023793+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990948 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "407e5d6223",
+    "timestamp": "2026-06-01T20:50:14.009622+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990938 | PnL: +0.00",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "14aca318ab",
+    "timestamp": "2026-06-01T20:50:13.994306+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990937 | PnL: -0.02",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "12a945d8e1",
+    "timestamp": "2026-06-01T20:50:13.978929+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970543 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "10f2b9f86f",
+    "timestamp": "2026-06-01T20:50:13.962878+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970541 | PnL: -0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f5dbc42a26",
+    "timestamp": "2026-06-01T20:50:13.947383+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950734 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "87d5a98f80",
+    "timestamp": "2026-06-01T20:50:13.933978+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950733 | PnL: -1.73",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4f4a9511ee",
+    "timestamp": "2026-06-01T20:50:13.920981+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936035 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4537975359",
+    "timestamp": "2026-06-01T20:50:13.907633+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936034 | PnL: -2.38",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "00c775ac3d",
+    "timestamp": "2026-06-01T20:50:13.892882+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931851 | PnL: +0.43",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "bc494ceba9",
+    "timestamp": "2026-06-01T20:50:13.879879+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931850 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "0c776db2dd",
+    "timestamp": "2026-06-01T20:50:13.867169+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924148 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "35f7625ee1",
+    "timestamp": "2026-06-01T20:50:13.853354+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924147 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "20c82b5d82",
+    "timestamp": "2026-06-01T20:50:13.839887+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918064 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "64c72c1ffe",
+    "timestamp": "2026-06-01T20:50:13.826626+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918063 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e3267b77e6",
+    "timestamp": "2026-06-01T20:50:13.812516+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764528 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ddf91e6ca0",
+    "timestamp": "2026-06-01T20:50:13.798493+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764525 | PnL: -1.27",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7d54b84c24",
+    "timestamp": "2026-06-01T20:50:13.785827+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680764 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a70aa43be5",
+    "timestamp": "2026-06-01T20:50:13.771108+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680763 | PnL: -1.94",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "199f5d5033",
+    "timestamp": "2026-06-01T20:50:13.758411+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649659 | PnL: +0.88",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5bd46de044",
+    "timestamp": "2026-06-01T20:50:13.745971+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649658 | PnL: -0.90",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "49acea77b2",
+    "timestamp": "2026-06-01T20:50:13.733314+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560719 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f6f5441575",
+    "timestamp": "2026-06-01T20:50:13.720280+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560718 | PnL: -2.19",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "8c8d09e6df",
+    "timestamp": "2026-06-01T20:50:13.701576+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552783 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5950963266",
+    "timestamp": "2026-06-01T20:50:13.689521+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552782 | PnL: -1.54",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "450ed975f8",
+    "timestamp": "2026-06-01T20:50:13.676026+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506997 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7d090b7ce9",
+    "timestamp": "2026-06-01T20:50:13.662690+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506994 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "9dfb801d51",
+    "timestamp": "2026-06-01T20:50:13.650343+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144452972 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4c52be7e5f",
+    "timestamp": "2026-06-01T20:50:13.637647+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451907 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "69916cc8aa",
+    "timestamp": "2026-06-01T20:50:13.624093+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451905 | PnL: -2.15",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a6e51bc4b3",
+    "timestamp": "2026-06-01T20:50:13.612424+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446493 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "482938b4b8",
+    "timestamp": "2026-06-01T20:50:13.600619+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446492 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "f45f2f3ac7",
+    "timestamp": "2026-06-01T20:50:13.588199+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417469 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "03861cb219",
+    "timestamp": "2026-06-01T20:50:13.575029+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417468 | PnL: -0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "037fdef049",
+    "timestamp": "2026-06-01T20:50:13.562002+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144345610 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "873ea3ae92",
+    "timestamp": "2026-06-01T20:50:13.539252+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336549 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2d13eaefa4",
+    "timestamp": "2026-06-01T20:50:13.525005+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336546 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2671f2e67f",
+    "timestamp": "2026-06-01T20:50:13.512303+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321046 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "34cc098856",
+    "timestamp": "2026-06-01T20:50:13.499076+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321045 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "09cdc8969a",
+    "timestamp": "2026-06-01T20:50:13.481006+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316502 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "361e66a2ea",
+    "timestamp": "2026-06-01T20:50:13.468456+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316501 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "504aa9cded",
+    "timestamp": "2026-06-01T20:50:13.456152+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144126581 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "fd75513924",
+    "timestamp": "2026-06-01T20:50:13.441128+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045914 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "483c54d956",
+    "timestamp": "2026-06-01T20:50:13.427295+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045912 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4YNIn_DCkK",
+    "timestamp": "2026-06-01T20:50:13.415Z",
+    "level": "info",
+    "message": "14 neue, 2 aktualisierte Trade(s)",
+    "details": "Profil: rTxDMdynXZ",
+    "botId": "C-RbAhyZxC",
+    "botName": "Lenovo_Bridge"
+  },
+  {
+    "id": "8607d8a17b",
+    "timestamp": "2026-06-01T20:50:13.414870+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009283 | PnL: -1.06",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "bdea7ed377",
+    "timestamp": "2026-06-01T20:50:13.400713+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009282 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "943786b0c3",
+    "timestamp": "2026-06-01T20:50:13.387284+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006353 | PnL: -0.66",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "6323b2564b",
+    "timestamp": "2026-06-01T20:50:13.374673+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006331 | PnL: -0.29",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "6be702b290",
+    "timestamp": "2026-06-01T20:50:13.362908+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143999906 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ff61a86ab3",
+    "timestamp": "2026-06-01T20:50:13.349686+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143972799 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "427aecee6a",
+    "timestamp": "2026-06-01T20:50:13.336121+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922226 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "845f877c36",
+    "timestamp": "2026-06-01T20:50:13.322982+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922223 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "bd22764207",
+    "timestamp": "2026-06-01T20:50:13.309091+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915559 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2550aa3216",
+    "timestamp": "2026-06-01T20:50:13.294510+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915558 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "01cde58460",
+    "timestamp": "2026-06-01T20:50:13.281558+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893053 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a108e1b447",
+    "timestamp": "2026-06-01T20:50:13.269182+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893051 | PnL: -0.88",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ffb5f5dca5",
+    "timestamp": "2026-06-01T20:50:13.254611+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822864 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e7649d4367",
+    "timestamp": "2026-06-01T20:50:13.242322+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822863 | PnL: -2.18",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "184e1717de",
+    "timestamp": "2026-06-01T20:50:13.229463+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757541 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "202ae986b4",
+    "timestamp": "2026-06-01T20:50:13.214397+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757540 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5d5d6ad3f5",
+    "timestamp": "2026-06-01T20:50:13.200664+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732398 | PnL: -0.36",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b7d7af6bd4",
+    "timestamp": "2026-06-01T20:50:13.187013+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732397 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "50d0f72303",
+    "timestamp": "2026-06-01T20:50:13.153829+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682413 | PnL: -1.20",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "75e6230ed5",
+    "timestamp": "2026-06-01T20:50:13.119657+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682411 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "9a826db8da",
+    "timestamp": "2026-06-01T20:50:13.106611+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678456 | PnL: -1.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "dc11180a0c",
+    "timestamp": "2026-06-01T20:50:13.093583+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678454 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "c95a6ce839",
+    "timestamp": "2026-06-01T20:50:13.081318+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635711 | PnL: +0.82",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e3924d5ebe",
+    "timestamp": "2026-06-01T20:50:13.065494+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635706 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2a7ab42b4a",
+    "timestamp": "2026-06-01T20:50:13.052209+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143619957 | PnL: -1.67",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "c2ee60eb17",
+    "timestamp": "2026-06-01T20:50:13.030752+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143607237 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "14b730989b",
+    "timestamp": "2026-06-01T20:50:13.014537+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583092 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "e077b98e25",
+    "timestamp": "2026-06-01T20:50:13.001957+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583091 | PnL: -2.13",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "d90a8ab492",
+    "timestamp": "2026-06-01T20:50:12.981786+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571064 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "dce192c98b",
+    "timestamp": "2026-06-01T20:50:12.968932+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571063 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "97e180824d",
+    "timestamp": "2026-06-01T20:50:12.953229+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495430 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4152875d91",
+    "timestamp": "2026-06-01T20:50:12.935573+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495429 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "1551a97af2",
+    "timestamp": "2026-06-01T20:50:12.917333+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143476203 | PnL: -1.70",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "472eebcec0",
+    "timestamp": "2026-06-01T20:50:12.898663+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470597 | PnL: +0.91",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "de1f3f0b10",
+    "timestamp": "2026-06-01T20:50:12.877240+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470583 | PnL: -2.17",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "0a6611f657",
+    "timestamp": "2026-06-01T20:50:12.864057+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467527 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a843966af9",
+    "timestamp": "2026-06-01T20:50:12.850966+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467526 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "2762c62e25",
+    "timestamp": "2026-06-01T20:50:12.837076+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367751 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "1757a2a833",
+    "timestamp": "2026-06-01T20:50:12.825019+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367750 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "ff5edb1c39",
+    "timestamp": "2026-06-01T20:50:12.813733+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143343578 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "654c72893a",
+    "timestamp": "2026-06-01T20:50:12.801087+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319472 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "5d97decdb2",
+    "timestamp": "2026-06-01T20:50:12.787053+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319468 | PnL: -2.31",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "aa2d5ca3e9",
+    "timestamp": "2026-06-01T20:50:12.774471+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246939 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "356086e45f",
+    "timestamp": "2026-06-01T20:50:12.721232+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143109160 | PnL: -0.41",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "8be70d01e3",
+    "timestamp": "2026-06-01T20:50:12.699519+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064824 | PnL: -0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a894a177c8",
+    "timestamp": "2026-06-01T20:50:12.687914+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064823 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b12df36fbf",
+    "timestamp": "2026-06-01T20:50:12.675470+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042562 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7c8371bdba",
+    "timestamp": "2026-06-01T20:50:12.657318+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042560 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "7b65c333eb",
+    "timestamp": "2026-06-01T20:50:12.643744+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032443 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b43573f9ea",
+    "timestamp": "2026-06-01T20:50:12.630694+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032441 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "a4773659d6",
+    "timestamp": "2026-06-01T20:50:12.614430+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001779 | PnL: -0.42",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "728226f5d4",
+    "timestamp": "2026-06-01T20:50:12.600208+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001778 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b17ec8044c",
+    "timestamp": "2026-06-01T20:50:12.588613+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988340 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "b07b91dfbb",
+    "timestamp": "2026-06-01T20:50:12.574421+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988339 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "4889e5dfed",
+    "timestamp": "2026-06-01T20:50:12.038325+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  },
+  {
+    "id": "382523c86d",
+    "timestamp": "2026-06-01T20:50:07.809988+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "C-RbAhyZxC",
+    "bridgeName": "Lenovo_Bridge"
+  }
+]

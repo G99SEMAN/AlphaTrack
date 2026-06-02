@@ -1,0 +1,898 @@
+[
+  {
+    "id": "q-e_Rx1VOO",
+    "timestamp": "2026-05-29T15:21:32.130Z",
+    "level": "error",
+    "message": "MT5-Verbindung unterbrochen!",
+    "details": "State: error",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "ipg-RlbQ6u",
+    "timestamp": "2026-05-29T15:19:30.516Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDP",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "ql0wssQvhy",
+    "timestamp": "2026-05-29T14:56:53.031Z",
+    "level": "info",
+    "message": "Bot-Status geändert: stopped → running",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "6XPWMSsIh1",
+    "timestamp": "2026-05-29T14:56:50.741Z",
+    "level": "info",
+    "message": "Command gesendet: start",
+    "details": "ID: cfJt8c8J6E",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "skl5gmDMuu",
+    "timestamp": "2026-05-29T14:55:02.438Z",
+    "level": "info",
+    "message": "Bot-Status geändert: running → stopped",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "yxV4GD_ouN",
+    "timestamp": "2026-05-29T14:55:01.559Z",
+    "level": "info",
+    "message": "Command gesendet: stop",
+    "details": "ID: s2GDlciWkf",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "hXcGpS7jJO",
+    "timestamp": "2026-05-29T14:54:57.397Z",
+    "level": "info",
+    "message": "Bot-Status geändert: paused → running",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "H1VXTEVQwx",
+    "timestamp": "2026-05-29T14:54:55.724Z",
+    "level": "info",
+    "message": "Command gesendet: start",
+    "details": "ID: Vk7ltwkwc9",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "rYQtIdB55U",
+    "timestamp": "2026-05-29T14:54:37.278Z",
+    "level": "info",
+    "message": "Bot-Status geändert: running → paused",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "s6aQJj17TY",
+    "timestamp": "2026-05-29T14:54:34.356Z",
+    "level": "info",
+    "message": "Command gesendet: pause",
+    "details": "ID: eHaRsuUG8x",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "HmB2HF_6nv",
+    "timestamp": "2026-05-29T14:54:01.174Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "4_GLcnhhOH",
+    "timestamp": "2026-05-29T14:53:56.129Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "fSsbsKnh85",
+    "timestamp": "2026-05-29T14:53:51.100Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "2PBmojG8qy",
+    "timestamp": "2026-05-29T14:53:46.071Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "LDC8m6_ZDK",
+    "timestamp": "2026-05-29T14:53:41.043Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "EtNTxpwv-m",
+    "timestamp": "2026-05-29T14:53:35.986Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "tZCXin3a0s",
+    "timestamp": "2026-05-29T14:53:30.953Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "lDfMh_Ewaf",
+    "timestamp": "2026-05-29T14:53:25.925Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "y2E0MQZtk7",
+    "timestamp": "2026-05-29T14:53:20.898Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "odNoRoA8W2",
+    "timestamp": "2026-05-29T14:53:15.867Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "TNowhJqStt",
+    "timestamp": "2026-05-29T14:53:10.828Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "7RVw2M14N4",
+    "timestamp": "2026-05-29T14:53:05.798Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "nkYcT_QgPM",
+    "timestamp": "2026-05-29T14:53:00.769Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "qM_bYhTt5w",
+    "timestamp": "2026-05-29T14:52:55.740Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "ry3GgTgkFF",
+    "timestamp": "2026-05-29T14:52:50.708Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "RNrCb1MrZX",
+    "timestamp": "2026-05-29T14:52:45.680Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "FkS1Ez2Map",
+    "timestamp": "2026-05-29T14:52:40.653Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "bBThQfXcMW",
+    "timestamp": "2026-05-29T14:52:35.622Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "5lFutfMwWB",
+    "timestamp": "2026-05-29T14:52:31.576Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "YdwkPgz_9m",
+    "timestamp": "2026-05-29T14:52:24.916Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "kytMBLNggG",
+    "timestamp": "2026-05-29T14:52:19.885Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "6kxXuk6JAa",
+    "timestamp": "2026-05-29T14:52:14.699Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "QHkabsQwtH",
+    "timestamp": "2026-05-29T14:52:09.660Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "v2EDx_SBze",
+    "timestamp": "2026-05-29T14:52:04.250Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "-Fxb7_JRLQ",
+    "timestamp": "2026-05-29T14:51:59.222Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "Saub2-6Xrb",
+    "timestamp": "2026-05-29T14:51:54.192Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "GfZryBjM-u",
+    "timestamp": "2026-05-29T14:51:49.163Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "367rFn_iJ3",
+    "timestamp": "2026-05-29T14:51:44.134Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "UrKLcipbl_",
+    "timestamp": "2026-05-29T14:51:39.105Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "bGSvqA2A5I",
+    "timestamp": "2026-05-29T14:51:34.072Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "8VGVvIlDMW",
+    "timestamp": "2026-05-29T14:51:29.043Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "AoX0vAurB3",
+    "timestamp": "2026-05-29T14:51:24.012Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "e7pc5yT-w8",
+    "timestamp": "2026-05-29T14:51:18.984Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "VJyW4S9E5K",
+    "timestamp": "2026-05-29T14:51:13.953Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "AXBgZ_b3PT",
+    "timestamp": "2026-05-29T14:51:08.920Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "kunntsX--X",
+    "timestamp": "2026-05-29T14:51:03.884Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "JljyN9N5Kd",
+    "timestamp": "2026-05-29T14:50:58.857Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "uoPX-Xfjkf",
+    "timestamp": "2026-05-29T14:50:53.828Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "t0kF9YOvtt",
+    "timestamp": "2026-05-29T14:50:48.793Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "Fsar3ratYL",
+    "timestamp": "2026-05-29T14:50:43.759Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "u0qkuRFm21",
+    "timestamp": "2026-05-29T14:50:38.721Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "HfPmfOTROm",
+    "timestamp": "2026-05-29T14:50:33.685Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "ROEUv3e2Rf",
+    "timestamp": "2026-05-29T14:50:28.648Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "K9Xe6uFpd7",
+    "timestamp": "2026-05-29T14:50:23.613Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "-KHL-7MIYa",
+    "timestamp": "2026-05-29T14:50:18.583Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "SF2jv1R0B1",
+    "timestamp": "2026-05-29T14:50:13.549Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "ODlFHj3Xaz",
+    "timestamp": "2026-05-29T14:50:08.508Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "5T7VucBohK",
+    "timestamp": "2026-05-29T14:50:03.471Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "sCfrDhN_r0",
+    "timestamp": "2026-05-29T14:49:58.435Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "yunmKgBx9W",
+    "timestamp": "2026-05-29T14:49:53.402Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "OewNqn9_Kf",
+    "timestamp": "2026-05-29T14:49:48.368Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "jJyk2OfZnF",
+    "timestamp": "2026-05-29T14:49:43.329Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "GMN23b_4Rj",
+    "timestamp": "2026-05-29T14:49:38.294Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "DzJBGJU4vX",
+    "timestamp": "2026-05-29T14:49:33.257Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "4AbR3C9TyX",
+    "timestamp": "2026-05-29T14:49:28.221Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "NgbT4EoR3W",
+    "timestamp": "2026-05-29T14:49:23.189Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "5nPKNek5o9",
+    "timestamp": "2026-05-29T14:49:18.155Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "18i_Bbkd19",
+    "timestamp": "2026-05-29T14:49:13.119Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "AnCgSqnKVH",
+    "timestamp": "2026-05-29T14:49:08.083Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "zrdl-F9RXJ",
+    "timestamp": "2026-05-29T14:49:03.045Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "PczSE5Kas2",
+    "timestamp": "2026-05-29T14:48:58.010Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "wvfZBUd_xw",
+    "timestamp": "2026-05-29T14:48:52.976Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "xNMw07PR3N",
+    "timestamp": "2026-05-29T14:48:47.938Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "kzKO-IbdxB",
+    "timestamp": "2026-05-29T14:48:42.902Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "JIn-sEQL2z",
+    "timestamp": "2026-05-29T14:48:37.865Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "2Csf153btY",
+    "timestamp": "2026-05-29T14:48:32.830Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "odysGAcber",
+    "timestamp": "2026-05-29T14:48:27.793Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "HpYDl0jFIX",
+    "timestamp": "2026-05-29T14:48:22.755Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "T0WQF0u5C7",
+    "timestamp": "2026-05-29T14:48:17.723Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "48x7IZYA_D",
+    "timestamp": "2026-05-29T14:48:12.688Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "Ey0Wwrpcym",
+    "timestamp": "2026-05-29T14:48:07.653Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "dsmKtgVyp1",
+    "timestamp": "2026-05-29T14:48:02.615Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "_wnYlPar0n",
+    "timestamp": "2026-05-29T14:47:57.581Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "NTF1STSqKk",
+    "timestamp": "2026-05-29T14:47:52.549Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "32oFJF7Orl",
+    "timestamp": "2026-05-29T14:47:47.518Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "LpJ36P_e_a",
+    "timestamp": "2026-05-29T14:47:42.486Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "8h0rY3Rv9w",
+    "timestamp": "2026-05-29T14:47:37.455Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "bqqnUyzaof",
+    "timestamp": "2026-05-29T14:47:32.401Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "QJpvQb6Hhz",
+    "timestamp": "2026-05-29T14:47:27.364Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "vQgLsYwx8z",
+    "timestamp": "2026-05-29T14:47:22.330Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "mwFx3BX97B",
+    "timestamp": "2026-05-29T14:47:17.295Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "XWeDTR1qMA",
+    "timestamp": "2026-05-29T14:47:12.259Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "leH_rUVYnX",
+    "timestamp": "2026-05-29T14:47:07.226Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "k3i2v72-BM",
+    "timestamp": "2026-05-29T14:47:02.191Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "YDDRYpMXU7",
+    "timestamp": "2026-05-29T14:46:57.152Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "-PgZbe342K",
+    "timestamp": "2026-05-29T14:46:52.124Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "j8tAxoJSnb",
+    "timestamp": "2026-05-29T14:46:47.092Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "P1kTi9VQPU",
+    "timestamp": "2026-05-29T14:46:42.060Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "HzhzXVbAhm",
+    "timestamp": "2026-05-29T14:46:37.030Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "AtJqQ1DaT4",
+    "timestamp": "2026-05-29T14:46:31.973Z",
+    "level": "info",
+    "message": "Heartbeat empfangen",
+    "details": "State: running, MT5: verbunden",
+    "botId": "BX1vBIIBUC",
+    "botName": "MT5 Test Bot"
+  }
+]

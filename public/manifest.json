@@ -1,0 +1,38 @@
+{
+  "name": "AlphaTrack",
+  "short_name": "AlphaTrack",
+  "description": "Dein persönliches Trading Journal",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#080b12",
+  "theme_color": "#080b12",
+  "orientation": "portrait-primary",
+  "lang": "de",
+  "scope": "/",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo/alphatrack.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Trades",
+      "url": "/journal",
+      "description": "Trade-Journal öffnen"
+    },
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "description": "Dashboard öffnen"
+    }
+  ]
+}

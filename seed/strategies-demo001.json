@@ -1,0 +1,53 @@
+[
+  {
+    "id": "s-demo-1",
+    "name": "Trend Following",
+    "description": "Trendfolge-Strategie auf Tages- und 4H-Charts. Einstieg nach Pullback in den Trend.",
+    "timeframe": "H4",
+    "rules": [
+      "Trendrichtung auf Daily bestätigen (EMA 50/200)",
+      "Pullback auf 4H abwarten (mind. 38% Fibonacci)",
+      "Einstieg bei Kerzenbestätigung in Trendrichtung",
+      "Stop Loss unter letztem Swing-Tief (Long) / über Swing-Hoch (Short)",
+      "Take Profit bei 1:2 RR oder nächstem Widerstand"
+    ],
+    "notes": "Funktioniert am besten in trending markets. Nicht in Seitwärtsphasen handeln.",
+    "riskPerTrade": 1,
+    "color": "#3b82f6",
+    "createdAt": "2025-10-01T00:00:00.000Z"
+  },
+  {
+    "id": "s-demo-2",
+    "name": "Breakout",
+    "description": "Ausbrüche aus klar definierten Konsolidierungszonen mit Volumenbestätigung.",
+    "timeframe": "H1",
+    "rules": [
+      "Konsolidierungszone identifizieren (mind. 3 Berührungen oben und unten)",
+      "Warten auf Schlusskurs außerhalb der Zone",
+      "Einstieg beim ersten Retest der gebrochenen Zone",
+      "Stop Loss innerhalb der Konsolidierungszone",
+      "Take Profit bei Zonenbreite projiziert"
+    ],
+    "notes": "Auf falsche Ausbrüche achten. Volumenanstieg beim Ausbruch ist wichtig.",
+    "riskPerTrade": 1.5,
+    "color": "#f59e0b",
+    "createdAt": "2025-10-01T00:00:00.000Z"
+  },
+  {
+    "id": "s-demo-3",
+    "name": "News Trading",
+    "description": "Fundamentale Nachrichten als Katalysator nutzen. Nur bei High-Impact-Events.",
+    "timeframe": "M15",
+    "rules": [
+      "Economic Calendar täglich prüfen (nur Red-Flag Events)",
+      "Bias vor dem Event festlegen (Konsensus vs. Erwartung)",
+      "Einstieg frühestens 1 Minute nach der Meldung",
+      "Enge Stop Losses wegen hoher Volatilität",
+      "Keine Trades 30 Minuten vor Marktschluss"
+    ],
+    "notes": "Sehr risikoreich. Position Size halbieren. Spreads beachten.",
+    "riskPerTrade": 0.5,
+    "color": "#a855f7",
+    "createdAt": "2025-10-01T00:00:00.000Z"
+  }
+]

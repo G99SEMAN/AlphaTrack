@@ -1,0 +1,1343 @@
+[
+  {
+    "id": "be48f74bb8",
+    "timestamp": "2026-06-01T19:40:37.902714+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: NZDUSDp | Ticket #pos_150101145 | PnL: +2.06",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3c89e22c6c",
+    "timestamp": "2026-06-01T19:40:37.889452+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_150099936 | PnL: -4.16",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "faebbca772",
+    "timestamp": "2026-06-01T19:40:37.875608+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_150098004 | PnL: -3.50",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "26541156b5",
+    "timestamp": "2026-06-01T19:40:37.861742+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_150097710 | PnL: -2.74",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f968d92867",
+    "timestamp": "2026-06-01T19:40:37.847255+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_150096716 | PnL: +8.32",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "b1eef34002",
+    "timestamp": "2026-06-01T19:40:37.832517+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149931633 | PnL: -10.97",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e3f8feddc0",
+    "timestamp": "2026-06-01T19:40:37.819177+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149888821 | PnL: +3.26",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "b7fcf5000d",
+    "timestamp": "2026-06-01T19:40:37.805151+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149887193 | PnL: +6.60",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dce9ac9ab5",
+    "timestamp": "2026-06-01T19:40:37.791423+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149851519 | PnL: +5.15",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "91740a9a74",
+    "timestamp": "2026-06-01T19:40:37.772307+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791770 | PnL: +2.13",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "29d1a9afd7",
+    "timestamp": "2026-06-01T19:40:37.759186+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791569 | PnL: +21.40",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "16674c5b67",
+    "timestamp": "2026-06-01T19:40:37.745771+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149784640 | PnL: -9.70",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e9d5c01202",
+    "timestamp": "2026-06-01T19:40:37.731426+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149587109 | PnL: +4.63",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "11216c6656",
+    "timestamp": "2026-06-01T19:40:37.717175+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149402916 | PnL: -5.23",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "019be29053",
+    "timestamp": "2026-06-01T19:40:37.703831+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149343654 | PnL: +8.04",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3962eef57e",
+    "timestamp": "2026-06-01T19:40:37.689281+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149336597 | PnL: -14.37",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "94ad217105",
+    "timestamp": "2026-06-01T19:40:37.674617+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149336191 | PnL: +14.92",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "de8104c821",
+    "timestamp": "2026-06-01T19:40:37.661090+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149322055 | PnL: -0.16",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "09bdf8f8cd",
+    "timestamp": "2026-06-01T19:40:37.643031+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149319801 | PnL: +19.74",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "279e203a82",
+    "timestamp": "2026-06-01T19:40:37.628314+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149315635 | PnL: +18.01",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "82538b2049",
+    "timestamp": "2026-06-01T19:40:37.615080+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCADp | Ticket #pos_149313088 | PnL: -0.22",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f9e724417e",
+    "timestamp": "2026-06-01T19:40:37.601037+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_149312468 | PnL: +0.22",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "9a7dfe10c4",
+    "timestamp": "2026-06-01T19:40:37.586286+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149311702 | PnL: +0.30",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "fbb4a4eff8",
+    "timestamp": "2026-06-01T19:40:37.571445+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149311129 | PnL: +0.25",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "73f198a16e",
+    "timestamp": "2026-06-01T19:40:37.556295+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149306562 | PnL: +0.65",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dc356a68a6",
+    "timestamp": "2026-06-01T19:40:37.538790+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149305018 | PnL: -0.20",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "6eec4ed465",
+    "timestamp": "2026-06-01T19:40:37.525119+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149304537 | PnL: -0.13",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5de6818464",
+    "timestamp": "2026-06-01T19:40:37.505660+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293342 | PnL: +0.39",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d93716e536",
+    "timestamp": "2026-06-01T19:40:37.492296+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293044 | PnL: -0.16",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "a240f3d4d3",
+    "timestamp": "2026-06-01T19:40:37.479366+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149291021 | PnL: -0.09",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "cc0f6ee016",
+    "timestamp": "2026-06-01T19:40:37.466660+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149283054 | PnL: +0.60",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "9a0adf4817",
+    "timestamp": "2026-06-01T19:40:37.453904+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149279096 | PnL: +0.03",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "69f071162d",
+    "timestamp": "2026-06-01T19:40:37.440916+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149278248 | PnL: +0.03",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e71fa4b77b",
+    "timestamp": "2026-06-01T19:40:37.427823+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149277897 | PnL: -10.27",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f3c32de839",
+    "timestamp": "2026-06-01T19:40:37.413961+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149276274 | PnL: -0.03",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "29fbad3eec",
+    "timestamp": "2026-06-01T19:40:37.395223+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_145925871 | PnL: -12.03",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "eaa522625c",
+    "timestamp": "2026-06-01T19:40:37.382114+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145148966 | PnL: -0.09",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "cc20fe6e82",
+    "timestamp": "2026-06-01T19:40:37.368394+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145130445 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ea113364a7",
+    "timestamp": "2026-06-01T19:40:37.351992+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073118 | PnL: +0.09",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "9dee251932",
+    "timestamp": "2026-06-01T19:40:37.338219+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073116 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "09bda73e08",
+    "timestamp": "2026-06-01T19:40:37.323535+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062343 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f7de79938a",
+    "timestamp": "2026-06-01T19:40:37.303064+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062342 | PnL: -0.75",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "12dc58130a",
+    "timestamp": "2026-06-01T19:40:37.287389+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061388 | PnL: +0.44",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "9bb3dce2a3",
+    "timestamp": "2026-06-01T19:40:37.274117+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061380 | PnL: -0.45",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "81511d1d34",
+    "timestamp": "2026-06-01T19:40:37.254666+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145029912 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "1ea50e34ce",
+    "timestamp": "2026-06-01T19:40:37.238651+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994624 | PnL: -0.43",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "8837498ba9",
+    "timestamp": "2026-06-01T19:40:37.216406+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994623 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d7a6b05e13",
+    "timestamp": "2026-06-01T19:40:37.203081+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990949 | PnL: -1.09",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dc02ad71f5",
+    "timestamp": "2026-06-01T19:40:37.189956+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990948 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "0ed8b69f9d",
+    "timestamp": "2026-06-01T19:40:37.176818+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990938 | PnL: +0.00",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ff895d65cf",
+    "timestamp": "2026-06-01T19:40:37.161935+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990937 | PnL: -0.02",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "da41d32944",
+    "timestamp": "2026-06-01T19:40:37.149201+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970543 | PnL: +0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f3e6d7522d",
+    "timestamp": "2026-06-01T19:40:37.135911+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970541 | PnL: -0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "a096bd2a8c",
+    "timestamp": "2026-06-01T19:40:37.122198+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950734 | PnL: +0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ecabba3bb1",
+    "timestamp": "2026-06-01T19:40:37.109478+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950733 | PnL: -1.73",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "6f14978001",
+    "timestamp": "2026-06-01T19:40:37.096245+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936035 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d4f30c4aa2",
+    "timestamp": "2026-06-01T19:40:37.082741+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936034 | PnL: -2.38",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "4e13115195",
+    "timestamp": "2026-06-01T19:40:37.068533+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931851 | PnL: +0.43",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "adc4f60026",
+    "timestamp": "2026-06-01T19:40:37.055042+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931850 | PnL: -0.46",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "6eac2b1989",
+    "timestamp": "2026-06-01T19:40:37.040555+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924148 | PnL: -0.39",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ab5a7df268",
+    "timestamp": "2026-06-01T19:40:37.020878+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924147 | PnL: +0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "6a2f16f39f",
+    "timestamp": "2026-06-01T19:40:37.005705+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918064 | PnL: -1.05",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ddacc301bc",
+    "timestamp": "2026-06-01T19:40:36.988296+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918063 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e822951b30",
+    "timestamp": "2026-06-01T19:40:36.972432+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764528 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "1d19028008",
+    "timestamp": "2026-06-01T19:40:36.959795+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764525 | PnL: -1.27",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d77fc45f9a",
+    "timestamp": "2026-06-01T19:40:36.942824+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680764 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dae5fb1f8e",
+    "timestamp": "2026-06-01T19:40:36.929305+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680763 | PnL: -1.94",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "c5adbe7256",
+    "timestamp": "2026-06-01T19:40:36.915511+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649659 | PnL: +0.88",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5530cb4358",
+    "timestamp": "2026-06-01T19:40:36.901815+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649658 | PnL: -0.90",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3f3fd2ffbf",
+    "timestamp": "2026-06-01T19:40:36.886548+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560719 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "c9594c68b7",
+    "timestamp": "2026-06-01T19:40:36.872334+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560718 | PnL: -2.19",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5b90eb3c55",
+    "timestamp": "2026-06-01T19:40:36.858893+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552783 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "6e6d92d703",
+    "timestamp": "2026-06-01T19:40:36.843404+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552782 | PnL: -1.54",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "879f9258d6",
+    "timestamp": "2026-06-01T19:40:36.828623+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506997 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "fe13c46fce",
+    "timestamp": "2026-06-01T19:40:36.815423+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506994 | PnL: -0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "58563f9c0f",
+    "timestamp": "2026-06-01T19:40:36.798932+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144452972 | PnL: -1.71",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "8a97d0748d",
+    "timestamp": "2026-06-01T19:40:36.785874+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451907 | PnL: +0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "c72fbd66ae",
+    "timestamp": "2026-06-01T19:40:36.772103+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451905 | PnL: -2.15",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "80a4a8fe45",
+    "timestamp": "2026-06-01T19:40:36.756869+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446493 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e6bf027256",
+    "timestamp": "2026-06-01T19:40:36.743655+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446492 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "99dbc3831b",
+    "timestamp": "2026-06-01T19:40:36.729108+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417469 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "a5edd19b50",
+    "timestamp": "2026-06-01T19:40:36.716120+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417468 | PnL: -0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "037962e941",
+    "timestamp": "2026-06-01T19:40:36.702520+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144345610 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "01397b9d02",
+    "timestamp": "2026-06-01T19:40:36.689515+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336549 | PnL: +0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ffe9b80bda",
+    "timestamp": "2026-06-01T19:40:36.672359+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336546 | PnL: -1.71",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "04f795d31a",
+    "timestamp": "2026-06-01T19:40:36.651633+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321046 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "18969d6f26",
+    "timestamp": "2026-06-01T19:40:36.638050+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321045 | PnL: -2.36",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "62d35315e2",
+    "timestamp": "2026-06-01T19:40:36.625346+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316502 | PnL: +0.44",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "0128dece6c",
+    "timestamp": "2026-06-01T19:40:36.612723+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316501 | PnL: -0.46",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "492315d628",
+    "timestamp": "2026-06-01T19:40:36.600300+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144126581 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "37ee663a07",
+    "timestamp": "2026-06-01T19:40:36.585936+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045914 | PnL: -0.39",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e340f76dbe",
+    "timestamp": "2026-06-01T19:40:36.571878+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045912 | PnL: +0.84",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "bbdaa3faf7",
+    "timestamp": "2026-06-01T19:40:36.559654+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009283 | PnL: -1.06",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "29a84ade05",
+    "timestamp": "2026-06-01T19:40:36.546151+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009282 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "82f927ece7",
+    "timestamp": "2026-06-01T19:40:36.533519+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006353 | PnL: -0.66",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "da6e84c597",
+    "timestamp": "2026-06-01T19:40:36.470927+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922226 | PnL: +0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "e8cb98ad4a",
+    "timestamp": "2026-06-01T19:40:36.455890+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922223 | PnL: -0.43",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "defbc82565",
+    "timestamp": "2026-06-01T19:40:36.440810+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915559 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "462fb5724e",
+    "timestamp": "2026-06-01T19:40:36.426658+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915558 | PnL: -1.09",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dd2c6cd55f",
+    "timestamp": "2026-06-01T19:40:36.413767+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893053 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3c332ffe64",
+    "timestamp": "2026-06-01T19:40:36.400066+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893051 | PnL: -0.88",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "1b31e8a2df",
+    "timestamp": "2026-06-01T19:40:36.384703+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822864 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "735260000b",
+    "timestamp": "2026-06-01T19:40:36.370189+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822863 | PnL: -2.18",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "34ccaf475c",
+    "timestamp": "2026-06-01T19:40:36.356782+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757541 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "a79a8c0a8b",
+    "timestamp": "2026-06-01T19:40:36.335868+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757540 | PnL: -2.36",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "cb91a082c3",
+    "timestamp": "2026-06-01T19:40:36.322898+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732398 | PnL: -0.36",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "iOr4RQjKz7",
+    "timestamp": "2026-06-01T19:40:36.305Z",
+    "level": "info",
+    "message": "14 neue, 2 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "67ad39792c",
+    "timestamp": "2026-06-01T19:40:36.300351+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732397 | PnL: -0.47",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5100aa351f",
+    "timestamp": "2026-06-01T19:40:36.266893+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682413 | PnL: -1.20",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "8ab1fc546f",
+    "timestamp": "2026-06-01T19:40:36.207048+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682411 | PnL: +0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ac49168c56",
+    "timestamp": "2026-06-01T19:40:36.186104+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678456 | PnL: -1.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "945d778a72",
+    "timestamp": "2026-06-01T19:40:36.098052+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678454 | PnL: +0.84",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3ce5645b52",
+    "timestamp": "2026-06-01T19:40:36.083350+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635711 | PnL: +0.82",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "adb217bf18",
+    "timestamp": "2026-06-01T19:40:36.052820+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635706 | PnL: -0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "51bfb466cf",
+    "timestamp": "2026-06-01T19:40:36.036987+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143619957 | PnL: -1.67",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d10e4a6a73",
+    "timestamp": "2026-06-01T19:40:36.008760+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143607237 | PnL: +0.87",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "938bd5d825",
+    "timestamp": "2026-06-01T19:40:35.990891+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583092 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "dba56dc98a",
+    "timestamp": "2026-06-01T19:40:35.976911+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583091 | PnL: -2.13",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "351fa9c224",
+    "timestamp": "2026-06-01T19:40:35.958533+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571064 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "fcd5b27153",
+    "timestamp": "2026-06-01T19:40:35.945278+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571063 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ce38888069",
+    "timestamp": "2026-06-01T19:40:35.933613+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495430 | PnL: +0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "9df9b7ca77",
+    "timestamp": "2026-06-01T19:40:35.916873+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495429 | PnL: -0.83",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "4f3007d5f7",
+    "timestamp": "2026-06-01T19:40:35.905257+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143476203 | PnL: -1.70",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "bfe8d5ad0f",
+    "timestamp": "2026-06-01T19:40:35.893527+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470597 | PnL: +0.91",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "ec704d0954",
+    "timestamp": "2026-06-01T19:40:35.880675+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470583 | PnL: -2.17",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "735b795d2f",
+    "timestamp": "2026-06-01T19:40:35.865604+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467527 | PnL: +0.84",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "bd7b4289da",
+    "timestamp": "2026-06-01T19:40:35.852930+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467526 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "d80d58e512",
+    "timestamp": "2026-06-01T19:40:35.840965+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367751 | PnL: +0.84",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "4796d58ecc",
+    "timestamp": "2026-06-01T19:40:35.825236+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367750 | PnL: -0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "c26cdc4959",
+    "timestamp": "2026-06-01T19:40:35.813370+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143343578 | PnL: -1.71",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "402e7ab8c9",
+    "timestamp": "2026-06-01T19:40:35.801583+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319472 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "8d62334ce7",
+    "timestamp": "2026-06-01T19:40:35.790002+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319468 | PnL: -2.31",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "c52d4fc9b5",
+    "timestamp": "2026-06-01T19:40:35.775296+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246939 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "b7af50f206",
+    "timestamp": "2026-06-01T19:40:35.763875+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246937 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "23723e1e14",
+    "timestamp": "2026-06-01T19:40:35.751299+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133655 | PnL: +0.39",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "56c36cabc7",
+    "timestamp": "2026-06-01T19:40:35.738857+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133653 | PnL: -0.41",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "24e8dabf59",
+    "timestamp": "2026-06-01T19:40:35.723423+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143109160 | PnL: -0.41",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "10f5b46e01",
+    "timestamp": "2026-06-01T19:40:35.711994+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064824 | PnL: -0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "3ae9c184d0",
+    "timestamp": "2026-06-01T19:40:35.701108+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064823 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "fe7e8dd96a",
+    "timestamp": "2026-06-01T19:40:35.686875+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042562 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "545f83485a",
+    "timestamp": "2026-06-01T19:40:35.673160+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042560 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5027886279",
+    "timestamp": "2026-06-01T19:40:35.661645+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032443 | PnL: +0.44",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "b9578c3174",
+    "timestamp": "2026-06-01T19:40:35.650109+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032441 | PnL: -0.47",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "96748f6b82",
+    "timestamp": "2026-06-01T19:40:35.636347+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001779 | PnL: -0.42",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "f8e246d524",
+    "timestamp": "2026-06-01T19:40:35.625170+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001778 | PnL: +0.86",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "70dad8d39c",
+    "timestamp": "2026-06-01T19:40:35.612513+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988340 | PnL: -1.05",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "febfca8cce",
+    "timestamp": "2026-06-01T19:40:35.601031+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988339 | PnL: +0.85",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "0001b339d9",
+    "timestamp": "2026-06-01T19:40:35.001761+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  },
+  {
+    "id": "5c0ef21233",
+    "timestamp": "2026-06-01T19:40:29.448707+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "botId": "LJrKSI8WQY",
+    "botName": "test1"
+  }
+]

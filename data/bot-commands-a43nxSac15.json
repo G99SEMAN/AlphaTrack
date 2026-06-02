@@ -1,0 +1,14 @@
+[
+  {
+    "id": "Y2Xb6S8Csb",
+    "command": "stop",
+    "timestamp": "2026-05-31T15:38:33.091Z",
+    "acknowledged": false
+  },
+  {
+    "id": "cCgL_5VgsS",
+    "command": "start",
+    "timestamp": "2026-05-31T15:38:44.594Z",
+    "acknowledged": false
+  }
+]

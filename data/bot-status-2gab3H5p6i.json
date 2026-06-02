@@ -1,0 +1,15 @@
+{
+  "state": "running",
+  "lastHeartbeat": "2026-05-31T14:40:11.534Z",
+  "botVersion": "1.0.0",
+  "mt5Connected": true,
+  "activeSymbols": [
+    "AUDUSDp",
+    "USDJPYp"
+  ],
+  "openPositions": 2,
+  "tradesSync": 30,
+  "uptime": 454,
+  "balance": 520.31,
+  "currency": "EUR"
+}

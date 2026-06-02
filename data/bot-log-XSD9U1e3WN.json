@@ -1,0 +1,63 @@
+[
+  {
+    "id": "gmIrYPwN7u",
+    "timestamp": "2026-05-29T15:23:57.277Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSD",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "9_QUSv5R9L",
+    "timestamp": "2026-05-29T15:23:29.308Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSD",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "_USSrXgcEc",
+    "timestamp": "2026-05-29T15:23:21.406Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDP",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "xQCYY5XKXJ",
+    "timestamp": "2026-05-29T15:23:13.004Z",
+    "level": "info",
+    "message": "Bot-Status geändert: paused → running",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "oROzidStb6",
+    "timestamp": "2026-05-29T15:23:12.169Z",
+    "level": "info",
+    "message": "Command gesendet: resume",
+    "details": "ID: za_qLK2qPp",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "MfAAfsUwoK",
+    "timestamp": "2026-05-29T15:23:07.972Z",
+    "level": "info",
+    "message": "Bot-Status geändert: running → paused",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  },
+  {
+    "id": "wDyK0FgXAc",
+    "timestamp": "2026-05-29T15:23:06.762Z",
+    "level": "info",
+    "message": "Command gesendet: pause",
+    "details": "ID: bg82OclTmE",
+    "botId": "XSD9U1e3WN",
+    "botName": "MT5 Test Bot"
+  }
+]

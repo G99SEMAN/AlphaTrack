@@ -1,0 +1,14 @@
+- ~~Uhrzeiten bei Kalender überprüfen~~ (erledigt: isoToday() nutzte UTC statt Europe/Berlin, gefixt)
+- ~~Mobile Ansicht: Sessions müssen etwas schmaler werden~~ (erledigt: 2-Spalten-Grid im compact-Modus)
+- ~~Neues Menu "Bots" in Navigationsleiste hinzufügen~~ (erledigt: /bots Route mit Stub-Seiten, getrennt von /bridge)
+- Trades:
+  - ~~Unter "Trades" werden gerade geschlossene Trades erst viel später angezeigt~~ (erledigt: 10s Polling via /api/trades)
+  - ~~Trades nach schlussdatum sortieren~~ (erledigt: offene Trades oben, geschlossene nach closeTime desc)
+  - ~~P&L mit Währungszeichen, Dropdown in Einstellungen~~ (erledigt: currencySymbol() überall, Profil-Dropdown EUR/USD/GBP/CHF)
+- Bridge:
+  - ~~Die Farbe der Uptime in Terminal der Bridge ist nur schwer leserlich~~ (erledigt: bright_white statt dim blue)
+  - ~~Die Meldungen, welche in der Bridge-Log stehen sollen identisch mit den Logs in Alphatrack sein~~ (erledigt: BOT_API_KEY-Bug gefixt - Push war mit 401 geblockt, symbol-Feld in trade_sync.py korrigiert, CLOSED-Trades nun auch im Terminal-Display)
+- Bridge Settings:
+  - ~~Wenn Einstellungen gespeichert werden, sollen diese direkt zur Bridge übertragen werden~~ (erledigt: POST /api/bot/config -> Bridge, config.json wird aktualisiert, Änderungen werden geloggt, Passwort maskiert)
+- Dashboard:
+  - ~~Oben im Dashboard ist eine Anzeige der Bridge mit dem Verbindungsstatus~~ (erledigt: wurde entfernt)
