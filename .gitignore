@@ -44,3 +44,12 @@ next-env.d.ts
 # user data - tracked for multi-device sync (private repo only!)
 # /data/
 # /public/screenshots/
+
+# AI tool artifacts (local only, not needed on GitHub)
+ruvector.db
+agentdb.rvf
+agentdb.rvf.lock
+skills-lock.json
+/.claude-flow/
+/.swarm/
+/.agents/
