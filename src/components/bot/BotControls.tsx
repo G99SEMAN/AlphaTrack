@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play, Pause, Square, RotateCcw, Loader2, RefreshCw } from 'lucide-react'
 import { BotCommandType, BotState, ConnectionState } from '@/types/bot'
+import { useBotStatus } from '@/context/BotStatusContext'
 
 interface Props {
   botId: string
@@ -20,34 +21,15 @@ const DISABLED_FOR: Partial<Record<BotState, BotCommandType[]>> = {
 }
 
 export default function BotControls({ botId, initialState, initialConnection }: Props) {
-  const [botState, setBotState] = useState<BotState>(initialState ?? 'disconnected')
-  const [connection, setConnection] = useState<ConnectionState>(initialConnection ?? 'offline')
+  const { bots, refresh } = useBotStatus()
   const [sending, setSending] = useState<BotCommandType | null>(null)
   const [feedback, setFeedback] = useState<string | null>(null)
 
-  const pollStatus = useCallback(async (signal?: AbortSignal) => {
-    try {
-      const res = await fetch(`/api/bridge/status?bridgeId=${encodeURIComponent(botId)}`, { signal })
-      if (!res.ok) return
-      const data = await res.json()
-      setConnection(data.connectionState)
-      if (data.status) setBotState(data.status.state)
-    } catch (e) {
-      if (e instanceof DOMException && e.name === 'AbortError') return
-    }
-  }, [botId])
-
-  useEffect(() => {
-    const controller = new AbortController()
-    pollStatus(controller.signal)
-    const id = setInterval(() => pollStatus(controller.signal), 5000)
-    return () => { clearInterval(id); controller.abort() }
-  }, [pollStatus])
-
-  // Wenn offline: Bot-State auf disconnected setzen damit alle Buttons grau werden
-  useEffect(() => {
-    if (connection === 'offline') setBotState('disconnected')
-  }, [connection])
+  const botEntry = bots.find(b => b.bot.id === botId)
+  const connection: ConnectionState = botEntry?.status?.connectionState ?? initialConnection ?? 'offline'
+  const botState: BotState = connection === 'offline'
+    ? 'disconnected'
+    : (botEntry?.status?.state ?? initialState ?? 'disconnected')
 
   async function sendCommand(cmd: BotCommandType) {
     setSending(cmd); setFeedback(null)
@@ -61,6 +43,7 @@ export default function BotControls({ botId, initialState, initialConnection }: 
       if (res.ok) {
         setFeedback(`"${cmd}" gesendet`)
         setTimeout(() => setFeedback(null), 4000)
+        refresh()
       } else {
         setFeedback(`Fehler: ${data.error}`)
       }
@@ -72,13 +55,13 @@ export default function BotControls({ botId, initialState, initialConnection }: 
   const disabled_ = DISABLED_FOR[botState] ?? []
 
   const buttons: { cmd: BotCommandType; label: string; Icon: typeof Play; color: string; bg: string }[] = [
-    { cmd: 'start',   label: 'Start',      Icon: Play,       color: 'var(--green)', bg: 'rgba(0,217,126,0.1)' },
-    { cmd: 'pause',   label: 'Pause',      Icon: Pause,      color: '#f59e0b',      bg: 'rgba(245,158,11,0.1)' },
-    { cmd: 'resume',  label: 'Fortsetzen', Icon: RotateCcw,  color: '#3b82f6',      bg: 'rgba(59,130,246,0.1)' },
-    { cmd: 'stop',    label: 'Stop',       Icon: Square,     color: '#ef4444',      bg: 'rgba(239,68,68,0.1)' },
+    { cmd: 'start',   label: 'Start',      Icon: Play,      color: 'var(--green)', bg: 'rgba(0,217,126,0.1)' },
+    { cmd: 'pause',   label: 'Pause',      Icon: Pause,     color: '#f59e0b',      bg: 'rgba(245,158,11,0.1)' },
+    { cmd: 'resume',  label: 'Fortsetzen', Icon: RotateCcw, color: '#3b82f6',      bg: 'rgba(59,130,246,0.1)' },
+    { cmd: 'stop',    label: 'Stop',       Icon: Square,    color: '#ef4444',      bg: 'rgba(239,68,68,0.1)' },
   ]
 
-  const restartDisabled = isOffline || disabled_.includes('restart')
+  const restartDisabled = isOffline || (DISABLED_FOR[botState] ?? []).includes('restart')
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
@@ -98,7 +81,6 @@ export default function BotControls({ botId, initialState, initialConnection }: 
             </button>
           )
         })}
-        {/* Trennlinie + Neustart */}
         <div className="w-px self-stretch mx-0.5" style={{ background: 'var(--border)' }} />
         <button
           onClick={() => sendCommand('restart')}

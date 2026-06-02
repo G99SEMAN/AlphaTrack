@@ -1,6 +1,21 @@
 [
   {
     "bias": "Short",
+    "entry_zone": "1.16320 - 1.16335",
+    "stop_loss": "1.16355",
+    "take_profit": "1.16285",
+    "risk_reward": "1:1.5",
+    "confidence": "Mittel",
+    "reasoning": "Der Markt zeigt eine klare Abwärtsstruktur mit Lower Highs, nachdem er von einem lokalen Hoch bei 1.16349 (01:05 Uhr) kontinuierlich gefallen ist auf aktuell 1.16323. Das Preisniveau um 1.16344-1.16349 stellt einen starken Widerstandsbereich dar, der bereits zweimal abgewiesen wurde. Ein Short-Einstieg in der Zone 1.16320-1.16335 zielt auf die Unterstützungszone bei 1.16285-1.16295, welche zuvor als Reaktionsniveau fungierte (00:05 Uhr Kerze bei 1.16293 Tief).",
+    "timeframe": "M5 (Scalping)",
+    "currentPrice": "1.16323",
+    "duration": "scalping",
+    "symbol": "EUR/USD",
+    "id": "fWNo3S-qub",
+    "timestamp": "2026-06-02T18:31:30.614Z"
+  },
+  {
+    "bias": "Short",
     "entry_zone": "1.16328 - 1.16345",
     "stop_loss": "1.16415",
     "take_profit": "1.16270",
@@ -133,20 +148,5 @@
     "symbol": "USD/CAD",
     "id": "4Ee5-G6Uw4",
     "timestamp": "2026-05-29T17:28:50.379Z"
-  },
-  {
-    "bias": "Long",
-    "entry_zone": "0.78153 - 0.78165",
-    "stop_loss": "0.78120",
-    "take_profit": "0.78200",
-    "risk_reward": "1:1.4",
-    "confidence": "Niedrig",
-    "reasoning": "Der Kurs zeigt nach dem Tief bei 0.77955 (02:55 UTC) eine klare Erholungsbewegung mit Higher Highs und Higher Lows – zuletzt wurde 0.78187 als lokales Hoch erreicht. Die Preisstruktur konsolidiert zwischen 0.78135 und 0.78187, wobei ein Pullback in die Zone 0.78153–0.78165 als möglicher Long-Einstieg dient. Der Stop Loss liegt knapp unter dem jüngsten strukturellen Tief bei 0.78120, während 0.78200 (Tageshoch-Bereich) als nächste Widerstandszone angesteuert wird. Aufgrund der Asien-Sitzung (geringes Volumen) ist die Confidence niedrig.",
-    "timeframe": "M5 (Scalping)",
-    "currentPrice": "0.78186",
-    "duration": "scalping",
-    "symbol": "USD/CHF",
-    "id": "Y-PN4A0n3q",
-    "timestamp": "2026-05-29T17:25:00.452Z"
   }
 ]

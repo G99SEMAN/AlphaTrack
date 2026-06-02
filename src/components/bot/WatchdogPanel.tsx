@@ -1,26 +1,22 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Wifi, WifiOff, AlertTriangle, Bot, Cpu, Clock, TrendingUp, Layers } from 'lucide-react'
-import { BotStatusWithConnection, ConnectionState, BotState } from '@/types/bot'
+import { ConnectionState } from '@/types/bot'
+import { useBotStatus } from '@/context/BotStatusContext'
 
 interface Props {
   botId: string
   botName: string
 }
 
-interface ApiResponse {
-  connectionState: ConnectionState
-  status: BotStatusWithConnection | null
-}
-
-const STATE_LABEL: Record<BotState, string> = {
+const STATE_LABEL = {
   running: 'Aktiv', paused: 'Pausiert', stopped: 'Gestoppt', error: 'Fehler', disconnected: 'Getrennt',
-}
-const STATE_COLOR: Record<BotState, string> = {
+} as const
+
+const STATE_COLOR = {
   running: 'var(--green)', paused: '#f59e0b', stopped: 'var(--text-3)', error: 'var(--red)', disconnected: 'var(--text-3)',
-}
+} as const
 
 function ConnectionBadge({ state }: { state: ConnectionState }) {
   const cfg = {
@@ -47,21 +43,11 @@ function fmt(s: number) {
 }
 
 export default function WatchdogPanel({ botId, botName }: Props) {
-  const [data, setData] = useState<ApiResponse | null>(null)
-  const [lastUpdate, setLastUpdate] = useState<Date | null>(null)
+  const { bots, lastUpdated } = useBotStatus()
+  const botEntry = bots.find(b => b.bot.id === botId)
 
-  const poll = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/bridge/status?bridgeId=${encodeURIComponent(botId)}`)
-      if (res.ok) { setData(await res.json()); setLastUpdate(new Date()) }
-    } catch { /* silent */ }
-  }, [botId])
-
-  useEffect(() => { poll(); const id = setInterval(poll, 5000); return () => clearInterval(id) }, [poll])
-
-  const conn = data?.connectionState ?? 'offline'
-  // Wenn offline: Statuswerte als disconnected anzeigen, nicht letzte bekannte Werte
-  const status = (data?.status && conn !== 'offline') ? data.status : null
+  const conn = botEntry?.status?.connectionState ?? 'offline'
+  const status = (botEntry?.status && conn !== 'offline') ? botEntry.status : null
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
@@ -74,7 +60,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
           <div>
             <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{botName}</p>
             <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-              {lastUpdate ? `Zuletzt: ${lastUpdate.toLocaleTimeString('de-DE')}` : 'Wartet auf Verbindung...'}
+              {lastUpdated ? `Zuletzt: ${lastUpdated.toLocaleTimeString('de-DE')}` : 'Wartet auf Verbindung...'}
             </p>
           </div>
         </div>
@@ -90,7 +76,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { Icon: Cpu,        label: 'MT5',     value: status.mt5Connected ? 'Verbunden' : 'Getrennt', color: status.mt5Connected ? 'var(--green)' : 'var(--red)' },
+              { Icon: Cpu,        label: 'MT5',      value: status.mt5Connected ? 'Verbunden' : 'Getrennt', color: status.mt5Connected ? 'var(--green)' : 'var(--red)' },
               { Icon: Clock,      label: 'Laufzeit', value: fmt(status.uptime), color: 'var(--text-1)' },
               { Icon: TrendingUp, label: 'Offen',    value: `${status.openPositions} Position${status.openPositions !== 1 ? 'en' : ''}`, color: status.openPositions > 0 ? '#f59e0b' : 'var(--text-1)' },
               { Icon: Layers,     label: 'Sync',     value: `${status.tradesSync} Trades`, color: 'var(--text-1)' },

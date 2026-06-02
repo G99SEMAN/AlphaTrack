@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Trash2, TrendingUp, Search } from 'lucide-react'
 import { BotWithStatus } from '@/types/bot'
@@ -11,6 +11,7 @@ import BridgeLogPanel from '@/components/bot/BridgeLogPanel'
 import LiveTradeFeed from '@/components/bot/LiveTradeFeed'
 import TradeExecutorPanel from '@/components/bot/TradeExecutorPanel'
 import DiscoverBridgeModal from '@/components/bridge/DiscoverBridgeModal'
+import { useBotStatus } from '@/context/BotStatusContext'
 
 interface Props {
   botsWithStatus: BotWithStatus[]
@@ -18,45 +19,28 @@ interface Props {
   tradesByProfile: Record<string, number>
 }
 
+const filterBridge = (list: BotWithStatus[]) => list.filter(b => !b.bot.type || b.bot.type === 'bridge')
+
 export default function BridgeClient({ botsWithStatus: initial, profiles, tradesByProfile }: Props) {
-  const filterBridge = (list: BotWithStatus[]) => list.filter(b => !b.bot.type || b.bot.type === 'bridge')
-  const [bots, setBots] = useState<BotWithStatus[]>(filterBridge(initial))
+  const { bots: allBots, refresh } = useBotStatus()
+
+  const contextBots = filterBridge(allBots)
+  const bots = contextBots.length > 0 ? contextBots : filterBridge(initial)
+
   const [selectedBotId, setSelectedBotId] = useState<string | null>(filterBridge(initial)[0]?.bot.id ?? null)
   const [showDiscover, setShowDiscover] = useState(false)
-  const refreshBots = useCallback(async () => {
-    try {
-      const res = await fetch('/api/bots')
-      if (res.ok) {
-        const { bots: rawList } = await res.json()
-        const list = (rawList as BotWithStatus['bot'][]).filter(b => !b.type || b.type === 'bridge')
-        const withStatus = await Promise.all(
-          list.map(async (bot: BotWithStatus['bot']) => {
-            try {
-              const sr = await fetch(`/api/bridge/status?bridgeId=${bot.id}`)
-              if (!sr.ok) return { bot, status: null }
-              const { connectionState, status } = await sr.json()
-              return { bot, status: status ? { ...status, connectionState } : null }
-            } catch { return { bot, status: null } }
-          })
-        )
-        setBots(withStatus)
-        if (withStatus.length > 0 && !withStatus.find(b => b.bot.id === selectedBotId)) {
-          setSelectedBotId(withStatus[0].bot.id)
-        }
-      }
-    } catch { /* silent */ }
-  }, [selectedBotId])
 
+  // Auto-select first bot if selected one no longer exists
   useEffect(() => {
-    const id = setInterval(refreshBots, 6000)
-    return () => clearInterval(id)
-  }, [refreshBots])
+    if (bots.length > 0 && !bots.find(b => b.bot.id === selectedBotId)) {
+      setSelectedBotId(bots[0].bot.id)
+    }
+  }, [bots, selectedBotId])
 
   async function deleteBot(id: string) {
     if (!confirm('Bot wirklich entfernen?')) return
     await fetch(`/api/bots/${id}`, { method: 'DELETE' })
-    await refreshBots()
-    if (selectedBotId === id) setSelectedBotId(bots.find(b => b.bot.id !== id)?.bot.id ?? null)
+    refresh()
   }
 
   const selected = bots.find(b => b.bot.id === selectedBotId)
@@ -92,7 +76,7 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
       {showDiscover && (
         <DiscoverBridgeModal
           onClose={() => setShowDiscover(false)}
-          onDiscovered={() => { setShowDiscover(false); refreshBots() }}
+          onDiscovered={() => { setShowDiscover(false); refresh() }}
         />
       )}
 
@@ -144,7 +128,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
           {/* Ausgewählter Bot Details */}
           {selected && (
             <>
-              {/* Profil-Info */}
               {selectedProfile && (
                 <p className="text-xs mb-4" style={{ color: 'var(--text-3)' }}>
                   <TrendingUp size={11} className="inline mr-1" style={{ color: 'var(--text-3)' }} />
@@ -155,7 +138,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                 </p>
               )}
 
-              {/* Watchdog + Controls */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <WatchdogPanel botId={selected.bot.id} botName={selected.bot.name} />
                 <BotControls
@@ -165,7 +147,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                 />
               </div>
 
-              {/* Trade-Executor + Trades + Log */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <TradeExecutorPanel
                   botId={selected.bot.id}

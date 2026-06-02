@@ -46,6 +46,8 @@ def execute_trade(symbol: str, direction: str, lots: float,
 
     order_type = mt5.ORDER_TYPE_BUY if direction == "buy" else mt5.ORDER_TYPE_SELL
     price = tick.ask if direction == "buy" else tick.bid
+    if not price or price <= 0:
+        return _err(f"Ungültiger Tick-Preis für {symbol}: {price}", symbol, direction, lots, timestamp)
     deviation = 20
 
     # Filling-Mode vom Broker/Symbol ermitteln

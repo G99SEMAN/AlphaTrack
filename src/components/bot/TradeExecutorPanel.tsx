@@ -30,7 +30,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
   const [lastResult, setLastResult] = useState<TradeOrderResult | null>(null)
 
   const symbols = activeSymbols && activeSymbols.length > 0 ? activeSymbols : FALLBACK_SYMBOLS
-  const effectiveSymbol = symbol === '__custom__' ? customSymbol.trim().toUpperCase() : symbol
+  const effectiveSymbol = symbol === '__custom__' ? customSymbol.trim() : symbol
   const isOffline = !connectionState || connectionState === 'offline'
   const isNotRunning = !botState || botState === 'stopped' || botState === 'error' || botState === 'disconnected'
   const disabled = !isUnlocked || isOffline || isNotRunning || status === 'loading'
@@ -156,7 +156,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
           <input
             type="text"
             value={customSymbol}
-            onChange={e => setCustomSymbol(e.target.value.toUpperCase())}
+            onChange={e => setCustomSymbol(e.target.value)}
             placeholder="z.B. BTCUSD"
             disabled={disabled}
             className="mt-2 w-full px-3 py-2 rounded-xl text-sm font-mono outline-none disabled:opacity-40"

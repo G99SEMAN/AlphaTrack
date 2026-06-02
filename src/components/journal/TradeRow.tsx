@@ -45,7 +45,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
 
   const isLong = trade.type === 'long'
   const pnlPositive = (trade.pnl ?? 0) > 0
-  const hasPnl = trade.pnl !== undefined
+  const hasPnl = trade.pnl != null
   const date = new Date(trade.date)
   const strategy = trade.strategyId ? strategies.find(s => s.id === trade.strategyId) : undefined
 
@@ -92,7 +92,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
             <div className="sm:hidden shrink-0">
               <StatusBadge status={trade.status} />
             </div>
-            {trade.tp !== undefined && (
+            {trade.tp != null && (
               <span
                 className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold shrink-0"
                 style={{ background: 'rgba(0,217,126,0.12)', color: 'var(--green)', border: '1px solid rgba(0,217,126,0.25)' }}
@@ -100,7 +100,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 TP
               </span>
             )}
-            {trade.sl !== undefined && (
+            {trade.sl != null && (
               <span
                 className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold shrink-0"
                 style={{ background: 'rgba(255,69,96,0.12)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.25)' }}
@@ -174,7 +174,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
 
         {/* RR */}
         <div className="hidden lg:block text-right shrink-0" style={{ minWidth: 50 }}>
-          {trade.rr !== undefined ? (
+          {trade.rr != null ? (
             <>
               <p className="text-xs" style={{ color: 'var(--text-3)' }}>RR</p>
               <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-2)' }}>
@@ -272,7 +272,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Grosse / Lots</p>
                 <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>{trade.size}</p>
               </div>
-              {trade.exit !== undefined && (
+              {trade.exit != null && (
                 <div>
                   <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Ausstieg</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
@@ -280,7 +280,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                   </p>
                 </div>
               )}
-              {trade.tp !== undefined && (
+              {trade.tp != null && (
                 <div>
                   <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Take Profit</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--green)' }}>
@@ -288,7 +288,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                   </p>
                 </div>
               )}
-              {trade.sl !== undefined && (
+              {trade.sl != null && (
                 <div>
                   <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Stop Loss</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--red)' }}>
@@ -300,7 +300,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Status</p>
                 <StatusBadge status={trade.status} />
               </div>
-              {trade.rr !== undefined && (
+              {trade.rr != null && (
                 <div className="lg:hidden">
                   <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Risk/Reward</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-2)' }}>{trade.rr.toFixed(1)}R</p>
@@ -339,21 +339,21 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                   </div>
                 </div>
               )}
-              {(trade.commission !== undefined || trade.swap !== undefined || trade.spreadCost !== undefined) && (
+              {(trade.commission != null || trade.swap != null || trade.spreadCost != null) && (
                 <div className="col-span-2 sm:col-span-4">
                   <p className="text-xs mb-2" style={{ color: 'var(--text-3)' }}>Kosten & Gebühren</p>
                   <div className="flex flex-wrap gap-2">
-                    {trade.commission !== undefined && (
+                    {trade.commission != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
                         Kommission: -{trade.commission.toFixed(2)}
                       </span>
                     )}
-                    {trade.swap !== undefined && (
+                    {trade.swap != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
                         Swap: -{trade.swap.toFixed(2)}
                       </span>
                     )}
-                    {trade.spreadCost !== undefined && (
+                    {trade.spreadCost != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
                         Spread: -{trade.spreadCost.toFixed(2)}
                       </span>
