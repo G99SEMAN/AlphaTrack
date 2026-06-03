@@ -12,10 +12,58 @@
   - ~~Wenn Einstellungen gespeichert werden, sollen diese direkt zur Bridge übertragen werden~~ (erledigt: POST /api/bot/config -> Bridge, config.json wird aktualisiert, Änderungen werden geloggt, Passwort maskiert)
 - Dashboard:
   - ~~Oben im Dashboard ist eine Anzeige der Bridge mit dem Verbindungsstatus~~ (erledigt: wurde entfernt)
-- AGP/1 Gateway Deployment (Mini-PC):
-  - [ ] Bridge-Dateien kopieren nach `C:\Users\PC\Desktop\bridge\`: `gateway.py` (NEU), `requirements.txt`, `main.py`
-  - [ ] Bot-Dateien kopieren nach `C:\Users\PC\Desktop\breakoutv1\`: `ws_client.py` (NEU), `main.py`, `config.json`, `requirements.txt`
-  - [ ] Bridge: `pip install fastapi "uvicorn[standard]"` und `pip uninstall flask -y`
-  - [ ] Bot: `pip install websocket-client` und `pip uninstall flask -y`
-  - [ ] Bridge starten → Erwartung: "Gateway-Server gestartet auf Port 8765"
-  - [ ] Bot starten (`start.bat`) → Erwartung: "Bot registriert: ..." + erscheint in AlphaTrack unter Bots
+
+Schritt 1 — Neue Dateien auf den Mini-PC kopieren
+
+  Kopiere vom AlphaTrack-Hauptprojekt (C:\Users\Kevin\Desktop\AlphaTrack\) folgende Dateien auf den Mini-PC:
+
+  Bridge-Ordner → nach C:\Users\PC\Desktop\bridge\:
+  bridge\gateway.py          ← NEU (ersetzen/hinzufügen)
+  bridge\requirements.txt    ← AKTUALISIERT (ersetzen)
+  bridge\main.py             ← AKTUALISIERT (ersetzen)
+
+  Bot-Ordner → nach C:\Users\PC\Desktop\breakoutv1\:
+  bots\breakoutv1\ws_client.py    ← NEU
+  bots\breakoutv1\main.py         ← AKTUALISIERT (ersetzen)
+  bots\breakoutv1\config.json     ← AKTUALISIERT (ersetzen)
+  bots\breakoutv1\requirements.txt ← AKTUALISIERT (ersetzen)
+
+  ---
+  Schritt 2 — Bridge: neue Pakete installieren
+
+  Auf dem Mini-PC in einem Terminal im bridge-Ordner:
+  pip install fastapi "uvicorn[standard]"
+  pip uninstall flask -y
+
+  ---
+  Schritt 3 — Bot: neues Paket installieren
+
+  Auf dem Mini-PC im breakoutv1-Ordner:
+  pip install websocket-client
+  pip uninstall flask -y
+
+  ---
+  Schritt 4 — Bridge starten
+
+  cd C:\Users\PC\Desktop\bridge
+  python main.py
+  Du solltest sehen: [CMD] Gateway-Server gestartet auf Port 8765 (statt "Flask")
+
+  ---
+  Schritt 5 — Bot starten
+
+  cd C:\Users\PC\Desktop\breakoutv1
+  start.bat
+  Du solltest sehen:
+  [...] Verbinde mit Bridge via WebSocket: http://localhost:8765
+  [OK] Bot registriert: abc123
+
+  ---
+  Verifizierung
+
+  In AlphaTrack unter Bots sollte der Bot automatisch auftauchen — diesmal ohne eigene IP/Port, sondern über die Bridge registriert. Im Netzwerk-Menü siehst du alle Verbindungen live.
+
+  Geht etwas schief? Häufigste Fehler:
+  - ModuleNotFoundError: fastapi → Schritt 2 nochmal ausführen
+  - ModuleNotFoundError: websocket → Schritt 3 nochmal ausführen
+  - Bot erscheint nicht in AlphaTrack → prüfe ob AlphaTrack läuft und api_key in beiden Configs gleich ist (REDACTED-API-KEY)

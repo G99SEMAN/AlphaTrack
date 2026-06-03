@@ -2316,12 +2316,14 @@
     "size": 0.01,
     "sl": null,
     "tp": null,
-    "pnl": 0.09,
-    "commission": 0,
+    "pnl": -42.34,
+    "commission": -0.05,
     "swap": 0,
-    "status": "open",
+    "status": "closed",
     "externalId": "pos_150802758",
-    "id": "tvvrJ9rQ2D"
+    "id": "tvvrJ9rQ2D",
+    "closeTime": "2026-06-03T19:02:10+00:00",
+    "exit": 4440.61
   },
   {
     "ticket": 151266156,
@@ -2333,11 +2335,13 @@
     "size": 0.01,
     "sl": null,
     "tp": null,
-    "pnl": -0.01,
-    "commission": 0,
+    "pnl": 0.05,
+    "commission": -0.05,
     "swap": 0,
-    "status": "open",
+    "status": "closed",
     "externalId": "pos_151266156",
-    "id": "JcTScIDQ7z"
+    "id": "JcTScIDQ7z",
+    "closeTime": "2026-06-03T19:03:59+00:00",
+    "exit": 1.16022
   }
 ]

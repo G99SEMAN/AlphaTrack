@@ -14,5 +14,13 @@
     "url": "http://192.168.178.37:8766",
     "createdAt": "2026-06-03T16:49:28.361Z",
     "type": "bot"
+  },
+  {
+    "id": "BstJavFKt4",
+    "name": "Breakout v1",
+    "profileId": "FiFT3HmJf-",
+    "url": "http://192.168.178.37:8765/bot/7ecf81a2",
+    "createdAt": "2026-06-03T20:08:27.457Z",
+    "type": "bot"
   }
 ]
