@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from command_server import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, start_server, config_lock
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, start_server, config_lock, configure
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -203,14 +203,15 @@ def main():
     display.log("ok", "MT5", "Verbunden")
 
     # Fetcher injizieren (nach MT5-Init)
+    configure(config["alphatrack_url"], config["profile_id"], config.get("api_key", ""), get_local_ip())
     set_candles_fetcher(mt5.copy_rates)
     set_history_fetcher(mt5.get_closed_deals)
     set_account_fetcher(mt5.get_account_info)
     set_calendar_fetcher(mt5.get_calendar)
 
-    # Flask Command-Server starten
+    # FastAPI Gateway starten
     start_server(config["command_server_port"])
-    display.log("ok", "CMD", f"Flask-Server gestartet auf Port {config['command_server_port']}")
+    display.log("ok", "CMD", f"Gateway gestartet auf Port {config['command_server_port']}")
 
     # Shared State
     state = {

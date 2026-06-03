@@ -1,5 +1,1444 @@
 [
   {
+    "id": "15a91891b9",
+    "timestamp": "2026-06-03T18:11:17.710837+00:00",
+    "level": "error",
+    "message": "MT5-Verbindung verloren",
+    "details": "Neustart-Sequenz gestartet",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fd04ba28d1",
+    "timestamp": "2026-06-03T17:20:11.266960+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "e9704a819a",
+    "timestamp": "2026-06-03T17:19:21.987397+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4efb49a9fa",
+    "timestamp": "2026-06-03T17:07:11.116666+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "5f22d3158b",
+    "timestamp": "2026-06-03T17:06:55.050306+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "153b170a16",
+    "timestamp": "2026-06-03T16:03:59.704729+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #151266156",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "bitSqftFAs",
+    "timestamp": "2026-06-03T16:03:58.610Z",
+    "level": "info",
+    "message": "Command gesendet: close_position",
+    "details": "Ticket #151266156",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "iRmZwiESpO",
+    "timestamp": "2026-06-03T16:03:38.243Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c798084f96",
+    "timestamp": "2026-06-03T16:03:36.633432+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.16016 | Ticket #151266156",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "9FpoP4O3qf",
+    "timestamp": "2026-06-03T16:03:36.050Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDp",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "20550fc6ee",
+    "timestamp": "2026-06-03T16:01:31.070965+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_150740289 | PnL: +3.55",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f8565643e3",
+    "timestamp": "2026-06-03T16:01:31.047111+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_150738945 | PnL: -0.05",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "dbdf4163d0",
+    "timestamp": "2026-06-03T16:01:31.020802+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_150386237 | PnL: -1.91",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "7bf304dc42",
+    "timestamp": "2026-06-03T16:01:30.996816+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: NZDUSDp | Ticket #pos_150101145 | PnL: +2.06",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "e2ba0bada4",
+    "timestamp": "2026-06-03T16:01:30.955824+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_150099936 | PnL: -4.16",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "6e85e9239b",
+    "timestamp": "2026-06-03T16:01:30.929275+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_150098004 | PnL: -3.50",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "1fa9a66750",
+    "timestamp": "2026-06-03T16:01:30.905978+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_150097710 | PnL: -2.74",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a8bfd0e64f",
+    "timestamp": "2026-06-03T16:01:30.880576+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_150096716 | PnL: +8.32",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b6410b953a",
+    "timestamp": "2026-06-03T16:01:30.857986+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149931633 | PnL: -10.97",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "97adc45d2e",
+    "timestamp": "2026-06-03T16:01:30.833766+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149888821 | PnL: +3.26",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "11d6889d74",
+    "timestamp": "2026-06-03T16:01:30.786960+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149851519 | PnL: +5.15",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8e4d2117d3",
+    "timestamp": "2026-06-03T16:01:30.763345+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791770 | PnL: +2.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "38cd708aba",
+    "timestamp": "2026-06-03T16:01:30.735612+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149791569 | PnL: +21.40",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2e5f9b27cc",
+    "timestamp": "2026-06-03T16:01:30.695279+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149784640 | PnL: -9.70",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8df71cb6d3",
+    "timestamp": "2026-06-03T16:01:30.670044+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149587109 | PnL: +4.63",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "75f8388484",
+    "timestamp": "2026-06-03T16:01:30.643907+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149402916 | PnL: -5.23",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8e94dedb04",
+    "timestamp": "2026-06-03T16:01:30.620884+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_149343654 | PnL: +8.04",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ea8eec74c0",
+    "timestamp": "2026-06-03T16:01:30.595817+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149336597 | PnL: -14.37",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "877517fb7f",
+    "timestamp": "2026-06-03T16:01:30.570021+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149336191 | PnL: +14.92",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "7899029889",
+    "timestamp": "2026-06-03T16:01:30.540535+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149322055 | PnL: -0.16",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fa7ae75968",
+    "timestamp": "2026-06-03T16:01:30.504098+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURGBPp | Ticket #pos_149319801 | PnL: +19.74",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a037ef000f",
+    "timestamp": "2026-06-03T16:01:30.479679+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149315635 | PnL: +18.01",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2ed5d0aa2d",
+    "timestamp": "2026-06-03T16:01:30.454448+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCADp | Ticket #pos_149313088 | PnL: -0.22",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4a4bec92c0",
+    "timestamp": "2026-06-03T16:01:30.429126+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDCHFp | Ticket #pos_149312468 | PnL: +0.22",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b8117de815",
+    "timestamp": "2026-06-03T16:01:30.404154+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: USDJPYp | Ticket #pos_149311702 | PnL: +0.30",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "6d4e821c8f",
+    "timestamp": "2026-06-03T16:01:30.372625+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149311129 | PnL: +0.25",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8912d1682c",
+    "timestamp": "2026-06-03T16:01:30.348174+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149306562 | PnL: +0.65",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a44d4c0179",
+    "timestamp": "2026-06-03T16:01:30.325211+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149305018 | PnL: -0.20",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "6ffd9e1474",
+    "timestamp": "2026-06-03T16:01:30.302092+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149304537 | PnL: -0.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4ed37b7e95",
+    "timestamp": "2026-06-03T16:01:30.279135+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149293342 | PnL: +0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b5e5e5ec41",
+    "timestamp": "2026-06-03T16:01:30.228755+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149291021 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a00122912a",
+    "timestamp": "2026-06-03T16:01:30.201431+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: GBPUSDp | Ticket #pos_149283054 | PnL: +0.60",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "3de48166fd",
+    "timestamp": "2026-06-03T16:01:30.178483+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149279096 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "7964aa0166",
+    "timestamp": "2026-06-03T16:01:30.146380+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149278248 | PnL: +0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "32876da8e1",
+    "timestamp": "2026-06-03T16:01:30.123891+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149277897 | PnL: -10.27",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c5f41e637e",
+    "timestamp": "2026-06-03T16:01:30.099612+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_149276274 | PnL: -0.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ba9713d74e",
+    "timestamp": "2026-06-03T16:01:30.076252+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: AUDUSDp | Ticket #pos_145925871 | PnL: -12.03",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "afda851ae6",
+    "timestamp": "2026-06-03T16:01:30.054721+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145148966 | PnL: -0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "556b323ef2",
+    "timestamp": "2026-06-03T16:01:30.032689+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145130445 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "39ac28e43a",
+    "timestamp": "2026-06-03T16:01:30.009459+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073118 | PnL: +0.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c632185ebc",
+    "timestamp": "2026-06-03T16:01:29.987226+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145073116 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8597a7d795",
+    "timestamp": "2026-06-03T16:01:29.965079+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062343 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8b7b010225",
+    "timestamp": "2026-06-03T16:01:29.941989+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145062342 | PnL: -0.75",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c7e8d27bdf",
+    "timestamp": "2026-06-03T16:01:29.919623+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061388 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "776f72ad64",
+    "timestamp": "2026-06-03T16:01:29.895094+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145061380 | PnL: -0.45",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2936cb65c6",
+    "timestamp": "2026-06-03T16:01:29.871600+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_145029912 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ca3ff40513",
+    "timestamp": "2026-06-03T16:01:29.831530+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994624 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4dee1e8ab4",
+    "timestamp": "2026-06-03T16:01:29.802903+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144994623 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c21930b57a",
+    "timestamp": "2026-06-03T16:01:29.779008+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990949 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d4afbad7e8",
+    "timestamp": "2026-06-03T16:01:29.754954+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990948 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a663f61631",
+    "timestamp": "2026-06-03T16:01:29.732329+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990938 | PnL: +0.00",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8aaaaa39a4",
+    "timestamp": "2026-06-03T16:01:29.708620+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144990937 | PnL: -0.02",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "49d0904d80",
+    "timestamp": "2026-06-03T16:01:29.679334+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970543 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c132c87727",
+    "timestamp": "2026-06-03T16:01:29.655206+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144970541 | PnL: -0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "30644a6eb1",
+    "timestamp": "2026-06-03T16:01:29.630593+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950734 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ee7bbb2f70",
+    "timestamp": "2026-06-03T16:01:29.602464+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144950733 | PnL: -1.73",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4d5598519b",
+    "timestamp": "2026-06-03T16:01:29.572528+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936035 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "deecfcdf31",
+    "timestamp": "2026-06-03T16:01:29.548086+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144936034 | PnL: -2.38",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "47b47cf702",
+    "timestamp": "2026-06-03T16:01:29.523747+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931851 | PnL: +0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "979330884c",
+    "timestamp": "2026-06-03T16:01:29.501312+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144931850 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2d1942aded",
+    "timestamp": "2026-06-03T16:01:29.475106+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924148 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "37240ef15a",
+    "timestamp": "2026-06-03T16:01:29.453605+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144924147 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ad707b03e1",
+    "timestamp": "2026-06-03T16:01:29.425261+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918064 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "da81722152",
+    "timestamp": "2026-06-03T16:01:29.403204+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144918063 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "48941c8611",
+    "timestamp": "2026-06-03T16:01:29.380186+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764528 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4e2221cd7f",
+    "timestamp": "2026-06-03T16:01:29.357300+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144764525 | PnL: -1.27",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f319ab1c2a",
+    "timestamp": "2026-06-03T16:01:29.334001+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680764 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c3e69155bd",
+    "timestamp": "2026-06-03T16:01:29.310667+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144680763 | PnL: -1.94",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b508bdcba4",
+    "timestamp": "2026-06-03T16:01:29.284086+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649659 | PnL: +0.88",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4ddbfdcf57",
+    "timestamp": "2026-06-03T16:01:29.249297+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144649658 | PnL: -0.90",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "7047795424",
+    "timestamp": "2026-06-03T16:01:29.225967+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560719 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "58b2ec305e",
+    "timestamp": "2026-06-03T16:01:29.202126+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144560718 | PnL: -2.19",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f7449f1c99",
+    "timestamp": "2026-06-03T16:01:29.178749+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552783 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "39d3004711",
+    "timestamp": "2026-06-03T16:01:29.137518+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144552782 | PnL: -1.54",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "e9cc995909",
+    "timestamp": "2026-06-03T16:01:29.113788+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506997 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "9492a66777",
+    "timestamp": "2026-06-03T16:01:29.090236+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144506994 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4187fe0ed2",
+    "timestamp": "2026-06-03T16:01:29.065849+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144452972 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "1d7b5665dc",
+    "timestamp": "2026-06-03T16:01:29.039919+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451907 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d2c346fe0e",
+    "timestamp": "2026-06-03T16:01:28.996795+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144451905 | PnL: -2.15",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "40d3028231",
+    "timestamp": "2026-06-03T16:01:28.974602+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446493 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "67d7a8f5b4",
+    "timestamp": "2026-06-03T16:01:28.949378+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144446492 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "be5e71dfa4",
+    "timestamp": "2026-06-03T16:01:28.924285+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417469 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c489c3d2b9",
+    "timestamp": "2026-06-03T16:01:28.899662+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144417468 | PnL: -0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "105203676e",
+    "timestamp": "2026-06-03T16:01:28.875853+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144345610 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "73ed63b104",
+    "timestamp": "2026-06-03T16:01:28.849353+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336549 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "02b91eaebd",
+    "timestamp": "2026-06-03T16:01:28.826118+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144336546 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "6d798c3bae",
+    "timestamp": "2026-06-03T16:01:28.802854+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321046 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "40a5bf11c3",
+    "timestamp": "2026-06-03T16:01:28.779230+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144321045 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ad2ddb2cab",
+    "timestamp": "2026-06-03T16:01:28.755636+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316502 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cfa352e14f",
+    "timestamp": "2026-06-03T16:01:28.724227+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144316501 | PnL: -0.46",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "740eb2be01",
+    "timestamp": "2026-06-03T16:01:28.698494+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144126581 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c05014bd5d",
+    "timestamp": "2026-06-03T16:01:28.659290+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144045914 | PnL: -0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f7102d1b1d",
+    "timestamp": "2026-06-03T16:01:28.608588+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009283 | PnL: -1.06",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "aa28847c25",
+    "timestamp": "2026-06-03T16:01:28.584855+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144009282 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a3140431d1",
+    "timestamp": "2026-06-03T16:01:28.564570+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006353 | PnL: -0.66",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "4826040e49",
+    "timestamp": "2026-06-03T16:01:28.541782+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_144006331 | PnL: -0.29",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cad16bc388",
+    "timestamp": "2026-06-03T16:01:28.518782+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143999906 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "790bc56fa7",
+    "timestamp": "2026-06-03T16:01:28.496011+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143972799 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fd97ad33fd",
+    "timestamp": "2026-06-03T16:01:28.474104+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922226 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f32a73faa0",
+    "timestamp": "2026-06-03T16:01:28.451034+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143922223 | PnL: -0.43",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d51de7309d",
+    "timestamp": "2026-06-03T16:01:28.426913+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915559 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "990d150b04",
+    "timestamp": "2026-06-03T16:01:28.404966+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143915558 | PnL: -1.09",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "68ee2d405b",
+    "timestamp": "2026-06-03T16:01:28.381538+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893053 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "0c9fc788c4",
+    "timestamp": "2026-06-03T16:01:28.358269+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143893051 | PnL: -0.88",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cb57aaed49",
+    "timestamp": "2026-06-03T16:01:28.333729+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822864 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2bc0b95d0f",
+    "timestamp": "2026-06-03T16:01:28.312451+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143822863 | PnL: -2.18",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8f9cfabfae",
+    "timestamp": "2026-06-03T16:01:28.289358+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757541 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cb39a2c2a4",
+    "timestamp": "2026-06-03T16:01:28.263982+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143757540 | PnL: -2.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "73d80bc8bb",
+    "timestamp": "2026-06-03T16:01:28.239672+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732398 | PnL: -0.36",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "83d9e12e7e",
+    "timestamp": "2026-06-03T16:01:28.218111+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143732397 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "5929c4469e",
+    "timestamp": "2026-06-03T16:01:28.195482+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682413 | PnL: -1.20",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b3e2a28606",
+    "timestamp": "2026-06-03T16:01:28.173915+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143682411 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ca98930a95",
+    "timestamp": "2026-06-03T16:01:28.126877+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143678454 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f584ec4ea5",
+    "timestamp": "2026-06-03T16:01:28.096185+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635711 | PnL: +0.82",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "9f8d24622e",
+    "timestamp": "2026-06-03T16:01:28.074594+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143635706 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "11df98b3be",
+    "timestamp": "2026-06-03T16:01:28.052750+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143619957 | PnL: -1.67",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "eb6faf9c89",
+    "timestamp": "2026-06-03T16:01:28.030628+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143607237 | PnL: +0.87",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "03e4005818",
+    "timestamp": "2026-06-03T16:01:28.009185+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583092 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ef90e6a5a0",
+    "timestamp": "2026-06-03T16:01:27.986368+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143583091 | PnL: -2.13",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8ac2b4c765",
+    "timestamp": "2026-06-03T16:01:27.964062+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571064 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "15f6ace66f",
+    "timestamp": "2026-06-03T16:01:27.944176+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143571063 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "0569f045e6",
+    "timestamp": "2026-06-03T16:01:27.923177+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495430 | PnL: +0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c4e41df384",
+    "timestamp": "2026-06-03T16:01:27.899806+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143495429 | PnL: -0.83",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f7868511e5",
+    "timestamp": "2026-06-03T16:01:27.873625+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143476203 | PnL: -1.70",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "589bd90f2a",
+    "timestamp": "2026-06-03T16:01:27.852795+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470597 | PnL: +0.91",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "142a10439e",
+    "timestamp": "2026-06-03T16:01:27.831639+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143470583 | PnL: -2.17",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "9284dce90b",
+    "timestamp": "2026-06-03T16:01:27.811595+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467527 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "41acd310e7",
+    "timestamp": "2026-06-03T16:01:27.785783+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143467526 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "bbab5bce90",
+    "timestamp": "2026-06-03T16:01:27.765383+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367751 | PnL: +0.84",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fcfa274b64",
+    "timestamp": "2026-06-03T16:01:27.743279+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143367750 | PnL: -0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c18202ab70",
+    "timestamp": "2026-06-03T16:01:27.722661+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143343578 | PnL: -1.71",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "01f282064d",
+    "timestamp": "2026-06-03T16:01:27.677384+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143319468 | PnL: -2.31",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "9def7e2a2a",
+    "timestamp": "2026-06-03T16:01:27.655516+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246939 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d2ee590731",
+    "timestamp": "2026-06-03T16:01:27.633050+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143246937 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "66fe30dc9d",
+    "timestamp": "2026-06-03T16:01:27.600178+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133655 | PnL: +0.39",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "09ff767f74",
+    "timestamp": "2026-06-03T16:01:27.575785+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143133653 | PnL: -0.41",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "56d81a79c1",
+    "timestamp": "2026-06-03T16:01:27.539957+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143109160 | PnL: -0.41",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "447a66102e",
+    "timestamp": "2026-06-03T16:01:27.518702+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064824 | PnL: -0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "c104c4883d",
+    "timestamp": "2026-06-03T16:01:27.496206+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143064823 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "f08a91bd11",
+    "timestamp": "2026-06-03T16:01:27.474730+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042562 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "0fc4780186",
+    "timestamp": "2026-06-03T16:01:27.452100+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143042560 | PnL: +0.85",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "0706cea359",
+    "timestamp": "2026-06-03T16:01:27.430350+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032443 | PnL: +0.44",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d3ea329d5a",
+    "timestamp": "2026-06-03T16:01:27.408603+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143032441 | PnL: -0.47",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "aac302fb84",
+    "timestamp": "2026-06-03T16:01:27.386096+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001779 | PnL: -0.42",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "35a143b983",
+    "timestamp": "2026-06-03T16:01:27.361857+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_143001778 | PnL: +0.86",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "40b5eac6b6",
+    "timestamp": "2026-06-03T16:01:27.337972+00:00",
+    "level": "info",
+    "message": "CLOSED Trade: EURUSDp | Ticket #pos_142988340 | PnL: -1.05",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "JLiNYVdgnH",
+    "timestamp": "2026-06-03T16:01:27.141Z",
+    "level": "info",
+    "message": "0 neue, 1 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "330ACKPKfO",
+    "timestamp": "2026-06-03T16:01:26.749Z",
+    "level": "info",
+    "message": "Bridge-Status geändert: stopped → running",
+    "botId": "TgSrwgejYS",
+    "botName": "LenovoThinkPad_Bridge"
+  },
+  {
+    "id": "c60f640b05",
+    "timestamp": "2026-06-03T16:01:25.936767+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d4485702a5",
+    "timestamp": "2026-06-03T16:01:18.181662+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.28:3000",
+    "bridgeId": "TgSrwgejYS",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
     "id": "a2e538b9d2",
     "timestamp": "2026-06-02T20:54:55.821022+00:00",
     "level": "warn",

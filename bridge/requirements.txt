@@ -1,5 +1,6 @@
 MetaTrader5>=5.0.45
 requests>=2.31.0
-flask>=3.0.0
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
 rich>=13.0.0
 tzdata>=2024.1

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   Pencil, CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
-  Sparkles, ShieldCheck, ShieldOff,
+  Sparkles, ShieldCheck, ShieldOff, Network,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
@@ -26,6 +26,7 @@ const NAV = [
   { href: '/statistiken',           label: 'Statistiken',    icon: BarChart2 },
   { href: '/kalender',              label: 'Kalender',       icon: CalendarDays },
   { href: '/bots',                  label: 'Bots',           icon: Bot },
+  { href: '/netzwerk',              label: 'Netzwerk',       icon: Network },
 ]
 
 const BOT_NAV = [

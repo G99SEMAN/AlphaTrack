@@ -88,5 +88,17 @@
     "command": "stop",
     "timestamp": "2026-06-02T18:41:06.883Z",
     "acknowledged": false
+  },
+  {
+    "id": "nVdOQUoslO",
+    "command": "execute_trade",
+    "timestamp": "2026-06-03T16:03:36.048Z",
+    "acknowledged": false
+  },
+  {
+    "id": "-Rzwj1WLvc",
+    "command": "close_position",
+    "timestamp": "2026-06-03T16:03:58.608Z",
+    "acknowledged": false
   }
 ]

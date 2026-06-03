@@ -6,5 +6,13 @@
     "url": "http://192.168.178.37:8765",
     "createdAt": "2026-06-02T16:26:57.739Z",
     "type": "bridge"
+  },
+  {
+    "id": "Z8zDRoYwpc",
+    "name": "Breakout v1",
+    "profileId": "FiFT3HmJf-",
+    "url": "http://192.168.178.37:8766",
+    "createdAt": "2026-06-03T16:49:28.361Z",
+    "type": "bot"
   }
 ]

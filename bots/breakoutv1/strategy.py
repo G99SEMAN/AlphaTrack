@@ -34,7 +34,7 @@ def on_tick(candles: list, positions: list, config: dict) -> dict:
     close = current['close']
 
     # Bereits offene Position auf diesem Symbol?
-    open_on_symbol = [p for p in positions if p.get('symbol') == symbol]
+    open_on_symbol = [p for p in positions if p.get('instrument') == symbol]
     if open_on_symbol:
         return {'action': 'hold'}
 

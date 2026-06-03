@@ -2430,12 +2430,14 @@
     "size": 0.01,
     "sl": null,
     "tp": null,
-    "pnl": -0.1,
-    "commission": 0,
+    "pnl": -0.29,
+    "commission": -0.05,
     "swap": 0,
-    "status": "open",
+    "status": "closed",
     "externalId": "pos_150802430",
-    "id": "JgRdTQdfhm"
+    "id": "JgRdTQdfhm",
+    "closeTime": "2026-06-02T23:23:21+00:00",
+    "exit": 4490.08
   },
   {
     "ticket": 150802758,
@@ -2453,5 +2455,22 @@
     "status": "open",
     "externalId": "pos_150802758",
     "id": "tvvrJ9rQ2D"
+  },
+  {
+    "ticket": 151266156,
+    "date": "2026-06-03T19:03:36+00:00",
+    "instrument": "EURUSDp",
+    "type": "long",
+    "entry": 1.16016,
+    "currentPrice": 1.16015,
+    "size": 0.01,
+    "sl": null,
+    "tp": null,
+    "pnl": -0.01,
+    "commission": 0,
+    "swap": 0,
+    "status": "open",
+    "externalId": "pos_151266156",
+    "id": "JcTScIDQ7z"
   }
 ]

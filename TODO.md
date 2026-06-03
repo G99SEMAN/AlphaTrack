@@ -12,3 +12,10 @@
   - ~~Wenn Einstellungen gespeichert werden, sollen diese direkt zur Bridge übertragen werden~~ (erledigt: POST /api/bot/config -> Bridge, config.json wird aktualisiert, Änderungen werden geloggt, Passwort maskiert)
 - Dashboard:
   - ~~Oben im Dashboard ist eine Anzeige der Bridge mit dem Verbindungsstatus~~ (erledigt: wurde entfernt)
+- AGP/1 Gateway Deployment (Mini-PC):
+  - [ ] Bridge-Dateien kopieren nach `C:\Users\PC\Desktop\bridge\`: `gateway.py` (NEU), `requirements.txt`, `main.py`
+  - [ ] Bot-Dateien kopieren nach `C:\Users\PC\Desktop\breakoutv1\`: `ws_client.py` (NEU), `main.py`, `config.json`, `requirements.txt`
+  - [ ] Bridge: `pip install fastapi "uvicorn[standard]"` und `pip uninstall flask -y`
+  - [ ] Bot: `pip install websocket-client` und `pip uninstall flask -y`
+  - [ ] Bridge starten → Erwartung: "Gateway-Server gestartet auf Port 8765"
+  - [ ] Bot starten (`start.bat`) → Erwartung: "Bot registriert: ..." + erscheint in AlphaTrack unter Bots

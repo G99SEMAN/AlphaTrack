@@ -1,0 +1,11 @@
+[
+  {
+    "id": "5cbc999530",
+    "timestamp": "2026-06-03T16:49:30.654768+00:00",
+    "level": "info",
+    "message": "Breakout v1 gestartet",
+    "details": "Symbol: EURUSDp | TF: M15 | Bridge: http://localhost:8765",
+    "bridgeId": "Z8zDRoYwpc",
+    "bridgeName": "Breakout v1"
+  }
+]
