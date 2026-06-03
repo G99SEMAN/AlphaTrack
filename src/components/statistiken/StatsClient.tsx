@@ -11,6 +11,9 @@ import InstrumentTable from './InstrumentTable'
 import TopAssetsCard from './TopAssetsCard'
 import StrategyTable from './StrategyTable'
 import TopTradesCard from './TopTradesCard'
+import DrawdownCard from './DrawdownCard'
+import ConsistencyCard from './ConsistencyCard'
+import DurationCard from './DurationCard'
 
 const MonthlyPnlChart = dynamic(() => import('./MonthlyPnlChart'), { ssr: false })
 const WeekdayChart = dynamic(() => import('./WeekdayChart'), { ssr: false })
@@ -62,6 +65,32 @@ export default function StatsClient({ stats, currency }: Props) {
           avgTradesPerDay={activeStats.avgTradesPerDay}
           currency={currency}
         />
+      )}
+
+      {/* Drawdown + Konsistenz + Dauer */}
+      {(settings.showDrawdownCard || settings.showConsistencyCard || settings.showDurationCard) && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {settings.showDrawdownCard && (
+            <DrawdownCard
+              maxDrawdown={activeStats.maxDrawdown}
+              recoveryFactor={activeStats.recoveryFactor}
+            />
+          )}
+          {settings.showConsistencyCard && (
+            <ConsistencyCard
+              consistencyScore={activeStats.consistencyScore}
+              profitableWeeks={activeStats.profitableWeeks}
+              totalWeeks={activeStats.totalWeeks}
+            />
+          )}
+          {settings.showDurationCard && (
+            <DurationCard
+              avgDurationMinutes={activeStats.avgDurationMinutes}
+              avgDurationLongMinutes={activeStats.avgDurationLongMinutes}
+              avgDurationShortMinutes={activeStats.avgDurationShortMinutes}
+            />
+          )}
+        </div>
       )}
 
       {/* Monatlicher P&L + Long/Short */}

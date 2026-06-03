@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { DirectionStats } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 interface Props {
   long: DirectionStats
@@ -25,9 +26,15 @@ function DirCard({ dir, stats, currency, delay }: { dir: 'long' | 'short'; stats
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
       <div className="flex items-center justify-between">
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          {isLong ? 'Long-Trades' : 'Short-Trades'}
-        </p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+            {isLong ? 'Long-Trades' : 'Short-Trades'}
+          </p>
+          <InfoTooltip text={isLong
+            ? "Performance aller Long-Positionen (Kauf). Winrate und P&L-Übersicht."
+            : "Performance aller Short-Positionen (Verkauf/Leerverkauf)."
+          } />
+        </div>
         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: bgColor }}>
           {isLong ? <TrendingUp size={15} style={{ color }} /> : <TrendingDown size={15} style={{ color }} />}
         </div>

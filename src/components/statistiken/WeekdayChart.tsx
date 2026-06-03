@@ -5,6 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Refere
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { WeekdayStats } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 interface Props { data: WeekdayStats[]; currency: string }
 
@@ -35,9 +36,12 @@ export default function WeekdayChart({ data, currency }: Props) {
       className="rounded-2xl p-5 flex flex-col gap-4 h-full"
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
-      <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-        Wochentags-Analyse - Ø P&L pro Tag
-      </p>
+      <div className="flex items-center gap-1.5">
+        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+          Wochentags-Analyse — Ø P&L pro Tag
+        </p>
+        <InfoTooltip text="Performance nach Wochentag. Zeigt an welchen Tagen du am profitabelsten tradest." />
+      </div>
 
       <div className="flex-1" style={{ minHeight: 'clamp(120px, 28vw, 160px)' }}>
         <ResponsiveContainer width="100%" height="100%">

@@ -13,6 +13,9 @@ export interface StatsSettings {
   showHourlyChart: boolean
   showRMultipleChart: boolean
   showTopTrades: boolean
+  showDrawdownCard: boolean
+  showConsistencyCard: boolean
+  showDurationCard: boolean
 }
 
 const DEFAULT_SETTINGS: StatsSettings = {
@@ -26,6 +29,9 @@ const DEFAULT_SETTINGS: StatsSettings = {
   showHourlyChart: true,
   showRMultipleChart: true,
   showTopTrades: true,
+  showDrawdownCard: true,
+  showConsistencyCard: true,
+  showDurationCard: true,
 }
 
 const STORAGE_KEY = 'alphatrack-stats-settings'

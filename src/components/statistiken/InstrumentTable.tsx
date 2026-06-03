@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { InstrumentStats } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 type SortKey = 'totalPnl' | 'winRate' | 'trades' | 'avgPnl'
 
@@ -39,9 +40,12 @@ export default function InstrumentTable({ data, currency }: Props) {
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
       <div className="px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Performance nach Instrument
-        </p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+            Performance nach Instrument
+          </p>
+          <InfoTooltip text="P&L-Übersicht nach gehandeltem Instrument, sortiert nach Gesamtertrag." />
+        </div>
       </div>
 
       {/* Scrollbarer Tabellen-Container - auf Mobile horizontal scrollbar */}

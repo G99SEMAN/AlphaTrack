@@ -3,6 +3,7 @@
 import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
+import InfoTooltip from './InfoTooltip'
 
 interface Props {
   profitFactor: number
@@ -22,9 +23,10 @@ interface KpiCardProps {
   sub?: string
   color: string
   delay: number
+  tooltip: string
 }
 
-function KpiCard({ label, value, sub, color, delay }: KpiCardProps) {
+function KpiCard({ label, value, sub, color, delay, tooltip }: KpiCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -33,9 +35,12 @@ function KpiCard({ label, value, sub, color, delay }: KpiCardProps) {
       className="rounded-xl px-3 py-3 sm:px-4 sm:py-3.5 flex flex-col gap-1"
       style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
     >
-      <p className="text-xs font-semibold uppercase tracking-wide leading-tight" style={{ color: 'var(--text-3)' }}>
-        {label}
-      </p>
+      <div className="flex items-center gap-1.5">
+        <p className="text-xs font-semibold uppercase tracking-wide leading-tight" style={{ color: 'var(--text-3)' }}>
+          {label}
+        </p>
+        <InfoTooltip text={tooltip} />
+      </div>
       <p className="text-base sm:text-xl font-bold font-mono leading-tight break-all" style={{ color }}>
         {value}
       </p>
@@ -68,6 +73,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub={profitFactor >= 1.5 ? 'Sehr gut (Ziel: >1.5)' : profitFactor >= 1 ? 'Solide (Ziel: >1.5)' : 'Unter Break-even'}
         color={pfColor}
         delay={0}
+        tooltip="Summe aller Gewinne ÷ Summe aller Verluste. Ziel: >1.5. >2.0 gilt als exzellent."
       />
       <KpiCard
         label="Erwartungswert"
@@ -75,6 +81,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub="Erwarteter Gewinn je Trade"
         color={expColor}
         delay={0.04}
+        tooltip="Durchschnittlicher erwarteter Gewinn pro Trade. Positiv = System verdient langfristig."
       />
       <KpiCard
         label="Gewinn / Verlust"
@@ -82,6 +89,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub={`Ø+${avgWin.toLocaleString('de-DE', { minimumFractionDigits: 2 })} / Ø${avgLoss.toLocaleString('de-DE', { minimumFractionDigits: 2 })} ${currencySymbol(currency)}`}
         color={ratioColor}
         delay={0.08}
+        tooltip="Durchschnittlicher Gewinn ÷ durchschnittlicher Verlust (absolut). >1.5 empfohlen."
       />
       <KpiCard
         label="Kosten-Quote"
@@ -89,6 +97,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub="Provision+Swap / |Brutto-P&L|"
         color={costColor}
         delay={0.12}
+        tooltip="Provision + Swap + Spread als % des Brutto-P&L. <10% ist sehr gut."
       />
       <KpiCard
         label="Gesamt-ROI"
@@ -96,6 +105,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub="Netto-P&L / eingesetztes Kapital"
         color={roiColor}
         delay={0.16}
+        tooltip="Netto-P&L ÷ eingesetztes Startkapital × 100."
       />
       <KpiCard
         label="Trades / Tag"
@@ -103,6 +113,7 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
         sub="Ø Trades pro Kalendertag"
         color="var(--text-1)"
         delay={0.20}
+        tooltip="Durchschnittliche Trades pro Kalendertag seit dem ersten Trade."
       />
     </div>
   )

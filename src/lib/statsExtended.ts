@@ -82,6 +82,14 @@ export interface ExtendedStats {
   hasRMultipleData: boolean
   totalClosed: number
   topTrades: TopTradeEntry[]
+  maxDrawdown: number
+  recoveryFactor: number
+  consistencyScore: number
+  profitableWeeks: number
+  totalWeeks: number
+  avgDurationMinutes: number
+  avgDurationLongMinutes: number
+  avgDurationShortMinutes: number
 }
 
 function round2(v: number): number {
@@ -115,6 +123,9 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
     long: dirStats([]), short: dirStats([]),
     byInstrument: [], top5ByTradeCount: [], byStrategy: [], byWeekday: [], byHour: [],
     rMultiples: [], hasRMultipleData: false, totalClosed: 0, topTrades: [],
+    maxDrawdown: 0, recoveryFactor: 0, consistencyScore: 0,
+    profitableWeeks: 0, totalWeeks: 0,
+    avgDurationMinutes: 0, avgDurationLongMinutes: 0, avgDurationShortMinutes: 0,
   }
   if (closed.length === 0 && paper.length === 0) return empty
   if (closed.length === 0) return {
@@ -122,6 +133,9 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
     totalClosed: paper.length,
     long: dirStats([], paperLong.filter(t => t.outcome === 'win').length, paperLong.filter(t => t.outcome === 'loss').length),
     short: dirStats([], paperShort.filter(t => t.outcome === 'win').length, paperShort.filter(t => t.outcome === 'loss').length),
+    maxDrawdown: 0, recoveryFactor: 0, consistencyScore: 0,
+    profitableWeeks: 0, totalWeeks: 0,
+    avgDurationMinutes: 0, avgDurationLongMinutes: 0, avgDurationShortMinutes: 0,
   }
 
   // KPIs
@@ -315,9 +329,54 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
       strategyName: strategies.find(s => s.id === t.strategyId)?.name,
     }))
 
+  // Max Drawdown (peak-to-trough auf kumulativer PnL-Kurve)
+  let peak = 0
+  let maxDD = 0
+  let cumPnl = 0
+  for (const t of [...closed].sort((a, b) => a.date.localeCompare(b.date))) {
+    cumPnl += (t.pnl ?? 0)
+    if (cumPnl > peak) peak = cumPnl
+    const dd = peak > 0 ? (peak - cumPnl) / peak * 100 : 0
+    if (dd > maxDD) maxDD = dd
+  }
+  const maxDrawdown = round2(maxDD)
+  const ddAbs = peak * (maxDD / 100)
+  const recoveryFactor = ddAbs > 0 ? round2(netPnl / ddAbs) : 0
+
+  // Konsistenz-Score — % der Wochen mit positivem P&L
+  const weekMap = new Map<string, number>()
+  for (const t of closed) {
+    const d = new Date(t.date)
+    const dayOfWeek = d.getDay() === 0 ? 6 : d.getDay() - 1
+    const monday = new Date(d)
+    monday.setDate(d.getDate() - dayOfWeek)
+    const key = monday.toISOString().substring(0, 10)
+    weekMap.set(key, (weekMap.get(key) ?? 0) + (t.pnl ?? 0))
+  }
+  const totalWeeks = weekMap.size
+  const profitableWeeks = Array.from(weekMap.values()).filter(v => v > 0).length
+  const consistencyScore = totalWeeks > 0 ? round2(profitableWeeks / totalWeeks * 100) : 0
+
+  // Ø Trade-Dauer
+  function avgMinutes(ts: Trade[]): number {
+    const withTime = ts.filter(t => t.closeTime && t.date)
+    if (withTime.length === 0) return 0
+    const totalMs = withTime.reduce((s, t) => {
+      const close = new Date(t.closeTime!).getTime()
+      const open = new Date(t.date).getTime()
+      return s + Math.max(0, close - open)
+    }, 0)
+    return round2(totalMs / withTime.length / 60000)
+  }
+  const avgDurationMinutes = avgMinutes(closed)
+  const avgDurationLongMinutes = avgMinutes(closed.filter(t => t.type === 'long'))
+  const avgDurationShortMinutes = avgMinutes(closed.filter(t => t.type === 'short'))
+
   return {
     profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costRatio, roi, avgTradesPerDay,
     monthlyPnl, long, short, byInstrument, top5ByTradeCount, byStrategy, byWeekday, byHour,
     rMultiples, hasRMultipleData, totalClosed: totalClosedCount, topTrades,
+    maxDrawdown, recoveryFactor, consistencyScore, profitableWeeks, totalWeeks,
+    avgDurationMinutes, avgDurationLongMinutes, avgDurationShortMinutes,
   }
 }

@@ -5,6 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Refere
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { HourlyStats } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 interface Props { data: HourlyStats[]; currency: string }
 
@@ -25,7 +26,8 @@ function CustomTooltip({ active, payload, currency }: { active?: boolean; payloa
 }
 
 export default function HourlyChart({ data, currency }: Props) {
-  const formatTick = useCallback((v: number) => `${v >= 0 ? '+' : ''}${v}€`, [])
+  const sym = currencySymbol(currency)
+  const formatTick = useCallback((v: number) => `${v >= 0 ? '+' : ''}${v}${sym}`, [sym])
 
   if (data.length === 0) return null
 
@@ -37,9 +39,12 @@ export default function HourlyChart({ data, currency }: Props) {
       className="rounded-2xl p-5 flex flex-col gap-4 h-full"
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
-      <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-        Stunden-Analyse - Ø P&L pro Stunde
-      </p>
+      <div className="flex items-center gap-1.5">
+        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+          Stunden-Analyse — Ø P&L pro Stunde
+        </p>
+        <InfoTooltip text="Performance nach Tageszeit (Schlussstunde des Trades). Ideal für Session-Analyse." />
+      </div>
 
       <div className="flex-1" style={{ minHeight: 'clamp(120px, 28vw, 160px)' }}>
         <ResponsiveContainer width="100%" height="100%">

@@ -3,6 +3,7 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import { motion } from 'framer-motion'
 import { RMultipleBucket } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 interface Props { data: RMultipleBucket[]; totalTrades: number }
 
@@ -26,9 +27,12 @@ export default function RMultipleChart({ data, totalTrades }: Props) {
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
       <div>
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          R-Multiple Verteilung
-        </p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+            R-Multiple Verteilung
+          </p>
+          <InfoTooltip text="Verteilung der Trades als Vielfaches des initial riskierten Betrags (1R). >+1R bedeutet mehr gewonnen als riskiert." />
+        </div>
         <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
           Trades mit Stop-Loss: {totalTrades}
         </p>

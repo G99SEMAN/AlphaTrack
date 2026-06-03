@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from 'recharts'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
+import InfoTooltip from './InfoTooltip'
 
 interface DataPoint { month: string; pnl: number; trades: number }
 interface Props { data: DataPoint[]; currency: string }
@@ -37,9 +38,12 @@ export default function MonthlyPnlChart({ data, currency }: Props) {
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Monatlicher P&L
-          </p>
+          <div className="flex items-center gap-1.5">
+            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+              Monatlicher P&L
+            </p>
+            <InfoTooltip text="Brutto-P&L pro Kalendermonat. Balken zeigen Gewinne (grün) und Verluste (rot)." />
+          </div>
           <p className="text-sm font-semibold mt-0.5" style={{ color: 'var(--text-2)' }}>
             {data.length} {data.length === 1 ? 'Monat' : 'Monate'}
           </p>

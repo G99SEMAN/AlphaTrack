@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Trophy } from 'lucide-react'
 import { TopTradeEntry } from '@/lib/statsExtended'
+import InfoTooltip from './InfoTooltip'
 
 interface Props {
   trades: TopTradeEntry[]
@@ -29,6 +30,7 @@ export default function TopTradesCard({ trades, currency }: Props) {
         <h3 className="font-semibold text-sm" style={{ color: 'var(--text-1)' }}>
           Beste Trades
         </h3>
+        <InfoTooltip text="Die 7 profitabelsten abgeschlossenen Einzeltrades." />
       </div>
 
       <div className="flex flex-col gap-2">

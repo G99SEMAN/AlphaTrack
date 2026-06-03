@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { InstrumentStats } from '@/lib/statsExtended'
 import { currencySymbol } from '@/lib/currency'
+import InfoTooltip from './InfoTooltip'
 
 interface Props {
   data: InstrumentStats[]
@@ -19,9 +20,12 @@ export default function TopAssetsCard({ data, currency }: Props) {
       style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
     >
       <div className="px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Top 5 Assets nach Trades
-        </p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+            Top 5 Assets nach Trades
+          </p>
+          <InfoTooltip text="Deine 5 meist-gehandelten Instrumente nach Trade-Anzahl." />
+        </div>
       </div>
 
       {/* Desktop Tabelle */}
