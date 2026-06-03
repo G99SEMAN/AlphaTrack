@@ -1,18 +1,21 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { BarChart2 } from 'lucide-react'
 import { ExtendedStats } from '@/lib/statsExtended'
 import { useStatsSettings } from '@/hooks/useStatsSettings'
 import KpiRow from './KpiRow'
-import MonthlyPnlChart from './MonthlyPnlChart'
 import DirectionCards from './DirectionCards'
 import InstrumentTable from './InstrumentTable'
 import TopAssetsCard from './TopAssetsCard'
 import StrategyTable from './StrategyTable'
-import WeekdayChart from './WeekdayChart'
-import RMultipleChart from './RMultipleChart'
 import TopTradesCard from './TopTradesCard'
+
+const MonthlyPnlChart = dynamic(() => import('./MonthlyPnlChart'), { ssr: false })
+const WeekdayChart = dynamic(() => import('./WeekdayChart'), { ssr: false })
+const HourlyChart = dynamic(() => import('./HourlyChart'), { ssr: false })
+const RMultipleChart = dynamic(() => import('./RMultipleChart'), { ssr: false })
 
 interface Props {
   stats: ExtendedStats
@@ -104,6 +107,11 @@ export default function StatsClient({ stats, currency }: Props) {
             </div>
           )}
         </div>
+      )}
+
+      {/* Stunden-Analyse */}
+      {settings.showHourlyChart && activeStats.byHour.length > 0 && (
+        <HourlyChart data={activeStats.byHour} currency={currency} />
       )}
 
       {/* Beste Trades */}

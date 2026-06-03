@@ -163,10 +163,16 @@
   },
   "permissions": {
     "allow": [
+      "Edit",
+      "Write",
+      "Bash(npm run build)",
       "Bash(npx @claude-flow*)",
       "Bash(npx claude-flow*)",
       "Bash(node .claude/*)",
-      "mcp__claude-flow__:*"
+      "mcp__claude-flow__:*",
+      "Bash(npx ruflo@latest swarm status)",
+      "Bash(npx ruflo@latest swarm health)",
+      "Bash(npx ruflo@latest --version)"
     ],
     "deny": [
       "Read(./.env)",

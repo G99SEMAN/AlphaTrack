@@ -10,6 +10,7 @@ export interface StatsSettings {
   showStrategyTable: boolean
   showInstrumentTable: boolean
   showWeekdayChart: boolean
+  showHourlyChart: boolean
   showRMultipleChart: boolean
   showTopTrades: boolean
 }
@@ -22,6 +23,7 @@ const DEFAULT_SETTINGS: StatsSettings = {
   showStrategyTable: true,
   showInstrumentTable: true,
   showWeekdayChart: true,
+  showHourlyChart: true,
   showRMultipleChart: true,
   showTopTrades: true,
 }

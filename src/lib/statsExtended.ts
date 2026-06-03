@@ -52,6 +52,15 @@ export interface RMultipleBucket {
   isPositive: boolean
 }
 
+export interface HourlyStats {
+  hour: number
+  label: string
+  trades: number
+  winRate: number
+  avgPnl: number
+  totalPnl: number
+}
+
 export interface ExtendedStats {
   profitFactor: number
   expectancy: number
@@ -68,6 +77,7 @@ export interface ExtendedStats {
   top5ByTradeCount: InstrumentStats[]
   byStrategy: StrategyStats[]
   byWeekday: WeekdayStats[]
+  byHour: HourlyStats[]
   rMultiples: RMultipleBucket[]
   hasRMultipleData: boolean
   totalClosed: number
@@ -103,7 +113,7 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
     profitFactor: 0, expectancy: 0, avgWin: 0, avgLoss: 0,
     winLossRatio: 0, costRatio: 0, roi: 0, avgTradesPerDay: 0, monthlyPnl: [],
     long: dirStats([]), short: dirStats([]),
-    byInstrument: [], top5ByTradeCount: [], byStrategy: [], byWeekday: [],
+    byInstrument: [], top5ByTradeCount: [], byStrategy: [], byWeekday: [], byHour: [],
     rMultiples: [], hasRMultipleData: false, totalClosed: 0, topTrades: [],
   }
   if (closed.length === 0 && paper.length === 0) return empty
@@ -266,6 +276,30 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
     count: bucketCounts.get(b.label) ?? 0,
   }))
 
+  // Stunden-Analyse
+  const hourMap = new Map<number, Trade[]>()
+  for (let h = 0; h < 24; h++) hourMap.set(h, [])
+  for (const t of closed) {
+    const timeStr = t.closeTime ?? t.date
+    const h = new Date(timeStr).getHours()
+    if (h >= 0 && h < 24) hourMap.get(h)!.push(t)
+  }
+  const byHour: HourlyStats[] = Array.from(hourMap.entries())
+    .filter(([, ts]) => ts.length > 0)
+    .map(([h, ts]) => {
+      const wins = ts.filter(t => (t.pnl ?? 0) > 0)
+      const sum = ts.reduce((s, t) => s + (t.pnl ?? 0), 0)
+      return {
+        hour: h,
+        label: `${String(h).padStart(2, '0')}:00`,
+        trades: ts.length,
+        winRate: round2(wins.length / ts.length * 100),
+        avgPnl: round2(sum / ts.length),
+        totalPnl: round2(sum),
+      }
+    })
+    .sort((a, b) => a.hour - b.hour)
+
   // Top Trades nach PnL
   const topTrades: TopTradeEntry[] = closed
     .filter(t => (t.pnl ?? 0) > 0)
@@ -283,7 +317,7 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
 
   return {
     profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costRatio, roi, avgTradesPerDay,
-    monthlyPnl, long, short, byInstrument, top5ByTradeCount, byStrategy, byWeekday,
+    monthlyPnl, long, short, byInstrument, top5ByTradeCount, byStrategy, byWeekday, byHour,
     rMultiples, hasRMultipleData, totalClosed: totalClosedCount, topTrades,
   }
 }

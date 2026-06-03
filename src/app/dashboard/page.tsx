@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
 import { ensureSeedData } from '@/lib/seed'
@@ -6,8 +7,11 @@ import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
 import PnLCard from '@/components/dashboard/PnLCard'
 import RiskCard from '@/components/dashboard/RiskCard'
-import EquityChart from '@/components/dashboard/EquityChart'
 import RecentTradesCard from '@/components/dashboard/RecentTradesCard'
+
+const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), {
+  loading: () => <div style={{ minHeight: 280 }} />,
+})
 import DashboardWinRate from '@/components/dashboard/DashboardWinRate'
 import DashboardTimeFilter from '@/components/dashboard/DashboardTimeFilter'
 import DemoBanner from '@/components/layout/DemoBanner'
