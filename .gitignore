@@ -45,6 +45,9 @@ next-env.d.ts
 # /data/
 # /public/screenshots/
 
+# Bot configs (contain MT5 credentials)
+bots/*/config.json
+
 # AI tool artifacts (local only, not needed on GitHub)
 ruvector.db
 agentdb.rvf
