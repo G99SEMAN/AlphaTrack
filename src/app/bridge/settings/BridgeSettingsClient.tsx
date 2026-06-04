@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import {
   SlidersHorizontal, Globe, KeyRound, User, Timer,
   Monitor, Eye, EyeOff, Save, AlertTriangle, CheckCircle,
-  WifiOff, RefreshCw, Hash, RotateCcw,
+  WifiOff, RefreshCw, Hash, RotateCcw, Copy, Zap,
 } from 'lucide-react'
 import { BotEntry } from '@/types/bot'
 import { Profile } from '@/types/profile'
@@ -155,6 +155,16 @@ export default function BridgeSettingsClient({ bots, profiles }: Props) {
   const [loading, setLoading] = useState(false)
   const [offline, setOffline] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [setupInfo, setSetupInfo] = useState<{ apiKey: string; url: string } | null>(null)
+  const [showApiKey, setShowApiKey] = useState(false)
+  const [apiKeyCopied, setApiKeyCopied] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/bridge/info')
+      .then(r => r.ok ? r.json() : null)
+      .then(d => d && setSetupInfo({ apiKey: d.apiKey, url: d.url }))
+      .catch(() => {})
+  }, [])
 
   const [saveState, setSaveState] = useState<Record<string, SaveState>>({
     connection: 'idle',
@@ -234,6 +244,61 @@ export default function BridgeSettingsClient({ bots, profiles }: Props) {
           </div>
         )}
       </div>
+
+      {/* Setup-Info (immer sichtbar) */}
+      {setupInfo && (
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+          className="mb-5 rounded-2xl overflow-hidden"
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+          <div className="flex items-center gap-2.5 px-5 py-3.5" style={{ borderBottom: '1px solid var(--border)' }}>
+            <Zap size={15} style={{ color: '#f59e0b' }} />
+            <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Bridge Auto-Setup</p>
+            <span className="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-full"
+              style={{ background: 'rgba(0,217,126,0.1)', color: 'var(--green)', border: '1px solid rgba(0,217,126,0.25)' }}>
+              Kein manuelles Setup nötig
+            </span>
+          </div>
+          <div className="px-5 py-4">
+            <p className="text-xs mb-3" style={{ color: 'var(--text-3)' }}>
+              Die Bridge auf dem Mini PC erkennt AlphaTrack automatisch im Netzwerk.
+              Nur MT5-Zugangsdaten müssen in <code className="px-1 rounded" style={{ background: 'var(--bg)' }}>setup.bat</code> eingegeben werden.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--text-3)' }}>AlphaTrack URL</p>
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl font-mono text-xs"
+                  style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}>
+                  <span className="flex-1 truncate">{setupInfo.url}</span>
+                </div>
+              </div>
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--text-3)' }}>API Key</p>
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl font-mono text-xs"
+                  style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}>
+                  <span className="flex-1 truncate">
+                    {showApiKey ? setupInfo.apiKey : '••••••••••••••••'}
+                  </span>
+                  <button onClick={() => setShowApiKey(v => !v)}
+                    className="shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
+                    style={{ color: 'var(--text-3)' }}>
+                    {showApiKey ? <EyeOff size={12} /> : <Eye size={12} />}
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(setupInfo.apiKey)
+                      setApiKeyCopied(true)
+                      setTimeout(() => setApiKeyCopied(false), 2000)
+                    }}
+                    className="shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
+                    style={{ color: apiKeyCopied ? 'var(--green)' : 'var(--text-3)' }}>
+                    {apiKeyCopied ? <CheckCircle size={12} /> : <Copy size={12} />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* Kein Bot */}
       {bots.length === 0 && (

@@ -1,6 +1,6 @@
 """
-AlphaTrack Bridge Setup
-Interaktive Konfiguration der Bridge-Verbindung.
+AlphaTrack Bridge Setup — minimale Konfiguration.
+Nur MT5-Zugangsdaten nötig. Alles andere wird automatisch ermittelt.
 """
 
 import json
@@ -15,106 +15,92 @@ except ImportError:
     input("Enter zum Beenden...")
     sys.exit(1)
 
-CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.json")
+from auto_discover import discover, fetch_setup_info
 
+CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.json")
 SEP = "-" * 55
 
-
-DEFAULT_CONFIG = {
-    "alphatrack_url": "http://192.168.178.30:3000",
-    "api_key": secrets.token_hex(32),
-    "bridge_id": "",
-    "bridge_name": "AlphaTrack Bridge",
-    "bridge_version": "1.0.0",
-    "profile_id": "",
+DEFAULTS = {
+    "alphatrack_url":         "",
+    "api_key":                "",
+    "bridge_id":              "",
+    "bridge_name":            "",
+    "bridge_version":         "1.0.0",
+    "profile_id":             "",
     "heartbeat_interval_sec": 5,
     "trade_sync_interval_sec": 30,
-    "command_server_port": 8765,
-    "mt5_login": 0,
-    "mt5_password": "",
-    "mt5_server": "",
-    "symbols_to_watch": ["EURUSD", "GBPUSD", "XAUUSD", "USDJPY"],
-    "mt5_exe_path": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
-    "mt5_restart_wait_sec": 10,
+    "command_server_port":    8765,
+    "mt5_login":              0,
+    "mt5_password":           "",
+    "mt5_server":             "",
+    "symbols_to_watch":       ["EURUSD", "GBPUSD", "XAUUSD", "USDJPY"],
+    "mt5_exe_path":           "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "mt5_restart_wait_sec":   10,
     "mt5_restart_max_attempts": 3,
-    "mt5_startup_wait_sec": 15,
+    "mt5_startup_wait_sec":   15,
 }
 
 
 def load_config() -> dict:
     if not os.path.exists(CONFIG_FILE):
-        print("  [INFO] Keine config.json gefunden - starte mit Standardwerten.")
-        return dict(DEFAULT_CONFIG)
+        return dict(DEFAULTS)
     with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        cfg = json.load(f)
+    # Fehlende Felder mit Defaults auffüllen
+    for k, v in DEFAULTS.items():
+        cfg.setdefault(k, v)
+    return cfg
 
 
-def save_config(config: dict):
+def save_config(cfg: dict):
     with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-        json.dump(config, f, indent=2, ensure_ascii=False)
+        json.dump(cfg, f, indent=2, ensure_ascii=False)
 
 
 def ask(label: str, current, secret: bool = False) -> str:
-    """Fragt nach einem Wert - Enter behaelt den aktuellen."""
     display = "****" if secret and current else str(current) if current else "(leer)"
     raw = input(f"  {label} [{display}]: ").strip()
-    if raw == "":
+    if not raw:
         return current
-    # Typ-Konvertierung wenn noetig
     if isinstance(current, int):
         try:
             return int(raw)
         except ValueError:
-            print(f"  -> Ungueltige Zahl, Wert unveraendert: {current}")
             return current
     return raw
 
 
-def test_connection(url: str) -> list | None:
-    """Testet die Verbindung zu AlphaTrack und gibt Profile zurueck oder None."""
-    print(f"\n  -> Teste Verbindung zu {url} ...")
-    try:
-        resp = requests.get(f"{url}/api/profiles", timeout=8)
-        if resp.status_code == 200:
-            profiles = resp.json().get("profiles", [])
-            print(f"  -> Verbunden! {len(profiles)} Profil(e) gefunden.")
-            return profiles
-        else:
-            print(f"  -> Verbindung OK, aber unerwarteter Status: {resp.status_code}")
-            return []
-    except requests.exceptions.ConnectionError:
-        print(f"  -> FEHLER: AlphaTrack nicht erreichbar unter {url}")
-        print("     Stelle sicher, dass AlphaTrack laeuft und die IP korrekt ist.")
-        return None
-    except requests.exceptions.Timeout:
-        print(f"  -> FEHLER: Verbindungs-Timeout nach 8 Sekunden.")
-        return None
-    except Exception as e:
-        print(f"  -> FEHLER: {e}")
-        return None
-
-
 def choose_profile(profiles: list, current_id: str) -> str:
-    """Zeigt Profile zur Auswahl an und gibt die gewaehle ID zurueck."""
     if not profiles:
-        print("  -> Keine Profile verfuegbar - Profil-ID manuell eingeben.")
-        return ask("Profil-ID", current_id)
+        print("  Keine Profile von AlphaTrack empfangen.")
+        return ask("Profil-ID (manuell eingeben)", current_id)
+
+    # Prüfen ob current_id noch gültig ist
+    valid_ids = {p["id"] for p in profiles}
+    effective_current = current_id if current_id in valid_ids else ""
+
+    if len(profiles) == 1:
+        chosen = profiles[0]
+        print(f"  -> Nur ein Profil verfuegbar — automatisch gewaehlt: {chosen['name']}")
+        return chosen["id"]
 
     print()
     print("  Verfuegbare Profile:")
     for i, p in enumerate(profiles, 1):
-        marker = " <- aktuell" if p["id"] == current_id else ""
-        print(f"    {i}) {p['name']} ({p['type'].upper()}) - {p['broker']} [{p['currency']}] - ID: {p['id']}{marker}")
-
-    print(f"    0) Manuell eingeben")
+        marker = " <- aktuell" if p["id"] == effective_current else ""
+        print(f"    {i}) {p['name']} ({p.get('currency','?')}) - {p.get('broker','?')}{marker}")
     print()
 
+    # Falls kein gültiges Profil gesetzt: Auswahl zwingend
+    pflicht = not effective_current
     while True:
-        raw = input(f"  Profil waehlen [1-{len(profiles)} / 0 / Enter = behalten]: ").strip()
-        if raw == "":
-            return current_id
-        if raw == "0":
-            return ask("Profil-ID", current_id)
+        hint = f"1-{len(profiles)}" if pflicht else f"1-{len(profiles)} / Enter = behalten"
+        raw = input(f"  Profil waehlen [{hint}]: ").strip()
+        if not raw and not pflicht:
+            return effective_current
+        if not raw and pflicht:
+            print("  -> Bitte ein Profil waehlen.")
+            continue
         try:
             idx = int(raw) - 1
             if 0 <= idx < len(profiles):
@@ -123,87 +109,87 @@ def choose_profile(profiles: list, current_id: str) -> str:
                 return chosen["id"]
         except ValueError:
             pass
-        print(f"  -> Bitte eine Zahl zwischen 0 und {len(profiles)} eingeben.")
+        print(f"  -> Bitte Zahl zwischen 1 und {len(profiles)} eingeben.")
 
 
 def main():
     os.system("cls" if os.name == "nt" else "clear")
 
     print(SEP)
-    print("   AlphaTrack Bridge - Setup")
+    print("   AlphaTrack Bridge — Setup")
     print(SEP)
     print()
-
-    config = load_config()
-    print(f"  Konfigurationsdatei: {CONFIG_FILE}")
-    print()
-    print("  Enter druecken = Wert unveraendert uebernehmen.")
+    print("  Nur MT5-Zugangsdaten werden benoetigt.")
+    print("  AlphaTrack-URL und API-Key werden automatisch ermittelt.")
     print()
 
-    # ── 1) AlphaTrack URL ──────────────────────────────────
+    cfg = load_config()
+
+    # ── 1) MT5-Zugangsdaten ───────────────────────────────
     print(SEP)
-    print("  [1] AlphaTrack URL")
+    print("  [1] MetaTrader 5 — Zugangsdaten")
     print(SEP)
-
-    new_url = ask("URL (z.B. http://192.168.178.30:3000)", config.get("alphatrack_url", ""))
-
-    profiles = []
-    if new_url != config.get("alphatrack_url"):
-        profiles = test_connection(new_url) or []
-
-    config["alphatrack_url"] = new_url
+    cfg["mt5_login"]    = ask("Kontonummer (Login)", cfg.get("mt5_login", ""))
+    cfg["mt5_password"] = ask("Passwort",           cfg.get("mt5_password", ""), secret=True)
+    cfg["mt5_server"]   = ask("Server (z.B. BlackBullMarkets-Demo)", cfg.get("mt5_server", ""))
     print()
 
-    # ── 2) API-Key ────────────────────────────────────────
+    # ── 2) Auto-Discovery ─────────────────────────────────
     print(SEP)
-    print("  [2] API-Key")
+    print("  [2] AlphaTrack suchen ...")
     print(SEP)
-    config["api_key"] = ask("API-Key", config.get("api_key", ""), secret=True)
+
+    last = cfg.get("alphatrack_url") or None
+    found_url = discover(last_known_url=last)
+
+    if not found_url:
+        print()
+        print("  [!] AlphaTrack nicht automatisch gefunden.")
+        print("      Stelle sicher dass AlphaTrack laeuft (npm start).")
+        manual = input("  Manuelle URL eingeben (oder Enter zum Abbrechen): ").strip()
+        if not manual:
+            print("  Setup abgebrochen.")
+            input("Enter zum Beenden...")
+            return
+        found_url = manual
+
+    cfg["alphatrack_url"] = found_url
+    print(f"  -> AlphaTrack gefunden: {found_url}")
+
+    # ── 3) API-Key und Profile holen ──────────────────────
+    info = fetch_setup_info(found_url)
+    if info:
+        cfg["api_key"] = info.get("apiKey", cfg.get("api_key", secrets.token_hex(32)))
+        print(f"  -> API-Key automatisch uebernommen.")
+        profiles = info.get("profiles", [])
+    else:
+        print("  [!] Konnte Setup-Info nicht laden. API-Key manuell eingeben.")
+        cfg["api_key"] = ask("API-Key", cfg.get("api_key", ""), secret=True)
+        profiles = []
+
     print()
 
-    # ── 3) Profil ─────────────────────────────────────────
+    # ── 4) Profil ─────────────────────────────────────────
     print(SEP)
-    print("  [3] Trading-Profil")
+    print("  [3] Trading-Profil waehlen")
     print(SEP)
-    config["profile_id"] = choose_profile(profiles, config.get("profile_id", ""))
+    cfg["profile_id"] = choose_profile(profiles, cfg.get("profile_id", ""))
     print()
 
-    # ── 4) Bridge-Name ────────────────────────────────────
-    print(SEP)
-    print("  [4] Bridge-Name")
-    print(SEP)
-    config["bridge_name"] = ask("Name", config.get("bridge_name", "AlphaTrack Bridge"))
-    print()
-
-    # ── 5) MT5-Zugangsdaten ───────────────────────────────
-    print(SEP)
-    print("  [5] MetaTrader 5 - Zugangsdaten")
-    print(SEP)
-    config["mt5_login"]    = ask("Login (Kontonummer)", config.get("mt5_login", ""))
-    config["mt5_password"] = ask("Passwort", config.get("mt5_password", ""), secret=True)
-    config["mt5_server"]   = ask("Server (z.B. BlackBullMarkets-Demo)", config.get("mt5_server", ""))
-    config["mt5_exe_path"] = ask(
-        "MT5-Pfad (z.B. C:\\Program Files\\MetaTrader 5\\terminal64.exe)",
-        config.get("mt5_exe_path", ""),
-    )
-    print()
-
-    # ── 6) Ports & Intervalle ─────────────────────────────
-    print(SEP)
-    print("  [6] Ports & Intervalle")
-    print(SEP)
-    config["command_server_port"]     = ask("Command-Server Port", config.get("command_server_port", 8765))
-    config["heartbeat_interval_sec"]  = ask("Heartbeat-Intervall (Sek)", config.get("heartbeat_interval_sec", 5))
-    config["trade_sync_interval_sec"] = ask("Trade-Sync-Intervall (Sek)", config.get("trade_sync_interval_sec", 30))
-    print()
+    # ── 5) Bridge-Name (optional) ─────────────────────────
+    import socket as _socket
+    default_name = cfg.get("bridge_name") or _socket.gethostname()
+    cfg["bridge_name"] = ask("Bridge-Name (optional, Enter = Hostname)", default_name)
 
     # ── Abschluss ─────────────────────────────────────────
-    print(SEP)
-    config["bridge_id"] = ""
-    print("  -> Bot-ID geleert (automatische Neuregistrierung beim naechsten Start)")
+    cfg["bridge_id"] = ""  # Neuregistrierung erzwingen
+    save_config(cfg)
 
-    save_config(config)
-    print("  -> Konfiguration gespeichert!")
+    print()
+    print(SEP)
+    print("  Konfiguration gespeichert!")
+    print(f"  AlphaTrack: {cfg['alphatrack_url']}")
+    print(f"  Profil:     {cfg.get('profile_id', '(nicht gesetzt)')}")
     print()
     print("  Naechster Schritt: start_bridge.bat ausfuehren")
     print(SEP)

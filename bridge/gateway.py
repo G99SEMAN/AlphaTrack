@@ -121,15 +121,20 @@ def _require_api_key(request: Request):
 
 # --- AlphaTrack proxy helpers ---
 
-async def _post_alphatrack(path: str, body: dict, headers: dict = None):
+# Maps bridge-internal bot_id → AlphaTrack nanoid, set after successful registration
+_alphatrack_bot_ids: dict = {}
+
+
+async def _post_alphatrack(path: str, body: dict, headers: dict = None) -> dict | None:
     url = f"{_alphatrack_url}{path}"
     h = headers or {}
-    await asyncio.to_thread(requests.post, url, json=body, headers=h, timeout=5)
-
-
-async def _patch_alphatrack(path: str, body: dict):
-    url = f"{_alphatrack_url}{path}"
-    await asyncio.to_thread(requests.patch, url, json=body, timeout=5)
+    try:
+        resp = await asyncio.to_thread(requests.post, url, json=body, headers=h, timeout=5)
+        if resp.ok:
+            return resp.json()
+    except Exception:
+        pass
+    return None
 
 
 # --- Ping keepalive task ---
@@ -187,7 +192,8 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                 bot_version = msg.get("version", "1.0.0")
 
                 # Reconnect: reuse existing bot_id if name is known
-                if bot_name in _bot_names_to_id:
+                is_reconnect = bot_name in _bot_names_to_id
+                if is_reconnect:
                     bot_id = _bot_names_to_id[bot_name]
                 else:
                     bot_id = str(uuid.uuid4())[:8]
@@ -198,15 +204,25 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
 
                 await websocket.send_text(json.dumps({"type": "registered", "bot_id": bot_id}))
 
+                # Bridge-Log: Verbindung oder Reconnect
+                if _log_callback:
+                    if is_reconnect:
+                        _log_callback("info", f"Bot reconnect: {bot_name}", f"Version {bot_version}")
+                    else:
+                        _log_callback("info", f"Bot verbunden: {bot_name}", f"Version {bot_version}")
+
                 port = _load_config().get("command_server_port", 8765)
                 bot_url = f"http://{_local_ip}:{port}/bot/{bot_id}"
                 try:
-                    await _post_alphatrack(
+                    resp = await _post_alphatrack(
                         "/api/bots",
                         {"name": bot_name, "profileId": _profile_id, "url": bot_url, "type": "bot"},
                         {"x-bot-api-key": _api_key},
                     )
-                    await _patch_alphatrack(f"/api/bots/{bot_id}", {"url": bot_url})
+                    if resp:
+                        at_id = resp.get("bot", {}).get("id")
+                        if at_id:
+                            _alphatrack_bot_ids[bot_id] = at_id
                 except Exception:
                     pass
 
@@ -214,7 +230,7 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                 if not bot_id:
                     continue
                 body = {
-                    "bridgeId": bot_id,
+                    "bridgeId": _alphatrack_bot_ids.get(bot_id, bot_id),
                     "status": {
                         "state": msg.get("state", "running"),
                         "lastHeartbeat": "",
@@ -229,7 +245,7 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                     },
                 }
                 try:
-                    await _post_alphatrack("/api/bridge/heartbeat", body)
+                    await _post_alphatrack("/api/bridge/heartbeat", body, {"x-bot-api-key": _api_key})
                 except Exception:
                     pass
 
@@ -238,11 +254,11 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                     continue
                 try:
                     await _post_alphatrack("/api/bridge/log", {
-                        "botId": bot_id,
+                        "botId": _alphatrack_bot_ids.get(bot_id, bot_id),
                         "level": msg.get("level", "info"),
                         "message": msg.get("message", ""),
                         "details": msg.get("details", ""),
-                    })
+                    }, {"x-bot-api-key": _api_key})
                 except Exception:
                     pass
 
@@ -262,6 +278,10 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
     finally:
         if bot_id:
             _bots.pop(bot_id, None)
+            # Bridge-Log: Bot getrennt
+            name = next((n for n, i in _bot_names_to_id.items() if i == bot_id), bot_id)
+            if _log_callback:
+                _log_callback("warn", f"Bot getrennt: {name}")
 
 
 # --- HTTP endpoints ---

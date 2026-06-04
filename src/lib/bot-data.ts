@@ -72,16 +72,42 @@ export function getBotById(id: string): BotEntry | null {
 }
 
 export function addBot(data: { name: string; profileId: string; url: string; type?: 'bridge' | 'bot' }): BotEntry {
+  const type = data.type ?? 'bot'
+  // Bridges: match by URL (same physical device regardless of name)
+  // Bots: match by name + profileId
+  const existing = type === 'bridge'
+    ? getBots().find(b => (b.type ?? 'bridge') === 'bridge' && b.url === data.url)
+    : getBots().find(b => (b.type ?? 'bridge') === type && b.name === data.name && b.profileId === data.profileId)
+  if (existing) {
+    if (existing.url !== data.url) {
+      saveBots(getBots().map(b => b.id === existing.id ? { ...b, url: data.url } : b))
+    }
+    return { ...existing, url: data.url }
+  }
   const entry: BotEntry = {
     id: nanoid(10),
     name: data.name,
     profileId: data.profileId,
     url: data.url,
     createdAt: new Date().toISOString(),
-    type: data.type ?? 'bot',
+    type,
   }
   saveBots([...getBots(), entry])
   return entry
+}
+
+export function deduplicateBots(): void {
+  const all = getBots()
+  const seen = new Map<string, BotEntry>()
+  for (const bot of all) {
+    const key = `${bot.type ?? 'bridge'}:${bot.name}:${bot.profileId}`
+    if (!seen.has(key)) {
+      seen.set(key, bot)
+    }
+  }
+  if (seen.size < all.length) {
+    saveBots(Array.from(seen.values()))
+  }
 }
 
 export function removeBot(id: string): void {
@@ -123,7 +149,13 @@ export function getBotStatusWithConnection(botId: string): BotStatusWithConnecti
   return { ...status, connectionState: getConnectionState(status) }
 }
 
+let _dedupDone = false
+
 export function getAllBotsWithStatus(): BotWithStatus[] {
+  if (!_dedupDone) {
+    _dedupDone = true
+    deduplicateBots()
+  }
   const now = Date.now()
   if (_botsWithStatusCache && now - _botsWithStatusCache.ts < BOTS_STATUS_CACHE_TTL_MS) {
     return _botsWithStatusCache.data

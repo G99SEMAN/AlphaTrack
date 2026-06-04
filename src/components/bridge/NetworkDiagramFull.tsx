@@ -12,17 +12,16 @@ const SC: Record<Status, string> = {
 }
 const ACCENT = { at: '#00d97e', bridge: '#a855f7', mt5: '#60a5fa', bot: '#f59e0b' }
 
-const R     = 32
-const SVG_W = 630
-const SVG_H = 560
+const R     = 28
+const SVG_W = 480
+const SVG_H = 400
 
-// Default positions
 const DEFAULT_POS: Record<string, { x: number; y: number }> = {
-  at:     { x: 220, y: 80  },
-  bridge: { x: 72,  y: 240 },
-  mt5:    { x: 72,  y: 400 },
+  at:     { x: 200, y: 65  },
+  bridge: { x: 65,  y: 205 },
+  mt5:    { x: 65,  y: 345 },
 }
-const defaultBotPos = (i: number) => ({ x: 540, y: 140 + i * 150 })
+const defaultBotPos = (i: number) => ({ x: 400, y: 100 + i * 130 })
 
 function ePath(x1: number, y1: number, x2: number, y2: number): string {
   const mx = (x1 + x2) / 2
@@ -53,30 +52,37 @@ export default function NetworkDiagramFull() {
     ? 'offline'
     : bridge.status.mt5Connected ? 'online' : 'warning'
 
-  // ── Drag state ────────────────────────────────────────────────────
-  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({
-    ...DEFAULT_POS,
+  const STORAGE_KEY = 'alphatrack-network-positions'
+
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      return saved ? { ...DEFAULT_POS, ...JSON.parse(saved) } : { ...DEFAULT_POS }
+    } catch { return { ...DEFAULT_POS } }
   })
   const [dragging, setDragging] = useState<string | null>(null)
   const dragStart = useRef<{ mx: number; my: number; nx: number; ny: number } | null>(null)
 
-  // Initialise positions for new nodes (don't overwrite existing)
+  // Persist positions to localStorage on every change
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(positions)) } catch { /* silent */ }
+  }, [positions])
+
+  // Initialise positions for newly seen nodes (don't overwrite saved ones)
   useEffect(() => {
     setPositions(prev => {
       const next = { ...prev }
       if (!next.at)     next.at     = DEFAULT_POS.at
       if (!next.bridge) next.bridge = DEFAULT_POS.bridge
       if (!next.mt5)    next.mt5    = DEFAULT_POS.mt5
-      const list = botList.length > 0 ? botList : [null as BotWithStatus | null]
-      list.forEach((bw, i) => {
-        const id = bw ? `bot-${bw.bot.id}` : 'no-bot'
+      botList.forEach((bw, i) => {
+        const id = `bot-${bw.bot.id}`
         if (!next[id]) next[id] = defaultBotPos(i)
       })
       return next
     })
   }, [bots]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Window-level mouse handlers while dragging
   useEffect(() => {
     if (!dragging) return
     const onMove = (e: MouseEvent) => {
@@ -109,82 +115,79 @@ export default function NetworkDiagramFull() {
 
   const resetPositions = () => {
     const fresh: Record<string, { x: number; y: number }> = { ...DEFAULT_POS }
-    const list = botList.length > 0 ? botList : [null as BotWithStatus | null]
-    list.forEach((bw, i) => {
-      fresh[bw ? `bot-${bw.bot.id}` : 'no-bot'] = defaultBotPos(i)
+    botList.forEach((bw, i) => {
+      fresh[`bot-${bw.bot.id}`] = defaultBotPos(i)
     })
+    try { localStorage.removeItem(STORAGE_KEY) } catch { /* silent */ }
     setPositions(fresh)
   }
 
-  // ── Build nodes ───────────────────────────────────────────────────
-  const botEntries = botList.length > 0 ? botList : [null as BotWithStatus | null]
+  const showBridge = bridgeS !== 'offline'
+  const showMt5    = mt5S    !== 'offline'
 
   const nodes: NodeData[] = [
     {
       id: 'at', ...(positions.at ?? DEFAULT_POS.at),
       status: 'online', accent: ACCENT.at, Icon: Globe,
       label: 'AlphaTrack',
-      sub: bridgeS === 'offline' ? 'Keine Verbindung' : `Bridge verbunden`,
+      sub: showBridge ? 'Bridge verbunden' : 'Keine Verbindung',
     },
-    {
+    ...(showBridge ? [{
       id: 'bridge', ...(positions.bridge ?? DEFAULT_POS.bridge),
       status: bridgeS, accent: ACCENT.bridge, Icon: Cpu,
       label: bridge?.bot.name ?? 'Bridge',
       sub: bridgeS === 'online'
         ? `${bridge?.status?.openPositions ?? 0} offene Positionen`
-        : bridgeS === 'warning' ? 'Verbindungsproblem' : 'Nicht verbunden',
-    },
-    {
+        : 'Verbindungsproblem',
+    } as NodeData] : []),
+    ...(showMt5 ? [{
       id: 'mt5', ...(positions.mt5 ?? DEFAULT_POS.mt5),
       status: mt5S, accent: ACCENT.mt5, Icon: Monitor,
       label: 'MetaTrader 5',
       sub: mt5S === 'online' && bridge?.status?.balance != null
         ? `${bridge.status.balance.toFixed(2)} ${bridge.status.currency ?? ''}`
-        : mt5S === 'online' ? 'Verbunden'
-        : mt5S === 'warning' ? 'Nicht eingeloggt' : 'Getrennt',
-    },
-    ...botEntries.map((bw, i): NodeData => {
-      const id  = bw ? `bot-${bw.bot.id}` : 'no-bot'
+        : mt5S === 'online' ? 'Verbunden' : 'Nicht eingeloggt',
+    } as NodeData] : []),
+    ...botList.map((bw, i): NodeData => {
+      const id  = `bot-${bw.bot.id}`
       const bs  = resolveStatus(bw)
       const pos = positions[id] ?? defaultBotPos(i)
       return {
         id, ...pos, status: bs, accent: ACCENT.bot, Icon: BotIcon,
-        label: bw?.bot.name ?? 'Kein Bot',
-        sub: !bw ? 'Noch kein Bot registriert'
-          : bs === 'online' ? `${bw.status?.openPositions ?? 0} Positionen`
-          : bw.status?.state === 'paused' ? 'Pausiert'
-          : bw.status?.state === 'stopped' ? 'Gestoppt' : 'Offline',
+        label: bw.bot.name,
+        sub: bs === 'online' ? `${bw.status?.openPositions ?? 0} Positionen`
+          : bw.status?.state === 'paused' ? 'Pausiert' : 'Gestoppt',
       }
     }),
   ]
 
   const nodeMap = new Map(nodes.map(n => [n.id, n]))
 
+  // Edges defined A→B, animation runs reversed (1→0) so dots travel towards AlphaTrack
   const edges = [
-    { id: 'at-bridge', a: 'at',     b: 'bridge', status: bridgeS },
-    { id: 'br-mt5',    a: 'bridge', b: 'mt5',    status: mt5S    },
-    ...botEntries.map((bw, i) => ({
-      id: `br-bot-${bw?.bot.id ?? i}`,
-      a: 'bridge', b: bw ? `bot-${bw.bot.id}` : 'no-bot',
+    ...(showBridge ? [{ id: 'at-bridge', a: 'at', b: 'bridge', status: bridgeS }] : []),
+    ...(showBridge && showMt5 ? [{ id: 'br-mt5', a: 'bridge', b: 'mt5', status: mt5S }] : []),
+    ...(showBridge ? botList.map(bw => ({
+      id: `br-bot-${bw.bot.id}`,
+      a: 'bridge', b: `bot-${bw.bot.id}`,
       status: resolveStatus(bw),
-    })),
+    })) : []),
   ]
 
-  // ── Render ────────────────────────────────────────────────────────
   return (
-    <div className="rounded-2xl overflow-hidden"
+    <div className="rounded-2xl overflow-hidden inline-block"
       style={{ background: 'var(--surface-1)', border: '1px solid var(--border)' }}>
 
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4"
+      <div className="flex items-center justify-between px-5 py-3"
         style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           {(['online', 'warning', 'offline'] as Status[]).map(s => (
-            <div key={s} className="flex items-center gap-2">
+            <div key={s} className="flex items-center gap-1.5">
               <span style={{
-                width: 8, height: 8, borderRadius: '50%',
+                width: 7, height: 7, borderRadius: '50%',
                 background: SC[s], display: 'block',
-                boxShadow: s === 'online' ? `0 0 6px ${SC[s]}` : 'none',
+                boxShadow: s === 'online' ? `0 0 5px ${SC[s]}` : 'none',
               }} />
               <span className="text-xs font-medium" style={{ color: 'var(--text-3)' }}>
                 {s === 'online' ? 'Online' : s === 'warning' ? 'Warnung' : 'Offline'}
@@ -192,7 +195,7 @@ export default function NetworkDiagramFull() {
             </div>
           ))}
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {lastUpdated && (
             <span className="text-[11px]" style={{ color: 'var(--text-3)' }}>
               {lastUpdated.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
@@ -201,26 +204,19 @@ export default function NetworkDiagramFull() {
           <button
             onClick={resetPositions}
             title="Positionen zurücksetzen"
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors"
-            style={{
-              color: 'var(--text-3)',
-              border: '1px solid var(--border)',
-              background: 'transparent',
-            }}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer"
+            style={{ color: 'var(--text-3)', border: '1px solid var(--border)', background: 'transparent' }}
           >
-            <RotateCcw size={11} />
+            <RotateCcw size={10} />
             Reset
           </button>
         </div>
       </div>
 
       {/* Canvas */}
-      <div className="p-6 lg:p-10"
-        style={{ cursor: dragging ? 'grabbing' : 'default' }}>
-        <div style={{ position: 'relative', width: SVG_W, height: SVG_H,
-          userSelect: 'none', WebkitUserSelect: 'none' }}>
+      <div className="p-5" style={{ cursor: dragging ? 'grabbing' : 'default' }}>
+        <div style={{ position: 'relative', width: SVG_W, height: SVG_H, userSelect: 'none', WebkitUserSelect: 'none' }}>
 
-          {/* SVG: edges + circles + labels */}
           <svg width={SVG_W} height={SVG_H}
             style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}>
             <defs>
@@ -228,11 +224,11 @@ export default function NetworkDiagramFull() {
                 const a = nodeMap.get(e.a)
                 const b = nodeMap.get(e.b)
                 if (!a || !b) return null
-                return <path key={`def-${e.id}`} id={e.id}
-                  d={ePath(a.x, a.y, b.x, b.y)} />
+                return <path key={`def-${e.id}`} id={e.id} d={ePath(a.x, a.y, b.x, b.y)} />
               })}
             </defs>
 
+            {/* Edges */}
             {edges.map(e => {
               const a = nodeMap.get(e.a)
               const b = nodeMap.get(e.b)
@@ -242,12 +238,12 @@ export default function NetworkDiagramFull() {
               return (
                 <g key={e.id}>
                   <path d={ePath(a.x, a.y, b.x, b.y)} fill="none"
-                    stroke={active ? `${color}30` : 'var(--border)'}
-                    strokeWidth={active ? 2 : 1}
-                    strokeDasharray={active ? undefined : '5 5'} />
+                    stroke={active ? `${color}35` : 'var(--border)'}
+                    strokeWidth={active ? 2 : 1} />
                   {active && (
-                    <circle r="5" fill={color} opacity={0.85}>
-                      <animateMotion dur="2.2s" repeatCount="indefinite">
+                    <circle r="4.5" fill={color} opacity={0.9}>
+                      <animateMotion dur="2.2s" repeatCount="indefinite"
+                        keyPoints="1;0" keyTimes="0;1" calcMode="linear">
                         <mpath href={`#${e.id}`} />
                       </animateMotion>
                     </circle>
@@ -256,24 +252,23 @@ export default function NetworkDiagramFull() {
               )
             })}
 
+            {/* Nodes */}
             {nodes.map(n => {
-              const color = SC[n.status]
+              const statusColor = SC[n.status]
               return (
                 <g key={n.id}>
-                  <circle cx={n.x} cy={n.y} r={R + 12}
-                    fill={`${n.accent}07`} stroke={`${n.accent}15`} strokeWidth={1} />
+                  {/* Outer glow ring */}
+                  <circle cx={n.x} cy={n.y} r={R + 10}
+                    fill={`${n.accent}06`} stroke={`${n.accent}12`} strokeWidth={1} />
+                  {/* Main circle — accent fill, status border */}
                   <circle cx={n.x} cy={n.y} r={R}
-                    fill={`${n.accent}18`} stroke={`${n.accent}45`} strokeWidth={1.5} />
-                  <circle cx={n.x} cy={n.y} r={R} fill="none"
-                    stroke={color} strokeWidth={1.5} opacity={0.55}
-                    strokeDasharray={n.status === 'offline' ? '4 5' : undefined} />
-                  <circle cx={n.x + R * 0.68} cy={n.y + R * 0.68} r={6}
-                    fill={color} stroke="var(--surface-1)" strokeWidth={2} />
-                  <text x={n.x} y={n.y + R + 20}
-                    textAnchor="middle" fontSize={13} fontWeight={700}
+                    fill={`${n.accent}16`} stroke={statusColor} strokeWidth={2} />
+                  {/* Label */}
+                  <text x={n.x} y={n.y + R + 18}
+                    textAnchor="middle" fontSize={12} fontWeight={700}
                     style={{ fill: 'var(--text-1)', pointerEvents: 'none' }}>{n.label}</text>
-                  <text x={n.x} y={n.y + R + 36}
-                    textAnchor="middle" fontSize={11}
+                  <text x={n.x} y={n.y + R + 32}
+                    textAnchor="middle" fontSize={10}
                     style={{ fill: 'var(--text-3)', pointerEvents: 'none' }}>{n.sub}</text>
                 </g>
               )
@@ -298,7 +293,7 @@ export default function NetworkDiagramFull() {
                   zIndex: isDragging ? 10 : 1,
                 }}
               >
-                <Icon size={20} color={n.accent} />
+                <Icon size={18} color={n.accent} />
               </div>
             )
           })}

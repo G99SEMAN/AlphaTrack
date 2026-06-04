@@ -23,6 +23,7 @@ from trade_sync import sync_trades
 from display import BridgeDisplay
 from local_log import LocalLog
 from log_sync import sync_to_alphatrack
+from auto_discover import discover, fetch_setup_info
 
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.json")
@@ -177,6 +178,42 @@ def main():
 
     display = BridgeDisplay(bridge_name=config.get("bridge_name", "AlphaTrack Bot"))
     display.log("info", "BOT", f"Starte {config.get('bridge_name', 'AlphaTrack Bot')} ...")
+
+    # ── Auto-Discovery: AlphaTrack im Netzwerk finden ────────────────
+    if not config.get("alphatrack_url"):
+        display.log("info", "DISC", "Keine AlphaTrack-URL konfiguriert — starte Auto-Discovery ...")
+        found = discover(last_known_url=None, display=display)
+        if not found:
+            display.log("error", "DISC", "AlphaTrack nicht gefunden! Bitte setup.bat ausfuehren.")
+            sys.exit(1)
+        info = fetch_setup_info(found)
+        if info:
+            config["alphatrack_url"] = found
+            config["api_key"] = info.get("apiKey", config.get("api_key", ""))
+            if not config.get("profile_id") and info.get("profiles"):
+                config["profile_id"] = info["profiles"][0]["id"]
+                display.log("info", "DISC", f"Profil automatisch gesetzt: {info['profiles'][0]['name']}")
+            save_config(config)
+            display.log("ok", "DISC", f"AlphaTrack verbunden: {found}")
+        else:
+            display.log("error", "DISC", "Setup-Info konnte nicht geladen werden.")
+            sys.exit(1)
+    else:
+        # Prüfen ob bekannte URL noch erreichbar, sonst neu suchen
+        try:
+            resp = requests.get(f"{config['alphatrack_url']}/api/bridge/info", timeout=4)
+            if not resp.ok:
+                raise ConnectionError
+        except Exception:
+            display.log("warn", "DISC", "AlphaTrack nicht erreichbar — suche neu im Netzwerk ...")
+            found = discover(last_known_url=config.get("alphatrack_url"), display=display)
+            if found and found != config.get("alphatrack_url"):
+                info = fetch_setup_info(found)
+                if info:
+                    config["alphatrack_url"] = found
+                    config["api_key"] = info.get("apiKey", config.get("api_key", ""))
+                    save_config(config)
+                    display.log("ok", "DISC", f"Neue AlphaTrack-URL gespeichert: {found}")
 
     # Auto-Registrierung bei AlphaTrack
     config = auto_register(config, display)

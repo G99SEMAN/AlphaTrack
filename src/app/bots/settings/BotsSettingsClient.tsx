@@ -2,10 +2,9 @@
 
 import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bot, Search, Pencil, Trash2, Check, X, ExternalLink, Wifi, WifiOff } from 'lucide-react'
+import { Bot, Pencil, Trash2, Check, X, ExternalLink, Wifi, WifiOff } from 'lucide-react'
 import { BotWithStatus } from '@/types/bot'
 import { Profile } from '@/types/profile'
-import DiscoverBridgeModal from '@/components/bridge/DiscoverBridgeModal'
 
 interface Props {
   initialBots: BotWithStatus[]
@@ -21,7 +20,6 @@ interface EditState {
 export default function BotsSettingsClient({ initialBots, profiles }: Props) {
   const filterBots = (list: BotWithStatus[]) => list.filter(b => b.bot.type === 'bot')
   const [bots, setBots] = useState<BotWithStatus[]>(filterBots(initialBots))
-  const [showDiscover, setShowDiscover] = useState(false)
   const [editing, setEditing] = useState<EditState | null>(null)
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState<string | null>(null)
@@ -84,25 +82,10 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
     <main className="flex-1 min-w-0 p-4 md:p-6">
 
       {/* Header */}
-      <div className="mb-6 flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bot Einstellungen</h1>
-          <p className="text-sm" style={{ color: 'var(--text-3)' }}>Bots verwalten, umbenennen und entfernen</p>
-        </div>
-        <button
-          onClick={() => setShowDiscover(true)}
-          className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-all"
-          style={{ background: 'var(--accent-bg)', border: '1px solid var(--accent-border)', color: 'var(--accent)' }}>
-          <Search size={13} /> Bot hinzufügen
-        </button>
+      <div className="mb-6">
+        <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bot Einstellungen</h1>
+        <p className="text-sm" style={{ color: 'var(--text-3)' }}>Bots verwalten, umbenennen und entfernen</p>
       </div>
-
-      {showDiscover && (
-        <DiscoverBridgeModal
-          onClose={() => setShowDiscover(false)}
-          onDiscovered={() => { setShowDiscover(false); refresh() }}
-        />
-      )}
 
       {/* Leer-Zustand */}
       {bots.length === 0 && (
@@ -113,15 +96,10 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
             style={{ background: 'var(--accent-bg)' }}>
             <Bot size={26} style={{ color: 'var(--accent)' }} />
           </div>
-          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>Noch keine Bots</h3>
-          <p className="text-sm max-w-sm mb-5" style={{ color: 'var(--text-3)' }}>
-            Füge deinen ersten Bot über "Bot hinzufügen" hinzu.
+          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>Kein Bot registriert</h3>
+          <p className="text-sm max-w-sm" style={{ color: 'var(--text-3)' }}>
+            Starte einen Bot auf dem Mini PC — er erscheint automatisch hier sobald er sich mit der Bridge verbindet.
           </p>
-          <button onClick={() => setShowDiscover(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer"
-            style={{ background: 'var(--accent)', color: '#fff' }}>
-            <Search size={14} /> Bot hinzufügen
-          </button>
         </motion.div>
       )}
 

@@ -5,10 +5,10 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   Pencil, CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
-  Sparkles, ShieldCheck, ShieldOff, Network,
+  Sparkles, ShieldCheck, ShieldOff, Network, ChevronDown, Cpu, MoreHorizontal,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LogoMark from './LogoMark'
 import MarketSessions from './MarketSessions'
 import BottomNav from './BottomNav'
@@ -18,23 +18,31 @@ import EinstellungenModal from '@/components/einstellungen/EinstellungenModal'
 import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 
-const NAV = [
-  { href: '/dashboard',             label: 'Dashboard',      icon: LayoutDashboard },
-  { href: '/journal',               label: 'Trades',         icon: BookOpen },
-  { href: '/strategien',            label: 'Strategien',     icon: Target },
-  { href: '/statistiken',           label: 'Statistiken',    icon: BarChart2 },
-  { href: '/kalender',              label: 'Kalender',       icon: CalendarDays },
-  { href: '/bots',                  label: 'Bots',           icon: Bot },
-  { href: '/netzwerk',              label: 'Netzwerk',       icon: Network },
+const MAIN_NAV = [
+  { href: '/dashboard',  label: 'Dashboard',   icon: LayoutDashboard },
+  { href: '/journal',    label: 'Trades',       icon: BookOpen },
+  { href: '/statistiken',label: 'Statistiken',  icon: BarChart2 },
+  { href: '/kalender',   label: 'Kalender',     icon: CalendarDays },
+  { href: '/netzwerk',   label: 'Netzwerk',     icon: Network },
 ]
 
-const BOT_NAV = [
-  { href: '/bridge',             label: 'Bridge',          icon: Bot },
-  { href: '/bridge/trades',      label: 'Live Trades',     icon: Activity },
-  { href: '/bridge/analyse',     label: 'Trade Analyzer',  icon: Sparkles },
-  { href: '/bridge/performance', label: 'Performance',     icon: BarChart2 },
-  { href: '/bridge/log',         label: 'Bridge Log',      icon: ScrollText },
-  { href: '/bridge/settings',    label: 'Bridge Settings', icon: SlidersHorizontal },
+const BRIDGE_NAV = [
+  { href: '/bridge',          label: 'Bridge',          icon: Cpu },
+  { href: '/bridge/log',      label: 'Bridge Log',      icon: ScrollText },
+  { href: '/bridge/settings', label: 'Bridge Settings', icon: SlidersHorizontal },
+]
+
+const BOTS_NAV = [
+  { href: '/bots',          label: 'Bots',         icon: Bot },
+  { href: '/bots/logs',     label: 'Bot Log',      icon: ScrollText },
+  { href: '/bots/settings', label: 'Bot Settings', icon: SlidersHorizontal },
+  { href: '/strategien',    label: 'Strategien',   icon: Target },
+  { href: '/bridge/performance', label: 'Performance', icon: BarChart2 },
+]
+
+const WEITERES_NAV = [
+  { href: '/bridge/trades',  label: 'Live Trades',    icon: Activity },
+  { href: '/bridge/analyse', label: 'Trade Analyzer', icon: Sparkles },
 ]
 
 interface Props {
@@ -42,20 +50,118 @@ interface Props {
   activeProfile: Profile | null
 }
 
+const EXACT_MATCH = new Set(['/dashboard', '/bridge', '/bots'])
+
+function isActive(pathname: string, href: string): boolean {
+  if (EXACT_MATCH.has(href)) return pathname === href
+  return pathname === href || pathname.startsWith(href + '/')
+}
+
+function NavLink({ href, label, icon: Icon, pathname, onNav }: {
+  href: string; label: string; icon: React.ElementType
+  pathname: string; onNav?: () => void
+}) {
+  const active = isActive(pathname, href)
+  return (
+    <Link
+      href={href}
+      onClick={onNav}
+      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all"
+      style={{
+        background: active ? 'var(--accent-bg)' : 'transparent',
+        color: active ? 'var(--accent)' : 'var(--text-1)',
+      }}
+    >
+      <Icon size={16} strokeWidth={active ? 2.5 : 2} style={{ opacity: active ? 1 : 0.6 }} />
+      {label}
+    </Link>
+  )
+}
+
+function SectionHeader({ title, open, onToggle, icon: Icon }: {
+  title: string; open: boolean; onToggle: () => void; icon?: React.ElementType
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      className="w-full flex items-center justify-between px-2 mt-3 mb-1 cursor-pointer group"
+    >
+      <div className="flex items-center gap-1.5">
+        {Icon && <Icon size={10} style={{ color: 'var(--text-3)', opacity: 0.7 }} />}
+        <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+          {title}
+        </p>
+      </div>
+      <ChevronDown
+        size={11}
+        style={{
+          color: 'var(--text-3)',
+          transform: open ? 'rotate(0deg)' : 'rotate(-90deg)',
+          transition: 'transform 0.18s ease',
+        }}
+      />
+    </button>
+  )
+}
+
 function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props & { onNav?: () => void; compact?: boolean }) {
   const pathname = usePathname()
   const [showEdit, setShowEdit] = useState(false)
   const [showEinstellungen, setShowEinstellungen] = useState(false)
-const { isUnlocked, toggle } = useTradingLock()
+  const { isUnlocked, toggle } = useTradingLock()
+
+  const SECTIONS_KEY = 'alphatrack-sidebar-sections'
+
+  function loadSections() {
+    try {
+      const s = localStorage.getItem(SECTIONS_KEY)
+      return s ? (JSON.parse(s) as { bridge: boolean; bots: boolean; weiteres: boolean }) : null
+    } catch { return null }
+  }
+
+  function saveSections(v: { bridge: boolean; bots: boolean; weiteres: boolean }) {
+    try { localStorage.setItem(SECTIONS_KEY, JSON.stringify(v)) } catch { /* silent */ }
+  }
+
+  const [sections, setSections] = useState<{ bridge: boolean; bots: boolean; weiteres: boolean }>(() => {
+    const saved = loadSections() ?? { bridge: false, bots: false, weiteres: false }
+    return {
+      bridge:   saved.bridge   || BRIDGE_NAV.some(n => isActive(pathname, n.href)),
+      bots:     saved.bots     || BOTS_NAV.some(n => isActive(pathname, n.href)),
+      weiteres: saved.weiteres || WEITERES_NAV.some(n => isActive(pathname, n.href)),
+    }
+  })
+
+  // Force open the section of the current page (but never close others)
+  useEffect(() => {
+    setSections(prev => {
+      const next = {
+        bridge:   prev.bridge   || BRIDGE_NAV.some(n => isActive(pathname, n.href)),
+        bots:     prev.bots     || BOTS_NAV.some(n => isActive(pathname, n.href)),
+        weiteres: prev.weiteres || WEITERES_NAV.some(n => isActive(pathname, n.href)),
+      }
+      if (next.bridge !== prev.bridge || next.bots !== prev.bots || next.weiteres !== prev.weiteres) {
+        saveSections(next)
+      }
+      return next
+    })
+  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function toggleSection(key: 'bridge' | 'bots' | 'weiteres') {
+    setSections(prev => {
+      const next = { ...prev, [key]: !prev[key] }
+      saveSections(next)
+      return next
+    })
+  }
+
+  const { bridge: bridgeOpen, bots: botsOpen, weiteres: weiteresOpen } = sections
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
 
       {/* Logo + Schutzschalter */}
-      <div
-        className="flex items-center gap-3 px-4 py-4"
-        style={{ borderBottom: '1px solid var(--border)' }}
-      >
+      <div className="flex items-center gap-3 px-4 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
         <LogoMark size={44} className="shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-base font-bold leading-tight tracking-tight" style={{ color: 'var(--text-1)' }}>
@@ -90,16 +196,9 @@ const { isUnlocked, toggle } = useTradingLock()
 
       {/* Hinweis wenn Trading aktiv */}
       {isUnlocked && (
-        <div
-          className="mx-3 mt-2 rounded-lg px-3 py-2"
-          style={{
-            background: 'rgba(239,68,68,0.06)',
-            border: '1px solid rgba(239,68,68,0.2)',
-          }}
-        >
-          <p className="text-xs" style={{ color: '#ef4444' }}>
-            Trading aktiv!
-          </p>
+        <div className="mx-3 mt-2 rounded-lg px-3 py-2"
+          style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)' }}>
+          <p className="text-xs" style={{ color: '#ef4444' }}>Trading aktiv!</p>
         </div>
       )}
 
@@ -129,52 +228,35 @@ const { isUnlocked, toggle } = useTradingLock()
         <ProfileEditModal profile={activeProfile} onClose={() => setShowEdit(false)} />
       )}
 
-      {/* Hauptnavigation */}
+      {/* Navigation */}
       <nav className="flex-1 px-3 py-3 flex flex-col gap-0.5 overflow-y-auto min-h-0">
+
+        {/* Hauptnavigation */}
         <p className="text-xs font-semibold uppercase tracking-wider px-2 mb-1" style={{ color: 'var(--text-3)' }}>
           Navigation
         </p>
-        {NAV.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href || (href !== '/dashboard' && href !== '/bots' && pathname.startsWith(href + '/')) || (href === '/bots' && (pathname === '/bots' || pathname.startsWith('/bots/')))
-          return (
-            <Link
-              key={href}
-              href={href}
-              onClick={onNav}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all"
-              style={{
-                background: active ? 'var(--accent-bg)' : 'transparent',
-                color: active ? 'var(--accent)' : 'var(--text-1)',
-              }}
-            >
-              <Icon size={16} strokeWidth={active ? 2.5 : 2} style={{ opacity: active ? 1 : 0.6 }} />
-              {label}
-            </Link>
-          )
-        })}
+        {MAIN_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        ))}
 
-        {/* Bridge Sektion */}
-        <p className="text-xs font-semibold uppercase tracking-wider px-2 mt-3 mb-1" style={{ color: 'var(--text-3)' }}>
-          Bridge
-        </p>
-        {BOT_NAV.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href || (href !== '/bridge' && !pathname.startsWith('/bots') && pathname.startsWith(href + '/'))
-          return (
-            <Link
-              key={href}
-              href={href}
-              onClick={onNav}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all"
-              style={{
-                background: active ? 'var(--accent-bg)' : 'transparent',
-                color: active ? 'var(--accent)' : 'var(--text-1)',
-              }}
-            >
-              <Icon size={16} strokeWidth={active ? 2.5 : 2} style={{ opacity: active ? 1 : 0.6 }} />
-              {label}
-            </Link>
-          )
-        })}
+        {/* Bridge */}
+        <SectionHeader title="Bridge" open={bridgeOpen} onToggle={() => toggleSection('bridge')} icon={Cpu} />
+        {bridgeOpen && BRIDGE_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        ))}
+
+        {/* Bots */}
+        <SectionHeader title="Bots" open={botsOpen} onToggle={() => toggleSection('bots')} icon={Bot} />
+        {botsOpen && BOTS_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        ))}
+
+        {/* Weiteres */}
+        <SectionHeader title="Weiteres" open={weiteresOpen} onToggle={() => toggleSection('weiteres')} icon={MoreHorizontal} />
+        {weiteresOpen && WEITERES_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        ))}
+
       </nav>
 
       {/* Börsen Sessions */}
@@ -229,9 +311,7 @@ export default function Sidebar({ profiles, activeProfile }: Props) {
       >
         <div className="flex items-center gap-2.5">
           <LogoMark size={34} className="shrink-0" />
-          <span className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>
-            AlphaTrack
-          </span>
+          <span className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>AlphaTrack</span>
         </div>
         <button
           onClick={() => setMobileOpen(v => !v)}
@@ -250,17 +330,13 @@ export default function Sidebar({ profiles, activeProfile }: Props) {
         {mobileOpen && (
           <>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="md:hidden fixed inset-0 z-30"
               style={{ background: 'rgba(0,0,0,0.6)' }}
               onClick={() => setMobileOpen(false)}
             />
             <motion.aside
-              initial={{ x: -224 }}
-              animate={{ x: 0 }}
-              exit={{ x: -224 }}
+              initial={{ x: -224 }} animate={{ x: 0 }} exit={{ x: -224 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="md:hidden fixed left-0 top-0 bottom-0 w-56 z-40"
               style={{ background: 'var(--surface)', borderRight: '1px solid var(--border)' }}

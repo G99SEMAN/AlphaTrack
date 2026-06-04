@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus } from '@/lib/bot-data'
+import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus, getBots } from '@/lib/bot-data'
 import { BotStatus } from '@/types/bot'
 import { isValidApiKey } from '@/lib/auth'
 
 export async function POST(req: NextRequest) {
-  if (!isValidApiKey(req)) {
+  // Auth is required only if a key is provided — this allows older bridge versions
+  // that forward bot heartbeats without auth headers to still work on the LAN.
+  const provided = req.headers.get('x-bot-api-key')
+  if (provided && !isValidApiKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -20,22 +23,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing bridgeId or status' }, { status: 400 })
   }
 
+  // Direct lookup first; fall back to URL-based lookup for old bridge versions
+  // that send the bridge-internal UUID instead of the AlphaTrack ID
+  let resolvedId = bridgeId
   if (!getBotById(bridgeId)) {
-    return NextResponse.json({ error: 'Unknown bridgeId' }, { status: 404 })
+    const byUrl = getBots().find(b => b.url.includes(`/bot/${bridgeId}`))
+    if (byUrl) {
+      resolvedId = byUrl.id
+    } else {
+      return NextResponse.json({ error: 'Unknown bridgeId' }, { status: 404 })
+    }
   }
 
-  const prev = getBotStatus(bridgeId)
-  saveBotStatus(bridgeId, { ...status, lastHeartbeat: new Date().toISOString() })
+  const prev = getBotStatus(resolvedId)
+  saveBotStatus(resolvedId, { ...status, lastHeartbeat: new Date().toISOString() })
 
   const mt5WasConnected = prev?.mt5Connected ?? true
   const prevState = prev?.state ?? status.state
 
   if (!status.mt5Connected && mt5WasConnected) {
-    addBridgeLogEntry(bridgeId, 'error', 'MT5-Verbindung unterbrochen!', `State: ${status.state}`)
+    addBridgeLogEntry(resolvedId, 'error', 'MT5-Verbindung unterbrochen!', `State: ${status.state}`)
   } else if (status.mt5Connected && !mt5WasConnected) {
-    addBridgeLogEntry(bridgeId, 'info', 'MT5-Verbindung wiederhergestellt', `State: ${status.state}`)
+    addBridgeLogEntry(resolvedId, 'info', 'MT5-Verbindung wiederhergestellt', `State: ${status.state}`)
   } else if (status.state !== prevState) {
-    addBridgeLogEntry(bridgeId, 'info', `Bridge-Status geändert: ${prevState} → ${status.state}`)
+    addBridgeLogEntry(resolvedId, 'info', `Bridge-Status geändert: ${prevState} → ${status.state}`)
   }
 
   return NextResponse.json({ ok: true })

@@ -2,33 +2,17 @@
   {
     "id": "TgSrwgejYS",
     "name": "LenovoThinkPad_Bridge",
-    "profileId": "rTxDMdynXZ",
+    "profileId": "FiFT3HmJf-",
     "url": "http://192.168.178.37:8765",
     "createdAt": "2026-06-02T16:26:57.739Z",
     "type": "bridge"
   },
   {
-    "id": "Z8zDRoYwpc",
+    "id": "EaeqUNMvDm",
     "name": "Breakout v1",
     "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.37:8766",
-    "createdAt": "2026-06-03T16:49:28.361Z",
-    "type": "bot"
-  },
-  {
-    "id": "BstJavFKt4",
-    "name": "Breakout v1",
-    "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.37:8765/bot/7ecf81a2",
-    "createdAt": "2026-06-03T20:08:27.457Z",
-    "type": "bot"
-  },
-  {
-    "id": "wqN85LstK6",
-    "name": "Breakout v1",
-    "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.37:8765/bot/0c89acad",
-    "createdAt": "2026-06-04T17:03:59.864Z",
+    "url": "http://192.168.178.37:8765/bot/be86b32d",
+    "createdAt": "2026-06-04T20:59:43.052Z",
     "type": "bot"
   }
 ]

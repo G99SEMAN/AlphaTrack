@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
 import DemoBanner from '@/components/layout/DemoBanner'
 import JournalClient from '@/components/journal/JournalClient'
+import LivePositionsWidget from '@/components/journal/LivePositionsWidget'
 
 export default function JournalPage() {
   const profiles = getProfiles()
@@ -30,6 +31,7 @@ export default function JournalPage() {
           </p>
         </div>
 
+        <LivePositionsWidget />
         <JournalClient
           trades={trades}
           strategies={strategies}
