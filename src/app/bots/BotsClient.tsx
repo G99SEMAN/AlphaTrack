@@ -66,7 +66,8 @@ function formatUptime(seconds: number): string {
 }
 
 export default function BotsClient({ initialBots, profiles }: Props) {
-  const filterBots = (list: BotWithStatus[]) => list.filter(b => b.bot.type === 'bot')
+  const filterBots = (list: BotWithStatus[]) =>
+    list.filter(b => b.bot.type === 'bot' && b.status != null && b.status.connectionState !== 'offline')
   const [bots, setBots] = useState<BotWithStatus[]>(filterBots(initialBots))
   const [showDiscover, setShowDiscover] = useState(false)
 
@@ -96,7 +97,7 @@ export default function BotsClient({ initialBots, profiles }: Props) {
         <div>
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bots</h1>
           <p className="text-sm" style={{ color: 'var(--text-3)' }}>
-            {bots.length} Bot{bots.length !== 1 ? 's' : ''} registriert
+            {bots.length} Bot{bots.length !== 1 ? 's' : ''} aktiv
           </p>
         </div>
         <button

@@ -15,7 +15,6 @@ import BottomNav from './BottomNav'
 import ProfileSwitcher from '@/components/profile/ProfileSwitcher'
 import ProfileEditModal from '@/components/profile/ProfileEditModal'
 import EinstellungenModal from '@/components/einstellungen/EinstellungenModal'
-import SidebarBridgeStatus from '@/components/bridge/SidebarBridgeStatus'
 import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 
@@ -200,11 +199,6 @@ const { isUnlocked, toggle } = useTradingLock()
       {showEinstellungen && (
         <EinstellungenModal profiles={profiles} onClose={() => setShowEinstellungen(false)} />
       )}
-
-      {/* Footer: Bridge-Status */}
-      <div className="px-3 pb-3 pt-2" style={{ borderTop: '1px solid var(--border)' }}>
-        <SidebarBridgeStatus />
-      </div>
 
     </div>
   )

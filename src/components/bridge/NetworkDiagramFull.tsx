@@ -46,7 +46,7 @@ export default function NetworkDiagramFull() {
   const { bots, lastUpdated } = useBotStatus()
 
   const bridge  = bots.find(b => !b.bot.type || b.bot.type === 'bridge') ?? null
-  const botList = bots.filter(b => b.bot.type === 'bot')
+  const botList = bots.filter(b => b.bot.type === 'bot' && b.status != null && b.status.connectionState !== 'offline')
 
   const bridgeS = resolveStatus(bridge)
   const mt5S: Status = !bridge?.status || bridgeS === 'offline'
@@ -124,7 +124,7 @@ export default function NetworkDiagramFull() {
       id: 'at', ...(positions.at ?? DEFAULT_POS.at),
       status: 'online', accent: ACCENT.at, Icon: Globe,
       label: 'AlphaTrack',
-      sub: `${bots.length} Verbindung${bots.length !== 1 ? 'en' : ''}`,
+      sub: bridgeS === 'offline' ? 'Keine Verbindung' : `Bridge verbunden`,
     },
     {
       id: 'bridge', ...(positions.bridge ?? DEFAULT_POS.bridge),
@@ -163,11 +163,6 @@ export default function NetworkDiagramFull() {
   const edges = [
     { id: 'at-bridge', a: 'at',     b: 'bridge', status: bridgeS },
     { id: 'br-mt5',    a: 'bridge', b: 'mt5',    status: mt5S    },
-    ...botEntries.map((bw, i) => ({
-      id: `at-bot-${bw?.bot.id ?? i}`,
-      a: 'at', b: bw ? `bot-${bw.bot.id}` : 'no-bot',
-      status: resolveStatus(bw),
-    })),
     ...botEntries.map((bw, i) => ({
       id: `br-bot-${bw?.bot.id ?? i}`,
       a: 'bridge', b: bw ? `bot-${bw.bot.id}` : 'no-bot',

@@ -14,7 +14,7 @@ import {
 } from '@/types/bot'
 
 const DATA_DIR = path.join(process.cwd(), 'data')
-const BOT_MAX_LOG_ENTRIES = 5000
+const BOT_MAX_LOG_ENTRIES = 100
 const CONNECTED_THRESHOLD_MS = 10_000
 const WARNING_THRESHOLD_MS = 30_000
 

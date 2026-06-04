@@ -35,17 +35,18 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
             if synced > 0 and display:
                 display.log("ok", "SYNC", f"{synced} neue Trade(s) an AlphaTrack uebertragen")
 
-            # Geschlossene Trades einzeln ins Log schreiben
+            # Zusammenfassung der geschlossenen Trades ins Log schreiben
             if closed_count > 0 and local_log:
-                for t in closed_trades:
-                    ticket = t.get("ticket") or t.get("externalId", "?")
-                    symbol = t.get("instrument") or t.get("symbol", "?")
-                    pnl = t.get("pnl")
-                    pnl_str = f" | PnL: {pnl:+.2f}" if pnl is not None else ""
-                    msg = f"CLOSED Trade: {symbol} | Ticket #{ticket}{pnl_str}"
-                    local_log.add("info", msg)
-                    if display:
-                        display.log("ok", "SYNC", msg)
+                total_pnl = sum(t.get("pnl") or 0 for t in closed_trades)
+                summary = f"{closed_count} Trade(s) synchronisiert | PnL gesamt: {total_pnl:+.2f}"
+                local_log.add("info", summary)
+                if display:
+                    for t in closed_trades:
+                        ticket = t.get("ticket") or t.get("externalId", "?")
+                        symbol = t.get("instrument") or t.get("symbol", "?")
+                        pnl = t.get("pnl")
+                        pnl_str = f" | PnL: {pnl:+.2f}" if pnl is not None else ""
+                        display.log("ok", "SYNC", f"CLOSED Trade: {symbol} | Ticket #{ticket}{pnl_str}")
 
             return True, time.time()
         else:

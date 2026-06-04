@@ -165,7 +165,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
       {bots.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
           <ScrollText size={36} style={{ color: 'var(--text-3)', opacity: 0.4 }} />
-          <p className="text-sm" style={{ color: 'var(--text-3)' }}>Kein Bot konfiguriert.</p>
+          <p className="text-sm" style={{ color: 'var(--text-3)' }}>Keine Bridge aktiv.</p>
         </div>
       ) : (
         <>
