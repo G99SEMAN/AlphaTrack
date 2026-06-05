@@ -1,5 +1,68 @@
 [
   {
+    "id": "1a964fc722",
+    "timestamp": "2026-06-05T20:35:11.582696+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fa1200925f",
+    "timestamp": "2026-06-05T19:22:15.030451+00:00",
+    "level": "info",
+    "message": "Bot reconnect: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b1b23ed1c8",
+    "timestamp": "2026-06-05T19:20:36.328068+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ef7d8c7593",
+    "timestamp": "2026-06-05T19:20:31.085982+00:00",
+    "level": "info",
+    "message": "Bot reconnect: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8a9008b5db",
+    "timestamp": "2026-06-05T18:54:14.561036+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "7308c55842",
+    "timestamp": "2026-06-05T18:08:33.659255+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cc8f82db1b",
+    "timestamp": "2026-06-05T18:08:29.625085+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Read timed out. (read timeout=10)",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
     "id": "7c014e10b3",
     "timestamp": "2026-06-05T18:02:04.447980+00:00",
     "level": "warn",

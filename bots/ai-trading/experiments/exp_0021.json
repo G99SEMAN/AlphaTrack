@@ -1,11 +1,11 @@
 {
   "n": 21,
-  "timestamp": "2026-06-05T17:04:13.960208",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
+  "timestamp": "2026-06-05T21:02:26.965983",
+  "sharpe": -16.573049295824806,
+  "n_trades": 700,
+  "win_rate": 37.142857142857146,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "syntax error",
-  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpedyjp79r.py\", line 3\n    Key insight: With 1179 trades in ~17 days, that's "
+  "best_sharpe": -8.285186040633779,
+  "change_desc": "Check alignment: fast > slow > trend or fast < slow < trend",
+  "error": null
 }

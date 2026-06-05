@@ -1,0 +1,11 @@
+{
+  "n": 81,
+  "timestamp": "2026-06-05T20:26:47.947748",
+  "sharpe": -14.967396046851734,
+  "n_trades": 1552,
+  "win_rate": 37.30670103092783,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Time filter: broad trading hours (6:00-22:00 UTC)",
+  "error": null
+}

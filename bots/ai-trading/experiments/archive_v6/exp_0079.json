@@ -1,0 +1,11 @@
+{
+  "n": 79,
+  "timestamp": "2026-06-05T20:25:44.141791",
+  "sharpe": -18.122835830962956,
+  "n_trades": 1489,
+  "win_rate": 36.601746138347885,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Build RSI series over last stoch_period+rsi_period bars",
+  "error": null
+}

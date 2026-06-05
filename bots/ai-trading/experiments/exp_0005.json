@@ -1,11 +1,11 @@
 {
   "n": 5,
-  "timestamp": "2026-06-05T16:50:23.568051",
-  "sharpe": -15.80231234280992,
-  "n_trades": 987,
-  "win_rate": 37.38601823708207,
+  "timestamp": "2026-06-05T20:52:32.389931",
+  "sharpe": -18.13364780965301,
+  "n_trades": 1571,
+  "win_rate": 37.110120942075106,
   "kept": false,
-  "best_sharpe": -14.036659836374518,
-  "change_desc": "Time filter: London + NY sessions (6:00-21:00 UTC)",
+  "best_sharpe": -16.617252504213226,
+  "change_desc": "Check if position already open",
   "error": null
 }

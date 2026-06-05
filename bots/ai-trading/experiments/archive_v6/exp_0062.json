@@ -1,0 +1,11 @@
+{
+  "n": 62,
+  "timestamp": "2026-06-05T20:15:53.726667",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpdmwxj_sl.py\", line 206\n    if sl_dist > 0 and tp\n                         ^"
+}

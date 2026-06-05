@@ -1,11 +1,11 @@
 {
   "n": 32,
-  "timestamp": "2026-06-05T19:25:20.168453",
-  "sharpe": -16.430360996660877,
-  "n_trades": 707,
-  "win_rate": 36.06789250353607,
+  "timestamp": "2026-06-05T21:07:34.886787",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
   "kept": false,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Time filter: London + NY sessions (6:00-20:00 UTC)",
-  "error": null
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp9dnqslse.py\", line 206\n    '\n    ^\nSyntaxError: unterminated string literal"
 }

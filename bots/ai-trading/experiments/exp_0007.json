@@ -1,11 +1,11 @@
 {
   "n": 7,
-  "timestamp": "2026-06-05T16:51:22.108869",
-  "sharpe": -16.205278265562185,
-  "n_trades": 1005,
-  "win_rate": 37.61194029850746,
+  "timestamp": "2026-06-05T20:53:16.083298",
+  "sharpe": -999.0,
+  "n_trades": 1,
+  "win_rate": 100.0,
   "kept": false,
-  "best_sharpe": -14.036659836374518,
-  "change_desc": "Time filter: trade during London + NY sessions (7:00-20:00 UTC)",
+  "best_sharpe": -16.617252504213226,
+  "change_desc": "BUY: Fast EMA crosses above Slow EMA + price above trend + RSI not overbought",
   "error": null
 }

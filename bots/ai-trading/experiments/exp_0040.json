@@ -1,11 +1,11 @@
 {
   "n": 40,
-  "timestamp": "2026-06-05T19:30:10.669064",
-  "sharpe": -31.051605092494214,
-  "n_trades": 205,
-  "win_rate": 32.6829268292683,
+  "timestamp": "2026-06-05T21:11:42.715730",
+  "sharpe": -15.67819588889004,
+  "n_trades": 194,
+  "win_rate": 38.144329896907216,
   "kept": false,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Calculate RSI series",
+  "best_sharpe": -7.392642560834384,
+  "change_desc": "Calculate indicators",
   "error": null
 }

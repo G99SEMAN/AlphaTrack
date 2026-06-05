@@ -1,11 +1,11 @@
 {
   "n": 1,
-  "timestamp": "2026-06-05T16:48:17.382985",
-  "sharpe": -14.797604350486202,
-  "n_trades": 967,
-  "win_rate": 37.64219234746639,
-  "kept": true,
-  "best_sharpe": -14.797604350486202,
-  "change_desc": "Time filter: only trade during London + NY overlap hours (7:00-20:00 UTC)",
+  "timestamp": "2026-06-05T20:50:43.062486",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0.0,
+  "kept": false,
+  "best_sharpe": -16.617252504213226,
+  "change_desc": "BUY: MACD crosses above signal + price above trend EMA + RSI not overbought",
   "error": null
 }

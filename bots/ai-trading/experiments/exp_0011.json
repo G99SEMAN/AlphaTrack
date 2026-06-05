@@ -1,11 +1,11 @@
 {
   "n": 11,
-  "timestamp": "2026-06-05T16:53:47.245333",
-  "sharpe": -12.9164158389223,
-  "n_trades": 1179,
-  "win_rate": 38.33757421543681,
-  "kept": true,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "Build RSI series for last stoch_period+1 points",
+  "timestamp": "2026-06-05T20:55:00.467222",
+  "sharpe": -18.33404683739529,
+  "n_trades": 1696,
+  "win_rate": 36.85141509433962,
+  "kept": false,
+  "best_sharpe": -16.617252504213226,
+  "change_desc": "BUY: Fast EMA crosses above Slow EMA (bullish) + price above trend EMA + RSI not overbought",
   "error": null
 }

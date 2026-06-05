@@ -1,11 +1,11 @@
 {
   "n": 22,
-  "timestamp": "2026-06-05T17:04:36.345178",
+  "timestamp": "2026-06-05T21:03:03.335793",
   "sharpe": -999.0,
   "n_trades": 0,
-  "win_rate": 0,
+  "win_rate": 0.0,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "syntax error",
-  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp46j36ez_.py\", line 1\n    Looking at the results, all strategies are getting"
+  "best_sharpe": -8.285186040633779,
+  "change_desc": "Calculate indicators",
+  "error": null
 }

@@ -1,0 +1,11 @@
+{
+  "n": 98,
+  "timestamp": "2026-06-05T20:36:46.656517",
+  "sharpe": -15.859920781329029,
+  "n_trades": 2344,
+  "win_rate": 37.158703071672356,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Bollinger Band parameters",
+  "error": null
+}

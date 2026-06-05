@@ -25,6 +25,12 @@ EXPERIMENTS_DIR = BASE_DIR / 'experiments'
 CONFIG_FILE = BASE_DIR / 'config.json'
 PROGRAM_FILE = BASE_DIR / 'program.md'
 
+MODELS = {
+    '1': ('claude-haiku-4-5-20251001',  'Haiku  — schnell & günstig  (~0.05€/100 Exp.)'),
+    '2': ('claude-sonnet-4-6',          'Sonnet — klug  & teurer     (~5€/100 Exp.)'),
+}
+_MODEL = 'claude-sonnet-4-6'  # wird in main() gesetzt
+
 
 def _load_config() -> dict:
     with open(CONFIG_FILE, 'r') as f:
@@ -123,7 +129,7 @@ Make ONE focused change to improve the Sharpe Ratio. Think about: entry filters,
 
     client = anthropic.Anthropic()
     msg = client.messages.create(
-        model="claude-sonnet-4-6",
+        model=_MODEL,
         max_tokens=2500,
         system=(
             "You are a Python trading strategy code generator. "
@@ -192,6 +198,20 @@ def main():
         print('[FEHLER] ANTHROPIC_API_KEY nicht gesetzt.')
         print('  Setze ihn mit: set ANTHROPIC_API_KEY=sk-ant-...')
         sys.exit(1)
+
+    # Modell-Auswahl (einmalig beim Start)
+    global _MODEL
+    print("\nWelches Modell soll verwendet werden?")
+    for key, (model_id, label) in MODELS.items():
+        print(f"  [{key}] {label}")
+    print("  [Enter] Standard: Haiku (günstig)")
+    choice = input("Auswahl: ").strip()
+    if choice in MODELS:
+        _MODEL, label = MODELS[choice]
+        print(f"[OK] Modell: {label.split('—')[0].strip()}\n")
+    else:
+        _MODEL = MODELS['1'][0]
+        print(f"[OK] Standard: Haiku\n")
 
     EXPERIMENTS_DIR.mkdir(exist_ok=True)
     config = _load_config()

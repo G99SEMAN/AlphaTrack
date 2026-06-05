@@ -1,21 +1,21 @@
 [
   {
     "id": "ai-trading-LtDzeFverW",
-    "name": "[AI-Trading] EMA Crossover Trend Following",
-    "description": "Automatisierte Trendfolge-Strategie auf EURUSDp (M5) mit EMA-Crossover-Signal, ATR-basiertem Risikomanagement und mehrfacher Bestätigung durch RSI, ADX und Zeitfilter. Optimiert durch KI-gestütztes Parameter-Research.",
+    "name": "[AI-Trading] EMA-Kreuzung mit Volatilitätsfilter",
+    "description": "Diese Strategie handelt EMA-Kreuzungssignale (schnell/langsam) mit einem übergeordneten Trendfilter und einem Volatilitätsregime-Filter, um Fehlsignale in extremen Marktphasen zu reduzieren. Einstiege erfolgen nur bei bestätigtem Momentum, konsekutiven Richtungskerzen und ausreichender EMA-Trennungsstärke.",
     "timeframe": "M5",
     "rules": [
-      "BUY-Signal: EMA(8) kreuzt EMA(21) von unten, Preis über EMA(50), ADX > 18 und RSI zwischen 40–70",
-      "SELL-Signal: EMA(8) kreuzt EMA(21) von oben, Preis unter EMA(50), ADX > 18 und RSI zwischen 30–60",
-      "Stop Loss bei 1,0× ATR(14) vom Einstiegspreis, Take Profit bei 2,0× ATR(14) — Mindest R:R 1,5:1",
-      "Nur handeln wenn ADX(14) > 18 — kein Trade in trendlosen Seitwärtsphasen",
-      "Zeitfilter: Trades nur zwischen 07:00 und 20:00 UTC (London- und New-York-Session)",
-      "Maximal 1 offene Position gleichzeitig, Positionsgröße 0,01 Lot",
-      "Symbol: EURUSDp — kein Trade wenn ATR zu gering (implizit durch SL-Sizing)"
+      "KAUF-Signal: Schneller EMA (5) kreuzt den langsamen EMA (13) von unten nach oben (Goldenes Kreuz auf M5)",
+      "VERKAUF-Signal: Schneller EMA (5) kreuzt den langsamen EMA (13) von oben nach unten (Todeskreuz auf M5)",
+      "Trendfilter: Beim Kauf muss der Kurs über dem Trend-EMA (34) liegen und dieser steigen; beim Verkauf muss der Kurs darunter liegen und der EMA fallen",
+      "Momentum-Filter: 5-Perioden-Momentum > 0,015% (Kauf) bzw. < -0,015% und 10-Perioden-Momentum > 0,008% (Kauf) bzw. < -0,008% erforderlich",
+      "Konsistenz-Filter: Die letzten 3 Kerzen müssen beim Kauf steigende Schlusskurse und beim Verkauf fallende Schlusskurse aufweisen",
+      "Volatilitätsregime-Filter: Das Verhältnis der aktuellen Volatilität zum 20-Perioden-Durchschnitt muss zwischen 0,5 und 2,5 liegen (keine Trades bei extremer Ruhe oder extremen Ausbrüchen)",
+      "Stop-Loss bei 1,5x ATR(14) vom Einstiegskurs, Take-Profit bei 2,5x ATR(14); minimales Chance-Risiko-Verhältnis von 1,5:1 wird geprüft"
     ],
-    "notes": "Backtest-Performance (3 Monate Out-of-Sample, Mär–Jun 2026): Sharpe Ratio 5,43 | 127 Trades | Win-Rate 44,9%.\nAutomatisch optimiert durch autoresearch.py — wird nach jeder verbesserten Strategie aktualisiert.",
+    "notes": "Backtest-Statistiken (bestes gespeichertes Experiment):\n  Sharpe Ratio: -7.3926\n  Anzahl Trades: 576\n  Win Rate: 39.24%\n  Konfiguration: Calculate indicators\nParameter: EMA 8/21/100, ATR(14) SL=1.5x TP=2.5x\nAutomatisch optimiert durch autoresearch.py",
     "riskPerTrade": 1,
     "color": "#3b82f6",
-    "createdAt": "2026-06-05T19:00:00.000Z"
+    "createdAt": "2026-06-05T19:12:08.846483+00:00"
   }
 ]

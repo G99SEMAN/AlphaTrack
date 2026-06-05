@@ -1,11 +1,11 @@
 {
   "n": 18,
-  "timestamp": "2026-06-05T16:57:58.394985",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
+  "timestamp": "2026-06-05T21:00:24.646045",
+  "sharpe": -16.513902016575948,
+  "n_trades": 1487,
+  "win_rate": 37.72696704774714,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "modification",
-  "error": "unterminated string literal (detected at line 1) (strategy.py, line 1)"
+  "best_sharpe": -8.5502597850946,
+  "change_desc": "Calculate indicators",
+  "error": null
 }

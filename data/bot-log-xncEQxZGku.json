@@ -1,5 +1,41 @@
 [
   {
+    "id": "fa1200925f",
+    "timestamp": "2026-06-05T19:22:15.030451+00:00",
+    "level": "info",
+    "message": "Bot reconnect: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b1b23ed1c8",
+    "timestamp": "2026-06-05T19:20:36.328068+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "ef7d8c7593",
+    "timestamp": "2026-06-05T19:20:31.085982+00:00",
+    "level": "info",
+    "message": "Bot reconnect: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8a9008b5db",
+    "timestamp": "2026-06-05T18:54:14.561036+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
     "id": "7c014e10b3",
     "timestamp": "2026-06-05T18:02:04.447980+00:00",
     "level": "warn",

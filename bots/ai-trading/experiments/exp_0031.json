@@ -1,11 +1,11 @@
 {
   "n": 31,
-  "timestamp": "2026-06-05T19:24:45.284393",
-  "sharpe": -4.448806915878883,
-  "n_trades": 461,
-  "win_rate": 39.91323210412148,
-  "kept": true,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Smooth over period",
-  "error": null
+  "timestamp": "2026-06-05T21:07:17.382840",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
+  "kept": false,
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "Calculate indicators",
+  "error": "'NoneType' object has no attribute 'get'"
 }

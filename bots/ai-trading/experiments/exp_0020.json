@@ -1,11 +1,11 @@
 {
   "n": 20,
-  "timestamp": "2026-06-05T16:59:08.096175",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
-  "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "ATR range filter: only trade when market has \"normal\" volatility",
-  "error": "unterminated string literal (detected at line 1) (strategy.py, line 1)"
+  "timestamp": "2026-06-05T21:01:50.377048",
+  "sharpe": -8.285186040633779,
+  "n_trades": 832,
+  "win_rate": 39.42307692307692,
+  "kept": true,
+  "best_sharpe": -8.285186040633779,
+  "change_desc": "Calculate indicators",
+  "error": null
 }

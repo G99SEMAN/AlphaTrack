@@ -1,11 +1,11 @@
 {
   "n": 41,
-  "timestamp": "2026-06-05T19:30:41.426172",
-  "sharpe": -16.104170705594154,
-  "n_trades": 570,
-  "win_rate": 38.771929824561404,
-  "kept": false,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Time filter: core active hours (8:00-17:00 UTC) \u2014 London session peak",
+  "timestamp": "2026-06-05T21:12:25.298281",
+  "sharpe": -1.750077599990813,
+  "n_trades": 571,
+  "win_rate": 41.68126094570928,
+  "kept": true,
+  "best_sharpe": -1.750077599990813,
+  "change_desc": "Calculate indicators",
   "error": null
 }

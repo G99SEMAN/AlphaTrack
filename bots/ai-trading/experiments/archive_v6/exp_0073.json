@@ -1,0 +1,11 @@
+{
+  "n": 73,
+  "timestamp": "2026-06-05T20:22:12.535542",
+  "sharpe": -18.44116597268696,
+  "n_trades": 1078,
+  "win_rate": 36.734693877551024,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Time filter: London + NY sessions (6:00-21:00 UTC)",
+  "error": null
+}

@@ -6,7 +6,9 @@ Speichert Einträge in bridge_log.json und pusht sie asynchron an AlphaTrack.
 import json
 import os
 import queue
+import tempfile
 import threading
+import time
 import uuid
 from datetime import datetime, timezone
 
@@ -97,7 +99,22 @@ class LocalLog:
             return []
 
     def _write(self, entries: list) -> None:
-        tmp = _LOG_FILE + ".tmp"
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(entries, f, ensure_ascii=False, indent=2)
-        os.replace(tmp, _LOG_FILE)
+        dir_ = os.path.dirname(_LOG_FILE) or "."
+        fd, tmp = tempfile.mkstemp(dir=dir_, suffix=".tmp")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump(entries, f, ensure_ascii=False, indent=2)
+            for attempt in range(5):
+                try:
+                    os.replace(tmp, _LOG_FILE)
+                    return
+                except PermissionError:
+                    if attempt < 4:
+                        time.sleep(0.05 * (attempt + 1))
+            os.replace(tmp, _LOG_FILE)
+        except Exception:
+            try:
+                os.unlink(tmp)
+            except OSError:
+                pass
+            raise

@@ -1,11 +1,11 @@
 {
   "n": 35,
-  "timestamp": "2026-06-05T19:26:57.732625",
-  "sharpe": -16.85285983118046,
-  "n_trades": 967,
-  "win_rate": 37.33195449844881,
+  "timestamp": "2026-06-05T21:08:44.740803",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
   "kept": false,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Time filter: London + NY sessions (6:00-20:00 UTC)",
-  "error": null
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpfswc1tit.py\", line 198\n    if sl\n         ^\nSyntaxError: expected ':'\n"
 }

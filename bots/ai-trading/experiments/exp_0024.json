@@ -1,11 +1,11 @@
 {
   "n": 24,
-  "timestamp": "2026-06-05T17:05:31.627666",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
+  "timestamp": "2026-06-05T21:04:18.676554",
+  "sharpe": -12.339053740172362,
+  "n_trades": 369,
+  "win_rate": 36.043360433604335,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "syntax error",
-  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp56avrjb2.py\", line 9\n    The Sharpe is deeply negative, meaning most trades"
+  "best_sharpe": -8.285186040633779,
+  "change_desc": "Calculate indicators",
+  "error": null
 }

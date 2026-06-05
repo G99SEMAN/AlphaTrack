@@ -1,11 +1,11 @@
 {
   "n": 12,
-  "timestamp": "2026-06-05T16:54:34.939090",
-  "sharpe": -13.738187218245718,
-  "n_trades": 393,
-  "win_rate": 38.42239185750636,
-  "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "Time filter: only trade during active hours (7:00-20:00 UTC)",
+  "timestamp": "2026-06-05T20:55:54.765921",
+  "sharpe": -13.636801001710262,
+  "n_trades": 974,
+  "win_rate": 37.88501026694045,
+  "kept": true,
+  "best_sharpe": -13.636801001710262,
+  "change_desc": "RSI filter thresholds",
   "error": null
 }

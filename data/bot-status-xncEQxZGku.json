@@ -1,6 +1,6 @@
 {
   "state": "running",
-  "lastHeartbeat": "2026-06-05T18:04:06.803Z",
+  "lastHeartbeat": "2026-06-05T20:35:09.829Z",
   "bridgeVersion": "1.0.0",
   "mt5Connected": true,
   "activeSymbols": [
@@ -11,8 +11,8 @@
     "GBPUSDp"
   ],
   "openPositions": 5,
-  "tradesSync": 2263,
-  "uptime": 13820,
+  "tradesSync": 3738,
+  "uptime": 22883,
   "balance": 488.39,
   "currency": "EUR"
 }

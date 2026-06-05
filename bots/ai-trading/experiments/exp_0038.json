@@ -1,11 +1,11 @@
 {
   "n": 38,
-  "timestamp": "2026-06-05T19:28:50.224299",
-  "sharpe": -18.08847424334248,
-  "n_trades": 991,
-  "win_rate": 36.83148335015136,
+  "timestamp": "2026-06-05T21:10:32.936544",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0.0,
   "kept": false,
-  "best_sharpe": -4.448806915878883,
-  "change_desc": "Time filter: extended active hours (6:00-21:00 UTC)",
+  "best_sharpe": -7.392642560834384,
+  "change_desc": "Calculate indicators",
   "error": null
 }

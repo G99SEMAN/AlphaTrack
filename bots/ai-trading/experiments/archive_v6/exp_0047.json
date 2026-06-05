@@ -1,0 +1,11 @@
+{
+  "n": 47,
+  "timestamp": "2026-06-05T20:06:29.477918",
+  "sharpe": -18.7682960523875,
+  "n_trades": 1710,
+  "win_rate": 36.84210526315789,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Skip if already in a position",
+  "error": null
+}

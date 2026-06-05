@@ -1,16 +1,8 @@
 """
-AI-Trading Strategy v6 — EMA Crossover Trend Following with ATR-based SL/TP
-Key insight: The mean reversion approach generates too many losing trades in trending markets.
-Switch back to trend following but with better filters:
-- Use EMA crossover (fast/slow) as entry signal
-- Trend filter: price must be above/below trend EMA
-- ATR-based SL/TP with wider multipliers for better RR
-- RSI filter to avoid entering in extreme conditions
-- Simpler, fewer conditions = more trades with better edge
+AI-Trading Strategy v41 — EMA Crossover + ATR with Volatility Filter
+Symbol: EURUSDp M5
+Focus: Add volatility regime filter to reduce whipsaws, stricter momentum thresholds
 """
-
-import math
-import statistics
 
 
 def _ema(values: list, period: int) -> list:
@@ -38,169 +30,140 @@ def _atr(candles: list, period: int) -> float:
     return sum(trs[-period:]) / period if trs else 0.0
 
 
-def _rsi(values: list, period: int) -> float:
-    if len(values) < period + 1:
-        return 50.0
-    gains, losses = [], []
-    for i in range(len(values) - period, len(values)):
-        delta = values[i] - values[i - 1]
-        gains.append(max(delta, 0.0))
-        losses.append(max(-delta, 0.0))
-    avg_gain = sum(gains) / period
-    avg_loss = sum(losses) / period
-    if avg_loss == 0:
-        return 100.0
-    rs = avg_gain / avg_loss
-    return 100.0 - (100.0 / (1.0 + rs))
+def _volatility_ratio(candles: list, period: int) -> float:
+    """Calculate volatility ratio (current vs average)."""
+    if len(candles) < period + 1:
+        return 1.0
+    
+    volatilities = []
+    for i in range(max(1, len(candles) - period), len(candles)):
+        hi = float(candles[i]['high'])
+        lo = float(candles[i]['low'])
+        volatilities.append(hi - lo)
+    
+    avg_vol = sum(volatilities) / len(volatilities) if volatilities else 1.0
+    current_vol = float(candles[-1]['high']) - float(candles[-1]['low'])
+    
+    return current_vol / avg_vol if avg_vol > 0 else 1.0
 
 
-def _adx(candles: list, period: int) -> float:
-    """Calculate ADX to measure trend strength."""
-    if len(candles) < period * 2 + 1:
+def _momentum(closes: list, period: int) -> float:
+    """Momentum with direction consideration."""
+    if len(closes) < period + 1:
         return 0.0
-
-    window = candles[-(period * 2 + 1):]
-    plus_dms = []
-    minus_dms = []
-    trs = []
-
-    for i in range(1, len(window)):
-        hi = float(window[i]['high'])
-        lo = float(window[i]['low'])
-        phi = float(window[i - 1]['high'])
-        plo = float(window[i - 1]['low'])
-        pc = float(window[i - 1]['close'])
-
-        up_move = hi - phi
-        down_move = plo - lo
-        plus_dm = up_move if (up_move > down_move and up_move > 0) else 0.0
-        minus_dm = down_move if (down_move > up_move and down_move > 0) else 0.0
-
-        tr = max(hi - lo, abs(hi - pc), abs(lo - pc))
-        plus_dms.append(plus_dm)
-        minus_dms.append(minus_dm)
-        trs.append(tr)
-
-    # Smooth over period
-    def smooth(vals, p):
-        if len(vals) < p:
-            return 0.0
-        s = sum(vals[:p])
-        for v in vals[p:]:
-            s = s - s / p + v
-        return s
-
-    atr_s = smooth(trs, period)
-    plus_s = smooth(plus_dms, period)
-    minus_s = smooth(minus_dms, period)
-
-    if atr_s == 0:
+    recent = closes[-1]
+    past = closes[-period-1]
+    if past == 0:
         return 0.0
+    return (recent - past) / past
 
-    plus_di = 100.0 * plus_s / atr_s
-    minus_di = 100.0 * minus_s / atr_s
-    di_sum = plus_di + minus_di
-    if di_sum == 0:
+
+def _consecutive_bars_direction(candles: list, direction: str, count: int) -> bool:
+    """Check if last N bars show consistent direction."""
+    if len(candles) < count:
+        return False
+    
+    if direction == 'up':
+        for i in range(-count, 0):
+            if float(candles[i]['close']) <= float(candles[i-1]['close']):
+                return False
+    elif direction == 'down':
+        for i in range(-count, 0):
+            if float(candles[i]['close']) >= float(candles[i-1]['close']):
+                return False
+    
+    return True
+
+
+def _ema_trend_strength(ema_vals: list) -> float:
+    """Measure EMA separation strength."""
+    if len(ema_vals) < 2 or ema_vals[-1] is None or ema_vals[-2] is None:
         return 0.0
-
-    dx = 100.0 * abs(plus_di - minus_di) / di_sum
-
-    # Simplified ADX: just return dx as proxy
-    return dx
+    return abs(ema_vals[-1] - ema_vals[-2])
 
 
 def on_tick(candles: list, positions: list, config: dict) -> dict:
     cfg = config.get('strategy', {})
     symbol = cfg.get('symbol', 'EURUSDp')
-    fast = int(cfg.get('ema_fast', 8))
-    slow = int(cfg.get('ema_slow', 21))
-    trend_p = int(cfg.get('ema_trend', 50))
+    ema_fast = int(cfg.get('ema_fast', 5))
+    ema_slow = int(cfg.get('ema_slow', 13))
+    ema_trend = int(cfg.get('ema_trend', 34))
     atr_p = int(cfg.get('atr_period', 14))
-    sl_mult = float(cfg.get('sl_atr_mult', 1.0))
-    tp_mult = float(cfg.get('tp_atr_mult', 2.0))
+    sl_mult = float(cfg.get('sl_atr_mult', 1.5))
+    tp_mult = float(cfg.get('tp_atr_mult', 3.0))
     lots = float(cfg.get('lots', 0.01))
 
-    min_candles = max(slow, trend_p, atr_p) + 40
+    min_candles = max(ema_slow, ema_trend, 50) + 10
+
     if len(candles) < min_candles:
         return {'action': 'hold'}
-
-    # Time filter: London + NY sessions (7:00-20:00 UTC)
-    last_dt = candles[-1].get('datetime', '')
-    if last_dt:
-        try:
-            if 'T' in str(last_dt):
-                hour = int(str(last_dt).split('T')[1].split(':')[0])
-            else:
-                hour = int(str(last_dt).split(' ')[1].split(':')[0])
-            if hour < 7 or hour >= 20:
-                return {'action': 'hold'}
-        except (IndexError, ValueError):
-            pass
 
     closes = [float(c['close']) for c in candles]
     close = closes[-1]
 
-    ef = _ema(closes, fast)
-    es = _ema(closes, slow)
-    et = _ema(closes, trend_p)
+    # Calculate indicators
+    ema_f = _ema(closes, ema_fast)
+    ema_s = _ema(closes, ema_slow)
+    ema_t = _ema(closes, ema_trend)
 
-    cf, cs = ef[-1], es[-1]
-    pf, ps = ef[-2], es[-2]
-    trend_curr = et[-1]
+    ef_curr, ef_prev = ema_f[-1], ema_f[-2]
+    es_curr, es_prev = ema_s[-1], ema_s[-2]
+    et_curr, et_prev = ema_t[-1], ema_t[-2]
 
-    if None in (cf, cs, pf, ps, trend_curr):
+    if None in (ef_curr, ef_prev, es_curr, es_prev, et_curr, et_prev):
         return {'action': 'hold'}
 
     curr_atr = _atr(candles, atr_p)
     if curr_atr <= 0:
         return {'action': 'hold'}
 
-    rsi_val = _rsi(closes, 14)
-
-    # Skip if already in a position
+    # Check if position already open
     if [p for p in positions if p.get('instrument') == symbol]:
         return {'action': 'hold'}
 
-    # EMA crossover detection
-    bull_cross = (pf <= ps) and (cf > cs)
-    bear_cross = (pf >= ps) and (cf < cs)
+    # Volatility regime filter - avoid extremely low or high volatility
+    vol_ratio = _volatility_ratio(candles, 20)
+    if vol_ratio < 0.5 or vol_ratio > 2.5:
+        return {'action': 'hold'}
 
-    # Trend filter: price relative to trend EMA
-    trend_up = close > trend_curr
-    trend_down = close < trend_curr
-
-    # ADX filter: only trade when there's some trend strength
-    adx_val = _adx(candles, 14)
-    trending = adx_val > 18
-
-    # RSI filter: avoid extreme readings (likely to reverse)
-    rsi_ok_buy = 40 < rsi_val < 70
-    rsi_ok_sell = 30 < rsi_val < 60
-
-    # --- BUY SIGNAL ---
-    # Fast EMA crosses above slow EMA, price above trend EMA, some trend strength
-    if bull_cross and trend_up and rsi_ok_buy and trending:
-        sl = round(close - sl_mult * curr_atr, 5)
-        tp = round(close + tp_mult * curr_atr, 5)
-        if (tp - close) >= 1.5 * (close - sl) and (close - sl) > 0:
+    momentum_5 = _momentum(closes, 5)
+    momentum_10 = _momentum(closes, 10)
+    trend_strength = _ema_trend_strength(ema_s)
+    
+    # BUY signal: stricter conditions
+    if (ef_prev <= es_prev and ef_curr > es_curr and 
+        close > et_curr and et_curr > et_prev and
+        momentum_5 > 0.00015 and momentum_10 > 0.00008 and
+        _consecutive_bars_direction(candles, 'up', 3) and
+        trend_strength > 0.00001):
+        
+        sl = close - sl_mult * curr_atr
+        tp = close + tp_mult * curr_atr
+        
+        if sl < close and tp > close and (tp - close) / (close - sl) >= 1.5:
             return {
                 'action': 'buy',
                 'lots': lots,
-                'sl': sl,
-                'tp': tp
+                'sl': round(sl, 5),
+                'tp': round(tp, 5),
             }
 
-    # --- SELL SIGNAL ---
-    # Fast EMA crosses below slow EMA, price below trend EMA, some trend strength
-    if bear_cross and trend_down and rsi_ok_sell and trending:
-        sl = round(close + sl_mult * curr_atr, 5)
-        tp = round(close - tp_mult * curr_atr, 5)
-        if (close - tp) >= 1.5 * (sl - close) and (sl - close) > 0:
+    # SELL signal: stricter conditions
+    if (ef_prev >= es_prev and ef_curr < es_curr and 
+        close < et_curr and et_curr < et_prev and
+        momentum_5 < -0.00015 and momentum_10 < -0.00008 and
+        _consecutive_bars_direction(candles, 'down', 3) and
+        trend_strength > 0.00001):
+        
+        sl = close + sl_mult * curr_atr
+        tp = close - tp_mult * curr_atr
+        
+        if sl > close and tp < close and (close - tp) / (sl - close) >= 1.5:
             return {
                 'action': 'sell',
                 'lots': lots,
-                'sl': sl,
-                'tp': tp
+                'sl': round(sl, 5),
+                'tp': round(tp, 5),
             }
 
     return {'action': 'hold'}

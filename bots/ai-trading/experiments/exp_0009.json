@@ -1,11 +1,11 @@
 {
   "n": 9,
-  "timestamp": "2026-06-05T16:52:32.893518",
-  "sharpe": -12.997574371759626,
-  "n_trades": 804,
-  "win_rate": 38.059701492537314,
-  "kept": true,
-  "best_sharpe": -12.997574371759626,
-  "change_desc": "Time filter: only trade during active hours (7:00-20:00 UTC)",
+  "timestamp": "2026-06-05T20:54:04.593664",
+  "sharpe": -19.569005215200495,
+  "n_trades": 1675,
+  "win_rate": 36.656716417910445,
+  "kept": false,
+  "best_sharpe": -16.617252504213226,
+  "change_desc": "Calculate EMAs",
   "error": null
 }

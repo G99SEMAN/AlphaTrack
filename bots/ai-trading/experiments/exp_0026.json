@@ -1,11 +1,11 @@
 {
   "n": 26,
-  "timestamp": "2026-06-05T17:06:33.238901",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
+  "timestamp": "2026-06-05T21:05:08.559282",
+  "sharpe": -11.723273644084635,
+  "n_trades": 498,
+  "win_rate": 39.1566265060241,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "syntax error",
-  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpc6yrpdpj.py\", line 3\n    Let me think about what's fundamentally wrong:\n   "
+  "best_sharpe": -8.285186040633779,
+  "change_desc": "Calculate indicators",
+  "error": null
 }

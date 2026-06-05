@@ -1,11 +1,11 @@
 {
   "n": 30,
-  "timestamp": "2026-06-05T19:24:06.092888",
-  "sharpe": -16.96849409752292,
-  "n_trades": 809,
-  "win_rate": 37.57725587144623,
+  "timestamp": "2026-06-05T21:06:59.373306",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "Time filter: London + NY sessions only (7:00-18:00 UTC)",
-  "error": null
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp0epuwacf.py\", line 201\n    return {\n           ^\nSyntaxError: '{' was never"
 }

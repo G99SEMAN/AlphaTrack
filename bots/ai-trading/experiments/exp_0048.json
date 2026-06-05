@@ -1,0 +1,11 @@
+{
+  "n": 48,
+  "timestamp": "2026-06-05T21:15:21.014560",
+  "sharpe": -12.965599431764915,
+  "n_trades": 1223,
+  "win_rate": 38.021259198691745,
+  "kept": false,
+  "best_sharpe": -1.750077599990813,
+  "change_desc": "Calculate indicators",
+  "error": null
+}

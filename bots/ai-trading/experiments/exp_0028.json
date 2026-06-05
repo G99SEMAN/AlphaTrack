@@ -1,11 +1,11 @@
 {
   "n": 28,
-  "timestamp": "2026-06-05T19:22:43.103470",
-  "sharpe": -16.358537529260527,
-  "n_trades": 929,
-  "win_rate": 37.56727664155005,
+  "timestamp": "2026-06-05T21:06:22.765447",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
   "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "Time filter: only trade during active market hours (7:00-20:00 UTC)",
-  "error": null
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpx7ubl31o.py\", line 203\n    if sl > close and tp\n                        ^\nS"
 }

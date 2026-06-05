@@ -1,11 +1,11 @@
 {
   "n": 27,
-  "timestamp": "2026-06-05T17:07:01.214813",
-  "sharpe": -999.0,
-  "n_trades": 0,
-  "win_rate": 0,
-  "kept": false,
-  "best_sharpe": -12.9164158389223,
-  "change_desc": "syntax error",
-  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp_mg64g_p.py\", line 5\n    Key changes I'll make:\n                 ^\nSyntaxEr"
+  "timestamp": "2026-06-05T21:06:05.021217",
+  "sharpe": -7.616135334499216,
+  "n_trades": 594,
+  "win_rate": 39.73063973063973,
+  "kept": true,
+  "best_sharpe": -7.616135334499216,
+  "change_desc": "Calculate indicators",
+  "error": null
 }
