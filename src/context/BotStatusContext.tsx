@@ -42,7 +42,22 @@ export function BotStatusProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     poll()
     intervalRef.current = setInterval(poll, 5000)
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (intervalRef.current) clearInterval(intervalRef.current)
+      } else {
+        void poll()
+        intervalRef.current = setInterval(poll, 5000)
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [poll])
 
   return (

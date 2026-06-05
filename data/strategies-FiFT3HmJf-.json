@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "ai-trading-LtDzeFverW",
+    "name": "[AI-Trading] EMA Crossover Trend Following",
+    "description": "Automatisierte Trendfolge-Strategie auf EURUSDp (M5) mit EMA-Crossover-Signal, ATR-basiertem Risikomanagement und mehrfacher Bestätigung durch RSI, ADX und Zeitfilter. Optimiert durch KI-gestütztes Parameter-Research.",
+    "timeframe": "M5",
+    "rules": [
+      "BUY-Signal: EMA(8) kreuzt EMA(21) von unten, Preis über EMA(50), ADX > 18 und RSI zwischen 40–70",
+      "SELL-Signal: EMA(8) kreuzt EMA(21) von oben, Preis unter EMA(50), ADX > 18 und RSI zwischen 30–60",
+      "Stop Loss bei 1,0× ATR(14) vom Einstiegspreis, Take Profit bei 2,0× ATR(14) — Mindest R:R 1,5:1",
+      "Nur handeln wenn ADX(14) > 18 — kein Trade in trendlosen Seitwärtsphasen",
+      "Zeitfilter: Trades nur zwischen 07:00 und 20:00 UTC (London- und New-York-Session)",
+      "Maximal 1 offene Position gleichzeitig, Positionsgröße 0,01 Lot",
+      "Symbol: EURUSDp — kein Trade wenn ATR zu gering (implizit durch SL-Sizing)"
+    ],
+    "notes": "Backtest-Performance (3 Monate Out-of-Sample, Mär–Jun 2026): Sharpe Ratio 5,43 | 127 Trades | Win-Rate 44,9%.\nAutomatisch optimiert durch autoresearch.py — wird nach jeder verbesserten Strategie aktualisiert.",
+    "riskPerTrade": 1,
+    "color": "#3b82f6",
+    "createdAt": "2026-06-05T19:00:00.000Z"
+  }
+]

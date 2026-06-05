@@ -4,10 +4,7 @@ import { BotStatus } from '@/types/bot'
 import { isValidApiKey } from '@/lib/auth'
 
 export async function POST(req: NextRequest) {
-  // Auth is required only if a key is provided — this allows older bridge versions
-  // that forward bot heartbeats without auth headers to still work on the LAN.
-  const provided = req.headers.get('x-bot-api-key')
-  if (provided && !isValidApiKey(req)) {
+  if (!isValidApiKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

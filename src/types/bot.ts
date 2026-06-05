@@ -42,7 +42,7 @@ export interface BotEntry {
 export interface BotStatus {
   state: BotState
   lastHeartbeat: string
-  botVersion: string
+  bridgeVersion: string
   mt5Connected: boolean
   activeSymbols: string[]
   openPositions: number

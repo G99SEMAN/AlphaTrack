@@ -1,0 +1,11 @@
+{
+  "n": 19,
+  "timestamp": "2026-06-05T16:58:30.952687",
+  "sharpe": -19.569005215200495,
+  "n_trades": 1675,
+  "win_rate": 36.656716417910445,
+  "kept": false,
+  "best_sharpe": -12.9164158389223,
+  "change_desc": "Current and previous values for crossover detection",
+  "error": null
+}

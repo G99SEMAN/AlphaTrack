@@ -1,0 +1,11 @@
+{
+  "n": 42,
+  "timestamp": "2026-06-05T20:03:38.973060",
+  "sharpe": -16.455787971973454,
+  "n_trades": 1010,
+  "win_rate": 37.722772277227726,
+  "kept": false,
+  "best_sharpe": -4.448806915878883,
+  "change_desc": "Time filter: London + NY overlap (7:00-18:00 UTC)",
+  "error": null
+}

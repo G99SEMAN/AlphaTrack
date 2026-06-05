@@ -15,8 +15,8 @@ import {
 
 const DATA_DIR = path.join(process.cwd(), 'data')
 const BOT_MAX_LOG_ENTRIES = 100
-const CONNECTED_THRESHOLD_MS = 10_000
-const WARNING_THRESHOLD_MS = 30_000
+const CONNECTED_THRESHOLD_MS = 45_000
+const WARNING_THRESHOLD_MS = 120_000
 
 // --- Caches ---
 
@@ -197,10 +197,12 @@ export function acknowledgeBotCommand(botId: string, id: string): void {
 }
 
 export function pruneOldCommands(botId: string): void {
-  const cutoff = Date.now() - 5 * 60 * 1000
+  const confirmedCutoff = Date.now() - 5 * 60 * 1000
+  const unconfirmedCutoff = Date.now() - 10 * 60 * 1000
   const fresh = getBotCommands(botId).filter(c => {
-    if (!c.acknowledged) return true
-    return new Date(c.timestamp).getTime() > cutoff
+    const ts = new Date(c.timestamp).getTime()
+    if (!c.acknowledged) return ts > unconfirmedCutoff
+    return ts > confirmedCutoff
   })
   saveBotCommands(botId, fresh)
 }

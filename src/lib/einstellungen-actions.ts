@@ -1,9 +1,10 @@
 'use server'
 
-import { writeFileSync, existsSync, mkdirSync } from 'fs'
+import { existsSync, mkdirSync } from 'fs'
 import { join } from 'path'
 import { revalidatePath } from 'next/cache'
 import { saveApiKeys } from '@/lib/api-keys'
+import { atomicWrite } from '@/lib/fs-utils'
 
 const DATA_DIR = join(process.cwd(), 'data')
 
@@ -34,7 +35,7 @@ export async function importSettingsAction(
     if (!ALLOWED_FILE_PATTERN.test(filename)) continue
     if (filename.includes('trades-') && !Array.isArray(content)) continue
     if (filename === 'profiles.json' && !Array.isArray(content)) continue
-    writeFileSync(join(DATA_DIR, filename), JSON.stringify(content, null, 2), 'utf8')
+    atomicWrite(join(DATA_DIR, filename), JSON.stringify(content, null, 2))
     restoredFiles.push(filename)
   }
 

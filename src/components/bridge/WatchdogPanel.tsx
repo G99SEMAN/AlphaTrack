@@ -72,7 +72,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
           <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-xl" style={{ background: 'var(--surface-2)' }}>
             <span className="rounded-full shrink-0" style={{ width: 8, height: 8, background: STATE_COLOR[status.state], boxShadow: `0 0 6px ${STATE_COLOR[status.state]}` }} />
             <span className="text-sm font-bold" style={{ color: STATE_COLOR[status.state] }}>{STATE_LABEL[status.state]}</span>
-            <span className="ml-auto text-xs font-mono" style={{ color: 'var(--text-3)' }}>v{status.botVersion}</span>
+            <span className="ml-auto text-xs font-mono" style={{ color: 'var(--text-3)' }}>v{status.bridgeVersion}</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[

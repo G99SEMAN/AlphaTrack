@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, start_server, config_lock, configure
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -222,6 +222,7 @@ def main():
     local_log = LocalLog(bridge_id=config["bridge_id"], bridge_name=config.get("bridge_name", "Bridge"))
     local_log.configure_push(config["alphatrack_url"], config.get("api_key", ""))
     set_log_callback(local_log.add)
+    set_display_callback(display.log)
     local_log.add("info", "Bridge gestartet", f"AlphaTrack: {config['alphatrack_url']}")
     sync_to_alphatrack(config, local_log, display)
 

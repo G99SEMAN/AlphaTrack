@@ -42,7 +42,7 @@ export default function SplashScreen() {
     const timer = setTimeout(() => {
       minTimePassed = true
       tryHide()
-    }, 2000)
+    }, 800)
 
     const onLoad = () => {
       windowLoaded = true

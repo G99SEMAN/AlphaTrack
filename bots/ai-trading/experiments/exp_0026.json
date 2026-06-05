@@ -1,0 +1,11 @@
+{
+  "n": 26,
+  "timestamp": "2026-06-05T17:06:33.238901",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
+  "kept": false,
+  "best_sharpe": -12.9164158389223,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmpc6yrpdpj.py\", line 3\n    Let me think about what's fundamentally wrong:\n   "
+}

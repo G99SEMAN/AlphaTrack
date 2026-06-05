@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { Profile, ActiveProfile } from '@/types/profile'
 import { Trade } from '@/types/trade'
 import { saveProfileStrategies } from '@/lib/strategies'
@@ -14,14 +15,14 @@ function ensureDataDir() {
 
 // --- Profile CRUD ---
 
-export function getProfiles(): Profile[] {
+export const getProfiles = cache(function getProfiles(): Profile[] {
   try {
     const raw = fs.readFileSync(PROFILES_FILE, 'utf-8')
     return JSON.parse(raw) as Profile[]
   } catch {
     return []
   }
-}
+})
 
 function atomicWrite(filePath: string, content: string): void {
   const tmp = filePath + '.tmp'
@@ -66,7 +67,7 @@ export function deleteProfile(profileId: string): void {
 
 // --- Aktives Profil ---
 
-export function getActiveProfileId(): string | null {
+export const getActiveProfileId = cache(function getActiveProfileId(): string | null {
   try {
     const raw = fs.readFileSync(ACTIVE_FILE, 'utf-8')
     const data = JSON.parse(raw) as ActiveProfile
@@ -74,7 +75,7 @@ export function getActiveProfileId(): string | null {
   } catch {
     return null
   }
-}
+})
 
 export function setActiveProfileId(profileId: string): void {
   ensureDataDir()
@@ -85,11 +86,11 @@ export function clearActiveProfile(): void {
   try { fs.unlinkSync(ACTIVE_FILE) } catch { /* ignorieren */ }
 }
 
-export function getActiveProfile(): Profile | null {
+export const getActiveProfile = cache(function getActiveProfile(): Profile | null {
   const id = getActiveProfileId()
   if (!id) return null
   return getProfiles().find(p => p.id === id) ?? null
-}
+})
 
 // --- Trades pro Profil ---
 

@@ -1,20 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { addBotCommand, pruneOldCommands, addBridgeLogEntry, getBotById } from '@/lib/bot-data'
 import { BotCommandType, TradeOrderPayload, ClosePositionPayload } from '@/types/bot'
+import { isSameOriginRequest } from '@/lib/auth'
 
 const VALID_COMMANDS: BotCommandType[] = ['start', 'stop', 'pause', 'resume', 'execute_trade', 'close_position', 'restart']
-
-function isSameOriginRequest(req: NextRequest): boolean {
-  const origin = req.headers.get('origin')
-  if (!origin) return false
-  const host = req.headers.get('host')
-  if (!host) return false
-  try {
-    return new URL(origin).host === host
-  } catch {
-    return false
-  }
-}
 
 export async function POST(req: NextRequest) {
   if (!isSameOriginRequest(req)) {
@@ -82,11 +71,12 @@ export async function POST(req: NextRequest) {
 
     if ((command === 'execute_trade' || command === 'close_position') && flaskRes.ok) {
       const result = await flaskRes.json()
-      return NextResponse.json({ ok: true, commandId: entry.id, result })
+      return NextResponse.json({ ok: true, delivered: true, commandId: entry.id, result })
     }
   } catch {
     addBridgeLogEntry(bridgeId, 'warn', `Bridge nicht direkt erreichbar - Command in Queue`, bridge.url)
+    return NextResponse.json({ ok: true, delivered: false, queued: true, commandId: entry.id })
   }
 
-  return NextResponse.json({ ok: true, commandId: entry.id })
+  return NextResponse.json({ ok: true, delivered: true, commandId: entry.id })
 }

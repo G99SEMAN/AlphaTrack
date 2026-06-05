@@ -1,0 +1,164 @@
+[
+  {
+    "id": "7c014e10b3",
+    "timestamp": "2026-06-05T18:02:04.447980+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "392617e751",
+    "timestamp": "2026-06-05T17:47:44.377043+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "3fe51c4498",
+    "timestamp": "2026-06-05T17:44:08.688667+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #151900917",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "nsmwiXXPVi",
+    "timestamp": "2026-06-05T17:44:07.383Z",
+    "level": "info",
+    "message": "Command gesendet: close_position",
+    "details": "Ticket #151900917",
+    "botId": "xncEQxZGku",
+    "botName": "MT5 Test Bridge"
+  },
+  {
+    "id": "b5efc7d4ba",
+    "timestamp": "2026-06-05T17:43:48.788873+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Read timed out. (read timeout=10)",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "0Yqc8q51Qe",
+    "timestamp": "2026-06-05T17:40:04.837Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "xncEQxZGku",
+    "botName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d4c47e433b",
+    "timestamp": "2026-06-05T17:39:53.639651+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15257 | Ticket #152364164",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2Xyi29Pigk",
+    "timestamp": "2026-06-05T17:39:53.058Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDp",
+    "botId": "xncEQxZGku",
+    "botName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d634127988",
+    "timestamp": "2026-06-05T17:39:20.890933+00:00",
+    "level": "error",
+    "message": "Trade fehlgeschlagen: BUY 0.01 EURUSDp",
+    "details": "MT5 Fehler 10027: AutoTrading disabled by client (price=1.15252 sl=0.0 tp=0.0)",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "Lt-gZc-eJJ",
+    "timestamp": "2026-06-05T17:39:20.428Z",
+    "level": "info",
+    "message": "Command gesendet: execute_trade",
+    "details": "BUY 0.01 EURUSDp",
+    "botId": "xncEQxZGku",
+    "botName": "MT5 Test Bridge"
+  },
+  {
+    "id": "1e0efadf95",
+    "timestamp": "2026-06-05T17:38:23.592923+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "cf1e4b5735",
+    "timestamp": "2026-06-05T17:37:55.361899+00:00",
+    "level": "info",
+    "message": "Bot verbunden: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "bbc022b456",
+    "timestamp": "2026-06-05T17:33:31.935195+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2ceb9c952c",
+    "timestamp": "2026-06-05T17:29:32.849631+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a9ca0807ea",
+    "timestamp": "2026-06-05T14:14:19.949377+00:00",
+    "level": "info",
+    "message": "155 Trade(s) synchronisiert | PnL gesamt: -8.57",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "5d34641120",
+    "timestamp": "2026-06-05T14:14:14.644943+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Read timed out. (read timeout=10)",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "fd8203992e",
+    "timestamp": "2026-06-05T14:13:46.303801+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "33f97c9fa7",
+    "timestamp": "2026-06-05T14:13:25.377953+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  }
+]

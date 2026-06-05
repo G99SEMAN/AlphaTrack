@@ -1,0 +1,18 @@
+{
+  "state": "running",
+  "lastHeartbeat": "2026-06-05T18:04:06.803Z",
+  "bridgeVersion": "1.0.0",
+  "mt5Connected": true,
+  "activeSymbols": [
+    "EURUSDp",
+    "USDCADp",
+    "AUDUSDp",
+    "NZDUSDp",
+    "GBPUSDp"
+  ],
+  "openPositions": 5,
+  "tradesSync": 2263,
+  "uptime": 13820,
+  "balance": 488.39,
+  "currency": "EUR"
+}

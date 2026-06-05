@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { TrendingUp, TrendingDown, X, RefreshCw, Activity } from 'lucide-react'
 import { useBotStatus } from '@/context/BotStatusContext'
 import { useTradingLock } from '@/context/TradingLockContext'
@@ -30,15 +30,19 @@ export default function LivePositionsWidget() {
   const [loading, setLoading] = useState(false)
   const [confirmTicket, setConfirmTicket] = useState<number | null>(null)
   const [closingTicket, setClosingTicket] = useState<number | null>(null)
+  const abortRef = useRef<AbortController | null>(null)
 
   const fetchPositions = useCallback(async () => {
     if (!bridgeId) { setPositions([]); return }
+    abortRef.current?.abort()
+    abortRef.current = new AbortController()
     setLoading(true)
     try {
-      const res = await fetch(`/api/bridge/positions?bridgeId=${bridgeId}`)
+      const res = await fetch(`/api/bridge/positions?bridgeId=${bridgeId}`, { signal: abortRef.current.signal })
       if (res.ok) setPositions((await res.json()).positions ?? [])
-    } catch { /* silent */ }
-    finally { setLoading(false) }
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return
+    } finally { setLoading(false) }
   }, [bridgeId])
 
   useEffect(() => {

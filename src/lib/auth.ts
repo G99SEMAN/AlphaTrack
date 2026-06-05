@@ -11,3 +11,15 @@ export function isValidApiKey(req: NextRequest): boolean {
     return false
   }
 }
+
+export function isSameOriginRequest(req: NextRequest): boolean {
+  const origin = req.headers.get('origin')
+  if (!origin) return false
+  const host = req.headers.get('host')
+  if (!host) return false
+  try {
+    return new URL(origin).host === host
+  } catch {
+    return false
+  }
+}

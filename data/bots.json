@@ -1,18 +1,26 @@
 [
   {
-    "id": "TgSrwgejYS",
-    "name": "LenovoThinkPad_Bridge",
+    "id": "EaeqUNMvDm",
+    "name": "Bot 1",
     "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.37:8765",
-    "createdAt": "2026-06-02T16:26:57.739Z",
+    "url": "http://192.168.178.37:8765/bot/32f7bea5",
+    "createdAt": "2026-06-04T20:59:43.052Z",
+    "type": "bot"
+  },
+  {
+    "id": "xncEQxZGku",
+    "name": "MT5 Test Bridge",
+    "profileId": "FiFT3HmJf-",
+    "url": "http://192.168.178.28:8765",
+    "createdAt": "2026-06-05T14:13:25.372Z",
     "type": "bridge"
   },
   {
-    "id": "EaeqUNMvDm",
-    "name": "Breakout v1",
+    "id": "LtDzeFverW",
+    "name": "AI-Trading",
     "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.37:8765/bot/be86b32d",
-    "createdAt": "2026-06-04T20:59:43.052Z",
+    "url": "http://192.168.178.28:8765/bot/41acc062",
+    "createdAt": "2026-06-05T17:37:55.577Z",
     "type": "bot"
   }
 ]

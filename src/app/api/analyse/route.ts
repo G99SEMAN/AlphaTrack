@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { NextResponse } from 'next/server'
-import { getBots, getBotStatus, getConnectionState } from '@/lib/bot-data'
+import { getAllBotsWithStatus, getBotStatus, getConnectionState } from '@/lib/bot-data'
 import { getApiKey } from '@/lib/api-keys'
 
 export interface AnalyseResult {
@@ -56,10 +56,15 @@ function toMT5Symbol(apiSymbol: string): string {
 }
 
 async function fetchCandlesFromBot(apiSymbol: string, interval: string): Promise<Candle[]> {
-  const bots = getBots()
-  if (bots.length === 0) throw new Error('Kein Bot registriert. Bitte Bot starten.')
+  const allBots = getAllBotsWithStatus()
+  const bridgeEntry = allBots.find(
+    ({ bot, status }) =>
+      (bot.type ?? 'bridge') === 'bridge' &&
+      getConnectionState(status) !== 'offline'
+  )
+  if (!bridgeEntry) throw new Error('Keine Bridge verfügbar')
 
-  const bot = bots[0]
+  const bot = bridgeEntry.bot
   const status = getBotStatus(bot.id)
   const connState = getConnectionState(status)
 
@@ -183,6 +188,9 @@ Gib mir eine präzise Handelsempfehlung basierend auf diesen echten Kursdaten.`
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Analyse fehlgeschlagen'
     console.error('Analyse-Fehler:', err)
+    if (msg === 'Keine Bridge verfügbar') {
+      return NextResponse.json({ error: msg }, { status: 503 })
+    }
     return NextResponse.json({ error: msg }, { status: 500 })
   }
 }

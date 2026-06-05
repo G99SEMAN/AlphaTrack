@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getBotById } from '@/lib/bot-data'
+import { isSameOriginRequest } from '@/lib/auth'
 
 async function getBridge(req: NextRequest) {
   const bridgeId = req.nextUrl.searchParams.get('bridgeId')
@@ -7,18 +8,6 @@ async function getBridge(req: NextRequest) {
   const bridge = getBotById(bridgeId)
   if (!bridge) return { error: 'Unknown bridgeId', status: 404 }
   return { bridge }
-}
-
-function isSameOriginRequest(req: NextRequest): boolean {
-  const origin = req.headers.get('origin')
-  if (!origin) return false
-  const host = req.headers.get('host')
-  if (!host) return false
-  try {
-    return new URL(origin).host === host
-  } catch {
-    return false
-  }
 }
 
 export async function GET(req: NextRequest) {

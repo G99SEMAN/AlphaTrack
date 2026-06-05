@@ -34,6 +34,7 @@ _history_fetcher = None
 _account_fetcher = None
 _calendar_fetcher = None
 _log_callback = None
+_display_callback = None
 
 # Bot WebSocket registry (bot_id -> WebSocket)
 _bots: dict = {}
@@ -88,6 +89,11 @@ def set_account_fetcher(func):
 def set_calendar_fetcher(func):
     global _calendar_fetcher
     _calendar_fetcher = func
+
+
+def set_display_callback(func):
+    global _display_callback
+    _display_callback = func
 
 
 def set_log_callback(func):
@@ -204,12 +210,13 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
 
                 await websocket.send_text(json.dumps({"type": "registered", "bot_id": bot_id}))
 
-                # Bridge-Log: Verbindung oder Reconnect
+                # Bridge-Log und Display: Verbindung oder Reconnect
+                event_msg = f"Bot {'reconnect' if is_reconnect else 'verbunden'}: {bot_name}"
+                event_detail = f"Version {bot_version}"
                 if _log_callback:
-                    if is_reconnect:
-                        _log_callback("info", f"Bot reconnect: {bot_name}", f"Version {bot_version}")
-                    else:
-                        _log_callback("info", f"Bot verbunden: {bot_name}", f"Version {bot_version}")
+                    _log_callback("info", event_msg, event_detail)
+                if _display_callback:
+                    _display_callback("ok", "BOT", f"{event_msg} | {event_detail}")
 
                 port = _load_config().get("command_server_port", 8765)
                 bot_url = f"http://{_local_ip}:{port}/bot/{bot_id}"
@@ -223,8 +230,20 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                         at_id = resp.get("bot", {}).get("id")
                         if at_id:
                             _alphatrack_bot_ids[bot_id] = at_id
-                except Exception:
-                    pass
+                            if _display_callback:
+                                _display_callback("ok", "BOT", f"Registriert bei AlphaTrack: {bot_name} ({at_id})")
+                    else:
+                        msg = f"Bot-Registrierung bei AlphaTrack fehlgeschlagen: {bot_name}"
+                        if _log_callback:
+                            _log_callback("warn", msg)
+                        if _display_callback:
+                            _display_callback("warn", "BOT", msg)
+                except Exception as exc:
+                    msg = f"Bot-Registrierung Fehler: {bot_name}: {exc}"
+                    if _log_callback:
+                        _log_callback("error", msg)
+                    if _display_callback:
+                        _display_callback("error", "BOT", msg)
 
             elif mtype == "heartbeat":
                 if not bot_id:
@@ -244,10 +263,9 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                         "currency": msg.get("currency"),
                     },
                 }
-                try:
-                    await _post_alphatrack("/api/bridge/heartbeat", body, {"x-bot-api-key": _api_key})
-                except Exception:
-                    pass
+                hb_resp = await _post_alphatrack("/api/bridge/heartbeat", body, {"x-bot-api-key": _api_key})
+                if hb_resp is None and _display_callback:
+                    _display_callback("warn", "BOT", f"Heartbeat-Weiterleitung fehlgeschlagen: {bot_name}")
 
             elif mtype == "log":
                 if not bot_id:
@@ -278,10 +296,11 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
     finally:
         if bot_id:
             _bots.pop(bot_id, None)
-            # Bridge-Log: Bot getrennt
             name = next((n for n, i in _bot_names_to_id.items() if i == bot_id), bot_id)
             if _log_callback:
                 _log_callback("warn", f"Bot getrennt: {name}")
+            if _display_callback:
+                _display_callback("warn", "BOT", f"Bot getrennt: {name}")
 
 
 # --- HTTP endpoints ---
@@ -301,7 +320,7 @@ async def get_candles(
         raise HTTPException(status_code=503, detail="MT5 nicht initialisiert")
     if interval not in ("M1", "M5", "M15", "H1", "H4", "D1"):
         raise HTTPException(status_code=400, detail=f"Ungültiger Intervall: {interval}")
-    count = min(count, 200)
+    count = min(count, 5000)
     candles = await asyncio.to_thread(_candles_fetcher, symbol, interval, count)
     if not candles:
         raise HTTPException(status_code=503, detail=f"Keine Kerzen für {symbol} - Symbol im MT5 aktiviert?")

@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { Trade, TradeStats } from '@/types/trade'
 import { Deposit } from '@/types/profile'
 import path from 'path'
@@ -14,14 +15,14 @@ function atomicWrite(filePath: string, content: string): void {
   fs.renameSync(tmp, filePath)
 }
 
-export function getTrades(): Trade[] {
+export const getTrades = cache(function getTrades(): Trade[] {
   try {
     const raw = fs.readFileSync(DATA_FILE, 'utf-8')
     return JSON.parse(raw) as Trade[]
   } catch {
     return []
   }
-}
+})
 
 export function saveTrades(trades: Trade[]): void {
   atomicWrite(DATA_FILE, JSON.stringify(trades, null, 2))

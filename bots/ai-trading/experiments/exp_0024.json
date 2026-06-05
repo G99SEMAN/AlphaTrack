@@ -1,0 +1,11 @@
+{
+  "n": 24,
+  "timestamp": "2026-06-05T17:05:31.627666",
+  "sharpe": -999.0,
+  "n_trades": 0,
+  "win_rate": 0,
+  "kept": false,
+  "best_sharpe": -12.9164158389223,
+  "change_desc": "syntax error",
+  "error": "  File \"C:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp56avrjb2.py\", line 9\n    The Sharpe is deeply negative, meaning most trades"
+}

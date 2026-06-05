@@ -57,3 +57,16 @@ skills-lock.json
 /.claude-flow/
 /.swarm/
 /.agents/
+
+# Ghost files created by cmd.exe misinterpreting > in code prompts
+# (bug in @claude-flow/cli hive-mind on Windows — safe to delete these)
+nul
+nul'
+0)
+fixed
+inset-0
+bottom-0
+top-0
+left-0
+w-56
+"!before.includes*"
