@@ -100,5 +100,41 @@
     "command": "close_position",
     "timestamp": "2026-06-03T16:03:58.608Z",
     "acknowledged": false
+  },
+  {
+    "id": "XuvUGpgIJK",
+    "command": "pause",
+    "timestamp": "2026-06-04T20:20:03.174Z",
+    "acknowledged": false
+  },
+  {
+    "id": "Z9dqetf7zn",
+    "command": "resume",
+    "timestamp": "2026-06-04T20:22:06.108Z",
+    "acknowledged": false
+  },
+  {
+    "id": "He6q_rhtjP",
+    "command": "execute_trade",
+    "timestamp": "2026-06-04T21:42:43.744Z",
+    "acknowledged": false
+  },
+  {
+    "id": "UXECuTEJWN",
+    "command": "execute_trade",
+    "timestamp": "2026-06-04T21:42:50.440Z",
+    "acknowledged": false
+  },
+  {
+    "id": "vXxuq1O6CA",
+    "command": "execute_trade",
+    "timestamp": "2026-06-04T21:43:01.718Z",
+    "acknowledged": false
+  },
+  {
+    "id": "nWRU73y54q",
+    "command": "execute_trade",
+    "timestamp": "2026-06-04T21:43:11.294Z",
+    "acknowledged": false
   }
 ]

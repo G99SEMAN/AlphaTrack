@@ -2343,5 +2343,22 @@
     "id": "JcTScIDQ7z",
     "closeTime": "2026-06-03T19:03:59+00:00",
     "exit": 1.16022
+  },
+  {
+    "ticket": 151900917,
+    "date": "2026-06-05T00:43:10+00:00",
+    "instrument": "EURUSDp",
+    "type": "short",
+    "entry": 1.1609099999999999,
+    "currentPrice": 1.16146,
+    "size": 0.01,
+    "sl": null,
+    "tp": null,
+    "pnl": -0.47,
+    "commission": 0,
+    "swap": 0,
+    "status": "open",
+    "externalId": "pos_151900917",
+    "id": "8CmrzKi_So"
   }
 ]
