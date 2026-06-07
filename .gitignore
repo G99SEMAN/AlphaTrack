@@ -45,9 +45,6 @@ next-env.d.ts
 # /data/
 # /public/screenshots/
 
-# Bot/Bridge configs (contain MT5 credentials)
-bots/*/config.json
-bridge/config.json
 
 # Python runtime artifacts
 __pycache__/
