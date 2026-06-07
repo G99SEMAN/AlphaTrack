@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1ab94c3ec4",
+    "timestamp": "2026-06-07T12:26:05.954621+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a2759d9168",
+    "timestamp": "2026-06-07T12:25:08.722009+00:00",
+    "level": "info",
+    "message": "Bot verbunden: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "05d591676d",
+    "timestamp": "2026-06-07T12:24:45.216114+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "14ac1d3490",
+    "timestamp": "2026-06-07T12:24:44.740546+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "47108476e2",
+    "timestamp": "2026-06-07T12:24:43.244496+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "75e6ab7f47",
+    "timestamp": "2026-06-07T12:24:20.067447+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "285b9c8d75",
+    "timestamp": "2026-06-07T11:45:04.187703+00:00",
+    "level": "info",
+    "message": "Bot verbunden: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c660083269",
+    "timestamp": "2026-06-07T11:43:44.410681+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f26fa68201",
+    "timestamp": "2026-06-07T11:43:40.785274+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5a2ab18689",
+    "timestamp": "2026-06-07T11:43:35.284138+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  }
+]

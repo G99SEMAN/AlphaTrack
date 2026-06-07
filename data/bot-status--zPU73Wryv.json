@@ -1,0 +1,21 @@
+{
+  "state": "running",
+  "lastHeartbeat": "2026-06-07T13:06:40.392Z",
+  "bridgeVersion": "1.0.0",
+  "bridgeType": "bridge",
+  "bridgeIp": "192.168.178.28",
+  "bridgePort": 8765,
+  "mt5Connected": true,
+  "activeSymbols": [
+    "AUDUSDp",
+    "USDCADp",
+    "GBPUSDp",
+    "EURUSDp",
+    "NZDUSDp"
+  ],
+  "openPositions": 5,
+  "tradesSync": 415,
+  "uptime": 2515,
+  "balance": 488.39,
+  "currency": "EUR"
+}

@@ -1,0 +1,12 @@
+{
+  "state": "running",
+  "lastHeartbeat": "2026-06-07T13:06:39.906Z",
+  "botVersion": "1.0.0",
+  "mt5Connected": true,
+  "openPositions": 0,
+  "activeSymbols": [],
+  "tradesSync": 0,
+  "uptime": 2485,
+  "balance": 488.39,
+  "currency": "EUR"
+}

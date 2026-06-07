@@ -1,5 +1,392 @@
 [
   {
+    "id": "0eb9446781",
+    "timestamp": "2026-06-07T13:13:05.585629+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4ada2eed56",
+    "timestamp": "2026-06-07T13:13:01.456440+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6be3e8ff5e",
+    "timestamp": "2026-06-07T13:12:48.261250+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8b63b40bf6",
+    "timestamp": "2026-06-07T13:12:39.140772+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7a0028e5b6",
+    "timestamp": "2026-06-07T13:12:25.864387+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "49e4684cbd",
+    "timestamp": "2026-06-07T13:12:16.668300+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "329248af1d",
+    "timestamp": "2026-06-07T13:12:03.423359+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "df5850aeda",
+    "timestamp": "2026-06-07T13:11:54.213929+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d301c2d7ab",
+    "timestamp": "2026-06-07T13:11:41.004371+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6b8249c5f2",
+    "timestamp": "2026-06-07T13:11:31.864673+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f57c801f05",
+    "timestamp": "2026-06-07T13:11:18.632868+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "33be3b94a5",
+    "timestamp": "2026-06-07T13:11:09.473818+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9b2b087fa3",
+    "timestamp": "2026-06-07T13:10:56.215658+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a5b39c8dd1",
+    "timestamp": "2026-06-07T13:10:47.061739+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c03699179a",
+    "timestamp": "2026-06-07T13:10:33.832367+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3b84b2b7e1",
+    "timestamp": "2026-06-07T13:10:24.659989+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "28b7df9144",
+    "timestamp": "2026-06-07T13:10:11.454110+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b0bc51c30d",
+    "timestamp": "2026-06-07T13:10:02.349783+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "523fc2d287",
+    "timestamp": "2026-06-07T13:09:49.195349+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a0a83ba673",
+    "timestamp": "2026-06-07T13:09:40.007461+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5da49a4792",
+    "timestamp": "2026-06-07T13:09:26.792924+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b86f655846",
+    "timestamp": "2026-06-07T13:09:17.665896+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bb27934ffe",
+    "timestamp": "2026-06-07T13:09:04.461015+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3023fdc89c",
+    "timestamp": "2026-06-07T13:08:55.291479+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "407f49dc8d",
+    "timestamp": "2026-06-07T13:08:42.054563+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ecf9a2aadc",
+    "timestamp": "2026-06-07T13:08:32.866548+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a2f510ba54",
+    "timestamp": "2026-06-07T13:08:19.675281+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "28fcb1ade2",
+    "timestamp": "2026-06-07T13:08:10.531008+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0e883fed0c",
+    "timestamp": "2026-06-07T13:07:57.352096+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2c54475a9b",
+    "timestamp": "2026-06-07T13:07:48.213396+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ab626453c7",
+    "timestamp": "2026-06-07T13:07:35.052198+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b9ce66f673",
+    "timestamp": "2026-06-07T13:07:25.910462+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9e71948fce",
+    "timestamp": "2026-06-07T13:07:12.700150+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1ab94c3ec4",
+    "timestamp": "2026-06-07T12:26:05.954621+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a2759d9168",
+    "timestamp": "2026-06-07T12:25:08.722009+00:00",
+    "level": "info",
+    "message": "Bot verbunden: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "05d591676d",
+    "timestamp": "2026-06-07T12:24:45.216114+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "14ac1d3490",
+    "timestamp": "2026-06-07T12:24:44.740546+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "47108476e2",
+    "timestamp": "2026-06-07T12:24:43.244496+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "75e6ab7f47",
+    "timestamp": "2026-06-07T12:24:20.067447+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: AI-Trading",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "285b9c8d75",
+    "timestamp": "2026-06-07T11:45:04.187703+00:00",
+    "level": "info",
+    "message": "Bot verbunden: AI-Trading",
+    "details": "Version 1.0.0",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c660083269",
+    "timestamp": "2026-06-07T11:43:44.410681+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f26fa68201",
+    "timestamp": "2026-06-07T11:43:40.785274+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5a2ab18689",
+    "timestamp": "2026-06-07T11:43:35.284138+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "-zPU73Wryv",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "a5bd5995fe",
     "timestamp": "2026-06-07T10:18:03.848045+00:00",
     "level": "warn",

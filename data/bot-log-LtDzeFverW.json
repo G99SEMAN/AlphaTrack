@@ -1,18 +1,1 @@
-[
-  {
-    "id": "u7R9kSmOJB",
-    "timestamp": "2026-06-05T19:22:25.339Z",
-    "level": "info",
-    "message": "Bridge-Status geändert: stopped → running",
-    "botId": "LtDzeFverW",
-    "botName": "AI-Trading"
-  },
-  {
-    "id": "bfGrubs4Ei",
-    "timestamp": "2026-06-05T18:02:04.440Z",
-    "level": "info",
-    "message": "Bridge-Status geändert: running → stopped",
-    "botId": "LtDzeFverW",
-    "botName": "AI-Trading"
-  }
-]
+[]

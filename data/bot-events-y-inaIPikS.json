@@ -1,0 +1,20 @@
+[
+  {
+    "id": "76TRpRevtA",
+    "timestamp": "2026-06-07T12:25:11.557Z",
+    "level": "info",
+    "message": "AI-Trading gestartet",
+    "details": "Symbol: EURUSDp | TF: M5",
+    "botId": "y-inaIPikS",
+    "botName": "AI-Trading"
+  },
+  {
+    "id": "fDtmmLnlgx",
+    "timestamp": "2026-06-07T11:45:06.731Z",
+    "level": "info",
+    "message": "AI-Trading gestartet",
+    "details": "Symbol: EURUSDp | TF: M5",
+    "botId": "y-inaIPikS",
+    "botName": "AI-Trading"
+  }
+]
