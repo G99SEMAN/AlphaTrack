@@ -153,26 +153,37 @@ class FVGScalper(BaseBot):
     # ── Entry Levels ─────────────────────────────────────────────────────
 
     def _calc_levels(self, m1: list, htf: list, direction: str) -> tuple | None:
-        if len(m1) < 15:
+        if len(m1) < 20:
             return None
         entry = m1[-1]["close"]
 
+        # ATR-Approximation (14 M1-Kerzen) als Mass fuer NQ-Volatilitaet
+        atr = sum(c["high"] - c["low"] for c in m1[-14:]) / 14
+
         if direction == "bearish":
-            sl = max(c["high"] for c in m1[-5:]) * 1.0003
+            # SL ueber Sweep-Hoch + 1.5x ATR Buffer (NQ-geeignet)
+            sl = max(c["high"] for c in m1[-5:]) + atr * 1.5
+            # TP1: naechster M1-Swing-Low
             tp1 = min(c["low"] for c in m1[-20:-1])
+            if tp1 >= entry:
+                tp1 = entry - atr * 2.0
+            # TP2: HTF Struktur-Low oder 3x ATR
             tp2 = (min(c["low"] for c in htf[-10:]) if len(htf) >= 10
-                   else tp1 - abs(entry - tp1))
+                   else entry - atr * 3.0)
             if tp2 >= tp1:
-                tp2 = tp1 - abs(entry - tp1) * 1.5
+                tp2 = entry - atr * 3.0
             return entry, sl, tp1, tp2
 
         elif direction == "bullish":
-            sl = min(c["low"] for c in m1[-5:]) * 0.9997
+            # SL unter Sweep-Low - 1.5x ATR Buffer
+            sl = min(c["low"] for c in m1[-5:]) - atr * 1.5
             tp1 = max(c["high"] for c in m1[-20:-1])
+            if tp1 <= entry:
+                tp1 = entry + atr * 2.0
             tp2 = (max(c["high"] for c in htf[-10:]) if len(htf) >= 10
-                   else tp1 + abs(tp1 - entry))
+                   else entry + atr * 3.0)
             if tp2 <= tp1:
-                tp2 = tp1 + abs(tp1 - entry) * 1.5
+                tp2 = entry + atr * 3.0
             return entry, sl, tp1, tp2
 
         return None
