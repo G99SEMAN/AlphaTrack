@@ -15,22 +15,28 @@ class FVGScalper(BaseBot):
 - `self._bridge.get_candles(symbol, interval, count)`: fetch H1/H4/M5/M15 candles
 - Return: `{action: buy|sell|close|hold, lots: float, sl: float, tp: float}` or `{action: close, ticket: int}`
 
-## Core ICT Concepts (preserve the multi-TF structure)
-1. **H1/H4 FVG** — identify Fair Value Gap (3-candle imbalance), determine bearish/bullish bias
-2. **M5/M15 confirmation** — Liquidity Sweep (price manipulates recent swing) + Displacement (strong opposite move)
-3. **M1 entry** — same sweep+displacement on 1M timeframe → enter in FVG direction
+## Core ICT Concepts (preserve the 2-stage structure)
+1. **HTF FVG** (`self._bridge.get_candles(symbol, cfg['htf'], cfg['htf_candles'])`) — Fair Value Gap or Near-Gap as direction bias
+2. **M1 entry** — Liquidity Sweep of a recent swing + displacement candle in FVG direction
+
+## Configurable parameters (change values in on_tick via cfg, not in config.json)
+- `htf`: higher timeframe (default "M5", try "M15" or "H1")
+- `htf_candles`: candle count for HTF (default 100)
+- `htf_bias_lookback`: candles for bias detection (default 10)
+- `sweep_lookback`: lookback for sweep detection (default 6)
+- `fvg_tolerance`: price tolerance to enter FVG zone in % (default 0.001)
+- `min_crv`: minimum CRV to enter trade (default 1.5)
 
 ## Allowed improvements
-- Tune FVG detection: minimum gap size, staleness filter (discard very old FVGs)
-- Improve bias detection: use more candles, add trend strength filter (e.g., ATR-based)
-- Adjust sweep detection: lookback periods, body-to-range ratio threshold
-- Add SMT divergence check using two correlated instruments (if bridge supports it)
-- Improve entry timing: candle body confirmation, momentum filter
-- Tune SL/TP calculation: dynamic ATR-based instead of fixed percentage
-- Add session-time weighting (avoid low-liquidity gaps at open/close)
-- Add volatility filter (skip if ATR too low or too high)
-- Improve CRV filter (min_crv tuning)
-- Add max daily loss protection
+- Tune FVG detection: adjust the near-gap body ratio threshold (currently 0.40)
+- Add staleness filter: ignore FVGs older than N candles
+- Improve bias detection: use more candles, add trend strength (e.g. count of consecutive closes)
+- Adjust sweep detection: change lookback, add body/wick ratio requirement
+- Add second confirmation: require HTF entry signal before M1 entry
+- Tune SL/TP: use ATR for dynamic sizing instead of fixed percentage
+- Add re-entry logic: trade a second time if FVG is tested again
+- Add time filter: skip last/first N candles of session
+- Try different HTF values (M5, M15) via cfg lookups
 
 ## Constraints
 - No external libraries beyond `math`, `statistics`, `datetime` (built-in only)
