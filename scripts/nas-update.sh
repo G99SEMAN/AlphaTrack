@@ -30,7 +30,7 @@ fi
 echo ""
 echo "  [3/5] Code von GitHub holen..."
 git fetch origin
-git reset --hard origin/master
+git reset --hard origin/main
 
 echo ""
 echo "  [4/5] Daten wiederherstellen..."
