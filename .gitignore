@@ -49,6 +49,14 @@ next-env.d.ts
 bots/*/config.json
 bridge/config.json
 
+# Python runtime artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Bridge operational log (changes on every run)
+bridge/bridge_log.json
+
 # AI tool artifacts (local only, not needed on GitHub)
 ruvector.db
 agentdb.rvf

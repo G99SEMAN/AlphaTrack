@@ -227,9 +227,9 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
           style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
           <ExternalLink size={13} className="mt-0.5 shrink-0" style={{ color: 'var(--text-3)' }} />
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            Bot-spezifische Einstellungen (Symbole, Intervalle, MT5-Account) erreichst du über den{' '}
-            <a href="/bridge/settings" className="underline" style={{ color: 'var(--accent)' }}>
-              Bridge-Bereich
+            Bot-spezifische Einstellungen erreichst du über{' '}
+            <a href="/bots" className="underline" style={{ color: 'var(--accent)' }}>
+              Bots → Bearbeiten
             </a>.
           </p>
         </div>

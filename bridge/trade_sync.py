@@ -21,10 +21,17 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     # Geschlossene Trades für Log vormerken
     closed_count = len(closed_trades)
 
+    # C4: Trades ohne bot_id stammen vom Bridge-Sync (nicht von einem Bot).
+    # bot_id=None kennzeichnet bridge-originierte Trades — sie erscheinen
+    # nicht in Bot-Trade-Listen, die nach bot_id filtern.
+    tagged_trades = [
+        {**t, "bot_id": t.get("bot_id", None)} for t in all_trades
+    ]
+
     payload = {
         "bridgeId": config["bridge_id"],
         "profileId": config["profile_id"],
-        "trades": all_trades,
+        "trades": tagged_trades,
     }
 
     try:

@@ -40,24 +40,33 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ trades: getBotTrades(profileId) })
 }
 
+// Normalize a raw trade payload to a typed Trade, resolving bot_id attribution.
+// Python sends snake_case bot_id; TypeScript stores as botId.
+// Trades with no bot attribution (bridge sync) receive botId: null (C4).
+function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
+  const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
+  const resolvedBotId = botId ?? bot_id ?? null
+  return { ...rest, botId: resolvedBotId } as unknown as Omit<Trade, 'id'>
+}
+
 export async function POST(req: NextRequest) {
   if (!isValidApiKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  let body: { bridgeId: string; profileId: string; trades: Omit<Trade, 'id'>[] }
+  let body: { bridgeId: string; profileId: string; trades: Record<string, unknown>[] }
   try {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { bridgeId, profileId, trades } = body
-  if (!bridgeId || !profileId || !Array.isArray(trades)) {
+  const { bridgeId, profileId, trades: rawTrades } = body
+  if (!bridgeId || !profileId || !Array.isArray(rawTrades)) {
     return NextResponse.json({ error: 'Missing bridgeId, profileId or trades' }, { status: 400 })
   }
 
-  if (trades.length > 1000) {
+  if (rawTrades.length > 1000) {
     return NextResponse.json({ error: 'Zu viele Trades (max. 1000 pro Request)' }, { status: 400 })
   }
 
@@ -70,6 +79,9 @@ export async function POST(req: NextRequest) {
     addBridgeLogEntry(bridgeId, 'warn', `Profil-ID nicht gefunden: ${profileId}`, 'Bitte Bridge-Profil in den Einstellungen korrigieren')
     return NextResponse.json({ error: `Unbekannte profileId: ${profileId}. Profil in Bridge-Einstellungen korrigieren.` }, { status: 422 })
   }
+
+  // Normalize incoming trades: resolve bot attribution (C4)
+  const trades = rawTrades.map(normalizeTrade)
 
   const existing = getBotTrades(profileId)
   const existingMap = new Map(

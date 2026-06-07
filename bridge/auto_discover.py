@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 
-ALPHATRACK_PORT = 3000
+ALPHATRACK_PORT = 3002
 PROBE_TIMEOUT   = 3   # Sekunden pro Versuch
 SCAN_TIMEOUT    = 2   # Kürzeres Timeout beim Massenscann
 SCAN_WORKERS    = 30  # Parallele Threads beim LAN-Scan
@@ -93,7 +93,7 @@ def discover(last_known_url: str | None = None, display=None) -> str | None:
     Findet AlphaTrack im Netzwerk.
     Gibt die gefundene URL zurück, oder None wenn nichts gefunden.
     """
-    candidates = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    candidates = ["http://localhost:3002", "http://127.0.0.1:3002"]
 
     if last_known_url and last_known_url not in candidates:
         candidates.append(last_known_url)

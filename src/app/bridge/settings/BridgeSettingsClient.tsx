@@ -149,7 +149,8 @@ function SaveButton({ state, onClick }: { state: SaveState; onClick: () => void 
   )
 }
 
-export default function BridgeSettingsClient({ bots, profiles }: Props) {
+export default function BridgeSettingsClient({ bots: allBots, profiles }: Props) {
+  const bots = allBots.filter(b => !b.type || b.type === 'bridge')
   const [selectedBotId, setSelectedBotId] = useState<string>(bots[0]?.id ?? '')
   const [config, setConfig] = useState<BridgeConfig | null>(null)
   const [loading, setLoading] = useState(false)

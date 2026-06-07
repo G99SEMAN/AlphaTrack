@@ -102,6 +102,31 @@ class BaseBot:
         self._state = "starting"
         self._open_positions: int = 0
         self._restart_requested = False
+        self._my_tickets: set[int] = set()  # tickets opened by THIS bot, survived across restarts
+
+    # ── Ticket-Persistenz (restart-safe) ────────────────────────────────
+
+    def _tickets_path(self) -> str:
+        base = os.path.dirname(sys.argv[0]) or "."
+        return os.path.join(base, "data", f"tickets_{self.bot_id}.json")
+
+    def _load_tickets(self) -> None:
+        path = self._tickets_path()
+        try:
+            if os.path.exists(path):
+                with open(path, "r", encoding="utf-8") as f:
+                    self._my_tickets = set(json.load(f))
+        except Exception:
+            self._my_tickets = set()
+
+    def _save_tickets(self) -> None:
+        path = self._tickets_path()
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(list(self._my_tickets), f)
+        except Exception:
+            pass
 
     # ── Konfiguration laden ─────────────────────────────────────────────
 
@@ -199,19 +224,27 @@ class BaseBot:
 
         # C4: bot_id immer als Metadatum vor Bridge-Durchgang setzen
         trade_dict["bot_id"] = self.bot_id
-        return self._bridge.execute_trade(
+        result = self._bridge.execute_trade(
             symbol=trade_dict["symbol"],
             direction=trade_dict["direction"],
             lots=float(trade_dict.get("lots", 0.01)),
             sl=float(trade_dict.get("sl", 0) or 0),
             tp=float(trade_dict.get("tp", 0) or 0),
         )
+        if result.get("success") and result.get("ticket"):
+            self._my_tickets.add(int(result["ticket"]))
+            self._save_tickets()
+        return result
 
     def close_trade(self, ticket: int) -> dict:
         """Schliesst eine offene Position. Bot-ID wird als Metadatum mitgesendet."""
         if not self._bridge:
             return {"success": False, "error": "Bridge nicht verbunden"}
-        return self._bridge.close_position(ticket=ticket)
+        result = self._bridge.close_position(ticket=ticket)
+        if result.get("success"):
+            self._my_tickets.discard(ticket)
+            self._save_tickets()
+        return result
 
     # ── MT5-Fehler-Empfang und Anzeige (C3) ────────────────────────────
 
@@ -284,6 +317,7 @@ class BaseBot:
     def run(self) -> None:
         """Startet den Bot-Loop. Blockiert bis zum Beenden."""
         self._config = self.load_config()
+        self._load_tickets()
 
         if not self._connect_and_register():
             sys.exit(1)
@@ -322,7 +356,10 @@ class BaseBot:
 
             if bridge_ok:
                 positions = self._bridge.get_positions()
-                self._open_positions = len(positions)
+                all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
+                self._my_tickets.intersection_update(all_tickets)  # prune closed trades
+                my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
+                self._open_positions = len(my_positions)
 
             self._process_commands()
 
@@ -330,9 +367,12 @@ class BaseBot:
                 try:
                     candles = self._bridge.get_candles(symbol, timeframe, candles_count)
                     positions = self._bridge.get_positions()
-                    signal_result = self.on_tick(candles, positions)
+                    all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
+                    self._my_tickets.intersection_update(all_tickets)
+                    my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
+                    signal_result = self.on_tick(candles, my_positions)
                     action = signal_result.get("action", "hold")
-                    open_count = len([p for p in positions if p.get("instrument") == symbol])
+                    open_count = len([p for p in my_positions if p.get("instrument") == symbol])
 
                     if action == "buy" and open_count < max_positions:
                         result = self.send_trade({**signal_result, "symbol": symbol, "direction": "buy"})

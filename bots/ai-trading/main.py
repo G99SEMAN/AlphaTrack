@@ -107,6 +107,7 @@ def main():
         'balance': None,
         'currency': None,
     }
+    my_tickets: set[int] = set()  # only tickets opened by this bot in the current session
 
     running = True
     last_heartbeat = last_tick = 0.0
@@ -133,8 +134,11 @@ def main():
 
         if bridge_ok:
             positions = bridge.get_positions()
-            state['open_positions'] = len(positions)
-            state['active_symbols'] = list({p.get('instrument') for p in positions if p.get('instrument')})
+            all_tickets = {p['ticket'] for p in positions if 'ticket' in p}
+            my_tickets.intersection_update(all_tickets)  # drop tickets no longer open in MT5
+            my_positions = [p for p in positions if p.get('ticket') in my_tickets]
+            state['open_positions'] = len(my_positions)
+            state['active_symbols'] = list({p.get('instrument') for p in my_positions if p.get('instrument')})
             account = bridge.get_account_info()
             if account:
                 state['balance'] = account.get('balance')
@@ -174,12 +178,14 @@ def main():
                 display.log('error', 'MT5', f'Fehler: {error_msg}')
             elif command == 'close_position':
                 payload = cmd.get('payload') or {}
-                result = bridge.close_position(ticket=int(payload.get('ticket', 0))) if bridge_ok else {'success': False, 'error': 'Bridge offline'}
+                ticket_to_close = int(payload.get('ticket', 0))
+                result = bridge.close_position(ticket=ticket_to_close) if bridge_ok else {'success': False, 'error': 'Bridge offline'}
+                if result.get('success') and ticket_to_close:
+                    my_tickets.discard(ticket_to_close)
                 ws_client.send_trade_result(cmd_id, result.get('success', False), error=result.get('error'))
                 level = 'ok' if result.get('success') else 'error'
-                ticket = payload.get('ticket', '?')
-                local_log.add(level, f'CLOSE #{ticket}', result.get('error'))
-                display.log(level, 'TRADE', f'CLOSE #{ticket}')
+                local_log.add(level, f'CLOSE #{ticket_to_close}', result.get('error'))
+                display.log(level, 'TRADE', f'CLOSE #{ticket_to_close}')
             elif command == 'execute_trade':
                 payload = cmd.get('payload') or {}
                 if bridge_ok:
@@ -192,6 +198,8 @@ def main():
                     )
                 else:
                     result = {'success': False, 'error': 'Bridge offline'}
+                if result.get('success') and result.get('ticket'):
+                    my_tickets.add(int(result['ticket']))
                 ws_client.send_trade_result(cmd_id, result.get('success', False),
                                             ticket=result.get('ticket'), price=result.get('price'),
                                             error=result.get('error'))
@@ -210,13 +218,15 @@ def main():
                 positions = bridge.get_positions()
                 sig = on_tick(candles, positions, config)
                 action = sig.get('action', 'hold')
-                open_count = len([p for p in positions if p.get('instrument') == symbol])
+                open_count = len([p for p in positions if p.get('instrument') == symbol and p.get('ticket') in my_tickets])
 
                 if action == 'buy' and open_count < max_positions:
                     result = bridge.execute_trade(symbol=symbol, direction='buy',
                                                   lots=float(sig.get('lots', 0.01)),
                                                   sl=float(sig.get('sl', 0) or 0),
                                                   tp=float(sig.get('tp', 0) or 0))
+                    if result.get('success') and result.get('ticket'):
+                        my_tickets.add(int(result['ticket']))
                     msg = f"BUY {sig.get('lots')} {symbol} | SL={sig.get('sl')} TP={sig.get('tp')}"
                     level = 'info' if result.get('success') else 'error'
                     ws_client.send_log(level, msg, result.get('error'))
@@ -228,6 +238,8 @@ def main():
                                                   lots=float(sig.get('lots', 0.01)),
                                                   sl=float(sig.get('sl', 0) or 0),
                                                   tp=float(sig.get('tp', 0) or 0))
+                    if result.get('success') and result.get('ticket'):
+                        my_tickets.add(int(result['ticket']))
                     msg = f"SELL {sig.get('lots')} {symbol} | SL={sig.get('sl')} TP={sig.get('tp')}"
                     level = 'info' if result.get('success') else 'error'
                     ws_client.send_log(level, msg, result.get('error'))
@@ -238,6 +250,8 @@ def main():
                     ticket = sig.get('ticket')
                     if ticket:
                         result = bridge.close_position(ticket=int(ticket))
+                        if result.get('success'):
+                            my_tickets.discard(int(ticket))
                         level = 'info' if result.get('success') else 'error'
                         ws_client.send_log(level, f"CLOSE #{ticket}", result.get('error'))
                         local_log.add(level, f"CLOSE #{ticket}", result.get('error'))

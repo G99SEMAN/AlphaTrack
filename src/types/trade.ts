@@ -24,6 +24,7 @@ export interface Trade {
   strategyId?: string
   externalId?: string
   outcome?: 'win' | 'loss'
+  botId?: string | null
 }
 
 export interface TradeStats {
