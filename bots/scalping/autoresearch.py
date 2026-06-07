@@ -136,7 +136,7 @@ STRICT REQUIREMENTS (do not change these):
     client = anthropic.Anthropic()
     msg = client.messages.create(
         model=_MODEL,
-        max_tokens=3000,
+        max_tokens=6000,
         system=(
             "You are a Python trading strategy code generator for ICT/SMC-based strategies. "
             "Output ONLY valid Python code. "
