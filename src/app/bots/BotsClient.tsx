@@ -172,16 +172,21 @@ export default function BotsClient({ initialBots, profiles }: Props) {
                     <Stat label="Synced"      value={status?.tradesSync != null ? `${status.tradesSync} Trades` : '-'} />
                   </div>
 
+                  {/* Bot-ID (Spec: ID + Name anzeigen) */}
+                  <p className="text-[10px] font-mono truncate" style={{ color: 'var(--text-3)' }}>
+                    ID: {bot.id}
+                  </p>
+
                   {/* Footer */}
                   <div className="flex items-center justify-between pt-1 border-t" style={{ borderColor: 'var(--border)' }}>
                     <p className="text-[11px] truncate" style={{ color: 'var(--text-3)' }}>
                       <TrendingUp size={10} className="inline mr-1" />
                       {profile?.name ?? 'Kein Profil'}
                     </p>
-                    <Link href="/bridge"
+                    <Link href={`/bots/${bot.id}`}
                       className="flex items-center gap-1 text-[11px] font-semibold"
                       style={{ color: 'var(--accent)' }}>
-                      Bridge <ExternalLink size={10} />
+                      Detail <ExternalLink size={10} />
                     </Link>
                   </div>
                 </motion.div>

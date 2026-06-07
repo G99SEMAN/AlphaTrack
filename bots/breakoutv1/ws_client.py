@@ -5,6 +5,7 @@ Nutzt websocket-client (sync, threading-basiert).
 import json
 import logging
 import queue
+import socket
 import threading
 import time
 
@@ -13,15 +14,31 @@ import websocket
 logger = logging.getLogger(__name__)
 
 
+def _get_local_ip() -> str:
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+
+
 class BridgeWSClient:
-    def __init__(self, bridge_url: str, api_key: str, bot_name: str, bot_version: str):
+    def __init__(self, bridge_url: str, api_key: str, bot_name: str, bot_version: str,
+                 bot_id: str = "", bot_type: str = "bot", bot_port: int = 0):
         ws_url = bridge_url.replace("http://", "ws://").replace("https://", "wss://")
         self._url = f"{ws_url.rstrip('/')}/ws?api_key={api_key}"
         self._name = bot_name
         self._version = bot_version
+        self._bot_id_static = bot_id
+        self._bot_type = bot_type
+        self._bot_port = bot_port
         self._ws: websocket.WebSocket | None = None
         self._bot_id: str | None = None
         self._connected = False
+        self._latency_ms: float | None = None
         self._cmd_queue: queue.Queue = queue.Queue()
         self._registered_event = threading.Event()
         self._lock = threading.Lock()
@@ -53,11 +70,17 @@ class BridgeWSClient:
                 attempts = 0
                 logger.info("WS verbunden: %s", self._url)
 
-                # Register
+                # Register with full identity fields (id, name, type, ip, port, latency)
+                local_ip = _get_local_ip()
+                t_reg_start = time.time()
                 ws.send(json.dumps({
                     "type": "register",
+                    "id": self._bot_id_static,
                     "name": self._name,
                     "version": self._version,
+                    "component_type": self._bot_type,
+                    "ip": local_ip,
+                    "port": self._bot_port,
                 }))
 
                 while not self._stop_event.is_set():
@@ -81,8 +104,9 @@ class BridgeWSClient:
 
                     if msg_type == "registered":
                         self._bot_id = msg.get("bot_id")
+                        self._latency_ms = round((time.time() - t_reg_start) * 1000, 1)
                         self._registered_event.set()
-                        logger.info("Bot registriert: %s", self._bot_id)
+                        logger.info("Bot registriert: %s (Latenz: %sms)", self._bot_id, self._latency_ms)
 
                     elif msg_type == "command":
                         self._cmd_queue.put({

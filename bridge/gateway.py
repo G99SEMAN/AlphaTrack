@@ -40,6 +40,8 @@ _display_callback = None
 _bots: dict = {}
 _bot_versions: dict = {}
 _bot_names_to_id: dict = {}
+# Full bot identity records: bot_id -> {id, name, type, ip, port, latency}
+_bot_identities: dict = {}
 # Pending WS trade results: cmd_id -> asyncio.Event
 _ws_trade_events: dict = {}
 _ws_trade_results: dict = {}
@@ -105,12 +107,59 @@ def get_command_queue() -> queue.Queue:
     return _command_queue
 
 
+def get_connected_bot_names() -> list[str]:
+    """Returns the names of all currently connected bots (for bridge terminal display)."""
+    names = []
+    for bot_id in list(_bots.keys()):
+        identity = _bot_identities.get(bot_id)
+        if identity:
+            names.append(identity["name"])
+        else:
+            # Fallback: look up name from reverse mapping
+            for name, bid in _bot_names_to_id.items():
+                if bid == bot_id:
+                    names.append(name)
+                    break
+    return names
+
+
 def set_trade_result(cmd_id: str, result: dict):
     with _trade_lock:
         _trade_results[cmd_id] = result
         evt = _trade_events.get(cmd_id)
     if evt:
         evt.set()
+
+
+# Maps cmd_id -> bot_id for MT5 error forwarding (C3)
+_cmd_to_bot_id: dict = {}
+_cmd_to_bot_lock = threading.Lock()
+
+
+async def _forward_mt5_error_to_bot(bot_id: str, error_msg: str) -> None:
+    """
+    Leitet einen MT5-Fehler sofort (near-realtime) an den verursachenden Bot weiter (C3).
+    Bridge identifiziert den Bot via bot_id und sendet die Fehlermeldung per WebSocket.
+    """
+    ws = _bots.get(bot_id)
+    if ws is None:
+        if _log_callback:
+            _log_callback("warn", f"MT5-Fehler-Weiterleitung: Bot {bot_id} nicht verbunden", error_msg)
+        return
+    try:
+        await ws.send_text(json.dumps({
+            "type": "command",
+            "cmd_id": f"mt5_err_{bot_id}",
+            "command": "mt5_error",
+            "payload": {"error": error_msg, "bot_id": bot_id},
+        }))
+        if _log_callback:
+            _log_callback("warn", f"MT5-Fehler weitergeleitet an Bot {bot_id}", error_msg)
+        if _display_callback:
+            _display_callback("warn", "MT5", f"Fehler an Bot {bot_id} weitergeleitet: {error_msg}")
+    except Exception as exc:
+        if _log_callback:
+            _log_callback("error", f"MT5-Fehler-Weiterleitung fehlgeschlagen: {bot_id}", str(exc))
 
 
 # --- API key auth ---
@@ -196,17 +245,41 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
             if mtype == "register":
                 bot_name = msg.get("name", "")
                 bot_version = msg.get("version", "1.0.0")
+                bot_ip = msg.get("ip", "unknown")
+                bot_port = msg.get("port", 0)
+                bot_component_type = msg.get("component_type", "bot")
+                bot_static_id = msg.get("id", "")
+                bot_latency = msg.get("latency", 0.0)
+
+                # Validate: only "bot" components may register via this endpoint
+                if bot_component_type not in ("bot", ""):
+                    await websocket.send_text(json.dumps({
+                        "type": "error",
+                        "message": f"Registration rejected: component_type '{bot_component_type}' must be 'bot'",
+                    }))
+                    await websocket.close(code=1008)
+                    return
 
                 # Reconnect: reuse existing bot_id if name is known
                 is_reconnect = bot_name in _bot_names_to_id
                 if is_reconnect:
                     bot_id = _bot_names_to_id[bot_name]
                 else:
-                    bot_id = str(uuid.uuid4())[:8]
+                    # Use static bot_id from config if provided, otherwise generate one
+                    bot_id = bot_static_id if bot_static_id else str(uuid.uuid4())[:8]
                     _bot_names_to_id[bot_name] = bot_id
 
                 _bots[bot_id] = websocket
                 _bot_versions[bot_id] = bot_version
+                # Store full identity record (id, name, type, ip, port, latency)
+                _bot_identities[bot_id] = {
+                    "id": bot_id,
+                    "name": bot_name,
+                    "type": bot_component_type,
+                    "ip": bot_ip,
+                    "port": bot_port,
+                    "latency": bot_latency,
+                }
 
                 await websocket.send_text(json.dumps({"type": "registered", "bot_id": bot_id}))
 
@@ -270,9 +343,11 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
             elif mtype == "log":
                 if not bot_id:
                     continue
+                # C2: Bot-Logs duerfen nicht in den Bridge-Log — separater Bot-Log-Endpunkt
+                at_bot_id = _alphatrack_bot_ids.get(bot_id, bot_id)
                 try:
-                    await _post_alphatrack("/api/bridge/log", {
-                        "botId": _alphatrack_bot_ids.get(bot_id, bot_id),
+                    await _post_alphatrack(f"/api/bots/{at_bot_id}/log", {
+                        "botId": at_bot_id,
                         "level": msg.get("level", "info"),
                         "message": msg.get("message", ""),
                         "details": msg.get("details", ""),
@@ -308,6 +383,12 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
 @app.get("/health")
 async def health():
     return {"ok": True, "bots_connected": len(_bots)}
+
+
+@app.get("/bots/identities")
+async def get_bot_identities():
+    """Returns the full identity record (id, name, type, ip, port, latency) for all connected bots."""
+    return {"bots": list(_bot_identities.values()), "count": len(_bot_identities)}
 
 
 @app.get("/candles")
@@ -364,6 +445,8 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
     command = data.get("command", "")
     cmd_id = data.get("id", "")
     payload = data.get("payload")
+    # Extract bot_id from request for MT5 error forwarding (C3/C4)
+    requesting_bot_id = data.get("bot_id", "") or (payload or {}).get("bot_id", "")
 
     valid = {"start", "stop", "pause", "resume", "execute_trade", "close_position", "restart"}
     if command not in valid:
@@ -372,31 +455,49 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
     if command == "close_position":
         if not payload or not payload.get("ticket"):
             raise HTTPException(status_code=400, detail="close_position benötigt ticket")
+        # Track cmd_id -> bot_id for error forwarding (C3)
+        if requesting_bot_id:
+            with _cmd_to_bot_lock:
+                _cmd_to_bot_id[cmd_id] = requesting_bot_id
         evt = threading.Event()
         with _trade_lock:
             _trade_events[cmd_id] = evt
-        _command_queue.put({"command": command, "id": cmd_id, "payload": payload})
+        _command_queue.put({"command": command, "id": cmd_id, "payload": payload, "bot_id": requesting_bot_id})
         ok = await asyncio.to_thread(evt.wait, 10)
         with _trade_lock:
             result = _trade_results.pop(cmd_id, {"success": False, "error": "Kein Ergebnis"})
             _trade_events.pop(cmd_id, None)
+        with _cmd_to_bot_lock:
+            _cmd_to_bot_id.pop(cmd_id, None)
         if not ok:
             return JSONResponse({"success": False, "error": "Timeout"}, status_code=504)
+        # C3: Forward MT5 error immediately to the originating bot
+        if not result.get("success") and result.get("error") and requesting_bot_id:
+            asyncio.create_task(_forward_mt5_error_to_bot(requesting_bot_id, result["error"]))
         return {"ok": True, **result}
 
     if command == "execute_trade":
         if not payload or not payload.get("symbol") or not payload.get("direction") or not payload.get("lots"):
             raise HTTPException(status_code=400, detail="execute_trade benötigt symbol, direction, lots")
+        # Track cmd_id -> bot_id for error forwarding (C3)
+        if requesting_bot_id:
+            with _cmd_to_bot_lock:
+                _cmd_to_bot_id[cmd_id] = requesting_bot_id
         evt = threading.Event()
         with _trade_lock:
             _trade_events[cmd_id] = evt
-        _command_queue.put({"command": command, "id": cmd_id, "payload": payload})
+        _command_queue.put({"command": command, "id": cmd_id, "payload": payload, "bot_id": requesting_bot_id})
         ok = await asyncio.to_thread(evt.wait, 10)
         with _trade_lock:
             result = _trade_results.pop(cmd_id, {"success": False, "error": "Kein Ergebnis"})
             _trade_events.pop(cmd_id, None)
+        with _cmd_to_bot_lock:
+            _cmd_to_bot_id.pop(cmd_id, None)
         if not ok:
             return JSONResponse({"success": False, "error": "Timeout - MT5 hat nicht geantwortet"}, status_code=504)
+        # C3: Forward MT5 error immediately to the originating bot
+        if not result.get("success") and result.get("error") and requesting_bot_id:
+            asyncio.create_task(_forward_mt5_error_to_bot(requesting_bot_id, result["error"]))
         return {"ok": True, **result}
 
     _command_queue.put({"command": command, "id": cmd_id})

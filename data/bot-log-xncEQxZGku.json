@@ -1,5 +1,41 @@
 [
   {
+    "id": "2eb6534908",
+    "timestamp": "2026-06-07T09:59:43.923105+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "DYeh_KdE8E",
+    "timestamp": "2026-06-07T09:59:43.916Z",
+    "level": "info",
+    "message": "0 neue, 1 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "xncEQxZGku",
+    "botName": "MT5 Test Bridge"
+  },
+  {
+    "id": "1996a4a6e6",
+    "timestamp": "2026-06-07T09:59:40.864241+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "70036d9466",
+    "timestamp": "2026-06-07T09:59:31.911122+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
     "id": "fa1200925f",
     "timestamp": "2026-06-05T19:22:15.030451+00:00",
     "level": "info",

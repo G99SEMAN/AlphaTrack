@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Bot, Trash2, TrendingUp, Search } from 'lucide-react'
+import { Bot, Trash2, TrendingUp, Search, Edit2, Check, X } from 'lucide-react'
 import { BotWithStatus } from '@/types/bot'
 import { Profile } from '@/types/profile'
 import WatchdogPanel from '@/components/bridge/WatchdogPanel'
@@ -29,6 +29,9 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
 
   const [selectedBotId, setSelectedBotId] = useState<string | null>(filterBridge(initial)[0]?.bot.id ?? null)
   const [showDiscover, setShowDiscover] = useState(false)
+  const [editingName, setEditingName] = useState(false)
+  const [nameInput, setNameInput] = useState('')
+  const [savingName, setSavingName] = useState(false)
 
   // Auto-select first bot if selected one no longer exists
   useEffect(() => {
@@ -41,6 +44,29 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
     if (!confirm('Bot wirklich entfernen?')) return
     await fetch(`/api/bots/${id}`, { method: 'DELETE' })
     refresh()
+  }
+
+  async function saveBridgeName(id: string) {
+    if (!nameInput.trim()) return
+    setSavingName(true)
+    try {
+      // Update in AlphaTrack database
+      await fetch(`/api/bots/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nameInput.trim() }),
+      })
+      // Update in bridge config via bridge API
+      await fetch('/api/bridge/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bridge_name: nameInput.trim() }),
+      })
+      setEditingName(false)
+      refresh()
+    } finally {
+      setSavingName(false)
+    }
   }
 
   const selected = bots.find(b => b.bot.id === selectedBotId)
@@ -128,15 +154,56 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
           {/* Ausgewählter Bot Details */}
           {selected && (
             <>
-              {selectedProfile && (
-                <p className="text-xs mb-4" style={{ color: 'var(--text-3)' }}>
-                  <TrendingUp size={11} className="inline mr-1" style={{ color: 'var(--text-3)' }} />
-                  Profil: <span style={{ color: 'var(--text-2)', fontWeight: 600 }}>{selectedProfile.name}</span>
-                  {' · '}{selectedProfile.broker} · {selectedProfile.currency}
-                  {' · '}{tradesByProfile[selectedProfile.id] ?? 0} Bot-Trades gespeichert
-                  {' · '}Bot-URL: <span className="font-mono">{selected.bot.url}</span>
-                </p>
-              )}
+              {/* Bridge-Identitaet: ID, Name (editierbar in AT), Verbindungs-URL */}
+              <div className="rounded-xl p-4 mb-4 flex flex-wrap items-center gap-4"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Bridge-ID</span>
+                  <span className="font-mono text-xs font-semibold" style={{ color: 'var(--text-2)' }}>{selected.bot.id}</span>
+                </div>
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Name</span>
+                  {editingName ? (
+                    <div className="flex items-center gap-1">
+                      <input
+                        className="text-xs rounded px-2 py-0.5 border"
+                        style={{ background: 'var(--bg)', borderColor: 'var(--border)', color: 'var(--text-1)' }}
+                        value={nameInput}
+                        onChange={e => setNameInput(e.target.value)}
+                        onKeyDown={e => { if (e.key === 'Enter') saveBridgeName(selected.bot.id); if (e.key === 'Escape') setEditingName(false) }}
+                        autoFocus
+                      />
+                      <button onClick={() => saveBridgeName(selected.bot.id)} disabled={savingName}
+                        className="p-0.5 rounded" style={{ color: 'var(--green)' }}>
+                        <Check size={14} />
+                      </button>
+                      <button onClick={() => setEditingName(false)}
+                        className="p-0.5 rounded" style={{ color: '#ef4444' }}>
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-semibold" style={{ color: 'var(--text-1)' }}>{selected.bot.name}</span>
+                      <button
+                        onClick={() => { setNameInput(selected.bot.name); setEditingName(true) }}
+                        className="opacity-40 hover:opacity-80" title="Name aendern (nur in AlphaTrack)">
+                        <Edit2 size={11} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {selectedProfile && (
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Profil</span>
+                    <span className="text-xs" style={{ color: 'var(--text-2)' }}>{selectedProfile.name} · {selectedProfile.broker}</span>
+                  </div>
+                )}
+                <div className="flex flex-col gap-0.5 min-w-0 ml-auto">
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Bridge-URL</span>
+                  <span className="font-mono text-[11px]" style={{ color: 'var(--text-3)' }}>{selected.bot.url}</span>
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <WatchdogPanel botId={selected.bot.id} botName={selected.bot.name} />

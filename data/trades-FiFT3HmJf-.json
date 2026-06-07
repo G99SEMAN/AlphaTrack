@@ -2487,12 +2487,14 @@
     "size": 0.01,
     "sl": null,
     "tp": null,
-    "pnl": -0.47,
-    "commission": 0,
+    "pnl": 7.45,
+    "commission": -0.05,
     "swap": 0,
-    "status": "open",
+    "status": "closed",
     "externalId": "pos_151900917",
-    "id": "8CmrzKi_So"
+    "id": "8CmrzKi_So",
+    "closeTime": "2026-06-05T20:44:07+00:00",
+    "exit": 1.15233
   },
   {
     "ticket": 151997262,

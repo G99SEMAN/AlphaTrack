@@ -9,7 +9,7 @@ import sys
 import time
 
 from bridge_client import BridgeClient
-from local_log import LocalLog
+from bot_log import BotLog
 from strategy import on_tick
 from ws_client import BridgeWSClient
 
@@ -40,6 +40,9 @@ def main():
         api_key=config['api_key'],
         bot_name=config['bot_name'],
         bot_version=config.get('bot_version', '1.0.0'),
+        bot_id=config.get('bot_id', ''),
+        bot_type=config.get('bot_type', 'bot'),
+        bot_port=config.get('bot_port', 0),
     )
 
     print(f'[...] Verbinde mit Bridge via WebSocket: {config["bridge_url"]}')
@@ -50,9 +53,10 @@ def main():
     bot_id = ws_client.get_bot_id() or 'unknown'
     print(f'[OK] Bot registriert: {bot_id}')
 
-    local_log = LocalLog(bridge_id=bot_id, bridge_name=config['bot_name'])
+    local_log = BotLog(bot_id=bot_id, bot_name=config['bot_name'])
 
-    bridge = BridgeClient(config['bridge_url'], config['api_key'])
+    # Erstelle BridgeClient mit bot_id fuer C4-konformes Trade-Routing
+    bridge = BridgeClient(config['bridge_url'], config['api_key'], bot_id=bot_id)
 
     strat_cfg = config.get('strategy', {})
     symbol = strat_cfg.get('symbol', 'EURUSDp')

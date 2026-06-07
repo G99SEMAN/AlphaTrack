@@ -1,7 +1,8 @@
 """
-Terminal-UI fuer den AlphaTrack Bridge.
-Zeigt statischen Header (ID, Name, IP:Port, Latenz, Status-Felder, verbundene Bots)
-und scrollendes Bridge-Log darunter.
+Terminal-UI fuer den AI-Trading Bot.
+Zeigt statischen Header (ID, Name, IP:Port, Latenz, Status-Felder, offene Trades)
+und scrollendes Bot-Log darunter.
+Schreibt ausschliesslich bot-relevante Informationen — keine Bridge-internen Daten.
 Verwendet 'rich' fuer die Darstellung.
 """
 
@@ -22,74 +23,71 @@ MAX_LOG_LINES = 200
 _REFRESH_RATE = 2  # Hz
 
 
-class BridgeDisplay:
-    """Statischer Header + scrollendes Log fuer das Bridge-Terminal."""
+class BotDisplay:
+    """Statischer Header + scrollendes Log fuer das Bot-Terminal."""
 
-    def __init__(self, bridge_name: str = "AlphaTrack Bridge"):
-        self._bridge_name = bridge_name
+    def __init__(self, bot_name: str = "AI-Trading Bot"):
+        self._bot_name = bot_name
         self._start_time = time.time()
         self._lock = threading.Lock()
         self._log_lines: deque[tuple[str, str, str]] = deque(maxlen=MAX_LOG_LINES)
         self._console = Console()
         self._live: Live | None = None
 
-        # Identitaets-Felder (statischer Header, Spec 3.1 Bridge-Terminal)
-        self._bridge_id: str = ""
-        self._bridge_ip: str = ""
-        self._bridge_port: int = 0
-        self._latency_ms: int | None = None
+        # Identitaets-Felder (statischer Header, Spec 3.1 Bot-Terminal)
+        self._bot_id: str = ""
+        self._bot_ip: str = ""
+        self._bot_port: int = 0
+        self._latency_ms: float | None = None
 
         # Verbindungs-Status
-        self._mt5_ok: bool = False
         self._at_ok: bool = False
+        self._bridge_ok: bool = False
         self._at_ping_ms: int | None = None
-        self._bridge_state: str = "starting"
+        self._bridge_ping_ms: int | None = None
+        self._bot_state: str = "starting"
 
-        # MT5-Daten
-        self._balance: float | None = None
-        self._currency: str = "USD"
-
-        # Verbundene Bots (Liste fuer Bridge-Terminal)
-        self._connected_bots: list[str] = []
+        # Bot-spezifische Daten
+        self._open_trades: int = 0
 
     # ── Oeffentliche Update-Methoden ─────────────────────────────────────
 
     def set_identity(
         self,
-        bridge_id: str,
-        bridge_ip: str,
-        bridge_port: int,
+        bot_id: str,
+        bot_ip: str,
+        bot_port: int,
+        latency_ms: float | None = None,
     ) -> None:
-        """Setzt die statischen Identitaets-Felder der Bridge (einmalig beim Start)."""
+        """Setzt die statischen Identitaets-Felder des Bots (nach Registrierung)."""
         with self._lock:
-            self._bridge_id = bridge_id
-            self._bridge_ip = bridge_ip
-            self._bridge_port = bridge_port
+            self._bot_id = bot_id
+            self._bot_ip = bot_ip
+            self._bot_port = bot_port
+            if latency_ms is not None:
+                self._latency_ms = latency_ms
 
     def update_status(
         self,
-        mt5_ok: bool,
         at_ok: bool,
-        at_ping_ms: int | None,
-        balance: float | None,
-        currency: str,
-        open_positions: int,
-        bridge_state: str,
-        connected_bots: list[str] | None = None,
+        bridge_ok: bool,
+        bot_state: str,
+        open_trades: int,
+        at_ping_ms: int | None = None,
+        bridge_ping_ms: int | None = None,
     ) -> None:
         with self._lock:
-            self._mt5_ok = mt5_ok
             self._at_ok = at_ok
-            self._at_ping_ms = at_ping_ms
-            self._balance = balance
-            self._currency = currency
-            self._bridge_state = bridge_state
-            if connected_bots is not None:
-                self._connected_bots = connected_bots
-            self._latency_ms = at_ping_ms  # Latenz zur AlphaTrack-Instanz
+            self._bridge_ok = bridge_ok
+            self._bot_state = bot_state
+            self._open_trades = open_trades
+            if at_ping_ms is not None:
+                self._at_ping_ms = at_ping_ms
+            if bridge_ping_ms is not None:
+                self._bridge_ping_ms = bridge_ping_ms
 
     def log(self, level: str, tag: str, message: str) -> None:
-        """Fuegt eine Bridge-Log-Zeile hinzu. level: 'info'|'warn'|'error'|'ok'"""
+        """Fuegt eine Bot-Log-Zeile hinzu. Nur bot-relevante Ereignisse."""
         ts = datetime.now().strftime("%H:%M:%S")
         with self._lock:
             self._log_lines.append((ts, f"[{tag}]", message))
@@ -109,15 +107,15 @@ class BridgeDisplay:
 
         id_text = Text()
         id_text.append("ID  ", style="dim")
-        id_text.append(self._bridge_id or "—", style="bold cyan")
+        id_text.append(self._bot_id or "—", style="bold cyan")
 
         name_text = Text()
         name_text.append("Name  ", style="dim")
-        name_text.append(self._bridge_name, style="bold white")
+        name_text.append(self._bot_name, style="bold white")
 
         addr_text = Text()
         addr_text.append("IP:Port  ", style="dim")
-        addr = f"{self._bridge_ip}:{self._bridge_port}" if self._bridge_ip else "—"
+        addr = f"{self._bot_ip}:{self._bot_port}" if self._bot_ip else "—"
         addr_text.append(addr, style="white")
 
         lat_text = Text()
@@ -129,12 +127,11 @@ class BridgeDisplay:
         return table
 
     def _render_status_row(self) -> Table:
-        """Zweite Header-Zeile: AlphaTrack-Status | MT5-Status | MT5-Balance | Bots-Liste"""
+        """Zweite Header-Zeile: AlphaTrack-Status | Bridge-Status | Offene Trades"""
         table = Table(box=box.SIMPLE_HEAD, show_header=False, padding=(0, 2), expand=True)
         table.add_column(justify="center", ratio=1)
         table.add_column(justify="center", ratio=1)
         table.add_column(justify="center", ratio=1)
-        table.add_column(justify="left", ratio=2)
 
         # AlphaTrack-Verbindungsstatus
         ping_str = f" ({self._at_ping_ms}ms)" if self._at_ping_ms is not None else ""
@@ -146,38 +143,34 @@ class BridgeDisplay:
         else:
             at_text.append("● ", style="bold red")
             at_text.append("AlphaTrack\n", style="red")
-            at_text.append("Getrennt", style="dim")
+            at_text.append("Nicht erreichbar", style="dim")
 
-        # MT5-Verbindungsstatus
-        mt5_text = Text()
-        if self._mt5_ok:
-            mt5_text.append("● ", style="bold green")
-            mt5_text.append("MetaTrader 5\n", style="green")
-            mt5_text.append("Verbunden", style="dim")
+        # Bridge-Verbindungsstatus
+        bridge_ping_str = f" ({self._bridge_ping_ms}ms)" if self._bridge_ping_ms is not None else ""
+        bridge_text = Text()
+        if self._bridge_ok:
+            bridge_text.append("● ", style="bold green")
+            bridge_text.append(f"Bridge{bridge_ping_str}\n", style="green")
+            bridge_text.append("Verbunden", style="dim")
         else:
-            mt5_text.append("● ", style="bold red")
-            mt5_text.append("MetaTrader 5\n", style="red")
-            mt5_text.append("Getrennt", style="dim")
+            bridge_text.append("● ", style="bold red")
+            bridge_text.append("Bridge\n", style="red")
+            bridge_text.append("Nicht erreichbar", style="dim")
 
-        # MT5-Balance
-        bal_text = Text()
-        if self._balance is not None:
-            bal_str = f"{self._balance:,.2f} {self._currency}".replace(",", ".")
-            bal_text.append(bal_str + "\n", style="bold white")
-            bal_text.append("MT5-Balance", style="dim")
-        else:
-            bal_text.append("—\n", style="dim")
-            bal_text.append("MT5-Balance", style="dim")
+        # Offene Trades dieses Bots
+        state_colors = {
+            "running": "bold green",
+            "paused": "yellow",
+            "stopped": "red",
+            "error": "bold red",
+            "starting": "dim",
+        }
+        state_style = state_colors.get(self._bot_state, "white")
+        trades_text = Text()
+        trades_text.append(f"{self._open_trades} offene Trades\n", style="bold white")
+        trades_text.append(f"Status: {self._bot_state}", style=state_style)
 
-        # Verbundene Bots
-        bots_text = Text()
-        bots_text.append("Verbundene Bots\n", style="dim")
-        if self._connected_bots:
-            bots_text.append(", ".join(self._connected_bots), style="cyan")
-        else:
-            bots_text.append("(keine)", style="dim")
-
-        table.add_row(at_text, mt5_text, bal_text, bots_text)
+        table.add_row(at_text, bridge_text, trades_text)
         return table
 
     def _render_log_panel(self, height: int) -> Panel:
@@ -194,16 +187,14 @@ class BridgeDisplay:
                 tag_color = "yellow"
             elif "ERR" in tag:
                 tag_color = "red"
-            elif "SYNC" in tag or "OK" in tag:
+            elif "OK" in tag:
                 tag_color = "green"
-            elif "CMD" in tag:
-                tag_color = "magenta"
-            text.append(f"{tag:<8}", style=tag_color)
+            text.append(f"{tag:<10}", style=tag_color)
             text.append(f"  {msg}\n")
 
         return Panel(
             text,
-            title="[dim]Bridge-Log[/dim]",
+            title="[dim]Bot-Log[/dim]",
             border_style="dim",
             padding=(0, 1),
         )
@@ -241,9 +232,9 @@ class BridgeDisplay:
                     layout["id_row"].update(
                         Panel(
                             self._render_identity_row(),
-                            title=f"[bold blue] {self._bridge_name} [/bold blue] [dim]Bridge[/dim]",
-                            subtitle=f"[dim]Uptime: {self._uptime_str()} | Status: {self._bridge_state}[/dim]",
-                            border_style="blue",
+                            title=f"[bold green] {self._bot_name} [/bold green] [dim]Bot[/dim]",
+                            subtitle=f"[dim]Uptime: {self._uptime_str()} | Status: {self._bot_state}[/dim]",
+                            border_style="green",
                             padding=(0, 1),
                         )
                     )
@@ -260,7 +251,7 @@ class BridgeDisplay:
                     pass
                 time.sleep(1.0 / _REFRESH_RATE)
 
-        t = threading.Thread(target=_render_loop, daemon=True, name="BridgeDisplayRenderer")
+        t = threading.Thread(target=_render_loop, daemon=True, name="BotDisplayRenderer")
         t.start()
 
     def stop(self) -> None:

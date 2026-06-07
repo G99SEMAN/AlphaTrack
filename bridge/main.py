@@ -1,5 +1,5 @@
 """
-AlphaTrack Python Bot - Hauptprogramm
+AlphaTrack Bridge - Hauptprogramm
 Laeuft auf dem Mini PC, verbindet sich mit MetaTrader 5 und sendet
 Daten an die AlphaTrack Webapp im Heimnetz.
 """
@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bot_names
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -176,8 +176,8 @@ def main():
         print("[FEHLER] mt5_password in config.json noch nicht gesetzt!")
         sys.exit(1)
 
-    display = BridgeDisplay(bridge_name=config.get("bridge_name", "AlphaTrack Bot"))
-    display.log("info", "BOT", f"Starte {config.get('bridge_name', 'AlphaTrack Bot')} ...")
+    display = BridgeDisplay(bridge_name=config.get("bridge_name", "AlphaTrack Bridge"))
+    display.log("info", "BRIDGE", f"Starte {config.get('bridge_name', 'AlphaTrack Bridge')} ...")
 
     # ── Auto-Discovery: AlphaTrack im Netzwerk finden ────────────────
     if not config.get("alphatrack_url"):
@@ -215,8 +215,21 @@ def main():
                     save_config(config)
                     display.log("ok", "DISC", f"Neue AlphaTrack-URL gespeichert: {found}")
 
+    # Populate bridge identity fields at startup
+    local_ip = get_local_ip()
+    config["bridge_ip"] = local_ip
+    if not config.get("bridge_type"):
+        config["bridge_type"] = "bridge"
+
     # Auto-Registrierung bei AlphaTrack
     config = auto_register(config, display)
+
+    # Set bridge identity in terminal display after registration (so bridge_id is available)
+    display.set_identity(
+        bridge_id=config.get("bridge_id", ""),
+        bridge_ip=local_ip,
+        bridge_port=config.get("command_server_port", 8765),
+    )
 
     # Lokales Log initialisieren, Live-Push konfigurieren, mit AlphaTrack synchronisieren
     local_log = LocalLog(bridge_id=config["bridge_id"], bridge_name=config.get("bridge_name", "Bridge"))
@@ -273,14 +286,14 @@ def main():
 
     def shutdown(sig, frame):
         nonlocal running
-        display.log("info", "BOT", "Shutdown ...")
+        display.log("info", "BRIDGE", "Shutdown ...")
         running = False
 
     signal.signal(signal.SIGINT, shutdown)
     signal.signal(signal.SIGTERM, shutdown)
 
-    display.log("ok", "BOT", f"Laeuft | AlphaTrack: {config['alphatrack_url']}")
-    display.log("info", "BOT", f"Heartbeat {config['heartbeat_interval_sec']}s | Sync {config['trade_sync_interval_sec']}s | Strg+C zum Beenden")
+    display.log("ok", "BRIDGE", f"Laeuft | AlphaTrack: {config['alphatrack_url']}")
+    display.log("info", "BRIDGE", f"Heartbeat {config['heartbeat_interval_sec']}s | Sync {config['trade_sync_interval_sec']}s | Strg+C zum Beenden")
     display.start()
 
     while running:
@@ -298,6 +311,7 @@ def main():
                     mt5_ok=False, at_ok=at_ok, at_ping_ms=at_ping_ms,
                     balance=state.get("balance"), currency=state.get("currency") or "USD",
                     open_positions=0, bridge_state="error",
+                    connected_bots=get_connected_bot_names(),
                 )
                 recovered = attempt_mt5_restart(config, mt5, display)
                 if recovered:
@@ -308,7 +322,7 @@ def main():
                     set_account_fetcher(mt5.get_account_info)
                 else:
                     display.log("error", "MT5", "*** CRITICAL ERROR *** MT5 konnte nicht neu gestartet werden!")
-                    display.log("error", "MT5", "Alle Neustart-Versuche fehlgeschlagen - Bot wird gestoppt.")
+                    display.log("error", "MT5", "Alle Neustart-Versuche fehlgeschlagen - Bridge wird gestoppt.")
                     local_log.add("error", "MT5-Neustart fehlgeschlagen", "Alle Versuche erschöpft - Bridge wird gestoppt")
                     state["state"] = "error"
                     global _emergency_shutdown
@@ -335,18 +349,18 @@ def main():
             command = cmd["command"]
             if command == "stop":
                 state["state"] = "stopped"
-                display.log("warn", "CMD", "Bot gestoppt via Command")
+                display.log("warn", "CMD", "Bridge gestoppt via Command")
                 local_log.add("warn", "Bridge gestoppt via Command")
             elif command == "pause":
                 state["state"] = "paused"
-                display.log("warn", "CMD", "Bot pausiert via Command")
+                display.log("warn", "CMD", "Bridge pausiert via Command")
                 local_log.add("warn", "Bridge pausiert via Command")
             elif command in ("start", "resume"):
                 state["state"] = "running"
-                display.log("ok", "CMD", "Bot gestartet/fortgesetzt via Command")
+                display.log("ok", "CMD", "Bridge gestartet/fortgesetzt via Command")
                 local_log.add("info", "Bridge gestartet/fortgesetzt via Command")
             elif command == "restart":
-                display.log("warn", "CMD", "Neustart angefordert - beende Bridge ...")
+                display.log("warn", "CMD", "Bridge-Neustart angefordert - beende Bridge ...")
                 local_log.add("warn", "Bridge-Neustart angefordert")
                 _restart_requested = True
                 running = False
@@ -440,7 +454,7 @@ def main():
             else:
                 last_sync = now
 
-        # Display-Status aktualisieren
+        # Display-Status aktualisieren (inkl. verbundene Bots-Liste)
         display.update_status(
             mt5_ok=state["mt5_connected"],
             at_ok=at_ok,
@@ -449,6 +463,7 @@ def main():
             currency=state.get("currency") or "USD",
             open_positions=state["open_positions"],
             bridge_state=state["state"],
+            connected_bots=get_connected_bot_names(),
         )
 
         time.sleep(1)
@@ -463,7 +478,7 @@ def main():
     send_heartbeat(config, state, display)
     mt5.disconnect()
     display.stop()
-    display.log("info", "BOT", "Beendet")
+    display.log("info", "BRIDGE", "Beendet")
 
 
 if __name__ == "__main__":

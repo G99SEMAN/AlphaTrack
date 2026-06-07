@@ -207,6 +207,51 @@ export function pruneOldCommands(botId: string): void {
   saveBotCommands(botId, fresh)
 }
 
+// --- Bot Log (bot-spezifische Ereignisse, getrennt von Bridge-Log, C2) ---
+
+function botLogPath(botId: string) { return path.join(DATA_DIR, `bot-events-${botId}.json`) }
+
+export function getBotLog(botId: string): BridgeLogEntry[] {
+  return readJson<BridgeLogEntry[]>(botLogPath(botId), [])
+}
+
+export function addBotLogEntry(
+  botId: string,
+  level: BridgeLogEntry['level'],
+  message: string,
+  details?: string,
+  botName?: string,
+): void {
+  const resolvedName = botName ?? getBotById(botId)?.name
+  const entry: BridgeLogEntry = {
+    id: nanoid(10),
+    timestamp: new Date().toISOString(),
+    level,
+    message,
+    details,
+    botId,
+    botName: resolvedName,
+  }
+  const log = getBotLog(botId)
+  const trimmed = [entry, ...log].slice(0, BOT_MAX_LOG_ENTRIES)
+  atomicWrite(botLogPath(botId), JSON.stringify(trimmed, null, 2))
+}
+
+export function clearBotLog(botId: string): void {
+  atomicWrite(botLogPath(botId), JSON.stringify([], null, 2))
+}
+
+export function bulkAddBotLogEntries(botId: string, entries: BridgeLogEntry[]): void {
+  const existing = getBotLog(botId)
+  const existingKeys = new Set(existing.map(e => `${e.timestamp}__${e.level}__${e.message}`))
+  const fresh = entries.filter(e => e.timestamp && !existingKeys.has(`${e.timestamp}__${e.level}__${e.message}`))
+  if (fresh.length === 0) return
+  const merged = [...fresh, ...existing]
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .slice(0, BOT_MAX_LOG_ENTRIES)
+  atomicWrite(botLogPath(botId), JSON.stringify(merged, null, 2))
+}
+
 // --- Bridge Log ---
 
 export function getBridgeLog(botId: string): BridgeLogEntry[] {

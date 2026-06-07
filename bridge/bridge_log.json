@@ -1,5 +1,104 @@
 [
   {
+    "id": "a5bd5995fe",
+    "timestamp": "2026-06-07T10:18:03.848045+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "8224dd4fe4",
+    "timestamp": "2026-06-07T10:17:50.653932+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d3044a91a4",
+    "timestamp": "2026-06-07T10:17:41.520014+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "58437d1a23",
+    "timestamp": "2026-06-07T10:17:28.324525+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a1e6fb1c03",
+    "timestamp": "2026-06-07T10:17:19.171131+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a72e259372",
+    "timestamp": "2026-06-07T10:17:05.964689+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "d05a4a45ee",
+    "timestamp": "2026-06-07T10:16:56.792611+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "a5fa29fb84",
+    "timestamp": "2026-06-07T10:16:43.540162+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "2eb6534908",
+    "timestamp": "2026-06-07T09:59:43.923105+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "1996a4a6e6",
+    "timestamp": "2026-06-07T09:59:40.864241+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
+    "id": "70036d9466",
+    "timestamp": "2026-06-07T09:59:31.911122+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000",
+    "bridgeId": "xncEQxZGku",
+    "bridgeName": "MT5 Test Bridge"
+  },
+  {
     "id": "1a964fc722",
     "timestamp": "2026-06-05T20:35:11.582696+00:00",
     "level": "warn",
