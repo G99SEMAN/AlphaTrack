@@ -73,24 +73,27 @@ def main():
         print("[FEHLER] Keine Daten erhalten — Bridge laufend?")
         sys.exit(1)
 
+    # Bridge liefert neueste Kerze zuerst → aufsteigend sortieren (älteste zuerst)
+    candles.sort(key=lambda c: c['datetime'])
+
     print(f"[OK] {len(candles)} Kerzen: {candles[0]['datetime']} bis {candles[-1]['datetime']}")
+    print(f"[INFO] Bridge-Limit: {len(candles)} Kerzen (max verfügbar)")
 
-    # Train/Val Split
+    # Train/Val Split: erste 80% = Train (ältere Daten), letzte 20% = Val (neuere Daten)
     if args.cutoff:
-        cutoff = args.cutoff
+        train = [c for c in candles if c['datetime'][:10] < args.cutoff]
+        val   = [c for c in candles if c['datetime'][:10] >= args.cutoff]
+        print(f"[SPLIT] Cutoff: {args.cutoff} (manuell)")
     else:
-        # Letzten 20% als Val, Rest als Train
         cutoff_idx = int(len(candles) * 0.80)
-        cutoff = candles[cutoff_idx]['datetime'][:10]
-    print(f"[SPLIT] Cutoff: {cutoff} — alles davor = Train, danach = Val")
-
-    train = [c for c in candles if c['datetime'][:10] < cutoff]
-    val   = [c for c in candles if c['datetime'][:10] >= cutoff]
+        train = candles[:cutoff_idx]
+        val   = candles[cutoff_idx:]
+        print(f"[SPLIT] 80/20 Split bei Index {cutoff_idx} ({train[-1]['datetime'][:10] if train else '?'})")
 
     print(f"[SPLIT] Train: {len(train)} Kerzen | Val: {len(val)} Kerzen")
 
-    if len(train) < 500:
-        print("[WARN] Zu wenig Train-Daten — mehr Kerzen anfordern (--count)")
+    if len(train) < 1200:
+        print("[WARN] Zu wenig Train-Daten (min. 1200 für H1-Bias-Erkennung). Bridge limitiert auf 5000 Kerzen.")
 
     train_path = os.path.join(DATA_DIR, 'ndaq_m1_train.csv')
     val_path   = os.path.join(DATA_DIR, 'ndaq_m1_val.csv')
