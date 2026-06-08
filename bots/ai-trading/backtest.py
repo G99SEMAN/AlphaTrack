@@ -104,7 +104,7 @@ def _sharpe(trades: list) -> float:
     std = math.sqrt(var) if var > 0 else 0.0
     if std == 0:
         return 0.0
-    return (mean / std) * math.sqrt(78 * 252)
+    return (mean / std) * math.sqrt(288 * 252)
 
 
 def _evaluate(candles: list, config: dict, label: str) -> dict:

@@ -24,6 +24,7 @@ _EDITABLE_FIELDS = {
 
 config_lock = threading.Lock()
 _trade_lock = threading.Lock()
+_positions_lock = threading.Lock()
 
 _command_queue: queue.Queue = queue.Queue()
 _trade_results: dict = {}
@@ -70,7 +71,8 @@ def _load_config() -> dict:
 
 def update_positions_cache(positions: list):
     global _positions_cache
-    _positions_cache = positions
+    with _positions_lock:
+        _positions_cache = positions
 
 
 def set_candles_fetcher(func):
@@ -410,7 +412,9 @@ async def get_candles(
 
 @app.get("/positions")
 async def get_positions():
-    return {"positions": _positions_cache}
+    with _positions_lock:
+        positions = list(_positions_cache)
+    return {"positions": positions}
 
 
 @app.get("/account")

@@ -63,11 +63,6 @@ def _save_experiment(num: int, data: dict):
         json.dump(data, f, indent=2, default=str)
 
 
-def _best_sharpe() -> float:
-    history = _load_history(200)
-    kept = [e.get('sharpe', -999.0) for e in history if e.get('kept')]
-    return max(kept, default=-999.0)
-
 
 def _clean_code(text: str) -> str:
     """Extrahiert Python-Code — entfernt Markdown-Fences und vorangestellten Prosa-Text."""
@@ -90,6 +85,7 @@ def _clean_code(text: str) -> str:
 
 def _is_valid_python(code: str) -> tuple:
     """Prüft Python-Syntax vor dem Schreiben. Gibt (True, '') oder (False, Fehler) zurück."""
+    fname = None
     try:
         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False,
                                          encoding='utf-8') as f:
@@ -100,10 +96,11 @@ def _is_valid_python(code: str) -> tuple:
     except py_compile.PyCompileError as e:
         return False, str(e)
     finally:
-        try:
-            os.unlink(fname)
-        except Exception:
-            pass
+        if fname:
+            try:
+                os.unlink(fname)
+            except Exception:
+                pass
 
 
 def _ask_claude(strategy_code: str, history: list, current_best: float, program: str) -> str:
