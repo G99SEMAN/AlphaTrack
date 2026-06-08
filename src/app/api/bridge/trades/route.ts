@@ -123,16 +123,20 @@ export async function POST(req: NextRequest) {
   }
 
   const total = newTrades.length + updatedCount
+  const bridgeTradesFinal = [...merged, ...newTrades]
+
   if (total > 0) {
-    const bridgeTradesFinal = [...merged, ...newTrades]
     saveBotTrades(profileId, bridgeTradesFinal)
-    const profileChanged = syncBridgeTradesToProfile(profileId, bridgeTradesFinal)
-    if (profileChanged) {
-      revalidatePath('/dashboard')
-      revalidatePath('/journal')
-      revalidatePath('/statistiken')
-    }
     addBridgeLogEntry(bridgeId, 'info', `${newTrades.length} neue, ${updatedCount} aktualisierte Trade(s)`, `Profil: ${profileId}`)
+  }
+
+  // Immer reconcile: Falls bot-trades bereits 'closed' aber profile-trades noch 'open',
+  // würde total=0 und der Abgleich nie stattfinden → dauerhaft falsche Anzeige.
+  const profileChanged = syncBridgeTradesToProfile(profileId, bridgeTradesFinal)
+  if (profileChanged) {
+    revalidatePath('/dashboard')
+    revalidatePath('/journal')
+    revalidatePath('/statistiken')
   }
 
   return NextResponse.json({ ok: true, synced: total })
