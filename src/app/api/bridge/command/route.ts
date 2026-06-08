@@ -69,9 +69,14 @@ export async function POST(req: NextRequest) {
       signal: AbortSignal.timeout(12000),
     })
 
-    if ((command === 'execute_trade' || command === 'close_position') && flaskRes.ok) {
-      const result = await flaskRes.json()
-      return NextResponse.json({ ok: true, delivered: true, commandId: entry.id, result })
+    if (command === 'execute_trade' || command === 'close_position') {
+      if (flaskRes.ok) {
+        const result = await flaskRes.json()
+        return NextResponse.json({ ok: true, delivered: true, commandId: entry.id, result })
+      }
+      const errBody = await flaskRes.json().catch(() => ({})) as { error?: string }
+      addBridgeLogEntry(bridgeId, 'error', `Command fehlgeschlagen: ${command}`, errBody.error ?? `HTTP ${flaskRes.status}`)
+      return NextResponse.json({ ok: false, error: errBody.error ?? 'Bridge returned error' }, { status: 502 })
     }
   } catch {
     addBridgeLogEntry(bridgeId, 'warn', `Bridge nicht direkt erreichbar - Command in Queue`, bridge.url)

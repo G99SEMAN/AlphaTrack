@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { getBotTrades, saveBotTrades, addBridgeLogEntry, getBotById } from '@/lib/bot-data'
+import { getBotTrades, saveBotTrades, addBridgeLogEntry, getBotById, getBots } from '@/lib/bot-data'
 import { getProfileTrades, saveProfileTrades, getProfiles } from '@/lib/profiles'
 import { Trade } from '@/types/trade'
 import { nanoid } from 'nanoid'
@@ -70,13 +70,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Zu viele Trades (max. 1000 pro Request)' }, { status: 400 })
   }
 
+  let resolvedBridgeId = bridgeId
   if (!getBotById(bridgeId)) {
-    return NextResponse.json({ error: 'Unknown bridgeId' }, { status: 404 })
+    const byUrl = getBots().find(b => b.url.includes(`/bot/${bridgeId}`))
+    if (byUrl) {
+      resolvedBridgeId = byUrl.id
+    } else {
+      return NextResponse.json({ error: 'Unknown bridgeId' }, { status: 404 })
+    }
   }
 
   const profiles = getProfiles()
   if (!profiles.find(p => p.id === profileId)) {
-    addBridgeLogEntry(bridgeId, 'warn', `Profil-ID nicht gefunden: ${profileId}`, 'Bitte Bridge-Profil in den Einstellungen korrigieren')
+    addBridgeLogEntry(resolvedBridgeId, 'warn', `Profil-ID nicht gefunden: ${profileId}`, 'Bitte Bridge-Profil in den Einstellungen korrigieren')
     return NextResponse.json({ error: `Unbekannte profileId: ${profileId}. Profil in Bridge-Einstellungen korrigieren.` }, { status: 422 })
   }
 
@@ -127,7 +133,7 @@ export async function POST(req: NextRequest) {
 
   if (total > 0) {
     saveBotTrades(profileId, bridgeTradesFinal)
-    addBridgeLogEntry(bridgeId, 'info', `${newTrades.length} neue, ${updatedCount} aktualisierte Trade(s)`, `Profil: ${profileId}`)
+    addBridgeLogEntry(resolvedBridgeId, 'info', `${newTrades.length} neue, ${updatedCount} aktualisierte Trade(s)`, `Profil: ${profileId}`)
   }
 
   // Immer reconcile: Falls bot-trades bereits 'closed' aber profile-trades noch 'open',
