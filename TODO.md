@@ -1,2 +1,2 @@
-- Trading Kalender
+- Trading Perfomance Calender
     - ein kalender (monatsansicht) welcher jeden tag anzeigt wieviel profite oder verluste man ich mit allen bots gemacht habe
