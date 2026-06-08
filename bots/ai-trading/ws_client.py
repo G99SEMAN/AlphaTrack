@@ -1,5 +1,5 @@
 """
-WebSocket Client für die AlphaTrack Bridge (AGP/1 Protokoll).
+WebSocket Client fuer die AlphaTrack Bridge (AGPv2 Protokoll).
 """
 import json
 import logging
@@ -7,6 +7,8 @@ import queue
 import socket
 import threading
 import time
+from datetime import datetime, timezone
+import uuid as _uuid_mod
 
 import websocket
 
@@ -22,6 +24,16 @@ def _get_local_ip() -> str:
         return ip
     except Exception:
         return "127.0.0.1"
+
+
+def _agp2_wrap(msg_type: str, payload: dict) -> dict:
+    return {
+        "agp": "2.0",
+        "type": msg_type,
+        "id": str(_uuid_mod.uuid4()),
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "payload": payload,
+    }
 
 
 class BridgeWSClient:
@@ -66,15 +78,14 @@ class BridgeWSClient:
 
                 local_ip = _get_local_ip()
                 t_reg_start = time.time()
-                ws.send(json.dumps({
-                    "type": "register",
+                ws.send(json.dumps(_agp2_wrap("register", {
                     "id": self._bot_id_static,
                     "name": self._name,
                     "version": self._version,
                     "component_type": self._bot_type,
                     "ip": local_ip,
                     "port": self._bot_port,
-                }))
+                })))
 
                 while not self._stop_event.is_set():
                     try:
@@ -92,15 +103,25 @@ class BridgeWSClient:
                     except json.JSONDecodeError:
                         continue
 
-                    msg_type = msg.get("type")
+                    _is_agpv2 = msg.get("agp") == "2.0"
+                    if _is_agpv2:
+                        msg_type = msg.get("type", "")
+                        inner = msg.get("payload", {})
+                        effective = {**msg, **(inner if isinstance(inner, dict) else {})}
+                    else:
+                        msg_type = msg.get("type", "")
+                        effective = msg
+
                     if msg_type == "registered":
-                        self._bot_id = msg.get("bot_id")
+                        self._bot_id = effective.get("bot_id")
                         self._latency_ms = round((time.time() - t_reg_start) * 1000, 1)
                         self._registered_event.set()
                     elif msg_type == "command":
-                        self._cmd_queue.put({"command": msg.get("command"),
-                                             "cmd_id": msg.get("cmd_id", ""),
-                                             "payload": msg.get("payload")})
+                        self._cmd_queue.put({
+                            "command": effective.get("command"),
+                            "cmd_id": effective.get("cmd_id", ""),
+                            "payload": effective.get("payload"),
+                        })
                     elif msg_type == "ping":
                         self._send({"type": "pong"})
 
@@ -133,25 +154,29 @@ class BridgeWSClient:
         return self._bot_id
 
     def get_latency_ms(self) -> float | None:
-        """Returns the round-trip latency to the Bridge measured at registration, in ms."""
         return self._latency_ms
 
     def send_heartbeat(self, state: str, open_positions: int, active_symbols: list,
                        trades_sync: int, uptime: int,
                        balance: float | None, currency: str | None) -> None:
-        msg: dict = {"type": "heartbeat", "state": state, "open_positions": open_positions,
-                     "active_symbols": active_symbols, "trades_sync": trades_sync, "uptime": uptime}
+        payload: dict = {
+            "state": state,
+            "open_positions": open_positions,
+            "active_symbols": active_symbols,
+            "trades_sync": trades_sync,
+            "uptime": uptime,
+        }
         if balance is not None:
-            msg["balance"] = balance
+            payload["balance"] = balance
         if currency is not None:
-            msg["currency"] = currency
-        self._send(msg)
+            payload["currency"] = currency
+        self._send(_agp2_wrap("heartbeat", payload))
 
     def send_log(self, level: str, message: str, details: str | None = None) -> None:
-        msg: dict = {"type": "log", "level": level, "message": message}
+        payload: dict = {"level": level, "message": message}
         if details is not None:
-            msg["details"] = details
-        self._send(msg)
+            payload["details"] = details
+        self._send(_agp2_wrap("log", payload))
 
     def get_command(self) -> dict | None:
         try:
@@ -162,12 +187,12 @@ class BridgeWSClient:
     def send_trade_result(self, cmd_id: str, success: bool,
                           ticket: int | None = None, price: float | None = None,
                           error: str | None = None) -> None:
-        msg: dict = {"type": "trade_result", "cmd_id": cmd_id, "success": success, "error": error}
+        payload: dict = {"cmd_id": cmd_id, "success": success, "error": error}
         if ticket is not None:
-            msg["ticket"] = ticket
+            payload["ticket"] = ticket
         if price is not None:
-            msg["price"] = price
-        self._send(msg)
+            payload["price"] = price
+        self._send(_agp2_wrap("trade_result", payload))
 
     def disconnect(self) -> None:
         self._stop_event.set()

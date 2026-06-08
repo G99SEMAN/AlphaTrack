@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import {
-  SlidersHorizontal, Globe, KeyRound, User, Timer,
+  SlidersHorizontal, Globe, User, Timer,
   Monitor, Eye, EyeOff, Save, AlertTriangle, CheckCircle,
   WifiOff, RefreshCw, Hash, RotateCcw, Copy, Zap,
 } from 'lucide-react'
@@ -149,7 +149,7 @@ function SaveButton({ state, onClick }: { state: SaveState; onClick: () => void 
   )
 }
 
-export default function BridgeSettingsClient({ bots: allBots, profiles }: Props) {
+export default function BridgeSettingsClient({ bots: allBots, profiles: _profiles }: Props) {
   const bots = allBots.filter(b => !b.type || b.type === 'bridge')
   const [selectedBotId, setSelectedBotId] = useState<string>(bots[0]?.id ?? '')
   const [config, setConfig] = useState<BridgeConfig | null>(null)
@@ -168,7 +168,6 @@ export default function BridgeSettingsClient({ bots: allBots, profiles }: Props)
   }, [])
 
   const [saveState, setSaveState] = useState<Record<string, SaveState>>({
-    connection: 'idle',
     identity: 'idle',
     intervals: 'idle',
     mt5: 'idle',
@@ -347,19 +346,22 @@ export default function BridgeSettingsClient({ bots: allBots, profiles }: Props)
           {/* Bridge-Verbindung */}
           <Section title="Bridge-Verbindung" icon={Globe}>
             <Field label="AlphaTrack URL"
-              hint="URL der AlphaTrack-Webapp im Heimnetz">
-              <Input value={config.alphatrack_url} mono
-                onChange={v => set('alphatrack_url', v)} />
+              hint="Automatisch erkannt via UDP-Discovery">
+              <Input value={config.alphatrack_url} mono readOnly />
             </Field>
             <Field label="API-Key">
-              <Input value={config.api_key} mono
-                onChange={v => set('api_key', v)} />
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl font-mono text-xs"
+                style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-1)' }}>
+                <span className="flex-1 truncate">
+                  {showApiKey ? config.api_key : '••••••••••••••••'}
+                </span>
+                <button onClick={() => setShowApiKey(v => !v)}
+                  className="shrink-0 cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
+                  style={{ color: 'var(--text-3)' }}>
+                  {showApiKey ? <EyeOff size={12} /> : <Eye size={12} />}
+                </button>
+              </div>
             </Field>
-            <SaveButton state={saveState.connection}
-              onClick={() => save('connection', {
-                alphatrack_url: config.alphatrack_url,
-                api_key: config.api_key,
-              })} />
           </Section>
 
           {/* Bridge-Identität */}
@@ -368,29 +370,10 @@ export default function BridgeSettingsClient({ bots: allBots, profiles }: Props)
               <Input value={config.bridge_name}
                 onChange={v => set('bridge_name', v)} />
             </Field>
-            <Field label="Profil-ID"
-              hint="Trading-Profil dem diese Bridge zugeordnet ist">
-              <div className="flex gap-2">
-                <div className="flex-1">
-                  <Input value={config.profile_id} mono
-                    onChange={v => set('profile_id', v)} />
-                </div>
-                {profiles.length > 0 && (
-                  <div className="relative group">
-                    <select
-                      value={config.profile_id}
-                      onChange={e => set('profile_id', e.target.value)}
-                      className="px-3 py-2 rounded-xl text-xs outline-none cursor-pointer h-full"
-                      style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-2)' }}>
-                      {profiles.map(p => (
-                        <option key={p.id} value={p.id}>{p.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </div>
+            <Field label="Profil-ID" hint="Automatisch zugewiesen bei Registrierung">
+              <Input value={config.profile_id} mono readOnly />
             </Field>
-            <Field label="Bridge-ID" hint="Automatisch vergeben - leeren erzwingt Neu-Registrierung">
+            <Field label="Bridge-ID" hint="Automatisch vergeben — leeren erzwingt Neu-Registrierung">
               <div className="flex gap-2">
                 <div className="flex-1">
                   <Input value={config.bridge_id || '(nicht registriert)'} mono readOnly />
@@ -398,13 +381,9 @@ export default function BridgeSettingsClient({ bots: allBots, profiles }: Props)
                 {config.bridge_id && (
                   <button
                     onClick={() => set('bridge_id', '')}
-                    title="Bridge-ID leeren (Neu-Registrierung beim nächsten Start)"
+                    title="Bridge-ID leeren"
                     className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-all"
-                    style={{
-                      background: 'rgba(239,68,68,0.08)',
-                      border: '1px solid rgba(239,68,68,0.25)',
-                      color: '#ef4444',
-                    }}>
+                    style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', color: '#ef4444' }}>
                     <RotateCcw size={11} />Reset
                   </button>
                 )}
@@ -413,13 +392,12 @@ export default function BridgeSettingsClient({ bots: allBots, profiles }: Props)
             <SaveButton state={saveState.identity}
               onClick={() => save('identity', {
                 bridge_name: config.bridge_name,
-                profile_id: config.profile_id,
                 bridge_id: config.bridge_id,
               })} />
           </Section>
 
           {/* Intervalle & Ports */}
-          <Section title="Intervalle & Ports" icon={Timer} restartRequired>
+          <Section title="Intervalle & Ports" icon={Timer}>
             <div className="grid grid-cols-2 gap-4">
               <Field label="Heartbeat (Sek)"
                 hint="Wie oft die Bridge ihren Status sendet">

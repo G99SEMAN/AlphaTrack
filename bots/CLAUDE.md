@@ -1,43 +1,71 @@
 # AlphaTrack Bot Development Guide
 
-All trading bots in this directory communicate with AlphaTrack through the **AlphaTrack Gateway Protocol v1 (AGP/1)** via the FastAPI Bridge on port 8765. Bots do **not** connect directly to MT5 Terminal or AlphaTrack—all interactions flow through the Bridge.
+All trading bots in this directory communicate with AlphaTrack through the **AlphaTrack Gateway Protocol v2 (AGPv2)** via the FastAPI Bridge on port 8765. Bots do **not** connect directly to MT5 Terminal or AlphaTrack—all interactions flow through the Bridge.
 
 **Full protocol specification:** `../docs/BRIDGE_PROTOCOL.md`
 
 ---
 
-## Quick Protocol Reference
+## Quick Protocol Reference (AGPv2)
+
+All WebSocket messages use the AGPv2 envelope:
+```json
+{"agp": "2.0", "type": "...", "id": "uuid", "ts": "2026-01-01T00:00:00+00:00", "payload": {...}}
+```
 
 ### WebSocket Registration (First Message)
 ```json
-{"type": "register", "name": "Bot Name", "version": "1.0.0"}
+{
+  "agp": "2.0", "type": "register", "id": "uuid", "ts": "...",
+  "payload": {"name": "Bot Name", "version": "1.0.0", "component_type": "bot", "ip": "192.168.178.X", "port": 0}
+}
 ```
 
 ### Heartbeat (Every 10s)
 ```json
-{"type": "heartbeat", "state": "running", "open_positions": 0, "balance": 1000.0, "currency": "USD", "uptime": 120}
+{
+  "agp": "2.0", "type": "heartbeat", "id": "uuid", "ts": "...",
+  "payload": {"state": "running", "open_positions": 0, "balance": 1000.0, "currency": "USD", "uptime": 120, "active_symbols": [], "trades_sync": 0}
+}
 ```
 
 ### Commands (From Bridge)
 ```json
-{"type": "command", "cmd_id": "uuid", "command": "execute_trade", "payload": {"symbol": "EURUSDp", "direction": "buy", "lots": 0.01, "sl": 1.08, "tp": 1.09}}
-{"type": "command", "cmd_id": "uuid", "command": "close_position", "payload": {"ticket": 12345678}}
+{"agp": "2.0", "type": "command", "id": "uuid", "ts": "...", "payload": {"cmd_id": "uuid", "command": "execute_trade", "payload": {"symbol": "EURUSDp", "direction": "buy", "lots": 0.01, "sl": 1.08, "tp": 1.09}}}
+{"agp": "2.0", "type": "command", "id": "uuid", "ts": "...", "payload": {"cmd_id": "uuid", "command": "close_position", "payload": {"ticket": 12345678}}}
 ```
 
 ### Trade Result (Response)
 ```json
-{"type": "trade_result", "cmd_id": "uuid", "success": true, "ticket": 12345678, "price": 1.08500, "error": null}
+{
+  "agp": "2.0", "type": "trade_result", "id": "uuid", "ts": "...",
+  "payload": {"cmd_id": "uuid", "success": true, "ticket": 12345678, "price": 1.08500, "error": null}
+}
 ```
 
 ### HTTP Endpoints
 ```
+GET  /health              — AGPv2 health check (unauthenticated)
+GET  /info                — AGPv2 discovery info (unauthenticated)
 GET  /candles?symbol=EURUSDp&interval=M15&count=50
 GET  /positions
 GET  /account
-POST /command (alternative to WebSocket)
+GET  /config              — requires X-Bot-Api-Key
+POST /command             — alternative to WebSocket
 ```
 
-Authentication: `X-Bot-Api-Key: {api_key}` header on all HTTP requests.
+Authentication: `X-Bot-Api-Key: {api_key}` header on all authenticated HTTP requests.
+
+---
+
+## UDP Bridge Discovery (Port 8766)
+
+The Bridge broadcasts its presence every 10 seconds on UDP port 8766:
+```json
+{"type": "bridge_announce", "agp": "2.0", "ip": "192.168.178.X", "port": 8765, "name": "AlphaTrack Bridge", "version": "2.0", "profile_id": "..."}
+```
+
+Bots with empty `bridge_url` automatically discover the Bridge via UDP, then fall back to HTTP scan of `192.168.178.1-254:8765`.
 
 ---
 
@@ -78,13 +106,13 @@ This allows both bot modules and bridge modules to coexist in the same codebase.
 
 ```json
 {
-  "alphatrack_url": "http://192.168.1.28:3000",
+  "alphatrack_url": "http://192.168.178.X:3002",
   "api_key": "REDACTED-API-KEY",
   "bot_id": "",
   "bot_name": "My Trading Bot",
   "bot_version": "1.0.0",
   "profile_id": "YOUR_PROFILE_ID",
-  "bridge_url": "http://localhost:8765",
+  "bridge_url": "",
   "heartbeat_interval_sec": 10,
   "command_server_port": 8766,
   "strategy": {
@@ -107,7 +135,7 @@ This allows both bot modules and bridge modules to coexist in the same codebase.
 | bot_name | string | Yes | Display name for UI |
 | bot_version | string | Yes | Semantic version (e.g., 1.0.0) |
 | profile_id | string | Yes | AlphaTrack profile ID |
-| bridge_url | string | Yes | Bridge gateway URL (http://localhost:8765 for local) |
+| bridge_url | string | No | Bridge gateway URL — leer lassen fuer Auto-Discovery via UDP/LAN-Scan |
 | heartbeat_interval_sec | int | No | Heartbeat frequency (default: 10) |
 | command_server_port | int | Yes | Local port for AlphaTrack→Bot commands (unique per bot) |
 | strategy | object | Yes | Trading parameters (custom per strategy) |
