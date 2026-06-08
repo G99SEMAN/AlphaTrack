@@ -8,7 +8,17 @@
       "Bash(npx @claude-flow*)",
       "Bash(npx claude-flow*)",
       "Bash(node .claude/*)",
-      "mcp__claude-flow__:*"
+      "mcp__claude-flow__:*",
+      "Bash(Get-ChildItem *)",
+      "Bash(npx ruflo *)",
+      "Write(src/**)",
+      "Edit(src/**)",
+      "Write(src/app/**)",
+      "Write(src/components/**)",
+      "Write(src/lib/**)",
+      "Write(src/types/**)",
+      "Write(src/hooks/**)",
+      "Write(src/context/**)"
     ]
   },
   "hooks": {
