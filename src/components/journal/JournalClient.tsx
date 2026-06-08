@@ -51,6 +51,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
   }, [])
 
   useEffect(() => {
+    fetchTrades()
     const id = setInterval(fetchTrades, 10_000)
     return () => clearInterval(id)
   }, [fetchTrades])
@@ -331,7 +332,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
         ) : (
           <div>
             {paginated.map(trade => (
-              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} />
+              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} />
             ))}
           </div>
         )}
@@ -400,12 +401,12 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
       {/* Modals */}
       <AnimatePresence>
-        {showModal && <TradeModal strategies={strategies} broker={broker} onClose={() => setShowModal(false)} />}
+        {showModal && <TradeModal strategies={strategies} broker={broker} onClose={() => { setShowModal(false); void fetchTrades() }} />}
       </AnimatePresence>
       <AnimatePresence>
         {showImport && (
           <ImportModal
-            onClose={() => setShowImport(false)}
+            onClose={() => { setShowImport(false); void fetchTrades() }}
             existingExternalIds={new Set(trades.map(t => t.externalId).filter(Boolean) as string[])}
             profileStartCapital={startCapital}
           />
@@ -419,7 +420,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             existingExternalIdsByProfile={Object.fromEntries(
               profiles.map(p => [p.id, new Set(trades.map(t => t.externalId).filter(Boolean) as string[])])
             )}
-            onClose={() => setShowBotImport(false)}
+            onClose={() => { setShowBotImport(false); void fetchTrades() }}
           />
         )}
       </AnimatePresence>
