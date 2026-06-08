@@ -100,7 +100,8 @@ export function deduplicateBots(): void {
   const all = getBots()
   const seen = new Map<string, BotEntry>()
   for (const bot of all) {
-    const key = `${bot.type ?? 'bridge'}:${bot.name}:${bot.profileId}`
+    const isBridge = (bot.type ?? 'bridge') === 'bridge'
+    const key = isBridge ? `bridge:url:${bot.url}` : `bot:${bot.name}:${bot.profileId}`
     if (!seen.has(key)) {
       seen.set(key, bot)
     }

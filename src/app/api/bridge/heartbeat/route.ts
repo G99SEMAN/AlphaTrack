@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   const mt5WasConnected = prev?.mt5Connected ?? true
   const prevState = prev?.state ?? status.state
 
-  if (!status.mt5Connected && mt5WasConnected) {
+  if (!status.mt5Connected && mt5WasConnected && prev !== null) {
     addBridgeLogEntry(resolvedId, 'error', 'MT5-Verbindung unterbrochen!', `State: ${status.state}`)
   } else if (status.mt5Connected && !mt5WasConnected) {
     addBridgeLogEntry(resolvedId, 'info', 'MT5-Verbindung wiederhergestellt', `State: ${status.state}`)

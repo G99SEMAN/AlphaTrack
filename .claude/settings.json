@@ -1,9 +1,5 @@
 {
   "permissions": {
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)"
-    ],
     "allow": [
       "Write(src/**)",
       "Edit(src/**)",
@@ -13,6 +9,13 @@
       "Write(src/types/**)",
       "Write(src/hooks/**)",
       "Write(src/context/**)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
     ]
+  },
+  "enabledPlugins": {
+    "superpowers-dev@superpowers-marketplace": true
   }
 }
