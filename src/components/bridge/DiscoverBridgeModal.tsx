@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Search, CheckCircle, Loader2, WifiOff, Cpu } from 'lucide-react'
 
@@ -9,13 +9,39 @@ interface Props {
   onDiscovered: () => void
 }
 
-type Step = 'input' | 'searching' | 'success' | 'error'
+type Step = 'input' | 'scanning' | 'searching' | 'success' | 'error'
 
 export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
   const [url, setUrl] = useState('http://192.168.178.x:8765')
-  const [step, setStep] = useState<Step>('input')
+  const [step, setStep] = useState<Step>('scanning')
   const [error, setError] = useState<string | null>(null)
   const [foundName, setFoundName] = useState<string | null>(null)
+
+  useEffect(() => {
+    handleAutoScan()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function handleAutoScan() {
+    setStep('scanning')
+    setError(null)
+    try {
+      const res = await fetch('/api/bridge/discover', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setStep('input')
+        return
+      }
+      setFoundName(data.bot?.name ?? 'Bridge')
+      setStep('success')
+      setTimeout(() => { onDiscovered(); onClose() }, 1800)
+    } catch {
+      setStep('input')
+    }
+  }
 
   async function handleDiscover() {
     setStep('searching')
@@ -61,7 +87,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
               </div>
               <div>
                 <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Bridge suchen</p>
-                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Laufende Bridge wiederfinden</p>
+                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Bridge automatisch suchen</p>
               </div>
             </div>
             <button onClick={onClose} className="cursor-pointer w-8 h-8 flex items-center justify-center rounded-lg"
@@ -70,7 +96,26 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
             </button>
           </div>
 
-          {/* Input */}
+          {/* Automatischer Scan */}
+          {step === 'scanning' && (
+            <div className="flex flex-col items-center py-6 gap-3">
+              <Loader2 size={28} className="animate-spin" style={{ color: '#a855f7' }} />
+              <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>
+                Suche Bridge im Netzwerk...
+              </p>
+              <p className="text-xs" style={{ color: 'var(--text-3)' }}>
+                Scanne 192.168.178.1–254 : 8765
+              </p>
+              <button
+                onClick={() => setStep('input')}
+                className="mt-2 text-xs cursor-pointer underline"
+                style={{ color: 'var(--text-3)' }}>
+                Manuell eingeben
+              </button>
+            </div>
+          )}
+
+          {/* Manuelle Eingabe */}
           {(step === 'input' || step === 'error') && (
             <>
               <div className="mb-4">
@@ -118,7 +163,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
             </>
           )}
 
-          {/* Suchen... */}
+          {/* Manuelle Suche läuft */}
           {step === 'searching' && (
             <div className="flex flex-col items-center py-6 gap-3">
               <Loader2 size={28} className="animate-spin" style={{ color: '#a855f7' }} />

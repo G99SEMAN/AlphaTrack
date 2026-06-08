@@ -23,7 +23,7 @@ from trade_sync import sync_trades
 from display import BridgeDisplay
 from local_log import LocalLog
 from log_sync import sync_to_alphatrack
-from auto_discover import discover, fetch_setup_info
+from auto_discover import discover, fetch_setup_info, discover_via_udp
 
 
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.json")

@@ -2,21 +2,57 @@
 Automatische Erkennung von AlphaTrack im Heimnetz.
 
 Suchreihenfolge:
-  1. localhost:3000  (Bridge und AlphaTrack auf selber Maschine)
+  0. UDP-Broadcast  (3s lauschen auf Port 8766, AGPv2 Bridge-Announce)
+  1. localhost:3002  (Bridge und AlphaTrack auf selber Maschine)
   2. last_known_url  (zuletzt erfolgreiche URL aus Config)
-  3. LAN-Scan        (192.168.x.0/24, parallel, Port 3000)
+  3. LAN-Scan        (192.168.178.x zuerst, dann restliches /24)
 """
 
 import ipaddress
+import json
 import socket
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
+
+UDP_DISCOVERY_PORT = 8766
 
 ALPHATRACK_PORT = 3002
 PROBE_TIMEOUT   = 3   # Sekunden pro Versuch
 SCAN_TIMEOUT    = 2   # Kürzeres Timeout beim Massenscann
 SCAN_WORKERS    = 30  # Parallele Threads beim LAN-Scan
+
+
+def discover_via_udp(timeout: float = 3.0) -> str | None:
+    """Lauscht auf UDP-Port 8766 auf AGPv2 Bridge-Announcements."""
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        sock.bind(("", UDP_DISCOVERY_PORT))
+        sock.settimeout(timeout)
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            try:
+                data, _ = sock.recvfrom(1024)
+                msg = json.loads(data.decode("utf-8"))
+                if msg.get("type") == "bridge_announce" and msg.get("agp") == "2.0":
+                    ip = msg.get("ip", "")
+                    port = msg.get("port", 8765)
+                    if ip:
+                        return f"http://{ip}:{port}"
+            except socket.timeout:
+                break
+            except Exception:
+                continue
+    except Exception:
+        pass
+    finally:
+        try:
+            sock.close()
+        except Exception:
+            pass
+    return None
 
 
 def _probe(url: str, timeout: float = PROBE_TIMEOUT) -> str | None:
@@ -47,11 +83,15 @@ def _local_ip() -> str:
 
 
 def _lan_candidates() -> list[str]:
-    """Generiert alle IPs im lokalen /24-Subnet auf Port 3000."""
+    """Generiert alle IPs im lokalen /24-Subnet — 192.168.178.X zuerst."""
     local = _local_ip()
     try:
         net = ipaddress.IPv4Network(f"{local}/24", strict=False)
-        return [f"http://{host}:{ALPHATRACK_PORT}" for host in net.hosts()]
+        hosts = [str(h) for h in net.hosts()]
+        preferred = [h for h in hosts if h.startswith("192.168.178.")]
+        others = [h for h in hosts if not h.startswith("192.168.178.")]
+        ordered = preferred + others
+        return [f"http://{h}:{ALPHATRACK_PORT}" for h in ordered]
     except Exception:
         return []
 
@@ -93,8 +133,16 @@ def discover(last_known_url: str | None = None, display=None) -> str | None:
     Findet AlphaTrack im Netzwerk.
     Gibt die gefundene URL zurück, oder None wenn nichts gefunden.
     """
-    candidates = ["http://localhost:3002", "http://127.0.0.1:3002"]
+    # Schritt 0: UDP-Discovery (3s)
+    if display:
+        display.log("info", "DISC", "Lausche auf UDP-Broadcast (3s) ...")
+    udp_result = discover_via_udp(timeout=3.0)
+    if udp_result:
+        if display:
+            display.log("ok", "DISC", f"Bridge via UDP gefunden: {udp_result}")
+        return udp_result
 
+    candidates = ["http://localhost:3002", "http://127.0.0.1:3002"]
     if last_known_url and last_known_url not in candidates:
         candidates.append(last_known_url)
 

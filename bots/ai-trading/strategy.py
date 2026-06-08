@@ -64,11 +64,11 @@ def _consecutive_bars_direction(candles: list, direction: str, count: int) -> bo
         return False
     
     if direction == 'up':
-        for i in range(-count, 0):
+        for i in range(-count + 1, 0):
             if float(candles[i]['close']) <= float(candles[i-1]['close']):
                 return False
     elif direction == 'down':
-        for i in range(-count, 0):
+        for i in range(-count + 1, 0):
             if float(candles[i]['close']) >= float(candles[i-1]['close']):
                 return False
     

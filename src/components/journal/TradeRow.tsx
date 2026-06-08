@@ -15,6 +15,7 @@ interface Props {
   broker?: string
   currency?: string
   startCapital?: number
+  onRefresh?: () => void
 }
 
 function StatusBadge({ status }: { status: Trade['status'] }) {
@@ -34,7 +35,7 @@ function StatusBadge({ status }: { status: Trade['status'] }) {
   )
 }
 
-export default function TradeRow({ trade, strategies, broker, currency, startCapital }: Props) {
+export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh }: Props) {
   const [expanded, setExpanded] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -51,7 +52,10 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
 
   function handleDelete() {
     if (!confirm(`Trade "${trade.instrument}" wirklich loschen?`)) return
-    startTransition(() => deleteTradeAction(trade.id))
+    startTransition(async () => {
+      await deleteTradeAction(trade.id)
+      onRefresh?.()
+    })
   }
 
   return (
@@ -529,7 +533,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
 
       {/* Edit Modal */}
       <AnimatePresence>
-        {showEdit && <TradeModal trade={trade} strategies={strategies} broker={broker} onClose={() => setShowEdit(false)} />}
+        {showEdit && <TradeModal trade={trade} strategies={strategies} broker={broker} onClose={() => { setShowEdit(false); onRefresh?.() }} />}
       </AnimatePresence>
 
       {/* Share Modal */}

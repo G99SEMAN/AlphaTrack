@@ -23,12 +23,9 @@ STRATEGY_FILE = os.path.join(BOT_DIR, "strategy.py")
 CONFIG_FILE = os.path.join(BOT_DIR, "config.json")
 EXPERIMENTS_DIR = os.path.join(BOT_DIR, "experiments")
 
-ALPHATRACK_DATA_DIR = r"C:\Users\Kevin\Desktop\AlphaTrack\data"
-STRATEGIES_FILENAME = "strategies-FiFT3HmJf-.json"
-STRATEGIES_FILE = os.path.join(ALPHATRACK_DATA_DIR, STRATEGIES_FILENAME)
-
-BOT_ID = "LtDzeFverW"
-STRATEGY_ID = f"ai-trading-{BOT_ID}"
+# Project root = two levels up from bots/ai-trading/
+_PROJECT_ROOT = os.path.abspath(os.path.join(BOT_DIR, "..", ".."))
+ALPHATRACK_DATA_DIR = os.path.join(_PROJECT_ROOT, "data")
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -147,7 +144,7 @@ def call_claude(strategy_code: str, config: dict, experiment: dict | None) -> di
 
 Return ONLY a JSON object with exactly these fields:
 {{
-  "id": "{STRATEGY_ID}",
+  "id": "ai-trading-<bot_id>",
   "name": "[AI-Trading] <short strategy name in German>",
   "description": "<1-2 sentences in German describing what this strategy does>",
   "timeframe": "{timeframe}",
@@ -206,6 +203,20 @@ def main():
     print(f"[INFO] Reading config from: {CONFIG_FILE}")
     config = load_json(CONFIG_FILE, default={})
 
+    # Resolve strategies file from config, env, or glob-discovery
+    strategies_filename = (
+        os.environ.get("STRATEGIES_FILENAME")
+        or config.get("strategies_file")
+    )
+    if not strategies_filename:
+        matches = glob.glob(os.path.join(ALPHATRACK_DATA_DIR, "strategies-*.json"))
+        strategies_filename = os.path.basename(matches[0]) if matches else "strategies.json"
+        print(f"[INFO] strategies_file not in config — auto-detected: {strategies_filename}")
+    strategies_file = os.path.join(ALPHATRACK_DATA_DIR, strategies_filename)
+
+    bot_id = config.get("bot_id") or config.get("profile_id") or "unknown"
+    strategy_id = f"ai-trading-{bot_id}"
+
     # 3. Find best kept experiment
     print(f"[INFO] Scanning experiments in: {EXPERIMENTS_DIR}")
     experiment = find_best_experiment()
@@ -229,7 +240,7 @@ def main():
         sys.exit(1)
 
     # Ensure required fields are present / correct
-    strategy_entry["id"] = STRATEGY_ID
+    strategy_entry["id"] = strategy_id
     strategy_entry.setdefault("riskPerTrade", 1)
     strategy_entry.setdefault("color", "#3b82f6")
     strategy_entry.setdefault("createdAt", datetime.now(timezone.utc).isoformat())
@@ -237,8 +248,8 @@ def main():
     print(f"[INFO] Received strategy entry: {strategy_entry.get('name', '(unnamed)')}")
 
     # 5. Load existing strategies file
-    print(f"[INFO] Loading strategies from: {STRATEGIES_FILE}")
-    existing: list = load_json(STRATEGIES_FILE, default=[])
+    print(f"[INFO] Loading strategies from: {strategies_file}")
+    existing: list = load_json(strategies_file, default=[])
     if not isinstance(existing, list):
         print("[WARN] strategies file is not a JSON array — resetting to []")
         existing = []
@@ -255,12 +266,12 @@ def main():
     print(f"[INFO] Total strategies after update: {len(existing)}")
 
     # 8. Atomic write
-    print(f"[INFO] Writing strategies file atomically to: {STRATEGIES_FILE}")
+    print(f"[INFO] Writing strategies file atomically to: {strategies_file}")
     os.makedirs(ALPHATRACK_DATA_DIR, exist_ok=True)
-    atomic_write_json(STRATEGIES_FILE, existing)
+    atomic_write_json(strategies_file, existing)
 
     print("[OK] analyze_strategy.py complete.")
-    print(f"[OK] Strategy '{strategy_entry.get('name')}' saved with id={STRATEGY_ID}")
+    print(f"[OK] Strategy '{strategy_entry.get('name')}' saved with id={strategy_id}")
 
 
 if __name__ == "__main__":

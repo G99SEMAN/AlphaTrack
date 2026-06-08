@@ -4,13 +4,15 @@ import os
 import queue
 import threading
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 
 import requests
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import JSONResponse
+
+from udp_announce import udp_announce_loop, configure as configure_udp
 
 app = FastAPI()
 
@@ -24,6 +26,7 @@ _EDITABLE_FIELDS = {
 
 config_lock = threading.Lock()
 _trade_lock = threading.Lock()
+_positions_lock = threading.Lock()
 
 _command_queue: queue.Queue = queue.Queue()
 _trade_results: dict = {}
@@ -60,6 +63,7 @@ def configure(alphatrack_url: str, profile_id: str, api_key: str, local_ip: str)
     _profile_id = profile_id
     _api_key = api_key
     _local_ip = local_ip
+    configure_udp(local_ip, profile_id, _load_config)
 
 
 def _load_config() -> dict:
@@ -70,7 +74,8 @@ def _load_config() -> dict:
 
 def update_positions_cache(positions: list):
     global _positions_cache
-    _positions_cache = positions
+    with _positions_lock:
+        _positions_cache = positions
 
 
 def set_candles_fetcher(func):
@@ -210,6 +215,7 @@ async def _ping_loop():
 @app.on_event("startup")
 async def _startup():
     asyncio.create_task(_ping_loop())
+    asyncio.create_task(udp_announce_loop())
 
 
 # --- WebSocket endpoint ---
@@ -240,6 +246,13 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
             except Exception:
                 continue
 
+            _is_agpv2 = msg.get("agp") == "2.0"
+            if _is_agpv2:
+                inner = msg.get("payload", {})
+                if isinstance(inner, dict):
+                    for k, v in inner.items():
+                        if k not in msg:
+                            msg[k] = v
             mtype = msg.get("type", "")
 
             if mtype == "register":
@@ -281,7 +294,16 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                     "latency": bot_latency,
                 }
 
-                await websocket.send_text(json.dumps({"type": "registered", "bot_id": bot_id}))
+                if _is_agpv2:
+                    resp = {
+                        "agp": "2.0", "type": "registered",
+                        "id": str(uuid.uuid4()),
+                        "ts": datetime.now(timezone.utc).isoformat(),
+                        "payload": {"bot_id": bot_id},
+                    }
+                else:
+                    resp = {"type": "registered", "bot_id": bot_id}
+                await websocket.send_text(json.dumps(resp))
 
                 # Bridge-Log und Display: Verbindung oder Reconnect
                 event_msg = f"Bot {'reconnect' if is_reconnect else 'verbunden'}: {bot_name}"
@@ -382,7 +404,26 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
 
 @app.get("/health")
 async def health():
-    return {"ok": True, "bots_connected": len(_bots)}
+    return {"ok": True, "agp": "2.0", "bots_connected": len(_bots)}
+
+
+@app.get("/info")
+async def get_info():
+    """AGPv2 Discovery-Endpunkt — keine Credentials."""
+    try:
+        cfg = _load_config()
+    except Exception:
+        cfg = {}
+    return {
+        "agp": "2.0",
+        "name": cfg.get("bridge_name", "AlphaTrack Bridge"),
+        "version": "2.0",
+        "ip": _local_ip,
+        "port": cfg.get("command_server_port", 8765),
+        "profile_id": _profile_id,
+        "bridge_id": cfg.get("bridge_id", ""),
+        "bots_connected": len(_bots),
+    }
 
 
 @app.get("/bots/identities")
@@ -410,7 +451,9 @@ async def get_candles(
 
 @app.get("/positions")
 async def get_positions():
-    return {"positions": _positions_cache}
+    with _positions_lock:
+        positions = list(_positions_cache)
+    return {"positions": positions}
 
 
 @app.get("/account")
@@ -549,7 +592,7 @@ async def bot_command(bot_id: str, request: Request, _: None = Depends(_require_
 
 
 @app.get("/config")
-async def get_config():
+async def get_config(_: None = Depends(_require_api_key)):
     try:
         return _load_config()
     except Exception as e:
