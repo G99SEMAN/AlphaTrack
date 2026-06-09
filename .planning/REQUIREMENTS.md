@@ -59,37 +59,35 @@
 
 ## Traceability
 
-*(Wird vom Roadmapper ausgefüllt)*
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRADES-01 | TBD | Pending |
-| TRADES-02 | TBD | Pending |
-| TRADES-03 | TBD | Pending |
-| NET-01 | TBD | Pending |
-| SYNC-01 | TBD | Pending |
-| BRIDGE-01 | TBD | Pending |
-| BRIDGE-02 | TBD | Pending |
-| BRIDGE-03 | TBD | Pending |
-| BRIDGE-04 | TBD | Pending |
-| BOTS-01 | TBD | Pending |
-| BOTS-02 | TBD | Pending |
-| BOTS-03 | TBD | Pending |
-| BOTS-04 | TBD | Pending |
-| BOTS-05 | TBD | Pending |
-| BOTS-06 | TBD | Pending |
-| BOTS-07 | TBD | Pending |
-| BOTS-08 | TBD | Pending |
-| BOTLOG-01 | TBD | Pending |
-| PERF-01 | TBD | Pending |
-| PERF-02 | TBD | Pending |
-| UI-01 | TBD | Pending |
+| TRADES-01 | Phase 1 | Pending |
+| TRADES-02 | Phase 1 | Pending |
+| TRADES-03 | Phase 1 | Pending |
+| NET-01 | Phase 1 | Pending |
+| SYNC-01 | Phase 1 | Pending |
+| BRIDGE-01 | Phase 2 | Pending |
+| BRIDGE-02 | Phase 2 | Pending |
+| BRIDGE-03 | Phase 2 | Pending |
+| BRIDGE-04 | Phase 2 | Pending |
+| BOTS-01 | Phase 3 | Pending |
+| BOTS-02 | Phase 3 | Pending |
+| BOTS-03 | Phase 3 | Pending |
+| BOTS-04 | Phase 3 | Pending |
+| BOTS-05 | Phase 3 | Pending |
+| BOTS-06 | Phase 3 | Pending |
+| BOTS-07 | Phase 3 | Pending |
+| BOTS-08 | Phase 3 | Pending |
+| BOTLOG-01 | Phase 4 | Pending |
+| PERF-01 | Phase 4 | Pending |
+| PERF-02 | Phase 4 | Pending |
+| UI-01 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 21 total
-- Mapped to phases: 0 (wird vom Roadmapper ausgefüllt)
-- Unmapped: 21 ⚠️
+- Mapped to phases: 21
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-06-09*
-*Last updated: 2026-06-09 nach initialer Definition*
+*Last updated: 2026-06-09 — Traceability vom Roadmapper ausgefüllt*
