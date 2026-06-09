@@ -29,7 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Trade-Executor-Trades enthalten `/bridge/tradeexecuter` im MetaTrader-Kommentar
   4. Bridge-Netzwerkansicht und Bot-Ansicht zeigen dieselbe Trade-Anzahl — kein 8-vs-1-Mismatch sichtbar
   5. Sync-Zähler zeigt eine plausible Zahl (nicht 8400+); nach einem Neustart liegt er im erwarteten Bereich
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — TRADES-02: sourceId-Feld am Trade-Typ + Befüllung/Migration im Trade-Endpunkt (Wave 1)
+- [ ] 01-02-PLAN.md — TRADES-01: Close-Event-Endpunkt + Heartbeat-Fallback für Trade-Status (Wave 1)
+- [ ] 01-03-PLAN.md — SYNC-01 + NET-01: Sync-Zähler aus UI entfernen + Netzwerk/Bot-Konsistenz verifizieren (Wave 2)
+- [ ] 01-04-PLAN.md — TRADES-03: MT5-Kommentar '/bridge/tradeexecuter' in Python-Bridge (Wave 1)
 
 ### Phase 2: Bridge-Bereinigung
 **Goal**: Die Bridge-Komponente verwaltet sich selbst — kein manueller Eingriff nötig, und die UI zeigt nur relevante Steuerelemente
@@ -75,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Datenkorrektheit | 0/? | Not started | - |
+| 1. Datenkorrektheit | 0/4 | Planned | - |
 | 2. Bridge-Bereinigung | 0/? | Not started | - |
 | 3. Bot-Verbesserungen | 0/? | Not started | - |
 | 4. Performance & Abschluss | 0/? | Not started | - |
