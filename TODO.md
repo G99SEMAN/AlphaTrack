@@ -1,16 +1,25 @@
-- Performance Seite:
-    - Auf der Performance seite sollen alle aktiven bots in ihrer performance gemessen werden (Botspezifich)
-    - das bedeutet, alle trades welche von einem bot gemacht wurden müssen diesem eindeutig zugeordnet werden
-    - durch die Trades kann ausgewertet werden wie gut der Bot läuft
-    - es soll pro Bot ein kleiner Graph (ähnlich wie im Dashboard) zu sehen sein mit dem unterschied, dass das Startkapital nicht notwendig ist. Der Graph startet bei 0€ und mit jedem gewinntrade wird der gewinn da drauf gerechnen und jeder verlust zieht den wert wieder runter. So kann man genau sehen wieviel gewinn oder verlust ein bot gemacht hat 
-    - dazu sollten noch grundlegende werte angezeigt werden, welche bei Einzelbetrachtung eines bots sinn machen. 
-    - die bots sollen auf der Performance seite nicht automatisch erscheinen, sondern soll es ein button geben "Bot hinzufügen", dort sollen alle aktiven bots aufgelistet werden. Erst wenn ein aktiver bot hinzugefügt wird, wird die performance dieses Bots gemessen und angezeigt.
-    - die Messung der performance wird anhand der vom Metatrader an diesen bot übertragenen Trade Daten gemacht.
-    - Wenn der bot noch keine Trades gemacht hat soll es angezeigt werden
-
-- NEU: Trading Perfomance Calender
-    - ein kalender (monatsansicht) welcher jeden tag anzeigt wieviel profite oder verluste man ich mit allen bots gemacht habe
-    - Farbliche markierung der Tage in Grün oder Rot, jenachdem ob gewinne oder verluste gemacht wurden
-    - wenn keine trades gemacht wurden an einem tag bleibt die standartfarbe
-    - in den tagen sollen nur kurze infos stehen: wieviele Trades an dem tag gemacht wurden, wieviele wins und losses usw
+- /Navigation/Trades:
+    - zwischen den offenen Trades ist eine weiße linie, welche farblich nicht passt, die trennlinie soll wie darunter bei den Vergangenen Trades aussehen
+    - Es sind viele Trades angeblich als offen deklariert, welche aber bereits geschlossen wurden
+- /Navitation/Netzwerk:
+    - hier wird jetzt gerade angezeigt, dass bei der bridge 8 Trades offen sind und bei dem eigentlichen Trading Bot, welcher eigentlich alle Trades aktuell auf macht nur einer, also da stimmt was nicht
+- /Bridge/Bridge:
+    - die Bridge kann oben über das mülleimer symbol geslöscht werden, das soll aber keine notwendigkeit sein. Da die Bridge automatisch erkannt wird soll sie auch automatisch angezeigt werden. Wenn die bridge nicht mehr vorhanden ist soll sie auch nicht dort angezeigt werden
+    - über die Bridge habe ich die Möglichkeit, über den Trade Executer manuell Trades auszuführen. Diese trades können bei der Bridge im Netzwerk angezeigt werden aber eben nur diese. Die Trades
+    - Aktuell werden bei der Bridge unter dem Feld Sync angezeigt, dass über 8400 Trades gesynct worden sind, das erscheint mir etwas viel
+- /Bridge/Bridge Log:
+    - als filtermethode steht bei der Bridgelog immernoch filtern nach Bots ("Alle Bots"), hier sollen aber keine Einträge von Bots erscheinen
+- /Bridge/Bridge Settings:
+    - da kaum Einstellungen für die Bridge notwendig sind soll diese seite entfernt werden
+- /Bots/Bots:
+    - Wenn sich ein Bot über die Bridge mit alphatrack verbunden hat soll er hier auftauchen und mit Infos angezeigt werden. Hier sollte geprüft werden, welche infos wirklich sinn machen. "Synced" ist Zb. leer, was auch immer das bedeutet, kann weg. Positionen wird mit 0 angezeigt obwohl min. 1 Trade offen ist. Da stimmt auch was nicht. Die Anzahl der Trades die der Bot gemacht hat soll noch hinzu kommen. Und Balance soll ersetzt werden durch P&L(von dem jeweiligen Bot)
+- /Bots/Bot Log:
+    - diese Seite wird nicht mehr benötigt und kann weg
+- /Bots/Bot Settings:
+    - Wenn ein Bot bestimmte Parameter hat wie Zb. "Lotgröße" oder ähnliches, welche während des laufenden Betriebes geändert werden können, sollen diese Settings hier auftauchen und einstellbar sein. Mit einem Bestätigen Button soll die Änderung der Parameter an den Bot gesendet werden. Das Aktuell Bearbeiten des Namens benötige ich nicht. AUch das Entfernen des Bots soll nicht möglich sein, da die Bots ebenfalls automatisch erkannt werden und wenn der Bot beendet wird dann soll er auch dort verschwinden
+- /Bots/Performance:
+    - Hier können laufende Bots hinzugefügt werden. Dort soll dann die Performance der jeweiligen Bots gemessen werden. Es soll ein Graph angezeigt werden der den P&L des jeweiligen Bots anzeigt, außerdem wieviele Trades er gemacht hat.
+    - Aktuell funktioniert dies noch nicht, vermutlich weil die Trades welche von Bots kommen immer noch nicht richtig den Bots zugeordnet werden kann
+- Allgemein:
+    - Jeder Trade muss eindeutig zugeordnet werden können, wenn zb ein Trade über den Trade Executer der Bridge gemacht wird muss dieser Trade auch der Bridge zugeordnet werden (wichtig auch das kommentar für den Metatrader, dort sollte dann /bridge/tradeexecuter stehen oder sowas)
     
