@@ -85,7 +85,7 @@ def execute_trade(symbol: str, direction: str, lots: float,
         "price": price,
         "deviation": deviation,
         "magic": 20250101,
-        "comment": "AlphaTrack Executor",
+        "comment": "/bridge/tradeexecuter",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": filling_mode,
     }
