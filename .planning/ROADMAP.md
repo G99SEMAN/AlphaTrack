@@ -53,7 +53,12 @@ Plans:
   3. Der Bridge-Log enthält keinen Filter "Alle Bots" — nur bridge-eigene Einträge sind filterbar
   4. Die Bridge-Settings-Seite existiert nicht mehr (navigieren zu ihr ergibt 404 oder Weiterleitung)
 
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+
+- [ ] 02-01-PLAN.md — BRIDGE-01 + BRIDGE-02: Heartbeat-Timeout-Filter (Auto-Discovery) + Trash-Icon entfernen (Wave 1)
+- [ ] 02-02-PLAN.md — BRIDGE-03 + BRIDGE-04: Bot-Filter aus Bridge-Log entfernen + Bridge-Settings-Seite loeschen (Wave 1)
+
 **UI hint**: yes
 
 ### Phase 3: Bot-Verbesserungen
@@ -95,6 +100,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
-| 2. Bridge-Bereinigung | 0/? | Not started | - |
+| 2. Bridge-Bereinigung | 0/2 | Planned | - |
 | 3. Bot-Verbesserungen | 0/? | Not started | - |
 | 4. Performance & Abschluss | 0/? | Not started | - |
