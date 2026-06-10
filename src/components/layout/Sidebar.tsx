@@ -29,9 +29,8 @@ const MAIN_NAV = [
 ]
 
 const BRIDGE_NAV = [
-  { href: '/bridge',          label: 'Bridge',          icon: Cpu },
-  { href: '/bridge/log',      label: 'Bridge Log',      icon: ScrollText },
-  { href: '/bridge/settings', label: 'Bridge Settings', icon: SlidersHorizontal },
+  { href: '/bridge',     label: 'Bridge',     icon: Cpu },
+  { href: '/bridge/log', label: 'Bridge Log', icon: ScrollText },
 ]
 
 const BOTS_NAV = [
