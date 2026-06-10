@@ -60,11 +60,15 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
     }
     setSavingName(true)
     try {
-      await fetch(`/api/bots/${bot.id}`, {
+      const res = await fetch(`/api/bots/${bot.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: nameInput.trim() }),
       })
+      if (!res.ok) {
+        console.error('[BotDetail] Name speichern fehlgeschlagen:', res.status)
+        return
+      }
       setCurrentName(nameInput.trim())
       setEditingName(false)
     } finally {
