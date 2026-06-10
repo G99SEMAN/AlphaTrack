@@ -31,7 +31,6 @@ export default function BridgeDashboardWidget() {
   const cfg = CONN_CFG[overallConn]
   const ConnIcon = cfg.Icon
   const totalOpen = bots.reduce((s, b) => s + (b.status?.openPositions ?? 0), 0)
-  const totalSync  = bots.reduce((s, b) => s + (b.status?.tradesSync ?? 0), 0)
 
   const stripColor = overallConn === 'connected'
     ? 'linear-gradient(90deg, #00d97e, #06d6a0)'
@@ -86,10 +85,6 @@ export default function BridgeDashboardWidget() {
                 <div className="text-center">
                   <p className="text-lg font-bold font-mono leading-none" style={{ color: totalOpen > 0 ? '#f59e0b' : 'var(--text-3)' }}>{totalOpen}</p>
                   <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>Offen</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-lg font-bold font-mono leading-none" style={{ color: 'var(--text-1)' }}>{totalSync}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>Synced</p>
                 </div>
               </div>
             </div>

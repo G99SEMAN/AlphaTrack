@@ -153,7 +153,6 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
           { label: 'Profil',         value: profile?.name ?? '—' },
           { label: 'Balance',        value: status?.balance != null ? `${status.balance.toFixed(2)} ${status.currency ?? ''}` : '—' },
           { label: 'Uptime',         value: status?.uptime ? `${Math.floor(status.uptime / 60)}m` : '—' },
-          { label: 'Trades gespeichert', value: String(status?.tradesSync ?? 0) },
         ].map(s => (
           <div key={s.label} className="rounded-xl p-3"
             style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>

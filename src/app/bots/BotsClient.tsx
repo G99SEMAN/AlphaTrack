@@ -169,7 +169,6 @@ export default function BotsClient({ initialBots, profiles }: Props) {
                     />
                     <Stat label="Positionen" value={status?.openPositions?.toString() ?? '-'} />
                     <Stat label="Uptime"      value={status?.uptime ? formatUptime(status.uptime) : '-'} />
-                    <Stat label="Synced"      value={status?.tradesSync != null ? `${status.tradesSync} Trades` : '-'} />
                   </div>
 
                   {/* Bot-ID (Spec: ID + Name anzeigen) */}

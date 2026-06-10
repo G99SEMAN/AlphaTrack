@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Wifi, WifiOff, AlertTriangle, Bot, Cpu, Clock, TrendingUp, Layers } from 'lucide-react'
+import { Wifi, WifiOff, AlertTriangle, Bot, Cpu, Clock, TrendingUp } from 'lucide-react'
 import { ConnectionState } from '@/types/bot'
 import { useBotStatus } from '@/context/BotStatusContext'
 
@@ -79,7 +79,6 @@ export default function WatchdogPanel({ botId, botName }: Props) {
               { Icon: Cpu,        label: 'MT5',      value: status.mt5Connected ? 'Verbunden' : 'Getrennt', color: status.mt5Connected ? 'var(--green)' : 'var(--red)' },
               { Icon: Clock,      label: 'Laufzeit', value: fmt(status.uptime), color: 'var(--text-1)' },
               { Icon: TrendingUp, label: 'Offen',    value: `${status.openPositions} Position${status.openPositions !== 1 ? 'en' : ''}`, color: status.openPositions > 0 ? '#f59e0b' : 'var(--text-1)' },
-              { Icon: Layers,     label: 'Sync',     value: `${status.tradesSync} Trades`, color: 'var(--text-1)' },
             ].map(({ Icon, label, value, color }) => (
               <div key={label} className="rounded-xl px-3 py-2.5" style={{ background: 'var(--surface-2)', border: '1px solid var(--border-subtle)' }}>
                 <div className="flex items-center gap-1.5 mb-1">
