@@ -19,7 +19,9 @@ awaiting: user response
 
 ### 1. Bridge Auto-Discovery Laufzeit (Heartbeat-Timeout)
 expected: Python-Bridge verbinden, dann Verbindung trennen. Nach spätestens 35 Sekunden (30s Timeout + max. 5s Poll-Intervall) muss die Bridge aus der Liste verschwinden — ohne manuellen Eingriff.
-result: [pending]
+result: issue
+reported: "Bridge bleibt nach über 35 Sekunden noch in der Tab-Leiste sichtbar, obwohl 'Kein Heartbeat empfangen' und Status 'Offline' angezeigt wird."
+severity: major
 
 ### 2. Bridge-Log initial nur Bridge-Bots
 expected: Im laufenden Dev-Server die Seite /bridge/log öffnen. Wenn data/bots.json gemischte Bot-Typen enthält (type: 'bot' + type: 'bridge'), dürfen beim ersten Render nur Bridge-Logs angezeigt werden — keine Bot-Logs sichtbar.
@@ -33,9 +35,17 @@ result: [pending]
 
 total: 3
 passed: 0
-issues: 0
-pending: 3
+issues: 1
+pending: 2
 skipped: 0
 blocked: 0
 
 ## Gaps
+
+- truth: "Bridge verschwindet automatisch nach max. 35s aus der Liste wenn Heartbeat ausbleibt"
+  status: failed
+  reason: "User reported: Bridge bleibt nach über 35 Sekunden noch in der Tab-Leiste sichtbar"
+  severity: major
+  test: 1
+  root_cause: "BridgeClient.tsx:28 — Fallback `contextBots.length > 0 ? contextBots : filterBridge(initial)` greift wenn der Context alle Bridges herausfiltert. Leerer Context (nach Timeout) wird wie uninitialiserter Context behandelt → SSR-Snapshot bleibt sichtbar. Fix: lastUpdated !== null als Initialisierungssignal nutzen."
+  fix: "BridgeClient.tsx:28 — const bots = lastUpdated !== null ? contextBots : filterBridge(initial)"
