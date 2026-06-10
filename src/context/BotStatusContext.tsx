@@ -21,6 +21,8 @@ function fingerprint(bots: BotWithStatus[]): string {
   ).join('|')
 }
 
+const HEARTBEAT_TIMEOUT_MS = 30_000
+
 export function BotStatusProvider({ children }: { children: React.ReactNode }) {
   const [bots, setBots] = useState<BotWithStatus[]>([])
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
@@ -31,7 +33,12 @@ export function BotStatusProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch('/api/bridge/status')
       if (!res.ok) return
       const data = await res.json()
-      const next: BotWithStatus[] = data.bots ?? []
+      const raw: BotWithStatus[] = data.bots ?? []
+      const now = Date.now()
+      const next = raw.filter(b => {
+        if (!b.status?.lastHeartbeat) return false
+        return now - new Date(b.status.lastHeartbeat).getTime() <= HEARTBEAT_TIMEOUT_MS
+      })
       setBots(prev => fingerprint(prev) === fingerprint(next) ? prev : next)
       setLastUpdated(new Date())
     } catch { /* silent */ }
