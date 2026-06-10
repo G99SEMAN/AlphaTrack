@@ -14,7 +14,7 @@ Dieses Brownfield-Bugfix-Projekt arbeitet 21 offene TODOs ab. Die Reihenfolge is
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Datenkorrektheit** - Trade-Attribution, Status und Sync-Zähler korrekt (completed 2026-06-10)
-- [ ] **Phase 2: Bridge-Bereinigung** - Auto-Discovery und UI-Cleanup der Bridge
+- [x] **Phase 2: Bridge-Bereinigung** - Auto-Discovery und UI-Cleanup der Bridge (completed 2026-06-10)
 - [ ] **Phase 3: Bot-Verbesserungen** - Korrekte Bot-Metriken und aufgeräumte Bot-Settings
 - [ ] **Phase 4: Performance & Abschluss** - Performance-Grafiken, Seitenbereinigung und UI-Fix
 
@@ -56,7 +56,7 @@ Plans:
 **Plans**: 2 plansPlans:
 
 - [x] 02-01-PLAN.md — BRIDGE-01 + BRIDGE-02: Heartbeat-Timeout-Filter (Auto-Discovery) + Trash-Icon entfernen (Wave 1)
-- [ ] 02-02-PLAN.md — BRIDGE-03 + BRIDGE-04: Bot-Filter aus Bridge-Log entfernen + Bridge-Settings-Seite loeschen (Wave 1)
+- [x] 02-02-PLAN.md — BRIDGE-03 + BRIDGE-04: Bot-Filter aus Bridge-Log entfernen + Bridge-Settings-Seite loeschen (Wave 1)
 
 **Cross-cutting constraints:**
 
@@ -103,6 +103,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
-| 2. Bridge-Bereinigung | 1/2 | Executing | - |
+| 2. Bridge-Bereinigung | 2/2 | Complete   | 2026-06-10 |
 | 3. Bot-Verbesserungen | 0/? | Not started | - |
 | 4. Performance & Abschluss | 0/? | Not started | - |
