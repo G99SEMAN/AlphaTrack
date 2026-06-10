@@ -43,6 +43,17 @@ export async function GET(req: NextRequest) {
 // Normalize a raw trade payload to a typed Trade, resolving bot_id attribution.
 // Python sends snake_case bot_id; TypeScript stores as botId.
 // Trades with no bot attribution (bridge sync) receive botId: null (C4).
+function isValidRawTrade(raw: Record<string, unknown>): boolean {
+  return (
+    typeof raw.date === 'string' &&
+    typeof raw.instrument === 'string' &&
+    (raw.type === 'long' || raw.type === 'short') &&
+    typeof raw.entry === 'number' &&
+    typeof raw.size === 'number' &&
+    (raw.status === 'open' || raw.status === 'closed' || raw.status === 'cancelled')
+  )
+}
+
 function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
   const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
   const resolvedBotId = botId ?? bot_id ?? null
@@ -88,7 +99,12 @@ export async function POST(req: NextRequest) {
   }
 
   // Normalize incoming trades: resolve bot attribution (C4)
-  const trades = rawTrades.map(normalizeTrade)
+  const validRaw = rawTrades.filter(isValidRawTrade)
+  const invalidCount = rawTrades.length - validRaw.length
+  if (invalidCount > 0) {
+    addBridgeLogEntry(resolvedBridgeId, 'warn', `${invalidCount} Trade(s) mit ungueltigem Format ignoriert`)
+  }
+  const trades = validRaw.map(normalizeTrade)
 
   let existing = getBotTrades(profileId)
   const needsMigration = existing.some(t => !t.sourceId)
