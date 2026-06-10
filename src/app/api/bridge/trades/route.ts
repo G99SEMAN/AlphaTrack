@@ -106,12 +106,7 @@ export async function POST(req: NextRequest) {
   }
   const trades = validRaw.map(normalizeTrade)
 
-  let existing = getBotTrades(profileId)
-  const needsMigration = existing.some(t => !t.sourceId)
-  if (needsMigration) {
-    existing = existing.map(t => t.sourceId ? t : { ...t, sourceId: 'bridge/tradeexecuter' })
-    saveBotTrades(profileId, existing)
-  }
+  const existing = getBotTrades(profileId).map(t => t.sourceId ? t : { ...t, sourceId: 'bridge/tradeexecuter' })
   const existingMap = new Map(
     existing.filter(t => t.externalId).map(t => [t.externalId!, t])
   )
