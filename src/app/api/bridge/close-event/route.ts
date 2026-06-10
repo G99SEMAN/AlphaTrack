@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { addBridgeLogEntry } from '@/lib/bot-data'
+import { addBridgeLogEntry, getBotById, getBots } from '@/lib/bot-data'
 import { getProfileTrades, saveProfileTrades } from '@/lib/profiles'
 import { isValidApiKey } from '@/lib/auth'
 
@@ -24,12 +24,31 @@ export async function POST(req: NextRequest) {
   }
 
   const { bridgeId, profileId, ticket, exitPrice, closeTime, pnl } = body
-  if (!bridgeId || !profileId || ticket == null || exitPrice == null || !closeTime) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+  if (
+    !bridgeId || !profileId ||
+    typeof ticket !== 'number' || !Number.isFinite(ticket) ||
+    typeof exitPrice !== 'number' || !Number.isFinite(exitPrice) ||
+    !closeTime
+  ) {
+    return NextResponse.json({ error: 'Missing or invalid required fields' }, { status: 400 })
+  }
+  if (pnl !== undefined && (typeof pnl !== 'number' || !Number.isFinite(pnl))) {
+    return NextResponse.json({ error: 'Invalid pnl value' }, { status: 400 })
   }
 
   if (!/^[a-zA-Z0-9_-]{1,64}$/.test(profileId)) {
     return NextResponse.json({ error: 'Invalid profileId' }, { status: 400 })
+  }
+
+  // Validate bridgeId against known bots (mirrors heartbeat/trades pattern)
+  let resolvedBridgeId = bridgeId
+  if (!getBotById(bridgeId)) {
+    const byUrl = getBots().find(b => b.url && b.url.includes(`/bot/${bridgeId}`))
+    if (byUrl) {
+      resolvedBridgeId = byUrl.id
+    } else {
+      return NextResponse.json({ error: 'Unknown bridgeId' }, { status: 404 })
+    }
   }
 
   const externalId = `pos_${ticket}`
@@ -50,7 +69,7 @@ export async function POST(req: NextRequest) {
   }
 
   saveProfileTrades(profileId, updated)
-  addBridgeLogEntry(bridgeId, 'info', `Trade geschlossen: pos_${ticket}`, `exitPrice: ${exitPrice}`)
+  addBridgeLogEntry(resolvedBridgeId, 'info', `Trade geschlossen: pos_${ticket}`, `exitPrice: ${exitPrice}`)
   revalidatePath('/dashboard')
   revalidatePath('/journal')
   revalidatePath('/statistiken')
