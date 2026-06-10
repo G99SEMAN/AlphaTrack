@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Bot, Trash2, TrendingUp, Search, Edit2, Check, X } from 'lucide-react'
+import { Bot, TrendingUp, Search, Edit2, Check, X } from 'lucide-react'
 import { BotWithStatus } from '@/types/bot'
 import { Profile } from '@/types/profile'
 import WatchdogPanel from '@/components/bridge/WatchdogPanel'
@@ -39,12 +39,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
       setSelectedBotId(bots[0].bot.id)
     }
   }, [bots, selectedBotId])
-
-  async function deleteBot(id: string) {
-    if (!confirm('Bot wirklich entfernen?')) return
-    await fetch(`/api/bots/${id}`, { method: 'DELETE' })
-    refresh()
-  }
 
   async function saveBridgeName(id: string) {
     if (!nameInput.trim()) return
@@ -141,11 +135,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                   }}>
                   <span className="rounded-full shrink-0" style={{ width: 7, height: 7, background: connColor, boxShadow: `0 0 5px ${connColor}`, display: 'block' }} />
                   {bot.name}
-                  <button onClick={e => { e.stopPropagation(); deleteBot(bot.id) }}
-                    className="ml-1 opacity-40 hover:opacity-80 cursor-pointer"
-                    title="Bot entfernen">
-                    <Trash2 size={12} />
-                  </button>
                 </button>
               )
             })}
