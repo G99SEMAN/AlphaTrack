@@ -12,7 +12,12 @@ function reconcileOpenTrades(profileId: string, openTicketIds: number[]): void {
   const updated = trades.map(t => {
     if (t.status === 'open' && t.externalId && !ticketSet.has(t.externalId)) {
       changed = true
-      return { ...t, status: 'closed' as const }
+      return {
+        ...t,
+        status: 'closed' as const,
+        closeTime: new Date().toISOString(),
+        notes: (t.notes ? t.notes + ' | ' : '') + '[Auto-geschlossen via Heartbeat-Reconciliation]',
+      }
     }
     return t
   })
