@@ -46,7 +46,8 @@ export async function GET(req: NextRequest) {
 function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
   const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
   const resolvedBotId = botId ?? bot_id ?? null
-  return { ...rest, botId: resolvedBotId } as unknown as Omit<Trade, 'id'>
+  const sourceId = resolvedBotId !== null ? resolvedBotId : 'bridge/tradeexecuter'
+  return { ...rest, botId: resolvedBotId, sourceId } as unknown as Omit<Trade, 'id'>
 }
 
 export async function POST(req: NextRequest) {
@@ -89,7 +90,12 @@ export async function POST(req: NextRequest) {
   // Normalize incoming trades: resolve bot attribution (C4)
   const trades = rawTrades.map(normalizeTrade)
 
-  const existing = getBotTrades(profileId)
+  let existing = getBotTrades(profileId)
+  const needsMigration = existing.some(t => !t.sourceId)
+  if (needsMigration) {
+    existing = existing.map(t => t.sourceId ? t : { ...t, sourceId: 'bridge/tradeexecuter' })
+    saveBotTrades(profileId, existing)
+  }
   const existingMap = new Map(
     existing.filter(t => t.externalId).map(t => [t.externalId!, t])
   )
