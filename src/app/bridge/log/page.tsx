@@ -18,11 +18,11 @@ export default async function BridgeLogPage() {
   }
 
   const allBots = getBots()
+  const bots = allBots.filter(bot => bot.type === 'bridge' || !bot.type)
   const initialLogs: Record<string, ReturnType<typeof getBridgeLog>> = {}
-  for (const bot of allBots) {
+  for (const bot of bots) {
     initialLogs[bot.id] = getBridgeLog(bot.id)
   }
-  const bots = allBots.filter(bot => bot.type === 'bridge' || !bot.type)
 
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
