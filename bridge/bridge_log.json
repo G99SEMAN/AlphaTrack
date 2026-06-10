@@ -1,5 +1,518 @@
 [
   {
+    "id": "5c73af8658",
+    "timestamp": "2026-06-10T10:15:58.242646+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://10.70.48.215:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8090615e5e",
+    "timestamp": "2026-06-10T10:10:07.064620+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000/",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5b306133e8",
+    "timestamp": "2026-06-10T10:08:47.184496+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.28:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "113948598f",
+    "timestamp": "2026-06-10T10:06:17.324549+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "52ba2cd8b9",
+    "timestamp": "2026-06-10T10:06:16.297531+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3cb266a3a7",
+    "timestamp": "2026-06-10T10:06:15.269364+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e2e52e96cb",
+    "timestamp": "2026-06-10T10:06:14.218589+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "73790c6a48",
+    "timestamp": "2026-06-10T10:06:13.189819+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d798a26cd4",
+    "timestamp": "2026-06-10T10:06:12.117169+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dc9fb0538e",
+    "timestamp": "2026-06-10T10:06:11.080065+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9d9f2d6387",
+    "timestamp": "2026-06-10T10:06:10.052423+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c3361c8c7d",
+    "timestamp": "2026-06-10T10:06:09.007932+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e81089f0ff",
+    "timestamp": "2026-06-10T10:06:07.941249+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4dd70a42b7",
+    "timestamp": "2026-06-10T10:06:06.867777+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "24fe4cdb17",
+    "timestamp": "2026-06-10T10:06:05.823445+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "af7f5aecd2",
+    "timestamp": "2026-06-10T10:06:04.751065+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8a54f78454",
+    "timestamp": "2026-06-10T10:06:03.706543+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9574dce8ab",
+    "timestamp": "2026-06-10T10:06:02.658795+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cc4d3323c3",
+    "timestamp": "2026-06-10T10:06:01.613600+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "64cc628f0b",
+    "timestamp": "2026-06-10T10:06:00.557215+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e02545dc32",
+    "timestamp": "2026-06-10T10:05:59.489755+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9974087eb5",
+    "timestamp": "2026-06-10T10:05:58.446810+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f45ba476e0",
+    "timestamp": "2026-06-10T10:05:57.420839+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.28', port=3000): Failed to establish a new connection: [WinError 10051] Ein Socketvorgang bezog sich auf ein nicht verfügbares Netzwerk\"))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "27fbfa43b9",
+    "timestamp": "2026-06-10T10:05:56.347027+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e67a0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "48f46fd047",
+    "timestamp": "2026-06-10T10:05:37.286611+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e67a0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "679eeedea6",
+    "timestamp": "2026-06-10T10:05:18.203257+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e7df0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "74bbafe5be",
+    "timestamp": "2026-06-10T10:04:59.137978+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e5370>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3bdfcd2ad1",
+    "timestamp": "2026-06-10T10:04:40.066000+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e4e20>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "21bc8360d3",
+    "timestamp": "2026-06-10T10:04:21.025667+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e68b0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "27a5437fb1",
+    "timestamp": "2026-06-10T10:04:01.975919+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e67a0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a41b38a676",
+    "timestamp": "2026-06-10T10:03:42.918274+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e7680>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5740da852b",
+    "timestamp": "2026-06-10T10:03:23.866077+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e6360>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c81ad886da",
+    "timestamp": "2026-06-10T10:03:04.814314+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e5040>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "71dc8db4d7",
+    "timestamp": "2026-06-10T10:02:45.744810+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c9693e78a0>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "00a8531336",
+    "timestamp": "2026-06-10T10:02:26.693074+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.28', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.178.28', port=3000) at 0x2c969b05150>, 'Connection to 192.168.178.28 timed out. (connect timeout=10)'))",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "676ff7d66d",
+    "timestamp": "2026-06-10T10:02:03.605110+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.28:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f5133317be",
+    "timestamp": "2026-06-10T04:50:16.492127+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 1",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6a741ee89a",
+    "timestamp": "2026-06-10T04:49:10.111550+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2e6cad6fd7",
+    "timestamp": "2026-06-10T04:48:51.421734+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "60ee532d28",
+    "timestamp": "2026-06-10T04:47:49.968493+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15452 | Ticket #153802574",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e14180e03c",
+    "timestamp": "2026-06-10T04:47:49.314848+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 1",
+    "details": "Version 1.0.0",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e1c1a4b4e5",
+    "timestamp": "2026-06-10T04:41:04.871264+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8b16bd34b5",
+    "timestamp": "2026-06-10T04:39:59.926054+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "688cb27a2e",
+    "timestamp": "2026-06-10T04:39:58.562896+00:00",
+    "level": "info",
+    "message": "190 Trade(s) synchronisiert | PnL gesamt: +34.98",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "caf353a8e0",
+    "timestamp": "2026-06-10T04:39:50.053491+00:00",
+    "level": "info",
+    "message": "Bridge neu registriert: IQTLJ3Jdpp",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "28940ae067",
+    "timestamp": "2026-06-10T04:39:36.678898+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.28:3000",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "92cda7818a",
+    "timestamp": "2026-06-10T04:37:34.297484+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "28fb20a21d",
+    "timestamp": "2026-06-10T04:37:34.156347+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.3:3002",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8bfcd78b75",
+    "timestamp": "2026-06-10T04:34:46.503658+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "251f91d6bb",
+    "timestamp": "2026-06-10T04:34:46.308285+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.3:3002",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c6e488ff61",
+    "timestamp": "2026-06-10T04:32:20.418084+00:00",
+    "level": "info",
+    "message": "190 Trade(s) synchronisiert | PnL gesamt: +34.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "909eb24b6f",
+    "timestamp": "2026-06-10T04:32:20.363754+00:00",
+    "level": "info",
+    "message": "Bridge neu registriert: DTpcHA-z-s",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8a37ee7e42",
+    "timestamp": "2026-06-10T04:32:20.281847+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ee8feb4022",
+    "timestamp": "2026-06-10T04:32:20.127069+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.3:3002",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8fbdf1b04a",
+    "timestamp": "2026-06-10T04:29:36.905055+00:00",
+    "level": "info",
+    "message": "156 Trade(s) synchronisiert | PnL gesamt: -1.12",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "341ab3ac8d",
+    "timestamp": "2026-06-10T04:29:36.835844+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e09c65efdc",
+    "timestamp": "2026-06-10T04:29:27.677378+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.3:3002",
+    "bridgeId": "DTpcHA-z-s",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "0eb9446781",
     "timestamp": "2026-06-07T13:13:05.585629+00:00",
     "level": "warn",

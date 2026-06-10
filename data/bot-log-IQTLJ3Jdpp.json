@@ -1,0 +1,29 @@
+[
+  {
+    "id": "8090615e5e",
+    "timestamp": "2026-06-10T10:10:07.064620+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://localhost:3000/",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "BfPTvuQtgJ",
+    "timestamp": "2026-06-10T04:48:18.929Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "IQTLJ3Jdpp",
+    "botName": "redesign_bridge"
+  },
+  {
+    "id": "Bowg5qSxn6",
+    "timestamp": "2026-06-10T04:39:58.544Z",
+    "level": "info",
+    "message": "36 neue, 5 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "IQTLJ3Jdpp",
+    "botName": "redesign_bridge"
+  }
+]
