@@ -13,7 +13,7 @@ Dieses Brownfield-Bugfix-Projekt arbeitet 21 offene TODOs ab. Die Reihenfolge is
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Datenkorrektheit** - Trade-Attribution, Status und Sync-Zähler korrekt
+- [x] **Phase 1: Datenkorrektheit** - Trade-Attribution, Status und Sync-Zähler korrekt (completed 2026-06-10)
 - [ ] **Phase 2: Bridge-Bereinigung** - Auto-Discovery und UI-Cleanup der Bridge
 - [ ] **Phase 3: Bot-Verbesserungen** - Korrekte Bot-Metriken und aufgeräumte Bot-Settings
 - [ ] **Phase 4: Performance & Abschluss** - Performance-Grafiken, Seitenbereinigung und UI-Fix
@@ -38,7 +38,7 @@ Plans:
 
 - [x] 01-01-PLAN.md — TRADES-02: sourceId-Feld am Trade-Typ + Befüllung/Migration im Trade-Endpunkt (Wave 1)
 - [x] 01-02-PLAN.md — TRADES-01: Close-Event-Endpunkt + Heartbeat-Fallback für Trade-Status (Wave 1)
-- [ ] 01-03-PLAN.md — SYNC-01 + NET-01: Sync-Zähler aus UI entfernen + Netzwerk/Bot-Konsistenz verifizieren (Wave 2)
+- [x] 01-03-PLAN.md — SYNC-01 + NET-01: Sync-Zähler aus UI entfernen + Netzwerk/Bot-Konsistenz verifizieren (Wave 2)
 - [x] 01-04-PLAN.md — TRADES-03: MT5-Kommentar '/bridge/tradeexecuter' in Python-Bridge (Wave 1)
 
 ### Phase 2: Bridge-Bereinigung
@@ -94,7 +94,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Datenkorrektheit | 3/4 | In Progress|  |
+| 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
 | 2. Bridge-Bereinigung | 0/? | Not started | - |
 | 3. Bot-Verbesserungen | 0/? | Not started | - |
 | 4. Performance & Abschluss | 0/? | Not started | - |
