@@ -53,11 +53,14 @@ Plans:
   3. Der Bridge-Log enthält keinen Filter "Alle Bots" — nur bridge-eigene Einträge sind filterbar
   4. Die Bridge-Settings-Seite existiert nicht mehr (navigieren zu ihr ergibt 404 oder Weiterleitung)
 
-**Plans**: 2 plans
-Plans:
+**Plans**: 2 plansPlans:
 
 - [ ] 02-01-PLAN.md — BRIDGE-01 + BRIDGE-02: Heartbeat-Timeout-Filter (Auto-Discovery) + Trash-Icon entfernen (Wave 1)
 - [ ] 02-02-PLAN.md — BRIDGE-03 + BRIDGE-04: Bot-Filter aus Bridge-Log entfernen + Bridge-Settings-Seite loeschen (Wave 1)
+
+**Cross-cutting constraints:**
+
+- npm run build kompiliert ohne TypeScript-Fehler
 
 **UI hint**: yes
 

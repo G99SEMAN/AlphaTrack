@@ -357,7 +357,7 @@ const filtered = allEntries.filter(e => {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Löschen-Button im Log (Trash2 in BridgeLogClient.tsx)**
    - Was wir wissen: `BridgeLogClient.tsx` hat einen "Log löschen"-Button (Zeile 325, `<Trash2 size={13} />`). BRIDGE-02 betrifft nur den Löschen-Button in der Bridge-Tab-Leiste (BridgeClient.tsx).
