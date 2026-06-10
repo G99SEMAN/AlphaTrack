@@ -8,12 +8,7 @@ updated: 2026-06-10T00:00:00Z
 
 ## Current Test
 
-number: 1
-name: Bridge Auto-Discovery Laufzeit (Heartbeat-Timeout)
-expected: |
-  Python-Bridge verbinden, danach trennen — Bridge verschwindet nach max. 35 Sekunden
-  automatisch aus der Bridge-Liste (BRIDGE-01)
-awaiting: user response
+[testing complete]
 
 ## Tests
 
@@ -25,18 +20,18 @@ severity: major
 
 ### 2. Bridge-Log initial nur Bridge-Bots
 expected: Im laufenden Dev-Server die Seite /bridge/log öffnen. Wenn data/bots.json gemischte Bot-Typen enthält (type: 'bot' + type: 'bridge'), dürfen beim ersten Render nur Bridge-Logs angezeigt werden — keine Bot-Logs sichtbar.
-result: [pending]
+result: pass
 
 ### 3. /bridge/settings ergibt 404
 expected: Im laufenden Dev-Server die URL /bridge/settings aufrufen. Next.js muss eine 404-Seite zurückgeben (die Route existiert nicht mehr). Der Sidebar-Link "Bridge Settings" darf nicht sichtbar sein.
-result: [pending]
+result: pass
 
 ## Summary
 
 total: 3
-passed: 0
+passed: 2
 issues: 1
-pending: 2
+pending: 0
 skipped: 0
 blocked: 0
 
