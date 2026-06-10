@@ -22,10 +22,10 @@ interface Props {
 const filterBridge = (list: BotWithStatus[]) => list.filter(b => !b.bot.type || b.bot.type === 'bridge')
 
 export default function BridgeClient({ botsWithStatus: initial, profiles, tradesByProfile }: Props) {
-  const { bots: allBots, refresh } = useBotStatus()
+  const { bots: allBots, lastUpdated, refresh } = useBotStatus()
 
   const contextBots = filterBridge(allBots)
-  const bots = contextBots.length > 0 ? contextBots : filterBridge(initial)
+  const bots = lastUpdated !== null ? contextBots : filterBridge(initial)
 
   const [selectedBotId, setSelectedBotId] = useState<string | null>(filterBridge(initial)[0]?.bot.id ?? null)
   const [showDiscover, setShowDiscover] = useState(false)
