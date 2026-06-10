@@ -1,14 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus, getBots } from '@/lib/bot-data'
+import { getProfileTrades, saveProfileTrades } from '@/lib/profiles'
+import { revalidatePath } from 'next/cache'
 import { BotStatus } from '@/types/bot'
 import { isValidApiKey } from '@/lib/auth'
+
+function reconcileOpenTrades(profileId: string, openTicketIds: number[]): void {
+  const trades = getProfileTrades(profileId)
+  const ticketSet = new Set(openTicketIds.map(t => `pos_${t}`))
+  let changed = false
+  const updated = trades.map(t => {
+    if (t.status === 'open' && t.externalId && !ticketSet.has(t.externalId)) {
+      changed = true
+      return { ...t, status: 'closed' as const }
+    }
+    return t
+  })
+  if (changed) {
+    saveProfileTrades(profileId, updated)
+    revalidatePath('/dashboard')
+    revalidatePath('/journal')
+  }
+}
 
 export async function POST(req: NextRequest) {
   if (!isValidApiKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  let body: { bridgeId: string; status: BotStatus }
+  let body: { bridgeId: string; status: BotStatus & { openTicketIds?: number[] }; profileId?: string }
   try {
     body = await req.json()
   } catch {
@@ -34,6 +54,10 @@ export async function POST(req: NextRequest) {
 
   const prev = getBotStatus(resolvedId)
   saveBotStatus(resolvedId, { ...status, lastHeartbeat: new Date().toISOString() })
+
+  if (body.profileId && Array.isArray(status.openTicketIds)) {
+    reconcileOpenTrades(body.profileId, status.openTicketIds)
+  }
 
   const mt5WasConnected = prev?.mt5Connected ?? true
   const prevState = prev?.state ?? status.state
