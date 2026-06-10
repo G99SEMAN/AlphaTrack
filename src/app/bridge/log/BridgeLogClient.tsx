@@ -63,7 +63,6 @@ function exportCSV(entries: BridgeLogEntry[], filename: string) {
 export default function BridgeLogClient({ bots, initialLogs }: Props) {
   const [logs, setLogs] = useState<Record<string, BridgeLogEntry[]>>(initialLogs)
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all')
-  const [botFilter, setBotFilter] = useState<string>('all')
   const [search, setSearch] = useState('')
   const [confirmClear, setConfirmClear] = useState<string | null>(null)
   const [clearing, setClearing] = useState(false)
@@ -104,7 +103,6 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
 
   const filtered = allEntries.filter(e => {
     if (levelFilter !== 'all' && e.level !== levelFilter) return false
-    if (botFilter !== 'all' && e.botId !== botFilter) return false
     if (search.trim()) {
       const q = search.trim().toLowerCase()
       if (
@@ -235,39 +233,6 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                 ))}
               </div>
 
-              <div className="h-4 w-px" style={{ background: 'var(--border)' }} />
-
-              {/* Bot-Filter */}
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <button
-                  onClick={() => setBotFilter('all')}
-                  className="px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all"
-                  style={botFilter === 'all' ? {
-                    background: 'var(--accent-bg)', color: 'var(--accent)',
-                    border: '1px solid var(--accent)44',
-                  } : {
-                    background: 'var(--bg)', color: 'var(--text-3)', border: '1px solid var(--border)',
-                  }}
-                >
-                  Alle Bots
-                </button>
-                {bots.map(bot => (
-                  <button
-                    key={bot.id}
-                    onClick={() => setBotFilter(bot.id)}
-                    className="px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all"
-                    style={botFilter === bot.id ? {
-                      background: 'rgba(96,165,250,0.12)', color: '#60a5fa',
-                      border: '1px solid rgba(96,165,250,0.35)',
-                    } : {
-                      background: 'var(--bg)', color: 'var(--text-3)', border: '1px solid var(--border)',
-                    }}
-                  >
-                    {bot.name}
-                  </button>
-                ))}
-              </div>
-
               <div className="ml-auto flex items-center gap-2">
                 {/* Aktualisieren */}
                 <button
@@ -323,7 +288,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                 {/* Log löschen */}
                 <div className="relative">
                   <button
-                    onClick={() => setConfirmClear(botFilter === 'all' ? '__all__' : botFilter)}
+                    onClick={() => setConfirmClear('__all__')}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
                     style={{
                       background: 'rgba(239,68,68,0.08)',
@@ -333,7 +298,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     title="Log löschen"
                   >
                     <Trash2 size={13} />
-                    {botFilter === 'all' ? 'Alle löschen' : 'Log löschen'}
+                    Alle löschen
                   </button>
                 </div>
               </div>
@@ -345,7 +310,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
             <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
                 {filtered.length} Einträge
-                {(levelFilter !== 'all' || botFilter !== 'all' || search) && (
+                {(levelFilter !== 'all' || !!search) && (
                   <span className="ml-1.5" style={{ color: 'var(--accent)' }}>(gefiltert)</span>
                 )}
               </p>
