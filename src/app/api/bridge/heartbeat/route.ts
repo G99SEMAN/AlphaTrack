@@ -56,7 +56,11 @@ export async function POST(req: NextRequest) {
   saveBotStatus(resolvedId, { ...status, lastHeartbeat: new Date().toISOString() })
 
   if (body.profileId && Array.isArray(status.openTicketIds)) {
-    reconcileOpenTrades(body.profileId, status.openTicketIds)
+    if (!/^[a-zA-Z0-9_-]{1,64}$/.test(body.profileId)) {
+      addBridgeLogEntry(resolvedId, 'warn', 'Heartbeat: ungueltige profileId ignoriert', body.profileId)
+    } else {
+      reconcileOpenTrades(body.profileId, status.openTicketIds)
+    }
   }
 
   const mt5WasConnected = prev?.mt5Connected ?? true
