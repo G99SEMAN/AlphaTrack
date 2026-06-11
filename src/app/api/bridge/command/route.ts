@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { addBotCommand, pruneOldCommands, addBridgeLogEntry, getBotById } from '@/lib/bot-data'
-import { BotCommandType, TradeOrderPayload, ClosePositionPayload } from '@/types/bot'
+import { BotCommandType, TradeOrderPayload, ClosePositionPayload, SetParametersPayload } from '@/types/bot'
 import { isSameOriginRequest } from '@/lib/auth'
 
-const VALID_COMMANDS: BotCommandType[] = ['start', 'stop', 'pause', 'resume', 'execute_trade', 'close_position', 'restart']
+const VALID_COMMANDS: BotCommandType[] = ['start', 'stop', 'pause', 'resume', 'execute_trade', 'close_position', 'restart', 'set_parameters']
 
 export async function POST(req: NextRequest) {
   if (!isSameOriginRequest(req)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  let body: { bridgeId: string; command: BotCommandType; payload?: TradeOrderPayload | ClosePositionPayload }
+  let body: { bridgeId: string; command: BotCommandType; payload?: TradeOrderPayload | ClosePositionPayload | SetParametersPayload }
   try {
     body = await req.json()
   } catch {
@@ -36,6 +36,13 @@ export async function POST(req: NextRequest) {
     const p = payload as ClosePositionPayload | undefined
     if (!p?.ticket) {
       return NextResponse.json({ error: 'close_position requires ticket' }, { status: 400 })
+    }
+  }
+
+  if (command === 'set_parameters') {
+    const p = payload as SetParametersPayload | undefined
+    if (!p?.parameters || typeof p.parameters !== 'object' || Array.isArray(p.parameters)) {
+      return NextResponse.json({ error: 'set_parameters requires parameters object' }, { status: 400 })
     }
   }
 
