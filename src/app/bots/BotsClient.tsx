@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Wifi, WifiOff, AlertTriangle, TrendingUp, ExternalLink } from 'lucide-react'
 import { BotWithStatus, ConnectionState, BotState, BotStats } from '@/types/bot'
@@ -92,11 +92,13 @@ export default function BotsClient({ initialBots, profiles }: Props) {
   }, [refresh])
 
   const [stats, setStats] = useState<Record<string, BotStats>>({})
+  const botsRef = useRef(bots)
+  botsRef.current = bots
 
   useEffect(() => {
     async function fetchStats() {
       const results = await Promise.allSettled(
-        bots.map(async ({ bot }) => {
+        botsRef.current.map(async ({ bot }) => {
           const res = await fetch(`/api/bots/${bot.id}/stats`)
           if (!res.ok) return null
           return { id: bot.id, data: await res.json() as BotStats }
@@ -113,7 +115,7 @@ export default function BotsClient({ initialBots, profiles }: Props) {
     fetchStats()
     const id = setInterval(fetchStats, 8000)
     return () => clearInterval(id)
-  }, [bots])
+  }, [])
 
   const connected = bots.filter(b => b.status?.connectionState === 'connected').length
   const running = bots.filter(b => b.status?.state === 'running').length

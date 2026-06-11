@@ -62,6 +62,11 @@ export async function POST(req: NextRequest) {
   }
   addBridgeLogEntry(bridgeId, 'info', `Command gesendet: ${command}`, logDetails)
 
+  const botApiKey = process.env.BOT_API_KEY ?? ''
+  if (!botApiKey) {
+    console.warn('[Bridge] BOT_API_KEY nicht gesetzt — Command wird ohne Auth-Key an Bot gesendet')
+  }
+
   try {
     const flaskBody: Record<string, unknown> = { command, id: entry.id }
     if (payload) flaskBody.payload = payload
@@ -70,7 +75,7 @@ export async function POST(req: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Bot-Api-Key': process.env.BOT_API_KEY ?? '',
+        'X-Bot-Api-Key': botApiKey,
       },
       body: JSON.stringify(flaskBody),
       signal: AbortSignal.timeout(12000),
@@ -84,6 +89,12 @@ export async function POST(req: NextRequest) {
       const errBody = await flaskRes.json().catch(() => ({})) as { error?: string }
       addBridgeLogEntry(bridgeId, 'error', `Command fehlgeschlagen: ${command}`, errBody.error ?? `HTTP ${flaskRes.status}`)
       return NextResponse.json({ ok: false, error: errBody.error ?? 'Bridge returned error' }, { status: 502 })
+    }
+
+    if (!flaskRes.ok) {
+      const errBody = await flaskRes.json().catch(() => ({})) as { error?: string }
+      addBridgeLogEntry(bridgeId, 'error', `Command fehlgeschlagen: ${command}`, errBody.error ?? `HTTP ${flaskRes.status}`)
+      return NextResponse.json({ ok: false, delivered: true, error: errBody.error ?? `Bridge returned ${flaskRes.status}` }, { status: 502 })
     }
   } catch {
     addBridgeLogEntry(bridgeId, 'warn', `Bridge nicht direkt erreichbar - Command in Queue`, bridge.url)
