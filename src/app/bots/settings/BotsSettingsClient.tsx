@@ -15,6 +15,101 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
   const filterBots = (list: BotWithStatus[]) =>
     list.filter(b => b.bot.type === 'bot' && b.status?.connectionState !== 'offline')
   const [bots] = useState<BotWithStatus[]>(filterBots(initialBots))
+  const [drafts, setDrafts] = useState<Record<string, Record<string, string | number | boolean>>>({})
+  const [sending, setSending] = useState<string | null>(null)
+
+  async function sendParameters(botId: string) {
+    const parameters = drafts[botId]
+    if (!parameters) return
+    setSending(botId)
+    try {
+      const res = await fetch('/api/bridge/command', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bridgeId: botId, command: 'set_parameters', payload: { parameters } }),
+      })
+      if (!res.ok) {
+        console.error('[BotsSettings] set_parameters fehlgeschlagen:', res.status)
+      }
+    } finally {
+      setSending(null)
+    }
+  }
+
+  function renderParameterEditor(botId: string, parameters: Record<string, string | number | boolean> | undefined) {
+    if (!parameters || Object.keys(parameters).length === 0) {
+      return (
+        <p className="text-[11px]" style={{ color: 'var(--text-3)' }}>
+          Dieser Bot unterstützt keine konfigurierbaren Parameter.
+        </p>
+      )
+    }
+
+    const draft = drafts[botId] ?? parameters
+
+    return (
+      <div className="flex flex-col gap-3">
+        {Object.entries(draft).map(([key, value]) => (
+          <div key={key} className="flex items-center justify-between gap-3">
+            <span className="text-[11px] font-bold uppercase tracking-wide" style={{ color: 'var(--text-2)' }}>
+              {key}
+            </span>
+            {typeof value === 'boolean' ? (
+              <button
+                role="switch"
+                aria-checked={value}
+                aria-label={key}
+                onClick={() => setDrafts(prev => ({
+                  ...prev,
+                  [botId]: { ...(prev[botId] ?? parameters), [key]: !value },
+                }))}
+                className="shrink-0 rounded-full transition-colors"
+                style={{ width: 44, height: 24, background: value ? 'var(--green)' : 'var(--surface-3)', position: 'relative' }}>
+                <span style={{
+                  position: 'absolute', top: 3, left: value ? 23 : 3,
+                  width: 18, height: 18, borderRadius: '50%', background: '#fff', transition: 'left 0.15s',
+                }} />
+              </button>
+            ) : typeof value === 'number' ? (
+              <input
+                type="number"
+                aria-label={key}
+                value={value}
+                onChange={e => setDrafts(prev => ({
+                  ...prev,
+                  [botId]: { ...(prev[botId] ?? parameters), [key]: parseFloat(e.target.value) || 0 },
+                }))}
+                className="w-28 px-2 py-1 rounded-lg text-[11px] font-mono outline-none text-right"
+                style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
+              />
+            ) : (
+              <input
+                type="text"
+                aria-label={key}
+                value={value as string}
+                onChange={e => setDrafts(prev => ({
+                  ...prev,
+                  [botId]: { ...(prev[botId] ?? parameters), [key]: e.target.value },
+                }))}
+                className="w-28 px-2 py-1 rounded-lg text-[11px] font-mono outline-none"
+                style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
+              />
+            )}
+          </div>
+        ))}
+
+        <button
+          onClick={() => sendParameters(botId)}
+          disabled={sending === botId}
+          aria-busy={sending === botId}
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold cursor-pointer disabled:opacity-60 mt-1 self-start"
+          style={{ background: 'var(--accent)', color: '#fff' }}>
+          <Check size={12} />
+          {sending === botId ? 'Senden...' : 'Parameter senden'}
+        </button>
+      </div>
+    )
+  }
 
   return (
     <main className="flex-1 min-w-0 p-4 md:p-6">
@@ -79,6 +174,11 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
                         : <><WifiOff size={11} style={{ color: '#ef4444' }} /> Offline</>}
                     </span>
                   </div>
+                </div>
+
+                {/* Parameter-Editor */}
+                <div className="mt-4 pt-4" style={{ borderTop: '1px solid var(--border)' }}>
+                  {renderParameterEditor(bot.id, status?.parameters)}
                 </div>
 
               </motion.div>
