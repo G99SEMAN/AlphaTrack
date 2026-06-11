@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Wifi, WifiOff, AlertTriangle, TrendingUp, ExternalLink } from 'lucide-react'
-import { BotWithStatus, ConnectionState, BotState } from '@/types/bot'
+import { BotWithStatus, ConnectionState, BotState, BotStats } from '@/types/bot'
 import { Profile } from '@/types/profile'
 import Link from 'next/link'
 import { currencySymbol } from '@/lib/currency'
@@ -64,6 +64,13 @@ function formatUptime(seconds: number): string {
   return m > 0 ? `${h}h ${m}m` : `${h}h`
 }
 
+function formatPnl(realizedPnl: number | null, currency: string): { value: string; color: string } {
+  if (realizedPnl === null) return { value: '-', color: 'var(--text-3)' }
+  if (realizedPnl > 0) return { value: `+${realizedPnl.toFixed(2)} ${currencySymbol(currency)}`, color: 'var(--green)' }
+  if (realizedPnl < 0) return { value: `${realizedPnl.toFixed(2)} ${currencySymbol(currency)}`, color: 'var(--red)' }
+  return { value: `+0.00 ${currencySymbol(currency)}`, color: 'var(--text-1)' }
+}
+
 export default function BotsClient({ initialBots, profiles }: Props) {
   const filterBots = (list: BotWithStatus[]) =>
     list.filter(b => b.bot.type === 'bot' && b.status != null && b.status.connectionState !== 'offline')
@@ -83,6 +90,30 @@ export default function BotsClient({ initialBots, profiles }: Props) {
     const id = setInterval(refresh, 8000)
     return () => clearInterval(id)
   }, [refresh])
+
+  const [stats, setStats] = useState<Record<string, BotStats>>({})
+
+  useEffect(() => {
+    async function fetchStats() {
+      const results = await Promise.allSettled(
+        bots.map(async ({ bot }) => {
+          const res = await fetch(`/api/bots/${bot.id}/stats`)
+          if (!res.ok) return null
+          return { id: bot.id, data: await res.json() as BotStats }
+        })
+      )
+      const next: Record<string, BotStats> = {}
+      for (const r of results) {
+        if (r.status === 'fulfilled' && r.value) {
+          next[r.value.id] = r.value.data
+        }
+      }
+      setStats(next)
+    }
+    fetchStats()
+    const id = setInterval(fetchStats, 8000)
+    return () => clearInterval(id)
+  }, [bots])
 
   const connected = bots.filter(b => b.status?.connectionState === 'connected').length
   const running = bots.filter(b => b.status?.state === 'running').length
@@ -198,11 +229,11 @@ export default function BotsClient({ initialBots, profiles }: Props) {
   )
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
   return (
     <div className="rounded-xl px-3 py-2" style={{ background: 'var(--bg)' }}>
       <p className="text-[10px] uppercase tracking-wide mb-0.5" style={{ color: 'var(--text-3)' }}>{label}</p>
-      <p className="text-sm font-bold truncate" style={{ color: 'var(--text-1)' }}>{value}</p>
+      <p className="text-sm font-bold truncate" style={{ color: valueColor ?? 'var(--text-1)' }}>{value}</p>
     </div>
   )
 }
