@@ -66,7 +66,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
         style={{ borderBottom: '1px solid var(--border)' }}
         onClick={() => setExpanded(v => !v)}
         onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'var(--surface-2)' }}
-        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'transparent' }}
+        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'var(--surface)' }}
       >
         {/* Richtungs-Indikator */}
         <div
