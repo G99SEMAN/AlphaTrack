@@ -168,6 +168,8 @@ export default function BotsClient({ initialBots, profiles }: Props) {
               const profile = profiles.find(p => p.id === bot.profileId)
               const conn = status?.connectionState
               const dotColor = conn === 'connected' ? 'var(--green)' : conn === 'warning' ? '#f59e0b' : '#ef4444'
+              const botStats = stats[bot.id]
+              const pnl = formatPnl(botStats?.realizedPnl ?? null, botStats?.currency ?? profile?.currency ?? 'EUR')
 
               return (
                 <motion.div key={bot.id}
@@ -193,13 +195,10 @@ export default function BotsClient({ initialBots, profiles }: Props) {
 
                   {/* Stats-Grid */}
                   <div className="grid grid-cols-2 gap-2">
-                    <Stat label="Balance"
-                      value={status?.balance != null
-                        ? `${status.balance.toFixed(2)} ${currencySymbol(status.currency ?? profile?.currency ?? 'EUR')}`
-                        : '-'}
-                    />
-                    <Stat label="Positionen" value={status?.openPositions?.toString() ?? '-'} />
-                    <Stat label="Uptime"      value={status?.uptime ? formatUptime(status.uptime) : '-'} />
+                    <Stat label="P&L" value={pnl.value} valueColor={pnl.color} />
+                    <Stat label="Positionen" value={botStats?.openCount?.toString() ?? '-'} />
+                    <Stat label="Trades"     value={botStats?.tradeCount?.toString() ?? '-'} />
+                    <Stat label="Uptime"     value={status?.uptime ? formatUptime(status.uptime) : '-'} />
                   </div>
 
                   {/* Bot-ID (Spec: ID + Name anzeigen) */}
