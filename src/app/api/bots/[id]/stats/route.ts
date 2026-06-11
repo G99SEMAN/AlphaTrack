@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getBotById } from '@/lib/bot-data'
 import { getProfileTrades, getProfiles } from '@/lib/profiles'
-import { isSameOriginRequest } from '@/lib/auth'
 import { BotStats } from '@/types/bot'
 
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!isSameOriginRequest(req)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
-
   const { id } = await params
   const bot = getBotById(id)
   if (!bot) {
