@@ -1,6 +1,7 @@
 import requests
 import time
 from mt5_connector import MT5Connector
+from gateway import get_at_bot_id_for_ticket
 
 
 def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=None, local_log=None) -> tuple[bool, float]:
@@ -21,12 +22,13 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     # Geschlossene Trades für Log vormerken
     closed_count = len(closed_trades)
 
-    # C4: Trades ohne bot_id stammen vom Bridge-Sync (nicht von einem Bot).
-    # bot_id=None kennzeichnet bridge-originierte Trades — sie erscheinen
-    # nicht in Bot-Trade-Listen, die nach bot_id filtern.
-    tagged_trades = [
-        {**t, "bot_id": t.get("bot_id", None)} for t in all_trades
-    ]
+    # C4: bot_id aus Ticket-Registry (gateway) aufloesen, Fallback auf Trade-Feld.
+    # Trades ohne bekanntes Ticket stammen vom Bridge-Sync → bot_id bleibt None.
+    tagged_trades = []
+    for t in all_trades:
+        ticket = t.get("ticket")
+        resolved = (get_at_bot_id_for_ticket(int(ticket)) if ticket else None) or t.get("bot_id", None)
+        tagged_trades.append({**t, "bot_id": resolved})
 
     payload = {
         "bridgeId": config["bridge_id"],

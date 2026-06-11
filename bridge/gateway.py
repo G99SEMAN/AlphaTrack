@@ -184,6 +184,16 @@ def _require_api_key(request: Request):
 # Maps bridge-internal bot_id → AlphaTrack nanoid, set after successful registration
 _alphatrack_bot_ids: dict = {}
 
+# Maps MT5 ticket → AlphaTrack bot ID for trade attribution in trade_sync (C4)
+_ticket_to_at_bot_id: dict = {}
+_ticket_lock = threading.Lock()
+
+
+def get_at_bot_id_for_ticket(ticket: int) -> str | None:
+    """Returns the AlphaTrack bot ID that opened this MT5 ticket, or None."""
+    with _ticket_lock:
+        return _ticket_to_at_bot_id.get(int(ticket))
+
 
 async def _post_alphatrack(path: str, body: dict, headers: dict = None) -> dict | None:
     url = f"{_alphatrack_url}{path}"
@@ -273,9 +283,10 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                     await websocket.close(code=1008)
                     return
 
-                # Reconnect: reuse existing bot_id if name is known
+                # Reconnect: reuse existing bot_id if name is known,
+                # but honour a provided static ID (allows config-based reassignment)
                 is_reconnect = bot_name in _bot_names_to_id
-                if is_reconnect:
+                if is_reconnect and not bot_static_id:
                     bot_id = _bot_names_to_id[bot_name]
                 else:
                     # Use static bot_id from config if provided, otherwise generate one
@@ -517,6 +528,12 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
         # C3: Forward MT5 error immediately to the originating bot
         if not result.get("success") and result.get("error") and requesting_bot_id:
             asyncio.create_task(_forward_mt5_error_to_bot(requesting_bot_id, result["error"]))
+        # C4: Remove ticket from attribution registry after close
+        if result.get("success"):
+            close_ticket = (payload or {}).get("ticket")
+            if close_ticket:
+                with _ticket_lock:
+                    _ticket_to_at_bot_id.pop(int(close_ticket), None)
         return {"ok": True, **result}
 
     if command == "execute_trade":
@@ -541,6 +558,11 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
         # C3: Forward MT5 error immediately to the originating bot
         if not result.get("success") and result.get("error") and requesting_bot_id:
             asyncio.create_task(_forward_mt5_error_to_bot(requesting_bot_id, result["error"]))
+        # C4: Record ticket → AlphaTrack bot ID for trade attribution
+        if result.get("success") and result.get("ticket") and requesting_bot_id:
+            at_id = _alphatrack_bot_ids.get(requesting_bot_id, requesting_bot_id)
+            with _ticket_lock:
+                _ticket_to_at_bot_id[int(result["ticket"])] = at_id
         return {"ok": True, **result}
 
     _command_queue.put({"command": command, "id": cmd_id})
