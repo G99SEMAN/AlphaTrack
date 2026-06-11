@@ -62,11 +62,11 @@ Ausnahmen:
 | Stat-Value | 14px | 700 (bold) | 1 | `text-sm font-bold` |
 | Card-Name / Heading | 14px | 700 (bold) | 1.25 | `text-sm font-bold` |
 | Section-Heading | 20px | 700 (bold) | 1.2 | `text-xl font-bold` |
-| Badge / Meta | 10–11px | 600 (semibold) | 1 | `text-[10px] font-semibold` / `text-[11px]` |
+| Badge / Meta | 10–11px | 400 (regular) | 1 | `text-[10px] uppercase tracking-wide` / `text-[11px] uppercase tracking-wide` |
 | Stat-Label | 10px | 400 (regular) | 1 | `text-[10px] uppercase tracking-wide` |
 | Mono (IDs, URL) | 11px | 400 (regular) | 1 | `text-[11px] font-mono` |
 
-Gewichte im Einsatz: 400 (regular) + 700 (bold) — ausnahmsweise 600 (semibold) für Badges/Labels.
+Gewichte im Einsatz: 400 (regular) + 700 (bold). Badges/Labels verwenden 400 mit `uppercase tracking-wide` statt eines dritten Gewichts.
 
 > Quelle: Bestehendes Muster in BotsClient.tsx (Z.95–175); keine Abweichung für neue Elemente.
 
@@ -171,12 +171,12 @@ Input-Typ-Inferenz (D-10):
 - `typeof value === 'boolean'` → `<button role="switch">` Toggle — 44×24px, grün wenn true / surface-3 wenn false
 - `typeof value === 'string'` → `<input type="text">` — flex-1 breit
 
-Parameter-Zeilen-Layout: `flex items-center justify-between gap-3` mit Label links (`text-xs font-semibold var(--text-2)`) und Input rechts.
+Parameter-Zeilen-Layout: `flex items-center justify-between gap-3` mit Label links (`text-[11px] font-bold uppercase tracking-wide var(--text-2)`) und Input rechts.
 
 **„Parameter senden"-Button (D-15):** Pro Bot, unterhalb der Parameter-Liste.
 - Label: „Parameter senden"
 - Icon: `Check` (lucide-react, size=12), links vom Label
-- Style: `background: var(--accent), color: #fff, px-3 py-2 rounded-xl text-xs font-bold`
+- Style: `background: var(--accent), color: #fff, px-3 py-2 rounded-xl text-[11px] font-bold`
 - Lade-State: Button disabled + Label „Senden..." während `fetch` läuft
 - Erfolgs-Feedback: Button-Label wechselt für 2s zu „Gesendet ✓", dann zurück
 - Nur sichtbar wenn `parameters` vorhanden (nicht beim Info-Text-Zustand)
@@ -210,7 +210,7 @@ Parameter-Zeilen-Layout: `flex items-center justify-between gap-3` mit Label lin
 | Bot verbunden, Parameter vorhanden | Parameter-Liste + „Parameter senden"-Button |
 | Button geklickt, Fetch läuft | Button disabled, Label „Senden..." |
 | Fetch erfolgreich | Button-Label „Gesendet ✓" für 2s, dann zurück |
-| Fetch fehlgeschlagen | Inline-Fehlertext unter Parameter-Liste: `text-xs var(--red)` |
+| Fetch fehlgeschlagen | Inline-Fehlertext unter Parameter-Liste: `text-[11px] var(--red)` |
 | Kein Bot verbunden (leere Liste) | Leer-Zustand Card (bestehend, unverändert) |
 
 ### Toggle (boolean Parameter)
