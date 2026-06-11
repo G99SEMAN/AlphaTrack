@@ -2,10 +2,14 @@ import { Trade } from './trade'
 
 export type BotState = 'running' | 'paused' | 'stopped' | 'error' | 'disconnected'
 export type ConnectionState = 'connected' | 'warning' | 'offline'
-export type BotCommandType = 'start' | 'stop' | 'pause' | 'resume' | 'execute_trade' | 'close_position' | 'restart'
+export type BotCommandType = 'start' | 'stop' | 'pause' | 'resume' | 'execute_trade' | 'close_position' | 'restart' | 'set_parameters'
 
 export interface ClosePositionPayload {
   ticket: number
+}
+
+export interface SetParametersPayload {
+  parameters: Record<string, string | number | boolean>
 }
 
 export interface TradeOrderPayload {
@@ -27,6 +31,13 @@ export interface TradeOrderResult {
   lots: number
   timestamp: string
 }
+export interface BotStats {
+  openCount: number
+  tradeCount: number
+  realizedPnl: number | null
+  currency: string
+}
+
 export type LogLevel = 'info' | 'warn' | 'error'
 
 // Konfigurierter Bot-Eintrag (gespeichert in data/bots.json)
@@ -50,6 +61,7 @@ export interface BotStatus {
   uptime: number
   balance?: number
   currency?: string
+  parameters?: Record<string, string | number | boolean>
 }
 
 export interface BotCommand {
