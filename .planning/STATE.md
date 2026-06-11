@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 UI-SPEC approved
-last_updated: "2026-06-11T14:38:57.983Z"
-last_activity: 2026-06-11 -- Phase 03 execution started
+stopped_at: Phase 03 Plan 02 — Checkpoint Task 3 (UAT Bot-Karte)
+last_updated: "2026-06-11T14:44:41Z"
+last_activity: 2026-06-11 -- Phase 03 Plan 02 Tasks 1+2 complete, awaiting UAT checkpoint
 progress:
   total_phases: 4
   completed_phases: 2
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 
 Phase: 03 (bot-verbesserungen) — EXECUTING
 Plan: 2 of 3
-Status: Ready to execute
+Status: Checkpoint — awaiting UAT (Task 3)
 Last activity: 2026-06-11 -- Phase 03 execution started
 
 Progress: [██████░░░░] 58%
@@ -82,4 +82,4 @@ None yet.
 
 Last session: 2026-06-11T14:38:57.974Z
 Stopped at: Phase 3 UI-SPEC approved
-Resume file: .planning/phases/03-bot-verbesserungen/03-UI-SPEC.md
+Resume file: .planning/phases/03-bot-verbesserungen/03-02-PLAN.md
