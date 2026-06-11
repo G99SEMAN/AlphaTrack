@@ -17,6 +17,7 @@ from udp_announce import udp_announce_loop, configure as configure_udp
 app = FastAPI()
 
 _CONFIG_FILE = os.path.join(os.path.dirname(__file__), "config.json")
+_TICKET_REGISTRY_FILE = os.path.join(os.path.dirname(__file__), "ticket_registry.json")
 _EDITABLE_FIELDS = {
     "alphatrack_url", "api_key", "bridge_id", "bridge_name", "profile_id",
     "heartbeat_interval_sec", "trade_sync_interval_sec", "command_server_port",
@@ -64,6 +65,7 @@ def configure(alphatrack_url: str, profile_id: str, api_key: str, local_ip: str)
     _api_key = api_key
     _local_ip = local_ip
     configure_udp(local_ip, profile_id, _load_config)
+    _load_ticket_registry()
 
 
 def _load_config() -> dict:
@@ -187,6 +189,29 @@ _alphatrack_bot_ids: dict = {}
 # Maps MT5 ticket → AlphaTrack bot ID for trade attribution in trade_sync (C4)
 _ticket_to_at_bot_id: dict = {}
 _ticket_lock = threading.Lock()
+
+
+def _load_ticket_registry() -> None:
+    global _ticket_to_at_bot_id
+    try:
+        with open(_TICKET_REGISTRY_FILE, "r", encoding="utf-8") as f:
+            raw = json.load(f)
+        with _ticket_lock:
+            _ticket_to_at_bot_id = {int(k): v for k, v in raw.items()}
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        print(f"[gateway] Ticket-Registry laden fehlgeschlagen: {e}")
+
+
+def _save_ticket_registry() -> None:
+    try:
+        with _ticket_lock:
+            snapshot = dict(_ticket_to_at_bot_id)
+        with open(_TICKET_REGISTRY_FILE, "w", encoding="utf-8") as f:
+            json.dump({str(k): v for k, v in snapshot.items()}, f)
+    except Exception as e:
+        print(f"[gateway] Ticket-Registry speichern fehlgeschlagen: {e}")
 
 
 def get_at_bot_id_for_ticket(ticket: int) -> str | None:
@@ -534,6 +559,7 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
             if close_ticket:
                 with _ticket_lock:
                     _ticket_to_at_bot_id.pop(int(close_ticket), None)
+                _save_ticket_registry()
         return {"ok": True, **result}
 
     if command == "execute_trade":
@@ -563,6 +589,7 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
             at_id = _alphatrack_bot_ids.get(requesting_bot_id, requesting_bot_id)
             with _ticket_lock:
                 _ticket_to_at_bot_id[int(result["ticket"])] = at_id
+            _save_ticket_registry()
         return {"ok": True, **result}
 
     _command_queue.put({"command": command, "id": cmd_id})
