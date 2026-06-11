@@ -22,14 +22,14 @@
 
 ### Bots
 
-- [ ] **BOTS-01**: Bot-Positionsanzahl in Bot-Karte spiegelt tatsächlich offene Trades wider (nicht 0)
+- [x] **BOTS-01**: Bot-Positionsanzahl in Bot-Karte spiegelt tatsächlich offene Trades wider (nicht 0)
 - [ ] **BOTS-02**: „Synced"-Feld in Bot-Karte ist entfernt (war leer, kein Mehrwert)
-- [ ] **BOTS-03**: Bot-Karte zeigt P&L des jeweiligen Bots statt Balance
-- [ ] **BOTS-04**: Bot-Karte zeigt Gesamt-Trade-Anzahl des Bots
+- [x] **BOTS-03**: Bot-Karte zeigt P&L des jeweiligen Bots statt Balance
+- [x] **BOTS-04**: Bot-Karte zeigt Gesamt-Trade-Anzahl des Bots
 - [ ] **BOTS-05**: Bot verschwindet automatisch wenn er sich trennt (kein manuelles Entfernen nötig)
 - [ ] **BOTS-06**: Bot-Entfernen-Button in Bot-Settings ist entfernt
 - [ ] **BOTS-07**: Namens-Bearbeitung in Bot-Settings ist entfernt
-- [ ] **BOTS-08**: Editierbare Bot-Parameter (z.B. Lotgröße) erscheinen in Bot-Settings mit Bestätigen-Button der Änderungen an den Bot sendet
+- [x] **BOTS-08**: Editierbare Bot-Parameter (z.B. Lotgröße) erscheinen in Bot-Settings mit Bestätigen-Button der Änderungen an den Bot sendet
 
 ### Seiten-Bereinigung
 
@@ -70,20 +70,21 @@
 | BRIDGE-02 | Phase 2 | Pending |
 | BRIDGE-03 | Phase 2 | Pending |
 | BRIDGE-04 | Phase 2 | Pending |
-| BOTS-01 | Phase 3 | Pending |
+| BOTS-01 | Phase 3 | Complete |
 | BOTS-02 | Phase 3 | Pending |
-| BOTS-03 | Phase 3 | Pending |
-| BOTS-04 | Phase 3 | Pending |
+| BOTS-03 | Phase 3 | Complete |
+| BOTS-04 | Phase 3 | Complete |
 | BOTS-05 | Phase 3 | Pending |
 | BOTS-06 | Phase 3 | Pending |
 | BOTS-07 | Phase 3 | Pending |
-| BOTS-08 | Phase 3 | Pending |
+| BOTS-08 | Phase 3 | Complete |
 | BOTLOG-01 | Phase 4 | Pending |
 | PERF-01 | Phase 4 | Pending |
 | PERF-02 | Phase 4 | Pending |
 | UI-01 | Phase 4 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 21 total
 - Mapped to phases: 21
 - Unmapped: 0

@@ -80,9 +80,10 @@ Plans:
 **Plans**: 3 plans
 Plans:
 
-- [ ] 03-01-PLAN.md — BOTS-01/03/04/08: Typ-Verträge + Stats-Endpunkt + set_parameters-Command (Wave 1)
+- [x] 03-01-PLAN.md — BOTS-01/03/04/08: Typ-Verträge + Stats-Endpunkt + set_parameters-Command (Wave 1)
 - [ ] 03-02-PLAN.md — BOTS-01/02/03/04/05: Bot-Karte auf P&L/Positionen/Trades aus Stats-Endpunkt umbauen (Wave 2)
 - [ ] 03-03-PLAN.md — BOTS-06/07/08: Bot-Settings Edit/Delete entfernen + Parameter-Editor mit Senden-Button (Wave 2)
+
 **UI hint**: yes
 
 ### Phase 4: Performance & Abschluss
@@ -109,5 +110,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
 | 2. Bridge-Bereinigung | 2/2 | Complete   | 2026-06-10 |
-| 3. Bot-Verbesserungen | 0/3 | Not started | - |
+| 3. Bot-Verbesserungen | 1/3 | In Progress|  |
 | 4. Performance & Abschluss | 0/? | Not started | - |
