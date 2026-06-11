@@ -102,9 +102,9 @@ Plans:
 **Plans**: 3 plans
 Plans:
 
-- [ ] 04-01-PLAN.md — PERF-01/PERF-02: Bridge gateway.py Registry-Persistenz (_ticket_to_at_bot_id in JSON) (Wave 1)
-- [ ] 04-02-PLAN.md — BOTLOG-01: Bot-Log-Seite + Sidebar-Eintrag entfernen (Wave 1)
-- [ ] 04-03-PLAN.md — UI-01: TradeRow borderBottom-Konsistenz für alle Trade-Status (Wave 1)
+- [x] 04-01-PLAN.md — PERF-01/PERF-02: Bridge gateway.py Registry-Persistenz (_ticket_to_at_bot_id in JSON) (Wave 1)
+- [x] 04-02-PLAN.md — BOTLOG-01: Bot-Log-Seite + Sidebar-Eintrag entfernen (Wave 1)
+- [x] 04-03-PLAN.md — UI-01: TradeRow borderBottom-Konsistenz für alle Trade-Status (Wave 1)
 
 **UI hint**: yes
 
@@ -118,4 +118,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
 | 2. Bridge-Bereinigung | 2/2 | Complete   | 2026-06-10 |
 | 3. Bot-Verbesserungen | 1/3 | In Progress|  |
-| 4. Performance & Abschluss | 0/3 | Not started | - |
+| 4. Performance & Abschluss | 3/3 | Complete   | 2026-06-11 |
