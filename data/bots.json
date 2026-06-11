@@ -1,13 +1,5 @@
 [
   {
-    "id": "y-inaIPikS",
-    "name": "AI-Trading",
-    "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.28:8765/bot/ai-trading-001",
-    "createdAt": "2026-06-07T11:45:04.421Z",
-    "type": "bot"
-  },
-  {
     "id": "IQTLJ3Jdpp",
     "name": "redesign_bridge",
     "profileId": "QJT91OaKxi",
@@ -19,7 +11,7 @@
     "id": "qwzDxCfKpp",
     "name": "TestBot 1",
     "profileId": "FiFT3HmJf-",
-    "url": "http://192.168.178.28:8765/bot/99711606-e67a-468d-9e03-49bd760bf26a",
+    "url": "http://192.168.178.28:8765/bot/94b8538c-8a01-4907-87a1-98f0b243630a",
     "createdAt": "2026-06-10T04:47:50.167Z",
     "type": "bot"
   }

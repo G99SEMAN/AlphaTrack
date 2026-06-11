@@ -1,20 +1,14 @@
 ---
-status: testing
+status: passed
 phase: 01-datenkorrektheit
 source: [01-01-SUMMARY.md, 01-02-SUMMARY.md, 01-03-SUMMARY.md, 01-04-SUMMARY.md]
 started: 2026-06-10T11:53:00Z
-updated: 2026-06-10T11:53:00Z
+updated: 2026-06-10T16:05:00Z
 ---
 
 ## Current Test
 
-number: 4
-name: "Synced"-Feld nicht sichtbar in der Bot-Detailansicht
-expected: |
-  Öffne /bots/[eine-beliebige-Bot-ID]. In der Stat-Übersicht des
-  Bot-Details darf kein "Trades gespeichert" oder "Synced"-Eintrag
-  mehr erscheinen.
-awaiting: user response
+none — alle Tests abgeschlossen
 
 ## Tests
 
@@ -32,7 +26,7 @@ result: pass
 
 ### 4. "Synced"-Feld nicht sichtbar in der Bot-Detailansicht
 expected: Öffne /bots/[eine-beliebige-Bot-ID]. In der Stat-Übersicht des Bot-Details darf kein "Trades gespeichert" oder "Synced"-Eintrag mehr erscheinen.
-result: [pending]
+result: pass
 
 ### 5. Close-Event API — Authentifizierung
 expected: |
@@ -45,7 +39,7 @@ expected: |
       -X POST http://localhost:3000/api/bridge/close-event \
       -H "Content-Type: application/json" \
       -d '{"bridgeId":"test","profileId":"x","ticket":1,"exitPrice":1.0,"closeTime":"now"}'
-result: [pending]
+result: pass
 
 ### 6. Close-Event API — Trade wird korrekt geschlossen
 expected: |
@@ -53,7 +47,7 @@ expected: |
   sende einen gültigen close-event Request mit diesem ticket und einem exitPrice.
   Danach erscheint der Trade im Journal/Dashboard als "geschlossen" mit dem richtigen exit-Preis.
   (Wenn kein offener Trade vorhanden ist, darf dieser Test übersprungen werden.)
-result: [pending]
+result: pass
 
 ### 7. sourceId bei neuen Trades gesetzt
 expected: |
@@ -62,14 +56,14 @@ expected: |
   Der neue Trade-Eintrag hat ein "sourceId"-Feld (z.B. "bridge/tradeexecuter" oder die botId).
   Vorhandene Trades ohne sourceId erhalten beim nächsten POST ebenfalls eine sourceId.
   (Diesen Test überspringen, wenn kein Test-Trade möglich ist.)
-result: [pending]
+result: pass
 
 ## Summary
 
 total: 7
-passed: 3
+passed: 7
 issues: 0
-pending: 4
+pending: 0
 skipped: 0
 blocked: 0
 

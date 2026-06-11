@@ -1,0 +1,50 @@
+[
+  {
+    "id": "4GA3be-mf5",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:47:36.707Z",
+    "acknowledged": false
+  },
+  {
+    "id": "IhlSCfKgn9",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:47:47.730Z",
+    "acknowledged": false
+  },
+  {
+    "id": "ukZJNoDkes",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:47:51.646Z",
+    "acknowledged": false
+  },
+  {
+    "id": "45kpIczTwO",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:47:59.235Z",
+    "acknowledged": false
+  },
+  {
+    "id": "qLSRJQgGvk",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:48:06.494Z",
+    "acknowledged": false
+  },
+  {
+    "id": "nK0xuKLGGH",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:48:18.430Z",
+    "acknowledged": false
+  },
+  {
+    "id": "OCZoNjXoHY",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:48:25.980Z",
+    "acknowledged": false
+  },
+  {
+    "id": "iYFlRMWUcx",
+    "command": "close_position",
+    "timestamp": "2026-06-11T19:48:39.724Z",
+    "acknowledged": false
+  }
+]
