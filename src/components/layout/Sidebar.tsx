@@ -35,7 +35,6 @@ const BRIDGE_NAV = [
 
 const BOTS_NAV = [
   { href: '/bots',          label: 'Bots',         icon: Bot },
-  { href: '/bots/logs',     label: 'Bot Log',      icon: ScrollText },
   { href: '/bots/settings', label: 'Bot Settings', icon: SlidersHorizontal },
   { href: '/strategien',    label: 'Strategien',   icon: Target },
   { href: '/bots/performance', label: 'Performance', icon: BarChart2 },
