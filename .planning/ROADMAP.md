@@ -53,7 +53,8 @@ Plans:
   3. Der Bridge-Log enthält keinen Filter "Alle Bots" — nur bridge-eigene Einträge sind filterbar
   4. Die Bridge-Settings-Seite existiert nicht mehr (navigieren zu ihr ergibt 404 oder Weiterleitung)
 
-**Plans**: 2 plansPlans:
+**Plans**: 2 plans
+Plans:
 
 - [x] 02-01-PLAN.md — BRIDGE-01 + BRIDGE-02: Heartbeat-Timeout-Filter (Auto-Discovery) + Trash-Icon entfernen (Wave 1)
 - [x] 02-02-PLAN.md — BRIDGE-03 + BRIDGE-04: Bot-Filter aus Bridge-Log entfernen + Bridge-Settings-Seite loeschen (Wave 1)
@@ -98,7 +99,13 @@ Plans:
   3. Die Bot-Log-Seite existiert nicht mehr (navigieren zu ihr ergibt 404 oder Weiterleitung)
   4. Die Trennlinie zwischen offenen Trades hat denselben visuellen Stil wie bei vergangenen Trades
 
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+
+- [ ] 04-01-PLAN.md — PERF-01/PERF-02: Bridge gateway.py Registry-Persistenz (_ticket_to_at_bot_id in JSON) (Wave 1)
+- [ ] 04-02-PLAN.md — BOTLOG-01: Bot-Log-Seite + Sidebar-Eintrag entfernen (Wave 1)
+- [ ] 04-03-PLAN.md — UI-01: TradeRow borderBottom-Konsistenz für alle Trade-Status (Wave 1)
+
 **UI hint**: yes
 
 ## Progress
@@ -111,4 +118,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Datenkorrektheit | 4/4 | Complete   | 2026-06-10 |
 | 2. Bridge-Bereinigung | 2/2 | Complete   | 2026-06-10 |
 | 3. Bot-Verbesserungen | 1/3 | In Progress|  |
-| 4. Performance & Abschluss | 0/? | Not started | - |
+| 4. Performance & Abschluss | 0/3 | Not started | - |
