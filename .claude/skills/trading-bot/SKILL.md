@@ -130,10 +130,15 @@ def get_parameters(self) -> dict:
     "candles_count": 50,
     "lots": 0.01,
     "max_positions": 1,
-    "comment": "Mein Bot"
+    "comment": "Mein Bot",
+    "tick_interval_sec": 60
   }
 }
 ```
+
+`tick_interval_sec` steuert, wie oft `on_tick()` aufgerufen wird (Standard: 60s,
+Minimum: 1s). Wird pro Loop-Iteration aus der Config gelesen — via
+`get_parameters()` exponiert ist es im Settings-Editor live aenderbar.
 
 **Pflichtfelder:**
 - `bot_id`: Einzigartiger statischer Identifier (z.B. `"mybot-001"`)

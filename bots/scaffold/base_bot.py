@@ -445,7 +445,6 @@ class BaseBot:
             timeframe = cfg.get("strategy", {}).get("timeframe", "M5")
             candles_count = int(cfg.get("strategy", {}).get("candles_count", 100))
             max_positions = int(cfg.get("strategy", {}).get("max_positions", 1))
-            tick_interval_sec = 60
             heartbeat_interval_sec = cfg.get("heartbeat_interval_sec", 10)
 
             self._state = "running"
@@ -474,6 +473,15 @@ class BaseBot:
                     self._open_positions = len(my_positions)
 
                 self._process_commands()
+
+                # Tick-Intervall pro Iteration aus der Config lesen — damit ist es
+                # via Settings-Editor (set_parameters) live aenderbar (Standard: 60s)
+                try:
+                    tick_interval_sec = float(self._config.get("strategy", {}).get("tick_interval_sec", 60))
+                except (TypeError, ValueError):
+                    tick_interval_sec = 60.0
+                if tick_interval_sec < 1:
+                    tick_interval_sec = 1.0
 
                 if self._state == "running" and bridge_ok and now - last_tick >= tick_interval_sec:
                     try:
