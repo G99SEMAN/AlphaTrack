@@ -64,6 +64,14 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
   function resetPage() { setPage(1) }
 
+  const botNames = useMemo(() => new Map(bots.map(b => [b.id, b.name])), [bots])
+
+  function resolveSourceLabel(trade: Trade): string | undefined {
+    if (!trade.sourceId) return undefined
+    if (trade.sourceId === 'bridge/tradeexecuter') return 'Bridge'
+    return botNames.get(trade.sourceId) ?? 'Bot'
+  }
+
   const filtered = useMemo(() => trades
     .filter(t => {
       if (filterStatus !== 'all' && t.status !== filterStatus) return false
@@ -332,7 +340,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
         ) : (
           <div>
             {paginated.map(trade => (
-              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} />
+              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} sourceLabel={resolveSourceLabel(trade)} />
             ))}
           </div>
         )}

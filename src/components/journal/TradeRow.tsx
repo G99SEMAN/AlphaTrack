@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { TrendingUp, TrendingDown, Pencil, Trash2, ChevronDown, ChevronUp, Loader2, Target, ImageIcon, Share2, MoreVertical, X, ZoomIn, ZoomOut } from 'lucide-react'
+import { TrendingUp, TrendingDown, Pencil, Trash2, ChevronDown, ChevronUp, Loader2, Target, ImageIcon, Share2, MoreVertical, X, ZoomIn, ZoomOut, Bot } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { deleteTradeAction } from '@/lib/actions'
@@ -16,6 +16,7 @@ interface Props {
   currency?: string
   startCapital?: number
   onRefresh?: () => void
+  sourceLabel?: string
 }
 
 function isSafeScreenshotUrl(url: string): boolean {
@@ -39,7 +40,7 @@ function StatusBadge({ status }: { status: Trade['status'] }) {
   )
 }
 
-export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh }: Props) {
+export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh, sourceLabel }: Props) {
   const [expanded, setExpanded] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -100,6 +101,16 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
             <div className="sm:hidden shrink-0">
               <StatusBadge status={trade.status} />
             </div>
+            {sourceLabel && (
+              <span
+                className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-semibold shrink-0 max-w-32 truncate"
+                style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent)', border: '1px solid rgba(59,130,246,0.25)' }}
+                title={`Quelle: ${sourceLabel}`}
+              >
+                <Bot size={10} className="shrink-0" />
+                {sourceLabel}
+              </span>
+            )}
             {trade.tp != null && (
               <span
                 className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold shrink-0"
