@@ -1,5 +1,77 @@
 [
   {
+    "id": "07fe7e9e29",
+    "timestamp": "2026-06-12T05:21:38.349766+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.28:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "YIn0k73YBL",
+    "timestamp": "2026-06-12T05:20:55.224Z",
+    "level": "info",
+    "message": "1 neue, 0 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "IQTLJ3Jdpp",
+    "botName": "redesign_bridge"
+  },
+  {
+    "id": "cd19f128bf",
+    "timestamp": "2026-06-12T05:20:48.485057+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fc822bb600",
+    "timestamp": "2026-06-12T05:20:37.939498+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 1",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5ff42f9b42",
+    "timestamp": "2026-06-12T05:19:22.748996+00:00",
+    "level": "info",
+    "message": "219 Trade(s) synchronisiert | PnL gesamt: +59.59",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ikR7mNwmJK",
+    "timestamp": "2026-06-12T05:19:22.724Z",
+    "level": "info",
+    "message": "0 neue, 12 aktualisierte Trade(s)",
+    "details": "Profil: FiFT3HmJf-",
+    "botId": "IQTLJ3Jdpp",
+    "botName": "redesign_bridge"
+  },
+  {
+    "id": "4101e7765c",
+    "timestamp": "2026-06-12T05:19:14.627269+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e5edf7233c",
+    "timestamp": "2026-06-12T05:19:00.507809+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.28:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "7489af603e",
     "timestamp": "2026-06-11T19:48:40.355347+00:00",
     "level": "info",

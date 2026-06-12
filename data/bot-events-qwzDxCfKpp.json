@@ -1,5 +1,23 @@
 [
   {
+    "id": "IlwVF4w2jy",
+    "timestamp": "2026-06-12T05:20:49.372Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "qwzDxCfKpp",
+    "botName": "TestBot 1"
+  },
+  {
+    "id": "9IKXJoSTFS",
+    "timestamp": "2026-06-12T05:20:48.835Z",
+    "level": "info",
+    "message": "30min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "qwzDxCfKpp",
+    "botName": "TestBot 1"
+  },
+  {
     "id": "RwV6cOiIGB",
     "timestamp": "2026-06-11T19:38:28.987Z",
     "level": "info",
