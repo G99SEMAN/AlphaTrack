@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Completed quick task 260612-mrw (Projekt-Aufräumaktion)
+last_activity: 2026-06-12 — Completed quick task 260612-o9u (Bot-Performance-Fixes)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-12 — Completed quick task 260612-mrw: Projekt-Aufräumaktion (Cleanup verwaiste Bot-Daten, alte Bots, Doku, Demo-Profil, Launcher; README aktualisiert)
+Last activity: 2026-06-12 — Completed quick task 260612-o9u: Bot-Performance-Fenster (Avg RR entfernt, Auto-Refresh, P&L-Quelle vereinheitlicht, Datenreparatur)
 
 ## Performance Metrics
 
@@ -75,6 +75,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260612-mrw | Projekt-Aufräumaktion: verwaiste Bot-Daten, alte Bots, veraltete Doku, Demo-Profil, Launcher entfernen; README aktualisieren | 2026-06-12 | f6d001f | [260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date](./quick/260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date/) |
+| 260612-o9u | Bot-Performance-Fenster: Avg RR entfernt, Auto-Refresh (10s), P&L-Quelle vereinheitlicht (/api/bots/trades), 6 fehlattribuierte Trades repariert | 2026-06-12 | bfe5d75 | [260612-o9u-bot-performance-fenster-fixen-avg-rr-ent](./quick/260612-o9u-bot-performance-fenster-fixen-avg-rr-ent/) |
 
 ## Deferred Items
 
