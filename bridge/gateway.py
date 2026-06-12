@@ -703,7 +703,9 @@ async def update_config(request: Request, _: None = Depends(_require_api_key)):
 
 
 async def _has_body(request: Request) -> bool:
-    return int(request.headers.get("content-length", 0)) > 0
+    cl = request.headers.get("content-length")
+    te = request.headers.get("transfer-encoding", "")
+    return (cl is not None and int(cl) > 0) or "chunked" in te.lower()
 
 
 def start_server(port: int) -> threading.Thread:
