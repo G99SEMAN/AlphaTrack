@@ -104,25 +104,24 @@ function SectionHeader({ title, open, onToggle, icon: Icon }: {
   )
 }
 
+const SECTIONS_KEY = 'alphatrack-sidebar-sections'
+
+function loadSections(): { bridge: boolean; bots: boolean; weiteres: boolean } | null {
+  try {
+    const s = localStorage.getItem(SECTIONS_KEY)
+    return s ? (JSON.parse(s) as { bridge: boolean; bots: boolean; weiteres: boolean }) : null
+  } catch { return null }
+}
+
+function saveSections(v: { bridge: boolean; bots: boolean; weiteres: boolean }) {
+  try { localStorage.setItem(SECTIONS_KEY, JSON.stringify(v)) } catch { /* silent */ }
+}
+
 function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props & { onNav?: () => void; compact?: boolean }) {
   const pathname = usePathname()
   const [showEdit, setShowEdit] = useState(false)
   const [showEinstellungen, setShowEinstellungen] = useState(false)
   const { isUnlocked, toggle } = useTradingLock()
-
-  const SECTIONS_KEY = 'alphatrack-sidebar-sections'
-
-  function loadSections() {
-    try {
-      const s = localStorage.getItem(SECTIONS_KEY)
-      return s ? (JSON.parse(s) as { bridge: boolean; bots: boolean; weiteres: boolean }) : null
-    } catch { return null }
-  }
-
-  function saveSections(v: { bridge: boolean; bots: boolean; weiteres: boolean }) {
-    try { localStorage.setItem(SECTIONS_KEY, JSON.stringify(v)) } catch { /* silent */ }
-  }
-
   const [sections, setSections] = useState<{ bridge: boolean; bots: boolean; weiteres: boolean }>(() => {
     const saved = loadSections() ?? { bridge: false, bots: false, weiteres: false }
     return {
