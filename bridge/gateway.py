@@ -5,6 +5,7 @@ import os
 import tempfile
 import queue
 import threading
+import time
 import uuid
 from datetime import datetime, timedelta, timezone
 from functools import wraps
@@ -142,12 +143,41 @@ def get_connected_bot_names() -> list[str]:
         if identity:
             names.append(identity["name"])
         else:
-            # Fallback: look up name from reverse mapping
+            # Fallback: Reverse-Lookup ueber _bot_names_to_id
             for name, bid in _bot_names_to_id.items():
                 if bid == bot_id:
                     names.append(name)
                     break
     return names
+
+
+def get_connected_bots_info() -> list[dict]:
+    """Liefert pro verbundenem Bot ein dict mit name, at_id und connected_at.
+
+    Nur Bots aus _bots (tatsaechlich per WebSocket verbunden) werden beruecksichtigt.
+    at_id ist None solange die AlphaTrack-Registrierung noch aussteht.
+    connected_at ist None wenn kein Identity-Record vorhanden (sollte nicht vorkommen).
+    """
+    result = []
+    for bot_id in list(_bots.keys()):
+        identity = _bot_identities.get(bot_id)
+        if identity:
+            name = identity["name"]
+            connected_at = identity.get("connected_at")
+        else:
+            # Fallback: Reverse-Lookup ueber _bot_names_to_id
+            name = bot_id
+            for n, bid in _bot_names_to_id.items():
+                if bid == bot_id:
+                    name = n
+                    break
+            connected_at = None
+        result.append({
+            "name": name,
+            "at_id": _alphatrack_bot_ids.get(bot_id),
+            "connected_at": connected_at,
+        })
+    return result
 
 
 def set_trade_result(cmd_id: str, result: dict):
@@ -346,7 +376,8 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
 
                 _bots[bot_id] = websocket
                 _bot_versions[bot_id] = bot_version
-                # Store full identity record (id, name, type, ip, port, latency)
+                # Store full identity record (id, name, type, ip, port, latency, connected_at)
+                # Bei Reconnect wird connected_at bewusst neu gesetzt
                 _bot_identities[bot_id] = {
                     "id": bot_id,
                     "name": bot_name,
@@ -354,6 +385,7 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                     "ip": bot_ip,
                     "port": bot_port,
                     "latency": bot_latency,
+                    "connected_at": time.time(),
                 }
 
                 if _is_agpv2:
