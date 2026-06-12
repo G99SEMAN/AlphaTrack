@@ -1,4 +1,5 @@
 import asyncio
+import hmac
 import json
 import os
 import tempfile
@@ -195,7 +196,9 @@ def _require_api_key(request: Request):
     except Exception:
         raise HTTPException(status_code=500, detail="Konfiguration nicht lesbar")
     provided = request.headers.get("X-Bot-Api-Key", "")
-    if not provided or provided != expected:
+    if not provided or not hmac.compare_digest(
+        provided.encode("utf-8"), expected.encode("utf-8")
+    ):
         raise HTTPException(status_code=401, detail="Unauthorized")
 
 
