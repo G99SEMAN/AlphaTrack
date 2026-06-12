@@ -5,6 +5,9 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 _IS_CONNECTED_CACHE_TTL = 5.0  # seconds
+_SERVER_OFFSET_CACHE_TTL = 3600.0  # seconds
+_DEFAULT_SERVER_OFFSET_SEC = 3 * 3600.0  # Fallback: BlackBull läuft auf UTC+3 (Sommer)
+_MAX_PLAUSIBLE_OFFSET_SEC = 14 * 3600.0  # Broker-Offsets liegen zwischen UTC-12 und UTC+14
 
 try:
     from zoneinfo import ZoneInfo
@@ -39,6 +42,8 @@ class MT5Connector:
         self._server = server
         self._conn_cache: bool = False
         self._conn_cache_at: float = 0.0
+        self._server_offset_cache: Optional[float] = None
+        self._server_offset_at: float = 0.0
 
     def connect(self) -> bool:
         if not mt5.initialize():
@@ -77,6 +82,38 @@ class MT5Connector:
         self._conn_cache = result
         return result
 
+    def _server_offset_sec(self) -> float:
+        """Versatz der Broker-Serverzeit gegenüber UTC in Sekunden.
+
+        MT5 liefert Epochs in Serverzeit (so als wäre sie UTC). Der Versatz wird
+        über einen frischen Tick ermittelt (tick.time ist Server-Epoch). Stale
+        Ticks (z.B. Wochenende) fallen durch den Plausibilitäts-Clamp, dann
+        greift der letzte bekannte Wert bzw. der Default.
+        """
+        now = time.time()
+        if self._server_offset_cache is not None and now - self._server_offset_at < _SERVER_OFFSET_CACHE_TTL:
+            return self._server_offset_cache
+
+        candidates = self.get_active_symbols()
+        if not candidates:
+            symbols = mt5.symbols_get()
+            candidates = [s.name for s in symbols if s.visible][:10] if symbols else []
+        for sym in candidates:
+            tick = mt5.symbol_info_tick(sym)
+            if tick is None or not tick.time:
+                continue
+            diff = tick.time - now
+            if abs(diff) <= _MAX_PLAUSIBLE_OFFSET_SEC:
+                # Broker-Offsets liegen im 30-Minuten-Raster
+                self._server_offset_cache = round(diff / 1800.0) * 1800.0
+                self._server_offset_at = now
+                return self._server_offset_cache
+        return self._server_offset_cache if self._server_offset_cache is not None else _DEFAULT_SERVER_OFFSET_SEC
+
+    def _server_iso(self, ts: float) -> str:
+        """Server-Epoch → echte UTC-ISO-Zeit (Frontend zeigt dann Lokalzeit an)."""
+        return _utc_iso(ts - self._server_offset_sec())
+
     def get_open_positions(self) -> list[dict]:
         positions = mt5.positions_get()
         if positions is None:
@@ -85,7 +122,7 @@ class MT5Connector:
         for p in positions:
             result.append({
                 "ticket": p.ticket,
-                "date": _utc_iso(p.time),
+                "date": self._server_iso(p.time),
                 "instrument": p.symbol,
                 "type": "long" if p.type == mt5.POSITION_TYPE_BUY else "short",
                 "entry": p.price_open,
@@ -142,8 +179,8 @@ class MT5Connector:
             swap = sum(d.swap for d in pos_deals)
 
             result.append({
-                "date": _utc_iso(entry.time),
-                "closeTime": _utc_iso(exit_.time),
+                "date": self._server_iso(entry.time),
+                "closeTime": self._server_iso(exit_.time),
                 "instrument": entry.symbol,
                 "type": "long" if entry.type == mt5.DEAL_TYPE_BUY else "short",
                 "entry": entry.price,
