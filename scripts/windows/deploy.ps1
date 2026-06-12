@@ -352,10 +352,11 @@ function Register-BridgeTask($cfg) {
     }
     Write-Ok "Geplante Aufgabe '$taskName' angelegt (Start bei Anmeldung)."
 
-    # Laufende Bridge beenden (falls aktiv) und mit neuer Config starten.
-    # /End schlaegt fehl, wenn die Aufgabe nicht laeuft -> Exit-Code ignorieren.
-    Invoke-MiniPcSsh $cfg ('schtasks /End /TN "' + $taskName + '" >nul 2>&1 & exit 0')
-    Invoke-MiniPcSsh $cfg ('schtasks /Run /TN "' + $taskName + '"')
+    # Laufende Bridge beenden (falls aktiv), kurz warten, dann mit neuer Config starten.
+    # /End schlaegt fehl, wenn die Aufgabe nicht laeuft -> wird remote unterdrueckt.
+    # Ohne /RU laeuft die Aufgabe nur bei angemeldetem Benutzer — sichtbar im Desktop des SSH-Users.
+    $restart = 'schtasks /End /TN "' + $taskName + '" >nul 2>&1 & timeout /t 2 /nobreak >nul & schtasks /Run /TN "' + $taskName + '"'
+    Invoke-MiniPcSsh $cfg $restart
     if ($LASTEXITCODE -ne 0) { throw 'Bridge konnte nicht gestartet werden (schtasks /Run).' }
     Write-Ok 'Bridge gestartet.'
 }
