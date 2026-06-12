@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Completed quick task 260612-ryx (Bot-Terminal testbot2)
+last_activity: 2026-06-12 — Completed quick task 260612-siw (Bot-Grundgerüst aktualisiert)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-12 — Completed quick task 260612-ryx: Bot-Terminal testbot2 im Bridge-Design
+Last activity: 2026-06-12 — Completed quick task 260612-siw: Bot-Grundgerüst zentralisiert, testbot2 migriert, Skill aktualisiert
 
 ## Performance Metrics
 
@@ -81,6 +81,7 @@ None yet.
 | 260612-fast3 | Bridge-Fix: MT5-Server-Epochs → echte UTC (Auto-Offset-Erkennung); Migration bestehender Trade-Zeitstempel um -3h | 2026-06-12 | 464ff25 | — |
 | 260612-r56 | Bridge-Terminal: eigenes "Verbundene Bots"-Panel (Status-Punkt, Name, AT-ID, Positionen, verbunden seit) | 2026-06-12 | c156e89 | [260612-r56-bridge-terminal-eigener-verbundene-bots-](./quick/260612-r56-bridge-terminal-eigener-verbundene-bots-/) |
 | 260612-ryx | Bot-Terminal testbot2 im Bridge-Design (rich-UI: Bridge-Status, Strategie-Parameter, offene Positionen, grüner Header) | 2026-06-12 | d94e0a2 | [260612-ryx-bot-terminal-testbot2-im-bridge-design-r](./quick/260612-ryx-bot-terminal-testbot2-im-bridge-design-r/) |
+| 260612-siw | Bot-Grundgerüst: ws/bridge-Client + BotDisplay ins Scaffold zentralisiert, BaseBot-Integration, testbot2 migriert, trading-bot-Skill + bots/CLAUDE.md aktualisiert | 2026-06-12 | f539957 | [260612-siw-bot-grundger-st-aktualisieren-ws-bridge-](./quick/260612-siw-bot-grundger-st-aktualisieren-ws-bridge-/) |
 
 ## Deferred Items
 
