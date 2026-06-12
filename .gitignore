@@ -75,3 +75,6 @@ top-0
 left-0
 w-56
 "!before.includes*"
+
+# Deploy-Konfiguration (enthaelt MT5-Zugangsdaten des Nutzers)
+scripts/windows/deploy.config.json
