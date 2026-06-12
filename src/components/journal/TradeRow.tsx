@@ -19,7 +19,7 @@ interface Props {
 }
 
 function isSafeScreenshotUrl(url: string): boolean {
-  return url.startsWith('/') || url.startsWith('data:image/') || /^https?:///.test(url)
+  return url.startsWith('/') || url.startsWith('data:image/') || /^https?:\/\//.test(url)
 }
 
 function StatusBadge({ status }: { status: Trade['status'] }) {
