@@ -11,7 +11,7 @@ Wenn der User `/trading-bot` aufruft:
    - `review` — bestehenden Bot reviewen
    - `debug` — Bot-Fehler analysieren
 
-2. **`new <botname>`** — erstelle alle Dateien unter `bots/<botname>/` (Templates unten)
+2. **`new <botname>`** — ZUERST Rueckfragen stellen (siehe "Rueckfragen vor der Erstellung"), DANN alle Dateien unter `bots/<botname>/` erstellen (Templates unten). Niemals Dateien erzeugen, bevor alle Pflichtfragen beantwortet sind.
 
 3. **`review`** — lies alle Bot-Dateien und pruefe:
    - Erbt Bot-Klasse von `BaseBot`?
@@ -23,6 +23,27 @@ Wenn der User `/trading-bot` aufruft:
    - `get_parameters()` implementiert, wenn Parameter einstellbar sein sollen?
 
 4. **`debug`** — lies `bots/<botname>/bot_log.json` und dann die Strategy-Datei
+
+---
+
+## Rueckfragen vor der Erstellung (Pflicht bei `new`)
+
+Bevor auch nur eine Datei erzeugt wird, MUESSEN folgende Punkte per Rueckfragen
+(AskUserQuestion oder Klartext) geklaert sein. Was der User bereits in seiner
+Anfrage beantwortet hat, wird nicht erneut gefragt — nur die Luecken.
+
+1. **Strategie-Logik** — Wann wird geoeffnet, wann geschlossen? (Einstiegs-Signal,
+   Ausstiegs-Signal/Haltedauer; konkret genug, um `on_tick()` zu implementieren)
+2. **Symbol + Timeframe** — z.B. EURUSDp auf M15 (Achtung: Broker-Suffix `p`),
+   und wie viele Kerzen die Strategie braucht (`candles_count`)
+3. **Risiko** — Lot-Groesse, SL/TP (fest, in Pips, oder keiner?), `max_positions`
+4. **Einstellbare Parameter** — Welche Werte sollen spaeter im AlphaTrack
+   Settings-Editor aenderbar sein (via `get_parameters()`)? Auch "keine" ist ok.
+5. **Name/Port nur falls unklar** — Botname aus dem Argument, Port automatisch
+   der naechste freie (ab 8771); nur nachfragen, wenn es Konflikte gibt.
+
+Erst wenn alle Punkte beantwortet sind: kurze Zusammenfassung der Entscheidungen
+zeigen, dann die Dateien erzeugen.
 
 ---
 
