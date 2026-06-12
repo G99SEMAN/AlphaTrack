@@ -1,7 +1,7 @@
 import time
 
 import MetaTrader5 as mt5
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 _IS_CONNECTED_CACHE_TTL = 5.0  # seconds
@@ -112,7 +112,9 @@ class MT5Connector:
         # 7 Tage Puffer damit IN-Deals älterer offener Positionen immer mitgefetcht werden
         lookback_start = max(0.0, close_after - 7 * 24 * 3600)
         from_date = datetime.fromtimestamp(lookback_start) if lookback_start > 0 else datetime(2000, 1, 1)
-        to_date = datetime.now()
+        # Broker-Serverzeit (z.B. UTC+3) liegt vor der Lokalzeit — mit datetime.now()
+        # als Obergrenze fehlen die juengsten Deals und Trades bleiben dauerhaft 'open'.
+        to_date = datetime.now() + timedelta(days=2)
 
         deals = mt5.history_deals_get(from_date, to_date)
         if deals is None:
