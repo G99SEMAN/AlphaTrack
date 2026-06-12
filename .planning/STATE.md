@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Milestone v1.0 completed and archived
+last_activity: 2026-06-12 — Completed quick task 260612-mrw (Projekt-Aufräumaktion)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-12 — Milestone v1.0 completed and archived
+Last activity: 2026-06-12 — Completed quick task 260612-mrw: Projekt-Aufräumaktion (Cleanup verwaiste Bot-Daten, alte Bots, Doku, Demo-Profil, Launcher; README aktualisiert)
 
 ## Performance Metrics
 
@@ -69,6 +69,12 @@ None yet.
 ### Blockers/Concerns
 
 - Bekannte Architektur-Schwäche: `_botsCache` und `_statsCache` in `src/lib/bot-data.ts` / `src/lib/data.ts` müssen nach jeder Mutation manuell auf `null` gesetzt werden — bei allen Phase-1-Fixes zwingend beachten.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260612-mrw | Projekt-Aufräumaktion: verwaiste Bot-Daten, alte Bots, veraltete Doku, Demo-Profil, Launcher entfernen; README aktualisieren | 2026-06-12 | f6d001f | [260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date](./quick/260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date/) |
 
 ## Deferred Items
 
