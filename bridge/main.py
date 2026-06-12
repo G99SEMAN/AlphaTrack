@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bot_names
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -307,12 +307,16 @@ def main():
                 display.log("error", "MT5", "Verbindung verloren - starte Neustart-Sequenz ...")
                 local_log.add("error", "MT5-Verbindung verloren", "Neustart-Sequenz gestartet")
                 state["state"] = "error"
+                # MT5 getrennt — Positionsliste leer, positions=0 pro Bot
+                bots_info = get_connected_bots_info()
+                for bot in bots_info:
+                    bot["positions"] = 0
                 display.update_status(
                     mt5_ok=False, at_ok=at_ok, at_ping_ms=at_ping_ms,
                     balance=state.get("balance"), currency=state.get("currency") or "USD",
                     open_positions=0, bridge_state="error",
-                    connected_bots=get_connected_bot_names(),
                 )
+                display.update_bots(bots_info)
                 recovered = attempt_mt5_restart(config, mt5, display)
                 if recovered:
                     state["mt5_connected"] = True
@@ -454,7 +458,19 @@ def main():
             else:
                 last_sync = now
 
-        # Display-Status aktualisieren (inkl. verbundene Bots-Liste)
+        # Display-Status aktualisieren inkl. Bots-Panel mit Positionszuordnung
+        bots_info = get_connected_bots_info()
+        open_pos = mt5.get_open_positions()
+        for bot in bots_info:
+            if bot.get("at_id"):
+                # Positionen zaehlen, deren AT-ID mit der Bot-AT-ID uebereinstimmt
+                bot["positions"] = sum(
+                    1 for p in open_pos
+                    if get_at_bot_id_for_ticket(p["ticket"]) == bot["at_id"]
+                )
+            else:
+                # at_id noch nicht bekannt (AlphaTrack-Registrierung ausstehend)
+                bot["positions"] = 0
         display.update_status(
             mt5_ok=state["mt5_connected"],
             at_ok=at_ok,
@@ -463,8 +479,8 @@ def main():
             currency=state.get("currency") or "USD",
             open_positions=state["open_positions"],
             bridge_state=state["state"],
-            connected_bots=get_connected_bot_names(),
         )
+        display.update_bots(bots_info)
 
         time.sleep(1)
 
