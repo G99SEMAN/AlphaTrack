@@ -559,6 +559,8 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
         if requesting_bot_id:
             with _cmd_to_bot_lock:
                 _cmd_to_bot_id[cmd_id] = requesting_bot_id
+        # Sync-Pfad (MT5 Worker -> HTTP /command): threading.Event — KEIN asyncio.
+        # Wird via asyncio.to_thread(evt.wait) gewartet, niemals mit asyncio.wait_for.
         evt = threading.Event()
         with _trade_lock:
             _trade_events[cmd_id] = evt
@@ -590,6 +592,8 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
         if requesting_bot_id:
             with _cmd_to_bot_lock:
                 _cmd_to_bot_id[cmd_id] = requesting_bot_id
+        # Sync-Pfad (MT5 Worker -> HTTP /command): threading.Event — KEIN asyncio.
+        # Wird via asyncio.to_thread(evt.wait) gewartet, niemals mit asyncio.wait_for.
         evt = threading.Event()
         with _trade_lock:
             _trade_events[cmd_id] = evt
@@ -631,7 +635,9 @@ async def bot_command(bot_id: str, request: Request, _: None = Depends(_require_
     frame = json.dumps({"type": "command", "cmd_id": cmd_id, "command": command, "payload": payload})
 
     if command in ("execute_trade", "close_position"):
-        loop = asyncio.get_event_loop()
+        # Async-Pfad (Bot WS -> /bot/{id}/command): asyncio.Event — NUR vom Event-Loop setzen.
+        # evt.set() erfolgt ausschließlich in ws_endpoint (gleichem Event-Loop-Thread).
+        # Niemals asyncio.Event aus einem threading.Thread setzen.
         evt = asyncio.Event()
         with _ws_trade_lock:
             _ws_trade_events[cmd_id] = evt
