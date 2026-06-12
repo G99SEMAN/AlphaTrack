@@ -30,16 +30,16 @@ import sys
 import time
 import threading
 
-# Importpfad beachten: PYTHONPATH muss auf bridge/ gesetzt sein (via start.bat)
-# und bot-Verzeichnis muss im sys.path sein.
+# Importpfad beachten: PYTHONPATH muss auf bots/ gesetzt sein (via start.bat)
+# Paketrelative Imports setzen voraus, dass scaffold als Package geladen wird.
 
 try:
-    from ws_client import BridgeWSClient
-    from bridge_client import BridgeClient
+    from .ws_client import BridgeWSClient
+    from .bridge_client import BridgeClient
 except ImportError as e:
     raise ImportError(
         f"BaseBot konnte ws_client/bridge_client nicht importieren: {e}\n"
-        "Stelle sicher, dass PYTHONPATH auf bridge/ gesetzt ist (start.bat)."
+        "Stelle sicher, dass PYTHONPATH auf das bots/-Verzeichnis gesetzt ist (start.bat)."
     ) from e
 
 # Bot-Log: Wird lokal im bot-Verzeichnis gespeichert (nicht im bridge/-Verzeichnis)
@@ -62,6 +62,13 @@ except ImportError:
         def add(self, level: str, message: str, details: str = None) -> None:
             ts = datetime.now().strftime("%H:%M:%S")
             print(f"[{ts}] [{level.upper()}] {message}{' | ' + details if details else ''}")
+
+
+# Guard-Import: BotDisplay aus dem Scaffold (rich evtl. nicht installiert)
+try:
+    from .bot_display import BotDisplay
+except ImportError:
+    BotDisplay = None  # type: ignore[assignment,misc]
 
 
 def _get_local_ip() -> str:
@@ -98,6 +105,7 @@ class BaseBot:
         self._ws_client: BridgeWSClient | None = None
         self._bridge: BridgeClient | None = None
         self._log: BotLog | None = None
+        self._display: "BotDisplay | None" = None  # Live-Terminal (nach display_header() aktiv)
         self._running = False
         self._state = "starting"
         self._open_positions: int = 0
@@ -214,9 +222,18 @@ class BaseBot:
 
     def display_header(self) -> None:
         """
-        Zeigt den statischen Terminal-Header des Bots an.
-        Felder: ID, Name, IP:Port, Latenz, AlphaTrack-Status, Bridge-Status, Offene Trades.
+        Zeigt den Terminal-Header des Bots an.
+        Wenn rich verfuegbar: startet das Live-Display (gruen, Bridge-Status, Parameter, Positionen).
+        Ohne rich: statischer print-Header (ID, Name, IP:Port, Latenz, Status, Bridge, AlphaTrack).
         """
+        if BotDisplay is not None:
+            # rich installiert: Live-Terminal starten
+            self._display = BotDisplay(self.name)
+            self._display.attach(self)
+            self._display.start()
+            return
+
+        # Fallback: statischer print-Header
         bridge_url = self._config.get("bridge_url", "—")
         at_url = self._config.get("alphatrack_url", "—")
         lat_str = f"{self.latency_ms}ms" if self.latency_ms else "—"
@@ -237,12 +254,22 @@ class BaseBot:
     def log(self, level: str, message: str, details: str = None) -> None:
         """
         Bot-Log: Schreibt nur bot-relevante Ereignisse.
+        WS-Client-Push immer wenn verbunden. Bei aktivem Display: nur ins Terminal
+        routen (kein Konsolen-Print). Ohne Display: Fallback auf BotLog.
         Bridge-interne Logs oder Logs anderer Bots werden NICHT geschrieben.
         """
-        if self._log:
-            self._log.add(level, message, details)
+        # WS-Client-Push immer, unabhaengig vom Display-Status
         if self._ws_client:
             self._ws_client.send_log(level, message, details)
+
+        if self._display is not None:
+            # Display aktiv: nur ins Terminal routen, kein Konsolen-Print
+            msg = message + (f" | {details}" if details else "")
+            self._display.log(level, "BOT", msg)
+        else:
+            # Display noch nicht gestartet oder nicht verfuegbar: BotLog-Fallback
+            if self._log:
+                self._log.add(level, message, details)
 
     # ── Trade-Sending mit Bot-ID als Metadatum (C4) ─────────────────────
 
@@ -291,8 +318,7 @@ class BaseBot:
         Wird aufgerufen wenn die Bridge einen MT5-Fehler an diesen Bot weiterleitet (C3).
         Subklassen koennen diese Methode ueberschreiben fuer spezifisches Error-Handling.
         """
-        print(f"[MT5-FEHLER] {error}")
-        self.log("error", f"MT5-Fehler", error)
+        self.log("error", "MT5-Fehler", error)
 
     # ── Parameter-Unterstuetzung (Settings-Editor in AlphaTrack) ────────
 
@@ -398,108 +424,112 @@ class BaseBot:
 
     def run(self) -> None:
         """Startet den Bot-Loop. Blockiert bis zum Beenden."""
-        self._config = self.load_config()
+        try:
+            self._config = self.load_config()
 
-        if not self._connect_and_register():
-            sys.exit(1)
+            if not self._connect_and_register():
+                sys.exit(1)
 
-        # Tickets erst NACH der Registrierung laden — die Bridge kann die
-        # bot_id aendern, und der Dateiname haengt von der finalen ID ab
-        self._load_tickets()
+            # Tickets erst NACH der Registrierung laden — die Bridge kann die
+            # bot_id aendern, und der Dateiname haengt von der finalen ID ab
+            self._load_tickets()
 
-        cfg = self._config
-        self._log = BotLog(bot_id=self.bot_id, bot_name=self.name)
-        if cfg.get("alphatrack_url"):
-            self._log.configure_push(cfg["alphatrack_url"], cfg.get("api_key", ""))
+            cfg = self._config
+            self._log = BotLog(bot_id=self.bot_id, bot_name=self.name)
+            if cfg.get("alphatrack_url"):
+                self._log.configure_push(cfg["alphatrack_url"], cfg.get("api_key", ""))
 
-        self._bridge = BridgeClient(cfg["bridge_url"], cfg["api_key"], bot_id=self.bot_id)
+            self._bridge = BridgeClient(cfg["bridge_url"], cfg["api_key"], bot_id=self.bot_id)
 
-        symbol = cfg.get("strategy", {}).get("symbol", "EURUSDp")
-        timeframe = cfg.get("strategy", {}).get("timeframe", "M5")
-        candles_count = int(cfg.get("strategy", {}).get("candles_count", 100))
-        max_positions = int(cfg.get("strategy", {}).get("max_positions", 1))
-        tick_interval_sec = 60
-        heartbeat_interval_sec = cfg.get("heartbeat_interval_sec", 10)
+            symbol = cfg.get("strategy", {}).get("symbol", "EURUSDp")
+            timeframe = cfg.get("strategy", {}).get("timeframe", "M5")
+            candles_count = int(cfg.get("strategy", {}).get("candles_count", 100))
+            max_positions = int(cfg.get("strategy", {}).get("max_positions", 1))
+            tick_interval_sec = 60
+            heartbeat_interval_sec = cfg.get("heartbeat_interval_sec", 10)
 
-        self._state = "running"
-        self._running = True
-        start_time = time.time()
-        last_tick = last_heartbeat = 0.0
+            self._state = "running"
+            self._running = True
+            start_time = time.time()
+            last_tick = last_heartbeat = 0.0
 
-        self.log("info", f"{self.name} gestartet", f"Symbol: {symbol} | TF: {timeframe}")
-        self.display_header()
+            self.log("info", f"{self.name} gestartet", f"Symbol: {symbol} | TF: {timeframe}")
+            self.display_header()
 
-        def shutdown(sig, frame):
-            self._running = False
+            def shutdown(sig, frame):
+                self._running = False
 
-        signal.signal(signal.SIGINT, shutdown)
-        signal.signal(signal.SIGTERM, shutdown)
+            signal.signal(signal.SIGINT, shutdown)
+            signal.signal(signal.SIGTERM, shutdown)
 
-        while self._running:
-            now = time.time()
-            bridge_ok = self._bridge.is_connected() if self._bridge else False
+            while self._running:
+                now = time.time()
+                bridge_ok = self._bridge.is_connected() if self._bridge else False
 
-            if bridge_ok:
-                positions = self._bridge.get_positions()
-                all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
-                self._prune_tickets(all_tickets)  # prune closed trades (mit Grace-Period)
-                my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
-                self._open_positions = len(my_positions)
-
-            self._process_commands()
-
-            if self._state == "running" and bridge_ok and now - last_tick >= tick_interval_sec:
-                try:
-                    candles = self._bridge.get_candles(symbol, timeframe, candles_count)
+                if bridge_ok:
                     positions = self._bridge.get_positions()
                     all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
-                    self._prune_tickets(all_tickets)
+                    self._prune_tickets(all_tickets)  # prune closed trades (mit Grace-Period)
                     my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
-                    signal_result = self.on_tick(candles, my_positions)
-                    action = signal_result.get("action", "hold")
-                    open_count = len([p for p in my_positions if p.get("instrument") == symbol])
+                    self._open_positions = len(my_positions)
 
-                    if action == "buy" and open_count < max_positions:
-                        result = self.send_trade({**signal_result, "symbol": symbol, "direction": "buy"})
-                        self.log("info" if result.get("success") else "error",
-                                 f"BUY {signal_result.get('lots')} {symbol}", result.get("error"))
+                self._process_commands()
 
-                    elif action == "sell" and open_count < max_positions:
-                        result = self.send_trade({**signal_result, "symbol": symbol, "direction": "sell"})
-                        self.log("info" if result.get("success") else "error",
-                                 f"SELL {signal_result.get('lots')} {symbol}", result.get("error"))
+                if self._state == "running" and bridge_ok and now - last_tick >= tick_interval_sec:
+                    try:
+                        candles = self._bridge.get_candles(symbol, timeframe, candles_count)
+                        positions = self._bridge.get_positions()
+                        all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
+                        self._prune_tickets(all_tickets)
+                        my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
+                        signal_result = self.on_tick(candles, my_positions)
+                        action = signal_result.get("action", "hold")
+                        open_count = len([p for p in my_positions if p.get("instrument") == symbol])
 
-                    elif action == "close":
-                        ticket = signal_result.get("ticket")
-                        if ticket:
-                            result = self.close_trade(ticket=int(ticket))
+                        if action == "buy" and open_count < max_positions:
+                            result = self.send_trade({**signal_result, "symbol": symbol, "direction": "buy"})
                             self.log("info" if result.get("success") else "error",
-                                     f"CLOSE #{ticket}", result.get("error"))
+                                     f"BUY {signal_result.get('lots')} {symbol}", result.get("error"))
 
-                except Exception as exc:
-                    self.log("error", "Strategie-Fehler", str(exc))
-                last_tick = now
+                        elif action == "sell" and open_count < max_positions:
+                            result = self.send_trade({**signal_result, "symbol": symbol, "direction": "sell"})
+                            self.log("info" if result.get("success") else "error",
+                                     f"SELL {signal_result.get('lots')} {symbol}", result.get("error"))
 
-            if now - last_heartbeat >= heartbeat_interval_sec and self._ws_client:
+                        elif action == "close":
+                            ticket = signal_result.get("ticket")
+                            if ticket:
+                                result = self.close_trade(ticket=int(ticket))
+                                self.log("info" if result.get("success") else "error",
+                                         f"CLOSE #{ticket}", result.get("error"))
+
+                    except Exception as exc:
+                        self.log("error", "Strategie-Fehler", str(exc))
+                    last_tick = now
+
+                if now - last_heartbeat >= heartbeat_interval_sec and self._ws_client:
+                    self._ws_client.send_heartbeat(
+                        state=self._state,
+                        open_positions=self._open_positions,
+                        active_symbols=[symbol] if self._open_positions > 0 else [],
+                        trades_sync=0,
+                        uptime=int(now - start_time),
+                        balance=None,
+                        currency=None,
+                        parameters=self.get_parameters(),
+                    )
+                    last_heartbeat = now
+
+                time.sleep(1)
+
+            self.log("info", f"{self.name} beendet")
+            if self._ws_client:
                 self._ws_client.send_heartbeat(
-                    state=self._state,
-                    open_positions=self._open_positions,
-                    active_symbols=[symbol] if self._open_positions > 0 else [],
-                    trades_sync=0,
-                    uptime=int(now - start_time),
-                    balance=None,
-                    currency=None,
-                    parameters=self.get_parameters(),
+                    state="stopped", open_positions=self._open_positions,
+                    active_symbols=[], trades_sync=0,
+                    uptime=int(time.time() - start_time), balance=None, currency=None,
                 )
-                last_heartbeat = now
-
-            time.sleep(1)
-
-        self.log("info", f"{self.name} beendet")
-        if self._ws_client:
-            self._ws_client.send_heartbeat(
-                state="stopped", open_positions=self._open_positions,
-                active_symbols=[], trades_sync=0,
-                uptime=int(time.time() - start_time), balance=None, currency=None,
-            )
-            self._ws_client.disconnect()
+                self._ws_client.disconnect()
+        finally:
+            if self._display is not None:
+                self._display.stop()
