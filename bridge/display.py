@@ -49,8 +49,8 @@ class BridgeDisplay:
         self._balance: float | None = None
         self._currency: str = "USD"
 
-        # Verbundene Bots (Liste fuer Bridge-Terminal)
-        self._connected_bots: list[str] = []
+        # Verbundene Bots — erweitertes Info-Dict fuer das Bots-Panel
+        self._bots_info: list[dict] = []
 
     # ── Oeffentliche Update-Methoden ─────────────────────────────────────
 
@@ -75,7 +75,6 @@ class BridgeDisplay:
         currency: str,
         open_positions: int,
         bridge_state: str,
-        connected_bots: list[str] | None = None,
     ) -> None:
         with self._lock:
             self._mt5_ok = mt5_ok
@@ -84,9 +83,12 @@ class BridgeDisplay:
             self._balance = balance
             self._currency = currency
             self._bridge_state = bridge_state
-            if connected_bots is not None:
-                self._connected_bots = connected_bots
             self._latency_ms = at_ping_ms  # Latenz zur AlphaTrack-Instanz
+
+    def update_bots(self, bots: list[dict]) -> None:
+        """Aktualisiert die Bots-Info-Liste fuer das Verbundene-Bots-Panel."""
+        with self._lock:
+            self._bots_info = bots
 
     def log(self, level: str, tag: str, message: str) -> None:
         """Fuegt eine Bridge-Log-Zeile hinzu. level: 'info'|'warn'|'error'|'ok'"""
@@ -129,12 +131,11 @@ class BridgeDisplay:
         return table
 
     def _render_status_row(self) -> Table:
-        """Zweite Header-Zeile: AlphaTrack-Status | MT5-Status | MT5-Balance | Bots-Liste"""
+        """Zweite Header-Zeile: AlphaTrack-Status | MT5-Status | MT5-Balance"""
         table = Table(box=box.SIMPLE_HEAD, show_header=False, padding=(0, 2), expand=True)
         table.add_column(justify="center", ratio=1)
         table.add_column(justify="center", ratio=1)
         table.add_column(justify="center", ratio=1)
-        table.add_column(justify="left", ratio=2)
 
         # AlphaTrack-Verbindungsstatus
         ping_str = f" ({self._at_ping_ms}ms)" if self._at_ping_ms is not None else ""
@@ -169,15 +170,7 @@ class BridgeDisplay:
             bal_text.append("—\n", style="dim")
             bal_text.append("MT5-Balance", style="dim")
 
-        # Verbundene Bots
-        bots_text = Text()
-        bots_text.append("Verbundene Bots\n", style="dim")
-        if self._connected_bots:
-            bots_text.append(", ".join(self._connected_bots), style="cyan")
-        else:
-            bots_text.append("(keine)", style="dim")
-
-        table.add_row(at_text, mt5_text, bal_text, bots_text)
+        table.add_row(at_text, mt5_text, bal_text)
         return table
 
     def _render_log_panel(self, height: int) -> Panel:
@@ -208,11 +201,56 @@ class BridgeDisplay:
             padding=(0, 1),
         )
 
+    def _format_duration(self, connected_at) -> str:
+        """Formatiert die Verbindungsdauer aus einem Unix-Timestamp.
+
+        Format: '5s' (<60s), '12m' (<1h), '1h 03m' (>=1h). Bei None -> '—'.
+        """
+        if connected_at is None:
+            return "—"
+        sec = int(time.time() - connected_at)
+        if sec < 60:
+            return f"{sec}s"
+        minutes = sec // 60
+        if minutes < 60:
+            return f"{minutes}m"
+        hours = minutes // 60
+        mins_rem = minutes % 60
+        return f"{hours}h {mins_rem:02d}m"
+
+    def _render_bots_panel(self) -> Panel:
+        """Rendert das 'Verbundene Bots'-Panel zwischen Status-Zeile und Log."""
+        with self._lock:
+            bots_snapshot = list(self._bots_info)
+
+        text = Text()
+        if bots_snapshot:
+            for bot in bots_snapshot:
+                text.append("● ", style="bold green")
+                text.append(bot.get("name", "?"), style="cyan")
+                text.append("   ID ", style="dim")
+                text.append(bot.get("at_id") or "—")
+                text.append("   Positionen: ", style="dim")
+                text.append(str(bot.get("positions", 0)))
+                text.append("   verbunden seit ", style="dim")
+                text.append(self._format_duration(bot.get("connected_at")))
+                text.append("\n")
+        else:
+            text.append("(keine Bots verbunden)", style="dim")
+
+        return Panel(
+            text,
+            title="[dim]Verbundene Bots[/dim]",
+            border_style="dim",
+            padding=(0, 1),
+        )
+
     def _build_layout(self) -> Layout:
         layout = Layout()
         layout.split_column(
             Layout(name="id_row", size=3),
             Layout(name="status_row", size=4),
+            Layout(name="bots", size=3),
             Layout(name="log"),
         )
         return layout
@@ -236,7 +274,10 @@ class BridgeDisplay:
             while self._live and self._live.is_started:
                 try:
                     terminal_height = self._console.height or 40
-                    log_height = max(5, terminal_height - 9)
+                    n = len(self._bots_info)
+                    bots_h = max(3, n + 2)
+                    layout["bots"].size = bots_h
+                    log_height = max(5, terminal_height - 9 - bots_h)
 
                     layout["id_row"].update(
                         Panel(
@@ -254,6 +295,7 @@ class BridgeDisplay:
                             padding=(0, 1),
                         )
                     )
+                    layout["bots"].update(self._render_bots_panel())
                     layout["log"].update(self._render_log_panel(log_height))
                     self._live.refresh()
                 except Exception:
