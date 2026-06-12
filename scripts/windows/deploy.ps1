@@ -207,6 +207,120 @@ function Select-TradingProfile($info, $cfg) {
     }
 }
 
+# --- Phase 2: Mini-PC --------------------------------------
+
+function Invoke-MiniPcSsh($cfg, [string]$RemoteCmd) {
+    & ssh "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" $RemoteCmd
+}
+
+function Test-MiniPcSsh($cfg) {
+    & ssh -o ConnectTimeout=5 "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" "exit"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Fail "Mini-PC per SSH nicht erreichbar: $($cfg.minipc_ssh_user)@$($cfg.minipc_host)"
+        Write-Host ''
+        Write-Host '  Einmalige Einrichtung auf dem Mini-PC (lokal ausfuehren):'
+        Write-Host '    1. Einstellungen > System > Optionale Features > "OpenSSH-Server" hinzufuegen'
+        Write-Host '    2. PowerShell als Administrator:'
+        Write-Host '         Set-Service sshd -StartupType Automatic'
+        Write-Host '         Start-Service sshd'
+        Write-Host '    3. Deploy erneut starten.'
+        throw 'Mini-PC nicht erreichbar.'
+    }
+    Write-Ok 'Mini-PC per SSH erreichbar.'
+}
+
+function Copy-CodeToMiniPc($cfg) {
+    $tarFile = Join-Path $env:TEMP 'alphatrack-deploy.tar'
+    if (Test-Path $tarFile) { Remove-Item $tarFile -Force }
+
+    Write-Host '  Packe bridge/ und bots/ ...'
+    & tar -cf $tarFile -C $RepoRoot `
+        --exclude '__pycache__' `
+        --exclude '*.pyc' `
+        --exclude 'bridge/ticket_registry.json' `
+        --exclude 'bridge/bridge_log.json' `
+        --exclude 'bots/*/data' `
+        --exclude 'bots/*/data/*' `
+        bridge bots
+    if ($LASTEXITCODE -ne 0) { throw 'tar (lokal packen) fehlgeschlagen.' }
+
+    $target    = $cfg.minipc_target_dir                       # z.B. C:\AlphaTrack
+    $targetFwd = $target -replace '\\', '/'                   # C:/AlphaTrack fuer scp/tar
+
+    Invoke-MiniPcSsh $cfg "cmd /c if not exist ""$target"" mkdir ""$target"""
+    if ($LASTEXITCODE -ne 0) { throw "Zielordner $target konnte nicht angelegt werden." }
+
+    Write-Host '  Kopiere zum Mini-PC ...'
+    & scp -q $tarFile "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/alphatrack-deploy.tar"
+    if ($LASTEXITCODE -ne 0) { throw 'scp zum Mini-PC fehlgeschlagen.' }
+
+    Invoke-MiniPcSsh $cfg "tar -xf ""$targetFwd/alphatrack-deploy.tar"" -C ""$targetFwd"" && del ""$target\alphatrack-deploy.tar"""
+    if ($LASTEXITCODE -ne 0) { throw 'Entpacken auf dem Mini-PC fehlgeschlagen.' }
+
+    Remove-Item $tarFile -Force
+    Write-Ok "Code nach $target kopiert (bridge/ + bots/)."
+}
+
+# Setzt ein Feld auf einem PSCustomObject — legt es an, falls nicht vorhanden.
+function Set-JsonField($Obj, [string]$Name, $Value) {
+    $Obj | Add-Member -MemberType NoteProperty -Name $Name -Value $Value -Force
+}
+
+# Pure Funktion: erzeugt den JSON-Text der Bridge-Config aus der Repo-Vorlage.
+function New-BridgeConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [string]$ProfileId) {
+    $c = Get-Content $TemplatePath -Raw | ConvertFrom-Json
+    Set-JsonField $c 'alphatrack_url'      "http://$($cfg.nas_host):$($cfg.nas_app_port)"
+    Set-JsonField $c 'api_key'             $ApiKey
+    Set-JsonField $c 'profile_id'          $ProfileId
+    Set-JsonField $c 'bridge_id'           ''            # leere ID -> Bridge registriert sich neu
+    Set-JsonField $c 'command_server_port' 8765
+    Set-JsonField $c 'mt5_login'           ([int]$cfg.mt5_login)
+    Set-JsonField $c 'mt5_password'        "$($cfg.mt5_password)"
+    Set-JsonField $c 'mt5_server'          "$($cfg.mt5_server)"
+    Set-JsonField $c 'mt5_exe_path'        "$($cfg.mt5_exe_path)"
+    return ($c | ConvertTo-Json -Depth 10)
+}
+
+# Pure Funktion: erzeugt den JSON-Text einer Bot-Config aus der Repo-Vorlage.
+# Bot-spezifische Felder (bot_id, bot_port, strategy) bleiben unveraendert.
+function New-BotConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [string]$ProfileId) {
+    $c = Get-Content $TemplatePath -Raw | ConvertFrom-Json
+    Set-JsonField $c 'alphatrack_url' "http://$($cfg.nas_host):$($cfg.nas_app_port)"
+    Set-JsonField $c 'api_key'        $ApiKey
+    Set-JsonField $c 'profile_id'     $ProfileId
+    Set-JsonField $c 'bridge_url'     "http://$($cfg.minipc_host):8765"
+    return ($c | ConvertTo-Json -Depth 10)
+}
+
+function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
+    $targetFwd = $cfg.minipc_target_dir -replace '\\', '/'
+    $tmpDir = Join-Path $env:TEMP 'alphatrack-configs'
+    if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force }
+    New-Item -ItemType Directory -Path $tmpDir | Out-Null
+
+    # Bridge
+    $bridgeJson = New-BridgeConfigJson (Join-Path $RepoRoot 'bridge\config.json') $cfg $ApiKey $ProfileId
+    $bridgeTmp  = Join-Path $tmpDir 'bridge-config.json'
+    Write-Utf8NoBom $bridgeTmp $bridgeJson
+    & scp -q $bridgeTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bridge/config.json"
+    if ($LASTEXITCODE -ne 0) { throw 'Bridge-Config konnte nicht geschrieben werden.' }
+    Write-Ok 'bridge/config.json geschrieben (MT5 + NAS-URL + API-Key + Profil).'
+
+    # Bots: alle Ordner unter bots/ mit config.json (scaffold hat keine)
+    $botDirs = Get-ChildItem (Join-Path $RepoRoot 'bots') -Directory |
+        Where-Object { Test-Path (Join-Path $_.FullName 'config.json') }
+    foreach ($dir in $botDirs) {
+        $botJson = New-BotConfigJson (Join-Path $dir.FullName 'config.json') $cfg $ApiKey $ProfileId
+        $botTmp  = Join-Path $tmpDir "$($dir.Name)-config.json"
+        Write-Utf8NoBom $botTmp $botJson
+        & scp -q $botTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bots/$($dir.Name)/config.json"
+        if ($LASTEXITCODE -ne 0) { throw "Bot-Config fuer $($dir.Name) konnte nicht geschrieben werden." }
+        Write-Ok "bots/$($dir.Name)/config.json geschrieben."
+    }
+
+    Remove-Item $tmpDir -Recurse -Force
+}
+
 # --- Hauptablauf ------------------------------------------
 
 function Invoke-Main {
