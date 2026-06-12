@@ -109,6 +109,101 @@ function Invoke-Questionnaire($cfg) {
     $cfg.mt5_exe_path = Ask-Required 'Pfad zu terminal64.exe'            $cfg.mt5_exe_path
 }
 
+# --- Phase 1: NAS ------------------------------------------
+
+function Invoke-NasSsh($cfg, [string]$RemoteCmd) {
+    & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
+}
+
+function Invoke-GitPush {
+    Write-Host '  git push ...'
+    & git -C $RepoRoot push
+    if ($LASTEXITCODE -ne 0) { throw 'git push fehlgeschlagen.' }
+    Write-Ok 'Code zu GitHub gepusht.'
+}
+
+# Stellt sicher, dass .env.local auf dem NAS existiert und BOT_API_KEY enthaelt.
+# Gibt den BOT_API_KEY zurueck — Bridge und Bots brauchen exakt denselben Wert.
+function Confirm-NasEnvFile($cfg) {
+    $envPath = "$($cfg.nas_project_dir)/.env.local"
+
+    Invoke-NasSsh $cfg "test -f $envPath"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warn2 ".env.local fehlt auf dem NAS — wird angelegt."
+        $botKey = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
+        $anthropicKey = Read-Host '  Anthropic-API-Key fuer KI-Analyse (optional, Enter = ueberspringen)'
+        $remoteCmd = "printf '%s\n' 'BOT_API_KEY=$botKey' > $envPath"
+        if ("$anthropicKey" -ne '') {
+            $remoteCmd = "printf '%s\n' 'BOT_API_KEY=$botKey' 'ANTHROPIC_API_KEY=$($anthropicKey.Trim())' > $envPath"
+        }
+        Invoke-NasSsh $cfg $remoteCmd
+        if ($LASTEXITCODE -ne 0) { throw ".env.local konnte nicht angelegt werden ($envPath)." }
+        Write-Ok '.env.local auf dem NAS angelegt (BOT_API_KEY generiert).'
+        return $botKey
+    }
+
+    $line = (Invoke-NasSsh $cfg "grep '^BOT_API_KEY=' $envPath") | Select-Object -First 1
+    if ("$line" -eq '') {
+        Write-Warn2 "BOT_API_KEY fehlt in $envPath — wird ergaenzt."
+        $botKey = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
+        Invoke-NasSsh $cfg "printf '%s\n' 'BOT_API_KEY=$botKey' >> $envPath"
+        if ($LASTEXITCODE -ne 0) { throw "BOT_API_KEY konnte nicht ergaenzt werden." }
+        return $botKey
+    }
+    $key = $line.Substring('BOT_API_KEY='.Length).Trim()
+    Write-Ok 'BOT_API_KEY vom NAS uebernommen.'
+    return $key
+}
+
+function Invoke-NasUpdate($cfg) {
+    Write-Host "  Update auf NAS ausfuehren ($($cfg.nas_ssh_user)@$($cfg.nas_host)) ..."
+    Invoke-NasSsh $cfg "bash $($cfg.nas_project_dir)/scripts/nas-update.sh"
+    if ($LASTEXITCODE -ne 0) { throw 'nas-update.sh auf dem NAS fehlgeschlagen.' }
+    Write-Ok 'NAS-Container neu gebaut und gestartet.'
+}
+
+function Wait-ForAlphaTrack($cfg) {
+    $url = "http://$($cfg.nas_host):$($cfg.nas_app_port)/api/bridge/info"
+    Write-Host "  Warte auf AlphaTrack ($url) ..."
+    $deadline = (Get-Date).AddSeconds(120)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $info = Invoke-RestMethod -Uri $url -TimeoutSec 5
+            Write-Ok 'AlphaTrack ist erreichbar.'
+            return $info
+        } catch {
+            Start-Sleep -Seconds 5
+        }
+    }
+    throw "AlphaTrack unter $url nicht erreichbar (Timeout 120s). Container-Log auf dem NAS pruefen: sudo docker logs alphatrack"
+}
+
+function Select-TradingProfile($info, $cfg) {
+    $profiles = @($info.profiles)
+    if ($profiles.Count -eq 0) {
+        throw "Keine Profile auf dem NAS-AlphaTrack vorhanden. Bitte zuerst unter http://$($cfg.nas_host):$($cfg.nas_app_port) ein Profil anlegen und Deploy erneut starten."
+    }
+    if ($profiles.Count -eq 1) {
+        Write-Ok "Nur ein Profil vorhanden — automatisch gewaehlt: $($profiles[0].name)"
+        return $profiles[0].id
+    }
+    Write-Host ''
+    Write-Host '  Verfuegbare Profile auf dem NAS:'
+    for ($i = 0; $i -lt $profiles.Count; $i++) {
+        Write-Host ("    {0}) {1} ({2}) - {3}" -f ($i + 1), $profiles[$i].name, $profiles[$i].currency, $profiles[$i].broker)
+    }
+    while ($true) {
+        $raw = Read-Host "  Profil waehlen [1-$($profiles.Count)]"
+        $idx = 0
+        if ([int]::TryParse($raw, [ref]$idx) -and $idx -ge 1 -and $idx -le $profiles.Count) {
+            $chosen = $profiles[$idx - 1]
+            Write-Ok "Gewaehlt: $($chosen.name)"
+            return $chosen.id
+        }
+        Write-Warn2 "Bitte Zahl zwischen 1 und $($profiles.Count) eingeben."
+    }
+}
+
 # --- Hauptablauf ------------------------------------------
 
 function Invoke-Main {
