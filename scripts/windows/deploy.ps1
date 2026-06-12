@@ -327,6 +327,39 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
     Remove-Item $tmpDir -Recurse -Force
 }
 
+# Firewall: NAS-AlphaTrack muss die Bridge auf Port 8765 erreichen koennen.
+# Remote-Shell auf dem Mini-PC ist cmd.exe -> ||/&& sind dort erlaubt.
+function Set-MiniPcFirewall($cfg) {
+    $ruleName = 'AlphaTrack Bridge 8765'
+    $remote = "netsh advfirewall firewall show rule name=""$ruleName"" >nul 2>&1 || netsh advfirewall firewall add rule name=""$ruleName"" dir=in action=allow protocol=TCP localport=8765"
+    Invoke-MiniPcSsh $cfg $remote
+    if ($LASTEXITCODE -ne 0) {
+        throw "Firewall-Regel konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC."
+    }
+    Write-Ok "Firewall-Regel '$ruleName' vorhanden."
+}
+
+# Geplante Aufgabe: Bridge startet bei Anmeldung automatisch. Bots bewusst NICHT.
+function Register-BridgeTask($cfg) {
+    $taskName = 'AlphaTrack Bridge'
+    $batPath  = "$($cfg.minipc_target_dir)\bridge\start_bridge.bat"
+
+    # /F = vorhandene Aufgabe ueberschreiben; innere \" noetig, falls Pfad Leerzeichen enthaelt
+    $create = 'schtasks /Create /TN "' + $taskName + '" /TR "\"' + $batPath + '\"" /SC ONLOGON /F'
+    Invoke-MiniPcSsh $cfg $create
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Geplante Aufgabe konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC.'
+    }
+    Write-Ok "Geplante Aufgabe '$taskName' angelegt (Start bei Anmeldung)."
+
+    # Laufende Bridge beenden (falls aktiv) und mit neuer Config starten.
+    # /End schlaegt fehl, wenn die Aufgabe nicht laeuft -> Exit-Code ignorieren.
+    Invoke-MiniPcSsh $cfg ('schtasks /End /TN "' + $taskName + '" >nul 2>&1 & exit 0')
+    Invoke-MiniPcSsh $cfg ('schtasks /Run /TN "' + $taskName + '"')
+    if ($LASTEXITCODE -ne 0) { throw 'Bridge konnte nicht gestartet werden (schtasks /Run).' }
+    Write-Ok 'Bridge gestartet.'
+}
+
 # --- Hauptablauf ------------------------------------------
 
 function Invoke-Main {
