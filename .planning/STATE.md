@@ -84,6 +84,7 @@ None yet.
 | 260612-siw | Bot-Grundgerüst: ws/bridge-Client + BotDisplay ins Scaffold zentralisiert, BaseBot-Integration, testbot2 migriert, trading-bot-Skill + bots/CLAUDE.md aktualisiert | 2026-06-12 | f539957 | [260612-siw-bot-grundger-st-aktualisieren-ws-bridge-](./quick/260612-siw-bot-grundger-st-aktualisieren-ws-bridge-/) |
 | 260612-fast4 | trading-bot-Skill: Pflicht-Rückfragerunde (Strategie, Symbol/TF, Risiko, Parameter) vor Bot-Erstellung | 2026-06-12 | a515e38 | — |
 | 260612-fast5 | Bot-Performance-Graph: Tooltip klebte am ersten Punkt (identische X-Labels) — eindeutige X-Werte mit Uhrzeit | 2026-06-12 | a769efe | — |
+| 260612-fast6 | Neuer Bot Price Monitor (Port 8771) via /trading-bot: zeigt EURUSDp-Kurs, Parameter tick_interval_sec (Scaffold: Tick-Intervall jetzt konfigurierbar) | 2026-06-12 | 4670978 | — |
 
 ## Deferred Items
 
