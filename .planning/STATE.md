@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Completed quick task 260612-o9u (Bot-Performance-Fixes)
+last_activity: 2026-06-12 — Completed quick task 260612-r56 (Bridge-Terminal Bots-Panel)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-12 — Completed quick task 260612-o9u: Bot-Performance-Fenster (Avg RR entfernt, Auto-Refresh, P&L-Quelle vereinheitlicht, Datenreparatur)
+Last activity: 2026-06-12 — Completed quick task 260612-r56: Bridge-Terminal Verbundene-Bots-Panel
 
 ## Performance Metrics
 
@@ -79,6 +79,7 @@ None yet.
 | 260612-fast | Trades-Seite: Quellen-Badge (Bot-Name / Bridge) pro Trade-Zeile | 2026-06-12 | b36eaad | — |
 | 260612-fast2 | Bridge-Fix: MT5-Deal-History-Fenster (to_date + 2d) — hängende 'offene' Trades wegen Broker-Serverzeit vor Lokalzeit | 2026-06-12 | a3d55b1 | — |
 | 260612-fast3 | Bridge-Fix: MT5-Server-Epochs → echte UTC (Auto-Offset-Erkennung); Migration bestehender Trade-Zeitstempel um -3h | 2026-06-12 | 464ff25 | — |
+| 260612-r56 | Bridge-Terminal: eigenes "Verbundene Bots"-Panel (Status-Punkt, Name, AT-ID, Positionen, verbunden seit) | 2026-06-12 | c156e89 | [260612-r56-bridge-terminal-eigener-verbundene-bots-](./quick/260612-r56-bridge-terminal-eigener-verbundene-bots-/) |
 
 ## Deferred Items
 
