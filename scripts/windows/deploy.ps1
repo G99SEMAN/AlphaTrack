@@ -211,6 +211,9 @@ function Select-TradingProfile($info, $cfg) {
 
 function Invoke-MiniPcSsh($cfg, [string]$RemoteCmd) {
     & ssh "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" $RemoteCmd
+    if ($LASTEXITCODE -eq 255) {
+        throw "SSH-Verbindung zum Mini-PC abgebrochen ($($cfg.minipc_ssh_user)@$($cfg.minipc_host))."
+    }
 }
 
 function Test-MiniPcSsh($cfg) {
@@ -269,6 +272,9 @@ function Set-JsonField($Obj, [string]$Name, $Value) {
 # Pure Funktion: erzeugt den JSON-Text der Bridge-Config aus der Repo-Vorlage.
 function New-BridgeConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [string]$ProfileId) {
     $c = Get-Content $TemplatePath -Raw | ConvertFrom-Json
+    if ($null -ne $c.PSObject.Properties['symbols_to_watch']) {
+        Set-JsonField $c 'symbols_to_watch' @($c.symbols_to_watch)
+    }
     Set-JsonField $c 'alphatrack_url'      "http://$($cfg.nas_host):$($cfg.nas_app_port)"
     Set-JsonField $c 'api_key'             $ApiKey
     Set-JsonField $c 'profile_id'          $ProfileId
