@@ -6,11 +6,10 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 ---
 
-[![Version](https://img.shields.io/badge/version-1.1.16-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack)
+[![Version](https://img.shields.io/badge/version-1.2-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/license-private-red?style=flat-square)](./LICENSE)
 
 ---
 
@@ -54,10 +53,12 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 | **Bridge Dashboard** | Live-Status aller verbundenen Bots mit Verbindungsanzeige (MT5, Bridge, AlphaTrack) |
 | **Live Trades** | Offene Positionen des Bots in Echtzeit, inkl. Schliessen-Funktion |
 | **Trade Analyzer** | KI-gestützte Marktanalyse auf Basis echter MT5-Kerzen (M5 Scalping / H1 Intraday) |
-| **Bot Log** | Bridge-Logs nach Level (INFO/WARN/ERR) filterbar, mit CSV/JSON-Export |
-| **Bot Settings** | Bot konfigurieren, Bridge per Auto-Discovery im LAN finden |
+| **Bridge Log** | Bridge-Logs nach Level (INFO/WARN/ERR) filterbar, mit CSV/JSON-Export |
+| **Bot Performance** | Bot-Statistiken, Equity-Kurve und Performance-Metriken je Bot |
+| **Bot Einstellungen** | Bot konfigurieren, Parameter anpassen, Zustand steuern |
 | **Trade-Executor** | Trades direkt in MT5 ausführen (Symbol, Richtung, Lots, SL/TP) |
 | **Watchdog-Panel** | Bridge-Status, Neustart-Funktion und Bot-Steuerung (Start/Pause/Stop) |
+| **Netzwerk (Auto-Discovery)** | Bridge und Bots automatisch im lokalen Netzwerk erkennen und registrieren |
 | **TradingLockContext** | Sicherheits-Schutzschalter in der Sidebar - sperrt alle Trade-Buttons standardmäßig |
 
 ---
@@ -66,9 +67,9 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 
-**Trading Journal:** Dashboard - Trades - Statistiken - Strategien - Kalender
+**Trading Journal:** Dashboard - Trades - Statistiken - Strategien - Kalender - Analyse - TPC
 
-**Bot-Analyser:** Bridge - Live Trades - Trade Analyzer - Performance - Bot Log - Bot Settings
+**Bot-Analyser:** Bridge (Analyse / Log / Trades) - Bots (Performance / Einstellungen) - Netzwerk
 
 **Schutzschalter:** Neben dem Logo in der Sidebar - `ShieldCheck` (grün = gesperrt/sicher) / `ShieldOff` (rot = Trading aktiv). Standard: gesperrt.
 
@@ -182,8 +183,11 @@ AlphaTrack/
 |   |   +-- strategien/           # Strategien-Verwaltung
 |   |   +-- kalender/             # Wirtschaftskalender
 |   |   +-- analyse/              # KI-Marktanalyse
+|   |   +-- tpc/                  # Trading Performance Calendar
+|   |   +-- netzwerk/             # Auto-Discovery von Bridge und Bots
 |   |   +-- einstellungen/        # App-Einstellungen & Backup
-|   |   +-- bridge/               # Bot-Analyser (Bridge, Log, Trades, Settings)
+|   |   +-- bridge/               # Bot-Analyser (analyse/, log/, trades/)
+|   |   +-- bots/                 # Bot-Management ([id]/, performance/, settings/)
 |   |   +-- setup/                # Ersteinrichtung / Profil anlegen
 |   |   +-- api/                  # API-Routen (bot/*, analyse/*, kalender/*)
 |   +-- components/               # Wiederverwendbare UI-Komponenten
@@ -207,10 +211,14 @@ AlphaTrack/
 |   |   +-- api-keys.ts           # API-Key Verwaltung (env + data/ Fallback)
 |   |   +-- analyse-data.ts       # Analyse-History
 |   +-- types/                    # TypeScript-Typdefinitionen
++-- bots/                         # Python-Bots (testbot2 aktiv, scaffold als Vorlage)
+|   +-- testbot2/                 # Aktiver Test-Bot
+|   +-- scaffold/                 # Bot-Vorlage für neue Bots
++-- bridge/                       # Python-Bridge (gateway.py, main.py, trade_executor.py)
 +-- scripts/
 |   +-- docker-entrypoint.sh      # Docker-Startskript (erstellt data/)
 |   +-- nas-update.sh             # NAS-Update via SSH
-+-- data/                         # Lokale JSON-Datenspeicherung (nicht in Git)
++-- data/                         # Lokale JSON-Datenspeicherung (in Git getrackt)
 +-- Dockerfile
 +-- docker-compose.yml
 +-- package.json
@@ -232,7 +240,9 @@ data/
 +-- bot-status-[BOT-ID].json          # Letzter Bot-Status (Heartbeat)
 +-- bot-log-[BOT-ID].json             # Bridge-Log-Einträge (max 5000)
 +-- bot-commands-[BOT-ID].json        # Ausstehende Bot-Commands
++-- bot-events-[BOT-ID].json          # Bot-Ereignisse (Trades, Signale)
 +-- bot-trades-[PROFIL-ID].json       # Vom Bot synchronisierte Trades
++-- performance-bots.json             # Aggregierte Bot-Performance-Daten
 +-- event-explanations.json           # KI-Erklärungen zu Wirtschaftsereignissen (Cache)
 +-- api-keys.json                     # Via UI importierte API-Keys (NAS-persistent)
 +-- analyse-history.json              # Letzte 10 KI-Marktanalysen
@@ -242,7 +252,7 @@ data/
 
 Trade-Screenshots werden unter `data/screenshots/` gespeichert.
 
-> Der `data/`-Ordner ist in `.gitignore` - deine Handelsdaten werden niemals zu GitHub gepusht.
+> Der `data/`-Ordner ist bewusst in Git getrackt (privates Repo, Multi-Device-Sync). Handelsdaten bleiben ausschliesslich im privaten Repository.
 
 ### Backup & Restore
 
