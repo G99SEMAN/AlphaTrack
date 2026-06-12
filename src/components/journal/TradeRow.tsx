@@ -18,6 +18,10 @@ interface Props {
   onRefresh?: () => void
 }
 
+function isSafeScreenshotUrl(url: string): boolean {
+  return url.startsWith('/') || url.startsWith('data:image/') || /^https?:///.test(url)
+}
+
 function StatusBadge({ status }: { status: Trade['status'] }) {
   const map = {
     open:      { label: 'Offen',        color: 'var(--accent)',  bg: 'rgba(59,130,246,0.12)' },
@@ -510,7 +514,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 </button>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {isSafeScreenshotUrl(trade.screenshot) && <img
                 src={trade.screenshot}
                 alt="Chart Screenshot"
                 onClick={() => setLightboxZoomed(v => !v)}
@@ -525,7 +529,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                   border: '1px solid rgba(255,255,255,0.1)',
                   cursor: lightboxZoomed ? 'zoom-out' : 'zoom-in',
                 }}
-              />
+              />}
             </motion.div>
           </motion.div>
         )}
