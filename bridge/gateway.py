@@ -52,6 +52,7 @@ _bot_identities: dict = {}
 _ws_trade_events: dict = {}
 _ws_trade_results: dict = {}
 _ws_trade_lock = threading.Lock()
+_bots_lock = asyncio.Lock()  # Schützt _bots-Dictionary gegen Race Conditions in _ping_loop
 
 # Set by configure()
 _alphatrack_url: str = ""
@@ -258,14 +259,15 @@ async def _post_alphatrack(path: str, body: dict, headers: dict = None) -> dict 
 async def _ping_loop():
     while True:
         await asyncio.sleep(30)
-        dead = []
-        for bot_id, ws in list(_bots.items()):
-            try:
-                await ws.send_text(json.dumps({"type": "ping"}))
-            except Exception:
-                dead.append(bot_id)
-        for bot_id in dead:
-            _bots.pop(bot_id, None)
+        async with _bots_lock:
+            dead = []
+            for bot_id, ws in list(_bots.items()):
+                try:
+                    await ws.send_text(json.dumps({"type": "ping"}))
+                except Exception:
+                    dead.append(bot_id)
+            for bot_id in dead:
+                _bots.pop(bot_id, None)
 
 
 @app.on_event("startup")
