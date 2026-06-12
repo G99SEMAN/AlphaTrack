@@ -82,6 +82,7 @@ None yet.
 | 260612-r56 | Bridge-Terminal: eigenes "Verbundene Bots"-Panel (Status-Punkt, Name, AT-ID, Positionen, verbunden seit) | 2026-06-12 | c156e89 | [260612-r56-bridge-terminal-eigener-verbundene-bots-](./quick/260612-r56-bridge-terminal-eigener-verbundene-bots-/) |
 | 260612-ryx | Bot-Terminal testbot2 im Bridge-Design (rich-UI: Bridge-Status, Strategie-Parameter, offene Positionen, grüner Header) | 2026-06-12 | d94e0a2 | [260612-ryx-bot-terminal-testbot2-im-bridge-design-r](./quick/260612-ryx-bot-terminal-testbot2-im-bridge-design-r/) |
 | 260612-siw | Bot-Grundgerüst: ws/bridge-Client + BotDisplay ins Scaffold zentralisiert, BaseBot-Integration, testbot2 migriert, trading-bot-Skill + bots/CLAUDE.md aktualisiert | 2026-06-12 | f539957 | [260612-siw-bot-grundger-st-aktualisieren-ws-bridge-](./quick/260612-siw-bot-grundger-st-aktualisieren-ws-bridge-/) |
+| 260612-fast4 | trading-bot-Skill: Pflicht-Rückfragerunde (Strategie, Symbol/TF, Risiko, Parameter) vor Bot-Erstellung | 2026-06-12 | a515e38 | — |
 
 ## Deferred Items
 
