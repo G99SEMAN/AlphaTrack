@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Completed quick task 260612-r56 (Bridge-Terminal Bots-Panel)
+last_activity: 2026-06-12 — Completed quick task 260612-ryx (Bot-Terminal testbot2)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-06-12 — Completed quick task 260612-r56: Bridge-Terminal Verbundene-Bots-Panel
+Last activity: 2026-06-12 — Completed quick task 260612-ryx: Bot-Terminal testbot2 im Bridge-Design
 
 ## Performance Metrics
 
@@ -80,6 +80,7 @@ None yet.
 | 260612-fast2 | Bridge-Fix: MT5-Deal-History-Fenster (to_date + 2d) — hängende 'offene' Trades wegen Broker-Serverzeit vor Lokalzeit | 2026-06-12 | a3d55b1 | — |
 | 260612-fast3 | Bridge-Fix: MT5-Server-Epochs → echte UTC (Auto-Offset-Erkennung); Migration bestehender Trade-Zeitstempel um -3h | 2026-06-12 | 464ff25 | — |
 | 260612-r56 | Bridge-Terminal: eigenes "Verbundene Bots"-Panel (Status-Punkt, Name, AT-ID, Positionen, verbunden seit) | 2026-06-12 | c156e89 | [260612-r56-bridge-terminal-eigener-verbundene-bots-](./quick/260612-r56-bridge-terminal-eigener-verbundene-bots-/) |
+| 260612-ryx | Bot-Terminal testbot2 im Bridge-Design (rich-UI: Bridge-Status, Strategie-Parameter, offene Positionen, grüner Header) | 2026-06-12 | d94e0a2 | [260612-ryx-bot-terminal-testbot2-im-bridge-design-r](./quick/260612-ryx-bot-terminal-testbot2-im-bridge-design-r/) |
 
 ## Deferred Items
 
