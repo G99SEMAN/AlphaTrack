@@ -1,5 +1,6314 @@
 [
   {
+    "id": "2b166d4bec",
+    "timestamp": "2026-06-12T20:14:07.524279+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: Price Monitor",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "93bb0b6a9e",
+    "timestamp": "2026-06-12T20:14:06.447415+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "50bb2dbcf1",
+    "timestamp": "2026-06-12T20:13:42.971081+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.76",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "363a3b3bf3",
+    "timestamp": "2026-06-12T20:13:18.664063+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155200270",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f213409689",
+    "timestamp": "2026-06-12T20:13:12.350755+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dcd559e6e0",
+    "timestamp": "2026-06-12T20:13:10.957264+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3d37c52ec1",
+    "timestamp": "2026-06-12T20:12:37.853680+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cc55d29100",
+    "timestamp": "2026-06-12T20:12:15.520984+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.157 | Ticket #155200270",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ce3d784eb3",
+    "timestamp": "2026-06-12T20:12:07.431553+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.80",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b28350533d",
+    "timestamp": "2026-06-12T20:11:36.411593+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.80",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9d97615596",
+    "timestamp": "2026-06-12T20:11:15.027355+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155199707",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "73c8bd1d6e",
+    "timestamp": "2026-06-12T20:11:05.889119+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.83",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e1f7fed1f2",
+    "timestamp": "2026-06-12T20:10:35.036673+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.83",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d5982df68e",
+    "timestamp": "2026-06-12T20:10:14.819580+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.157 | Ticket #155199707",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "17c10e8e03",
+    "timestamp": "2026-06-12T20:10:04.703312+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "df86b97a44",
+    "timestamp": "2026-06-12T20:09:34.354738+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70ad2fcd40",
+    "timestamp": "2026-06-12T20:09:14.115664+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155199230",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f938e7ec3c",
+    "timestamp": "2026-06-12T20:09:04.021407+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "daec271f49",
+    "timestamp": "2026-06-12T20:08:33.655811+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "601f006e40",
+    "timestamp": "2026-06-12T20:08:13.870974+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15707 | Ticket #155199230",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "241ade3700",
+    "timestamp": "2026-06-12T20:08:03.311519+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "be481f20b0",
+    "timestamp": "2026-06-12T20:07:32.943377+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "15caeb360a",
+    "timestamp": "2026-06-12T20:07:14.760288+00:00",
+    "level": "warn",
+    "message": "MT5-Fehler weitergeleitet an Bot testbot2-001",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "da80e089a3",
+    "timestamp": "2026-06-12T20:07:14.737127+00:00",
+    "level": "error",
+    "message": "Trade fehlgeschlagen: BUY 0.01 EURUSDp",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1c01fade0c",
+    "timestamp": "2026-06-12T20:07:01.932088+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f38f96820e",
+    "timestamp": "2026-06-12T20:06:31.623115+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f011d86b5d",
+    "timestamp": "2026-06-12T20:06:12.829933+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155198533",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d9a48d88d9",
+    "timestamp": "2026-06-12T20:06:00.608094+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "71a1866e0d",
+    "timestamp": "2026-06-12T20:05:30.239830+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "acc22e2ae0",
+    "timestamp": "2026-06-12T20:05:11.998265+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15706 | Ticket #155198533",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b124c042b1",
+    "timestamp": "2026-06-12T20:05:11.859471+00:00",
+    "level": "info",
+    "message": "Bot reconnect: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c8b9a8e008",
+    "timestamp": "2026-06-12T20:04:59.877487+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6e5b1fb58d",
+    "timestamp": "2026-06-12T20:04:42.743563+00:00",
+    "level": "info",
+    "message": "Bot verbunden: Price Monitor",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5359afecc8",
+    "timestamp": "2026-06-12T20:04:29.209852+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b02b47586d",
+    "timestamp": "2026-06-12T20:03:58.982988+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "22a1a9e8c3",
+    "timestamp": "2026-06-12T20:03:28.685991+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36561b06bf",
+    "timestamp": "2026-06-12T20:02:58.337157+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dbf8f3aa33",
+    "timestamp": "2026-06-12T20:02:28.036820+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2818ff4054",
+    "timestamp": "2026-06-12T20:01:57.748279+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "327e43528c",
+    "timestamp": "2026-06-12T20:01:27.406480+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0e9d17b282",
+    "timestamp": "2026-06-12T20:00:57.161696+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7f62868684",
+    "timestamp": "2026-06-12T20:00:26.867516+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "55fbf94e58",
+    "timestamp": "2026-06-12T19:59:56.591423+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "971e89434d",
+    "timestamp": "2026-06-12T19:59:26.219984+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a075c1c72a",
+    "timestamp": "2026-06-12T19:58:55.883050+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4f161c48e0",
+    "timestamp": "2026-06-12T19:58:25.134730+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "52ee046575",
+    "timestamp": "2026-06-12T19:57:54.787183+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f60b1ff72c",
+    "timestamp": "2026-06-12T19:57:24.501372+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7193c84c81",
+    "timestamp": "2026-06-12T19:56:54.236818+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "71b4420482",
+    "timestamp": "2026-06-12T19:56:23.950440+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "eb3d4411f9",
+    "timestamp": "2026-06-12T19:55:53.622180+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a2ada38665",
+    "timestamp": "2026-06-12T19:55:23.319085+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fbd272d2df",
+    "timestamp": "2026-06-12T19:54:53.073850+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5147ae40e3",
+    "timestamp": "2026-06-12T19:54:22.690722+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "69ead80f3f",
+    "timestamp": "2026-06-12T19:53:52.456504+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "76105b27ed",
+    "timestamp": "2026-06-12T19:53:22.143495+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cc6b589e45",
+    "timestamp": "2026-06-12T19:52:51.819248+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "54e6739d07",
+    "timestamp": "2026-06-12T19:52:21.564244+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "15e648830e",
+    "timestamp": "2026-06-12T19:51:51.275843+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.79",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b08deea411",
+    "timestamp": "2026-06-12T19:51:20.968769+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.79",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e4a17ad9c1",
+    "timestamp": "2026-06-12T19:50:50.747845+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.79",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f8b46bc73f",
+    "timestamp": "2026-06-12T19:50:20.451601+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.79",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b91965853a",
+    "timestamp": "2026-06-12T19:49:50.214396+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.69",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8329eb4b0f",
+    "timestamp": "2026-06-12T19:49:19.901515+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.69",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f2427ee8fb",
+    "timestamp": "2026-06-12T19:48:49.705425+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.69",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f3a90f3452",
+    "timestamp": "2026-06-12T19:48:19.406693+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.69",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f6b8197ddb",
+    "timestamp": "2026-06-12T19:47:49.098140+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d86cd3061a",
+    "timestamp": "2026-06-12T19:47:18.805255+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ee6c13091b",
+    "timestamp": "2026-06-12T19:46:48.467880+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6773374618",
+    "timestamp": "2026-06-12T19:46:18.186397+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a656f9c1c5",
+    "timestamp": "2026-06-12T19:45:47.913331+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e21cd7b980",
+    "timestamp": "2026-06-12T19:45:17.611574+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "35d3dd3da6",
+    "timestamp": "2026-06-12T19:44:47.332741+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "265b768ab0",
+    "timestamp": "2026-06-12T19:44:17.084343+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2c490c8b22",
+    "timestamp": "2026-06-12T19:43:46.861968+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e2f2cae748",
+    "timestamp": "2026-06-12T19:43:16.569985+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a37436984a",
+    "timestamp": "2026-06-12T19:42:46.263499+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0ff7323ff8",
+    "timestamp": "2026-06-12T19:42:16.038571+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c4577be338",
+    "timestamp": "2026-06-12T19:41:45.747303+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c63718d868",
+    "timestamp": "2026-06-12T19:41:15.548128+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d0908c4bc9",
+    "timestamp": "2026-06-12T19:40:45.285061+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5c66ef20a1",
+    "timestamp": "2026-06-12T19:40:15.019546+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "60d1d5e1a2",
+    "timestamp": "2026-06-12T19:39:44.740098+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4f1b9e7d99",
+    "timestamp": "2026-06-12T19:39:14.427712+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e748eee162",
+    "timestamp": "2026-06-12T19:38:44.180561+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "464bc6b03f",
+    "timestamp": "2026-06-12T19:38:13.870825+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "63dcfe0fb3",
+    "timestamp": "2026-06-12T19:37:43.589506+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5f6554474a",
+    "timestamp": "2026-06-12T19:37:13.273237+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "92ad882831",
+    "timestamp": "2026-06-12T19:36:42.723097+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5df4f54602",
+    "timestamp": "2026-06-12T19:36:12.451284+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f2ae4dbfa0",
+    "timestamp": "2026-06-12T19:35:42.172393+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b68b220794",
+    "timestamp": "2026-06-12T19:35:11.829343+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "82d5b35661",
+    "timestamp": "2026-06-12T19:34:41.541844+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f652daf592",
+    "timestamp": "2026-06-12T19:34:10.981303+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9d34a443a3",
+    "timestamp": "2026-06-12T19:33:40.745429+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4b03ed929c",
+    "timestamp": "2026-06-12T19:33:10.431968+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f24858f260",
+    "timestamp": "2026-06-12T19:32:40.145994+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0fe9613b00",
+    "timestamp": "2026-06-12T19:32:09.900408+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36efbe8649",
+    "timestamp": "2026-06-12T19:31:39.587359+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0ff6cc8636",
+    "timestamp": "2026-06-12T19:31:09.320600+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d99abb2df8",
+    "timestamp": "2026-06-12T19:30:39.025289+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d992e41233",
+    "timestamp": "2026-06-12T19:30:08.704875+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f2a9eb6e3e",
+    "timestamp": "2026-06-12T19:29:38.418787+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "55f7674edf",
+    "timestamp": "2026-06-12T19:29:07.860047+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8699200cc8",
+    "timestamp": "2026-06-12T19:28:37.605842+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d40c2c2f63",
+    "timestamp": "2026-06-12T19:28:07.291060+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f4a1cf3066",
+    "timestamp": "2026-06-12T19:27:37.069203+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ec0fc8759b",
+    "timestamp": "2026-06-12T19:27:06.775930+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f2401fc7d7",
+    "timestamp": "2026-06-12T19:26:36.452405+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0f28beda71",
+    "timestamp": "2026-06-12T19:26:06.119685+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "852a457302",
+    "timestamp": "2026-06-12T19:25:35.885785+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1b2ca688a4",
+    "timestamp": "2026-06-12T19:25:05.607911+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "77e83d56e9",
+    "timestamp": "2026-06-12T19:24:35.338920+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6a21b6acea",
+    "timestamp": "2026-06-12T19:24:05.085075+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "75e99ddaae",
+    "timestamp": "2026-06-12T19:23:34.821384+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7ad0eca286",
+    "timestamp": "2026-06-12T19:23:04.575265+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c4743b1af3",
+    "timestamp": "2026-06-12T19:22:34.277985+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "afa578a7f3",
+    "timestamp": "2026-06-12T19:22:04.050489+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "85c0d912e5",
+    "timestamp": "2026-06-12T19:21:33.748936+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f831bebc0e",
+    "timestamp": "2026-06-12T19:21:03.484337+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f20cfc0e83",
+    "timestamp": "2026-06-12T19:20:33.170974+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fa48c674a0",
+    "timestamp": "2026-06-12T19:20:02.903585+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "288ede39e0",
+    "timestamp": "2026-06-12T19:19:32.409230+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "338bedea10",
+    "timestamp": "2026-06-12T19:19:02.125041+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70548f44ee",
+    "timestamp": "2026-06-12T19:18:31.837167+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ece943297b",
+    "timestamp": "2026-06-12T19:18:01.587462+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b35423a273",
+    "timestamp": "2026-06-12T19:17:31.251687+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9a5d924e3f",
+    "timestamp": "2026-06-12T19:17:00.924030+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b8d7d7ac60",
+    "timestamp": "2026-06-12T19:16:30.629834+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1df0737b7b",
+    "timestamp": "2026-06-12T19:15:58.871455+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3f808a86c2",
+    "timestamp": "2026-06-12T19:15:28.542535+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2d20267193",
+    "timestamp": "2026-06-12T19:14:52.599957+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d0f493c354",
+    "timestamp": "2026-06-12T19:14:22.329916+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a29d3902dd",
+    "timestamp": "2026-06-12T19:13:58.154439+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36d4c3cc40",
+    "timestamp": "2026-06-12T19:13:52.054092+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "445d1906c2",
+    "timestamp": "2026-06-12T19:13:21.779746+00:00",
+    "level": "info",
+    "message": "54 Trade(s) synchronisiert | PnL gesamt: +2.67",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d9e3d5295d",
+    "timestamp": "2026-06-12T19:13:15.574180+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155182797",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4a9148f148",
+    "timestamp": "2026-06-12T19:12:51.367867+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.68",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "717aae07b4",
+    "timestamp": "2026-06-12T19:12:21.053200+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.68",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7295a4f890",
+    "timestamp": "2026-06-12T19:12:14.662464+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15753 | Ticket #155182797",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a46e04edca",
+    "timestamp": "2026-06-12T19:11:50.286440+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.68",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d1c6e9bc8b",
+    "timestamp": "2026-06-12T19:11:20.067728+00:00",
+    "level": "info",
+    "message": "53 Trade(s) synchronisiert | PnL gesamt: +2.68",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "40df7111c1",
+    "timestamp": "2026-06-12T19:11:14.289874+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155182379",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "43231859ff",
+    "timestamp": "2026-06-12T19:10:49.666246+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.73",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1494e0d63f",
+    "timestamp": "2026-06-12T19:10:19.049701+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.73",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e85d244ec6",
+    "timestamp": "2026-06-12T19:10:13.440418+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15756 | Ticket #155182379",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8d5a340d7f",
+    "timestamp": "2026-06-12T19:09:48.333593+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.73",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e716a1946e",
+    "timestamp": "2026-06-12T19:09:17.759361+00:00",
+    "level": "info",
+    "message": "52 Trade(s) synchronisiert | PnL gesamt: +2.73",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5f70e61a03",
+    "timestamp": "2026-06-12T19:09:12.669350+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155181554",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7d223d94ca",
+    "timestamp": "2026-06-12T19:08:47.472598+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "95d2a8c1ef",
+    "timestamp": "2026-06-12T19:08:17.218198+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "995f5eab01",
+    "timestamp": "2026-06-12T19:07:46.981554+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ae5685fb15",
+    "timestamp": "2026-06-12T19:07:16.730106+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9a202ebc4c",
+    "timestamp": "2026-06-12T19:07:11.650429+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15769 | Ticket #155181554",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bd35475156",
+    "timestamp": "2026-06-12T19:06:46.487151+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "873c0b656e",
+    "timestamp": "2026-06-12T19:06:16.242214+00:00",
+    "level": "info",
+    "message": "51 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ab40a16c6c",
+    "timestamp": "2026-06-12T19:06:11.124863+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155181067",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c17d5e23b2",
+    "timestamp": "2026-06-12T19:05:45.883821+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "263ca1e414",
+    "timestamp": "2026-06-12T19:05:15.643440+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9433c333b8",
+    "timestamp": "2026-06-12T19:04:45.405479+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "967e371e48",
+    "timestamp": "2026-06-12T19:04:15.135072+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a11a9fef0c",
+    "timestamp": "2026-06-12T19:04:10.912783+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15775 | Ticket #155181067",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "95d8edbcd2",
+    "timestamp": "2026-06-12T19:03:44.673946+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d8cd9b74ff",
+    "timestamp": "2026-06-12T19:03:14.375747+00:00",
+    "level": "info",
+    "message": "50 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36230fbf2a",
+    "timestamp": "2026-06-12T19:03:09.387236+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155180145",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "43594d1bd4",
+    "timestamp": "2026-06-12T19:02:42.180010+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ad459ef805",
+    "timestamp": "2026-06-12T19:02:11.942247+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2d901af76e",
+    "timestamp": "2026-06-12T19:01:41.681367+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "49da519ddb",
+    "timestamp": "2026-06-12T19:01:11.397677+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1ffd1fcbf1",
+    "timestamp": "2026-06-12T19:01:09.123685+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1575 | Ticket #155180145",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3e0bfe3c01",
+    "timestamp": "2026-06-12T19:00:40.892239+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c0f1f722b7",
+    "timestamp": "2026-06-12T19:00:10.668010+00:00",
+    "level": "info",
+    "message": "49 Trade(s) synchronisiert | PnL gesamt: +2.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "eb3c3288ef",
+    "timestamp": "2026-06-12T19:00:07.548695+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155179334",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c0ca6414f3",
+    "timestamp": "2026-06-12T18:59:40.329918+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2d0d30d869",
+    "timestamp": "2026-06-12T18:59:10.065505+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d079bf1696",
+    "timestamp": "2026-06-12T18:59:06.940974+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15764 | Ticket #155179334",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "acf58b204c",
+    "timestamp": "2026-06-12T18:58:39.744267+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b2ca2278cb",
+    "timestamp": "2026-06-12T18:58:09.440458+00:00",
+    "level": "info",
+    "message": "48 Trade(s) synchronisiert | PnL gesamt: +2.82",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bdd2a6a0a0",
+    "timestamp": "2026-06-12T18:58:07.156363+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155178489",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "02a45fe753",
+    "timestamp": "2026-06-12T18:57:38.969089+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5b351d91a4",
+    "timestamp": "2026-06-12T18:57:08.699145+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c5774d01d4",
+    "timestamp": "2026-06-12T18:56:38.443393+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "333bafcb1b",
+    "timestamp": "2026-06-12T18:56:08.168779+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7c0679d9d0",
+    "timestamp": "2026-06-12T18:56:05.911055+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15783 | Ticket #155178489",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "92356da635",
+    "timestamp": "2026-06-12T18:55:37.651274+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f214f00bf5",
+    "timestamp": "2026-06-12T18:55:07.360652+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "894f44d9ab",
+    "timestamp": "2026-06-12T18:55:05.107059+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155178093",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0575957620",
+    "timestamp": "2026-06-12T18:54:36.886259+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +2.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "df04754054",
+    "timestamp": "2026-06-12T18:54:06.561651+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +2.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ac599797fd",
+    "timestamp": "2026-06-12T18:54:04.014253+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1578 | Ticket #155178093",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "90be451f98",
+    "timestamp": "2026-06-12T18:54:03.770903+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3c0ed00b9d",
+    "timestamp": "2026-06-12T18:53:35.830705+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +2.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dfa383f3c5",
+    "timestamp": "2026-06-12T18:53:05.567937+00:00",
+    "level": "info",
+    "message": "307 Trade(s) synchronisiert | PnL gesamt: +74.15",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c6024f16eb",
+    "timestamp": "2026-06-12T18:53:03.460043+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "86109b1177",
+    "timestamp": "2026-06-12T18:53:01.371562+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "260bd1d2f7",
+    "timestamp": "2026-06-12T18:03:38.221161+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e0966be08b",
+    "timestamp": "2026-06-12T18:03:16.328164+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +2.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d77b655ea9",
+    "timestamp": "2026-06-12T18:02:56.107934+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155163177",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "853ef78c94",
+    "timestamp": "2026-06-12T18:02:45.978970+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +2.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1c71de8b1d",
+    "timestamp": "2026-06-12T18:02:15.661805+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +2.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "eb759d9f9e",
+    "timestamp": "2026-06-12T18:01:55.491868+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15751 | Ticket #155163177",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9855f390d3",
+    "timestamp": "2026-06-12T18:01:45.390993+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +2.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ec956a789e",
+    "timestamp": "2026-06-12T18:01:15.097512+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +2.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0f1854dc26",
+    "timestamp": "2026-06-12T18:00:54.866896+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155162316",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4e10257728",
+    "timestamp": "2026-06-12T18:00:44.747220+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "47b2d359d3",
+    "timestamp": "2026-06-12T18:00:14.473926+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c0113dc99d",
+    "timestamp": "2026-06-12T17:59:44.162444+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "61ae15148f",
+    "timestamp": "2026-06-12T17:59:13.832230+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e46958fcfd",
+    "timestamp": "2026-06-12T17:58:54.630865+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15745 | Ticket #155162316",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c37a8990bb",
+    "timestamp": "2026-06-12T17:58:43.528518+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "95f5f039a7",
+    "timestamp": "2026-06-12T17:58:12.956696+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +2.96",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "751c5a764a",
+    "timestamp": "2026-06-12T17:57:54.543184+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155161977",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "43d613d6c9",
+    "timestamp": "2026-06-12T17:57:42.452295+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a4bdeb52ba",
+    "timestamp": "2026-06-12T17:57:12.112169+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "00f4544453",
+    "timestamp": "2026-06-12T17:56:52.898416+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1574 | Ticket #155161977",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0fcd68f226",
+    "timestamp": "2026-06-12T17:56:41.788334+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "58eedc6f7c",
+    "timestamp": "2026-06-12T17:56:11.519238+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b522fd61a9",
+    "timestamp": "2026-06-12T17:55:53.253830+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155161328",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "49395de578",
+    "timestamp": "2026-06-12T17:55:41.134693+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.91",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ef538789fd",
+    "timestamp": "2026-06-12T17:55:10.791376+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.91",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7cc0c137ca",
+    "timestamp": "2026-06-12T17:54:51.584181+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1575 | Ticket #155161328",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9885087170",
+    "timestamp": "2026-06-12T17:54:40.455027+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.91",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "247223b65c",
+    "timestamp": "2026-06-12T17:54:10.201992+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.91",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "88c77539fe",
+    "timestamp": "2026-06-12T17:53:51.913992+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155160784",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "22f46cfb6b",
+    "timestamp": "2026-06-12T17:53:39.810513+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9025094ad2",
+    "timestamp": "2026-06-12T17:53:09.481572+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e16d4e39fb",
+    "timestamp": "2026-06-12T17:52:39.179374+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d7952d60cf",
+    "timestamp": "2026-06-12T17:52:08.897079+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "17ea08b832",
+    "timestamp": "2026-06-12T17:51:50.793493+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1575 | Ticket #155160784",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bf166b26ed",
+    "timestamp": "2026-06-12T17:51:38.676136+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e17ab4ea69",
+    "timestamp": "2026-06-12T17:51:08.350977+00:00",
+    "level": "info",
+    "message": "41 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ffc5e031fc",
+    "timestamp": "2026-06-12T17:50:49.166649+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155160206",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "45c843920c",
+    "timestamp": "2026-06-12T17:50:38.063371+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "71498c2ad9",
+    "timestamp": "2026-06-12T17:50:07.739301+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0ed889916a",
+    "timestamp": "2026-06-12T17:49:37.462604+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ceb6608797",
+    "timestamp": "2026-06-12T17:49:07.228528+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bf82255900",
+    "timestamp": "2026-06-12T17:48:48.923266+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15747 | Ticket #155160206",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a0c1727b7a",
+    "timestamp": "2026-06-12T17:48:36.815109+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bc5b36f2c1",
+    "timestamp": "2026-06-12T17:48:06.539048+00:00",
+    "level": "info",
+    "message": "40 Trade(s) synchronisiert | PnL gesamt: +2.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a4f2da9ba0",
+    "timestamp": "2026-06-12T17:47:47.368177+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155159711",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bad50a350c",
+    "timestamp": "2026-06-12T17:47:36.267317+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8af2329931",
+    "timestamp": "2026-06-12T17:47:05.992818+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e615edc263",
+    "timestamp": "2026-06-12T17:46:46.297061+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15751 | Ticket #155159711",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f74bd739f5",
+    "timestamp": "2026-06-12T17:46:46.173986+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "074842de54",
+    "timestamp": "2026-06-12T17:46:35.209813+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "de89d621fa",
+    "timestamp": "2026-06-12T17:46:04.971261+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0ef6fa7f41",
+    "timestamp": "2026-06-12T17:45:33.448918+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "04905065aa",
+    "timestamp": "2026-06-12T17:45:03.192081+00:00",
+    "level": "info",
+    "message": "300 Trade(s) synchronisiert | PnL gesamt: +74.22",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "08630eebbd",
+    "timestamp": "2026-06-12T17:45:00.820067+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "178ccceda1",
+    "timestamp": "2026-06-12T17:44:58.537782+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c302f57de0",
+    "timestamp": "2026-06-12T17:31:52.739270+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ffa399a7ef",
+    "timestamp": "2026-06-12T17:31:32.434567+00:00",
+    "level": "info",
+    "message": "39 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b6ae6cf93f",
+    "timestamp": "2026-06-12T17:31:08.172039+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155154932",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "55de05eccb",
+    "timestamp": "2026-06-12T17:31:02.045406+00:00",
+    "level": "info",
+    "message": "38 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bb23e19d6c",
+    "timestamp": "2026-06-12T17:30:31.735559+00:00",
+    "level": "info",
+    "message": "38 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8c21c5450f",
+    "timestamp": "2026-06-12T17:30:07.498912+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15757 | Ticket #155154932",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "907ef13a1e",
+    "timestamp": "2026-06-12T17:30:01.414273+00:00",
+    "level": "info",
+    "message": "38 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ac7211707a",
+    "timestamp": "2026-06-12T17:29:31.132702+00:00",
+    "level": "info",
+    "message": "38 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5527e059d5",
+    "timestamp": "2026-06-12T17:29:07.736287+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155154264",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cab2734451",
+    "timestamp": "2026-06-12T17:29:00.629952+00:00",
+    "level": "info",
+    "message": "37 Trade(s) synchronisiert | PnL gesamt: +2.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a1a9c6daa9",
+    "timestamp": "2026-06-12T17:28:30.319257+00:00",
+    "level": "info",
+    "message": "37 Trade(s) synchronisiert | PnL gesamt: +2.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "de058bcf43",
+    "timestamp": "2026-06-12T17:28:06.085479+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15745 | Ticket #155154264",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "131860a55e",
+    "timestamp": "2026-06-12T17:28:00.003027+00:00",
+    "level": "info",
+    "message": "37 Trade(s) synchronisiert | PnL gesamt: +2.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0b63661fa2",
+    "timestamp": "2026-06-12T17:27:29.662351+00:00",
+    "level": "info",
+    "message": "37 Trade(s) synchronisiert | PnL gesamt: +2.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "987774dc1a",
+    "timestamp": "2026-06-12T17:27:05.358908+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155153568",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "75e8714b4e",
+    "timestamp": "2026-06-12T17:26:59.297443+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "88f6d5a0be",
+    "timestamp": "2026-06-12T17:26:29.022275+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "126973f44a",
+    "timestamp": "2026-06-12T17:25:58.749150+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d41e4f9649",
+    "timestamp": "2026-06-12T17:25:28.390628+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "44df70b93d",
+    "timestamp": "2026-06-12T17:25:05.107018+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15745 | Ticket #155153568",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "046cee9432",
+    "timestamp": "2026-06-12T17:24:58.020285+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c792e3734b",
+    "timestamp": "2026-06-12T17:24:27.736908+00:00",
+    "level": "info",
+    "message": "36 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ce7f59c6f7",
+    "timestamp": "2026-06-12T17:24:05.166848+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155152564",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b52c0e1787",
+    "timestamp": "2026-06-12T17:23:57.075356+00:00",
+    "level": "info",
+    "message": "35 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d14e627e09",
+    "timestamp": "2026-06-12T17:23:26.848175+00:00",
+    "level": "info",
+    "message": "35 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fff68ce121",
+    "timestamp": "2026-06-12T17:22:56.618348+00:00",
+    "level": "info",
+    "message": "35 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6a641f73af",
+    "timestamp": "2026-06-12T17:22:26.326318+00:00",
+    "level": "info",
+    "message": "35 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0b81bb8547",
+    "timestamp": "2026-06-12T17:22:04.864320+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15746 | Ticket #155152564",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "296e41c79f",
+    "timestamp": "2026-06-12T17:22:03.856696+00:00",
+    "level": "info",
+    "message": "Bot reconnect: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7dbf2b6c39",
+    "timestamp": "2026-06-12T17:21:55.767273+00:00",
+    "level": "info",
+    "message": "35 Trade(s) synchronisiert | PnL gesamt: +3.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8c0daa4ae5",
+    "timestamp": "2026-06-12T17:21:25.545287+00:00",
+    "level": "info",
+    "message": "34 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8a9cd03612",
+    "timestamp": "2026-06-12T17:21:03.000400+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "68371da20f",
+    "timestamp": "2026-06-12T17:20:53.897136+00:00",
+    "level": "info",
+    "message": "34 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "be1ef2af83",
+    "timestamp": "2026-06-12T17:20:36.179483+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15737 | Ticket #155152049",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ff5c908c37",
+    "timestamp": "2026-06-12T17:20:23.046534+00:00",
+    "level": "info",
+    "message": "34 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36db5f7014",
+    "timestamp": "2026-06-12T17:20:19.977380+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155151749",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "86d06bc28d",
+    "timestamp": "2026-06-12T17:19:52.460983+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5177cf7151",
+    "timestamp": "2026-06-12T17:19:36.267956+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15735 | Ticket #155151749",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2944f9ffb0",
+    "timestamp": "2026-06-12T17:19:35.913578+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "25ec07bc86",
+    "timestamp": "2026-06-12T17:19:22.161525+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b36701265e",
+    "timestamp": "2026-06-12T17:18:51.282911+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "13d0a71a0e",
+    "timestamp": "2026-06-12T17:18:21.039333+00:00",
+    "level": "info",
+    "message": "294 Trade(s) synchronisiert | PnL gesamt: +74.18",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0b2576593e",
+    "timestamp": "2026-06-12T17:18:20.794210+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "541ee9a937",
+    "timestamp": "2026-06-12T17:18:20.048242+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "048d8e0e88",
+    "timestamp": "2026-06-12T17:17:44.367988+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d566886f5d",
+    "timestamp": "2026-06-12T17:17:14.120279+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6277c92026",
+    "timestamp": "2026-06-12T17:16:43.838749+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e649dddc1d",
+    "timestamp": "2026-06-12T17:16:13.589218+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b368647221",
+    "timestamp": "2026-06-12T17:15:43.325363+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bfb759aef8",
+    "timestamp": "2026-06-12T17:15:13.104039+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "86defd9069",
+    "timestamp": "2026-06-12T17:14:42.860432+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4923904abd",
+    "timestamp": "2026-06-12T17:14:12.590910+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "39f860ddae",
+    "timestamp": "2026-06-12T17:13:42.342698+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "25e0a92cac",
+    "timestamp": "2026-06-12T17:13:12.035718+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8303c7bae8",
+    "timestamp": "2026-06-12T17:12:41.772615+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "76c3076bef",
+    "timestamp": "2026-06-12T17:12:11.533337+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "152575b072",
+    "timestamp": "2026-06-12T17:11:41.272392+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8235c125c4",
+    "timestamp": "2026-06-12T17:11:11.048039+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2185053656",
+    "timestamp": "2026-06-12T17:10:40.805413+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3de0887d36",
+    "timestamp": "2026-06-12T17:10:10.554917+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "aad42d41f5",
+    "timestamp": "2026-06-12T17:09:40.307516+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5f7141cedd",
+    "timestamp": "2026-06-12T17:09:10.117411+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9cb4d539be",
+    "timestamp": "2026-06-12T17:08:39.888156+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bd6f814318",
+    "timestamp": "2026-06-12T17:08:09.615607+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3e4ac24d4c",
+    "timestamp": "2026-06-12T17:07:39.394608+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "13a7719f2c",
+    "timestamp": "2026-06-12T17:07:09.139386+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7b1c666b1b",
+    "timestamp": "2026-06-12T17:06:38.880464+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3657f617ad",
+    "timestamp": "2026-06-12T17:06:08.657915+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2d56dab8c1",
+    "timestamp": "2026-06-12T17:05:38.338610+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3f6212e877",
+    "timestamp": "2026-06-12T17:05:08.074406+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c01b9d2f27",
+    "timestamp": "2026-06-12T17:04:37.819485+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fb2b725852",
+    "timestamp": "2026-06-12T17:04:07.568751+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cff7262bd9",
+    "timestamp": "2026-06-12T17:03:37.301295+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "69205c1f8b",
+    "timestamp": "2026-06-12T17:03:07.056661+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "99323be9ca",
+    "timestamp": "2026-06-12T17:02:36.783000+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fdd2a6865a",
+    "timestamp": "2026-06-12T17:02:06.539765+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b7ba325b41",
+    "timestamp": "2026-06-12T17:01:36.327524+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "18b543fd98",
+    "timestamp": "2026-06-12T17:01:06.085940+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "83ea7858ef",
+    "timestamp": "2026-06-12T17:00:35.865061+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2b206496e3",
+    "timestamp": "2026-06-12T17:00:05.603534+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b5152cfe2b",
+    "timestamp": "2026-06-12T16:59:35.340182+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6ccdc2892a",
+    "timestamp": "2026-06-12T16:59:05.076499+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "581cc9746f",
+    "timestamp": "2026-06-12T16:58:34.845017+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f4598df49c",
+    "timestamp": "2026-06-12T16:58:04.577921+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9126c2faab",
+    "timestamp": "2026-06-12T16:57:34.330923+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3a67940a97",
+    "timestamp": "2026-06-12T16:57:04.072242+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "43e04c025e",
+    "timestamp": "2026-06-12T16:56:33.836213+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "73753f6913",
+    "timestamp": "2026-06-12T16:56:03.412096+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3392edc242",
+    "timestamp": "2026-06-12T16:55:33.165771+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c8ec1c12ec",
+    "timestamp": "2026-06-12T16:55:02.821901+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "79944e03bb",
+    "timestamp": "2026-06-12T16:54:32.155846+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cb1ffd64af",
+    "timestamp": "2026-06-12T16:54:01.756912+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "67f5d52631",
+    "timestamp": "2026-06-12T16:53:31.527324+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2d57abd99b",
+    "timestamp": "2026-06-12T16:53:01.306417+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b43248e9d8",
+    "timestamp": "2026-06-12T16:52:31.032891+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "230e434a72",
+    "timestamp": "2026-06-12T16:52:00.793362+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "45ef9cd6ab",
+    "timestamp": "2026-06-12T16:51:30.510183+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ba5ba333e6",
+    "timestamp": "2026-06-12T16:51:00.289193+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "40526c0b7c",
+    "timestamp": "2026-06-12T16:50:30.098960+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "751f0253c6",
+    "timestamp": "2026-06-12T16:49:59.871080+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "02a0786dc0",
+    "timestamp": "2026-06-12T16:49:29.667573+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b57361a69e",
+    "timestamp": "2026-06-12T16:48:59.432524+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7274a696b7",
+    "timestamp": "2026-06-12T16:48:29.183795+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6665202888",
+    "timestamp": "2026-06-12T16:47:59.004714+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4a301991b2",
+    "timestamp": "2026-06-12T16:47:28.777123+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "41ecfe149d",
+    "timestamp": "2026-06-12T16:46:58.566991+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4cb5cde58b",
+    "timestamp": "2026-06-12T16:46:28.300995+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ff504bedf8",
+    "timestamp": "2026-06-12T16:45:58.058387+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3542368f5b",
+    "timestamp": "2026-06-12T16:45:27.825096+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b952cf7580",
+    "timestamp": "2026-06-12T16:44:57.641616+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "80c77ffbff",
+    "timestamp": "2026-06-12T16:44:27.409242+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0c658fc420",
+    "timestamp": "2026-06-12T16:43:57.132746+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "88f3fb4f9d",
+    "timestamp": "2026-06-12T16:43:26.899922+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9b2ba6d64f",
+    "timestamp": "2026-06-12T16:42:56.629132+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8e6947a215",
+    "timestamp": "2026-06-12T16:42:26.337462+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d3e31ff41b",
+    "timestamp": "2026-06-12T16:41:56.087369+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3891f80c16",
+    "timestamp": "2026-06-12T16:41:25.847397+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4cbe41b436",
+    "timestamp": "2026-06-12T16:40:55.598586+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8ee9ca4877",
+    "timestamp": "2026-06-12T16:40:25.329267+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "559b044b39",
+    "timestamp": "2026-06-12T16:39:55.095912+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6716722140",
+    "timestamp": "2026-06-12T16:39:24.882476+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "77964fae42",
+    "timestamp": "2026-06-12T16:38:54.710706+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1ced059510",
+    "timestamp": "2026-06-12T16:38:24.507548+00:00",
+    "level": "info",
+    "message": "33 Trade(s) synchronisiert | PnL gesamt: +2.89",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "62a5918457",
+    "timestamp": "2026-06-12T16:37:54.249228+00:00",
+    "level": "info",
+    "message": "294 Trade(s) synchronisiert | PnL gesamt: +74.18",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8210ab3030",
+    "timestamp": "2026-06-12T16:37:52.342988+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b709d2518f",
+    "timestamp": "2026-06-12T16:37:49.784242+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f8561bbfde",
+    "timestamp": "2026-06-12T16:00:09.047038+00:00",
+    "level": "info",
+    "message": "6 Trade(s) synchronisiert | PnL gesamt: -0.16",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1f080d222a",
+    "timestamp": "2026-06-12T15:59:38.857009+00:00",
+    "level": "info",
+    "message": "6 Trade(s) synchronisiert | PnL gesamt: -0.16",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "602f3bc45a",
+    "timestamp": "2026-06-12T15:59:08.642367+00:00",
+    "level": "info",
+    "message": "6 Trade(s) synchronisiert | PnL gesamt: -0.16",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d4831d1d8b",
+    "timestamp": "2026-06-12T15:58:38.400104+00:00",
+    "level": "info",
+    "message": "6 Trade(s) synchronisiert | PnL gesamt: -0.16",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c2e6976e30",
+    "timestamp": "2026-06-12T15:58:08.207460+00:00",
+    "level": "info",
+    "message": "6 Trade(s) synchronisiert | PnL gesamt: -0.16",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "16bda07240",
+    "timestamp": "2026-06-12T15:57:38.029711+00:00",
+    "level": "info",
+    "message": "7 Trade(s) synchronisiert | PnL gesamt: -0.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5edfa0d3f7",
+    "timestamp": "2026-06-12T15:57:07.836284+00:00",
+    "level": "info",
+    "message": "7 Trade(s) synchronisiert | PnL gesamt: -0.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3edc01ad1c",
+    "timestamp": "2026-06-12T15:56:39.588324+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: SELL 0.08 EURUSDp @ 1.15751 | Ticket #155121796",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ebdb91e799",
+    "timestamp": "2026-06-12T15:56:37.039319+00:00",
+    "level": "info",
+    "message": "7 Trade(s) synchronisiert | PnL gesamt: -0.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "62169df931",
+    "timestamp": "2026-06-12T15:56:06.763603+00:00",
+    "level": "info",
+    "message": "7 Trade(s) synchronisiert | PnL gesamt: -0.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8fba8b0f0b",
+    "timestamp": "2026-06-12T15:55:35.949748+00:00",
+    "level": "info",
+    "message": "8 Trade(s) synchronisiert | PnL gesamt: -0.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a734652905",
+    "timestamp": "2026-06-12T15:55:05.676670+00:00",
+    "level": "info",
+    "message": "8 Trade(s) synchronisiert | PnL gesamt: -0.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5f1f54e8ca",
+    "timestamp": "2026-06-12T15:54:35.409395+00:00",
+    "level": "info",
+    "message": "8 Trade(s) synchronisiert | PnL gesamt: -0.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3bb5e2904a",
+    "timestamp": "2026-06-12T15:54:26.283299+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155119775",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5956feba54",
+    "timestamp": "2026-06-12T15:54:05.097538+00:00",
+    "level": "info",
+    "message": "8 Trade(s) synchronisiert | PnL gesamt: -0.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f9b14afb64",
+    "timestamp": "2026-06-12T15:53:34.871560+00:00",
+    "level": "info",
+    "message": "9 Trade(s) synchronisiert | PnL gesamt: -0.24",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "30acc7721c",
+    "timestamp": "2026-06-12T15:53:28.405799+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2a8e88c41c",
+    "timestamp": "2026-06-12T15:53:04.685893+00:00",
+    "level": "info",
+    "message": "9 Trade(s) synchronisiert | PnL gesamt: -0.24",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a3f4b7acbc",
+    "timestamp": "2026-06-12T15:52:34.415095+00:00",
+    "level": "info",
+    "message": "9 Trade(s) synchronisiert | PnL gesamt: -0.24",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "da32f72baa",
+    "timestamp": "2026-06-12T15:52:03.744473+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d1944ff71a",
+    "timestamp": "2026-06-12T15:51:54.512769+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1575 | Ticket #155119775",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "88a29d4a5c",
+    "timestamp": "2026-06-12T15:51:31.320474+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "20e588f2b4",
+    "timestamp": "2026-06-12T15:51:01.068937+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a3dfc9a5c5",
+    "timestamp": "2026-06-12T15:50:54.442511+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155119020",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dc593f6d19",
+    "timestamp": "2026-06-12T15:50:30.226916+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ae819b66fd",
+    "timestamp": "2026-06-12T15:49:59.963458+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2c61cd1e9d",
+    "timestamp": "2026-06-12T15:49:53.858652+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15756 | Ticket #155119020",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cea0756334",
+    "timestamp": "2026-06-12T15:49:29.631981+00:00",
+    "level": "info",
+    "message": "11 Trade(s) synchronisiert | PnL gesamt: -0.36",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "32b5bfcad3",
+    "timestamp": "2026-06-12T15:48:59.378597+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ffe67da847",
+    "timestamp": "2026-06-12T15:48:53.304208+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155118077",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5930852502",
+    "timestamp": "2026-06-12T15:48:29.104525+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1090e98d04",
+    "timestamp": "2026-06-12T15:47:58.825229+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4013fa076c",
+    "timestamp": "2026-06-12T15:47:52.747219+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15768 | Ticket #155118077",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a7ada86923",
+    "timestamp": "2026-06-12T15:47:28.562670+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "10ed619bd9",
+    "timestamp": "2026-06-12T15:46:58.333982+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "671bb8466a",
+    "timestamp": "2026-06-12T15:46:52.223883+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155117421",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c233e3b236",
+    "timestamp": "2026-06-12T15:46:27.840165+00:00",
+    "level": "info",
+    "message": "12 Trade(s) synchronisiert | PnL gesamt: -0.26",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d8b9ece9b0",
+    "timestamp": "2026-06-12T15:45:57.555706+00:00",
+    "level": "info",
+    "message": "13 Trade(s) synchronisiert | PnL gesamt: -0.20",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e75c860fa8",
+    "timestamp": "2026-06-12T15:45:51.446413+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15767 | Ticket #155117421",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "82dfdf8a1f",
+    "timestamp": "2026-06-12T15:45:27.210228+00:00",
+    "level": "info",
+    "message": "13 Trade(s) synchronisiert | PnL gesamt: -0.20",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "30b954a205",
+    "timestamp": "2026-06-12T15:44:56.915273+00:00",
+    "level": "info",
+    "message": "13 Trade(s) synchronisiert | PnL gesamt: -0.20",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ba75fc435a",
+    "timestamp": "2026-06-12T15:44:50.797617+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155116453",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2c17a3b3d7",
+    "timestamp": "2026-06-12T15:44:26.569622+00:00",
+    "level": "info",
+    "message": "13 Trade(s) synchronisiert | PnL gesamt: -0.20",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7d272dce8b",
+    "timestamp": "2026-06-12T15:43:56.368938+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e12290f722",
+    "timestamp": "2026-06-12T15:43:50.269241+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15773 | Ticket #155116453",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "84246534d4",
+    "timestamp": "2026-06-12T15:43:26.018510+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ccc891a8b8",
+    "timestamp": "2026-06-12T15:42:55.734288+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d05eaead4d",
+    "timestamp": "2026-06-12T15:42:49.641271+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155115402",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1067afc956",
+    "timestamp": "2026-06-12T15:42:25.443030+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dd097b6998",
+    "timestamp": "2026-06-12T15:41:55.190592+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "20f91373aa",
+    "timestamp": "2026-06-12T15:41:49.090020+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15767 | Ticket #155115402",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fe3d5390f8",
+    "timestamp": "2026-06-12T15:41:24.871976+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f1ccd48637",
+    "timestamp": "2026-06-12T15:40:54.613493+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7b4daecec5",
+    "timestamp": "2026-06-12T15:40:49.322454+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155113969",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6706ba8023",
+    "timestamp": "2026-06-12T15:40:24.093981+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ca491b3755",
+    "timestamp": "2026-06-12T15:39:53.834003+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "61bf4afc05",
+    "timestamp": "2026-06-12T15:39:23.645950+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f48e5c9933",
+    "timestamp": "2026-06-12T15:38:53.417311+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "acd6afa2f3",
+    "timestamp": "2026-06-12T15:38:48.303563+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15791 | Ticket #155113969",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6911e1ec2d",
+    "timestamp": "2026-06-12T15:38:23.132947+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4e8d9ef374",
+    "timestamp": "2026-06-12T15:37:52.853114+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c462636eb6",
+    "timestamp": "2026-06-12T15:37:47.775493+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155112678",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1246d24ad9",
+    "timestamp": "2026-06-12T15:37:22.597733+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6085a38819",
+    "timestamp": "2026-06-12T15:36:52.291669+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "50198cca5f",
+    "timestamp": "2026-06-12T15:36:22.032074+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "31f229bedd",
+    "timestamp": "2026-06-12T15:35:51.773126+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d252cca7b8",
+    "timestamp": "2026-06-12T15:35:46.687859+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15801 | Ticket #155112678",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "60c70b92a8",
+    "timestamp": "2026-06-12T15:35:21.495794+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0b6c24905f",
+    "timestamp": "2026-06-12T15:34:51.278707+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2a645ee90e",
+    "timestamp": "2026-06-12T15:34:46.178355+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155111539",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9011f23066",
+    "timestamp": "2026-06-12T15:34:20.977111+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c8a72f671b",
+    "timestamp": "2026-06-12T15:33:50.392500+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d23310ad85",
+    "timestamp": "2026-06-12T15:33:45.302485+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15816 | Ticket #155111539",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3b639238e8",
+    "timestamp": "2026-06-12T15:33:20.068782+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b7b9719fc1",
+    "timestamp": "2026-06-12T15:32:49.781466+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0ef9f5bfec",
+    "timestamp": "2026-06-12T15:32:45.687438+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155110188",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fcaad9fd7b",
+    "timestamp": "2026-06-12T15:32:19.485247+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0d2873141e",
+    "timestamp": "2026-06-12T15:31:49.190945+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "718faa06fb",
+    "timestamp": "2026-06-12T15:31:18.929908+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "03371d00aa",
+    "timestamp": "2026-06-12T15:30:48.694752+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8e55d56188",
+    "timestamp": "2026-06-12T15:30:44.627118+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15826 | Ticket #155110188",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "31565097ad",
+    "timestamp": "2026-06-12T15:30:18.386072+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8620cb0d80",
+    "timestamp": "2026-06-12T15:29:48.113890+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "44c09c7caf",
+    "timestamp": "2026-06-12T15:29:43.990865+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155108138",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "42684a578c",
+    "timestamp": "2026-06-12T15:29:17.811357+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "439fd27117",
+    "timestamp": "2026-06-12T15:28:47.328290+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6c2f6fce8a",
+    "timestamp": "2026-06-12T15:28:17.075798+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8e3c948e50",
+    "timestamp": "2026-06-12T15:27:46.756056+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "383843ca02",
+    "timestamp": "2026-06-12T15:27:42.658857+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15812 | Ticket #155108138",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b6f886a012",
+    "timestamp": "2026-06-12T15:27:16.461122+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36e0a128d5",
+    "timestamp": "2026-06-12T15:26:46.216769+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "975ef5c545",
+    "timestamp": "2026-06-12T15:26:42.128823+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155106043",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e316d01036",
+    "timestamp": "2026-06-12T15:26:15.913194+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2940adf36c",
+    "timestamp": "2026-06-12T15:25:45.611040+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6e96bc03cf",
+    "timestamp": "2026-06-12T15:25:15.349801+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3b405f49d6",
+    "timestamp": "2026-06-12T15:24:45.125786+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a0541de95d",
+    "timestamp": "2026-06-12T15:24:42.006233+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15789 | Ticket #155106043",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ffd2b4f09f",
+    "timestamp": "2026-06-12T15:24:14.800056+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "adce866133",
+    "timestamp": "2026-06-12T15:23:44.525529+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "aef525ce08",
+    "timestamp": "2026-06-12T15:23:41.412018+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155105118",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c9e745723a",
+    "timestamp": "2026-06-12T15:23:14.196969+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8139528322",
+    "timestamp": "2026-06-12T15:22:43.831306+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "87295ac34e",
+    "timestamp": "2026-06-12T15:22:40.716764+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15784 | Ticket #155105118",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "53f1b5571f",
+    "timestamp": "2026-06-12T15:22:13.538740+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8dde6865c8",
+    "timestamp": "2026-06-12T15:21:43.296993+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c69ca29c3a",
+    "timestamp": "2026-06-12T15:21:40.206131+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155103142",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "314b2b3a06",
+    "timestamp": "2026-06-12T15:21:12.958224+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9503867c50",
+    "timestamp": "2026-06-12T15:20:42.693759+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ce5538cbee",
+    "timestamp": "2026-06-12T15:20:12.376708+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9a32c97753",
+    "timestamp": "2026-06-12T15:19:42.176878+00:00",
+    "level": "info",
+    "message": "14 Trade(s) synchronisiert | PnL gesamt: -0.66",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d3a80186a3",
+    "timestamp": "2026-06-12T15:19:39.952680+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15787 | Ticket #155103142",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3c42cd6d74",
+    "timestamp": "2026-06-12T15:19:11.725931+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1d2c1133ac",
+    "timestamp": "2026-06-12T15:18:41.439399+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c19b9ebec2",
+    "timestamp": "2026-06-12T15:18:39.104580+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155102172",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "edf37bfb56",
+    "timestamp": "2026-06-12T15:18:09.908713+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f2a9d80290",
+    "timestamp": "2026-06-12T15:17:39.660292+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9be4e0f53a",
+    "timestamp": "2026-06-12T15:17:38.498344+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15771 | Ticket #155102172",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b5959b6a8d",
+    "timestamp": "2026-06-12T15:17:09.279723+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dc5c13118c",
+    "timestamp": "2026-06-12T15:16:38.908928+00:00",
+    "level": "info",
+    "message": "15 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "465cfe588e",
+    "timestamp": "2026-06-12T15:16:37.698778+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155101500",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f716fce05c",
+    "timestamp": "2026-06-12T15:16:07.707654+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7b18d5fa91",
+    "timestamp": "2026-06-12T15:15:37.431991+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "141a357b3b",
+    "timestamp": "2026-06-12T15:15:37.293150+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15777 | Ticket #155101500",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c2369125ea",
+    "timestamp": "2026-06-12T15:15:07.023807+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "950578c97a",
+    "timestamp": "2026-06-12T15:14:36.763519+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5011d201bd",
+    "timestamp": "2026-06-12T15:14:36.635482+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155100594",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ef8e21577b",
+    "timestamp": "2026-06-12T15:14:06.427390+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9751164730",
+    "timestamp": "2026-06-12T15:13:36.142498+00:00",
+    "level": "info",
+    "message": "16 Trade(s) synchronisiert | PnL gesamt: -0.70",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e51ea22a17",
+    "timestamp": "2026-06-12T15:13:36.090606+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15754 | Ticket #155100594",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "038845e214",
+    "timestamp": "2026-06-12T15:13:05.799078+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9b8ca06e26",
+    "timestamp": "2026-06-12T15:12:35.511270+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d26765e0e5",
+    "timestamp": "2026-06-12T15:12:35.410368+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155100069",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6352a1ae48",
+    "timestamp": "2026-06-12T15:12:05.117603+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70be6626d7",
+    "timestamp": "2026-06-12T15:11:34.835723+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cd9be9ab4d",
+    "timestamp": "2026-06-12T15:11:34.730989+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15749 | Ticket #155100069",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "87006dedd9",
+    "timestamp": "2026-06-12T15:11:04.525198+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ecfc94a5cf",
+    "timestamp": "2026-06-12T15:10:34.283988+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7ac220e85d",
+    "timestamp": "2026-06-12T15:10:34.184368+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155099117",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "446ed95ca5",
+    "timestamp": "2026-06-12T15:10:03.920823+00:00",
+    "level": "info",
+    "message": "17 Trade(s) synchronisiert | PnL gesamt: -0.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "827c8fe365",
+    "timestamp": "2026-06-12T15:09:33.631364+00:00",
+    "level": "info",
+    "message": "18 Trade(s) synchronisiert | PnL gesamt: -0.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a84b4ba497",
+    "timestamp": "2026-06-12T15:09:33.492287+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15744 | Ticket #155099117",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d0cfa60f0f",
+    "timestamp": "2026-06-12T15:09:03.267888+00:00",
+    "level": "info",
+    "message": "18 Trade(s) synchronisiert | PnL gesamt: -0.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a0dcf83526",
+    "timestamp": "2026-06-12T15:08:33.004843+00:00",
+    "level": "info",
+    "message": "18 Trade(s) synchronisiert | PnL gesamt: -0.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cf0ccbb1c1",
+    "timestamp": "2026-06-12T15:08:32.879935+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155098295",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "294f40cd29",
+    "timestamp": "2026-06-12T15:08:02.599396+00:00",
+    "level": "info",
+    "message": "18 Trade(s) synchronisiert | PnL gesamt: -0.86",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "abc0d7b2d5",
+    "timestamp": "2026-06-12T15:07:32.281025+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c0fc756ee8",
+    "timestamp": "2026-06-12T15:07:32.164662+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15739 | Ticket #155098295",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d0d7474bc8",
+    "timestamp": "2026-06-12T15:07:01.908993+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e90573ee8a",
+    "timestamp": "2026-06-12T15:06:31.653564+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "800ffbc3ec",
+    "timestamp": "2026-06-12T15:06:31.544415+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155097246",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0fea8b56da",
+    "timestamp": "2026-06-12T15:06:01.313648+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ac337451e5",
+    "timestamp": "2026-06-12T15:05:31.002882+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "514c2a36cb",
+    "timestamp": "2026-06-12T15:05:30.878390+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15739 | Ticket #155097246",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9dc5ba3653",
+    "timestamp": "2026-06-12T15:05:00.584018+00:00",
+    "level": "info",
+    "message": "19 Trade(s) synchronisiert | PnL gesamt: -0.88",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d8b90e36e1",
+    "timestamp": "2026-06-12T15:04:30.341410+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "07c4754733",
+    "timestamp": "2026-06-12T15:04:30.213173+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155096352",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b7fb03c009",
+    "timestamp": "2026-06-12T15:03:59.955559+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4d7e3c5146",
+    "timestamp": "2026-06-12T15:03:29.716991+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e868365b6a",
+    "timestamp": "2026-06-12T15:03:29.620181+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15749 | Ticket #155096352",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "725ca0c853",
+    "timestamp": "2026-06-12T15:02:59.320060+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a387a93b7c",
+    "timestamp": "2026-06-12T15:02:29.070965+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "87278b1afd",
+    "timestamp": "2026-06-12T15:02:28.978131+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155095329",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a55ed771d7",
+    "timestamp": "2026-06-12T15:01:58.692957+00:00",
+    "level": "info",
+    "message": "20 Trade(s) synchronisiert | PnL gesamt: -0.87",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "67cee28b81",
+    "timestamp": "2026-06-12T15:01:28.486724+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c97c627fd5",
+    "timestamp": "2026-06-12T15:01:28.366895+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15739 | Ticket #155095329",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "85a7456d45",
+    "timestamp": "2026-06-12T15:00:58.121760+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "01a57925a7",
+    "timestamp": "2026-06-12T15:00:27.879228+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5ec27a392e",
+    "timestamp": "2026-06-12T15:00:27.751163+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155093784",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6fa72f1627",
+    "timestamp": "2026-06-12T14:59:57.486251+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c1eec391e0",
+    "timestamp": "2026-06-12T14:59:27.250067+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4b961b5453",
+    "timestamp": "2026-06-12T14:59:27.148136+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1574200000000001 | Ticket #155093784",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "090f9bdacf",
+    "timestamp": "2026-06-12T14:58:56.911546+00:00",
+    "level": "info",
+    "message": "21 Trade(s) synchronisiert | PnL gesamt: -0.90",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "358f0e7c97",
+    "timestamp": "2026-06-12T14:58:26.655978+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "147904484c",
+    "timestamp": "2026-06-12T14:58:26.541799+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155092951",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b5f0a472c4",
+    "timestamp": "2026-06-12T14:57:56.318192+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "441fd3de5a",
+    "timestamp": "2026-06-12T14:57:26.060170+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3dc06e5bd7",
+    "timestamp": "2026-06-12T14:57:25.955369+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15775 | Ticket #155092951",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8fde75e795",
+    "timestamp": "2026-06-12T14:56:55.720387+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7ff5ff63a6",
+    "timestamp": "2026-06-12T14:56:25.505719+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "02b0fa27e6",
+    "timestamp": "2026-06-12T14:56:25.401992+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155091589",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6c7a0752e1",
+    "timestamp": "2026-06-12T14:55:55.095172+00:00",
+    "level": "info",
+    "message": "22 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "62bdbee514",
+    "timestamp": "2026-06-12T14:55:24.837550+00:00",
+    "level": "info",
+    "message": "23 Trade(s) synchronisiert | PnL gesamt: -0.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "abd135ddbe",
+    "timestamp": "2026-06-12T14:55:24.728952+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15764 | Ticket #155091589",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ae3d52ed93",
+    "timestamp": "2026-06-12T14:54:54.483869+00:00",
+    "level": "info",
+    "message": "23 Trade(s) synchronisiert | PnL gesamt: -0.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d21becad3e",
+    "timestamp": "2026-06-12T14:54:24.214942+00:00",
+    "level": "info",
+    "message": "23 Trade(s) synchronisiert | PnL gesamt: -0.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c571f73abd",
+    "timestamp": "2026-06-12T14:54:24.114781+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155089029",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3c735acd7f",
+    "timestamp": "2026-06-12T14:53:53.870918+00:00",
+    "level": "info",
+    "message": "23 Trade(s) synchronisiert | PnL gesamt: -0.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "287164ddc9",
+    "timestamp": "2026-06-12T14:53:23.621406+00:00",
+    "level": "info",
+    "message": "24 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "688af987e0",
+    "timestamp": "2026-06-12T14:53:23.556322+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15743 | Ticket #155089029",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5b76cd5f0d",
+    "timestamp": "2026-06-12T14:52:53.260113+00:00",
+    "level": "info",
+    "message": "24 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d57b77ef9a",
+    "timestamp": "2026-06-12T14:52:22.998913+00:00",
+    "level": "info",
+    "message": "24 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d308759a43",
+    "timestamp": "2026-06-12T14:52:22.900496+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155086660",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "06a825348c",
+    "timestamp": "2026-06-12T14:51:52.626468+00:00",
+    "level": "info",
+    "message": "24 Trade(s) synchronisiert | PnL gesamt: -0.75",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f5461dbfe8",
+    "timestamp": "2026-06-12T14:51:22.350098+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "21ff98ef72",
+    "timestamp": "2026-06-12T14:51:22.211534+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1571500000000001 | Ticket #155086660",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cbcd0ef205",
+    "timestamp": "2026-06-12T14:50:51.949560+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a382dcb556",
+    "timestamp": "2026-06-12T14:50:21.692494+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4543cd27d0",
+    "timestamp": "2026-06-12T14:50:21.572352+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155085893",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4fc4a0cbd4",
+    "timestamp": "2026-06-12T14:49:51.279931+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "597526146d",
+    "timestamp": "2026-06-12T14:49:21.030882+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ac178e8d5e",
+    "timestamp": "2026-06-12T14:49:20.967420+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1573 | Ticket #155085893",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "56ca0e2886",
+    "timestamp": "2026-06-12T14:48:50.695312+00:00",
+    "level": "info",
+    "message": "25 Trade(s) synchronisiert | PnL gesamt: -0.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ae487b8559",
+    "timestamp": "2026-06-12T14:48:20.263291+00:00",
+    "level": "info",
+    "message": "26 Trade(s) synchronisiert | PnL gesamt: -1.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a144dc2a38",
+    "timestamp": "2026-06-12T14:48:20.143427+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155084414",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "18f83a066c",
+    "timestamp": "2026-06-12T14:47:49.845912+00:00",
+    "level": "info",
+    "message": "26 Trade(s) synchronisiert | PnL gesamt: -1.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "91f9b84885",
+    "timestamp": "2026-06-12T14:47:19.642704+00:00",
+    "level": "info",
+    "message": "26 Trade(s) synchronisiert | PnL gesamt: -1.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f4cb9c0e44",
+    "timestamp": "2026-06-12T14:47:19.523975+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1571500000000001 | Ticket #155084414",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3256eb30ee",
+    "timestamp": "2026-06-12T14:46:49.225542+00:00",
+    "level": "info",
+    "message": "26 Trade(s) synchronisiert | PnL gesamt: -1.02",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "67da914cb4",
+    "timestamp": "2026-06-12T14:46:18.985385+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5b93b4e0aa",
+    "timestamp": "2026-06-12T14:46:18.861112+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155083328",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "96d0ee64ae",
+    "timestamp": "2026-06-12T14:45:48.595415+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d97e13da88",
+    "timestamp": "2026-06-12T14:45:18.318479+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fd1ea8d210",
+    "timestamp": "2026-06-12T14:45:18.203039+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15729 | Ticket #155083328",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "37ffddc363",
+    "timestamp": "2026-06-12T14:44:47.940614+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fd353b3ff8",
+    "timestamp": "2026-06-12T14:44:18.717592+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154966028",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f634b95bb3",
+    "timestamp": "2026-06-12T14:44:17.666464+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e46bdd26dc",
+    "timestamp": "2026-06-12T14:44:17.498498+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "748fae30c6",
+    "timestamp": "2026-06-12T14:43:47.350763+00:00",
+    "level": "info",
+    "message": "27 Trade(s) synchronisiert | PnL gesamt: -0.94",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "11cae5a3d5",
+    "timestamp": "2026-06-12T14:43:17.068509+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "debd4b32f5",
+    "timestamp": "2026-06-12T14:42:46.810468+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b000767070",
+    "timestamp": "2026-06-12T14:42:16.545203+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "678ca004b2",
+    "timestamp": "2026-06-12T14:41:46.267401+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6ea38d4b43",
+    "timestamp": "2026-06-12T14:41:15.996026+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c9a86e673a",
+    "timestamp": "2026-06-12T14:40:45.744165+00:00",
+    "level": "info",
+    "message": "28 Trade(s) synchronisiert | PnL gesamt: -0.99",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9bfb9f6b66",
+    "timestamp": "2026-06-12T14:40:15.426437+00:00",
+    "level": "info",
+    "message": "29 Trade(s) synchronisiert | PnL gesamt: +1.21",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "63f3d2d177",
+    "timestamp": "2026-06-12T14:39:45.162948+00:00",
+    "level": "info",
+    "message": "29 Trade(s) synchronisiert | PnL gesamt: +1.21",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ffb23ed26d",
+    "timestamp": "2026-06-12T14:39:14.916331+00:00",
+    "level": "info",
+    "message": "30 Trade(s) synchronisiert | PnL gesamt: +3.42",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cd0ede3552",
+    "timestamp": "2026-06-12T14:38:44.649908+00:00",
+    "level": "info",
+    "message": "30 Trade(s) synchronisiert | PnL gesamt: +3.42",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4dd320f54b",
+    "timestamp": "2026-06-12T14:38:14.362764+00:00",
+    "level": "info",
+    "message": "31 Trade(s) synchronisiert | PnL gesamt: +5.34",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6023dbc038",
+    "timestamp": "2026-06-12T14:37:44.103415+00:00",
+    "level": "info",
+    "message": "261 Trade(s) synchronisiert | PnL gesamt: +71.29",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8203866e50",
+    "timestamp": "2026-06-12T14:37:43.141983+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1fc7ae1ec7",
+    "timestamp": "2026-06-12T14:37:40.433255+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4ca74110b3",
+    "timestamp": "2026-06-12T11:14:24.235072+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e4cc73e568",
+    "timestamp": "2026-06-12T11:14:18.432854+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15733 | Ticket #154966028",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "492fc3f78a",
+    "timestamp": "2026-06-12T11:13:57.264018+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "11cc18d999",
+    "timestamp": "2026-06-12T11:13:27.027804+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7ee6ac6c1c",
+    "timestamp": "2026-06-12T11:13:17.936481+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154965271",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "756dcee0dd",
+    "timestamp": "2026-06-12T11:12:56.744753+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "51709f7fc2",
+    "timestamp": "2026-06-12T11:12:26.477138+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b3f2751cfc",
+    "timestamp": "2026-06-12T11:11:56.226673+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "33b56d1e6e",
+    "timestamp": "2026-06-12T11:11:26.030797+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e1fa280bbd",
+    "timestamp": "2026-06-12T11:11:17.898184+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15729 | Ticket #154965271",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ba95f17735",
+    "timestamp": "2026-06-12T11:10:55.760100+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ed45213d5e",
+    "timestamp": "2026-06-12T11:10:25.518459+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0d76a5670f",
+    "timestamp": "2026-06-12T11:10:17.378466+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154964371",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a29418cd59",
+    "timestamp": "2026-06-12T11:09:55.233627+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fd68abdbd1",
+    "timestamp": "2026-06-12T11:09:24.950818+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ade3206b61",
+    "timestamp": "2026-06-12T11:09:16.826655+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1573 | Ticket #154964371",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3a5e3b1f2c",
+    "timestamp": "2026-06-12T11:08:54.625804+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4be34638a3",
+    "timestamp": "2026-06-12T11:08:24.339805+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c952a98556",
+    "timestamp": "2026-06-12T11:08:16.241293+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154963504",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "068a4a1657",
+    "timestamp": "2026-06-12T11:07:54.050240+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "bb6a5bde67",
+    "timestamp": "2026-06-12T11:07:23.822851+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6fd25a25c1",
+    "timestamp": "2026-06-12T11:07:15.697241+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15735 | Ticket #154963504",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a1b9797cce",
+    "timestamp": "2026-06-12T11:06:53.522015+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0484515999",
+    "timestamp": "2026-06-12T11:06:23.275475+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "32ca73fb25",
+    "timestamp": "2026-06-12T11:06:15.139820+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154961571",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "917d54a482",
+    "timestamp": "2026-06-12T11:05:52.954155+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b6ba79b2a0",
+    "timestamp": "2026-06-12T11:05:22.642400+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "358e10a843",
+    "timestamp": "2026-06-12T11:04:52.402692+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6ba6853eab",
+    "timestamp": "2026-06-12T11:04:22.181612+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9c969f3250",
+    "timestamp": "2026-06-12T11:04:14.110051+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15735 | Ticket #154961571",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "de9c50a241",
+    "timestamp": "2026-06-12T11:03:51.919164+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cd93d76ec3",
+    "timestamp": "2026-06-12T11:03:21.746399+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ba19dab530",
+    "timestamp": "2026-06-12T11:03:13.637271+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154960872",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fdcd66a1c0",
+    "timestamp": "2026-06-12T11:02:51.495545+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e383a5161a",
+    "timestamp": "2026-06-12T11:02:21.239761+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "705e50031b",
+    "timestamp": "2026-06-12T11:02:13.110901+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15726 | Ticket #154960872",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ad646d552e",
+    "timestamp": "2026-06-12T11:01:50.943260+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3815fb8d68",
+    "timestamp": "2026-06-12T11:01:20.736095+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d37840c4b5",
+    "timestamp": "2026-06-12T11:01:12.627556+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154959713",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5bd952a1ee",
+    "timestamp": "2026-06-12T11:00:50.467914+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b8a26346d4",
+    "timestamp": "2026-06-12T11:00:20.179383+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0903a9461d",
+    "timestamp": "2026-06-12T10:59:49.961543+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2727d5e13d",
+    "timestamp": "2026-06-12T10:59:19.710977+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c85c914e42",
+    "timestamp": "2026-06-12T10:59:11.603154+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1574 | Ticket #154959713",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2698c01680",
+    "timestamp": "2026-06-12T10:58:49.411067+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7988c15b68",
+    "timestamp": "2026-06-12T10:58:19.144320+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4b3aa7f147",
+    "timestamp": "2026-06-12T10:58:11.026479+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154958460",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "161b5b9b06",
+    "timestamp": "2026-06-12T10:57:48.864480+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4711ddb7eb",
+    "timestamp": "2026-06-12T10:57:18.597380+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0c6d79dcf4",
+    "timestamp": "2026-06-12T10:57:10.509795+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15724 | Ticket #154958460",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "41f80034ad",
+    "timestamp": "2026-06-12T10:56:48.334250+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "990aab5c4e",
+    "timestamp": "2026-06-12T10:56:18.130076+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "81b4b5d82e",
+    "timestamp": "2026-06-12T10:56:10.008081+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154957142",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e4ba3a9db8",
+    "timestamp": "2026-06-12T10:55:47.805612+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8ea3e35160",
+    "timestamp": "2026-06-12T10:55:17.527944+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d26689b832",
+    "timestamp": "2026-06-12T10:55:09.419276+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.1574200000000001 | Ticket #154957142",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5a53aeb29b",
+    "timestamp": "2026-06-12T10:54:47.240051+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6c6bc2f11c",
+    "timestamp": "2026-06-12T10:54:17.023474+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cb72b0d511",
+    "timestamp": "2026-06-12T10:54:08.930956+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154956174",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2ddd50b559",
+    "timestamp": "2026-06-12T10:53:46.768053+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c68524b091",
+    "timestamp": "2026-06-12T10:53:16.475231+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e877bbdcc0",
+    "timestamp": "2026-06-12T10:53:08.630287+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15753 | Ticket #154956174",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ca6b0a7091",
+    "timestamp": "2026-06-12T10:52:45.463729+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9716244a02",
+    "timestamp": "2026-06-12T10:52:15.237549+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ca50acd89e",
+    "timestamp": "2026-06-12T10:52:15.119577+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154955640",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "584afa1c3f",
+    "timestamp": "2026-06-12T10:52:08.028276+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154955294",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2e5b24853f",
+    "timestamp": "2026-06-12T10:51:44.887805+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "694c549c3c",
+    "timestamp": "2026-06-12T10:51:33.682909+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: SELL 0.01 EURUSDp @ 1.15758 | Ticket #154955640",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "12d47842db",
+    "timestamp": "2026-06-12T10:51:14.530838+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5aef7614e7",
+    "timestamp": "2026-06-12T10:50:44.283520+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6add17a399",
+    "timestamp": "2026-06-12T10:50:14.029438+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a8565b9b9d",
+    "timestamp": "2026-06-12T10:50:06.940681+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15774 | Ticket #154955294",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "fd93316883",
+    "timestamp": "2026-06-12T10:49:43.734860+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5efc8d6c95",
+    "timestamp": "2026-06-12T10:49:13.472123+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "875d38eabb",
+    "timestamp": "2026-06-12T10:49:06.350715+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154954138",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0741971641",
+    "timestamp": "2026-06-12T10:48:43.153573+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "56a976d20b",
+    "timestamp": "2026-06-12T10:48:12.904057+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b97a6cb9fc",
+    "timestamp": "2026-06-12T10:47:42.618661+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e1a2b91556",
+    "timestamp": "2026-06-12T10:47:12.370841+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "96f7f8e49b",
+    "timestamp": "2026-06-12T10:47:06.239406+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15771 | Ticket #154954138",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ebd05f0cf8",
+    "timestamp": "2026-06-12T10:46:42.086846+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c794d498cf",
+    "timestamp": "2026-06-12T10:46:11.843976+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "95fae2268e",
+    "timestamp": "2026-06-12T10:46:05.669316+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154953693",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4f65ceba9b",
+    "timestamp": "2026-06-12T10:45:41.489699+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6c15041b64",
+    "timestamp": "2026-06-12T10:45:11.252147+00:00",
+    "level": "info",
+    "message": "4 Trade(s) synchronisiert | PnL gesamt: -0.07",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5a71bb81f6",
+    "timestamp": "2026-06-12T10:45:05.143031+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15761 | Ticket #154953693",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5b7f6f2593",
+    "timestamp": "2026-06-12T10:44:40.982963+00:00",
+    "level": "info",
+    "message": "1 Trade(s) synchronisiert | PnL gesamt: -0.21",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2733cd6a1b",
+    "timestamp": "2026-06-12T10:44:10.745570+00:00",
+    "level": "info",
+    "message": "1 Trade(s) synchronisiert | PnL gesamt: -0.21",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "99f90a560a",
+    "timestamp": "2026-06-12T10:44:04.609870+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #154945706",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "80e2bef3b8",
+    "timestamp": "2026-06-12T10:44:03.719552+00:00",
+    "level": "info",
+    "message": "Bot verbunden: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e54200131f",
+    "timestamp": "2026-06-12T10:43:40.431970+00:00",
+    "level": "info",
+    "message": "224 Trade(s) synchronisiert | PnL gesamt: +60.28",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d16e405afa",
+    "timestamp": "2026-06-12T10:43:39.450605+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0965c69daf",
+    "timestamp": "2026-06-12T10:43:36.096841+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "98a21f72c1",
     "timestamp": "2026-06-12T10:21:01.622004+00:00",
     "level": "warn",

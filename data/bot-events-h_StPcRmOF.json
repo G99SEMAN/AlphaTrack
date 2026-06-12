@@ -1,0 +1,902 @@
+[
+  {
+    "id": "guYPZE-KKD",
+    "timestamp": "2026-06-12T20:14:05.896Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "LEHH2NCBXv",
+    "timestamp": "2026-06-12T20:14:03.848Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "vcoEIy_kis",
+    "timestamp": "2026-06-12T20:14:01.832Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "64G-rZl4Mf",
+    "timestamp": "2026-06-12T20:13:59.771Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "BDf9d8quNq",
+    "timestamp": "2026-06-12T20:13:57.730Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "FkJ-x9xkhP",
+    "timestamp": "2026-06-12T20:13:55.691Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "Yr7t50IKH4",
+    "timestamp": "2026-06-12T20:13:53.625Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "fXxRfzewFv",
+    "timestamp": "2026-06-12T20:13:51.598Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "KH3OBEsyNN",
+    "timestamp": "2026-06-12T20:13:49.576Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ZzFMth2Tkl",
+    "timestamp": "2026-06-12T20:13:47.512Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "06RqH66FOY",
+    "timestamp": "2026-06-12T20:13:45.495Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "cUOWreUsdl",
+    "timestamp": "2026-06-12T20:13:43.423Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ponf51nW98",
+    "timestamp": "2026-06-12T20:13:41.374Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "mXYnpMoxWu",
+    "timestamp": "2026-06-12T20:13:39.303Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "DIBPUR37Ie",
+    "timestamp": "2026-06-12T20:13:37.290Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "rcIqVYDy4d",
+    "timestamp": "2026-06-12T20:13:35.197Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ZMe--y1s6R",
+    "timestamp": "2026-06-12T20:13:33.153Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "aJj5NpTU0y",
+    "timestamp": "2026-06-12T20:13:31.101Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "kDnASKQjmg",
+    "timestamp": "2026-06-12T20:13:29.056Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "psDIZlicYF",
+    "timestamp": "2026-06-12T20:13:26.986Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "pVNn08WeM-",
+    "timestamp": "2026-06-12T20:13:25.021Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ZM-pmh8B1W",
+    "timestamp": "2026-06-12T20:13:22.890Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "WsyPAR_7XI",
+    "timestamp": "2026-06-12T20:13:20.858Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "3ZZ9xrao4j",
+    "timestamp": "2026-06-12T20:13:18.990Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "JZkiNYcJT9",
+    "timestamp": "2026-06-12T20:13:18.061Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "8oarl-C5NF",
+    "timestamp": "2026-06-12T20:13:17.647Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "9yiyz5K-G3",
+    "timestamp": "2026-06-12T20:13:12.756Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "JCBIBNBAmg",
+    "timestamp": "2026-06-12T20:13:12.599Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "8uz00lV-A9",
+    "timestamp": "2026-06-12T20:13:12.364Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "7d2Y7HosHm",
+    "timestamp": "2026-06-12T20:13:06.491Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "4T8YT7SpNI",
+    "timestamp": "2026-06-12T20:13:04.428Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "X2Zq3uocQe",
+    "timestamp": "2026-06-12T20:13:02.402Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "JiiZXIAk4A",
+    "timestamp": "2026-06-12T20:13:00.341Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "HVmu1lpCho",
+    "timestamp": "2026-06-12T20:12:58.324Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "uLl7S-5ExO",
+    "timestamp": "2026-06-12T20:12:56.306Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "tZWuZVIeem",
+    "timestamp": "2026-06-12T20:12:54.261Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "i6EZnnhKyd",
+    "timestamp": "2026-06-12T20:12:52.170Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "K5T-30PJyV",
+    "timestamp": "2026-06-12T20:12:50.756Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "_JmxGQtjL3",
+    "timestamp": "2026-06-12T20:12:50.565Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "85KUAe_89E",
+    "timestamp": "2026-06-12T20:12:50.399Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "PWP91-zU1L",
+    "timestamp": "2026-06-12T20:12:49.983Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "a23D3aL8b6",
+    "timestamp": "2026-06-12T20:12:49.744Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15700 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ZrKru5v3DV",
+    "timestamp": "2026-06-12T20:12:37.620Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "JS_GD6o1Ri",
+    "timestamp": "2026-06-12T20:12:35.581Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "0Y32FIk6mG",
+    "timestamp": "2026-06-12T20:12:33.572Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "jJsvlnSpT2",
+    "timestamp": "2026-06-12T20:12:31.521Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "7FPZr6dhH7",
+    "timestamp": "2026-06-12T20:12:29.445Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "4NDFtN6f2i",
+    "timestamp": "2026-06-12T20:12:27.414Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "9Mc1-dcnoF",
+    "timestamp": "2026-06-12T20:12:25.374Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "Q4ZpxSHbnE",
+    "timestamp": "2026-06-12T20:12:23.314Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "uuMyCKtR91",
+    "timestamp": "2026-06-12T20:12:21.287Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ruac_2SVBQ",
+    "timestamp": "2026-06-12T20:12:19.218Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "H1iM25I1lK",
+    "timestamp": "2026-06-12T20:12:17.157Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "HD8dZD4CAI",
+    "timestamp": "2026-06-12T20:12:15.184Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "_IY-clrB9O",
+    "timestamp": "2026-06-12T20:12:13.062Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "3k88PUCVXk",
+    "timestamp": "2026-06-12T20:12:10.999Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "qiv03eeprF",
+    "timestamp": "2026-06-12T20:12:08.954Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "fdywB7L673",
+    "timestamp": "2026-06-12T20:12:07.395Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "sWpCCSpiQv",
+    "timestamp": "2026-06-12T20:12:04.859Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "7a2I1BG0cs",
+    "timestamp": "2026-06-12T20:12:02.831Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "KVN-gNegiP",
+    "timestamp": "2026-06-12T20:12:00.742Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "WJKAVzL2o8",
+    "timestamp": "2026-06-12T20:11:58.712Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "0ORKkVrfuO",
+    "timestamp": "2026-06-12T20:11:56.636Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "ZGZ7fjwvku",
+    "timestamp": "2026-06-12T20:11:54.578Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "UXSo7TXaoP",
+    "timestamp": "2026-06-12T20:11:52.510Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "-DCFM3F66C",
+    "timestamp": "2026-06-12T20:11:50.434Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "e4hvLdIPwc",
+    "timestamp": "2026-06-12T20:11:48.395Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "KNlJ7gwyvO",
+    "timestamp": "2026-06-12T20:11:46.711Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "FU9nDkZ6yo",
+    "timestamp": "2026-06-12T20:11:44.345Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "PVVD0tqieP",
+    "timestamp": "2026-06-12T20:11:42.297Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "0EBzQPgkNt",
+    "timestamp": "2026-06-12T20:11:40.256Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "0KNxeZXlhU",
+    "timestamp": "2026-06-12T20:11:38.207Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "OHXwTsvYJd",
+    "timestamp": "2026-06-12T20:11:36.165Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "HDDLqUOMMF",
+    "timestamp": "2026-06-12T20:11:34.089Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "KUCf_yaS5l",
+    "timestamp": "2026-06-12T20:11:32.009Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "vd0ONCGTJj",
+    "timestamp": "2026-06-12T20:11:29.978Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "nmx-lxKglP",
+    "timestamp": "2026-06-12T20:11:27.967Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "MViBwmIhSM",
+    "timestamp": "2026-06-12T20:11:25.897Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "Gd5cC7vrgU",
+    "timestamp": "2026-06-12T20:11:23.843Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "3MAckSAy4v",
+    "timestamp": "2026-06-12T20:11:21.754Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "SI_q2p5ak9",
+    "timestamp": "2026-06-12T20:11:19.730Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "rDEemRxFYr",
+    "timestamp": "2026-06-12T20:11:17.715Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "Lw9AIu25lE",
+    "timestamp": "2026-06-12T20:11:15.673Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "j9ROpm50nT",
+    "timestamp": "2026-06-12T20:11:13.604Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "lfkc-AzpYm",
+    "timestamp": "2026-06-12T20:11:11.597Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "jWnDUQXddv",
+    "timestamp": "2026-06-12T20:11:09.530Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15696 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "__DYPmNOsy",
+    "timestamp": "2026-06-12T20:11:07.473Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "LIlsDDT8Wz",
+    "timestamp": "2026-06-12T20:11:05.427Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "lOq37I3HuT",
+    "timestamp": "2026-06-12T20:11:03.405Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15695 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "2IpUlA7Hqr",
+    "timestamp": "2026-06-12T20:11:01.334Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "tuxoi-Kf39",
+    "timestamp": "2026-06-12T20:10:59.344Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "_rdiRaEOWv",
+    "timestamp": "2026-06-12T20:10:57.305Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15699 ^",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "y8bry0oXXF",
+    "timestamp": "2026-06-12T20:10:55.253Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15697 v",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "DX7TRF3Oga",
+    "timestamp": "2026-06-12T20:10:53.209Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "waag6bYxAq",
+    "timestamp": "2026-06-12T20:10:51.185Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "EnmJVYIO6h",
+    "timestamp": "2026-06-12T20:10:49.163Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "678ihJ5po8",
+    "timestamp": "2026-06-12T20:10:47.070Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "3MtvzP8nxo",
+    "timestamp": "2026-06-12T20:10:45.019Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "nhOfnbL-zS",
+    "timestamp": "2026-06-12T20:10:42.960Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  },
+  {
+    "id": "R4_7mrTMC4",
+    "timestamp": "2026-06-12T20:10:40.898Z",
+    "level": "info",
+    "message": "EURUSDp: 1.15698 =",
+    "details": "",
+    "botId": "h_StPcRmOF",
+    "botName": "Price Monitor"
+  }
+]

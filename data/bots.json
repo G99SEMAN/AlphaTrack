@@ -14,5 +14,13 @@
     "url": "http://192.168.178.30:8765/bot/testbot2-001",
     "createdAt": "2026-06-12T07:24:46.554Z",
     "type": "bot"
+  },
+  {
+    "id": "h_StPcRmOF",
+    "name": "Price Monitor",
+    "profileId": "FiFT3HmJf-",
+    "url": "http://192.168.178.30:8765/bot/pricemonitor-001",
+    "createdAt": "2026-06-12T20:04:42.848Z",
+    "type": "bot"
   }
 ]

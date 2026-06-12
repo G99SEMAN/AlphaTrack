@@ -1,6 +1,21 @@
 [
   {
     "bias": "Short",
+    "entry_zone": "1.15763 - 1.15780",
+    "stop_loss": "1.15840",
+    "take_profit": "1.15700",
+    "risk_reward": "1:1.0",
+    "confidence": "Mittel",
+    "reasoning": "Der Kurs hat von einem Hoch bei 1.15836 (20:25 Uhr) eine klare Abwärtsstruktur mit Lower Highs und Lower Lows gebildet und notiert aktuell bei 1.15763. Das Hoch bei 1.15836 fungiert als struktureller Widerstand, während die Zone um 1.15700 (Tief bei 1.15682 aus 19:50) als nächste relevante Unterstützung dient. Ein Short-Einstieg in der aktuellen Zone mit Stop über dem letzten Swing-High bei 1.15836 und Ziel an der Liquiditätszone 1.15700 bietet ein akzeptables Setup in der späten New-York-Session.",
+    "timeframe": "M5 (Scalping)",
+    "currentPrice": "1.15763",
+    "duration": "scalping",
+    "symbol": "EUR/USD",
+    "id": "dbMdnZOzlb",
+    "timestamp": "2026-06-12T15:56:19.651Z"
+  },
+  {
+    "bias": "Short",
     "entry_zone": "1.16320 - 1.16335",
     "stop_loss": "1.16355",
     "take_profit": "1.16285",
@@ -133,20 +148,5 @@
     "symbol": "EUR/USD",
     "id": "rZ-36kgWE0",
     "timestamp": "2026-05-29T17:39:57.568Z"
-  },
-  {
-    "bias": "Long",
-    "entry_zone": "1.37985 - 1.38001",
-    "stop_loss": "1.37955",
-    "take_profit": "1.38040",
-    "risk_reward": "1:1.5",
-    "confidence": "Mittel",
-    "reasoning": "Der Markt zeigt einen klaren Aufwärtstrend von 1.37749 (01:00 Uhr) bis zum aktuellen Kurs 1.38001, mit konsistenten Higher Highs und Higher Lows. Die Konsolidierungszone zwischen 1.37974 und 1.38006 in den letzten 5 Kerzen deutet auf eine kurzfristige Akkumulation hin, bevor der Kurs weiter steigt. Der Stop Loss liegt unterhalb des lokalen Swingtiefs bei 1.37969 (03:05 Kerze), während das Take Profit-Niveau am Widerstandsbereich 1.38017-1.38040 ausgerichtet ist.",
-    "timeframe": "M5 (Scalping)",
-    "currentPrice": "1.38001",
-    "duration": "scalping",
-    "symbol": "USD/CAD",
-    "id": "4Ee5-G6Uw4",
-    "timestamp": "2026-05-29T17:28:50.379Z"
   }
 ]

@@ -1,7 +1,25 @@
 [
   {
-    "id": "Q2YVwW6Xbe",
-    "timestamp": "2026-06-12T10:20:26.736Z",
+    "id": "8ZsVpu8iio",
+    "timestamp": "2026-06-12T20:13:18.820Z",
+    "level": "info",
+    "message": "CLOSE #155200270",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "oX7-beotmk",
+    "timestamp": "2026-06-12T20:13:17.822Z",
+    "level": "info",
+    "message": "1min abgelaufen — schliesse #155200270",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "tiH8gW5LJM",
+    "timestamp": "2026-06-12T20:12:15.633Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -9,71 +27,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "68EYeLKQct",
-    "timestamp": "2026-06-12T10:20:25.976Z",
+    "id": "Qnvd1yKHdG",
+    "timestamp": "2026-06-12T20:12:15.087Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "Zn0Tu4_k19",
-    "timestamp": "2026-06-12T10:19:25.175Z",
+    "id": "q-fwJaSDnq",
+    "timestamp": "2026-06-12T20:11:15.222Z",
     "level": "info",
-    "message": "CLOSE #154944713",
+    "message": "CLOSE #155199707",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "2Etx-ae08P",
-    "timestamp": "2026-06-12T10:19:24.981Z",
+    "id": "LMo2MrN9wt",
+    "timestamp": "2026-06-12T20:11:14.968Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154944713",
+    "message": "1min abgelaufen — schliesse #155199707",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "s-Icq8VB7e",
-    "timestamp": "2026-06-12T10:17:24.097Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "vYsP9riNLB",
-    "timestamp": "2026-06-12T10:17:23.715Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "01AXx1ZE9l",
-    "timestamp": "2026-06-12T10:16:23.542Z",
-    "level": "info",
-    "message": "CLOSE #154944027",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "-rJr-0QvzR",
-    "timestamp": "2026-06-12T10:16:23.219Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154944027",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "fUatKhDHgG",
-    "timestamp": "2026-06-12T10:14:21.802Z",
+    "id": "WyZ1PXZGde",
+    "timestamp": "2026-06-12T20:10:14.930Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -81,35 +63,107 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "MFi-wOVtFv",
-    "timestamp": "2026-06-12T10:14:20.810Z",
+    "id": "7MiO-3Y3Ie",
+    "timestamp": "2026-06-12T20:10:14.405Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "detP9r0QbY",
-    "timestamp": "2026-06-12T10:13:21.737Z",
+    "id": "lJbE6xRH9O",
+    "timestamp": "2026-06-12T20:09:14.346Z",
     "level": "info",
-    "message": "CLOSE #154943041",
+    "message": "CLOSE #155199230",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "pNkTOq9O-5",
-    "timestamp": "2026-06-12T10:13:21.649Z",
+    "id": "C67qq-YifL",
+    "timestamp": "2026-06-12T20:09:14.074Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154943041",
+    "message": "1min abgelaufen — schliesse #155199230",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "BBNTW3eunJ",
-    "timestamp": "2026-06-12T10:13:21.565Z",
+    "id": "TJ5FkDwhyl",
+    "timestamp": "2026-06-12T20:08:14.054Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "KzMvnFa8Uj",
+    "timestamp": "2026-06-12T20:08:13.772Z",
+    "level": "info",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "AsVYIIPX0e",
+    "timestamp": "2026-06-12T20:07:15.799Z",
+    "level": "error",
+    "message": "MT5-Fehler",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "E_tbnACu3G",
+    "timestamp": "2026-06-12T20:07:14.968Z",
+    "level": "error",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "mOGBM_nhUG",
+    "timestamp": "2026-06-12T20:07:14.381Z",
+    "level": "info",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "YxkPEShBv9",
+    "timestamp": "2026-06-12T20:06:12.202Z",
+    "level": "info",
+    "message": "1min abgelaufen — schliesse #155198533",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "9E14ijyB5g",
+    "timestamp": "2026-06-12T20:05:13.534Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "3gHkIQOj8S",
+    "timestamp": "2026-06-12T20:05:12.202Z",
+    "level": "info",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "TswxCRAaD8",
+    "timestamp": "2026-06-12T20:05:12.118Z",
     "level": "info",
     "message": "TestBot 2 gestartet",
     "details": "Symbol: EURUSDp | TF: M1",
@@ -117,8 +171,26 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "5HTk1-nDQg",
-    "timestamp": "2026-06-12T10:11:02.253Z",
+    "id": "scRgcWoXUb",
+    "timestamp": "2026-06-12T19:13:15.702Z",
+    "level": "info",
+    "message": "CLOSE #155182797",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "6JpwxUcA4Q",
+    "timestamp": "2026-06-12T19:13:14.800Z",
+    "level": "info",
+    "message": "1min abgelaufen — schliesse #155182797",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "dFYrMKCy7l",
+    "timestamp": "2026-06-12T19:12:14.803Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -126,71 +198,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "5d-5sjtMEe",
-    "timestamp": "2026-06-12T10:11:01.750Z",
+    "id": "46N0XV7kGP",
+    "timestamp": "2026-06-12T19:12:14.565Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "e50AVhcqD_",
-    "timestamp": "2026-06-12T10:10:01.749Z",
+    "id": "8qtaZGkjEI",
+    "timestamp": "2026-06-12T19:11:14.388Z",
     "level": "info",
-    "message": "CLOSE #154942591",
+    "message": "CLOSE #155182379",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "5UV3dmyISC",
-    "timestamp": "2026-06-12T10:10:01.247Z",
+    "id": "XMRugOV92-",
+    "timestamp": "2026-06-12T19:11:13.605Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154942591",
+    "message": "1min abgelaufen — schliesse #155182379",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "R3b8Ku3NDN",
-    "timestamp": "2026-06-12T10:09:01.307Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "kMqY8yRmb8",
-    "timestamp": "2026-06-12T10:09:00.680Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "VM4PidLwlf",
-    "timestamp": "2026-06-12T10:08:00.777Z",
-    "level": "info",
-    "message": "CLOSE #154941999",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "qDehhZoEjR",
-    "timestamp": "2026-06-12T10:07:59.864Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154941999",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "MOqdIsKStv",
-    "timestamp": "2026-06-12T10:05:59.747Z",
+    "id": "8KAaQ_TJ4q",
+    "timestamp": "2026-06-12T19:10:13.550Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -198,71 +234,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "J6jzbDNMAx",
-    "timestamp": "2026-06-12T10:05:59.135Z",
+    "id": "HOqwEgvZAa",
+    "timestamp": "2026-06-12T19:10:12.672Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "76vJ06ePes",
-    "timestamp": "2026-06-12T10:04:59.236Z",
+    "id": "e9N6-YCdKb",
+    "timestamp": "2026-06-12T19:09:12.775Z",
     "level": "info",
-    "message": "CLOSE #154941222",
+    "message": "CLOSE #155181554",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "rPonp9-r_e",
-    "timestamp": "2026-06-12T10:04:58.891Z",
+    "id": "5JjMt8tbT3",
+    "timestamp": "2026-06-12T19:09:12.483Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154941222",
+    "message": "1min abgelaufen — schliesse #155181554",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "F775sIWnBF",
-    "timestamp": "2026-06-12T10:02:58.304Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "KS0YgFi5Y8",
-    "timestamp": "2026-06-12T10:02:57.840Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "9sO7549mPm",
-    "timestamp": "2026-06-12T10:01:57.832Z",
-    "level": "info",
-    "message": "CLOSE #154940013",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "J1VNJjBAq-",
-    "timestamp": "2026-06-12T10:01:57.459Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154940013",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "l1yXJM47Jl",
-    "timestamp": "2026-06-12T09:59:56.835Z",
+    "id": "5s4tJLhTJb",
+    "timestamp": "2026-06-12T19:07:11.757Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -270,71 +270,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "RBkCoEIsBM",
-    "timestamp": "2026-06-12T09:59:56.434Z",
+    "id": "GSIiRpmhv9",
+    "timestamp": "2026-06-12T19:07:11.429Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "vbRowmclqs",
-    "timestamp": "2026-06-12T09:58:56.385Z",
+    "id": "h-nV8DpDTg",
+    "timestamp": "2026-06-12T19:06:11.187Z",
     "level": "info",
-    "message": "CLOSE #154939371",
+    "message": "CLOSE #155181067",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "R8avNRBqaD",
-    "timestamp": "2026-06-12T09:58:56.101Z",
+    "id": "Zgiu7iF8do",
+    "timestamp": "2026-06-12T19:06:10.996Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154939371",
+    "message": "1min abgelaufen — schliesse #155181067",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "1QO_cxPRXM",
-    "timestamp": "2026-06-12T09:56:56.301Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "SNZNbwOIKE",
-    "timestamp": "2026-06-12T09:56:55.723Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "G6S0qnZHPs",
-    "timestamp": "2026-06-12T09:55:55.836Z",
-    "level": "info",
-    "message": "CLOSE #154939044",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "amY2EoxW2k",
-    "timestamp": "2026-06-12T09:55:55.327Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154939044",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "AViFAqz4BS",
-    "timestamp": "2026-06-12T09:54:55.320Z",
+    "id": "6sBRRXJbDy",
+    "timestamp": "2026-06-12T19:04:11.040Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -342,71 +306,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "8LDPpfLBlG",
-    "timestamp": "2026-06-12T09:54:54.700Z",
+    "id": "i35hrsCBsc",
+    "timestamp": "2026-06-12T19:04:10.005Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "c7KwMk7_bJ",
-    "timestamp": "2026-06-12T09:53:54.897Z",
+    "id": "201olqy-If",
+    "timestamp": "2026-06-12T19:03:09.499Z",
     "level": "info",
-    "message": "CLOSE #154938746",
+    "message": "CLOSE #155180145",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "Vkfqg5JRgG",
-    "timestamp": "2026-06-12T09:53:54.385Z",
+    "id": "IGlFnj2sDH",
+    "timestamp": "2026-06-12T19:03:09.130Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154938746",
+    "message": "1min abgelaufen — schliesse #155180145",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "ZNZkT9dgvt",
-    "timestamp": "2026-06-12T09:52:54.418Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "F5Mz6RIbV8",
-    "timestamp": "2026-06-12T09:52:53.537Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "FAS5yNDPbT",
-    "timestamp": "2026-06-12T09:51:53.858Z",
-    "level": "info",
-    "message": "CLOSE #154937859",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "o0NyMpY8eO",
-    "timestamp": "2026-06-12T09:51:53.124Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154937859",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "mlOpALWn30",
-    "timestamp": "2026-06-12T09:49:52.698Z",
+    "id": "gqB1HY6Ytu",
+    "timestamp": "2026-06-12T19:01:09.239Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -414,71 +342,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "iedxV6nHRC",
-    "timestamp": "2026-06-12T09:49:52.059Z",
+    "id": "sEekpUbwZ8",
+    "timestamp": "2026-06-12T19:01:08.235Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "P3i2aeHkfj",
-    "timestamp": "2026-06-12T09:48:52.174Z",
+    "id": "pOs-E2VB9Q",
+    "timestamp": "2026-06-12T19:00:07.707Z",
     "level": "info",
-    "message": "CLOSE #154937354",
+    "message": "CLOSE #155179334",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "4LBvEQtJx2",
-    "timestamp": "2026-06-12T09:48:51.732Z",
+    "id": "MfRfjXQE9o",
+    "timestamp": "2026-06-12T19:00:07.508Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154937354",
+    "message": "1min abgelaufen — schliesse #155179334",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "XjGo0-WZHn",
-    "timestamp": "2026-06-12T09:47:51.704Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "-XM04uui3Z",
-    "timestamp": "2026-06-12T09:47:51.108Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "UZP81DQ0vc",
-    "timestamp": "2026-06-12T09:46:50.283Z",
-    "level": "info",
-    "message": "CLOSE #154936598",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "a432GVczG3",
-    "timestamp": "2026-06-12T09:46:49.962Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154936598",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "lLNRrcNfs2",
-    "timestamp": "2026-06-12T09:44:49.158Z",
+    "id": "GebitDwJXD",
+    "timestamp": "2026-06-12T18:59:07.042Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -486,35 +378,35 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "TLQ2dzKQIY",
-    "timestamp": "2026-06-12T09:44:48.469Z",
+    "id": "T6DqROao6-",
+    "timestamp": "2026-06-12T18:59:06.639Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "Ce7XI89olu",
-    "timestamp": "2026-06-12T09:43:47.760Z",
+    "id": "DEe4HmOYKW",
+    "timestamp": "2026-06-12T18:58:07.283Z",
     "level": "info",
-    "message": "CLOSE #154935885",
+    "message": "CLOSE #155178489",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "6VMUTFgw5g",
-    "timestamp": "2026-06-12T09:43:47.470Z",
+    "id": "OaxM17T_uv",
+    "timestamp": "2026-06-12T18:58:06.175Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154935885",
+    "message": "1min abgelaufen — schliesse #155178489",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "WAuGJXPTFY",
-    "timestamp": "2026-06-12T09:41:46.708Z",
+    "id": "4saVIOEicb",
+    "timestamp": "2026-06-12T18:56:06.023Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
@@ -522,125 +414,53 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "HluaTncfzs",
-    "timestamp": "2026-06-12T09:41:46.246Z",
+    "id": "IXFtPp9h81",
+    "timestamp": "2026-06-12T18:56:05.625Z",
     "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "_sUWwdPbGj",
-    "timestamp": "2026-06-12T09:40:46.243Z",
+    "id": "4bKm9J8ct2",
+    "timestamp": "2026-06-12T18:55:05.219Z",
     "level": "info",
-    "message": "CLOSE #154886835",
+    "message": "CLOSE #155178093",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "R2PuXw09aZ",
-    "timestamp": "2026-06-12T09:40:45.751Z",
+    "id": "MBsgsDZmwe",
+    "timestamp": "2026-06-12T18:55:04.664Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154886835",
+    "message": "1min abgelaufen — schliesse #155178093",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "nwEGyEULv9",
-    "timestamp": "2026-06-12T09:39:45.701Z",
+    "id": "fRMHPmNrJZ",
+    "timestamp": "2026-06-12T18:54:05.725Z",
     "level": "info",
-    "message": "CLOSE #154886012",
+    "message": "BUY 0.01 EURUSDp",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "jhIKFA2IGC",
-    "timestamp": "2026-06-12T09:39:45.208Z",
+    "id": "wkyKn2ECUq",
+    "timestamp": "2026-06-12T18:54:05.605Z",
     "level": "info",
-    "message": "1min abgelaufen — schließe #154886012",
+    "message": "1min-Intervall — oeffne BUY EURUSDp 0.01",
     "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "E7neyQO-Qy",
-    "timestamp": "2026-06-12T09:38:45.320Z",
-    "level": "info",
-    "message": "CLOSE #154885701",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "RGSORTtbn9",
-    "timestamp": "2026-06-12T09:38:44.643Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154885701",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "2Jy1mQtIdT",
-    "timestamp": "2026-06-12T09:37:44.828Z",
-    "level": "info",
-    "message": "CLOSE #154885363",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "uM9JSoSgYy",
-    "timestamp": "2026-06-12T09:37:44.065Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154885363",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "ylEZgIpfhc",
-    "timestamp": "2026-06-12T09:36:44.314Z",
-    "level": "info",
-    "message": "CLOSE #154885207",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "nX8GJf_f9f",
-    "timestamp": "2026-06-12T09:36:43.853Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154885207",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "cQ98ZtFg_5",
-    "timestamp": "2026-06-12T09:35:44.235Z",
-    "level": "info",
-    "message": "CLOSE #154881221",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "eLJFaYlrbS",
-    "timestamp": "2026-06-12T09:35:44.147Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154881221",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "W5jpR8iD9I",
-    "timestamp": "2026-06-12T09:35:44.063Z",
+    "id": "MwA_yds-mA",
+    "timestamp": "2026-06-12T18:54:05.488Z",
     "level": "info",
     "message": "TestBot 2 gestartet",
     "details": "Symbol: EURUSDp | TF: M1",
@@ -648,8 +468,260 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "eW5Bc13PuD",
-    "timestamp": "2026-06-12T07:49:41.643Z",
+    "id": "MkxqkIiI7v",
+    "timestamp": "2026-06-12T18:02:56.262Z",
+    "level": "info",
+    "message": "CLOSE #155163177",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "ghB50NVroV",
+    "timestamp": "2026-06-12T18:02:56.064Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155163177",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "OJzg6ig86H",
+    "timestamp": "2026-06-12T18:01:55.595Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "3fFWzcaoZ5",
+    "timestamp": "2026-06-12T18:01:55.197Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "jxCQgyXq0u",
+    "timestamp": "2026-06-12T18:00:54.966Z",
+    "level": "info",
+    "message": "CLOSE #155162316",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "qGgvzI3ETk",
+    "timestamp": "2026-06-12T18:00:54.631Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155162316",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "Z9S9qUUlYI",
+    "timestamp": "2026-06-12T17:58:54.737Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "C1i0e0yO3v",
+    "timestamp": "2026-06-12T17:58:54.037Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "js1gWxjuQk",
+    "timestamp": "2026-06-12T17:57:54.664Z",
+    "level": "info",
+    "message": "CLOSE #155161977",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "y_3v1HOBne",
+    "timestamp": "2026-06-12T17:57:53.542Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155161977",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "cdldZk3Aop",
+    "timestamp": "2026-06-12T17:56:53.089Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "plh3itByXJ",
+    "timestamp": "2026-06-12T17:56:52.848Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "ggHplCnHcJ",
+    "timestamp": "2026-06-12T17:55:53.372Z",
+    "level": "info",
+    "message": "CLOSE #155161328",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "70LlvUcTo6",
+    "timestamp": "2026-06-12T17:55:52.251Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155161328",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "OacX6d6jkc",
+    "timestamp": "2026-06-12T17:54:51.736Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "H2w8jum1TB",
+    "timestamp": "2026-06-12T17:54:51.522Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "_Of7jYPoBK",
+    "timestamp": "2026-06-12T17:53:52.040Z",
+    "level": "info",
+    "message": "CLOSE #155160784",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "mOILs8S336",
+    "timestamp": "2026-06-12T17:53:51.107Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155160784",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "00mOKZfL91",
+    "timestamp": "2026-06-12T17:51:50.900Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "Aw8HnBWUP9",
+    "timestamp": "2026-06-12T17:51:49.941Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "oo5TRKwdFD",
+    "timestamp": "2026-06-12T17:50:49.253Z",
+    "level": "info",
+    "message": "CLOSE #155160206",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "yzYcT4eX8n",
+    "timestamp": "2026-06-12T17:50:49.045Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155160206",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "7jdLcknaUb",
+    "timestamp": "2026-06-12T17:48:49.054Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "uihxBoRJb-",
+    "timestamp": "2026-06-12T17:48:47.927Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "aJeIJkw86p",
+    "timestamp": "2026-06-12T17:47:47.583Z",
+    "level": "info",
+    "message": "CLOSE #155159711",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "zRm0NnEJJ-",
+    "timestamp": "2026-06-12T17:47:46.881Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155159711",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "P35u5Fib6u",
+    "timestamp": "2026-06-12T17:46:49.071Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "48KBgUcIQK",
+    "timestamp": "2026-06-12T17:46:48.911Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "1GurIWRFdM",
+    "timestamp": "2026-06-12T17:46:48.845Z",
     "level": "info",
     "message": "TestBot 2 gestartet",
     "details": "Symbol: EURUSDp | TF: M1",
@@ -657,17 +729,152 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "rd1ksM5sI3",
-    "timestamp": "2026-06-12T07:44:37.300Z",
+    "id": "iEmpf98qUc",
+    "timestamp": "2026-06-12T17:31:08.299Z",
     "level": "info",
-    "message": "Parameter aktualisiert",
-    "details": "{\"hold_minutes\": 1, \"interval_minutes\": 1}",
+    "message": "CLOSE #155154932",
+    "details": "",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   },
   {
-    "id": "Ey30BYuRGv",
-    "timestamp": "2026-06-12T07:38:23.684Z",
+    "id": "0OVocSj9A1",
+    "timestamp": "2026-06-12T17:31:08.042Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155154932",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "23QhsVcX-4",
+    "timestamp": "2026-06-12T17:30:07.624Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "AXoGLZQwuA",
+    "timestamp": "2026-06-12T17:30:07.316Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "Y8JQ_XYVFp",
+    "timestamp": "2026-06-12T17:29:07.831Z",
+    "level": "info",
+    "message": "CLOSE #155154264",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "FGracKowfT",
+    "timestamp": "2026-06-12T17:29:06.742Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155154264",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "rNBHWRI2uo",
+    "timestamp": "2026-06-12T17:28:06.184Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "DL3NXiLd28",
+    "timestamp": "2026-06-12T17:28:05.986Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "jRvRyfPvVo",
+    "timestamp": "2026-06-12T17:27:05.481Z",
+    "level": "info",
+    "message": "CLOSE #155153568",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "L5uPeBtcVv",
+    "timestamp": "2026-06-12T17:27:05.301Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155153568",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "7zoTEXQb7C",
+    "timestamp": "2026-06-12T17:25:05.230Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "QxJwk06-ed",
+    "timestamp": "2026-06-12T17:25:04.242Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "h5awXpwc39",
+    "timestamp": "2026-06-12T17:24:07.234Z",
+    "level": "info",
+    "message": "CLOSE #155152564",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "zAEiOTEPtq",
+    "timestamp": "2026-06-12T17:24:06.547Z",
+    "level": "info",
+    "message": "1min abgelaufen — schließe #155152564",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "kN6qGVAP8A",
+    "timestamp": "2026-06-12T17:22:06.149Z",
+    "level": "info",
+    "message": "BUY 0.01 EURUSDp",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "azRl6EIdfv",
+    "timestamp": "2026-06-12T17:22:04.187Z",
+    "level": "info",
+    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
+    "details": "",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "EKBNx-4DEZ",
+    "timestamp": "2026-06-12T17:22:04.099Z",
     "level": "info",
     "message": "TestBot 2 gestartet",
     "details": "Symbol: EURUSDp | TF: M1",
@@ -675,26 +882,8 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "d82gfOrZpu",
-    "timestamp": "2026-06-12T07:34:30.241Z",
-    "level": "info",
-    "message": "Parameter aktualisiert",
-    "details": "{\"hold_minutes\": 5, \"interval_minutes\": 10}",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "vvPW4MWX6z",
-    "timestamp": "2026-06-12T07:33:52.588Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "e-DhdXsFdP",
-    "timestamp": "2026-06-12T07:33:51.899Z",
+    "id": "JKrlRWEHyh",
+    "timestamp": "2026-06-12T17:20:36.131Z",
     "level": "info",
     "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
     "details": "",
@@ -702,182 +891,11 @@
     "botName": "TestBot 2"
   },
   {
-    "id": "AOVgjt_pQ9",
-    "timestamp": "2026-06-12T07:32:52.056Z",
+    "id": "1v_I7I3kEz",
+    "timestamp": "2026-06-12T17:19:39.612Z",
     "level": "info",
     "message": "BUY 0.01 EURUSDp",
     "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "NNYqUhhn88",
-    "timestamp": "2026-06-12T07:32:51.169Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "VuoWBUhtln",
-    "timestamp": "2026-06-12T07:31:51.453Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "M37E1pXTmf",
-    "timestamp": "2026-06-12T07:31:50.774Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "n31IcZ8KLm",
-    "timestamp": "2026-06-12T07:30:50.830Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "3ElcKXhF7N",
-    "timestamp": "2026-06-12T07:30:50.099Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "nedTW0Hlqs",
-    "timestamp": "2026-06-12T07:29:50.157Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "6hNHFSLfJy",
-    "timestamp": "2026-06-12T07:29:49.469Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "4AJXI1YWzz",
-    "timestamp": "2026-06-12T07:28:49.516Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "do9UiIjCu9",
-    "timestamp": "2026-06-12T07:28:48.528Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "2UxoaIYSjz",
-    "timestamp": "2026-06-12T07:27:48.596Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "pCuh7FvSlj",
-    "timestamp": "2026-06-12T07:27:47.673Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "gzjtKJzbS-",
-    "timestamp": "2026-06-12T07:26:47.940Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "7-1Ymw7UeO",
-    "timestamp": "2026-06-12T07:26:47.233Z",
-    "level": "info",
-    "message": "1min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "25BTVbF-u2",
-    "timestamp": "2026-06-12T07:25:47.267Z",
-    "level": "info",
-    "message": "CLOSE #154884957",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "M7UUxdNaMu",
-    "timestamp": "2026-06-12T07:25:46.801Z",
-    "level": "info",
-    "message": "1min abgelaufen — schließe #154884957",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "2bssrTKlpY",
-    "timestamp": "2026-06-12T07:25:27.336Z",
-    "level": "info",
-    "message": "Parameter aktualisiert",
-    "details": "{\"hold_minutes\": 1, \"interval_minutes\": 1}",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "u5QV1egaes",
-    "timestamp": "2026-06-12T07:24:47.786Z",
-    "level": "info",
-    "message": "BUY 0.01 EURUSDp",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "WVqE7iAnrU",
-    "timestamp": "2026-06-12T07:24:47.324Z",
-    "level": "info",
-    "message": "30min-Intervall — öffne BUY EURUSDp 0.01",
-    "details": "",
-    "botId": "kYH5wxoW99",
-    "botName": "TestBot 2"
-  },
-  {
-    "id": "cdtM6jPxVs",
-    "timestamp": "2026-06-12T07:24:47.233Z",
-    "level": "info",
-    "message": "TestBot 2 gestartet",
-    "details": "Symbol: EURUSDp | TF: M1",
     "botId": "kYH5wxoW99",
     "botName": "TestBot 2"
   }

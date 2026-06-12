@@ -1,17 +1,15 @@
 {
   "state": "running",
-  "lastHeartbeat": "2026-06-12T10:21:03.026Z",
+  "lastHeartbeat": "2026-06-12T20:14:09.257Z",
   "bridgeVersion": "1.0.0",
   "bridgeType": "bridge",
   "bridgeIp": "192.168.178.30",
   "bridgePort": 8765,
   "mt5Connected": true,
-  "activeSymbols": [
-    "EURUSDp"
-  ],
-  "openPositions": 1,
-  "tradesSync": 11,
-  "uptime": 495,
-  "balance": 555.39,
+  "activeSymbols": [],
+  "openPositions": 0,
+  "tradesSync": 32,
+  "uptime": 4866,
+  "balance": 553.27,
   "currency": "EUR"
 }
