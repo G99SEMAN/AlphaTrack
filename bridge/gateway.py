@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import tempfile
 import queue
 import threading
 import uuid
@@ -72,6 +73,23 @@ def _load_config() -> dict:
     with config_lock:
         with open(_CONFIG_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
+
+
+def _atomic_write_config(data: dict) -> None:
+    """Schreibt config.json atomar via tempfile+rename (kein Datenverlust bei Absturz)."""
+    tmp_fd, tmp_path = tempfile.mkstemp(
+        dir=os.path.dirname(_CONFIG_FILE), suffix=".tmp"
+    )
+    try:
+        with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        os.replace(tmp_path, _CONFIG_FILE)   # atomar auf POSIX und Windows
+    except Exception:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
 
 
 def update_positions_cache(positions: list):
@@ -662,8 +680,7 @@ async def update_config(request: Request, _: None = Depends(_require_api_key)):
                 if cfg.get(key) != value:
                     cfg[key] = value
                     changed.append(f"{key} = ****" if "password" in key.lower() else f"{key} = {value}")
-            with open(_CONFIG_FILE, "w", encoding="utf-8") as f:
-                json.dump(cfg, f, indent=2, ensure_ascii=False)
+            _atomic_write_config(cfg)
         if changed and _log_callback:
             for entry in changed:
                 _log_callback("info", f"Einstellung geaendert: {entry}")
