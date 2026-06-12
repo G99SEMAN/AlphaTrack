@@ -166,7 +166,8 @@ class BridgeWSClient:
 
     def send_heartbeat(self, state: str, open_positions: int, active_symbols: list,
                        trades_sync: int, uptime: int,
-                       balance: float | None, currency: str | None) -> None:
+                       balance: float | None, currency: str | None,
+                       parameters: dict | None = None) -> None:
         payload: dict = {
             "state": state,
             "open_positions": open_positions,
@@ -178,6 +179,8 @@ class BridgeWSClient:
             payload["balance"] = balance
         if currency is not None:
             payload["currency"] = currency
+        if parameters:
+            payload["parameters"] = parameters
         self._send(_agp2_wrap("heartbeat", payload))
 
     def send_log(self, level: str, message: str, details: str | None = None) -> None:

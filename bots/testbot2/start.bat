@@ -1,5 +1,5 @@
 @echo off
-title TestBot 1
+title TestBot 2
 set PYTHONPATH=%~dp0..
 echo Pruefe Abhaengigkeiten...
 python -m pip install -r "%~dp0requirements.txt" --quiet --disable-pip-version-check

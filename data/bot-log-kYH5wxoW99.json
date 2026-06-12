@@ -1,0 +1,29 @@
+[
+  {
+    "id": "EAyP5ZuS5f",
+    "timestamp": "2026-06-12T07:44:36.080Z",
+    "level": "info",
+    "message": "Command gesendet: set_parameters",
+    "details": "ID: 3P3SDbvtSc",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "Y8m3ZNF57c",
+    "timestamp": "2026-06-12T07:34:29.427Z",
+    "level": "info",
+    "message": "Command gesendet: set_parameters",
+    "details": "ID: XSXSSBMIYL",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  },
+  {
+    "id": "FtfUivge6T",
+    "timestamp": "2026-06-12T07:25:26.555Z",
+    "level": "info",
+    "message": "Command gesendet: set_parameters",
+    "details": "ID: ggKIiVr0XZ",
+    "botId": "kYH5wxoW99",
+    "botName": "TestBot 2"
+  }
+]

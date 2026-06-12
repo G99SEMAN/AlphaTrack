@@ -11,7 +11,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Pruefe Abhaengigkeiten...
-pip install -r requirements.txt --quiet --disable-pip-version-check
+python -m pip install -r requirements.txt --quiet --disable-pip-version-check
 if %errorlevel% neq 0 (
     echo [FEHLER] Abhaengigkeiten konnten nicht installiert werden.
     pause

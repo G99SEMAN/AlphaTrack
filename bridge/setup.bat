@@ -10,6 +10,6 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-pip install requests --quiet --disable-pip-version-check
+python -m pip install requests --quiet --disable-pip-version-check
 
 python setup.py

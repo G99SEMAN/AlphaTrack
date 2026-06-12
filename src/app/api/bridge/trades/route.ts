@@ -23,7 +23,14 @@ function syncBridgeTradesToProfile(profileId: string, bridgeTrades: Trade[]): bo
       changed = true
     } else if (existing.status === 'open' && bt.status === 'closed') {
       const idx = updated.findIndex(t => t.externalId === bt.externalId)
-      if (idx !== -1) { updated[idx] = { ...existing, ...bt, id: existing.id }; changed = true }
+      if (idx !== -1) {
+          updated[idx] = {
+            ...existing, ...bt, id: existing.id,
+            botId: existing.botId ?? bt.botId,
+            sourceId: existing.sourceId ?? bt.sourceId,
+          }
+          changed = true
+        }
     }
   }
 
@@ -139,7 +146,11 @@ export async function POST(req: NextRequest) {
     if (prev.status === 'open' && t.status === 'closed') {
       const idx = merged.findIndex(x => x.externalId === externalId)
       if (idx !== -1) {
-        merged[idx] = { ...prev, ...t, id: prev.id }
+        merged[idx] = {
+          ...prev, ...t, id: prev.id,
+          botId: prev.botId ?? t.botId,
+          sourceId: prev.sourceId ?? t.sourceId,
+        }
         updatedCount++
       }
     }

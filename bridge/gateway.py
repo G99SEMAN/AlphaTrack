@@ -319,7 +319,10 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                 bot_ip = msg.get("ip", "unknown")
                 bot_port = msg.get("port", 0)
                 bot_component_type = msg.get("component_type", "bot")
-                bot_static_id = msg.get("id", "")
+                # Statische Bot-ID MUSS aus dem payload kommen: der AGPv2-Umschlag
+                # hat selbst ein 'id'-Feld (Message-UUID), das beim Merge gewinnt
+                _reg_payload = msg.get("payload") if _is_agpv2 else None
+                bot_static_id = (_reg_payload.get("id", "") if isinstance(_reg_payload, dict) else msg.get("id", ""))
                 bot_latency = msg.get("latency", 0.0)
 
                 # Validate: only "bot" components may register via this endpoint
@@ -417,6 +420,8 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
                         "currency": msg.get("currency"),
                     },
                 }
+                if msg.get("parameters"):
+                    body["status"]["parameters"] = msg["parameters"]
                 hb_resp = await _post_alphatrack("/api/bridge/heartbeat", body, {"x-bot-api-key": _api_key})
                 if hb_resp is None and _display_callback:
                     _display_callback("warn", "BOT", f"Heartbeat-Weiterleitung fehlgeschlagen: {bot_name}")
@@ -580,13 +585,9 @@ async def receive_command(request: Request, _: None = Depends(_require_api_key))
         # C3: Forward MT5 error immediately to the originating bot
         if not result.get("success") and result.get("error") and requesting_bot_id:
             asyncio.create_task(_forward_mt5_error_to_bot(requesting_bot_id, result["error"]))
-        # C4: Remove ticket from attribution registry after close
-        if result.get("success"):
-            close_ticket = (payload or {}).get("ticket")
-            if close_ticket:
-                with _ticket_lock:
-                    _ticket_to_at_bot_id.pop(int(close_ticket), None)
-                _save_ticket_registry()
+        # C4: Keep ticket attribution in registry after close so the 30s trade-sync
+        # can still resolve bot_id for the closed deal. Tickets accumulate but stay
+        # small in practice (MT5 IDs are monotonically increasing, no reuse risk).
         return {"ok": True, **result}
 
     if command == "execute_trade":

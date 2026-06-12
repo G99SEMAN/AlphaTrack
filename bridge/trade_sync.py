@@ -3,6 +3,12 @@ import time
 from mt5_connector import MT5Connector
 from gateway import get_at_bot_id_for_ticket
 
+# Mindest-Lookback für abgeschlossene Trades: Trades die kürzer als dieses
+# Fenster her geschlossen wurden werden immer erneut geprüft — verhindert, dass
+# Trades, die knapp vor einem Sync-Intervall geschlossen wurden, dauerhaft als
+# 'open' hängenbleiben.
+_MIN_LOOKBACK_SEC = 7200  # 2 Stunden
+
 
 def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=None, local_log=None) -> tuple[bool, float]:
     """
@@ -13,7 +19,11 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     headers = {"x-bot-api-key": config["api_key"]}
 
     open_trades = mt5.get_open_positions()
-    closed_trades = mt5.get_closed_deals(from_timestamp=last_sync_ts)
+    # Lookback-Fenster: immer mindestens _MIN_LOOKBACK_SEC zurückgehen damit
+    # Trades die kurz vor dem letzten Sync geschlossen wurden nicht dauerhaft
+    # als 'open' hängenbleiben.
+    effective_ts = min(last_sync_ts, time.time() - _MIN_LOOKBACK_SEC) if last_sync_ts > 0 else last_sync_ts
+    closed_trades = mt5.get_closed_deals(from_timestamp=effective_ts)
 
     all_trades = open_trades + closed_trades
     if not all_trades:
@@ -23,10 +33,17 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     closed_count = len(closed_trades)
 
     # C4: bot_id aus Ticket-Registry (gateway) aufloesen, Fallback auf Trade-Feld.
-    # Trades ohne bekanntes Ticket stammen vom Bridge-Sync → bot_id bleibt None.
+    # Closed-Deals haben kein 'ticket'-Feld; Ticket wird aus externalId extrahiert.
     tagged_trades = []
     for t in all_trades:
         ticket = t.get("ticket")
+        if not ticket:
+            ext_id = t.get("externalId", "")
+            if isinstance(ext_id, str) and ext_id.startswith("pos_"):
+                try:
+                    ticket = int(ext_id[4:])
+                except ValueError:
+                    pass
         resolved = (get_at_bot_id_for_ticket(int(ticket)) if ticket else None) or t.get("bot_id", None)
         tagged_trades.append({**t, "bot_id": resolved})
 

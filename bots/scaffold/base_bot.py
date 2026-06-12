@@ -103,8 +103,25 @@ class BaseBot:
         self._open_positions: int = 0
         self._restart_requested = False
         self._my_tickets: set[int] = set()  # tickets opened by THIS bot, survived across restarts
+        self._ticket_added_at: dict[int, float] = {}  # ticket -> Zeitpunkt der lokalen Aufnahme
 
     # ── Ticket-Persistenz (restart-safe) ────────────────────────────────
+
+    # Frisch geoeffnete Tickets duerfen so lange nicht gepruned werden:
+    # der Positions-Cache der Bridge laeuft bis zu ~2s hinterher — ohne
+    # Grace-Period wuerde ein neues Ticket sofort wieder verworfen.
+    TICKET_PRUNE_GRACE_SEC = 15.0
+
+    def _prune_tickets(self, open_tickets: set[int]) -> None:
+        """Entfernt geschlossene Tickets — aber nie solche, die juenger als die Grace-Period sind."""
+        now = time.time()
+        for ticket in list(self._my_tickets):
+            if ticket in open_tickets:
+                continue
+            added = self._ticket_added_at.get(ticket, 0.0)
+            if now - added >= self.TICKET_PRUNE_GRACE_SEC:
+                self._my_tickets.discard(ticket)
+                self._ticket_added_at.pop(ticket, None)
 
     def _tickets_path(self) -> str:
         base = os.path.dirname(sys.argv[0]) or "."
@@ -116,8 +133,27 @@ class BaseBot:
             if os.path.exists(path):
                 with open(path, "r", encoding="utf-8") as f:
                     self._my_tickets = set(json.load(f))
+                # Geladene Tickets gelten als "alt" (added_at=0): sie sind sofort
+                # prunebar und zaehlen fuer Strategien als maximal gealtert
+                for t in self._my_tickets:
+                    self._ticket_added_at.setdefault(t, 0.0)
         except Exception:
             self._my_tickets = set()
+
+    def ticket_age_sec(self, ticket: int) -> float | None:
+        """
+        Alter eines eigenen Tickets in Sekunden — gemessen mit der LOKALEN Uhr
+        seit send_trade(). Nach einem Neustart gelten geladene Tickets als
+        maximal alt. None wenn das Ticket nicht von diesem Bot stammt.
+
+        Hinweis: Absichtlich NICHT der MT5-Zeitstempel der Position — der kommt
+        in Broker-Zeit (z.B. UTC+3) und ist als UTC etikettiert, wodurch
+        Altersberechnungen um Stunden daneben liegen.
+        """
+        added = self._ticket_added_at.get(int(ticket))
+        if added is None:
+            return None
+        return time.time() - added
 
     def _save_tickets(self) -> None:
         path = self._tickets_path()
@@ -232,7 +268,9 @@ class BaseBot:
             tp=float(trade_dict.get("tp", 0) or 0),
         )
         if result.get("success") and result.get("ticket"):
-            self._my_tickets.add(int(result["ticket"]))
+            ticket = int(result["ticket"])
+            self._my_tickets.add(ticket)
+            self._ticket_added_at[ticket] = time.time()
             self._save_tickets()
         return result
 
@@ -255,6 +293,42 @@ class BaseBot:
         """
         print(f"[MT5-FEHLER] {error}")
         self.log("error", f"MT5-Fehler", error)
+
+    # ── Parameter-Unterstuetzung (Settings-Editor in AlphaTrack) ────────
+
+    def get_parameters(self) -> dict | None:
+        """
+        Liefert die im AlphaTrack Settings-Editor editierbaren Parameter.
+        Subklassen ueberschreiben diese Methode und geben ein dict zurueck,
+        z.B. {"hold_minutes": 10, "interval_minutes": 30}.
+        Standard: None — keine Parameter, Editor zeigt Hinweistext.
+        """
+        return None
+
+    def apply_parameters(self, params: dict) -> None:
+        """
+        Wendet via set_parameters empfangene Parameter an.
+        Standard: Werte in config['strategy'] mergen und in config.json
+        persistieren (restart-safe). Subklassen koennen ueberschreiben.
+        """
+        self._config.setdefault("strategy", {}).update(params)
+        self._persist_parameters(params)
+
+    def _persist_parameters(self, params: dict) -> None:
+        """Schreibt Parameter zurueck in config.json."""
+        config_path = os.path.join(os.path.dirname(sys.argv[0]), self.CONFIG_FILE)
+        if not os.path.exists(config_path):
+            config_path = self.CONFIG_FILE
+        try:
+            with open(config_path, "r", encoding="utf-8") as f:
+                cfg = json.load(f)
+            cfg.setdefault("strategy", {}).update(params)
+            tmp_path = config_path + ".tmp"
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                json.dump(cfg, f, indent=2, ensure_ascii=False)
+            os.replace(tmp_path, config_path)
+        except Exception as e:
+            self.log("error", "Parameter-Persistenz fehlgeschlagen", str(e))
 
     # ── Strategie-Tick (muss von Subklasse implementiert werden) ────────
 
@@ -299,6 +373,14 @@ class BaseBot:
             elif command == "mt5_error":
                 error_msg = cmd.get("payload", {}).get("error", "Unbekannter MT5-Fehler")
                 self.on_mt5_error(error_msg)
+            elif command == "set_parameters":
+                payload = cmd.get("payload") or {}
+                params = payload.get("parameters") or {}
+                if isinstance(params, dict) and params:
+                    self.apply_parameters(params)
+                    self.log("info", "Parameter aktualisiert", json.dumps(params))
+                else:
+                    self.log("warn", "set_parameters ohne parameters-Objekt empfangen")
             elif command == "close_position":
                 payload = cmd.get("payload") or {}
                 ticket = int(payload.get("ticket", 0))
@@ -317,10 +399,13 @@ class BaseBot:
     def run(self) -> None:
         """Startet den Bot-Loop. Blockiert bis zum Beenden."""
         self._config = self.load_config()
-        self._load_tickets()
 
         if not self._connect_and_register():
             sys.exit(1)
+
+        # Tickets erst NACH der Registrierung laden — die Bridge kann die
+        # bot_id aendern, und der Dateiname haengt von der finalen ID ab
+        self._load_tickets()
 
         cfg = self._config
         self._log = BotLog(bot_id=self.bot_id, bot_name=self.name)
@@ -357,7 +442,7 @@ class BaseBot:
             if bridge_ok:
                 positions = self._bridge.get_positions()
                 all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
-                self._my_tickets.intersection_update(all_tickets)  # prune closed trades
+                self._prune_tickets(all_tickets)  # prune closed trades (mit Grace-Period)
                 my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
                 self._open_positions = len(my_positions)
 
@@ -368,7 +453,7 @@ class BaseBot:
                     candles = self._bridge.get_candles(symbol, timeframe, candles_count)
                     positions = self._bridge.get_positions()
                     all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
-                    self._my_tickets.intersection_update(all_tickets)
+                    self._prune_tickets(all_tickets)
                     my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
                     signal_result = self.on_tick(candles, my_positions)
                     action = signal_result.get("action", "hold")
@@ -404,6 +489,7 @@ class BaseBot:
                     uptime=int(now - start_time),
                     balance=None,
                     currency=None,
+                    parameters=self.get_parameters(),
                 )
                 last_heartbeat = now
 
