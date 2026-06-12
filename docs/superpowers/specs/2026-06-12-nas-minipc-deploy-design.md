@@ -66,18 +66,25 @@ interaktiv ab; Enter übernimmt den gespeicherten Default (Muster wie in
 - MetaTrader: Kontonummer (Login), Passwort, Server, Pfad zu `terminal64.exe`
 - Anthropic-API-Key (nur falls `.env.local` auf dem NAS fehlt, siehe Phase 1)
 
-Danach wird `deploy.config.json` gespeichert (liegt im Repo; Secrets im Repo sind
-laut Entscheidung akzeptiert).
+Danach wird `deploy.config.json` gespeichert (gitignored — die Datei ist
+Dev-PC-spezifischer Zustand und enthält das MT5-Passwort; sie wird zur Laufzeit
+erzeugt und muss nicht verteilt werden).
 
 **Phase 1 — NAS-Deploy:**
 
 1. `git push` (Abbruch bei Fehler)
 2. Prüfen, ob `.env.local` im NAS-Projektpfad existiert (`ssh test -f`); falls
-   nicht: Anthropic-API-Key abfragen und Datei per SSH anlegen
+   nicht: `BOT_API_KEY` generieren, Anthropic-API-Key abfragen (optional) und
+   Datei per SSH anlegen. Muss vor `nas-update.sh` passieren, da
+   `docker-compose.yml` die Datei als `env_file` voraussetzt
 3. `ssh -p <port> <user>@<nas> "bash <pfad>/scripts/nas-update.sh"`
 4. Warten bis `http://<NAS>:3002/api/bridge/info` antwortet (Timeout 120 s,
    Polling alle 5 s); bei Timeout Abbruch mit Hinweis
-5. Aus der Antwort API-Key und Profilliste übernehmen; Profilauswahl:
+5. API-Key: `/api/bridge/info` liefert bewusst keinen Key. Der Key ist
+   `BOT_API_KEY` aus `.env.local` auf dem NAS — das Skript liest ihn dort per
+   SSH aus (bzw. erzeugt ihn beim Anlegen der Datei in Schritt 2) und trägt
+   denselben Wert in die Bridge-/Bot-Configs ein. Aus `/api/bridge/info`
+   kommt nur die Profilliste; Profilauswahl:
    genau ein Profil → automatisch; mehrere → nummerierte Auswahl; keines →
    Abbruch mit Hinweis, zuerst ein Profil im AlphaTrack-UI anzulegen
 
