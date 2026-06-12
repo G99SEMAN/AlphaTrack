@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 04 abgeschlossen — alle 3 Pläne fertig
-stopped_at: Phase 4 complete (3/3 plans)
-last_updated: "2026-06-11T22:42:00.000Z"
-last_activity: 2026-06-11 -- Phase 04 ausgeführt (alle 3 Pläne)
+status: Awaiting next milestone
+stopped_at: Phase 4 context gathered
+last_updated: "2026-06-12T11:03:01.378Z"
+last_activity: 2026-06-12 — Milestone v1.0 completed and archived
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 12
   completed_plans: 12
   percent: 100
@@ -25,12 +25,10 @@ See: .planning/PROJECT.md (updated 2026-06-09)
 
 ## Current Position
 
-Phase: 4 (performance-abschluss) — COMPLETE
-Plan: 3 of 3
-Status: Phase 04 abgeschlossen — alle 3 Pläne fertig
-Last activity: 2026-06-11 -- Phase 04 ausgeführt (3/3 Pläne: PERF-01/02, BOTLOG-01, UI-01)
-
-Progress: [████████░░] 75%
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-06-12 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
@@ -74,12 +72,25 @@ None yet.
 
 ## Deferred Items
 
-| Category | Item | Status | Deferred At |
-|----------|------|--------|-------------|
-| *(none)* | | | |
+Items acknowledged and deferred at milestone close on 2026-06-12:
+
+| Category | Item | Status |
+|----------|------|--------|
+| verification | Phase 02: Bridge Auto-Discovery Timeout (30s Live-Test) | human_needed |
+| verification | Phase 02: Bridge-Log Filter (Live-Daten) | human_needed |
+| verification | Phase 02: /bridge/settings → 404 im laufenden Server | human_needed |
+| verification | Phase 03: Bot-Karte mit echten offenen Trades (BOTS-01 Live) | human_needed |
+| verification | Phase 03: P&L farbig im Browser (BOTS-03 Live) | human_needed |
+| verification | Phase 03: Bot-Disconnect Timeout ~30s (BOTS-05 Live) | human_needed |
+| verification | Phase 03: Parameter-Editor mit realem Bot (BOTS-08 Live) | human_needed |
+| verification | Phase 04: Bot-Performance-Graph nach Bridge-Neustart (PERF-01 E2E) | human_needed |
 
 ## Session Continuity
 
 Last session: 2026-06-11T20:07:00.191Z
 Stopped at: Phase 4 context gathered
 Resume file: .planning/phases/04-performance-abschluss/04-01-PLAN.md
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone
