@@ -29,26 +29,21 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
     [trades],
   )
 
-  const { totalPnl, winRate, avgRR, rrCount, chartData } = useMemo(() => {
+  const { totalPnl, winRate, chartData } = useMemo(() => {
     let running = 0
     let wins = 0
-    let rrSum = 0
-    let rrCount = 0
     const points: { date: string; value: number }[] = [{ date: 'Start', value: 0 }]
 
     for (const t of closedTrades) {
       const pnl = t.pnl ?? 0
       running += pnl
       if (pnl > 0) wins++
-      if (t.rr !== undefined) { rrSum += t.rr; rrCount++ }
       points.push({ date: fmtDate(t.closeTime || t.date), value: Math.round(running * 100) / 100 })
     }
 
     return {
       totalPnl: running,
       winRate: closedTrades.length > 0 ? (wins / closedTrades.length) * 100 : 0,
-      avgRR: rrCount > 0 ? rrSum / rrCount : 0,
-      rrCount,
       chartData: points,
     }
   }, [closedTrades])
@@ -61,7 +56,6 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
     { label: 'Win Rate', value: `${winRate.toFixed(1)}%`, color: winRate >= 50 ? 'var(--green)' : 'var(--red)' },
     { label: 'P&L', value: `${totalPnl >= 0 ? '+' : ''}${totalPnl.toLocaleString('de-DE', { maximumFractionDigits: 2 })}€`, color },
     { label: 'Trades', value: String(closedTrades.length), color: 'var(--text-1)' },
-    { label: 'Avg RR', value: rrCount > 0 ? avgRR.toFixed(2) : '—', color: 'var(--text-1)' },
   ]
 
   return (
@@ -155,7 +149,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
             </ResponsiveContainer>
           </div>
 
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {kpis.map(kpi => (
               <div key={kpi.label} className="rounded-xl p-2 text-center" style={{ background: 'var(--bg)' }}>
                 <p className="text-xs font-mono font-bold leading-tight" style={{ color: kpi.color }}>

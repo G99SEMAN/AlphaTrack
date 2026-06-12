@@ -23,10 +23,9 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
   )
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     const [trackedRes, tradesRes] = await Promise.all([
       fetch('/api/bots/performance-tracked'),
-      fetch(`/api/bridge/trades?profileId=${profileId}`),
+      fetch(`/api/bots/trades?profileId=${profileId}`),
     ])
     if (trackedRes.ok) {
       const data = await trackedRes.json() as { trackedBotIds: string[] }
@@ -36,10 +35,13 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
       const data = await tradesRes.json() as { trades: Trade[] }
       setAllBotTrades(data.trades)
     }
-    setLoading(false)
   }, [profileId])
 
-  useEffect(() => { fetchData() }, [fetchData])
+  useEffect(() => {
+    fetchData().finally(() => setLoading(false))
+    const interval = setInterval(fetchData, 10000)
+    return () => clearInterval(interval)
+  }, [fetchData])
 
   async function handleAddBot(botId: string) {
     await fetch('/api/bots/performance-tracked', {
@@ -101,7 +103,7 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
             <BotPerfCard
               key={bw.bot.id}
               botEntry={bw.bot}
-              trades={allBotTrades.filter(t => t.botId === bw.bot.id)}
+              trades={allBotTrades.filter(t => t.sourceId === bw.bot.id)}
               onRemove={() => handleRemoveBot(bw.bot.id)}
             />
           ))}
