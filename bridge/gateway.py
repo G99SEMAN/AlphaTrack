@@ -452,6 +452,8 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
     finally:
         if bot_id:
             _bots.pop(bot_id, None)
+            _bot_identities.pop(bot_id, None)
+            _bot_versions.pop(bot_id, None)
             name = next((n for n, i in _bot_names_to_id.items() if i == bot_id), bot_id)
             if _log_callback:
                 _log_callback("warn", f"Bot getrennt: {name}")
