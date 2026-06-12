@@ -77,6 +77,7 @@ None yet.
 | 260612-mrw | Projekt-Aufräumaktion: verwaiste Bot-Daten, alte Bots, veraltete Doku, Demo-Profil, Launcher entfernen; README aktualisieren | 2026-06-12 | f6d001f | [260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date](./quick/260612-mrw-projekt-aufr-umaktion-verwaiste-bot-date/) |
 | 260612-o9u | Bot-Performance-Fenster: Avg RR entfernt, Auto-Refresh (10s), P&L-Quelle vereinheitlicht (/api/bots/trades), 6 fehlattribuierte Trades repariert | 2026-06-12 | bfe5d75 | [260612-o9u-bot-performance-fenster-fixen-avg-rr-ent](./quick/260612-o9u-bot-performance-fenster-fixen-avg-rr-ent/) |
 | 260612-fast | Trades-Seite: Quellen-Badge (Bot-Name / Bridge) pro Trade-Zeile | 2026-06-12 | b36eaad | — |
+| 260612-fast2 | Bridge-Fix: MT5-Deal-History-Fenster (to_date + 2d) — hängende 'offene' Trades wegen Broker-Serverzeit vor Lokalzeit | 2026-06-12 | a3d55b1 | — |
 
 ## Deferred Items
 
