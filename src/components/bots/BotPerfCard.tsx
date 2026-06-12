@@ -20,6 +20,16 @@ function fmtDate(s: string): string {
   return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`
 }
 
+// Eindeutiger X-Wert pro Punkt (Datum + Uhrzeit mit Sekunden) — bei identischen
+// X-Werten ordnet der recharts-Tooltip sonst jeden Hover dem ersten Punkt zu
+function fmtDateTime(s: string): string {
+  const d = new Date(s)
+  const hh = String(d.getHours()).padStart(2, '0')
+  const mm = String(d.getMinutes()).padStart(2, '0')
+  const ss = String(d.getSeconds()).padStart(2, '0')
+  return `${fmtDate(s)} ${hh}:${mm}:${ss}`
+}
+
 export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
   const closedTrades = useMemo(
     () =>
@@ -38,7 +48,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
       const pnl = t.pnl ?? 0
       running += pnl
       if (pnl > 0) wins++
-      points.push({ date: fmtDate(t.closeTime || t.date), value: Math.round(running * 100) / 100 })
+      points.push({ date: fmtDateTime(t.closeTime || t.date), value: Math.round(running * 100) / 100 })
     }
 
     return {
@@ -111,6 +121,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
                   axisLine={false}
                   tickLine={false}
                   interval="preserveStartEnd"
+                  tickFormatter={v => String(v).split(' ')[0]}
                 />
                 <YAxis
                   tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'monospace' }}
@@ -121,7 +132,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
                 />
                 <ReferenceLine y={0} stroke="var(--text-3)" strokeDasharray="3 3" strokeOpacity={0.4} />
                 <Tooltip
-                  content={({ active, payload }) => {
+                  content={({ active, payload, label }) => {
                     if (!active || !payload?.length) return null
                     const val = payload[0].value as number
                     return (
@@ -129,6 +140,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
                         className="px-2 py-1.5 rounded-lg text-xs"
                         style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                       >
+                        <p style={{ color: 'var(--text-3)' }}>{String(label)}</p>
                         <p style={{ color: val >= 0 ? 'var(--green)' : 'var(--red)', fontFamily: 'monospace' }}>
                           {val >= 0 ? '+' : ''}{val.toLocaleString('de-DE')}€
                         </p>
