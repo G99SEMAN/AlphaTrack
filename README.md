@@ -132,17 +132,24 @@ services:
 
 > Das `data/`-Volume sichert alle Trades, Profile, Bot-Daten und gecachte KI-Erklärungen persistent ausserhalb des Containers.
 
-### Update auf NAS ausrollen
+### Deploy (NAS + Mini-PC)
 
-```bash
-# 1. Änderungen lokal committen und pushen
-git push
+`scripts\windows\deploy.bat` startet das interaktive Deploy:
 
-# 2. Per SSH auf das NAS verbinden und Update-Script starten
-ssh user@nas-ip "cd /volume1/docker/alphatrack && bash scripts/nas-update.sh"
-```
+1. **Konfigurationsabfrage** — NAS-Zugang, Mini-PC-Zugang, MT5-Logindaten.
+   Antworten werden in `scripts/windows/deploy.config.json` gespeichert (gitignored);
+   Enter übernimmt beim nächsten Lauf den gespeicherten Wert.
+2. **NAS** — git push, `.env.local` mit `BOT_API_KEY` sicherstellen, Container-Rebuild,
+   Auswahl des Trading-Profils vom NAS.
+3. **Mini-PC** — `bridge/` + `bots/` per SSH kopieren, Configs generieren,
+   Firewall-Regel (TCP 8765) und geplante Aufgabe "AlphaTrack Bridge" (Start bei
+   Anmeldung). Bots werden nur kopiert — Start manuell per `start.bat`.
+4. **Check** — wartet, bis die Bridge sich beim NAS-AlphaTrack registriert hat.
 
-Das Script stoppt den Container, sichert die Daten, pullt den neuen Code von GitHub, stellt die Daten wieder her und baut den Container neu.
+**Einmalig auf dem Mini-PC:** OpenSSH-Server aktivieren (Einstellungen → Optionale
+Features → "OpenSSH-Server", dann `Set-Service sshd -StartupType Automatic` +
+`Start-Service sshd` als Admin). Der SSH-Benutzer braucht Admin-Rechte
+(Firewall/Aufgabenplanung). MetaTrader 5 und Python müssen installiert sein.
 
 ---
 

@@ -361,6 +361,27 @@ function Register-BridgeTask($cfg) {
     Write-Ok 'Bridge gestartet.'
 }
 
+# --- Phase 3: Abschluss-Check ------------------------------
+
+# Die Bridge registriert sich beim Start selbst per POST /api/bots.
+# Wir pollen, bis ein Bridge-Eintrag mit der Mini-PC-IP auftaucht.
+function Wait-ForBridgeRegistration($cfg) {
+    $url = "http://$($cfg.nas_host):$($cfg.nas_app_port)/api/bots"
+    Write-Host '  Warte auf Bridge-Registrierung (max. 90s) ...'
+    $deadline = (Get-Date).AddSeconds(90)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $resp = Invoke-RestMethod -Uri $url -TimeoutSec 5
+            $bridge = @($resp.bots) | Where-Object {
+                ($_.type -eq 'bridge' -or -not $_.type) -and $_.url -like "*$($cfg.minipc_host)*"
+            } | Select-Object -First 1
+            if ($bridge) { return $bridge }
+        } catch { }
+        Start-Sleep -Seconds 5
+    }
+    return $null
+}
+
 # --- Hauptablauf ------------------------------------------
 
 function Invoke-Main {
@@ -373,7 +394,39 @@ function Invoke-Main {
         return
     }
 
-    Write-Warn2 'Deploy-Phasen noch nicht implementiert (folgt in spaeteren Tasks).'
+    Write-Step '[Phase 1/3] NAS-Deploy'
+    Invoke-GitPush
+    $apiKey = Confirm-NasEnvFile $cfg
+    Invoke-NasUpdate $cfg
+    $info = Wait-ForAlphaTrack $cfg
+    $profileId = Select-TradingProfile $info $cfg
+
+    Write-Step '[Phase 2/3] Mini-PC-Deploy'
+    Test-MiniPcSsh $cfg
+    Copy-CodeToMiniPc $cfg
+    Write-RemoteConfigs $cfg $apiKey $profileId
+    Set-MiniPcFirewall $cfg
+    Register-BridgeTask $cfg
+
+    Write-Step '[Phase 3/3] Abschluss-Check'
+    $bridge = Wait-ForBridgeRegistration $cfg
+
+    Write-Host ''
+    Write-Host "  $Sep"
+    if ($bridge) {
+        Write-Ok "Bridge '$($bridge.name)' ist beim NAS-AlphaTrack registriert."
+        Write-Host "  AlphaTrack:  http://$($cfg.nas_host):$($cfg.nas_app_port)"
+        Write-Host "  Bridge:      $($bridge.url)"
+        Write-Host '  Bots:        auf dem Mini-PC manuell per start.bat starten.'
+    } else {
+        Write-Warn2 'Bridge hat sich nicht innerhalb von 90s registriert.'
+        Write-Host '  Naechste Schritte:'
+        Write-Host "    - Auf dem Mini-PC das Bridge-Fenster pruefen ($($cfg.minipc_target_dir)\bridge)"
+        Write-Host '    - MT5-Zugangsdaten in der Ausgabe der Bridge pruefen'
+        Write-Host "    - Bridge-Log im AlphaTrack-UI: http://$($cfg.nas_host):$($cfg.nas_app_port)/bridge"
+        throw 'Abschluss-Check fehlgeschlagen.'
+    }
+    Write-Host "  $Sep"
 }
 
 if ($MyInvocation.InvocationName -ne '.') {
