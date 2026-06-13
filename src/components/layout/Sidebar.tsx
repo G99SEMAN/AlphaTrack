@@ -5,12 +5,11 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   Pencil, CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
-  Sparkles, ShieldCheck, ShieldOff, Network, ChevronDown, Cpu, MoreHorizontal,
-  TrendingUp, Eye, EyeOff,
+  Sparkles, ShieldCheck, ShieldOff, Network, Cpu,
+  TrendingUp, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import LogoMark from './LogoMark'
+import { useState } from 'react'
 import MarketSessions from './MarketSessions'
 import BottomNav from './BottomNav'
 import ProfileSwitcher from '@/components/profile/ProfileSwitcher'
@@ -20,36 +19,25 @@ import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
 
-const MAIN_NAV = [
-  { href: '/dashboard',  label: 'Dashboard',   icon: LayoutDashboard },
-  { href: '/journal',    label: 'Trades',       icon: BookOpen },
-  { href: '/statistiken',label: 'Statistiken',  icon: BarChart2 },
-  { href: '/kalender',   label: 'Kalender',     icon: CalendarDays },
-  { href: '/tpc',        label: 'TPC',          icon: TrendingUp },
-  { href: '/netzwerk',   label: 'Netzwerk',     icon: Network },
+const UEBERSICHT_NAV = [
+  { href: '/dashboard',   label: 'Dashboard',   icon: LayoutDashboard },
+  { href: '/journal',     label: 'Trades',       icon: BookOpen },
+  { href: '/statistiken', label: 'Statistiken',  icon: BarChart2 },
+  { href: '/kalender',    label: 'Kalender',     icon: CalendarDays },
+  { href: '/tpc',         label: 'TPC',          icon: TrendingUp },
+  { href: '/netzwerk',    label: 'Netzwerk',     icon: Network },
 ]
 
-const BRIDGE_NAV = [
-  { href: '/bridge',     label: 'Bridge',     icon: Cpu },
-  { href: '/bridge/log', label: 'Bridge Log', icon: ScrollText },
+const BRIDGE_BOTS_NAV = [
+  { href: '/bridge',            label: 'Bridge',        icon: Cpu },
+  { href: '/bridge/log',        label: 'Bridge Log',    icon: ScrollText },
+  { href: '/bots',              label: 'Bots',          icon: Bot },
+  { href: '/bots/settings',     label: 'Bot Settings',  icon: SlidersHorizontal },
+  { href: '/strategien',        label: 'Strategien',    icon: Target },
+  { href: '/bots/performance',  label: 'Performance',   icon: BarChart2 },
+  { href: '/bridge/trades',     label: 'Live Trades',   icon: Activity },
+  { href: '/bridge/analyse',    label: 'Trade Analyzer',icon: Sparkles },
 ]
-
-const BOTS_NAV = [
-  { href: '/bots',          label: 'Bots',         icon: Bot },
-  { href: '/bots/settings', label: 'Bot Settings', icon: SlidersHorizontal },
-  { href: '/strategien',    label: 'Strategien',   icon: Target },
-  { href: '/bots/performance', label: 'Performance', icon: BarChart2 },
-]
-
-const WEITERES_NAV = [
-  { href: '/bridge/trades',  label: 'Live Trades',    icon: Activity },
-  { href: '/bridge/analyse', label: 'Trade Analyzer', icon: Sparkles },
-]
-
-interface Props {
-  profiles: Profile[]
-  activeProfile: Profile | null
-}
 
 const EXACT_MATCH = new Set(['/dashboard', '/bridge', '/bots'])
 
@@ -58,70 +46,70 @@ function isActive(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(href + '/')
 }
 
-function NavLink({ href, label, icon: Icon, pathname, onNav }: {
+function NavLink({ href, label, icon: Icon, pathname, collapsed, onNav }: {
   href: string; label: string; icon: React.ElementType
-  pathname: string; onNav?: () => void
+  pathname: string; collapsed: boolean; onNav?: () => void
 }) {
   const active = isActive(pathname, href)
   return (
     <Link
       href={href}
       onClick={onNav}
-      className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all"
+      title={collapsed ? label : undefined}
+      className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-sm font-medium transition-all relative"
       style={{
-        background: active ? 'var(--accent-bg)' : 'transparent',
-        color: active ? 'var(--accent)' : 'var(--text-1)',
+        background: active ? 'rgba(59,130,246,0.12)' : 'transparent',
+        border: active ? '1px solid rgba(59,130,246,0.18)' : '1px solid transparent',
+        color: active ? 'var(--accent)' : 'var(--text-2)',
+        justifyContent: collapsed ? 'center' : undefined,
       }}
     >
-      <Icon size={16} strokeWidth={active ? 2.5 : 2} style={{ opacity: active ? 1 : 0.6 }} />
-      {label}
+      {active && !collapsed && (
+        <span style={{
+          position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)',
+          width: 3, height: 3, borderRadius: '50%', background: 'var(--accent)',
+        }} />
+      )}
+      <Icon
+        size={15}
+        strokeWidth={active ? 2.5 : 2}
+        style={{ opacity: active ? 1 : 0.5, flexShrink: 0, marginLeft: active && !collapsed ? 6 : 0 }}
+      />
+      {!collapsed && (
+        <span style={{ opacity: active ? 1 : 0.7 }}>{label}</span>
+      )}
     </Link>
   )
 }
 
-function SectionHeader({ title, open, onToggle, icon: Icon }: {
-  title: string; open: boolean; onToggle: () => void; icon?: React.ElementType
-}) {
+function SectionDivider({ label, collapsed }: { label: string; collapsed: boolean }) {
+  if (collapsed) return <div style={{ height: 1, background: 'var(--border)', margin: '6px 8px' }} />
   return (
-    <button
-      onClick={onToggle}
-      className="w-full flex items-center justify-between px-2 mt-3 mb-1 cursor-pointer group"
-    >
-      <div className="flex items-center gap-1.5">
-        {Icon && <Icon size={10} style={{ color: 'var(--text-3)', opacity: 0.7 }} />}
-        <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          {title}
-        </p>
-      </div>
-      <ChevronDown
-        size={11}
-        style={{
-          color: 'var(--text-3)',
-          transform: open ? 'rotate(0deg)' : 'rotate(-90deg)',
-          transition: 'transform 0.18s ease',
-        }}
-      />
-    </button>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 4px 4px', margin: '4px 0' }}>
+      <div style={{ height: 1, width: 10, background: 'var(--border)' }} />
+      <span style={{
+        fontSize: 9, fontWeight: 700, color: 'var(--text-3)',
+        textTransform: 'uppercase', letterSpacing: '0.14em', whiteSpace: 'nowrap',
+      }}>
+        {label}
+      </span>
+      <div style={{ height: 1, flex: 1, background: 'var(--border)' }} />
+    </div>
   )
 }
 
-const SECTIONS_KEY = 'alphatrack-sidebar-sections'
-
-function loadSections(): { bridge: boolean; bots: boolean; weiteres: boolean } | null {
-  try {
-    const s = localStorage.getItem(SECTIONS_KEY)
-    return s ? (JSON.parse(s) as { bridge: boolean; bots: boolean; weiteres: boolean }) : null
-  } catch { return null }
+interface Props {
+  profiles: Profile[]
+  activeProfile: Profile | null
 }
 
-function saveSections(v: { bridge: boolean; bots: boolean; weiteres: boolean }) {
-  try { localStorage.setItem(SECTIONS_KEY, JSON.stringify(v)) } catch { /* silent */ }
-}
-
-function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props & { onNav?: () => void; compact?: boolean }) {
+function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleCollapse }: Props & {
+  onNav?: () => void; collapsed: boolean; onToggleCollapse?: () => void
+}) {
   const pathname = usePathname()
   const [showEdit, setShowEdit] = useState(false)
   const [showEinstellungen, setShowEinstellungen] = useState(false)
+  const [showProfileSwitcher, setShowProfileSwitcher] = useState(false)
   const { isUnlocked, toggle } = useTradingLock()
   const { bots } = useBotStatus()
   const [balanceVisible, setBalanceVisible] = useState(() => {
@@ -142,245 +130,320 @@ function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props
     })
   }
 
-  const [sections, setSections] = useState<{ bridge: boolean; bots: boolean; weiteres: boolean }>(() => {
-    const saved = loadSections() ?? { bridge: false, bots: false, weiteres: false }
-    return {
-      bridge:   saved.bridge   || BRIDGE_NAV.some(n => isActive(pathname, n.href)),
-      bots:     saved.bots     || BOTS_NAV.some(n => isActive(pathname, n.href)),
-      weiteres: saved.weiteres || WEITERES_NAV.some(n => isActive(pathname, n.href)),
-    }
-  })
-
-  // Force open the section of the current page (but never close others)
-  useEffect(() => {
-    setSections(prev => {
-      const next = {
-        bridge:   prev.bridge   || BRIDGE_NAV.some(n => isActive(pathname, n.href)),
-        bots:     prev.bots     || BOTS_NAV.some(n => isActive(pathname, n.href)),
-        weiteres: prev.weiteres || WEITERES_NAV.some(n => isActive(pathname, n.href)),
-      }
-      if (next.bridge !== prev.bridge || next.bots !== prev.bots || next.weiteres !== prev.weiteres) {
-        saveSections(next)
-      }
-      return next
-    })
-  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  function toggleSection(key: 'bridge' | 'bots' | 'weiteres') {
-    setSections(prev => {
-      const next = { ...prev, [key]: !prev[key] }
-      saveSections(next)
-      return next
-    })
-  }
-
-  const { bridge: bridgeOpen, bots: botsOpen, weiteres: weiteresOpen } = sections
+  const avatarInitial = activeProfile?.name?.[0]?.toUpperCase() ?? 'P'
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
 
-      {/* Logo + Schutzschalter */}
-      <div className="flex items-center gap-3 px-4 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
-        <LogoMark size={44} className="shrink-0" />
-        <div className="flex-1 min-w-0">
-          <p className="text-base font-bold leading-tight tracking-tight" style={{ color: 'var(--text-1)' }}>
-            AlphaTrack
-          </p>
-          <p className="text-[10px] leading-[1.1] tracking-widest uppercase" style={{ color: 'var(--text-3)' }}>
-            Trading Journal
-          </p>
+      {/* Logo + Collapse Button */}
+      <div
+        style={{
+          display: 'flex', alignItems: 'center', gap: 10,
+          padding: collapsed ? '14px 10px' : '14px 14px 12px',
+          borderBottom: '1px solid var(--border)',
+          justifyContent: collapsed ? 'center' : undefined,
+        }}
+      >
+        {/* Logo Mark */}
+        <div style={{
+          width: 34, height: 34, flexShrink: 0,
+          background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
+          borderRadius: 9,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: 14, fontWeight: 800, color: '#fff',
+          boxShadow: '0 4px 12px rgba(37,99,235,0.4)',
+        }}>
+          A
         </div>
-        <button
-          type="button"
-          title={isUnlocked ? 'Trading sperren' : 'Trading entsperren'}
-          onClick={toggle}
-          className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-all"
-          style={isUnlocked ? {
-            background: 'rgba(239,68,68,0.12)',
-            border: '1px solid rgba(239,68,68,0.35)',
-            color: '#ef4444',
-          } : {
-            background: 'rgba(0,217,126,0.15)',
-            border: '1px solid rgba(0,217,126,0.4)',
-            color: '#00d97e',
-            boxShadow: '0 0 8px rgba(0,217,126,0.2)',
-          }}
-        >
-          {isUnlocked
-            ? <ShieldOff size={15} strokeWidth={2} />
-            : <ShieldCheck size={15} strokeWidth={2.5} />
-          }
-        </button>
+
+        {!collapsed && (
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+              AlphaTrack
+            </p>
+            <p style={{ fontSize: 9, color: 'var(--text-3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Trading Journal
+            </p>
+          </div>
+        )}
+
+        {!collapsed && onToggleCollapse && (
+          <button
+            type="button"
+            onClick={onToggleCollapse}
+            style={{
+              width: 22, height: 22, flexShrink: 0,
+              background: 'var(--surface-2)', border: '1px solid var(--border)',
+              borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', color: 'var(--text-3)',
+            }}
+            title="Sidebar einklappen"
+          >
+            <ChevronLeft size={12} />
+          </button>
+        )}
+
+        {collapsed && onToggleCollapse && (
+          <button
+            type="button"
+            onClick={onToggleCollapse}
+            style={{
+              position: 'absolute', right: -10, top: 20,
+              width: 20, height: 20,
+              background: 'var(--surface-2)', border: '1px solid var(--border)',
+              borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', color: 'var(--text-3)', zIndex: 10,
+            }}
+            title="Sidebar ausklappen"
+          >
+            <ChevronRight size={10} />
+          </button>
+        )}
       </div>
 
-      {/* Hinweis wenn Trading aktiv */}
-      {isUnlocked && (
-        <div className="mx-3 mt-2 rounded-lg px-3 py-2"
-          style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)' }}>
-          <p className="text-xs" style={{ color: '#ef4444' }}>Trading aktiv!</p>
+      {/* Trading Lock Hinweis */}
+      {isUnlocked && !collapsed && (
+        <div style={{ margin: '8px 10px 0', padding: '6px 10px', borderRadius: 8, background: 'rgba(255,69,96,0.06)', border: '1px solid rgba(255,69,96,0.2)' }}>
+          <p style={{ fontSize: 11, color: 'var(--red)' }}>Trading aktiv!</p>
         </div>
       )}
 
-      {/* Profil-Bereich */}
-      <div className="px-3 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
-        <div className="flex items-center justify-between px-1 mb-2">
-          <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Aktives Profil
-          </p>
-          {activeProfile && (
-            <button
-              onClick={() => setShowEdit(true)}
-              className="w-5 h-5 flex items-center justify-center rounded cursor-pointer transition-colors"
-              style={{ color: 'var(--text-3)' }}
-              title="Profil bearbeiten"
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-1)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-3)')}
-            >
-              <Pencil size={11} />
-            </button>
+      {/* Profil-Pill */}
+      {!collapsed && activeProfile && (
+        <div style={{ padding: '10px 10px 8px', borderBottom: '1px solid var(--border)' }}>
+          <div
+            style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              padding: '8px 10px', borderRadius: 10,
+              background: 'var(--surface-2)', border: '1px solid var(--border)',
+              cursor: 'pointer',
+            }}
+            onClick={() => setShowProfileSwitcher(v => !v)}
+          >
+            <div style={{
+              width: 26, height: 26, flexShrink: 0,
+              background: 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
+              borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 11, fontWeight: 700, color: '#fff',
+            }}>
+              {avatarInitial}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {activeProfile.name}
+              </div>
+              <div style={{ fontSize: 9, color: 'var(--text-3)' }}>
+                {activeProfile.type === 'live' ? 'Live' : 'Demo'} · {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 4 }}>
+              <button
+                type="button"
+                onClick={e => { e.stopPropagation(); setShowEdit(true) }}
+                style={{ color: 'var(--text-3)', padding: 2, cursor: 'pointer' }}
+                title="Profil bearbeiten"
+              >
+                <Pencil size={10} />
+              </button>
+              <ChevronDown size={12} style={{ color: 'var(--text-3)' }} />
+            </div>
+          </div>
+          {showProfileSwitcher && (
+            <div style={{ marginTop: 4 }}>
+              <ProfileSwitcher profiles={profiles} activeProfile={activeProfile} />
+            </div>
           )}
         </div>
-        <ProfileSwitcher profiles={profiles} activeProfile={activeProfile} />
-      </div>
+      )}
+
+      {/* Collapsed: nur Avatar */}
+      {collapsed && activeProfile && (
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+          <div
+            title={activeProfile.name}
+            style={{
+              width: 30, height: 30,
+              background: 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
+              borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 12, fontWeight: 700, color: '#fff', cursor: 'pointer',
+            }}
+            onClick={() => setShowProfileSwitcher(v => !v)}
+          >
+            {avatarInitial}
+          </div>
+        </div>
+      )}
 
       {showEdit && activeProfile && (
         <ProfileEditModal profile={activeProfile} onClose={() => setShowEdit(false)} />
       )}
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-3 flex flex-col gap-0.5 overflow-y-auto min-h-0">
+      <nav style={{ flex: 1, padding: '8px 8px', display: 'flex', flexDirection: 'column', gap: 1, overflowY: 'auto', minHeight: 0 }}>
 
-        {/* Hauptnavigation */}
-        <p className="text-xs font-semibold uppercase tracking-wider px-2 mb-1" style={{ color: 'var(--text-3)' }}>
-          Navigation
-        </p>
-        {MAIN_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        <SectionDivider label="Übersicht" collapsed={collapsed} />
+        {UEBERSICHT_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} collapsed={collapsed} onNav={onNav} />
         ))}
 
-        {/* Bridge */}
-        <SectionHeader title="Bridge" open={bridgeOpen} onToggle={() => toggleSection('bridge')} icon={Cpu} />
-        {bridgeOpen && BRIDGE_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
-        ))}
-
-        {/* Bots */}
-        <SectionHeader title="Bots" open={botsOpen} onToggle={() => toggleSection('bots')} icon={Bot} />
-        {botsOpen && BOTS_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
-        ))}
-
-        {/* Weiteres */}
-        <SectionHeader title="Weiteres" open={weiteresOpen} onToggle={() => toggleSection('weiteres')} icon={MoreHorizontal} />
-        {weiteresOpen && WEITERES_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} onNav={onNav} />
+        <SectionDivider label="Bridge & Bots" collapsed={collapsed} />
+        {BRIDGE_BOTS_NAV.map(item => (
+          <NavLink key={item.href} {...item} pathname={pathname} collapsed={collapsed} onNav={onNav} />
         ))}
 
       </nav>
 
-      {/* MT5 Kontostand */}
+      {/* MT5 Balance Karte */}
       {mt5Balance !== undefined && (
-        <div style={{ borderTop: '1px solid var(--border)' }}>
-          <div className="px-3 pt-2 pb-1 flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <span
-                className="shrink-0 rounded-full"
-                style={{
-                  width: 5, height: 5,
-                  background: mt5Connected ? 'var(--green)' : '#f59e0b',
-                  boxShadow: mt5Connected ? '0 0 4px var(--green)' : '0 0 4px #f59e0b',
-                }}
-              />
-              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)', fontSize: 9 }}>
-                MT5 Konto
-              </p>
+        <div style={{ padding: '0 8px 8px', borderTop: '1px solid var(--border)' }}>
+          <div style={{
+            background: 'var(--surface-2)', border: '1px solid var(--border)',
+            borderRadius: 10, padding: collapsed ? '10px 0' : '10px 12px',
+            display: 'flex', flexDirection: collapsed ? 'column' : 'row',
+            alignItems: 'center', gap: collapsed ? 6 : 8,
+            marginTop: 8,
+            justifyContent: collapsed ? 'center' : undefined,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 6, flexDirection: collapsed ? 'column' : 'row', flex: 1, minWidth: 0 }}>
+              <span style={{
+                width: 6, height: 6, borderRadius: '50%', flexShrink: 0,
+                background: mt5Connected ? 'var(--green)' : '#f59e0b',
+                boxShadow: mt5Connected ? '0 0 5px var(--green)' : '0 0 5px #f59e0b',
+              }} />
+              {!collapsed && (
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 8, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>MT5 Konto</p>
+                  {balanceVisible && (
+                    <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-1)', fontFamily: 'var(--font-dm-mono)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                      {mt5Balance.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {' '}<span style={{ fontSize: 10, fontWeight: 500, color: 'var(--text-3)' }}>{mt5Currency}</span>
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
-            <button
-              type="button"
-              onClick={toggleBalance}
-              title={balanceVisible ? 'Kontostand ausblenden' : 'Kontostand einblenden'}
-              className="w-4 h-4 flex items-center justify-center cursor-pointer"
-              style={{ color: 'var(--text-3)' }}
-            >
-              {balanceVisible ? <EyeOff size={11} /> : <Eye size={11} />}
-            </button>
+            {!collapsed && (
+              <button type="button" onClick={toggleBalance} style={{ color: 'var(--text-3)', cursor: 'pointer' }} title={balanceVisible ? 'Ausblenden' : 'Einblenden'}>
+                {balanceVisible ? <EyeOff size={11} /> : <Eye size={11} />}
+              </button>
+            )}
           </div>
-          {balanceVisible && (
-            <div className="px-3 pb-2">
-              <p className="text-sm font-bold tabular-nums" style={{ color: 'var(--text-1)', letterSpacing: '-0.01em' }}>
-                {mt5Balance.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                {' '}
-                <span className="text-xs font-semibold" style={{ color: 'var(--text-3)' }}>{mt5Currency}</span>
-              </p>
-            </div>
-          )}
         </div>
       )}
 
-      {/* Börsen Sessions */}
-      <MarketSessions compact={compact} />
+      {/* MarketSessions */}
+      <MarketSessions compact={collapsed} />
 
-      {/* Einstellungen */}
-      <div className="px-3 pb-2">
+      {/* Einstellungen + Trading Lock */}
+      <div style={{ padding: '0 8px 10px', display: 'flex', gap: 6, flexDirection: collapsed ? 'column' : 'row', alignItems: 'center' }}>
         <button
           onClick={() => { setShowEinstellungen(true); onNav?.() }}
-          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer"
           style={{
-            background: 'rgba(249,115,22,0.07)',
-            color: '#fb923c',
+            flex: collapsed ? undefined : 1,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            padding: collapsed ? '7px' : '7px 12px',
+            borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+            background: 'rgba(249,115,22,0.07)', color: '#fb923c',
             border: '1px solid rgba(249,115,22,0.2)',
           }}
+          title="Einstellungen"
         >
           <Settings size={13} style={{ opacity: 0.85 }} />
-          Einstellungen
+          {!collapsed && 'Einstellungen'}
+        </button>
+
+        <button
+          type="button"
+          title={isUnlocked ? 'Trading sperren' : 'Trading entsperren'}
+          onClick={toggle}
+          style={{
+            width: 30, height: 30, flexShrink: 0,
+            borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            ...(isUnlocked ? {
+              background: 'rgba(255,69,96,0.12)', border: '1px solid rgba(255,69,96,0.35)', color: 'var(--red)',
+            } : {
+              background: 'rgba(0,217,126,0.12)', border: '1px solid rgba(0,217,126,0.35)', color: 'var(--green)',
+              boxShadow: '0 0 8px rgba(0,217,126,0.15)',
+            }),
+          }}
+        >
+          {isUnlocked ? <ShieldOff size={14} strokeWidth={2} /> : <ShieldCheck size={14} strokeWidth={2.5} />}
         </button>
       </div>
 
       {showEinstellungen && (
         <EinstellungenModal profiles={profiles} onClose={() => setShowEinstellungen(false)} />
       )}
-
     </div>
   )
 }
 
 export default function Sidebar({ profiles, activeProfile }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(() => {
+    try { return localStorage.getItem('alphatrack-sidebar-collapsed') === 'true' }
+    catch { return false }
+  })
+
+  function toggleCollapse() {
+    setCollapsed(v => {
+      const next = !v
+      try { localStorage.setItem('alphatrack-sidebar-collapsed', String(next)) } catch { /* silent */ }
+      return next
+    })
+  }
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside
-        className="hidden md:flex flex-col w-56 shrink-0 h-screen sticky top-0"
-        style={{ background: 'var(--surface)', borderRight: '1px solid var(--border)' }}
+      <motion.aside
+        className="hidden md:flex flex-col shrink-0 h-screen sticky top-0"
+        animate={{ width: collapsed ? 52 : 224 }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        style={{
+          background: 'var(--surface)', borderRight: '1px solid var(--border)',
+          overflow: 'visible', position: 'relative',
+        }}
       >
-        <SidebarInner profiles={profiles} activeProfile={activeProfile} />
-      </aside>
+        <SidebarInner
+          profiles={profiles}
+          activeProfile={activeProfile}
+          collapsed={collapsed}
+          onToggleCollapse={toggleCollapse}
+        />
+      </motion.aside>
 
       {/* Mobile Header */}
       <header
         className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4"
         style={{
-          background: 'var(--surface)',
-          borderBottom: '1px solid var(--border)',
+          background: 'var(--surface)', borderBottom: '1px solid var(--border)',
           paddingTop: 'calc(0.75rem + env(safe-area-inset-top, 0px))',
           paddingBottom: '0.75rem',
         }}
       >
-        <div className="flex items-center gap-2.5">
-          <LogoMark size={34} className="shrink-0" />
-          <span className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>AlphaTrack</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{
+            width: 30, height: 30,
+            background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
+            borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 12, fontWeight: 800, color: '#fff',
+          }}>A</div>
+          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>AlphaTrack</span>
         </div>
         <button
           onClick={() => setMobileOpen(v => !v)}
-          className="w-9 h-9 flex items-center justify-center rounded-lg cursor-pointer"
-          style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)' }}
+          style={{
+            width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            borderRadius: 8, cursor: 'pointer',
+            background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)',
+          }}
         >
           {mobileOpen ? <X size={16} /> : <Menu size={16} />}
         </button>
       </header>
 
-      {/* Mobile Bottom Navigation */}
       <BottomNav />
 
       {/* Mobile Drawer */}
@@ -390,20 +453,20 @@ export default function Sidebar({ profiles, activeProfile }: Props) {
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               className="md:hidden fixed inset-0 z-30"
-              style={{ background: 'rgba(0,0,0,0.6)' }}
+              style={{ background: 'rgba(0,0,0,0.7)' }}
               onClick={() => setMobileOpen(false)}
             />
             <motion.aside
               initial={{ x: -224 }} animate={{ x: 0 }} exit={{ x: -224 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="md:hidden fixed left-0 top-0 bottom-0 w-56 z-40"
-              style={{ background: 'var(--surface)', borderRight: '1px solid var(--border)' }}
+              className="md:hidden fixed left-0 top-0 bottom-0 z-40"
+              style={{ width: 224, background: 'var(--surface)', borderRight: '1px solid var(--border)' }}
             >
               <SidebarInner
                 profiles={profiles}
                 activeProfile={activeProfile}
                 onNav={() => setMobileOpen(false)}
-                compact
+                collapsed={false}
               />
             </motion.aside>
           </>
