@@ -25,33 +25,46 @@ function fmt(val: number, currency: string) {
   return `${sign}${val.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ${sym}`
 }
 
+function smoothCubicPath(pts: [number, number][]): string {
+  if (pts.length < 2) return ''
+  let d = `M ${pts[0][0]},${pts[0][1]}`
+  for (let i = 1; i < pts.length; i++) {
+    const [px, py] = pts[i - 1]
+    const [cx, cy] = pts[i]
+    const cpx = px + (cx - px) * 0.5
+    d += ` C ${cpx},${py} ${cpx},${cy} ${cx},${cy}`
+  }
+  return d
+}
+
 function Sparkline({ data, startCapital, positive }: { data: DataPoint[]; startCapital: number; positive: boolean }) {
   if (data.length < 2) return null
-  const values = [startCapital, ...data.map(d => d.value)]
-  const min = Math.min(...values)
-  const max = Math.max(...values)
+  const rawValues = [startCapital, ...data.map(d => d.value)]
+  const min = Math.min(...rawValues)
+  const max = Math.max(...rawValues)
   const range = max - min || 1
-  const w = 200
-  const h = 40
-  const pts = values.map((v, i) => {
-    const x = (i / (values.length - 1)) * w
-    const y = h - ((v - min) / range) * h
-    return `${x},${y}`
-  })
+  const w = 400
+  const h = 64
+  // Leichtes vertikales Padding damit die Linie nicht an den Rand klebt
+  const vPad = h * 0.08
+  const pts: [number, number][] = rawValues.map((v, i) => [
+    (i / (rawValues.length - 1)) * w,
+    h - vPad - ((v - min) / range) * (h - vPad * 2),
+  ])
   const color = positive ? 'var(--green)' : 'var(--red)'
-  const polyline = pts.join(' ')
-  const area = `${pts[0]} ${pts.join(' ')} ${w},${h} 0,${h}`
+  const linePath = smoothCubicPath(pts)
+  const areaPath = `${linePath} L ${w},${h} L 0,${h} Z`
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} style={{ width: '100%', height: 44 }} preserveAspectRatio="none">
+    <svg viewBox={`0 0 ${w} ${h}`} style={{ width: '100%', height: 64 }} preserveAspectRatio="none">
       <defs>
         <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity={positive ? 0.2 : 0.15} />
+          <stop offset="0%" stopColor={color} stopOpacity={positive ? 0.22 : 0.15} />
           <stop offset="100%" stopColor={color} stopOpacity={0} />
         </linearGradient>
       </defs>
-      <polygon points={area} fill="url(#sparkGrad)" />
-      <polyline points={polyline} fill="none" stroke={color} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />
+      <path d={areaPath} fill="url(#sparkGrad)" />
+      <path d={linePath} fill="none" stroke={color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   )
 }

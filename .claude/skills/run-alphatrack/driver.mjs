@@ -15,7 +15,9 @@ const BASE = process.env.ALPHATRACK_URL || 'http://localhost:3000';
 const SKILL_DIR = new URL('.', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 
 async function getPage(browser) {
-  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const width = parseInt(process.env.VIEWPORT_WIDTH || '1440');
+  const height = parseInt(process.env.VIEWPORT_HEIGHT || '900');
+  const ctx = await browser.newContext({ viewport: { width, height } });
   return ctx.newPage();
 }
 
@@ -29,6 +31,8 @@ try {
     const urlPath = arg2 || '/dashboard';
     const page = await getPage(browser);
     await page.goto(BASE + urlPath, { waitUntil: 'networkidle', timeout: 15000 });
+    const waitMs = parseInt(process.env.WAIT_MS || '0');
+    if (waitMs > 0) await page.waitForTimeout(waitMs);
     await page.screenshot({ path: outPath, fullPage: false });
     console.log(`Screenshot saved: ${outPath}`);
   }

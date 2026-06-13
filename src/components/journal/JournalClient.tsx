@@ -186,11 +186,11 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       >
         {/* Toolbar */}
         <div
-          className="flex flex-col sm:flex-row gap-3 px-4 py-3"
+          className="flex flex-col gap-2 px-4 py-3"
           style={{ borderBottom: '1px solid var(--border)' }}
         >
-          {/* Suche */}
-          <div className="flex-1 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}>
+          {/* Zeile 1: Suche */}
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}>
             <Search size={14} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
             <input
               value={search}
@@ -201,27 +201,30 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             />
           </div>
 
-          {/* Filter: Status */}
-          <div className="flex flex-wrap items-center gap-1">
-            <SlidersHorizontal size={13} className="hidden sm:block" style={{ color: 'var(--text-3)' }} />
+          {/* Zeile 2: Filter Status + Richtung + Action-Buttons in einer Zeile */}
+          <div className="flex items-center gap-1 flex-wrap">
+            <SlidersHorizontal size={13} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+
+            {/* Status-Filter */}
             {(['all', 'open', 'closed', 'cancelled'] as FilterStatus[]).map(s => (
               <button
                 key={s}
                 onClick={() => { setFilterStatus(s); resetPage() }}
-                className="px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-all"
+                className="px-2 py-1 rounded-md text-xs font-medium cursor-pointer transition-all"
                 style={{
                   background: filterStatus === s ? 'var(--accent-bg)' : 'transparent',
                   color: filterStatus === s ? 'var(--accent)' : 'var(--text-3)',
                   border: `1px solid ${filterStatus === s ? 'var(--accent)' : 'transparent'}`,
                 }}
               >
-                {s === 'all' ? 'Alle' : s === 'open' ? 'Offen' : s === 'closed' ? 'Geschlossen' : 'Abgebr.'}
+                {s === 'all' ? 'Alle' : s === 'open' ? 'Offen' : s === 'closed' ? 'Geschl.' : 'Abgebr.'}
               </button>
             ))}
-          </div>
 
-          {/* Filter: Richtung */}
-          <div className="flex flex-wrap items-center gap-1">
+            {/* Trennlinie */}
+            <span style={{ width: 1, height: 14, background: 'var(--border)', margin: '0 2px', flexShrink: 0 }} />
+
+            {/* Richtungsfilter */}
             {([
               { val: 'all', label: 'Beide' },
               { val: 'long', label: 'Long' },
@@ -230,7 +233,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
               <button
                 key={val}
                 onClick={() => { setFilterDir(val); resetPage() }}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium cursor-pointer transition-all"
                 style={{
                   background: filterDir === val
                     ? val === 'long' ? 'rgba(0,217,126,0.1)' : val === 'short' ? 'rgba(255,69,96,0.1)' : 'var(--surface-2)'
@@ -240,55 +243,55 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                     : 'var(--text-3)',
                 }}
               >
-                {val === 'long' && <TrendingUp size={11} />}
-                {val === 'short' && <TrendingDown size={11} />}
+                {val === 'long' && <TrendingUp size={10} />}
+                {val === 'short' && <TrendingDown size={10} />}
                 {label}
               </button>
             ))}
-          </div>
 
-          {/* Buttons */}
-          <div className="flex items-center gap-2 sm:shrink-0">
-            {bots.length > 0 && (
+            {/* Action-Buttons rechtsbündig */}
+            <div className="flex items-center gap-1.5 ml-auto">
+              {bots.length > 0 && (
+                <button
+                  onClick={() => setShowBotImport(true)}
+                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                  style={{
+                    background: 'rgba(59,130,246,0.08)',
+                    color: '#3b82f6',
+                    border: '1px solid rgba(59,130,246,0.3)',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.15)' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.08)' }}
+                >
+                  <Bot size={13} />
+                  <span className="hidden sm:inline">Via Bot</span>
+                </button>
+              )}
               <button
-                onClick={() => setShowBotImport(true)}
-                className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all"
+                onClick={() => setShowImport(true)}
+                className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
                 style={{
-                  background: 'rgba(59,130,246,0.08)',
-                  color: '#3b82f6',
-                  border: '1px solid rgba(59,130,246,0.3)',
+                  background: 'var(--surface-2)',
+                  color: 'var(--text-2)',
+                  border: '1px solid var(--border)',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.15)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.08)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
               >
-                <Bot size={14} />
-                Via Bot
+                <Upload size={13} />
+                <span className="hidden sm:inline">Import</span>
               </button>
-            )}
-            <button
-              onClick={() => setShowImport(true)}
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all"
-              style={{
-                background: 'var(--surface-2)',
-                color: 'var(--text-2)',
-                border: '1px solid var(--border)',
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
-            >
-              <Upload size={14} />
-              Import
-            </button>
-            <button
-              onClick={() => setShowModal(true)}
-              className="flex flex-1 sm:flex-none items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all"
-              style={{ background: 'var(--accent)', color: '#fff' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.9' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
-            >
-              <Plus size={15} />
-              Trade
-            </button>
+              <button
+                onClick={() => setShowModal(true)}
+                className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                style={{ background: 'var(--accent)', color: '#fff' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.9' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
+              >
+                <Plus size={14} />
+                Trade
+              </button>
+            </div>
           </div>
         </div>
 

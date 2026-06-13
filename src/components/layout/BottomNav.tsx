@@ -2,15 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, Activity, CalendarDays, Bot, BarChart2, TrendingUp } from 'lucide-react'
+import { LayoutDashboard, BookOpen, Activity, Bot, BarChart2 } from 'lucide-react'
 
 const ITEMS = [
   { href: '/dashboard',       label: 'Dashboard',  icon: LayoutDashboard },
   { href: '/journal',         label: 'Trades',     icon: BookOpen },
   { href: '/bridge/trades',   label: 'Live',       icon: Activity },
   { href: '/bots',            label: 'Bots',       icon: Bot },
-  { href: '/kalender',        label: 'Kalender',   icon: CalendarDays },
-  { href: '/tpc',             label: 'TPC',        icon: TrendingUp },
   { href: '/statistiken',     label: 'Statistik',  icon: BarChart2 },
 ]
 

@@ -1,0 +1,132 @@
+<h2>Welche Design-Richtung passt am besten?</h2>
+<p class="subtitle">Alle Varianten zeigen denselben Dark Mode — nur unterschiedliche Atmosphären. Klick auf deinen Favoriten.</p>
+
+<div class="cards">
+
+  <!-- Option A: Premium Finance -->
+  <div class="card" data-choice="premium" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#060a12;padding:16px;font-family:system-ui;border-radius:8px 8px 0 0;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="background:#0d1623;border:1px solid #1a2840;border-radius:8px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#3d5a80;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:18px;font-weight:700;color:#00e5a0;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;color:#2a4a6a;margin-top:2px;">▲ +3.2% diese Woche</div>
+        </div>
+        <div style="background:#0d1623;border:1px solid #1a2840;border-radius:8px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#3d5a80;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:18px;font-weight:700;color:#e8edf5;letter-spacing:-.02em;">68.4%</div>
+          <div style="font-size:8px;color:#2a4a6a;margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <div style="background:#0d1623;border:1px solid #1a2840;border-radius:8px;padding:10px 14px;">
+        <div style="font-size:9px;color:#3d5a80;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;">Equity Kurve</div>
+        <svg viewBox="0 0 200 40" style="width:100%;height:40px;">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e5a0" stop-opacity=".2"/><stop offset="100%" stop-color="#00e5a0" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2 L200,40 L0,40 Z" fill="url(#g1)"/>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2" fill="none" stroke="#00e5a0" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Premium Finance</h3>
+      <p>Sehr dunkles Blauschwarz, scharfe Grün-Akzente, minimale Borders — wie Bloomberg oder ein professionelles Handels-Terminal</p>
+    </div>
+  </div>
+
+  <!-- Option B: Glassmorphism / Modern Fintech -->
+  <div class="card" data-choice="glass" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);padding:16px;border-radius:8px 8px 0 0;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;margin-top:2px;background:linear-gradient(90deg,#a78bfa,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">▲ +3.2% diese Woche</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;">68.4%</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:10px 14px;">
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">Equity Kurve</div>
+        <svg viewBox="0 0 200 40" style="width:100%;height:40px;">
+          <defs>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a78bfa" stop-opacity=".4"/><stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/></linearGradient>
+            <linearGradient id="g2s" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient>
+          </defs>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2 L200,40 L0,40 Z" fill="url(#g2)"/>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2" fill="none" stroke="url(#g2s)" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Modern Fintech</h3>
+      <p>Lila-blaue Verläufe, Glas-Effekte, weiche Kanten — lebendig und modern, wie Robinhood oder eine neue Trading-App</p>
+    </div>
+  </div>
+
+  <!-- Option C: Clean & Sharp -->
+  <div class="card" data-choice="clean" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0f;padding:16px;border-radius:8px 8px 0 0;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="background:#111118;border:1px solid #1c1c2a;border-radius:10px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#555;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Net P&amp;L</div>
+          <div style="font-size:20px;font-weight:800;color:#f0f0f0;letter-spacing:-.03em;line-height:1;">+2.847</div>
+          <div style="font-size:8px;color:#555;margin-top:2px;font-weight:500;">EUR &nbsp;·&nbsp; ▲ +3.2%</div>
+        </div>
+        <div style="background:#111118;border:1px solid #1c1c2a;border-radius:10px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#555;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;font-weight:600;">Win Rate</div>
+          <div style="font-size:20px;font-weight:800;color:#f0f0f0;letter-spacing:-.03em;line-height:1;">68.4%</div>
+          <div style="font-size:8px;color:#555;margin-top:2px;font-weight:500;">142 Trades</div>
+        </div>
+      </div>
+      <div style="background:#111118;border:1px solid #1c1c2a;border-radius:10px;padding:10px 14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div style="font-size:9px;color:#555;letter-spacing:.08em;text-transform:uppercase;font-weight:600;">Equity</div>
+          <div style="font-size:8px;color:#3b82f6;font-weight:600;">+18.4%</div>
+        </div>
+        <svg viewBox="0 0 200 40" style="width:100%;height:40px;">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity=".15"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2 L200,40 L0,40 Z" fill="url(#g3)"/>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Clean &amp; Sharp</h3>
+      <p>Tiefschwarz, große Zahlen, viel Luft, starke Typografie — sehr kontrastreich und präzise, fast wie Apple-Design für Trading</p>
+    </div>
+  </div>
+
+  <!-- Option D: Warm Dark -->
+  <div class="card" data-choice="warm" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0e0b08;padding:16px;border-radius:8px 8px 0 0;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="background:#141009;border:1px solid #2a1f10;border-radius:10px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#6b5a3e;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:18px;font-weight:700;color:#f5e6c8;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;color:#f59e0b;margin-top:2px;">▲ +3.2% diese Woche</div>
+        </div>
+        <div style="background:#141009;border:1px solid #2a1f10;border-radius:10px;padding:10px 14px;flex:1;">
+          <div style="font-size:9px;color:#6b5a3e;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:18px;font-weight:700;color:#f5e6c8;letter-spacing:-.02em;">68.4%</div>
+          <div style="font-size:8px;color:#6b5a3e;margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <div style="background:#141009;border:1px solid #2a1f10;border-radius:10px;padding:10px 14px;">
+        <div style="font-size:9px;color:#6b5a3e;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;">Equity Kurve</div>
+        <svg viewBox="0 0 200 40" style="width:100%;height:40px;">
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b" stop-opacity=".2"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2 L200,40 L0,40 Z" fill="url(#g4)"/>
+          <path d="M0,35 C20,30 40,28 60,22 C80,16 100,18 120,12 C140,6 160,8 180,4 L200,2" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Warm Dark</h3>
+      <p>Warme Braun-Schwarz-Töne, goldene Akzente — gediegener, ruhiger Look, wie ein klassisches Handelsbüro</p>
+    </div>
+  </div>
+
+</div>

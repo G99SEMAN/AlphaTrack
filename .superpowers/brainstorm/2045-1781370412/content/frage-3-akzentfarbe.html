@@ -1,0 +1,116 @@
+<h2>Welche Akzentfarbe soll das neue Premium-Design haben?</h2>
+<p class="subtitle">Die App hat aktuell Blau als Standard-Akzent und kann auf Rot oder Violett gewechselt werden. Sollen wir das beibehalten — oder eine neue Richtung?</p>
+
+<div class="cards">
+
+  <!-- Option A: Blau beibehalten, aber Premium -->
+  <div class="card" data-choice="blue-premium" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#060a12;padding:16px;border-radius:8px 8px 0 0;font-family:system-ui;">
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <div style="background:#0b1220;border:1px solid #0f1f38;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#2a4a7a;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;color:#22c55e;margin-top:2px;">▲ +3.2%</div>
+        </div>
+        <div style="background:#0b1220;border:1px solid #0f1f38;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#2a4a7a;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;">68.4%</div>
+          <div style="font-size:8px;color:#2a4a7a;margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <!-- Nav pills -->
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <div style="background:#1a3a7a;border-radius:6px;padding:5px 10px;font-size:9px;font-weight:600;color:#60a5fa;">Dashboard</div>
+        <div style="padding:5px 10px;font-size:9px;color:#2a4a7a;">Trades</div>
+        <div style="padding:5px 10px;font-size:9px;color:#2a4a7a;">Statistiken</div>
+      </div>
+      <!-- Button -->
+      <div style="background:#1d4ed8;border-radius:7px;padding:6px 12px;font-size:9px;font-weight:600;color:#fff;text-align:center;width:fit-content;">+ Neuer Trade</div>
+    </div>
+    <div class="card-body">
+      <h3>Blau (verfeinert)</h3>
+      <p>Das bekannte Blau bleibt — aber Hintergrund und Kontrast werden dramatisch dunkler. Bekannte Farbe, neues Premium-Gefühl.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Grün (Trading Terminal) -->
+  <div class="card" data-choice="green" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#060a10;padding:16px;border-radius:8px 8px 0 0;font-family:system-ui;">
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <div style="background:#090f14;border:1px solid #0d2018;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#1a4030;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;color:#00d97e;margin-top:2px;">▲ +3.2%</div>
+        </div>
+        <div style="background:#090f14;border:1px solid #0d2018;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#1a4030;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;">68.4%</div>
+          <div style="font-size:8px;color:#1a4030;margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <!-- Nav pills -->
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <div style="background:rgba(0,217,126,0.12);border:1px solid rgba(0,217,126,0.25);border-radius:6px;padding:5px 10px;font-size:9px;font-weight:600;color:#00d97e;">Dashboard</div>
+        <div style="padding:5px 10px;font-size:9px;color:#1a4030;">Trades</div>
+        <div style="padding:5px 10px;font-size:9px;color:#1a4030;">Statistiken</div>
+      </div>
+      <!-- Button -->
+      <div style="background:#00b368;border-radius:7px;padding:6px 12px;font-size:9px;font-weight:600;color:#000;text-align:center;width:fit-content;">+ Neuer Trade</div>
+    </div>
+    <div class="card-body">
+      <h3>Grün (Trading Terminal)</h3>
+      <p>Grün als Primär-Akzent — wie Bloomberg oder ein professionelles Handelsterminal. Stärker auf Trading fokussiert.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Cyan / Teal -->
+  <div class="card" data-choice="cyan" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#05080f;padding:16px;border-radius:8px 8px 0 0;font-family:system-ui;">
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <div style="background:#080d18;border:1px solid #0a1f2e;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#0e3040;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Net P&amp;L</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;letter-spacing:-.02em;">+2.847 €</div>
+          <div style="font-size:8px;color:#06b6d4;margin-top:2px;">▲ +3.2%</div>
+        </div>
+        <div style="background:#080d18;border:1px solid #0a1f2e;border-radius:8px;padding:10px 12px;flex:1;">
+          <div style="font-size:8px;color:#0e3040;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Win Rate</div>
+          <div style="font-size:17px;font-weight:700;color:#e8edf5;">68.4%</div>
+          <div style="font-size:8px;color:#0e3040;margin-top:2px;">142 Trades</div>
+        </div>
+      </div>
+      <!-- Nav pills -->
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <div style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);border-radius:6px;padding:5px 10px;font-size:9px;font-weight:600;color:#22d3ee;">Dashboard</div>
+        <div style="padding:5px 10px;font-size:9px;color:#0e3040;">Trades</div>
+        <div style="padding:5px 10px;font-size:9px;color:#0e3040;">Statistiken</div>
+      </div>
+      <!-- Button -->
+      <div style="background:#0891b2;border-radius:7px;padding:6px 12px;font-size:9px;font-weight:600;color:#fff;text-align:center;width:fit-content;">+ Neuer Trade</div>
+    </div>
+    <div class="card-body">
+      <h3>Cyan / Teal</h3>
+      <p>Kühleres Blaugrün — moderner als normales Blau, ruhiger als Grün. Wirkt technisch und präzise.</p>
+    </div>
+  </div>
+
+  <!-- Option D: Bestehend beibehalten, nur verfeinern -->
+  <div class="card" data-choice="keep-system" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#060a12;padding:16px;border-radius:8px 8px 0 0;font-family:system-ui;">
+      <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;">
+        <div style="background:#1d4ed8;border-radius:5px;padding:5px 10px;font-size:9px;font-weight:600;color:#fff;">Blau</div>
+        <div style="background:#e11d48;border-radius:5px;padding:5px 10px;font-size:9px;font-weight:600;color:#fff;">Rot</div>
+        <div style="background:#9333ea;border-radius:5px;padding:5px 10px;font-size:9px;font-weight:600;color:#fff;">Violett</div>
+      </div>
+      <div style="background:#0b1220;border:1px solid #0f1f38;border-radius:8px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-size:8px;color:#2a4a7a;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;">Das Theme-System bleibt erhalten</div>
+        <div style="font-size:12px;color:#e8edf5;font-weight:500;">User kann zwischen Blau / Rot / Violett wechseln — wir machen nur alles dunkler und schärfer.</div>
+      </div>
+      <div style="font-size:8px;color:#2a4a7a;">Gleiche Funktion · neues Premium-Dark-Fundament</div>
+    </div>
+    <div class="card-body">
+      <h3>Bestehend verfeinern</h3>
+      <p>Alle 3 Themes bleiben, aber das dunkle Fundament (Hintergründe, Borders, Schatten) wird auf Premium-Niveau gehoben.</p>
+    </div>
+  </div>
+
+</div>

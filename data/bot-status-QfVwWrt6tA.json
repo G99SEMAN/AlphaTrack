@@ -1,6 +1,6 @@
 {
   "state": "running",
-  "lastHeartbeat": "2026-06-13T15:56:43.154Z",
+  "lastHeartbeat": "2026-06-13T18:42:54.348Z",
   "bridgeVersion": "1.0.0",
   "bridgeType": "bridge",
   "bridgeIp": "192.168.178.30",
@@ -9,7 +9,7 @@
   "activeSymbols": [],
   "openPositions": 0,
   "tradesSync": 0,
-  "uptime": 2458,
+  "uptime": 12429,
   "balance": 553.27,
   "currency": "EUR"
 }

@@ -59,14 +59,14 @@ export default async function DashboardPage({
         {onlyDemo && <DemoBanner />}
 
         {/* Header */}
-        <div className="mb-6 flex items-start justify-between flex-wrap gap-3">
-          <div>
+        <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-3">
+          <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
                 Dashboard
               </h1>
               <span
-                className="text-xs px-2 py-0.5 rounded-full font-medium flex items-center gap-1"
+                className="text-xs px-2 py-0.5 rounded-full font-medium flex items-center gap-1 shrink-0"
                 style={{
                   background: activeProfile.type === 'live' ? 'var(--green-bg)' : 'var(--accent-bg)',
                   color: activeProfile.type === 'live' ? 'var(--green)' : 'var(--accent)',
@@ -76,7 +76,7 @@ export default async function DashboardPage({
                 {activeProfile.type === 'live' ? 'Echtgeld' : 'Spielgeld'}
               </span>
             </div>
-            <p className="text-sm" style={{ color: 'var(--text-3)' }}>
+            <p className="text-sm truncate" style={{ color: 'var(--text-3)' }}>
               {activeProfile.broker} · Startkapital:{' '}
               <span className="font-mono font-semibold" style={{ color: 'var(--text-2)' }}>
                 {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}

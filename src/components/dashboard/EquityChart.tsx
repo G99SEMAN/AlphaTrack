@@ -54,11 +54,11 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
   const positive = pnl >= 0
   const strokeColor = positive ? 'var(--green)' : 'var(--red)'
 
-  // Y-axis domain with a little padding
+  // Y-axis domain — kleines Padding damit die Kurve den Raum gut nutzt
   const values = absoluteData.map(d => d.value)
   const minVal = Math.min(...values, startCapital)
   const maxVal = Math.max(...values, startCapital)
-  const padding = (maxVal - minVal) * 0.15 || startCapital * 0.05 || 10
+  const padding = (maxVal - minVal) * 0.08 || startCapital * 0.02 || 5
   const yDomain: [number, number] = [Math.floor(minVal - padding), Math.ceil(maxVal + padding)]
 
   return (
@@ -102,7 +102,7 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
         </span>
       </div>
 
-      <div style={{ flex: 1, minHeight: 130 }}>
+      <div style={{ height: 160 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={absoluteData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
             <defs>

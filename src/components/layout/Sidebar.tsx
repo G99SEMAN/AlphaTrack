@@ -395,7 +395,7 @@ export default function Sidebar({ profiles, activeProfile }: Props) {
         transition={{ duration: 0.2, ease: 'easeInOut' }}
         style={{
           background: 'var(--surface)', borderRight: '1px solid var(--border)',
-          overflow: 'visible', position: 'relative',
+          overflow: 'visible',
         }}
       >
         <SidebarInner

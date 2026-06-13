@@ -1,5 +1,23 @@
 [
   {
+    "id": "4ab49436a8",
+    "timestamp": "2026-06-13T18:42:57.850308+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: Price Monitor",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "64a99ee57e",
+    "timestamp": "2026-06-13T18:36:15.454218+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "2f38b4d9f1",
     "timestamp": "2026-06-13T15:44:27.127993+00:00",
     "level": "info",

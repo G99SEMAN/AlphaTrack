@@ -22,12 +22,12 @@ export default function DashboardTimeFilter() {
   }
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 w-full md:w-auto">
       {PERIODS.map(p => (
         <button
           key={p.value}
           onClick={() => setPeriod(p.value)}
-          className="px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-all"
+          className="flex-1 md:flex-none px-2.5 py-1.5 rounded-md text-xs font-medium cursor-pointer transition-all"
           style={{
             background: current === p.value ? 'var(--accent-bg)' : 'var(--surface-2)',
             color: current === p.value ? 'var(--accent)' : 'var(--text-3)',

@@ -1,5 +1,14 @@
 [
   {
+    "id": "64a99ee57e",
+    "timestamp": "2026-06-13T18:36:15.454218+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "2f38b4d9f1",
     "timestamp": "2026-06-13T15:44:27.127993+00:00",
     "level": "info",
@@ -884,15 +893,6 @@
   {
     "id": "f60b1ff72c",
     "timestamp": "2026-06-12T19:57:24.501372+00:00",
-    "level": "info",
-    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
-    "details": null,
-    "bridgeId": "IQTLJ3Jdpp",
-    "bridgeName": "redesign_bridge"
-  },
-  {
-    "id": "7193c84c81",
-    "timestamp": "2026-06-12T19:56:54.236818+00:00",
     "level": "info",
     "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
     "details": null,
