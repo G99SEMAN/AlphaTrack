@@ -65,8 +65,8 @@ export default function BotControls({ botId, initialState, initialConnection }: 
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-      className="rounded-2xl p-3 self-start"
-      style={{ background: 'var(--surface)', border: '1px solid var(--border)', width: 'fit-content' }}>
+      className="rounded-2xl p-3"
+      style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
       <p className="text-[10px] font-semibold uppercase tracking-wider mb-2.5 px-1" style={{ color: 'var(--text-3)' }}>Bridge-Steuerung</p>
       <div className="flex flex-wrap gap-1.5">
         {buttons.map(({ cmd, label, Icon, color, bg }) => {

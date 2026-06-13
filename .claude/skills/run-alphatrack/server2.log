@@ -1,0 +1,20 @@
+
+> alpha-track@1.1.16 dev
+> next dev
+
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.178.30:3002
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · serverActions
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 1354ms
+ ○ Compiling /api/ui-settings ...
+ ✓ Compiled /api/ui-settings in 843ms (300 modules)
+ GET /api/ui-settings 200 in 968ms
+ ○ Compiling /api/profiles ...
+ ✓ Compiled /api/profiles in 633ms (342 modules)
+ GET /api/profiles 200 in 706ms

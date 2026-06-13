@@ -1,0 +1,902 @@
+[
+  {
+    "id": "2f38b4d9f1",
+    "timestamp": "2026-06-13T15:44:27.127993+00:00",
+    "level": "info",
+    "message": "Bot verbunden: Price Monitor",
+    "details": "Version 1.0.0",
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "308e2b2438",
+    "timestamp": "2026-06-13T15:15:52.589246+00:00",
+    "level": "info",
+    "message": "319 Trade(s) synchronisiert | PnL gesamt: +73.74",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a2edfeac9e",
+    "timestamp": "2026-06-13T15:15:44.937599+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e9fd928414",
+    "timestamp": "2026-06-13T15:15:44.065900+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "adfe502c9a",
+    "timestamp": "2026-06-13T15:12:44.053374+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2ca1683202",
+    "timestamp": "2026-06-13T15:12:28.686606+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8dccbe8d57",
+    "timestamp": "2026-06-13T15:12:13.321102+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4815c3d883",
+    "timestamp": "2026-06-13T15:11:57.964113+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d165428cd7",
+    "timestamp": "2026-06-13T15:11:42.603729+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d36ff14ced",
+    "timestamp": "2026-06-13T15:11:27.235619+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ce0611ef9c",
+    "timestamp": "2026-06-13T15:11:11.867044+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d528ab6682",
+    "timestamp": "2026-06-13T15:10:56.510575+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e48d821f1f",
+    "timestamp": "2026-06-13T15:10:41.159468+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d3cfd6b1c6",
+    "timestamp": "2026-06-13T15:10:25.839799+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1a279688e7",
+    "timestamp": "2026-06-13T15:10:10.502441+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "90b1d0c1a5",
+    "timestamp": "2026-06-13T15:09:55.126811+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "af39a4f785",
+    "timestamp": "2026-06-13T15:09:39.765727+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c5df742c10",
+    "timestamp": "2026-06-13T15:09:24.394974+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1e3e04c9cd",
+    "timestamp": "2026-06-13T15:09:09.033971+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70777226fa",
+    "timestamp": "2026-06-13T15:08:53.270130+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "68f240ff41",
+    "timestamp": "2026-06-13T15:08:37.880390+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "86d2e26831",
+    "timestamp": "2026-06-13T15:08:22.036033+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e07afb0163",
+    "timestamp": "2026-06-13T15:08:06.312453+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a291868e6e",
+    "timestamp": "2026-06-13T15:07:50.408900+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "09a8e8348d",
+    "timestamp": "2026-06-13T15:07:34.253194+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "00ec14b8a0",
+    "timestamp": "2026-06-13T15:07:17.086195+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "55a24e9df1",
+    "timestamp": "2026-06-13T15:07:00.571688+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "09cbd1a2d5",
+    "timestamp": "2026-06-13T15:06:44.982347+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6e3db973f3",
+    "timestamp": "2026-06-13T15:06:29.536028+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4759c4e362",
+    "timestamp": "2026-06-13T15:06:14.180851+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c75f97ad57",
+    "timestamp": "2026-06-13T15:05:58.689810+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "991a9c5428",
+    "timestamp": "2026-06-13T15:05:43.260544+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c08cb35dc8",
+    "timestamp": "2026-06-13T15:05:27.338113+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "867177d38b",
+    "timestamp": "2026-06-13T15:05:11.889926+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "90943d5512",
+    "timestamp": "2026-06-13T15:04:56.007689+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "05101c0d3d",
+    "timestamp": "2026-06-13T15:04:40.011466+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "aa3df9fbf9",
+    "timestamp": "2026-06-13T15:04:24.892827+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "afb5bd86ed",
+    "timestamp": "2026-06-13T15:04:09.467532+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a9f5b0ca09",
+    "timestamp": "2026-06-13T15:03:53.992851+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f7a610df35",
+    "timestamp": "2026-06-13T15:03:38.589519+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "61c0d1177e",
+    "timestamp": "2026-06-13T15:03:23.213000+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "066b59030c",
+    "timestamp": "2026-06-13T15:03:07.826997+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ddf7f90876",
+    "timestamp": "2026-06-13T14:36:57.410990+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ad738c9f0d",
+    "timestamp": "2026-06-13T14:28:00.090525+00:00",
+    "level": "info",
+    "message": "319 Trade(s) synchronisiert | PnL gesamt: +73.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70585ab597",
+    "timestamp": "2026-06-13T14:27:53.122478+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a928ddd96c",
+    "timestamp": "2026-06-13T14:27:49.693338+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c218e7a5ee",
+    "timestamp": "2026-06-13T07:20:51.133815+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: Price Monitor",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6c2a576f61",
+    "timestamp": "2026-06-13T07:18:43.672367+00:00",
+    "level": "info",
+    "message": "Bot verbunden: Price Monitor",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "72b6eea5d5",
+    "timestamp": "2026-06-13T07:18:21.962369+00:00",
+    "level": "info",
+    "message": "319 Trade(s) synchronisiert | PnL gesamt: +73.74",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e820f35560",
+    "timestamp": "2026-06-13T07:18:21.062131+00:00",
+    "level": "info",
+    "message": "AlphaTrack-Verbindung wiederhergestellt",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "8aa8675210",
+    "timestamp": "2026-06-13T07:18:17.789074+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2b166d4bec",
+    "timestamp": "2026-06-12T20:14:07.524279+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: Price Monitor",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "93bb0b6a9e",
+    "timestamp": "2026-06-12T20:14:06.447415+00:00",
+    "level": "warn",
+    "message": "Bot getrennt: TestBot 2",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "50bb2dbcf1",
+    "timestamp": "2026-06-12T20:13:42.971081+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.76",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "363a3b3bf3",
+    "timestamp": "2026-06-12T20:13:18.664063+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155200270",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f213409689",
+    "timestamp": "2026-06-12T20:13:12.350755+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dcd559e6e0",
+    "timestamp": "2026-06-12T20:13:10.957264+00:00",
+    "level": "warn",
+    "message": "AlphaTrack nicht erreichbar",
+    "details": "http://192.168.178.30:3000",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "3d37c52ec1",
+    "timestamp": "2026-06-12T20:12:37.853680+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.78",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "cc55d29100",
+    "timestamp": "2026-06-12T20:12:15.520984+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.157 | Ticket #155200270",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "ce3d784eb3",
+    "timestamp": "2026-06-12T20:12:07.431553+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.80",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b28350533d",
+    "timestamp": "2026-06-12T20:11:36.411593+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.80",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "9d97615596",
+    "timestamp": "2026-06-12T20:11:15.027355+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155199707",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "73c8bd1d6e",
+    "timestamp": "2026-06-12T20:11:05.889119+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.83",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "e1f7fed1f2",
+    "timestamp": "2026-06-12T20:10:35.036673+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.83",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d5982df68e",
+    "timestamp": "2026-06-12T20:10:14.819580+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.157 | Ticket #155199707",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "17c10e8e03",
+    "timestamp": "2026-06-12T20:10:04.703312+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "df86b97a44",
+    "timestamp": "2026-06-12T20:09:34.354738+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.85",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "70ad2fcd40",
+    "timestamp": "2026-06-12T20:09:14.115664+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155199230",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f938e7ec3c",
+    "timestamp": "2026-06-12T20:09:04.021407+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "daec271f49",
+    "timestamp": "2026-06-12T20:08:33.655811+00:00",
+    "level": "info",
+    "message": "42 Trade(s) synchronisiert | PnL gesamt: +2.92",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "601f006e40",
+    "timestamp": "2026-06-12T20:08:13.870974+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15707 | Ticket #155199230",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "241ade3700",
+    "timestamp": "2026-06-12T20:08:03.311519+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "be481f20b0",
+    "timestamp": "2026-06-12T20:07:32.943377+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "15caeb360a",
+    "timestamp": "2026-06-12T20:07:14.760288+00:00",
+    "level": "warn",
+    "message": "MT5-Fehler weitergeleitet an Bot testbot2-001",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "da80e089a3",
+    "timestamp": "2026-06-12T20:07:14.737127+00:00",
+    "level": "error",
+    "message": "Trade fehlgeschlagen: BUY 0.01 EURUSDp",
+    "details": "MT5 Fehler 10021: No prices (price=1.1569 sl=0.0 tp=0.0)",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1c01fade0c",
+    "timestamp": "2026-06-12T20:07:01.932088+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f38f96820e",
+    "timestamp": "2026-06-12T20:06:31.623115+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +2.98",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f011d86b5d",
+    "timestamp": "2026-06-12T20:06:12.829933+00:00",
+    "level": "info",
+    "message": "Position geschlossen: Ticket #155198533",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "d9a48d88d9",
+    "timestamp": "2026-06-12T20:06:00.608094+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "71a1866e0d",
+    "timestamp": "2026-06-12T20:05:30.239830+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "acc22e2ae0",
+    "timestamp": "2026-06-12T20:05:11.998265+00:00",
+    "level": "info",
+    "message": "Trade ausgeführt: BUY 0.01 EURUSDp @ 1.15706 | Ticket #155198533",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b124c042b1",
+    "timestamp": "2026-06-12T20:05:11.859471+00:00",
+    "level": "info",
+    "message": "Bot reconnect: TestBot 2",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "c8b9a8e008",
+    "timestamp": "2026-06-12T20:04:59.877487+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "6e5b1fb58d",
+    "timestamp": "2026-06-12T20:04:42.743563+00:00",
+    "level": "info",
+    "message": "Bot verbunden: Price Monitor",
+    "details": "Version 1.0.0",
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "5359afecc8",
+    "timestamp": "2026-06-12T20:04:29.209852+00:00",
+    "level": "info",
+    "message": "43 Trade(s) synchronisiert | PnL gesamt: +3.14",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "b02b47586d",
+    "timestamp": "2026-06-12T20:03:58.982988+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "22a1a9e8c3",
+    "timestamp": "2026-06-12T20:03:28.685991+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "36561b06bf",
+    "timestamp": "2026-06-12T20:02:58.337157+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "dbf8f3aa33",
+    "timestamp": "2026-06-12T20:02:28.036820+00:00",
+    "level": "info",
+    "message": "44 Trade(s) synchronisiert | PnL gesamt: +3.03",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "2818ff4054",
+    "timestamp": "2026-06-12T20:01:57.748279+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "327e43528c",
+    "timestamp": "2026-06-12T20:01:27.406480+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "0e9d17b282",
+    "timestamp": "2026-06-12T20:00:57.161696+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7f62868684",
+    "timestamp": "2026-06-12T20:00:26.867516+00:00",
+    "level": "info",
+    "message": "45 Trade(s) synchronisiert | PnL gesamt: +3.10",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "55fbf94e58",
+    "timestamp": "2026-06-12T19:59:56.591423+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "971e89434d",
+    "timestamp": "2026-06-12T19:59:26.219984+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "a075c1c72a",
+    "timestamp": "2026-06-12T19:58:55.883050+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "4f161c48e0",
+    "timestamp": "2026-06-12T19:58:25.134730+00:00",
+    "level": "info",
+    "message": "46 Trade(s) synchronisiert | PnL gesamt: +3.00",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "52ee046575",
+    "timestamp": "2026-06-12T19:57:54.787183+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "f60b1ff72c",
+    "timestamp": "2026-06-12T19:57:24.501372+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7193c84c81",
+    "timestamp": "2026-06-12T19:56:54.236818+00:00",
+    "level": "info",
+    "message": "47 Trade(s) synchronisiert | PnL gesamt: +2.93",
+    "details": null,
+    "bridgeId": "IQTLJ3Jdpp",
+    "bridgeName": "redesign_bridge"
+  }
+]

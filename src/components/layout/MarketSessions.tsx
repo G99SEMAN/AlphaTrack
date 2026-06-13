@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSessionSettings } from '@/hooks/useSessionSettings'
 
 const EXCHANGES = [
   { id: 'nyse',  name: 'NYSE',  tz: 'America/New_York', oH: 9,  oM: 30, cH: 16, cM: 0  },
@@ -149,6 +150,7 @@ function SessionRow({ name, isOpen, timeStr, pct, compact }: { name: string; isO
 
 export default function MarketSessions({ compact = false }: { compact?: boolean }) {
   const [tick, setTick] = useState(0)
+  const { settings } = useSessionSettings()
 
   useEffect(() => {
     const id = setInterval(() => setTick(t => t + 1), 60_000)
@@ -158,7 +160,8 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
   void tick
 
   const forex = getForexStatus()
-  const statuses = EXCHANGES.map(ex => ({ ...ex, ...getStatus(ex) }))
+  const visibleExchanges = EXCHANGES.filter(ex => settings.visibleExchanges.includes(ex.id))
+  const statuses = visibleExchanges.map(ex => ({ ...ex, ...getStatus(ex) }))
   const anyOpen = statuses.some(s => s.isOpen)
 
   return (
@@ -169,10 +172,10 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
         <SessionRow name="Forex" isOpen={forex.isOpen} timeStr={forex.timeStr} pct={forex.pct} compact={compact} />
       </div>
 
-      <div style={{ height: 1, background: 'var(--border)', margin: compact ? '0 8px' : '0 12px' }} />
+      {statuses.length > 0 && <div style={{ height: 1, background: 'var(--border)', margin: compact ? '0 8px' : '0 12px' }} />}
 
       {/* Börsen */}
-      <div className={compact ? 'px-2 pt-1 pb-2' : 'px-3 pt-2 pb-3'}>
+      {statuses.length > 0 && <div className={compact ? 'px-2 pt-1 pb-2' : 'px-3 pt-2 pb-3'}>
         <div className="flex items-center justify-between px-1 mb-1">
           <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)', fontSize: compact ? 9 : undefined }}>
             Börsen
@@ -194,7 +197,7 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
             <SessionRow key={s.id} name={s.name} isOpen={s.isOpen} timeStr={s.timeStr} pct={s.pct} compact={compact} />
           ))}
         </div>
-      </div>
+      </div>}
 
     </div>
   )

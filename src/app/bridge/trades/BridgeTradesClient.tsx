@@ -21,6 +21,8 @@ interface LivePosition {
   tp: number | null
   pnl: number
   swap: number
+  botId?: string
+  botName?: string
 }
 
 interface Props {
@@ -29,7 +31,9 @@ interface Props {
 
 export default function BridgeTradesClient({ bots }: Props) {
   const { isUnlocked } = useTradingLock()
-  const [selectedBotId, setSelectedBotId] = useState<string | null>(bots[0]?.id ?? null)
+  const [selectedBotIds, setSelectedBotIds] = useState<Set<string>>(
+    new Set(bots.map(b => b.id))
+  )
   const [positions, setPositions] = useState<LivePosition[]>([])
   const [loadingPositions, setLoadingPositions] = useState(false)
   const [closeTarget, setCloseTarget] = useState<LivePosition | null>(null)
@@ -41,6 +45,25 @@ export default function BridgeTradesClient({ bots }: Props) {
     const id = setInterval(() => setNow(Date.now()), 1000)
     return () => clearInterval(id)
   }, [])
+
+  const allSelected = selectedBotIds.size === bots.length
+
+  function toggleBot(id: string) {
+    setSelectedBotIds(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) {
+        if (next.size === 1) return prev // mindestens einer muss aktiv bleiben
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  function selectAll() {
+    setSelectedBotIds(new Set(bots.map(b => b.id)))
+  }
 
   const totalPnl = positions.reduce((sum, p) => sum + p.pnl, 0)
 
@@ -54,17 +77,26 @@ export default function BridgeTradesClient({ bots }: Props) {
   }
 
   const fetchPositions = useCallback(async () => {
-    if (!selectedBotId) return
+    if (selectedBotIds.size === 0) return
     setLoadingPositions(true)
     try {
-      const res = await fetch(`/api/bridge/positions?bridgeId=${selectedBotId}`)
-      if (res.ok) {
-        const data = await res.json()
-        setPositions(data.positions ?? [])
-      }
+      const results = await Promise.all(
+        [...selectedBotIds].map(async (botId) => {
+          const bot = bots.find(b => b.id === botId)
+          const res = await fetch(`/api/bridge/positions?bridgeId=${botId}`)
+          if (!res.ok) return []
+          const data = await res.json()
+          return (data.positions ?? []).map((p: LivePosition) => ({
+            ...p,
+            botId,
+            botName: bot?.name ?? botId,
+          }))
+        })
+      )
+      setPositions(results.flat())
     } catch { /* silent */ }
     finally { setLoadingPositions(false) }
-  }, [selectedBotId])
+  }, [selectedBotIds, bots])
 
   useEffect(() => {
     fetchPositions()
@@ -73,7 +105,8 @@ export default function BridgeTradesClient({ bots }: Props) {
   }, [fetchPositions])
 
   async function confirmClose() {
-    if (!closeTarget || !selectedBotId) return
+    if (!closeTarget) return
+    const bridgeId = closeTarget.botId ?? [...selectedBotIds][0]
     setClosingTicket(closeTarget.ticket)
     setCloseTarget(null)
     try {
@@ -81,7 +114,7 @@ export default function BridgeTradesClient({ bots }: Props) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          bridgeId: selectedBotId,
+          bridgeId,
           command: 'close_position',
           payload: { ticket: closeTarget.ticket },
         }),
@@ -130,20 +163,35 @@ export default function BridgeTradesClient({ bots }: Props) {
         </div>
       </div>
 
-      {/* Bot-Auswahl */}
+      {/* Filter */}
       {bots.length > 1 && (
-        <div className="flex gap-2 mb-5 flex-wrap">
-          {bots.map(bot => (
-            <button key={bot.id} onClick={() => setSelectedBotId(bot.id)}
-              className="px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
-              style={{
-                background: selectedBotId === bot.id ? 'rgba(239,68,68,0.12)' : 'var(--surface)',
-                border: selectedBotId === bot.id ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--border)',
-                color: selectedBotId === bot.id ? '#ef4444' : 'var(--text-2)',
-              }}>
-              {bot.name}
-            </button>
-          ))}
+        <div className="flex gap-2 mb-5 flex-wrap items-center">
+          <span className="text-xs font-semibold uppercase tracking-wider mr-1" style={{ color: 'var(--text-3)' }}>
+            Filter
+          </span>
+          <button onClick={selectAll}
+            className="px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
+            style={{
+              background: allSelected ? 'rgba(239,68,68,0.12)' : 'var(--surface)',
+              border: allSelected ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--border)',
+              color: allSelected ? '#ef4444' : 'var(--text-2)',
+            }}>
+            Alle
+          </button>
+          {bots.map(bot => {
+            const active = selectedBotIds.has(bot.id)
+            return (
+              <button key={bot.id} onClick={() => toggleBot(bot.id)}
+                className="px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
+                style={{
+                  background: active ? 'rgba(239,68,68,0.12)' : 'var(--surface)',
+                  border: active ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--border)',
+                  color: active ? '#ef4444' : 'var(--text-2)',
+                }}>
+                {bot.name}
+              </button>
+            )
+          })}
         </div>
       )}
 
@@ -205,7 +253,7 @@ export default function BridgeTradesClient({ bots }: Props) {
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                 <Layers size={28} style={{ color: 'var(--text-3)', marginBottom: 10 }} />
                 <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-2)' }}>Keine offenen Positionen</p>
-                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Der Bot hat aktuell keine aktiven Trades.</p>
+                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Die ausgewählten Bots haben aktuell keine aktiven Trades.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -221,7 +269,7 @@ export default function BridgeTradesClient({ bots }: Props) {
                     : null
 
                   return (
-                    <motion.div key={pos.ticket}
+                    <motion.div key={`${pos.botId}-${pos.ticket}`}
                       initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
                       className="rounded-2xl p-4"
                       style={{ background: pnlTint, border: `1px solid var(--border)` }}>
@@ -235,9 +283,17 @@ export default function BridgeTradesClient({ bots }: Props) {
                               : <TrendingDown size={14} style={{ color: '#ef4444' }} />}
                           </div>
                           <div>
-                            <p className="text-sm font-black font-mono" style={{ color: 'var(--text-1)' }}>
-                              {pos.instrument}
-                            </p>
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-sm font-black font-mono" style={{ color: 'var(--text-1)' }}>
+                                {pos.instrument}
+                              </p>
+                              {pos.botName && bots.length > 1 && (
+                                <span className="text-xs px-1.5 py-0.5 rounded font-semibold leading-none"
+                                  style={{ background: 'rgba(239,68,68,0.08)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
+                                  {pos.botName}
+                                </span>
+                              )}
+                            </div>
                             <p className="text-xs font-semibold" style={{ color: isLong ? '#22c55e' : '#ef4444' }}>
                               {isLong ? 'LONG' : 'SHORT'} · {pos.size} Lot
                             </p>
@@ -385,6 +441,9 @@ export default function BridgeTradesClient({ bots }: Props) {
                   {' · '}PnL <span style={{ color: closeTarget.pnl >= 0 ? '#22c55e' : '#ef4444' }}>
                     {closeTarget.pnl >= 0 ? '+' : ''}{closeTarget.pnl.toFixed(2)}
                   </span>
+                  {closeTarget.botName && (
+                    <span style={{ color: 'var(--text-3)' }}> · {closeTarget.botName}</span>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <button onClick={() => setCloseTarget(null)}

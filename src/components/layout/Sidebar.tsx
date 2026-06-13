@@ -6,7 +6,7 @@ import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   Pencil, CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
   Sparkles, ShieldCheck, ShieldOff, Network, ChevronDown, Cpu, MoreHorizontal,
-  TrendingUp,
+  TrendingUp, Eye, EyeOff,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
@@ -18,6 +18,7 @@ import ProfileEditModal from '@/components/profile/ProfileEditModal'
 import EinstellungenModal from '@/components/einstellungen/EinstellungenModal'
 import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
+import { useBotStatus } from '@/context/BotStatusContext'
 
 const MAIN_NAV = [
   { href: '/dashboard',  label: 'Dashboard',   icon: LayoutDashboard },
@@ -122,6 +123,25 @@ function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props
   const [showEdit, setShowEdit] = useState(false)
   const [showEinstellungen, setShowEinstellungen] = useState(false)
   const { isUnlocked, toggle } = useTradingLock()
+  const { bots } = useBotStatus()
+  const [balanceVisible, setBalanceVisible] = useState(() => {
+    try { return localStorage.getItem('alphatrack-mt5-balance-visible') !== 'false' }
+    catch { return true }
+  })
+
+  const bridgeBot = bots.find(b => b.bot.type === 'bridge' && b.status?.balance !== undefined)
+  const mt5Balance = bridgeBot?.status?.balance
+  const mt5Currency = bridgeBot?.status?.currency ?? 'USD'
+  const mt5Connected = bridgeBot?.status?.connectionState === 'connected'
+
+  function toggleBalance() {
+    setBalanceVisible(v => {
+      const next = !v
+      try { localStorage.setItem('alphatrack-mt5-balance-visible', String(next)) } catch { /* silent */ }
+      return next
+    })
+  }
+
   const [sections, setSections] = useState<{ bridge: boolean; bots: boolean; weiteres: boolean }>(() => {
     const saved = loadSections() ?? { bridge: false, bots: false, weiteres: false }
     return {
@@ -257,6 +277,45 @@ function SidebarInner({ profiles, activeProfile, onNav, compact = false }: Props
         ))}
 
       </nav>
+
+      {/* MT5 Kontostand */}
+      {mt5Balance !== undefined && (
+        <div style={{ borderTop: '1px solid var(--border)' }}>
+          <div className="px-3 pt-2 pb-1 flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span
+                className="shrink-0 rounded-full"
+                style={{
+                  width: 5, height: 5,
+                  background: mt5Connected ? 'var(--green)' : '#f59e0b',
+                  boxShadow: mt5Connected ? '0 0 4px var(--green)' : '0 0 4px #f59e0b',
+                }}
+              />
+              <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)', fontSize: 9 }}>
+                MT5 Konto
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={toggleBalance}
+              title={balanceVisible ? 'Kontostand ausblenden' : 'Kontostand einblenden'}
+              className="w-4 h-4 flex items-center justify-center cursor-pointer"
+              style={{ color: 'var(--text-3)' }}
+            >
+              {balanceVisible ? <EyeOff size={11} /> : <Eye size={11} />}
+            </button>
+          </div>
+          {balanceVisible && (
+            <div className="px-3 pb-2">
+              <p className="text-sm font-bold tabular-nums" style={{ color: 'var(--text-1)', letterSpacing: '-0.01em' }}>
+                {mt5Balance.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {' '}
+                <span className="text-xs font-semibold" style={{ color: 'var(--text-3)' }}>{mt5Currency}</span>
+              </p>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Börsen Sessions */}
       <MarketSessions compact={compact} />

@@ -3,9 +3,10 @@
 import { useTheme } from 'next-themes'
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette } from 'lucide-react'
+import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock } from 'lucide-react'
 import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
+import { useSessionSettings } from '@/hooks/useSessionSettings'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Profile } from '@/types/profile'
 
@@ -97,6 +98,7 @@ export default function EinstellungenClient({ profiles }: Props) {
 
   const { settings, updateSetting } = useStatsSettings()
   const { accent, setAccent } = useAccentTheme()
+  const { settings: sessionSettings, updateExchanges } = useSessionSettings()
   const isDark = mounted ? theme === 'dark' : true
 
   const ACCENT_THEMES: { id: AccentTheme; label: string; color: string; darkBg: string; lightBg: string }[] = [
@@ -152,6 +154,54 @@ export default function EinstellungenClient({ profiles }: Props) {
               </span>
             </label>
           ))}
+        </div>
+      </div>
+
+      {/* Börsen-Sessions */}
+      <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+        <div className="flex items-center gap-2 mb-1">
+          <Clock size={15} style={{ color: 'var(--text-3)' }} />
+          <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+            Börsen-Sessions
+          </p>
+        </div>
+        <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
+          Wähle welche Börsen in der Sidebar angezeigt werden. Forex ist immer sichtbar.
+        </p>
+        <div className="space-y-2">
+          {mounted && [
+            { id: 'nyse',  label: 'NYSE (New York)' },
+            { id: 'lse',   label: 'LSE (London)' },
+            { id: 'xetra', label: 'XETRA (Frankfurt)' },
+            { id: 'tse',   label: 'Tokio (TSE)' },
+          ].map(({ id, label }) => {
+            const visible = sessionSettings.visibleExchanges.includes(id)
+            return (
+              <label
+                key={id}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer transition-all"
+                style={{
+                  background: visible ? 'var(--accent-bg)' : 'var(--surface-2)',
+                  border: `1px solid ${visible ? 'var(--accent)' : 'var(--border)'}`,
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={visible}
+                  onChange={e => {
+                    const next = e.target.checked
+                      ? [...sessionSettings.visibleExchanges, id]
+                      : sessionSettings.visibleExchanges.filter(x => x !== id)
+                    void updateExchanges(next)
+                  }}
+                  className="w-4 h-4 rounded accent-[var(--accent)] cursor-pointer"
+                />
+                <span className="text-sm font-medium flex-1" style={{ color: 'var(--text-1)' }}>
+                  {label}
+                </span>
+              </label>
+            )
+          })}
         </div>
       </div>
 

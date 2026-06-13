@@ -5,7 +5,7 @@ milestone_name: milestone
 status: Awaiting next milestone
 stopped_at: Phase 4 context gathered
 last_updated: "2026-06-12T11:03:01.378Z"
-last_activity: 2026-06-12 — Completed quick task 260612-siw (Bot-Grundgerüst aktualisiert)
+last_activity: 2026-06-13 — Completed quick task 260613-s5k (SSH-Key-Support für Mini-PC-Deploy)
 progress:
   total_phases: 4
   completed_phases: 4
@@ -85,6 +85,7 @@ None yet.
 | 260612-fast4 | trading-bot-Skill: Pflicht-Rückfragerunde (Strategie, Symbol/TF, Risiko, Parameter) vor Bot-Erstellung | 2026-06-12 | a515e38 | — |
 | 260612-fast5 | Bot-Performance-Graph: Tooltip klebte am ersten Punkt (identische X-Labels) — eindeutige X-Werte mit Uhrzeit | 2026-06-12 | a769efe | — |
 | 260612-fast6 | Neuer Bot Price Monitor (Port 8771) via /trading-bot: zeigt EURUSDp-Kurs, Parameter tick_interval_sec (Scaffold: Tick-Intervall jetzt konfigurierbar) | 2026-06-12 | 4670978 | — |
+| 260613-s5k | SSH-Key-Unterstützung für Mini-PC-Deploy: setup-ssh-key.ps1 (Key erzeugen + Anleitung), deploy.ps1 um minipc_ssh_key erweitert, README ergänzt | 2026-06-13 | b66561e | [260613-s5k-minipc-ssh-key-support](./quick/260613-s5k-minipc-ssh-key-support/) |
 
 ## Deferred Items
 

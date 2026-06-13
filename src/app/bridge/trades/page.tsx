@@ -1,5 +1,5 @@
 import { getProfiles, getActiveProfile, setActiveProfileId } from '@/lib/profiles'
-import { getBots } from '@/lib/bot-data'
+import { getAllBotsWithStatus } from '@/lib/bot-data'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
 import BridgeTradesClient from './BridgeTradesClient'
@@ -17,7 +17,9 @@ export default async function BridgeTradesPage() {
     activeProfile = profiles[0]
   }
 
-  const bots = getBots()
+  const bots = getAllBotsWithStatus()
+    .filter(({ status }) => status?.connectionState === 'connected' || status?.connectionState === 'warning')
+    .map(({ bot }) => bot)
 
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>

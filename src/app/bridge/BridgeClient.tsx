@@ -195,15 +195,18 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <WatchdogPanel botId={selected.bot.id} botName={selected.bot.name} />
-                <BotControls
-                  botId={selected.bot.id}
-                  initialState={selected.status?.state}
-                  initialConnection={selected.status?.connectionState}
-                />
+                <div className="flex flex-col gap-4">
+                  <WatchdogPanel botId={selected.bot.id} botName={selected.bot.name} />
+                  <BotControls
+                    botId={selected.bot.id}
+                    initialState={selected.status?.state}
+                    initialConnection={selected.status?.connectionState}
+                  />
+                </div>
+                <BridgeLogPanel botId={selected.bot.id} />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TradeExecutorPanel
                   botId={selected.bot.id}
                   connectionState={selected.status?.connectionState}
@@ -211,7 +214,6 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                   activeSymbols={selected.status?.activeSymbols}
                 />
                 <LiveTradeFeed profileId={selected.bot.profileId} />
-                <BridgeLogPanel botId={selected.bot.id} />
               </div>
             </>
           )}
