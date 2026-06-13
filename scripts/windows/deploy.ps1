@@ -340,9 +340,10 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
 
 # Firewall: NAS-AlphaTrack muss die Bridge auf Port 8765 erreichen koennen.
 # Remote-Shell auf dem Mini-PC ist cmd.exe -> ||/&& sind dort erlaubt.
+# Kein Leerzeichen im Namen: Quotes ueberleben den SSH->cmd.exe-Weg nicht zuverlaessig.
 function Set-MiniPcFirewall($cfg) {
-    $ruleName = 'AlphaTrack Bridge 8765'
-    $remote = "netsh advfirewall firewall show rule name=""$ruleName"" >nul 2>&1 || netsh advfirewall firewall add rule name=""$ruleName"" dir=in action=allow protocol=TCP localport=8765"
+    $ruleName = 'AlphaTrackBridge8765'
+    $remote = "netsh advfirewall firewall show rule name=$ruleName >nul 2>&1 || netsh advfirewall firewall add rule name=$ruleName dir=in action=allow protocol=TCP localport=8765"
     Invoke-MiniPcSsh $cfg $remote
     if ($LASTEXITCODE -ne 0) {
         throw "Firewall-Regel konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC."
@@ -351,12 +352,12 @@ function Set-MiniPcFirewall($cfg) {
 }
 
 # Geplante Aufgabe: Bridge startet bei Anmeldung automatisch. Bots bewusst NICHT.
+# Kein Leerzeichen im TN: Quotes ueberleben den SSH->cmd.exe-Weg nicht zuverlaessig.
 function Register-BridgeTask($cfg) {
-    $taskName = 'AlphaTrack Bridge'
+    $taskName = 'AlphaTrackBridge'
     $batPath  = "$($cfg.minipc_target_dir)\bridge\start_bridge.bat"
 
-    # /F = vorhandene Aufgabe ueberschreiben; innere \" noetig, falls Pfad Leerzeichen enthaelt
-    $create = 'schtasks /Create /TN "' + $taskName + '" /TR "\"' + $batPath + '\"" /SC ONLOGON /F'
+    $create  = "schtasks /Create /TN $taskName /TR $batPath /SC ONLOGON /F"
     Invoke-MiniPcSsh $cfg $create
     if ($LASTEXITCODE -ne 0) {
         throw 'Geplante Aufgabe konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC.'
@@ -366,7 +367,7 @@ function Register-BridgeTask($cfg) {
     # Laufende Bridge beenden (falls aktiv), kurz warten, dann mit neuer Config starten.
     # /End schlaegt fehl, wenn die Aufgabe nicht laeuft -> wird remote unterdrueckt.
     # Ohne /RU laeuft die Aufgabe nur bei angemeldetem Benutzer — sichtbar im Desktop des SSH-Users.
-    $restart = 'schtasks /End /TN "' + $taskName + '" >nul 2>&1 & timeout /t 2 /nobreak >nul & schtasks /Run /TN "' + $taskName + '"'
+    $restart = "schtasks /End /TN $taskName >nul 2>&1 & timeout /t 2 /nobreak >nul & schtasks /Run /TN $taskName"
     Invoke-MiniPcSsh $cfg $restart
     if ($LASTEXITCODE -ne 0) { throw 'Bridge konnte nicht gestartet werden (schtasks /Run).' }
     Write-Ok 'Bridge gestartet.'
