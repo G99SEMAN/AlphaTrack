@@ -7,11 +7,6 @@ import { ArrowUpRight, ArrowDownRight, Clock } from 'lucide-react'
 
 interface Props { trades: Trade[] }
 
-function fmt(val: number) {
-  const sign = val >= 0 ? '+' : ''
-  return `${sign}${val.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} €`
-}
-
 function RecentTradesCard({ trades }: Props) {
   const recent = useMemo(() =>
     [...trades]
@@ -22,25 +17,34 @@ function RecentTradesCard({ trades }: Props) {
 
   return (
     <motion.div
-      className="rounded-2xl p-5 flex flex-col gap-4 h-full"
+      className="rounded-2xl flex flex-col h-full"
       style={{
-        background: 'var(--surface)',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--card-shadow)',
+        background: 'var(--surface)', border: '1px solid var(--border)',
+        boxShadow: 'var(--card-shadow)', padding: 16,
+        position: 'relative', overflow: 'hidden',
       }}
       whileHover={{ boxShadow: 'var(--card-shadow-hover)' }}
       transition={{ duration: 0.15 }}
     >
-      <div className="flex items-center justify-between">
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 1,
+        background: 'linear-gradient(90deg,transparent,rgba(59,130,246,0.15),transparent)',
+      }} />
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+        <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em' }}>
           Letzte Trades
         </p>
-        <span className="text-xs px-2 py-1 rounded-md" style={{ background: 'var(--surface-2)', color: 'var(--text-3)' }}>
+        <span style={{
+          fontSize: 9, padding: '2px 7px', borderRadius: 5,
+          background: 'var(--surface-2)', color: 'var(--text-3)',
+          fontFamily: 'var(--font-dm-mono)',
+        }}>
           {trades.length} gesamt
         </span>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {recent.map((trade, i) => {
           const isLong = trade.type === 'long'
           const pnlPos = (trade.pnl ?? 0) >= 0
@@ -49,50 +53,50 @@ function RecentTradesCard({ trades }: Props) {
           return (
             <motion.div
               key={trade.id}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl"
-              style={{ background: 'var(--surface-2)' }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                padding: '8px 10px', borderRadius: 10,
+                background: 'var(--surface-2)', border: '1px solid var(--border-subtle)',
+              }}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.06 }}
             >
-              {/* Richtungs-Icon */}
-              <div
-                className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                style={{ background: isLong ? 'var(--green-bg)' : 'var(--red-bg)' }}
-              >
+              <div style={{
+                width: 26, height: 26, borderRadius: 8, flexShrink: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: isLong ? 'rgba(0,217,126,0.10)' : 'rgba(255,69,96,0.10)',
+                border: isLong ? '1px solid rgba(0,217,126,0.18)' : '1px solid rgba(255,69,96,0.18)',
+              }}>
                 {isLong
-                  ? <ArrowUpRight size={14} style={{ color: 'var(--green)' }} />
-                  : <ArrowDownRight size={14} style={{ color: 'var(--red)' }} />
+                  ? <ArrowUpRight size={13} style={{ color: 'var(--green)' }} />
+                  : <ArrowDownRight size={13} style={{ color: 'var(--red)' }} />
                 }
               </div>
 
-              {/* Instrument + Datum */}
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate" style={{ color: 'var(--text-1)' }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {trade.instrument}
                 </p>
-                <p className="text-xs" style={{ color: 'var(--text-3)' }}>
+                <p style={{ fontSize: 9, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)' }}>
                   {new Date(trade.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
-                  {' · '}{trade.type === 'long' ? 'Long' : 'Short'}
+                  {' · '}{isLong ? 'Long' : 'Short'}
                 </p>
               </div>
 
-              {/* P&L */}
-              <div className="text-right">
+              <div style={{ textAlign: 'right' }}>
                 {isOpen ? (
-                  <div className="flex items-center gap-1">
-                    <Clock size={11} style={{ color: 'var(--accent)' }} />
-                    <span className="text-xs font-mono" style={{ color: 'var(--accent)' }}>Offen</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <Clock size={10} style={{ color: 'var(--accent)' }} />
+                    <span style={{ fontSize: 10, color: 'var(--accent)', fontFamily: 'var(--font-dm-mono)' }}>Offen</span>
                   </div>
                 ) : (
                   <>
-                    <p className="text-sm font-mono font-semibold" style={{ color: pnlPos ? 'var(--green)' : 'var(--red)' }}>
-                      {fmt(trade.pnl ?? 0)}
+                    <p style={{ fontSize: 11, fontWeight: 700, color: pnlPos ? 'var(--green)' : 'var(--red)', fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
+                      {(trade.pnl ?? 0) >= 0 ? '+' : ''}{(trade.pnl ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} €
                     </p>
                     {trade.rr && (
-                      <p className="text-xs font-mono" style={{ color: 'var(--text-3)' }}>
-                        1:{trade.rr.toFixed(1)}
-                      </p>
+                      <p style={{ fontSize: 9, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)' }}>1:{trade.rr.toFixed(1)}</p>
                     )}
                   </>
                 )}
