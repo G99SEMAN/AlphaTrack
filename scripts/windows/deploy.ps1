@@ -188,10 +188,17 @@ function Wait-ForAlphaTrack($cfg) {
     throw "AlphaTrack unter $url nicht erreichbar (Timeout 120s). Container-Log auf dem NAS pruefen: sudo docker logs alphatrack"
 }
 
-function Select-TradingProfile($info, $cfg) {
+function Select-TradingProfile($info, $cfg, [string]$ApiKey) {
     $profiles = @($info.profiles)
     if ($profiles.Count -eq 0) {
-        throw "Keine Profile auf dem NAS-AlphaTrack vorhanden. Bitte zuerst unter http://$($cfg.nas_host):$($cfg.nas_app_port) ein Profil anlegen und Deploy erneut starten."
+        Write-Warn2 'Keine Profile vorhanden — ein leeres Profil wird jetzt angelegt.'
+        $profileName = Ask-Required 'Profilname (z.B. BlackBull-Demo)' 'Mein Profil'
+        $body = "{""name"":""$($profileName.Trim())"",""type"":""demo"",""currency"":""USD"",""startCapital"":0,""broker"":""""}"
+        $url  = "http://$($cfg.nas_host):$($cfg.nas_app_port)/api/profiles"
+        $created = Invoke-RestMethod -Uri $url -Method POST -Body $body `
+            -ContentType 'application/json' -Headers @{ 'x-bot-api-key' = $ApiKey }
+        Write-Ok "Profil '$($created.name)' angelegt. Details nach dem Deploy in AlphaTrack konfigurieren."
+        return $created.id
     }
     if ($profiles.Count -eq 1) {
         Write-Ok "Nur ein Profil vorhanden — automatisch gewaehlt: $($profiles[0].name)"
@@ -411,7 +418,7 @@ function Invoke-Main {
     $apiKey = Confirm-NasEnvFile $cfg
     Invoke-NasUpdate $cfg
     $info = Wait-ForAlphaTrack $cfg
-    $profileId = Select-TradingProfile $info $cfg
+    $profileId = Select-TradingProfile $info $cfg $apiKey
 
     Write-Step '[Phase 2/3] Mini-PC-Deploy'
     Test-MiniPcSsh $cfg
