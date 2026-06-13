@@ -98,11 +98,12 @@ export default async function DashboardPage({
           </Suspense>
         </div>
 
-        {/* Bento Grid */}
+        {/* Premium Grid */}
         <StaggerWrapper>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 auto-rows-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
 
-            <div className="lg:col-span-4" style={{ minHeight: 180 }}>
+            {/* Zeile 1: PnL Hero (8) + WinRate (4) */}
+            <div className="lg:col-span-8 lg:row-span-2" style={{ minHeight: 280 }}>
               <PnLCard
                 totalPnl={stats.totalPnl}
                 monthlyPnl={stats.monthlyPnl}
@@ -112,10 +113,12 @@ export default async function DashboardPage({
                 netDailyPnl={stats.netDailyPnl}
                 totalCosts={stats.totalCosts}
                 currency={activeProfile.currency}
+                equityCurve={stats.equityCurve}
+                startCapital={activeProfile.startCapital}
               />
             </div>
 
-            <div className="lg:col-span-4" style={{ minHeight: 180 }}>
+            <div className="lg:col-span-4" style={{ minHeight: 130 }}>
               <DashboardWinRate
                 winRate={stats.winRate}
                 totalTrades={stats.totalTrades}
@@ -124,11 +127,13 @@ export default async function DashboardPage({
               />
             </div>
 
-            <div className="lg:col-span-4" style={{ minHeight: 180 }}>
+            {/* Zeile 1 rechts unten: Risiko */}
+            <div className="lg:col-span-4" style={{ minHeight: 130 }}>
               <RiskCard avgRR={stats.avgRR} maxDrawdown={stats.maxDrawdown} />
             </div>
 
-            <div className="lg:col-span-8" style={{ minHeight: 280 }}>
+            {/* Zeile 2: Equity Chart volle Breite */}
+            <div className="lg:col-span-12" style={{ minHeight: 200 }}>
               <EquityChart
                 data={stats.equityCurve}
                 startCapital={activeProfile.startCapital}
@@ -136,11 +141,12 @@ export default async function DashboardPage({
               />
             </div>
 
-            <div className="lg:col-span-4" style={{ minHeight: 280 }}>
+            {/* Zeile 3: Letzte Trades + Offene Trades nebeneinander */}
+            <div className="lg:col-span-6">
               <RecentTradesCard trades={allTrades} />
             </div>
 
-            <div className="lg:col-span-12">
+            <div className="lg:col-span-6">
               <CriticalOpenTradesCard trades={allTrades} currency={activeProfile.currency} />
             </div>
 
