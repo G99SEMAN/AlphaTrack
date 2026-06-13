@@ -18,6 +18,7 @@ import EinstellungenModal from '@/components/einstellungen/EinstellungenModal'
 import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
+import LogoMark from './LogoMark'
 
 const UEBERSICHT_NAV = [
   { href: '/dashboard',   label: 'Dashboard',   icon: LayoutDashboard },
@@ -145,16 +146,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
         }}
       >
         {/* Logo Mark */}
-        <div style={{
-          width: 34, height: 34, flexShrink: 0,
-          background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
-          borderRadius: 9,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 14, fontWeight: 800, color: '#fff',
-          boxShadow: '0 4px 12px rgba(37,99,235,0.4)',
-        }}>
-          A
-        </div>
+        <LogoMark size={34} />
 
         {!collapsed && (
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -424,12 +416,7 @@ export default function Sidebar({ profiles, activeProfile }: Props) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{
-            width: 30, height: 30,
-            background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
-            borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 12, fontWeight: 800, color: '#fff',
-          }}>A</div>
+          <LogoMark size={30} />
           <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>AlphaTrack</span>
         </div>
         <button
