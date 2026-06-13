@@ -151,6 +151,26 @@ Features → "OpenSSH-Server", dann `Set-Service sshd -StartupType Automatic` +
 `Start-Service sshd` als Admin). Der SSH-Benutzer braucht Admin-Rechte
 (Firewall/Aufgabenplanung). MetaTrader 5 und Python müssen installiert sein.
 
+#### SSH-Key einrichten (kein Passwort beim Deploy)
+
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\windows\setup-ssh-key.ps1
+```
+
+Das Script erzeugt ein ed25519-Schlüsselpaar unter `%USERPROFILE%\.ssh\alphatrack_deploy`
+und gibt den Public Key mit Kopierbefehlen für den Mini-PC aus.
+Da Windows-OpenSSH keine leeren Passwörter erlaubt, muss der Public Key **einmalig manuell**
+auf dem Mini-PC eingetragen werden (physisch oder per Remote Desktop):
+
+```powershell
+# Auf dem Mini-PC ausführen:
+Add-Content "$env:USERPROFILE\.ssh\authorized_keys" "ssh-ed25519 AAAA... (Public Key einfügen)"
+icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:USERNAME}:F"
+```
+
+Beim nächsten `deploy.bat`-Lauf den angezeigten Key-Pfad bei **"Mini-PC SSH-Key-Pfad"** eingeben —
+danach läuft der Deploy passwortlos.
+
 ---
 
 ## Konfiguration

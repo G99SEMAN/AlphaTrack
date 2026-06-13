@@ -34,6 +34,7 @@ function Read-DeployConfig {
         nas_app_port      = '3002'
         minipc_host       = ''
         minipc_ssh_user   = ''
+        minipc_ssh_key    = ''
         minipc_target_dir = 'C:\AlphaTrack'
         mt5_login         = ''
         mt5_password      = ''
@@ -78,6 +79,11 @@ function Ask-Required([string]$Label, [string]$Current, [switch]$Secret) {
     }
 }
 
+function Get-MiniPcSshArgs($cfg) {
+    if ($cfg.minipc_ssh_key -and (Test-Path $cfg.minipc_ssh_key)) { return @('-i', $cfg.minipc_ssh_key) }
+    return @()
+}
+
 function Invoke-Questionnaire($cfg) {
     Write-Host ''
     Write-Host "  $Sep"
@@ -94,8 +100,9 @@ function Invoke-Questionnaire($cfg) {
 
     Write-Step '[2] Mini-PC (Bridge, Bots, MetaTrader)'
     $cfg.minipc_host       = Ask-Required 'Mini-PC IP/Hostname'  $cfg.minipc_host
-    $cfg.minipc_ssh_user   = Ask-Required 'Mini-PC SSH-Benutzer' $cfg.minipc_ssh_user
-    $cfg.minipc_target_dir = Ask-Required 'Mini-PC Zielordner'   $cfg.minipc_target_dir
+    $cfg.minipc_ssh_user   = Ask-Required 'Mini-PC SSH-Benutzer'                   $cfg.minipc_ssh_user
+    $cfg.minipc_ssh_key    = Ask-Value    'Mini-PC SSH-Key-Pfad (leer = Passwort)' $cfg.minipc_ssh_key
+    $cfg.minipc_target_dir = Ask-Required 'Mini-PC Zielordner'                     $cfg.minipc_target_dir
 
     Write-Step '[3] MetaTrader 5 — Zugangsdaten'
     while ($true) {
@@ -210,14 +217,16 @@ function Select-TradingProfile($info, $cfg) {
 # --- Phase 2: Mini-PC --------------------------------------
 
 function Invoke-MiniPcSsh($cfg, [string]$RemoteCmd) {
-    & ssh "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" $RemoteCmd
+    $keyArgs = Get-MiniPcSshArgs $cfg
+    & ssh @keyArgs "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" $RemoteCmd
     if ($LASTEXITCODE -eq 255) {
         throw "SSH-Verbindung zum Mini-PC abgebrochen ($($cfg.minipc_ssh_user)@$($cfg.minipc_host))."
     }
 }
 
 function Test-MiniPcSsh($cfg) {
-    & ssh -o ConnectTimeout=5 "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" "exit"
+    $keyArgs = Get-MiniPcSshArgs $cfg
+    & ssh @keyArgs -o ConnectTimeout=5 "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" "exit"
     if ($LASTEXITCODE -ne 0) {
         Write-Fail "Mini-PC per SSH nicht erreichbar: $($cfg.minipc_ssh_user)@$($cfg.minipc_host)"
         Write-Host ''
@@ -254,7 +263,8 @@ function Copy-CodeToMiniPc($cfg) {
     if ($LASTEXITCODE -ne 0) { throw "Zielordner $target konnte nicht angelegt werden." }
 
     Write-Host '  Kopiere zum Mini-PC ...'
-    & scp -q $tarFile "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/alphatrack-deploy.tar"
+    $keyArgs = Get-MiniPcSshArgs $cfg
+    & scp -q @keyArgs $tarFile "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/alphatrack-deploy.tar"
     if ($LASTEXITCODE -ne 0) { throw 'scp zum Mini-PC fehlgeschlagen.' }
 
     Invoke-MiniPcSsh $cfg "tar -xf ""$targetFwd/alphatrack-deploy.tar"" -C ""$targetFwd"" && del ""$target\alphatrack-deploy.tar"""
@@ -303,12 +313,13 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
     $tmpDir = Join-Path $env:TEMP 'alphatrack-configs'
     if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force }
     New-Item -ItemType Directory -Path $tmpDir | Out-Null
+    $keyArgs = Get-MiniPcSshArgs $cfg
 
     # Bridge
     $bridgeJson = New-BridgeConfigJson (Join-Path $RepoRoot 'bridge\config.json') $cfg $ApiKey $ProfileId
     $bridgeTmp  = Join-Path $tmpDir 'bridge-config.json'
     Write-Utf8NoBom $bridgeTmp $bridgeJson
-    & scp -q $bridgeTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bridge/config.json"
+    & scp -q @keyArgs $bridgeTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bridge/config.json"
     if ($LASTEXITCODE -ne 0) { throw 'Bridge-Config konnte nicht geschrieben werden.' }
     Write-Ok 'bridge/config.json geschrieben (MT5 + NAS-URL + API-Key + Profil).'
 
@@ -319,7 +330,7 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
         $botJson = New-BotConfigJson (Join-Path $dir.FullName 'config.json') $cfg $ApiKey $ProfileId
         $botTmp  = Join-Path $tmpDir "$($dir.Name)-config.json"
         Write-Utf8NoBom $botTmp $botJson
-        & scp -q $botTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bots/$($dir.Name)/config.json"
+        & scp -q @keyArgs $botTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bots/$($dir.Name)/config.json"
         if ($LASTEXITCODE -ne 0) { throw "Bot-Config fuer $($dir.Name) konnte nicht geschrieben werden." }
         Write-Ok "bots/$($dir.Name)/config.json geschrieben."
     }
