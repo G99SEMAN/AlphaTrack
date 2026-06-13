@@ -63,85 +63,72 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
 
   return (
     <motion.div
-      className="rounded-2xl p-5 flex flex-col gap-4 h-full"
+      className="rounded-2xl flex flex-col"
       style={{
-        background: 'var(--surface)',
-        border: '1px solid var(--border)',
-        boxShadow: 'var(--card-shadow)',
+        background: 'var(--surface)', border: '1px solid var(--border)',
+        boxShadow: 'var(--card-shadow)', padding: 16,
+        position: 'relative', overflow: 'hidden',
+        minHeight: 200,
       }}
       whileHover={{ boxShadow: 'var(--card-shadow-hover)' }}
       transition={{ duration: 0.15 }}
     >
-      <div className="flex items-start justify-between">
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 1,
+        background: 'linear-gradient(90deg,transparent,rgba(59,130,246,0.15),transparent)',
+      }} />
+
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+          <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: 4 }}>
             Kontostand
           </p>
-          <p className="text-2xl font-bold font-mono mt-1" style={{ color: 'var(--text-1)' }}>
+          <p style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', lineHeight: 1, fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
             {lastBalance.toLocaleString('de-DE')} {currencySymbol(currency)}
           </p>
           {startCapital > 0 && (
-            <p className="text-xs font-mono mt-0.5" style={{ color: positive ? 'var(--green)' : 'var(--red)' }}>
+            <p style={{ fontSize: 10, fontFamily: 'var(--font-dm-mono)', marginTop: 2, color: positive ? 'var(--green)' : 'var(--red)' }}>
               {pnl >= 0 ? '+' : ''}{pnl.toLocaleString('de-DE')} {currencySymbol(currency)} seit Deposit
             </p>
           )}
         </div>
-        <div className="flex flex-col items-end gap-1.5">
-          <span
-            className="text-xs px-2 py-1 rounded-md font-mono"
-            style={{
-              background: positive ? 'var(--green-bg)' : 'var(--red-bg)',
-              color: positive ? 'var(--green)' : 'var(--red)',
-            }}
-          >
-            {pnl >= 0 ? '+' : ''}{startCapital > 0 ? ((pnl / startCapital) * 100).toFixed(1) : '0.0'}%
-          </span>
-          <span className="text-xs" style={{ color: 'var(--text-3)' }}>
-            {data.length} Trades
-          </span>
-        </div>
+        <span style={{
+          fontSize: 11, padding: '3px 9px', borderRadius: 6, fontFamily: 'var(--font-dm-mono)', fontWeight: 700,
+          background: positive ? 'rgba(0,217,126,0.10)' : 'rgba(255,69,96,0.10)',
+          border: positive ? '1px solid rgba(0,217,126,0.20)' : '1px solid rgba(255,69,96,0.20)',
+          color: positive ? 'var(--green)' : 'var(--red)',
+        }}>
+          {pnl >= 0 ? '+' : ''}{startCapital > 0 ? ((pnl / startCapital) * 100).toFixed(1) : '0.0'}%
+        </span>
       </div>
 
-      <div className="flex-1 min-h-0" style={{ minHeight: 160 }}>
+      <div style={{ flex: 1, minHeight: 130 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={absoluteData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="equityGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={positive ? 'var(--green)' : 'var(--red)'} stopOpacity={0.3} />
+                <stop offset="0%" stopColor={positive ? 'var(--green)' : 'var(--red)'} stopOpacity={0.25} />
                 <stop offset="100%" stopColor={positive ? 'var(--green)' : 'var(--red)'} stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis
               dataKey="date"
-              tick={{ fill: 'var(--text-3)', fontSize: 10, fontFamily: 'inherit' }}
-              axisLine={false}
-              tickLine={false}
-              interval="preserveStartEnd"
+              tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'inherit' }}
+              axisLine={false} tickLine={false} interval="preserveStartEnd"
             />
             <YAxis
-              tick={{ fill: 'var(--text-3)', fontSize: 10, fontFamily: 'monospace' }}
-              axisLine={false}
-              tickLine={false}
+              tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'monospace' }}
+              axisLine={false} tickLine={false}
               tickFormatter={v => `${v.toLocaleString('de-DE')}€`}
-              domain={yDomain}
-              width={65}
+              domain={yDomain} width={65}
             />
             {startCapital > 0 && (
-              <ReferenceLine
-                y={startCapital}
-                stroke="var(--text-3)"
-                strokeDasharray="3 3"
-                strokeOpacity={0.5}
-              />
+              <ReferenceLine y={startCapital} stroke="var(--border)" strokeDasharray="3 3" strokeOpacity={0.8} />
             )}
             <Tooltip content={<CustomTooltip startCapital={startCapital} />} />
             <Area
-              type="monotone"
-              dataKey="value"
-              stroke={strokeColor}
-              strokeWidth={2}
-              fill="url(#equityGradient)"
-              dot={false}
+              type="monotone" dataKey="value" stroke={strokeColor} strokeWidth={2}
+              fill="url(#equityGradient)" dot={false}
               activeDot={{ r: 4, fill: strokeColor, strokeWidth: 0 }}
             />
           </AreaChart>
