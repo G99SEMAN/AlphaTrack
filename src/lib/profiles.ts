@@ -50,13 +50,29 @@ export function updateProfile(updated: Profile): void {
 }
 
 export function deleteProfile(profileId: string): void {
+  // Screenshots der Trades einsammeln und löschen
+  const trades = getProfileTrades(profileId)
+  const screenshotsDir = path.join(DATA_DIR, 'screenshots')
+  for (const trade of trades) {
+    if (trade.screenshot) {
+      const filename = trade.screenshot.replace('/api/screenshots/', '')
+      try { fs.unlinkSync(path.join(screenshotsDir, filename)) } catch { /* ignorieren */ }
+    }
+  }
+
+  // Profil-Dateien löschen
   const profiles = getProfiles().filter(p => p.id !== profileId)
   saveProfiles(profiles)
-  const tradeFile = getTradeFilePath(profileId)
-  try { fs.unlinkSync(tradeFile) } catch { /* ignorieren */ }
-  const stratFile = path.join(DATA_DIR, `strategies-${profileId}.json`)
-  try { fs.unlinkSync(stratFile) } catch { /* ignorieren */ }
-  // Aktives Profil zuruecksetzen wenn noetig
+  const filesToDelete = [
+    getTradeFilePath(profileId),
+    path.join(DATA_DIR, `strategies-${profileId}.json`),
+    path.join(DATA_DIR, `bot-trades-${profileId}.json`),
+  ]
+  for (const f of filesToDelete) {
+    try { fs.unlinkSync(f) } catch { /* ignorieren */ }
+  }
+
+  // Aktives Profil zurücksetzen wenn nötig
   const active = getActiveProfileId()
   if (active === profileId) {
     const remaining = profiles[0]
