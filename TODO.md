@@ -1,0 +1,1 @@
+- Parameter senden an Bots geht nicht
