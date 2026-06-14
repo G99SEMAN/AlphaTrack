@@ -8,7 +8,16 @@
       "Write(src/lib/**)",
       "Write(src/types/**)",
       "Write(src/hooks/**)",
-      "Write(src/context/**)"
+      "Write(src/context/**)",
+      "Bash(npx skills *)",
+      "WebFetch(domain:skills.sh)",
+      "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" check /dashboard)",
+      "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot \".claude\\\\skills\\\\run-alphatrack\\\\ss_einstellungen.png\" /einstellungen)",
+      "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot \".claude\\\\skills\\\\run-alphatrack\\\\ss3.png\" /einstellungen)",
+      "PowerShell(netstat -ano)",
+      "PowerShell($env:ALPHATRACK_URL = \"http://localhost:3002\"; Start-Sleep 3; node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot \".claude\\\\skills\\\\run-alphatrack\\\\ss5.png\" /einstellungen)",
+      "PowerShell($env:ALPHATRACK_URL = \"http://localhost:3002\"; node \".claude\\\\skills\\\\run-alphatrack\\\\debug-einstellungen.mjs\" 2>&1)",
+      "Bash(grep -v \"//\\\\|demo.*mode\\\\|demo.*type\\\\|demoMode\\\\|type.*demo\\\\|demo.*account\\\\|\\\\\"demo\\\\\"\\\\|'demo'\")"
     ],
     "deny": [
       "Read(./.env)",

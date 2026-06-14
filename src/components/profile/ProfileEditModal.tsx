@@ -87,11 +87,13 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
   const [currency, setCurrency] = useState(profile.currency)
   const [type, setType] = useState<'live' | 'demo'>(profile.type)
   const [broker, setBroker] = useState(
+    !profile.broker ? '' :
     BROKERS.includes(profile.broker) ? profile.broker : 'Sonstiger'
   )
   const [brokerCustom, setBrokerCustom] = useState(
-    BROKERS.includes(profile.broker) ? '' : profile.broker
+    !profile.broker || BROKERS.includes(profile.broker) ? '' : profile.broker
   )
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [color, setColor] = useState(profile.color)
   const [icon, setIcon] = useState(profile.icon ?? '')
   const [notes, setNotes] = useState(profile.notes ?? '')
@@ -106,6 +108,7 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
 
   function handleSaveProfile() {
     if (!name.trim() || !brokerValue) return
+    setSaveError(null)
     const fd = new FormData()
     fd.set('name', name.trim())
     fd.set('type', type)
@@ -115,8 +118,12 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
     fd.set('notes', notes)
     fd.set('currency', currency)
     startTransition(async () => {
-      await updateProfileAction(profile.id, fd)
-      onClose()
+      try {
+        await updateProfileAction(profile.id, fd)
+        onClose()
+      } catch {
+        setSaveError('Speichern fehlgeschlagen. Bitte erneut versuchen.')
+      }
     })
   }
 
@@ -270,6 +277,7 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
                     value={broker}
                     onChange={e => setBroker(e.target.value)}
                   >
+                    <option value="">Broker wählen…</option>
                     {BROKERS.map(b => <option key={b} value={b}>{b}</option>)}
                   </select>
                   {broker === 'Sonstiger' && (
@@ -383,17 +391,26 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
                 {/* Profil-ID (für Bot-Konfiguration) */}
                 <ProfileIdField profileId={profile.id} />
 
+                {saveError && (
+                  <p className="text-xs text-center" style={{ color: 'var(--red)' }}>{saveError}</p>
+                )}
+                {(!name.trim() || !brokerValue) && !isPending && (
+                  <p className="text-xs text-center" style={{ color: 'var(--text-3)' }}>
+                    {!name.trim() ? 'Profilname ist erforderlich.' : 'Bitte wähle einen Broker.'}
+                  </p>
+                )}
                 <button
                   onClick={handleSaveProfile}
                   disabled={isPending || !name.trim() || !brokerValue}
-                  className="w-full py-2.5 rounded-xl text-sm font-semibold cursor-pointer transition-all"
+                  className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all"
                   style={{
-                    background: 'var(--accent)',
-                    color: '#fff',
+                    background: (!name.trim() || !brokerValue) && !isPending ? 'var(--surface-3)' : 'var(--accent)',
+                    color: (!name.trim() || !brokerValue) && !isPending ? 'var(--text-3)' : '#fff',
+                    cursor: (isPending || !name.trim() || !brokerValue) ? 'not-allowed' : 'pointer',
                     opacity: isPending ? 0.7 : 1,
                   }}
                 >
-                  {isPending ? 'Wird gespeichert...' : 'Anderungen speichern'}
+                  {isPending ? 'Wird gespeichert…' : 'Änderungen speichern'}
                 </button>
               </div>
             )}
@@ -520,7 +537,7 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
                     }}
                   >
                     <Plus size={14} />
-                    Einzahlung hinzufugen
+                    Einzahlung hinzufügen
                   </button>
                 </div>
               </div>
