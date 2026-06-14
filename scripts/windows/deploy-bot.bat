@@ -31,11 +31,11 @@ if not exist "!REPO_ROOT!\bots\!BOT!" (
 )
 
 echo  Kopiere...
-scp -r -i "!MINIPC_KEY!" "!REPO_ROOT!\bots\!BOT!" !MINIPC_USER!@!MINIPC_HOST!:"!MINIPC_TARGET!/"
+tar cf - -C "!REPO_ROOT!\bots" "!BOT!" | ssh -i "!MINIPC_KEY!" !MINIPC_USER!@!MINIPC_HOST! "tar xf - -C \"!MINIPC_TARGET!\""
 
 if !errorlevel! neq 0 (
     echo.
-    echo  [FEHLER] SCP fehlgeschlagen. SSH-Key und Verbindung pruefen.
+    echo  [FEHLER] Uebertragung fehlgeschlagen. SSH-Key und Verbindung pruefen.
     pause
     exit /b 1
 )
