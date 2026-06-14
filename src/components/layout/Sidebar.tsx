@@ -1,20 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
-  Pencil, CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
+  CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
   Sparkles, ShieldCheck, ShieldOff, Network, Cpu,
-  TrendingUp, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown,
+  TrendingUp, Eye, EyeOff, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import MarketSessions from './MarketSessions'
 import BottomNav from './BottomNav'
-import ProfileSwitcher from '@/components/profile/ProfileSwitcher'
-import ProfileEditModal from '@/components/profile/ProfileEditModal'
-import EinstellungenModal from '@/components/einstellungen/EinstellungenModal'
 import { Profile } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
@@ -108,9 +105,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
   onNav?: () => void; collapsed: boolean; onToggleCollapse?: () => void
 }) {
   const pathname = usePathname()
-  const [showEdit, setShowEdit] = useState(false)
-  const [showEinstellungen, setShowEinstellungen] = useState(false)
-  const [showProfileSwitcher, setShowProfileSwitcher] = useState(false)
+  const router = useRouter()
   const { isUnlocked, toggle } = useTradingLock()
   const { bots } = useBotStatus()
   const [balanceVisible, setBalanceVisible] = useState(() => {
@@ -203,18 +198,20 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
       {/* Profil-Pill */}
       {!collapsed && activeProfile && (
         <div style={{ padding: '10px 10px 8px', borderBottom: '1px solid var(--border)' }}>
-          <div
+          <button
+            type="button"
+            onClick={() => router.push('/einstellungen#profile')}
             style={{
-              display: 'flex', alignItems: 'center', gap: 8,
+              width: '100%', display: 'flex', alignItems: 'center', gap: 8,
               padding: '8px 10px', borderRadius: 10,
               background: 'var(--surface-2)', border: '1px solid var(--border)',
-              cursor: 'pointer',
+              cursor: 'pointer', textAlign: 'left',
             }}
-            onClick={() => setShowProfileSwitcher(v => !v)}
+            title="Profile verwalten"
           >
             <div style={{
               width: 26, height: 26, flexShrink: 0,
-              background: 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
+              background: activeProfile.color ?? 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
               borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 11, fontWeight: 700, color: '#fff',
             }}>
@@ -228,46 +225,28 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
                 {activeProfile.type === 'live' ? 'Live' : 'Demo'} · {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 4 }}>
-              <button
-                type="button"
-                onClick={e => { e.stopPropagation(); setShowEdit(true) }}
-                style={{ color: 'var(--text-3)', padding: 2, cursor: 'pointer' }}
-                title="Profil bearbeiten"
-              >
-                <Pencil size={10} />
-              </button>
-              <ChevronDown size={12} style={{ color: 'var(--text-3)' }} />
-            </div>
-          </div>
-          {showProfileSwitcher && (
-            <div style={{ marginTop: 4 }}>
-              <ProfileSwitcher profiles={profiles} activeProfile={activeProfile} />
-            </div>
-          )}
+            <Settings size={12} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
+          </button>
         </div>
       )}
 
       {/* Collapsed: nur Avatar */}
       {collapsed && activeProfile && (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
-          <div
+          <button
+            type="button"
             title={activeProfile.name}
+            onClick={() => router.push('/einstellungen#profile')}
             style={{
               width: 30, height: 30,
-              background: 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
+              background: activeProfile.color ?? 'linear-gradient(135deg, #1d4ed8, #60a5fa)',
               borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 12, fontWeight: 700, color: '#fff', cursor: 'pointer',
+              fontSize: 12, fontWeight: 700, color: '#fff', cursor: 'pointer', border: 'none',
             }}
-            onClick={() => setShowProfileSwitcher(v => !v)}
           >
             {avatarInitial}
-          </div>
+          </button>
         </div>
-      )}
-
-      {showEdit && activeProfile && (
-        <ProfileEditModal profile={activeProfile} onClose={() => setShowEdit(false)} />
       )}
 
       {/* Navigation */}
@@ -329,7 +308,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
       {/* Einstellungen + Trading Lock */}
       <div style={{ padding: '0 8px 10px', display: 'flex', gap: 6, flexDirection: collapsed ? 'column' : 'row', alignItems: 'center' }}>
         <button
-          onClick={() => { setShowEinstellungen(true); onNav?.() }}
+          onClick={() => { router.push('/einstellungen'); onNav?.() }}
           style={{
             flex: collapsed ? undefined : 1,
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
@@ -364,9 +343,6 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
         </button>
       </div>
 
-      {showEinstellungen && (
-        <EinstellungenModal profiles={profiles} onClose={() => setShowEinstellungen(false)} />
-      )}
     </div>
   )
 }

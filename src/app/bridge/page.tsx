@@ -5,14 +5,11 @@ import Sidebar from '@/components/layout/Sidebar'
 import BridgeClient from './BridgeClient'
 
 export default async function BridgePage() {
-  const allProfiles = getProfiles()
-  if (allProfiles.length === 0) redirect('/setup')
-
-  const profiles = allProfiles.filter(p => !p.isDemo)
+  const profiles = getProfiles()
   if (profiles.length === 0) redirect('/setup')
 
   let activeProfile = getActiveProfile()
-  if (!activeProfile || activeProfile.isDemo) {
+  if (!activeProfile) {
     setActiveProfileId(profiles[0].id)
     activeProfile = profiles[0]
   }

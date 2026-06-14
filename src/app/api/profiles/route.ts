@@ -7,7 +7,6 @@ import { PROFILE_COLORS } from '@/types/profile'
 
 export async function GET() {
   const profiles = getProfiles()
-    .filter(p => !p.isDemo)
     .map(p => ({ id: p.id, name: p.name, broker: p.broker, type: p.type, currency: p.currency }))
   return NextResponse.json({ profiles })
 }

@@ -3,7 +3,6 @@ import { getProfileStrategies } from '@/lib/strategies'
 import { getBots } from '@/lib/bot-data'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
-import DemoBanner from '@/components/layout/DemoBanner'
 import JournalClient from '@/components/journal/JournalClient'
 import LivePositionsWidget from '@/components/journal/LivePositionsWidget'
 
@@ -21,7 +20,6 @@ export default function JournalPage() {
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
       <main className="flex-1 p-4 md:p-6 max-w-full overflow-hidden">
-        {activeProfile.isDemo && <DemoBanner />}
         <div className="mb-5">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
             Trades

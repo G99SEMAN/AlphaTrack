@@ -9,7 +9,6 @@ export async function GET(req: NextRequest) {
   const url = `${proto}://${host}`
 
   const profiles = getProfiles()
-    .filter(p => !p.isDemo)
     .map(p => ({ id: p.id, name: p.name, currency: p.currency, broker: p.broker }))
 
   return NextResponse.json({ url, profiles }, {

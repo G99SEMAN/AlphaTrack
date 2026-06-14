@@ -2,9 +2,8 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
-import { ensureSeedData } from '@/lib/seed'
-import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
+import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
 import PnLCard from '@/components/dashboard/PnLCard'
 import RiskCard from '@/components/dashboard/RiskCard'
 import RecentTradesCard from '@/components/dashboard/RecentTradesCard'
@@ -14,7 +13,6 @@ const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), 
 })
 import DashboardWinRate from '@/components/dashboard/DashboardWinRate'
 import DashboardTimeFilter from '@/components/dashboard/DashboardTimeFilter'
-import DemoBanner from '@/components/layout/DemoBanner'
 import CriticalOpenTradesCard from '@/components/dashboard/CriticalOpenTradesCard'
 import { StaggerWrapper } from '@/components/dashboard/StaggerWrapper'
 import { Banknote, Gamepad2 } from 'lucide-react'
@@ -24,23 +22,27 @@ export default async function DashboardPage({
 }: {
   searchParams: Promise<{ period?: string }>
 }) {
-  ensureSeedData()
-
   const params = await searchParams
   const period = params?.period ?? 'gesamt'
 
   const profiles = getProfiles()
-
-  if (profiles.length === 0) redirect('/setup')
-
-  const onlyDemo = profiles.every(p => p.isDemo)
 
   let activeProfile = getActiveProfile()
   if (!activeProfile && profiles.length > 0) {
     setActiveProfileId(profiles[0].id)
     activeProfile = profiles[0]
   }
-  if (!activeProfile) redirect('/setup')
+
+  if (profiles.length === 0 || !activeProfile) {
+    return (
+      <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
+        <Sidebar profiles={[]} activeProfile={null} />
+        <main className="flex-1 min-w-0 p-4 md:p-6">
+          <EmptyProfileState />
+        </main>
+      </div>
+    )
+  }
 
   const allTrades = getProfileTrades(activeProfile.id)
   const trades = filterTradesByPeriod(allTrades, period)
@@ -56,8 +58,6 @@ export default async function DashboardPage({
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
 
       <main className="flex-1 min-w-0 p-4 md:p-6">
-        {onlyDemo && <DemoBanner />}
-
         {/* Header */}
         <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-3">
           <div className="min-w-0">

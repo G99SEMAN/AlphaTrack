@@ -222,7 +222,7 @@ export default function BotImportModal({ bots, profiles, existingExternalIdsByPr
                     Ziel-Profil
                   </label>
                   <div className="flex flex-col gap-1.5">
-                    {profiles.filter(p => !p.isDemo).map(profile => (
+                    {profiles.map(profile => (
                       <button key={profile.id} onClick={() => setSelectedProfileId(profile.id)}
                         className="flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all cursor-pointer"
                         style={{

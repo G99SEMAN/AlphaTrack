@@ -427,7 +427,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
         {showBotImport && bots.length > 0 && (
           <BotImportModal
             bots={bots}
-            profiles={profiles.filter(p => !p.isDemo)}
+            profiles={profiles}
             existingExternalIdsByProfile={Object.fromEntries(
               profiles.map(p => [p.id, new Set(trades.map(t => t.externalId).filter(Boolean) as string[])])
             )}

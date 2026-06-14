@@ -2,7 +2,6 @@ import { getProfiles, getActiveProfile, getProfileTrades } from '@/lib/profiles'
 import { getProfileStrategies } from '@/lib/strategies'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
-import DemoBanner from '@/components/layout/DemoBanner'
 import StrategiesClient from '@/components/strategien/StrategiesClient'
 
 export default function StrategienPage() {
@@ -18,7 +17,6 @@ export default function StrategienPage() {
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
       <main className="flex-1 p-4 md:p-6 max-w-full overflow-hidden">
-        {activeProfile.isDemo && <DemoBanner />}
         <div className="mb-5">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
             Strategien

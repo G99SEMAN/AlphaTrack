@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import Sidebar from '@/components/layout/Sidebar'
-import DemoBanner from '@/components/layout/DemoBanner'
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import TpcClient from './TpcClient'
 
@@ -18,7 +17,6 @@ export default async function TpcPage() {
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
       <main className="flex-1 min-w-0 p-4 md:p-6">
-        {activeProfile.isDemo && <DemoBanner />}
         <TpcClient profileId={activeProfile.id} />
       </main>
     </div>

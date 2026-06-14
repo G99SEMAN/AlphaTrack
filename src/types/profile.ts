@@ -25,7 +25,6 @@ export interface Profile {
   createdAt: string
   notes?: string
   deposits?: Deposit[]
-  isDemo?: boolean
 }
 
 export interface ActiveProfile {

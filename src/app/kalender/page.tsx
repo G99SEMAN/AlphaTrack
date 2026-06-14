@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import Sidebar from '@/components/layout/Sidebar'
-import DemoBanner from '@/components/layout/DemoBanner'
 import KalenderClient from '@/components/wirtschaftskalender/KalenderClient'
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import { fetchWirtschaftskalender } from '@/lib/wirtschaftskalender'
@@ -33,8 +32,6 @@ export default async function KalenderPage() {
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
       <main className="flex-1 min-w-0 p-4 md:p-6">
-        {activeProfile.isDemo && <DemoBanner />}
-
         <div className="mb-5">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
             Wirtschaftskalender
