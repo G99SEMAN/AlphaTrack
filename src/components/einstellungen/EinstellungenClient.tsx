@@ -407,7 +407,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   return (
                     <div
                       key={profile.id}
-                      className="group flex items-center gap-3 px-3 py-3 rounded-lg transition-all cursor-pointer"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg transition-all cursor-pointer"
                       style={{
                         background: isActive ? 'var(--accent-bg)' : 'var(--surface-2)',
                         border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border)'}`,
@@ -454,7 +454,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                       {isActive && <Check size={15} style={{ color: 'var(--accent)', flexShrink: 0 }} />}
 
                       {/* Aktions-Buttons */}
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center gap-1">
                         <button
                           onClick={e => { e.stopPropagation(); setShowEditModal(profile) }}
                           className="p-1.5 rounded-lg transition-all"
