@@ -1,1 +1,197 @@
  ⚠ Port 3000 is in use by an unknown process, using available port 3002 instead.
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\DumpStack.log.tmp'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\hiberfil.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\DumpStack.log.tmp'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\hiberfil.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\DumpStack.log.tmp'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\hiberfil.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/einstellungen'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/dashboard'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json',
+  page: '/dashboard'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open 'C:\Users\G99SEMAN\Desktop\AlphaTrack\.next\routes-manifest.json'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.next\\routes-manifest.json'
+}
