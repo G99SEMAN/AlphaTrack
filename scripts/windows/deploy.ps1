@@ -118,8 +118,33 @@ function Invoke-Questionnaire($cfg) {
 
 # --- Phase 1: NAS ------------------------------------------
 
+$script:NasCtlPath = ''
+
+function Open-NasConnection($cfg) {
+    $script:NasCtlPath = Join-Path $env:TEMP "at-nas-$([System.IO.Path]::GetRandomFileName())"
+    # Baut einmalig eine Master-SSH-Verbindung auf (1x Passwort), alle weiteren Calls nutzen sie.
+    & ssh -M -N -f `
+        -o "ControlPath=$($script:NasCtlPath)" `
+        -o "ControlPersist=120" `
+        -p $cfg.nas_ssh_port `
+        "$($cfg.nas_ssh_user)@$($cfg.nas_host)"
+    if ($LASTEXITCODE -ne 0) { throw "SSH Master-Verbindung zum NAS fehlgeschlagen." }
+    Write-Ok "NAS-Verbindung geöffnet (kein weiteres Passwort nötig)."
+}
+
+function Close-NasConnection {
+    if ($script:NasCtlPath) {
+        & ssh -O exit -o "ControlPath=$($script:NasCtlPath)" placeholder 2>$null
+        $script:NasCtlPath = ''
+    }
+}
+
 function Invoke-NasSsh($cfg, [string]$RemoteCmd) {
-    & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
+    if ($script:NasCtlPath) {
+        & ssh -o "ControlPath=$($script:NasCtlPath)" -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
+    } else {
+        & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
+    }
     if ($LASTEXITCODE -eq 255) {
         throw "SSH-Verbindung zum NAS fehlgeschlagen ($($cfg.nas_ssh_user)@$($cfg.nas_host), Port $($cfg.nas_ssh_port)). Ist das NAS erreichbar und SSH aktiviert?"
     }
@@ -415,8 +440,13 @@ function Invoke-Main {
 
     Write-Step '[Phase 1/3] NAS-Deploy'
     Invoke-GitPush
-    $apiKey = Confirm-NasEnvFile $cfg
-    Invoke-NasUpdate $cfg
+    Open-NasConnection $cfg
+    try {
+        $apiKey = Confirm-NasEnvFile $cfg
+        Invoke-NasUpdate $cfg
+    } finally {
+        Close-NasConnection
+    }
     $info = Wait-ForAlphaTrack $cfg
     $profileId = Select-TradingProfile $info $cfg $apiKey
 
