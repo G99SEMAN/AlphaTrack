@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getProfiles } from '@/lib/profiles'
 import { ensureSeedData } from '@/lib/seed'
 import { redirect } from 'next/navigation'

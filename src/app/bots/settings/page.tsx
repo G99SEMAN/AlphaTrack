@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import { getAllBotsWithStatus } from '@/lib/bot-data'
 import { redirect } from 'next/navigation'

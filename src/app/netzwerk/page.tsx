@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'

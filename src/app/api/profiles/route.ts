@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getProfiles, createProfile } from '@/lib/profiles'
+import { getProfiles, createProfile, setActiveProfileId } from '@/lib/profiles'
 import { isValidApiKey } from '@/lib/auth'
 import { nanoid } from 'nanoid'
 import type { Profile } from '@/types/profile'
@@ -41,5 +41,6 @@ export async function POST(req: NextRequest) {
   }
 
   createProfile(profile)
+  setActiveProfileId(profile.id)
   return NextResponse.json({ id: profile.id, name: profile.name }, { status: 201 })
 }

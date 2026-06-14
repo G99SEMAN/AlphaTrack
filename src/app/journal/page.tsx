@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getProfiles, getActiveProfile, getProfileTrades } from '@/lib/profiles'
 import { getProfileStrategies } from '@/lib/strategies'
 import { getBots } from '@/lib/bot-data'

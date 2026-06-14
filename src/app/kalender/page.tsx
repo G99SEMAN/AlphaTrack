@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
 import Sidebar from '@/components/layout/Sidebar'

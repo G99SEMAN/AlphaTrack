@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getProfiles, getActiveProfile, setActiveProfileId } from '@/lib/profiles'
 import Sidebar from '@/components/layout/Sidebar'
 import EinstellungenClient from '@/components/einstellungen/EinstellungenClient'

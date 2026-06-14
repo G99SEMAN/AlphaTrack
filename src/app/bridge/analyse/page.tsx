@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
 import AnalyseClient from '@/components/analyse/AnalyseClient'
