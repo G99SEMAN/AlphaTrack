@@ -118,33 +118,8 @@ function Invoke-Questionnaire($cfg) {
 
 # --- Phase 1: NAS ------------------------------------------
 
-$script:NasCtlPath = ''
-
-function Open-NasConnection($cfg) {
-    $script:NasCtlPath = Join-Path $env:TEMP "at-nas-$([System.IO.Path]::GetRandomFileName())"
-    # Baut einmalig eine Master-SSH-Verbindung auf (1x Passwort), alle weiteren Calls nutzen sie.
-    & ssh -M -N -f `
-        -o "ControlPath=$($script:NasCtlPath)" `
-        -o "ControlPersist=120" `
-        -p $cfg.nas_ssh_port `
-        "$($cfg.nas_ssh_user)@$($cfg.nas_host)"
-    if ($LASTEXITCODE -ne 0) { throw "SSH Master-Verbindung zum NAS fehlgeschlagen." }
-    Write-Ok "NAS-Verbindung geöffnet (kein weiteres Passwort nötig)."
-}
-
-function Close-NasConnection {
-    if ($script:NasCtlPath) {
-        & ssh -O exit -o "ControlPath=$($script:NasCtlPath)" placeholder 2>$null
-        $script:NasCtlPath = ''
-    }
-}
-
 function Invoke-NasSsh($cfg, [string]$RemoteCmd) {
-    if ($script:NasCtlPath) {
-        & ssh -o "ControlPath=$($script:NasCtlPath)" -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
-    } else {
-        & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
-    }
+    & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $RemoteCmd
     if ($LASTEXITCODE -eq 255) {
         throw "SSH-Verbindung zum NAS fehlgeschlagen ($($cfg.nas_ssh_user)@$($cfg.nas_host), Port $($cfg.nas_ssh_port)). Ist das NAS erreichbar und SSH aktiviert?"
     }
@@ -157,44 +132,27 @@ function Invoke-GitPush {
     Write-Ok 'Code zu GitHub gepusht.'
 }
 
-# Stellt sicher, dass .env.local auf dem NAS existiert und BOT_API_KEY enthaelt.
-# Gibt den BOT_API_KEY zurueck — Bridge und Bots brauchen exakt denselben Wert.
-function Confirm-NasEnvFile($cfg) {
-    $envPath = "$($cfg.nas_project_dir)/.env.local"
+# Einzelner SSH-Aufruf: .env.local pruefen/anlegen, BOT_API_KEY ausgeben, Container updaten.
+# Update-Output geht auf stderr (bleibt im Terminal sichtbar), Key kommt auf stdout (wird geparst).
+function Invoke-NasSetupAndUpdate($cfg) {
+    $envPath   = "$($cfg.nas_project_dir)/.env.local"
+    $updScript = "$($cfg.nas_project_dir)/scripts/nas-update.sh"
+    $newKey    = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
 
-    Invoke-NasSsh $cfg "test -f '$envPath'"
-    if ($LASTEXITCODE -ne 0) {
-        Write-Warn2 ".env.local fehlt auf dem NAS — wird angelegt."
-        $botKey = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
-        $anthropicKey = Read-Host '  Anthropic-API-Key fuer KI-Analyse (optional, Enter = ueberspringen)'
-        $remoteCmd = "printf '%s\n' 'BOT_API_KEY=$botKey' > '$envPath'"
-        if ("$anthropicKey" -ne '') {
-            $remoteCmd = "printf '%s\n' 'BOT_API_KEY=$botKey' 'ANTHROPIC_API_KEY=$($anthropicKey.Trim())' > '$envPath'"
-        }
-        Invoke-NasSsh $cfg $remoteCmd
-        if ($LASTEXITCODE -ne 0) { throw ".env.local konnte nicht angelegt werden ($envPath)." }
-        Write-Ok '.env.local auf dem NAS angelegt (BOT_API_KEY generiert).'
-        return $botKey
-    }
+    Write-Host "  NAS-Verbindung herstellen, .env.local pruefen + Container updaten ..."
 
-    $line = (Invoke-NasSsh $cfg "grep '^BOT_API_KEY=' '$envPath'") | Select-Object -First 1
-    if ("$line" -eq '') {
-        Write-Warn2 "BOT_API_KEY fehlt in $envPath — wird ergaenzt."
-        $botKey = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
-        Invoke-NasSsh $cfg "printf '%s\n' 'BOT_API_KEY=$botKey' >> '$envPath'"
-        if ($LASTEXITCODE -ne 0) { throw "BOT_API_KEY konnte nicht ergaenzt werden." }
-        return $botKey
-    }
-    $key = $line.Substring('BOT_API_KEY='.Length).Trim()
+    $remoteCmd = "if [ ! -f '$envPath' ]; then printf 'BOT_API_KEY=$newKey\n' > '$envPath'; fi; grep '^BOT_API_KEY=' '$envPath' | head -1; bash '$updScript' >&2"
+
+    $output = & ssh -p $cfg.nas_ssh_port "$($cfg.nas_ssh_user)@$($cfg.nas_host)" $remoteCmd
+    if ($LASTEXITCODE -eq 255) { throw "SSH-Verbindung zum NAS fehlgeschlagen ($($cfg.nas_ssh_user)@$($cfg.nas_host), Port $($cfg.nas_ssh_port))." }
+
+    $keyLine = @($output) | Where-Object { $_ -match '^BOT_API_KEY=' } | Select-Object -First 1
+    if (-not $keyLine) { throw "BOT_API_KEY konnte nicht aus .env.local gelesen werden. Datei auf dem NAS pruefen: $envPath" }
+
+    $apiKey = $keyLine.Substring('BOT_API_KEY='.Length).Trim()
     Write-Ok 'BOT_API_KEY vom NAS uebernommen.'
-    return $key
-}
-
-function Invoke-NasUpdate($cfg) {
-    Write-Host "  Update auf NAS ausfuehren ($($cfg.nas_ssh_user)@$($cfg.nas_host)) ..."
-    Invoke-NasSsh $cfg "bash '$($cfg.nas_project_dir)/scripts/nas-update.sh'"
-    if ($LASTEXITCODE -ne 0) { throw 'nas-update.sh auf dem NAS fehlgeschlagen.' }
     Write-Ok 'NAS-Container neu gebaut und gestartet.'
+    return $apiKey
 }
 
 function Wait-ForAlphaTrack($cfg) {
@@ -440,13 +398,7 @@ function Invoke-Main {
 
     Write-Step '[Phase 1/3] NAS-Deploy'
     Invoke-GitPush
-    Open-NasConnection $cfg
-    try {
-        $apiKey = Confirm-NasEnvFile $cfg
-        Invoke-NasUpdate $cfg
-    } finally {
-        Close-NasConnection
-    }
+    $apiKey = Invoke-NasSetupAndUpdate $cfg
     $info = Wait-ForAlphaTrack $cfg
     $profileId = Select-TradingProfile $info $cfg $apiKey
 
