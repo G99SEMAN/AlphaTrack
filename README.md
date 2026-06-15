@@ -22,6 +22,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 - [Konfiguration](#konfiguration)
 - [Projektstruktur](#projektstruktur)
 - [Datenspeicherung](#datenspeicherung)
+- [Backtesting](#backtesting)
 - [Tech Stack](#tech-stack)
 - [PWA / Mobile](#pwa--mobile)
 - [Lizenz](#lizenz)
@@ -240,7 +241,9 @@ AlphaTrack/
 |   +-- types/                    # TypeScript-Typdefinitionen
 +-- bots/                         # Python-Bots (testbot2 aktiv, scaffold als Vorlage)
 |   +-- testbot2/                 # Aktiver Test-Bot
+|   +-- scalpingv1/               # EMA-Crossover + RSI Scalping Bot (EURUSDp M5)
 |   +-- scaffold/                 # Bot-Vorlage für neue Bots
+|   +-- backtest/                 # Generischer Backtest-Runner (runner.py)
 +-- bridge/                       # Python-Bridge (gateway.py, main.py, trade_executor.py)
 +-- scripts/
 |   +-- docker-entrypoint.sh      # Docker-Startskript (erstellt data/)
@@ -284,6 +287,89 @@ Trade-Screenshots werden unter `data/screenshots/` gespeichert.
 ### Backup & Restore
 
 Über die Einstellungen lässt sich ein vollständiges Backup als `.zip` exportieren (inkl. Screenshots) und auf einem anderen Gerät wieder importieren.
+
+---
+
+## Backtesting
+
+Bots können gegen echte MetaTrader-Daten zurückgetestet werden — ohne Live-Trading-Risiko. Die Daten kommen ausschliesslich über die Bridge aus MT5, es wird kein externer Datenfeed benötigt.
+
+### Voraussetzungen
+
+- **Bridge läuft** auf dem Mini PC (MT5 verbunden, Port 8765 erreichbar)
+- **Python** + `requests` auf dem ausführenden Computer installiert
+- Bot hat eine gültige `config.json` mit `bridge_url` und `api_key`
+
+### Backtest starten
+
+```bash
+# Vom AlphaTrack-Projektverzeichnis aus:
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14
+
+# Mit expliziter Bridge-URL (falls abweichend von config.json):
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://192.168.178.37:8765
+```
+
+**Parameter:**
+
+| Parameter | Pflicht | Beschreibung |
+|---|---|---|
+| `--bot` | Ja | Name des Bot-Ordners unter `bots/` (z.B. `scalpingv1`) |
+| `--from` | Ja | Start-Datum im Format `YYYY-MM-DD` |
+| `--to` | Ja | End-Datum im Format `YYYY-MM-DD` (inklusive) |
+| `--bridge` | Nein | Bridge-URL — Standard: Wert aus `config.json` des Bots |
+
+### Ablauf
+
+1. Runner liest `bots/<botname>/config.json` (Symbol, Timeframe, Parameter)
+2. Lädt historische Kerzen vom Bridge-Endpoint `/historical_candles` (MT5 als Quelle)
+3. Simuliert die `on_tick()`-Schleife des Bots über die Kerzen im Sliding-Window
+4. SL/TP werden gegen High/Low der jeweils nächsten Kerze geprüft
+5. Noch offene Positionen am Ende werden zum letzten Close-Preis geschlossen
+
+### Beispiel-Output
+
+```
+[Bridge] Lade Kerzen: EURUSDp M5 | 2026-01-01 → 2026-06-14 ...
+[Bridge] 18432 Kerzen geladen
+[Backtest] Warmup: 50 Kerzen | Test ab: 2026-01-01 09:05:00
+
+==============================================================
+  BACKTEST: Scalping V1
+  Symbol   : EURUSDp | TF: M5
+  Zeitraum : 2026-01-01 → 2026-06-14
+==============================================================
+  Trades gesamt    : 47
+  Gewinner / Verlierer : 29 / 18
+  Win-Rate         : 61.7%
+  Gesamt-P&L       : +$312.50
+  Ø Win / Ø Loss   : +$32.50 / -$25.00
+  Profit-Faktor    : 2.08
+  Max. Drawdown    : $75.00
+
+  #   Eröffnet           Dir   Entry     Exit       P&L   Typ
+  -------------------------------------------------------
+  1   2026-01-02 09:15   BUY   1.03452  1.03602  +$37.50  TP
+  2   2026-01-03 10:30   SELL  1.03811  1.03961  -$25.00  SL
+  ...
+==============================================================
+```
+
+> **Hinweis:** P&L-Werte sind Rohschätzungen (kein Spread, keine Kommission). Der Spread deines Brokers reduziert die Realrendite — typisch 1–2 Pips bei EURUSD.
+
+### Neuen Bot backtest-fähig machen
+
+**Pflicht:** Zeit-Checks in `on_tick()` müssen `self._now()` statt `datetime.now()` nutzen:
+
+```python
+# Richtig — im Backtest wird self._now() auf die Kerzenzeit gesetzt:
+now_utc = self._now()
+
+# Falsch — gibt immer die echte Systemzeit zurück, Session-Filter bricht:
+now_utc = datetime.now(timezone.utc)
+```
+
+`self._now()` ist in `BaseBot` definiert und gibt live `datetime.now(timezone.utc)` zurück. Der Backtest-Runner überschreibt sie automatisch. Bots ohne Zeit-Checks (kein Session-Filter) brauchen nichts zu ändern.
 
 ---
 

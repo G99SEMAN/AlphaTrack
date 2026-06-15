@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_historical_candles_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -257,6 +257,7 @@ def main():
     configure(config["alphatrack_url"], config["profile_id"], config.get("api_key", ""), get_local_ip())
     set_candles_fetcher(mt5.copy_rates)
     set_history_fetcher(mt5.get_closed_deals)
+    set_historical_candles_fetcher(mt5.copy_rates_range)
     set_account_fetcher(mt5.get_account_info)
     set_calendar_fetcher(mt5.get_calendar)
 

@@ -291,6 +291,36 @@ rich>=13.0.0
 - **Log-Trennung** — `self.log()` schreibt nur bot-relevante Logs (C2)
 - **Trade senden** — immer `self.send_trade()` nutzen, nie direkt `bridge_client.execute_trade()` (C4)
 
+## Backtesting
+
+Jeder Bot kann mit dem generischen Backtest-Runner getestet werden:
+
+```
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://192.168.178.37:8765
+```
+
+- Daten kommen **ausschliesslich aus MetaTrader** ueber die Bridge (`/historical_candles`)
+- Die Bridge muss laufen; der Runner kann von jedem PC im LAN ausgefuehrt werden
+- Output: Trade-Liste, Win-Rate, Gesamt-P&L, Profit-Faktor, Max. Drawdown (im Terminal)
+
+### Pflicht fuer backtest-faehige Bots
+
+Zeit-Checks in `on_tick()` **immer** `self._now()` statt `datetime.now()` verwenden:
+
+```python
+# Richtig — funktioniert im Backtest (Zeit wird simuliert):
+now_utc = self._now()
+
+# Falsch — im Backtest immer Echtzeit, Session-Filter bricht:
+now_utc = datetime.now(timezone.utc)
+```
+
+`self._now()` ist in `BaseBot` definiert und gibt live `datetime.now(timezone.utc)` zurueck.
+Im Backtest-Runner wird die Methode pro Kerze ueberschrieben.
+
+---
+
 ## Review-Checkliste
 
 - [ ] `class MyBot(BaseBot)` — erbt von BaseBot?
@@ -301,3 +331,4 @@ rich>=13.0.0
 - [ ] `send_trade()` statt direktem Bridge-Aufruf?
 - [ ] Bot-Ordner enthaelt KEINE eigenen Kopien von `ws_client.py`, `bridge_client.py`, `bot_display.py`?
 - [ ] `get_parameters()` implementiert, wenn Parameter einstellbar sein sollen?
+- [ ] Zeit-Checks nutzen `self._now()` statt `datetime.now()` (Backtest-Pflicht)?

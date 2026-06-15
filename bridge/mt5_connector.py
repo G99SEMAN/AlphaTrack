@@ -187,7 +187,7 @@ class MT5Connector:
                 "exit": exit_.price,
                 "size": entry.volume,
                 "pnl": round(pnl, 2),
-                "commission": round(commission, 2),
+                "commission": round(abs(commission), 2),
                 "swap": round(swap, 2),
                 "status": "closed",
                 "externalId": f"pos_{pos_id}",
@@ -272,6 +272,28 @@ class MT5Connector:
         except Exception as e:
             print(f"[MT5] Kalender-Fehler: {e}")
             return []
+
+    def copy_rates_range(self, symbol: str, interval: str, from_dt: datetime, to_dt: datetime) -> list[dict]:
+        """Historische Kerzen für einen Zeitraum — älteste zuerst (für Backtest)."""
+        tf = _TIMEFRAME_MAP.get(interval)
+        if tf is None:
+            return []
+        from_naive = from_dt.replace(tzinfo=None) if from_dt.tzinfo else from_dt
+        to_naive = to_dt.replace(tzinfo=None) if to_dt.tzinfo else to_dt
+        rates = mt5.copy_rates_range(symbol, tf, from_naive, to_naive)
+        if rates is None:
+            return []
+        return [
+            {
+                "datetime": datetime.fromtimestamp(r["time"], tz=timezone.utc).astimezone(_TZ_BERLIN).strftime("%Y-%m-%d %H:%M:%S"),
+                "ts": int(r["time"]),
+                "open": str(r["open"]),
+                "high": str(r["high"]),
+                "low": str(r["low"]),
+                "close": str(r["close"]),
+            }
+            for r in rates
+        ]
 
     def copy_rates(self, symbol: str, interval: str, count: int) -> list[dict]:
         tf = _TIMEFRAME_MAP.get(interval)

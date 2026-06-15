@@ -48,7 +48,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
 
   for (const t of closed) {
     const pnl = t.pnl ?? 0
-    const cost = (t.commission ?? 0) + (t.swap ?? 0) + (t.spreadCost ?? 0)
+    const cost = Math.abs(t.commission ?? 0) + Math.abs(t.swap ?? 0) + (t.spreadCost ?? 0)
     const dayStr = t.date.slice(0, 10)
     const monthStr = t.date.slice(0, 7)
 

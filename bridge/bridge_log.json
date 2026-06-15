@@ -1,5 +1,41 @@
 [
   {
+    "id": "1a3c900bf1",
+    "timestamp": "2026-06-15T14:14:51.720954+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.30', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.30', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "1a77528332",
+    "timestamp": "2026-06-15T14:14:46.607730+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.30', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.30', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "18192401f6",
+    "timestamp": "2026-06-15T14:14:41.508304+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.30', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.30', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
+    "id": "7be4f98c80",
+    "timestamp": "2026-06-15T14:14:33.313185+00:00",
+    "level": "info",
+    "message": "Bridge gestartet",
+    "details": "AlphaTrack: http://192.168.178.30:3000",
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "redesign_bridge"
+  },
+  {
     "id": "4ab49436a8",
     "timestamp": "2026-06-13T18:42:57.850308+00:00",
     "level": "warn",

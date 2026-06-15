@@ -29,6 +29,7 @@ import socket
 import sys
 import time
 import threading
+from datetime import datetime, timezone
 
 # Importpfad beachten: PYTHONPATH muss auf bots/ gesetzt sein (via start.bat)
 # Paketrelative Imports setzen voraus, dass scaffold als Package geladen wird.
@@ -357,6 +358,10 @@ class BaseBot:
             self.log("error", "Parameter-Persistenz fehlgeschlagen", str(e))
 
     # ── Strategie-Tick (muss von Subklasse implementiert werden) ────────
+
+    def _now(self) -> datetime:
+        """Aktuelle UTC-Zeit. Im Backtest wird diese Methode überschrieben."""
+        return datetime.now(timezone.utc)
 
     def on_tick(self, candles: list, positions: list) -> dict:
         """

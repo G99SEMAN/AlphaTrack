@@ -222,6 +222,17 @@ python main.py
 3. Check Bridge logs for WebSocket connection
 4. Check AlphaTrack UI for bot registration
 
+### Backtesting
+```batch
+python backtest/runner.py --bot <botname> --from 2026-01-01 --to 2026-06-14
+```
+Daten kommen über die Bridge aus MetaTrader (`/historical_candles`). Bridge muss laufen.
+
+**Pflicht für alle Bots:** Zeit-Checks in `on_tick()` immer `self._now()` statt `datetime.now()` nutzen:
+```python
+now_utc = self._now()   # korrekt — im Backtest wird dies auf Kerzenzeit gesetzt
+```
+
 ### Exit Codes
 - 0 = Clean shutdown
 - 1 = Configuration error

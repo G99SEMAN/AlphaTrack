@@ -19,7 +19,6 @@ Parameter (in config.json unter 'strategy'):
 """
 import sys
 import os
-from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -55,7 +54,7 @@ class ScalpingV1Strategy(BaseBot):
         cfg = self._config.get("strategy", {})
 
         # Session-Filter: nur innerhalb der London/NY-Handelszeit
-        now_utc = datetime.now(timezone.utc)
+        now_utc = self._now()
         session_start = int(cfg.get("session_start_utc", 7))
         session_end = int(cfg.get("session_end_utc", 16))
         if not (session_start <= now_utc.hour < session_end):

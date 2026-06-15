@@ -38,6 +38,7 @@ _trade_events: dict = {}
 _positions_cache: list = []
 _candles_fetcher = None
 _history_fetcher = None
+_historical_candles_fetcher = None
 _account_fetcher = None
 _calendar_fetcher = None
 _log_callback = None
@@ -109,6 +110,11 @@ def set_candles_fetcher(func):
 def set_history_fetcher(func):
     global _history_fetcher
     _history_fetcher = func
+
+
+def set_historical_candles_fetcher(func):
+    global _historical_candles_fetcher
+    _historical_candles_fetcher = func
 
 
 def set_account_fetcher(func):
@@ -545,6 +551,29 @@ async def get_candles(
     if not candles:
         raise HTTPException(status_code=503, detail=f"Keine Kerzen für {symbol} - Symbol im MT5 aktiviert?")
     return {"candles": candles, "symbol": symbol}
+
+
+@app.get("/historical_candles")
+async def get_historical_candles(
+    symbol: str = Query(default="EURUSDp"),
+    interval: str = Query(default="M5"),
+    from_date: str = Query(..., description="Start-Datum lokal YYYY-MM-DD"),
+    to_date: str = Query(..., description="End-Datum lokal YYYY-MM-DD"),
+    _: None = Depends(_require_api_key),
+):
+    if _historical_candles_fetcher is None:
+        raise HTTPException(status_code=503, detail="MT5 nicht initialisiert")
+    if interval not in ("M1", "M5", "M15", "H1", "H4", "D1"):
+        raise HTTPException(status_code=400, detail=f"Ungültiger Intervall: {interval}")
+    try:
+        from_dt = datetime.strptime(from_date, "%Y-%m-%d")
+        to_dt = datetime.strptime(to_date, "%Y-%m-%d") + timedelta(days=1)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Datum-Format: YYYY-MM-DD")
+    candles = await asyncio.to_thread(_historical_candles_fetcher, symbol, interval, from_dt, to_dt)
+    if not candles:
+        raise HTTPException(status_code=503, detail=f"Keine historischen Daten für {symbol} {interval}")
+    return {"candles": candles, "symbol": symbol, "count": len(candles)}
 
 
 @app.get("/positions")
