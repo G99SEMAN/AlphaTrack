@@ -199,12 +199,10 @@ export default function BridgeTradesClient({ bots }: Props) {
         <div className="rounded-2xl p-10 flex flex-col items-center text-center"
           style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
           <Activity size={28} style={{ color: 'var(--text-3)', marginBottom: 12 }} />
-          <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-1)' }}>Kein Bot konfiguriert</p>
-          <p className="text-xs" style={{ color: 'var(--text-3)' }}>Bitte zuerst einen Bot im Bridge-Dashboard einrichten.</p>
+          <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-1)' }}>Bridge nicht verbunden</p>
+          <p className="text-xs" style={{ color: 'var(--text-3)' }}>Die Bridge läuft nicht oder hat seit über 2 Minuten keinen Heartbeat gesendet.</p>
         </div>
       ) : (
-        <>
-          {positions.length > 0 && (
             <div className="mb-5 rounded-2xl px-5 py-4 flex items-center gap-6"
               style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div>

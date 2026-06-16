@@ -17,7 +17,10 @@ export default async function BridgeTradesPage() {
   }
 
   const bots = getAllBotsWithStatus()
-    .filter(({ status }) => status?.connectionState === 'connected' || status?.connectionState === 'warning')
+    .filter(({ bot, status }) =>
+      (bot.type === 'bridge' || !bot.type) &&
+      (status?.connectionState === 'connected' || status?.connectionState === 'warning')
+    )
     .map(({ bot }) => bot)
 
   return (

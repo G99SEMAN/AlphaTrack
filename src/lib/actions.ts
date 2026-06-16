@@ -87,6 +87,7 @@ export async function updateStartCapitalAction(newCapital: number) {
 export async function updateProfileAction(profileId: string, formData: FormData) {
   const existing = getProfiles().find(p => p.id === profileId)
   if (!existing) return
+  const rawCapital = parseFloat(formData.get('startCapital') as string)
   const updated: Profile = {
     ...existing,
     name: formData.get('name') as string,
@@ -96,6 +97,7 @@ export async function updateProfileAction(profileId: string, formData: FormData)
     icon: (formData.get('icon') as string) || undefined,
     notes: (formData.get('notes') as string) || undefined,
     currency: (formData.get('currency') as Profile['currency']) || existing.currency,
+    startCapital: !isNaN(rawCapital) ? rawCapital : existing.startCapital,
   }
   updateProfile(updated)
   revalidatePath('/', 'layout')

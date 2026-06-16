@@ -98,6 +98,8 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
   const [icon, setIcon] = useState(profile.icon ?? '')
   const [notes, setNotes] = useState(profile.notes ?? '')
 
+  const [startCapital, setStartCapital] = useState(profile.startCapital.toString())
+
   // Einzahlungs-Formular
   const today = new Date().toISOString().slice(0, 10)
   const [depDate, setDepDate] = useState(today)
@@ -117,6 +119,7 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
     fd.set('icon', icon)
     fd.set('notes', notes)
     fd.set('currency', currency)
+    fd.set('startCapital', startCapital)
     startTransition(async () => {
       try {
         await updateProfileAction(profile.id, fd)
@@ -379,6 +382,26 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
                 </div>
 
                 <div>
+                  <label style={labelStyle}>Startkapital</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      value={startCapital}
+                      onChange={e => setStartCapital(e.target.value)}
+                      style={{ ...inputStyle, fontFamily: 'var(--font-dm-mono, monospace)', flex: 1 }}
+                    />
+                    <span
+                      className="flex items-center px-3 rounded-xl text-sm font-mono"
+                      style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-3)', whiteSpace: 'nowrap' }}
+                    >
+                      {currencySymbol(profile.currency)}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
                   <label style={labelStyle}>Notizen</label>
                   <textarea
                     style={{ ...inputStyle, resize: 'vertical', minHeight: 68 }}
@@ -418,14 +441,14 @@ export default function ProfileEditModal({ profile, onClose }: Props) {
             {/* Tab: Einzahlungen */}
             {tab === 'deposits' && (
               <div className="flex flex-col gap-4">
-                {/* Startkapital Info */}
+                {/* Startkapital Info (read-only, editierbar im Profil-Tab) */}
                 <div
                   className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm"
                   style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
                 >
                   <span style={{ color: 'var(--text-2)' }}>Startkapital</span>
                   <span className="font-mono font-semibold" style={{ color: 'var(--text-1)' }}>
-                    {profile.startCapital.toLocaleString('de-DE')} {currencySymbol(profile.currency)}
+                    {parseFloat(startCapital || '0').toLocaleString('de-DE')} {currencySymbol(profile.currency)}
                   </span>
                 </div>
 
