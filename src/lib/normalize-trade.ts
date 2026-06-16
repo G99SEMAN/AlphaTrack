@@ -11,6 +11,7 @@ export function isValidRawTrade(raw: Record<string, unknown>): boolean {
   )
 }
 
+// Python sends snake_case bot_id; TypeScript stores as botId. Trades without bot attribution (bridge sync) receive botId: null.
 export function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
   const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
   const resolvedBotId = botId ?? bot_id ?? null
