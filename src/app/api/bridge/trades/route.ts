@@ -5,6 +5,7 @@ import { getProfileTrades, saveProfileTrades, getProfiles } from '@/lib/profiles
 import { Trade } from '@/types/trade'
 import { nanoid } from 'nanoid'
 import { isValidApiKey } from '@/lib/auth'
+import { isValidRawTrade, normalizeTrade } from '@/lib/normalize-trade'
 
 function syncBridgeTradesToProfile(profileId: string, bridgeTrades: Trade[]): boolean {
   const profileTrades = getProfileTrades(profileId)
@@ -47,26 +48,6 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ trades: getBotTrades(profileId) })
 }
 
-// Normalize a raw trade payload to a typed Trade, resolving bot_id attribution.
-// Python sends snake_case bot_id; TypeScript stores as botId.
-// Trades with no bot attribution (bridge sync) receive botId: null (C4).
-function isValidRawTrade(raw: Record<string, unknown>): boolean {
-  return (
-    typeof raw.date === 'string' &&
-    typeof raw.instrument === 'string' &&
-    (raw.type === 'long' || raw.type === 'short') &&
-    typeof raw.entry === 'number' &&
-    typeof raw.size === 'number' &&
-    (raw.status === 'open' || raw.status === 'closed' || raw.status === 'cancelled')
-  )
-}
-
-function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
-  const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
-  const resolvedBotId = botId ?? bot_id ?? null
-  const sourceId = resolvedBotId !== null ? resolvedBotId : 'bridge/tradeexecuter'
-  return { ...rest, botId: resolvedBotId, sourceId } as unknown as Omit<Trade, 'id'>
-}
 
 export async function POST(req: NextRequest) {
   if (!isValidApiKey(req)) {
