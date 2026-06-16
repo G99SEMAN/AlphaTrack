@@ -118,6 +118,22 @@ export function removeBot(id: string): void {
   saveBots(getBots().filter(b => b.id !== id))
 }
 
+export function getBotsByProfileId(profileId: string): BotEntry[] {
+  return getBots().filter(b => b.profileId === profileId)
+}
+
+export function deleteBotFiles(botId: string): void {
+  const filesToDelete = [
+    botStatusPath(botId),
+    bridgeLogPath(botId),
+    botCommandsPath(botId),
+    botLogPath(botId),
+  ]
+  for (const f of filesToDelete) {
+    try { fs.unlinkSync(f) } catch { /* ignorieren */ }
+  }
+}
+
 // --- Bot Trades ---
 
 export function getBotTrades(profileId: string): Trade[] {
