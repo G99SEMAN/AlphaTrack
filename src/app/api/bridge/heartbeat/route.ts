@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus, getBots } from '@/lib/bot-data'
-import { getProfileTrades, saveProfileTrades } from '@/lib/profiles'
+import { getProfileTrades, saveProfileTrades, getProfiles, updateProfile } from '@/lib/profiles'
 import { revalidatePath } from 'next/cache'
 import { BotStatus } from '@/types/bot'
 import { isValidApiKey } from '@/lib/auth'
@@ -65,6 +65,36 @@ export async function POST(req: NextRequest) {
       addBridgeLogEntry(resolvedId, 'warn', 'Heartbeat: ungueltige profileId ignoriert', body.profileId)
     } else {
       reconcileOpenTrades(body.profileId, status.openTicketIds)
+    }
+  }
+
+  // Auto-Startkapital: bei erster Verbindung Kontostand aus Bridge holen
+  if (body.profileId && /^[a-zA-Z0-9_-]{1,64}$/.test(body.profileId)) {
+    const profiles = getProfiles()
+    const profile = profiles.find(p => p.id === body.profileId)
+    if (profile && profile.startCapital === 0) {
+      const bridge = getBotById(resolvedId)
+      if (bridge) {
+        try {
+          const accountRes = await fetch(`${bridge.url}/account`, {
+            signal: AbortSignal.timeout(5000),
+          })
+          if (accountRes.ok) {
+            const account = await accountRes.json() as Record<string, unknown>
+            const balance = account?.balance
+            if (typeof balance === 'number' && balance > 0) {
+              updateProfile({ ...profile, startCapital: balance })
+              addBridgeLogEntry(
+                resolvedId,
+                'info',
+                `Startkapital automatisch gesetzt: ${balance} ${profile.currency}`,
+              )
+            }
+          }
+        } catch {
+          // Nächster Heartbeat versucht es erneut
+        }
+      }
     }
   }
 
