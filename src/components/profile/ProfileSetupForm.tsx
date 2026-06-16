@@ -1,14 +1,11 @@
 'use client'
 
-import { useState, useRef, useTransition } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { addProfileFromModalAction, importTradesAction, updateStartCapitalAction, finishSetupAction } from '@/lib/actions'
+import { addProfileFromModalAction, finishSetupAction, importBridgeHistoryAction } from '@/lib/actions'
 import { PROFILE_COLORS, PROFILE_ICONS, PROFILE_ICON_MAP } from '@/types/profile'
-import { Trade } from '@/types/trade'
-import { Banknote, Gamepad2, ChevronRight, Check, Upload, AlertCircle, FileText, ArrowLeft } from 'lucide-react'
-import { extractInitialBalance, parseMT5Html } from '@/lib/parsers/mt5'
-
+import { Banknote, Gamepad2, ChevronRight, Check, AlertCircle, History, SkipForward, Loader2 } from 'lucide-react'
 
 const CURRENCIES = ['EUR', 'USD', 'GBP', 'CHF', 'USDT']
 
@@ -17,21 +14,10 @@ const BROKERS = [
   'DEGIRO', 'comdirect', 'Flatex', 'XTB', 'IG Markets', 'Sonstiger',
 ]
 
-const IMPORT_BROKERS = [
-  { id: 'metatrader5', name: 'MetaTrader 5', description: 'Kontoauszug als HTML exportieren (Rechtsklick → Als HTML speichern)', fileTypes: 'HTML', available: true },
-  { id: 'metatrader4', name: 'MetaTrader 4', description: 'Kontoauszug als HTML oder CSV exportieren', fileTypes: 'HTML, CSV', available: false },
-  { id: 'tradingview', name: 'TradingView', description: 'Trade-History als CSV exportieren', fileTypes: 'CSV', available: false },
-  { id: 'ctrader', name: 'cTrader', description: 'Kontoauszug als CSV exportieren', fileTypes: 'CSV', available: false },
-  { id: 'ninja', name: 'NinjaTrader', description: 'Performance-Report als CSV exportieren', fileTypes: 'CSV', available: false },
-  { id: 'ibkr', name: 'Interactive Brokers', description: 'Activity Statement als CSV exportieren', fileTypes: 'CSV', available: false },
-]
-
 interface Props {
   isFirstProfile?: boolean
   onClose?: () => void
 }
-
-type ImportSubStep = 'broker' | 'preview' | 'done'
 
 export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
   const router = useRouter()
@@ -51,16 +37,9 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
     notes: '',
   })
 
-  // Step 4 - Import
-  const [importSubStep, setImportSubStep] = useState<ImportSubStep>('broker')
-  const [importBrokerSelected, setImportBrokerSelected] = useState<string | null>(null)
-  const [importParsed, setImportParsed] = useState<Omit<Trade, 'id'>[]>([])
-  const [importParseError, setImportParseError] = useState<string | null>(null)
-  const [importBalanceMismatch, setImportBalanceMismatch] = useState<{ reportBalance: number } | null>(null)
-  const [importCapitalUpdated, setImportCapitalUpdated] = useState(false)
-  const [importResult, setImportResult] = useState<{ imported: number; skipped: number } | null>(null)
-  const [isPending, startTransition] = useTransition()
-  const importFileRef4 = useRef<HTMLInputElement>(null)
+  // Schritt 4 - Trade-Sync
+  const [syncPhase, setSyncPhase] = useState<'choice' | 'loading' | 'done' | 'no_bridge'>('choice')
+  const [syncImported, setSyncImported] = useState<number>(0)
 
   const set = (key: string, value: string) => setForm(f => ({ ...f, [key]: value }))
   const brokerValue = form.broker === 'Sonstiger' ? form.brokerCustom : form.broker
@@ -88,53 +67,6 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
     }
   }
 
-  function handleImportFile4(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    setImportParseError(null)
-    setImportBalanceMismatch(null)
-    setImportCapitalUpdated(false)
-
-    const reader = new FileReader()
-    reader.onload = (ev) => {
-      try {
-        const html = ev.target?.result as string
-        const trades = parseMT5Html(html)
-        if (trades.length === 0) {
-          setImportParseError('Keine Positionen gefunden. Bitte eine MT5-Kontohistorie im HTML-Format hochladen.')
-          return
-        }
-        const reportBalance = extractInitialBalance(html)
-        const enteredCapital = parseFloat(form.startCapital)
-        if (reportBalance !== null && !isNaN(enteredCapital) && reportBalance !== enteredCapital) {
-          setImportBalanceMismatch({ reportBalance })
-        }
-        setImportParsed(trades)
-        setImportSubStep('preview')
-      } catch {
-        setImportParseError('Datei konnte nicht gelesen werden. Bitte eine gultige MT5-HTML-Datei verwenden.')
-      }
-    }
-    reader.readAsText(file, 'utf-8')
-    e.target.value = ''
-  }
-
-  function handleAcceptBalance(reportBalance: number) {
-    startTransition(async () => {
-      await updateStartCapitalAction(reportBalance)
-      setImportBalanceMismatch(null)
-      setImportCapitalUpdated(true)
-    })
-  }
-
-  function handleDoImport() {
-    startTransition(async () => {
-      const res = await importTradesAction(importParsed)
-      setImportResult(res)
-      setImportSubStep('done')
-    })
-  }
-
   async function handleFinish() {
     if (onClose) {
       onClose()
@@ -144,7 +76,16 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
     await finishSetupAction()
   }
 
-  const isWidePreview = step === 4 && importSubStep === 'preview'
+  async function handleBridgeSync() {
+    setSyncPhase('loading')
+    const result = await importBridgeHistoryAction()
+    if (!result.ok) {
+      setSyncPhase('no_bridge')
+      return
+    }
+    setSyncImported(result.imported)
+    setSyncPhase('done')
+  }
 
   const cardStyle = {
     background: 'var(--surface)',
@@ -153,7 +94,7 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
     boxShadow: 'var(--card-shadow)',
     padding: '2rem',
     width: '100%',
-    maxWidth: isWidePreview ? 700 : 480,
+    maxWidth: 480,
     transition: 'max-width 0.3s ease',
   }
 
@@ -179,7 +120,7 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
     display: 'block',
   }
 
-  const stepLabels = ['Profil-Typ', 'Broker & Kapital', 'Details', 'Trade-Import']
+  const stepLabels = ['Profil-Typ', 'Broker & Kapital', 'Details', 'Trade-Sync']
 
   return (
     <motion.div
@@ -524,7 +465,7 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
         </motion.div>
       )}
 
-      {/* Schritt 4: Trade-Import */}
+      {/* Schritt 4: Trade-Sync */}
       {step === 4 && (
         <motion.div
           key="step4"
@@ -532,277 +473,125 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
           animate={{ opacity: 1, x: 0 }}
           className="flex flex-col gap-5"
         >
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h2 className="text-lg font-bold mb-1" style={{ color: 'var(--text-1)' }}>
-                Trades importieren
-              </h2>
-              <p className="text-sm" style={{ color: 'var(--text-2)' }}>
-                Importiere bestehende Trades direkt ins Journal - oder uberspringe diesen Schritt.
-              </p>
-            </div>
-            {importSubStep !== 'done' && (
-              <button
-                type="button"
-                onClick={handleFinish}
-                className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-all"
-                style={{ background: 'var(--surface-2)', color: 'var(--text-3)', border: '1px solid var(--border)' }}
-              >
-                Uberspringen
-              </button>
-            )}
+          <div>
+            <h2 className="text-lg font-bold mb-1" style={{ color: 'var(--text-1)' }}>
+              Trades synchronisieren
+            </h2>
+            <p className="text-sm" style={{ color: 'var(--text-2)' }}>
+              Möchtest du bestehende Trades aus MetaTrader laden oder erst ab heute dokumentieren?
+            </p>
           </div>
 
           <AnimatePresence mode="wait">
 
-            {/* Sub-Step: Broker-Auswahl */}
-            {importSubStep === 'broker' && (
+            {/* Auswahl */}
+            {syncPhase === 'choice' && (
               <motion.div
-                key="import-broker"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="flex flex-col gap-2"
-              >
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                  Plattform auswahlen
-                </p>
-
-                {importParseError && (
-                  <div
-                    className="flex items-start gap-2 px-3 py-2.5 rounded-lg"
-                    style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}
-                  >
-                    <AlertCircle size={14} className="shrink-0 mt-0.5" style={{ color: '#ef4444' }} />
-                    <p className="text-xs" style={{ color: '#ef4444' }}>{importParseError}</p>
-                  </div>
-                )}
-
-                {IMPORT_BROKERS.map(broker => (
-                  <button
-                    key={broker.id}
-                    type="button"
-                    onClick={() => broker.available && setImportBrokerSelected(broker.id === importBrokerSelected ? null : broker.id)}
-                    disabled={!broker.available}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all"
-                    style={{
-                      background: importBrokerSelected === broker.id ? 'var(--accent-bg)' : 'var(--surface-2)',
-                      border: `1.5px solid ${importBrokerSelected === broker.id ? 'var(--accent)' : 'var(--border)'}`,
-                      cursor: broker.available ? 'pointer' : 'default',
-                      opacity: broker.available ? 1 : 0.5,
-                    }}
-                  >
-                    <div
-                      className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                      style={{
-                        background: importBrokerSelected === broker.id ? 'var(--accent)' : 'transparent',
-                        border: `1.5px solid ${importBrokerSelected === broker.id ? 'var(--accent)' : 'var(--border)'}`,
-                      }}
-                    >
-                      <AnimatePresence>
-                        {importBrokerSelected === broker.id && (
-                          <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.12 }}>
-                            <Check size={11} color="#fff" strokeWidth={3} />
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>{broker.name}</p>
-                        <span className="px-1.5 py-0.5 rounded text-xs font-medium" style={{ background: 'var(--surface-3)', color: 'var(--text-3)', border: '1px solid var(--border)' }}>
-                          {broker.fileTypes}
-                        </span>
-                      </div>
-                      <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>{broker.description}</p>
-                    </div>
-                    {!broker.available && (
-                      <span className="text-xs font-medium px-2 py-1 rounded shrink-0" style={{ background: 'rgba(255,165,0,0.1)', color: '#f59e0b', border: '1px solid rgba(255,165,0,0.2)' }}>
-                        Bald
-                      </span>
-                    )}
-                  </button>
-                ))}
-
-                <div className="flex items-center justify-between gap-3 pt-1">
-                  <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-                    {importBrokerSelected ? `${IMPORT_BROKERS.find(b => b.id === importBrokerSelected)?.name} ausgewahlt` : 'Keinen Broker ausgewahlt'}
-                  </p>
-                  <button
-                    type="button"
-                    disabled={!importBrokerSelected}
-                    onClick={() => importFileRef4.current?.click()}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold"
-                    style={{
-                      background: importBrokerSelected ? 'var(--accent)' : 'var(--surface-2)',
-                      color: importBrokerSelected ? '#fff' : 'var(--text-3)',
-                      border: `1px solid ${importBrokerSelected ? 'var(--accent)' : 'var(--border)'}`,
-                      cursor: importBrokerSelected ? 'pointer' : 'not-allowed',
-                      opacity: importBrokerSelected ? 1 : 0.6,
-                    }}
-                  >
-                    <FileText size={14} />
-                    Datei auswahlen
-                    <ChevronRight size={13} />
-                  </button>
-                  <input
-                    ref={importFileRef4}
-                    type="file"
-                    accept=".html,.htm"
-                    className="hidden"
-                    onChange={handleImportFile4}
-                  />
-                </div>
-              </motion.div>
-            )}
-
-            {/* Sub-Step: Vorschau */}
-            {importSubStep === 'preview' && (
-              <motion.div
-                key="import-preview"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
+                key="choice"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="flex flex-col gap-3"
               >
-                {/* Balance-Mismatch Banner */}
-                {importBalanceMismatch && (
-                  <div
-                    className="flex flex-col gap-2 px-3 py-3 rounded-lg"
-                    style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.3)' }}
-                  >
-                    <div className="flex items-start gap-2">
-                      <AlertCircle size={14} className="shrink-0 mt-0.5" style={{ color: '#f59e0b' }} />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold" style={{ color: '#f59e0b' }}>
-                          Startkapital stimmt nicht uberein
-                        </p>
-                        <p className="text-xs mt-0.5" style={{ color: 'var(--text-2)' }}>
-                          Bericht: <span className="font-mono font-semibold">{importBalanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
-                          {' · '}
-                          Profil: <span className="font-mono font-semibold">{parseFloat(form.startCapital || '0').toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 ml-5">
-                      <button
-                        onClick={() => handleAcceptBalance(importBalanceMismatch.reportBalance)}
-                        disabled={isPending}
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
-                        style={{ background: '#f59e0b', color: '#fff', opacity: isPending ? 0.7 : 1 }}
-                      >
-                        Ja, auf {importBalanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 })} anpassen
-                      </button>
-                      <button
-                        onClick={() => setImportBalanceMismatch(null)}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer"
-                        style={{ color: 'var(--text-3)' }}
-                      >
-                        Nein, beibehalten
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {importCapitalUpdated && (
-                  <div
-                    className="flex items-center gap-2 px-3 py-2.5 rounded-lg"
-                    style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)' }}
-                  >
-                    <Check size={13} style={{ color: '#22c55e' }} />
-                    <p className="text-xs" style={{ color: '#22c55e' }}>Startkapital im Profil aktualisiert</p>
-                  </div>
-                )}
-
-                {/* Status-Banner */}
-                <div
-                  className="flex items-center gap-4 px-3 py-2.5 rounded-lg flex-wrap"
-                  style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
+                <button
+                  type="button"
+                  onClick={handleBridgeSync}
+                  className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all cursor-pointer"
+                  style={{ background: 'var(--surface-2)', border: '1.5px solid var(--border)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)' }}
                 >
-                  <span className="text-xs" style={{ color: 'var(--text-2)' }}>
-                    <span className="font-bold" style={{ color: 'var(--text-1)' }}>{importParsed.length}</span> Positionen gefunden
-                  </span>
-                  <span className="text-xs font-semibold" style={{ color: '#22c55e' }}>
-                    {importParsed.length} neu
-                  </span>
-                </div>
-
-                {/* Tabelle */}
-                <div className="rounded-lg overflow-hidden" style={{ border: '1px solid var(--border)', maxHeight: 280, overflowY: 'auto', overflowX: 'auto' }}>
-                  <table className="w-full text-xs" style={{ minWidth: 480 }}>
-                    <thead>
-                      <tr style={{ background: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
-                        {['Symbol', 'Richtung', 'Datum', 'Entry', 'Exit', 'P&L', 'Lot'].map(h => (
-                          <th key={h} className="px-3 py-2 text-left font-semibold" style={{ color: 'var(--text-3)' }}>
-                            {h}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {importParsed.map((t, i) => (
-                        <tr
-                          key={i}
-                          style={{ borderBottom: i < importParsed.length - 1 ? '1px solid var(--border)' : undefined }}
-                        >
-                          <td className="px-3 py-2 font-mono font-medium" style={{ color: 'var(--text-1)' }}>{t.instrument}</td>
-                          <td className="px-3 py-2">
-                            <span
-                              className="px-1.5 py-0.5 rounded text-xs font-semibold"
-                              style={{
-                                background: t.type === 'long' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
-                                color: t.type === 'long' ? '#22c55e' : '#ef4444',
-                              }}
-                            >
-                              {t.type === 'long' ? 'Long' : 'Short'}
-                            </span>
-                          </td>
-                          <td className="px-3 py-2" style={{ color: 'var(--text-2)' }}>
-                            {new Date(t.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' })}
-                          </td>
-                          <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>{t.entry}</td>
-                          <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>{t.exit ?? '-'}</td>
-                          <td
-                            className="px-3 py-2 font-mono font-semibold"
-                            style={{ color: t.pnl !== undefined ? (t.pnl >= 0 ? '#22c55e' : '#ef4444') : 'var(--text-3)' }}
-                          >
-                            {t.pnl !== undefined ? (t.pnl >= 0 ? '+' : '') + t.pnl.toFixed(2) : '-'}
-                          </td>
-                          <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>{t.size}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Buttons */}
-                <div className="flex items-center justify-between gap-3">
-                  <button
-                    type="button"
-                    onClick={() => { setImportSubStep('broker'); setImportParsed([]); setImportParseError(null); setImportBalanceMismatch(null) }}
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
-                    style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: 'var(--accent-bg)' }}
                   >
-                    <ArrowLeft size={14} /> Zuruck
-                  </button>
-                  <button
-                    type="button"
-                    disabled={isPending}
-                    onClick={handleDoImport}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer"
-                    style={{ background: 'var(--accent)', color: '#fff', opacity: isPending ? 0.7 : 1 }}
+                    <History size={20} style={{ color: 'var(--accent)' }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>
+                      Alle historischen Trades laden
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-2)' }}>
+                      Bridge muss verbunden sein — lädt alle bisherigen Trades aus MetaTrader
+                    </p>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleFinish}
+                  className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-left transition-all cursor-pointer"
+                  style={{ background: 'var(--surface-2)', border: '1.5px solid var(--border)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)' }}
+                >
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: 'var(--surface-3)' }}
                   >
-                    <Upload size={14} />
-                    {isPending ? 'Importiere...' : `${importParsed.length} Trade${importParsed.length !== 1 ? 's' : ''} importieren`}
-                  </button>
-                </div>
+                    <SkipForward size={20} style={{ color: 'var(--text-3)' }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>
+                      Erst ab heute dokumentieren
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--text-2)' }}>
+                      Keine historischen Daten — neue Trades werden ab sofort erfasst
+                    </p>
+                  </div>
+                </button>
               </motion.div>
             )}
 
-            {/* Sub-Step: Fertig */}
-            {importSubStep === 'done' && importResult && (
+            {/* Laden */}
+            {syncPhase === 'loading' && (
               <motion.div
-                key="import-done"
+                key="loading"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col items-center gap-3 py-8"
+              >
+                <Loader2 size={32} className="animate-spin" style={{ color: 'var(--accent)' }} />
+                <p className="text-sm" style={{ color: 'var(--text-2)' }}>
+                  Historische Trades werden geladen…
+                </p>
+              </motion.div>
+            )}
+
+            {/* Keine Bridge */}
+            {syncPhase === 'no_bridge' && (
+              <motion.div
+                key="no_bridge"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex flex-col gap-4"
+              >
+                <div
+                  className="px-4 py-3 rounded-xl"
+                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.3)' }}
+                >
+                  <p className="text-sm font-semibold" style={{ color: '#f59e0b' }}>
+                    Keine Bridge verbunden
+                  </p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-2)' }}>
+                    Du kannst den historischen Import später unter Einstellungen nachholen, sobald die Bridge verbunden ist.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleFinish}
+                  className="w-full py-3 rounded-xl font-semibold text-sm cursor-pointer"
+                  style={{ background: 'var(--accent)', color: '#fff' }}
+                >
+                  Zum Dashboard
+                </button>
+              </motion.div>
+            )}
+
+            {/* Fertig */}
+            {syncPhase === 'done' && (
+              <motion.div
+                key="done"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center gap-4 py-6"
@@ -815,13 +604,11 @@ export default function ProfileSetupForm({ isFirstProfile, onClose }: Props) {
                 </div>
                 <div className="text-center">
                   <p className="text-base font-bold" style={{ color: 'var(--text-1)' }}>
-                    {importResult.imported} Trade{importResult.imported !== 1 ? 's' : ''} importiert
+                    {syncImported} Trade{syncImported !== 1 ? 's' : ''} importiert
                   </p>
-                  {importResult.skipped > 0 && (
-                    <p className="text-sm mt-1" style={{ color: 'var(--text-3)' }}>
-                      {importResult.skipped} bereits vorhandene ubersprungen
-                    </p>
-                  )}
+                  <p className="text-sm mt-1" style={{ color: 'var(--text-3)' }}>
+                    Alle historischen Trades wurden synchronisiert
+                  </p>
                 </div>
                 <button
                   type="button"
