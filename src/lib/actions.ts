@@ -25,7 +25,9 @@ import {
   getBotCommands,
   getConnectionState,
   getBotStatus,
+  getAllBotsWithStatus,
 } from '@/lib/bot-data'
+import { isValidRawTrade, normalizeTrade } from '@/lib/normalize-trade'
 
 // --- Profile Actions ---
 
@@ -401,4 +403,68 @@ export async function importBotTradesAction(
   revalidatePath('/dashboard')
 
   return { imported: withIds.length, skipped: incoming.length - withIds.length }
+}
+
+export async function importBridgeHistoryAction(): Promise<
+  | { ok: true; imported: number }
+  | { ok: false; reason: 'no_bridge' | 'bridge_offline' | 'fetch_error' }
+> {
+  const activeId = getActiveProfileId()
+  if (!activeId) return { ok: false, reason: 'no_bridge' }
+
+  // Verbundene Bridge für dieses Profil suchen
+  const allBots = getAllBotsWithStatus()
+  const bridgeEntry = allBots.find(
+    ({ bot, status }) =>
+      bot.profileId === activeId &&
+      (bot.type ?? 'bridge') === 'bridge' &&
+      (status?.connectionState === 'connected' || status?.connectionState === 'warning')
+  )
+
+  if (!bridgeEntry) return { ok: false, reason: 'bridge_offline' }
+
+  const bridge = bridgeEntry.bot
+
+  let deals: Record<string, unknown>[]
+  try {
+    const res = await fetch(`${bridge.url}/history`, {
+      signal: AbortSignal.timeout(30_000),
+    })
+    if (!res.ok) return { ok: false, reason: 'fetch_error' }
+    const data = await res.json() as { deals?: unknown[] }
+    deals = (data.deals ?? []) as Record<string, unknown>[]
+  } catch {
+    return { ok: false, reason: 'fetch_error' }
+  }
+
+  const validRaw = deals.filter(isValidRawTrade)
+  const existing = getProfileTrades(activeId)
+  const existingExternalIds = new Set(existing.filter(t => t.externalId).map(t => t.externalId!))
+  const syntheticKeys = new Set(
+    existing.filter(t => !t.externalId).map(t => `${t.instrument}_${t.date}_${t.size}`)
+  )
+
+  const newTrades: Trade[] = []
+  for (const raw of validRaw) {
+    const t = normalizeTrade(raw)
+    if (t.externalId) {
+      if (!existingExternalIds.has(t.externalId)) {
+        newTrades.push({ ...t, id: nanoid(10) })
+      }
+    } else {
+      const key = `${t.instrument}_${t.date}_${t.size}`
+      if (!syntheticKeys.has(key)) {
+        newTrades.push({ ...t, id: nanoid(10) })
+        syntheticKeys.add(key)
+      }
+    }
+  }
+
+  if (newTrades.length > 0) {
+    saveProfileTrades(activeId, [...existing, ...newTrades])
+    revalidatePath('/dashboard')
+    revalidatePath('/journal')
+  }
+
+  return { ok: true, imported: newTrades.length }
 }
