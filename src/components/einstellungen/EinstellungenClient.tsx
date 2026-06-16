@@ -10,7 +10,7 @@ import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
 import { useSessionSettings } from '@/hooks/useSessionSettings'
 import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
-import { switchProfileAction, deleteProfileAction } from '@/lib/actions'
+import { switchProfileAction, deleteProfileAction, stopBotsForProfileAction, checkStopAcknowledgedAction } from '@/lib/actions'
 import ProfileEditModal from '@/components/profile/ProfileEditModal'
 import ProfileSetupModal from '@/components/profile/ProfileSetupModal'
 
@@ -36,6 +36,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set(profiles.map(p => p.id)))
   const [deleteConfirm, setDeleteConfirm] = useState<Profile | null>(null)
   const [deleting, setDeleting] = useState(false)
+  const [deleteStatusMsg, setDeleteStatusMsg] = useState<string | null>(null)
   const [switching, setSwitching] = useState<string | null>(null)
   const [showEditModal, setShowEditModal] = useState<Profile | null>(null)
   const [showCreateModal, setShowCreateModal] = useState(false)
@@ -143,11 +144,29 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
     const id = deleteConfirm.id
     setDeleteConfirm(null)
     setDeleting(true)
+
     try {
+      // Schritt 1: Stop-Commands an alle aktiven Bots senden
+      const stops = await stopBotsForProfileAction(id)
+
+      if (stops.length > 0) {
+        setDeleteStatusMsg('Bots werden gestoppt…')
+        // Max 5 Sekunden auf Acknowledgment warten
+        const deadline = Date.now() + 5000
+        while (Date.now() < deadline) {
+          const allDone = await checkStopAcknowledgedAction(stops)
+          if (allDone) break
+          await new Promise(r => setTimeout(r, 500))
+        }
+      }
+
+      // Schritt 2: Profil und alle Daten löschen
+      setDeleteStatusMsg('Profil wird gelöscht…')
       await deleteProfileAction(id)
       router.refresh()
     } finally {
       setDeleting(false)
+      setDeleteStatusMsg(null)
     }
   }
 
@@ -491,6 +510,16 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     </div>
                   )
                 })}
+              </div>
+            )}
+
+            {deleting && deleteStatusMsg && (
+              <div
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs mb-4"
+                style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
+              >
+                <span className="animate-spin text-base">⟳</span>
+                {deleteStatusMsg}
               </div>
             )}
 
