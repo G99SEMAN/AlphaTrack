@@ -203,7 +203,8 @@ export default function BridgeTradesClient({ bots }: Props) {
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>Die Bridge läuft nicht oder hat seit über 2 Minuten keinen Heartbeat gesendet.</p>
         </div>
       ) : (
-            <div className="mb-5 rounded-2xl px-5 py-4 flex items-center gap-6"
+        <>
+          <div className="mb-5 rounded-2xl px-5 py-4 flex items-center gap-6"
               style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-3)' }}>Positionen</p>
@@ -225,7 +226,6 @@ export default function BridgeTradesClient({ bots }: Props) {
                 </button>
               </div>
             </div>
-          )}
 
           <section className="mb-6">
             <div className="flex items-center justify-between mb-3">
