@@ -19,6 +19,13 @@ import {
   saveProfileTrades,
 } from '@/lib/profiles'
 import { getProfileStrategies, saveProfileStrategies } from '@/lib/strategies'
+import {
+  getBotsByProfileId,
+  addBotCommand,
+  getBotCommands,
+  getConnectionState,
+  getBotStatus,
+} from '@/lib/bot-data'
 
 // --- Profile Actions ---
 
@@ -51,6 +58,35 @@ export async function deleteProfileAction(profileId: string) {
   deleteProfile(profileId)
   revalidatePath('/', 'layout')
   if (getProfiles().length === 0) redirect('/setup')
+}
+
+export async function stopBotsForProfileAction(
+  profileId: string
+): Promise<{ botId: string; commandId: string }[]> {
+  const bots = getBotsByProfileId(profileId)
+  const stops: { botId: string; commandId: string }[] = []
+
+  for (const bot of bots) {
+    const status = getBotStatus(bot.id)
+    const state = getConnectionState(status)
+    if (state === 'connected' || state === 'warning') {
+      const command = addBotCommand(bot.id, 'stop')
+      stops.push({ botId: bot.id, commandId: command.id })
+    }
+  }
+
+  return stops
+}
+
+export async function checkStopAcknowledgedAction(
+  stops: { botId: string; commandId: string }[]
+): Promise<boolean> {
+  for (const { botId, commandId } of stops) {
+    const commands = getBotCommands(botId)
+    const cmd = commands.find(c => c.id === commandId)
+    if (!cmd || !cmd.acknowledged) return false
+  }
+  return true
 }
 
 export async function addProfileFromModalAction(formData: FormData) {
