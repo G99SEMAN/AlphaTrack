@@ -2,6 +2,7 @@ import { cache } from 'react'
 import { Profile, ActiveProfile } from '@/types/profile'
 import { Trade } from '@/types/trade'
 import { saveProfileStrategies } from '@/lib/strategies'
+import { getBotsByProfileId, deleteBotFiles, removeBot } from '@/lib/bot-data'
 import path from 'path'
 import fs from 'fs'
 
@@ -58,6 +59,13 @@ export function deleteProfile(profileId: string): void {
       const filename = trade.screenshot.replace('/api/screenshots/', '')
       try { fs.unlinkSync(path.join(screenshotsDir, filename)) } catch { /* ignorieren */ }
     }
+  }
+
+  // Zugehörige Bots und ihre Dateien löschen
+  const bots = getBotsByProfileId(profileId)
+  for (const bot of bots) {
+    deleteBotFiles(bot.id)
+    removeBot(bot.id)
   }
 
   // Profil-Dateien löschen
