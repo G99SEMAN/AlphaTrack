@@ -157,6 +157,11 @@ def get_connected_bot_names() -> list[str]:
     return names
 
 
+def get_alphatrack_bot_ids() -> dict:
+    """Gibt {internal_bot_id: at_bot_id} für alle registrierten Bots zurück."""
+    return dict(_alphatrack_bot_ids)
+
+
 def get_connected_bots_info() -> list[dict]:
     """Liefert pro verbundenem Bot ein dict mit name, at_id und connected_at.
 

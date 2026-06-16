@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_historical_candles_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_historical_candles_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket, get_alphatrack_bot_ids
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -163,6 +163,97 @@ def ping_alphatrack(url: str) -> int | None:
 _restart_requested = False
 _emergency_shutdown = False
 
+COMMAND_POLL_INTERVAL_SEC = 3
+
+
+def _poll_commands(config: dict, display, local_log, cmd_queue) -> None:
+    """Pollt ausstehende Commands vom AlphaTrack-Server und leitet sie weiter.
+
+    Pollt sowohl die Bridge-ID selbst als auch alle verbundenen Bot-AT-IDs,
+    weil set_parameters-Commands unter der jeweiligen Bot-ID gespeichert werden.
+    """
+    bridge_id = config.get("bridge_id", "")
+    alphatrack_url = config.get("alphatrack_url", "")
+    api_key = config.get("api_key", "")
+    port = config.get("command_server_port", 8765)
+    if not bridge_id or not alphatrack_url:
+        return
+
+    # {at_id: internal_id_or_None} — None bedeutet: Bridge selbst (broadcast an alle Bots)
+    ids_to_poll: dict = {bridge_id: None}
+    for internal_id, at_id in get_alphatrack_bot_ids().items():
+        ids_to_poll[at_id] = internal_id
+
+    for poll_id, internal_bot_id in ids_to_poll.items():
+        try:
+            resp = requests.get(
+                f"{alphatrack_url}/api/bridge/commands",
+                params={"bridgeId": poll_id},
+                headers={"x-bot-api-key": api_key},
+                timeout=5,
+            )
+            if not resp.ok:
+                local_log.add("warn", f"Command-Poll fehlgeschlagen: HTTP {resp.status_code}",
+                              f"{alphatrack_url}/api/bridge/commands?bridgeId={poll_id}")
+                continue
+            commands = resp.json().get("commands", [])
+        except requests.RequestException:
+            continue
+
+        for cmd in commands:
+            command = cmd.get("command", "")
+            payload = cmd.get("payload") or {}
+            cmd_id = cmd.get("id", "")
+
+            if command == "set_parameters":
+                if internal_bot_id:
+                    # Direkt an den spezifischen Bot weiterleiten
+                    try:
+                        requests.post(
+                            f"http://localhost:{port}/bot/{internal_bot_id}/command",
+                            json={"command": command, "id": cmd_id, "payload": payload},
+                            headers={"X-Bot-Api-Key": api_key},
+                            timeout=5,
+                        )
+                        display.log("ok", "POLL", f"set_parameters an Bot {internal_bot_id} gesendet")
+                        local_log.add("info", "set_parameters gepollt und gesendet", f"Bot: {internal_bot_id}")
+                    except requests.RequestException as e:
+                        display.log("error", "POLL", f"set_parameters Weiterleitung fehlgeschlagen: {e}")
+                        local_log.add("error", "set_parameters Weiterleitung fehlgeschlagen", str(e))
+                else:
+                    # Fallback: an alle verbundenen Bots senden
+                    try:
+                        bots_resp = requests.get(f"http://localhost:{port}/bots/identities", timeout=3)
+                        if bots_resp.ok:
+                            bot_ids = [b["id"] for b in bots_resp.json().get("bots", [])]
+                            for bid in bot_ids:
+                                requests.post(
+                                    f"http://localhost:{port}/bot/{bid}/command",
+                                    json={"command": command, "id": cmd_id, "payload": payload},
+                                    headers={"X-Bot-Api-Key": api_key},
+                                    timeout=5,
+                                )
+                            count = len(bot_ids)
+                            if count:
+                                display.log("ok", "POLL", f"set_parameters an {count} Bot(s) gesendet")
+                                local_log.add("info", "set_parameters gepollt und gesendet", f"{count} Bot(s)")
+                            else:
+                                display.log("warn", "POLL", "set_parameters erhalten, aber kein Bot verbunden")
+                                local_log.add("warn", "set_parameters erhalten, kein Bot verbunden")
+                    except requests.RequestException as e:
+                        display.log("error", "POLL", f"set_parameters Broadcast fehlgeschlagen: {e}")
+                        local_log.add("error", "set_parameters Broadcast fehlgeschlagen", str(e))
+
+            elif command in ("start", "stop", "pause", "resume", "restart"):
+                cmd_queue.put({"command": command, "id": cmd_id})
+                display.log("info", "POLL", f"Command gepollt: {command}")
+                local_log.add("info", f"Command gepollt: {command}")
+
+            elif command in ("execute_trade", "close_position"):
+                cmd_queue.put({"command": command, "id": cmd_id, "payload": payload})
+                display.log("info", "POLL", f"Command gepollt: {command}")
+                local_log.add("info", f"Command gepollt: {command}")
+
 
 def main():
     global _restart_requested
@@ -282,6 +373,7 @@ def main():
     last_heartbeat = 0.0
     last_sync = 0.0
     last_ping = 0.0
+    last_command_poll = 0.0
     at_ping_ms: int | None = None
     at_ok = False
 
@@ -424,6 +516,11 @@ def main():
                     display.log("error", "CMD", "execute_trade: MT5 nicht verbunden")
                     local_log.add("error", f"Trade fehlgeschlagen: {direction} {lots} {sym}", "MT5 nicht verbunden")
                 set_trade_result(cmd_id, result)
+
+        # Command-Polling (alle 3s)
+        if now - last_command_poll >= COMMAND_POLL_INTERVAL_SEC:
+            _poll_commands(config, display, local_log, cmd_queue)
+            last_command_poll = now
 
         # AlphaTrack-Ping (alle 15s) + Verbindungsstatus-Logging
         if now - last_ping >= 15:

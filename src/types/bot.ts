@@ -69,6 +69,7 @@ export interface BotCommand {
   command: BotCommandType
   timestamp: string
   acknowledged: boolean
+  payload?: TradeOrderPayload | ClosePositionPayload | SetParametersPayload
 }
 
 export interface BridgeLogEntry {

@@ -11,6 +11,9 @@ import {
   ConnectionState,
   BotStatusWithConnection,
   BotWithStatus,
+  TradeOrderPayload,
+  ClosePositionPayload,
+  SetParametersPayload,
 } from '@/types/bot'
 
 const DATA_DIR = path.join(process.cwd(), 'data')
@@ -179,12 +182,17 @@ export function saveBotCommands(botId: string, commands: BotCommand[]): void {
   atomicWrite(botCommandsPath(botId), JSON.stringify(commands, null, 2))
 }
 
-export function addBotCommand(botId: string, command: BotCommandType): BotCommand {
+export function addBotCommand(
+  botId: string,
+  command: BotCommandType,
+  payload?: TradeOrderPayload | ClosePositionPayload | SetParametersPayload,
+): BotCommand {
   const entry: BotCommand = {
     id: nanoid(10),
     command,
     timestamp: new Date().toISOString(),
     acknowledged: false,
+    ...(payload !== undefined ? { payload } : {}),
   }
   saveBotCommands(botId, [...getBotCommands(botId), entry])
   return entry

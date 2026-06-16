@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
   }
 
   pruneOldCommands(bridgeId)
-  const entry = addBotCommand(bridgeId, command)
+  const entry = addBotCommand(bridgeId, command, payload)
   let logDetails = `ID: ${entry.id}`
   if (command === 'execute_trade' && payload) {
     const p = payload as TradeOrderPayload
