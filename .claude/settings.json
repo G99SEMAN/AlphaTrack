@@ -17,11 +17,17 @@
       "PowerShell(netstat -ano)",
       "PowerShell($env:ALPHATRACK_URL = \"http://localhost:3002\"; Start-Sleep 3; node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot \".claude\\\\skills\\\\run-alphatrack\\\\ss5.png\" /einstellungen)",
       "PowerShell($env:ALPHATRACK_URL = \"http://localhost:3002\"; node \".claude\\\\skills\\\\run-alphatrack\\\\debug-einstellungen.mjs\" 2>&1)",
-      "Bash(grep -v \"//\\\\|demo.*mode\\\\|demo.*type\\\\|demoMode\\\\|type.*demo\\\\|demo.*account\\\\|\\\\\"demo\\\\\"\\\\|'demo'\")"
+      "Bash(grep -v \"//\\\\|demo.*mode\\\\|demo.*type\\\\|demoMode\\\\|type.*demo\\\\|demo.*account\\\\|\\\\\"demo\\\\\"\\\\|'demo'\")",
+      "Bash(cat > *)",
+      "Bash(echo \"Task 1: complete \\(commits 34d6cbb..6db83c4, review clean\\)\" >> \"c:/Users/G99SEMAN/Desktop/AlphaTrack/.git/sdd/progress.md\")"
     ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.git\\sdd",
+      "c:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.git\\sdd"
     ]
   },
   "enabledPlugins": {
