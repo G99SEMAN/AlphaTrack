@@ -588,6 +588,14 @@ async def get_positions():
     return {"positions": positions}
 
 
+@app.get("/history")
+async def get_history():
+    if _history_fetcher is None:
+        raise HTTPException(status_code=503, detail="MT5 nicht initialisiert")
+    deals = await asyncio.to_thread(_history_fetcher)
+    return {"deals": deals}
+
+
 @app.get("/account")
 async def get_account():
     if _account_fetcher is None:
