@@ -102,6 +102,11 @@ def update_positions_cache(positions: list):
         _positions_cache = positions
 
 
+def get_positions_cache() -> list:
+    with _positions_lock:
+        return list(_positions_cache)
+
+
 def set_candles_fetcher(func):
     global _candles_fetcher
     _candles_fetcher = func

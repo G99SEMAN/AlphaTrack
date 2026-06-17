@@ -1,6 +1,8 @@
 import requests
 import time
 
+from gateway import get_positions_cache
+
 
 def send_heartbeat(config: dict, state: dict, display=None) -> tuple[bool, bool]:
     """Sendet einen Heartbeat an AlphaTrack. Gibt (success, needs_reregister) zurück.
@@ -27,7 +29,15 @@ def send_heartbeat(config: dict, state: dict, display=None) -> tuple[bool, bool]
     if state.get("currency"):
         status_payload["currency"] = state["currency"]
 
-    payload = {"bridgeId": config["bridge_id"], "status": status_payload}
+    positions = get_positions_cache()
+    status_payload["openTicketIds"] = [p["ticket"] for p in positions]
+    status_payload["positions"] = positions
+
+    payload = {
+        "bridgeId": config["bridge_id"],
+        "profileId": config.get("profile_id", ""),
+        "status": status_payload,
+    }
     try:
         t0 = time.time()
         resp = requests.post(url, json=payload, headers={"x-bot-api-key": config["api_key"]}, timeout=5)

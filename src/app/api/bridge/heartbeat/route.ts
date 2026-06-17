@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus, getBots } from '@/lib/bot-data'
+import { saveBotStatus, addBridgeLogEntry, getBotById, getBotStatus, getBots, saveBotPositions } from '@/lib/bot-data'
 import { getProfileTrades, saveProfileTrades, getProfiles, updateProfile } from '@/lib/profiles'
 import { revalidatePath } from 'next/cache'
-import { BotStatus } from '@/types/bot'
+import { BotStatus, LivePosition } from '@/types/bot'
 import { isValidApiKey } from '@/lib/auth'
 
 function reconcileOpenTrades(profileId: string, openTicketIds: number[]): void {
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  let body: { bridgeId: string; status: BotStatus & { openTicketIds?: number[] }; profileId?: string }
+  let body: { bridgeId: string; status: BotStatus & { openTicketIds?: number[]; positions?: LivePosition[] }; profileId?: string }
   try {
     body = await req.json()
   } catch {
@@ -59,6 +59,10 @@ export async function POST(req: NextRequest) {
 
   const prev = getBotStatus(resolvedId)
   saveBotStatus(resolvedId, { ...status, lastHeartbeat: new Date().toISOString() })
+
+  if (Array.isArray(status.positions)) {
+    saveBotPositions(resolvedId, status.positions)
+  }
 
   if (body.profileId && Array.isArray(status.openTicketIds)) {
     if (!/^[a-zA-Z0-9_-]{1,64}$/.test(body.profileId)) {

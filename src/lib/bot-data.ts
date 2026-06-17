@@ -14,6 +14,7 @@ import {
   TradeOrderPayload,
   ClosePositionPayload,
   SetParametersPayload,
+  LivePosition,
 } from '@/types/bot'
 
 const DATA_DIR = path.join(process.cwd(), 'data')
@@ -49,10 +50,11 @@ function readJson<T>(filePath: string, fallback: T): T {
 
 const BOTS_PATH = path.join(DATA_DIR, 'bots.json')
 
-function botStatusPath(botId: string)   { return path.join(DATA_DIR, `bot-status-${botId}.json`) }
-function bridgeLogPath(botId: string)   { return path.join(DATA_DIR, `bot-log-${botId}.json`) }
-function botCommandsPath(botId: string) { return path.join(DATA_DIR, `bot-commands-${botId}.json`) }
+function botStatusPath(botId: string)     { return path.join(DATA_DIR, `bot-status-${botId}.json`) }
+function bridgeLogPath(botId: string)     { return path.join(DATA_DIR, `bot-log-${botId}.json`) }
+function botCommandsPath(botId: string)   { return path.join(DATA_DIR, `bot-commands-${botId}.json`) }
 function botTradesPath(profileId: string) { return path.join(DATA_DIR, `bot-trades-${profileId}.json`) }
+function botPositionsPath(botId: string)  { return path.join(DATA_DIR, `bot-positions-${botId}.json`) }
 
 // --- Bot-Konfiguration (Liste) ---
 
@@ -153,6 +155,16 @@ export function getBotStatus(botId: string): BotStatus | null {
 export function saveBotStatus(botId: string, status: BotStatus): void {
   atomicWrite(botStatusPath(botId), JSON.stringify(status, null, 2))
   _botsWithStatusCache = null
+}
+
+// --- Bot Positions (gecacht via Heartbeat) ---
+
+export function getBotPositions(botId: string): LivePosition[] {
+  return readJson<LivePosition[]>(botPositionsPath(botId), [])
+}
+
+export function saveBotPositions(botId: string, positions: LivePosition[]): void {
+  atomicWrite(botPositionsPath(botId), JSON.stringify(positions, null, 2))
 }
 
 export function getConnectionState(status: BotStatus | null): ConnectionState {

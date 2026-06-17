@@ -50,6 +50,20 @@ export interface BotEntry {
   type?: 'bridge' | 'bot'  // fehlendes Feld = bridge (Rückwärtskompatibilität)
 }
 
+export interface LivePosition {
+  ticket: number
+  date: string
+  instrument: string
+  type: 'long' | 'short'
+  entry: number
+  currentPrice: number
+  size: number
+  sl: number | null
+  tp: number | null
+  pnl: number
+  swap: number
+}
+
 export interface BotStatus {
   state: BotState
   lastHeartbeat: string
@@ -57,6 +71,8 @@ export interface BotStatus {
   mt5Connected: boolean
   activeSymbols: string[]
   openPositions: number
+  openTicketIds?: number[]
+  positions?: LivePosition[]
   tradesSync: number
   uptime: number
   balance?: number
