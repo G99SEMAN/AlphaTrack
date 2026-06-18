@@ -18,11 +18,17 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     url = f"{config['alphatrack_url']}/api/bridge/trades"
     headers = {"x-bot-api-key": config["api_key"]}
 
-    open_trades = mt5.get_open_positions()
+    sync_mode = config.get("sync_mode", "full")
+    sync_cutoff = config.get("sync_cutoff_timestamp", 0) if sync_mode == "new_only" else 0
+
+    open_trades = mt5.get_open_positions(min_open_utc=sync_cutoff)
     # Lookback-Fenster: immer mindestens _MIN_LOOKBACK_SEC zurückgehen damit
     # Trades die kurz vor dem letzten Sync geschlossen wurden nicht dauerhaft
     # als 'open' hängenbleiben.
     effective_ts = min(last_sync_ts, time.time() - _MIN_LOOKBACK_SEC) if last_sync_ts > 0 else last_sync_ts
+    if sync_cutoff > 0:
+        server_cutoff = sync_cutoff + mt5.server_offset_sec()
+        effective_ts = max(effective_ts, server_cutoff)
     closed_trades = mt5.get_closed_deals(from_timestamp=effective_ts)
 
     all_trades = open_trades + closed_trades

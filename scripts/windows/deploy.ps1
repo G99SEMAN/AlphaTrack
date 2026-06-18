@@ -40,6 +40,7 @@ function Read-DeployConfig {
         mt5_password      = ''
         mt5_server        = ''
         mt5_exe_path      = 'C:\Program Files\MetaTrader 5\terminal64.exe'
+        sync_mode         = 'full'
     }
     if (Test-Path $ConfigPath) {
         try {
@@ -114,6 +115,19 @@ function Invoke-Questionnaire($cfg) {
     $cfg.mt5_password = Ask-Required 'Passwort'                          $cfg.mt5_password -Secret
     $cfg.mt5_server   = Ask-Required 'Server (z.B. BlackBullMarkets-Demo)' $cfg.mt5_server
     $cfg.mt5_exe_path = Ask-Required 'Pfad zu terminal64.exe'            $cfg.mt5_exe_path
+
+    Write-Step '[4] Sync-Modus'
+    Write-Host '  Sollen vergangene Trades vom MetaTrader-Account geladen werden?'
+    $syncDefault = if ($cfg.sync_mode -eq 'new_only') { '2' } else { '1' }
+    Write-Host "    1) Komplette History laden"
+    Write-Host "    2) Nur neue Trades ab jetzt"
+    while ($true) {
+        $raw = Read-Host "  Sync-Modus waehlen [1-2, Standard: $syncDefault]"
+        if ($raw -eq '') { $raw = $syncDefault }
+        if ($raw -eq '1') { $cfg.sync_mode = 'full'; break }
+        if ($raw -eq '2') { $cfg.sync_mode = 'new_only'; break }
+        Write-Warn2 'Bitte 1 oder 2 eingeben.'
+    }
 }
 
 # --- Phase 1: NAS ------------------------------------------
@@ -284,6 +298,13 @@ function New-BridgeConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [str
     Set-JsonField $c 'mt5_password'        "$($cfg.mt5_password)"
     Set-JsonField $c 'mt5_server'          "$($cfg.mt5_server)"
     Set-JsonField $c 'mt5_exe_path'        "$($cfg.mt5_exe_path)"
+    $syncMode = if ($cfg.sync_mode) { $cfg.sync_mode } else { 'full' }
+    Set-JsonField $c 'sync_mode'           $syncMode
+    if ($syncMode -eq 'new_only') {
+        Set-JsonField $c 'sync_cutoff_timestamp' ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
+    } else {
+        Set-JsonField $c 'sync_cutoff_timestamp' 0
+    }
     return ($c | ConvertTo-Json -Depth 10)
 }
 
@@ -401,6 +422,16 @@ function Invoke-Main {
     $apiKey = Invoke-NasSetupAndUpdate $cfg
     $info = Wait-ForAlphaTrack $cfg
     $profileId = Select-TradingProfile $info $cfg $apiKey
+
+    if ($cfg.sync_mode -eq 'new_only') {
+        $purgeUrl = "http://$($cfg.nas_host):$($cfg.nas_app_port)/api/bridge/trades?profileId=$profileId"
+        try {
+            Invoke-RestMethod -Uri $purgeUrl -Method DELETE -Headers @{ 'x-bot-api-key' = $apiKey } -TimeoutSec 10
+            Write-Ok 'Bestehende Bot-Trades geloescht (nur neue Trades werden synchronisiert).'
+        } catch {
+            Write-Warn2 "Trades konnten nicht geloescht werden: $($_.Exception.Message)"
+        }
+    }
 
     Write-Step '[Phase 2/3] Mini-PC-Deploy'
     Test-MiniPcSsh $cfg

@@ -49,6 +49,32 @@ export async function GET(req: NextRequest) {
 }
 
 
+export async function DELETE(req: NextRequest) {
+  if (!isValidApiKey(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const profileId = req.nextUrl.searchParams.get('profileId')
+  if (!profileId || !/^[a-zA-Z0-9_-]{1,64}$/.test(profileId)) {
+    return NextResponse.json({ error: 'Missing or invalid profileId' }, { status: 400 })
+  }
+
+  saveBotTrades(profileId, [])
+
+  const profileTrades = getProfileTrades(profileId)
+  const filtered = profileTrades.filter(t => !t.externalId?.startsWith('pos_'))
+  const purged = profileTrades.length - filtered.length
+  if (purged > 0) {
+    saveProfileTrades(profileId, filtered)
+  }
+
+  revalidatePath('/dashboard')
+  revalidatePath('/journal')
+  revalidatePath('/statistiken')
+
+  return NextResponse.json({ ok: true, purged })
+}
+
+
 export async function POST(req: NextRequest) {
   if (!isValidApiKey(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
