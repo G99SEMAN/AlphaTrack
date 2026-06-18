@@ -141,8 +141,11 @@ function Invoke-NasSsh($cfg, [string]$RemoteCmd) {
 
 function Invoke-GitPush {
     Write-Host '  git push ...'
-    & git -C $RepoRoot push
-    if ($LASTEXITCODE -ne 0) { throw 'git push fehlgeschlagen.' }
+    Push-Location $RepoRoot
+    & git push
+    $ec = $LASTEXITCODE
+    Pop-Location
+    if ($ec -ne 0) { throw 'git push fehlgeschlagen.' }
     Write-Ok 'Code zu GitHub gepusht.'
 }
 
