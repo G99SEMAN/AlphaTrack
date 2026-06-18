@@ -136,23 +136,29 @@ class BridgeClient:
             return None
 
     def execute_trade(self, symbol: str, direction: str, lots: float,
-                      sl: float = 0, tp: float = 0) -> dict:
+                      sl: float = 0, tp: float = 0,
+                      sl_pips: float = 0, tp_pips: float = 0) -> dict:
         """Sendet Trade-Order mit bot_id als Metadatum (C4 konform)."""
         try:
+            payload = {
+                "symbol": symbol,
+                "direction": direction,
+                "lots": lots,
+                "sl": sl,
+                "tp": tp,
+                "bot_id": self._bot_id,
+            }
+            if sl_pips > 0:
+                payload["slPips"] = sl_pips
+            if tp_pips > 0:
+                payload["tpPips"] = tp_pips
             r = requests.post(
                 f"{self._url}/command",
                 json={
                     "command": "execute_trade",
                     "id": str(uuid.uuid4()),
                     "bot_id": self._bot_id,
-                    "payload": {
-                        "symbol": symbol,
-                        "direction": direction,
-                        "lots": lots,
-                        "sl": sl,
-                        "tp": tp,
-                        "bot_id": self._bot_id,
-                    },
+                    "payload": payload,
                 },
                 headers=self._headers,
                 timeout=15,

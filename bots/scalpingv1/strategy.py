@@ -48,8 +48,8 @@ class ScalpingV1Strategy(BaseBot):
 
         Returns:
             {"action": "hold"}
-            {"action": "buy",  "lots": 0.05, "sl": 1.0800, "tp": 1.0815}
-            {"action": "sell", "lots": 0.05, "sl": 1.0815, "tp": 1.0800}
+            {"action": "buy",  "lots": 0.05, "sl_pips": 10, "tp_pips": 15}
+            {"action": "sell", "lots": 0.05, "sl_pips": 10, "tp_pips": 15}
         """
         cfg = self._config.get("strategy", {})
 
@@ -82,9 +82,6 @@ class ScalpingV1Strategy(BaseBot):
         sl_pips = float(cfg.get("sl_pips", 10))
         tp_pips = float(cfg.get("tp_pips", 15))
         lots = float(cfg.get("lots", 0.05))
-        pip = 0.0001  # EURUSD Pip-Groesse
-
-        price = closes[-1]
 
         # Keine neue Position wenn bereits offen
         if positions:
@@ -92,17 +89,13 @@ class ScalpingV1Strategy(BaseBot):
 
         # Bullisches Crossover: EMA fast ueberschreitet EMA slow von unten + RSI > 50
         if ema_fast_prev < ema_slow_prev and ema_fast_curr > ema_slow_curr and rsi > 50:
-            sl = round(price - sl_pips * pip, 5)
-            tp = round(price + tp_pips * pip, 5)
-            self.log("info", "BUY-Signal", f"EMA-Cross bullish | RSI={rsi:.1f} | SL={sl} TP={tp}")
-            return {"action": "buy", "lots": lots, "sl": sl, "tp": tp}
+            self.log("info", "BUY-Signal", f"EMA-Cross bullish | RSI={rsi:.1f} | SL={sl_pips}p TP={tp_pips}p")
+            return {"action": "buy", "lots": lots, "sl_pips": sl_pips, "tp_pips": tp_pips}
 
         # Bearisches Crossover: EMA fast unterschreitet EMA slow von oben + RSI < 50
         if ema_fast_prev > ema_slow_prev and ema_fast_curr < ema_slow_curr and rsi < 50:
-            sl = round(price + sl_pips * pip, 5)
-            tp = round(price - tp_pips * pip, 5)
-            self.log("info", "SELL-Signal", f"EMA-Cross bearish | RSI={rsi:.1f} | SL={sl} TP={tp}")
-            return {"action": "sell", "lots": lots, "sl": sl, "tp": tp}
+            self.log("info", "SELL-Signal", f"EMA-Cross bearish | RSI={rsi:.1f} | SL={sl_pips}p TP={tp_pips}p")
+            return {"action": "sell", "lots": lots, "sl_pips": sl_pips, "tp_pips": tp_pips}
 
         return {"action": "hold"}
 

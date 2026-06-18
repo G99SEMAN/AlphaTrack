@@ -294,6 +294,8 @@ class BaseBot:
             lots=float(trade_dict.get("lots", 0.01)),
             sl=float(trade_dict.get("sl", 0) or 0),
             tp=float(trade_dict.get("tp", 0) or 0),
+            sl_pips=float(trade_dict.get("sl_pips", 0) or 0),
+            tp_pips=float(trade_dict.get("tp_pips", 0) or 0),
         )
         if result.get("success") and result.get("ticket"):
             ticket = int(result["ticket"])
