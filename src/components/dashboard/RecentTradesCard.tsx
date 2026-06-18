@@ -115,7 +115,7 @@ function RecentTradesCard({ trades, bots = [] }: Props) {
 
               <div style={{ textAlign: 'right' }}>
                 <p style={{ fontSize: 11, fontWeight: 700, color: pnlPos ? 'var(--green)' : 'var(--red)', fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
-                  {(trade.pnl ?? 0) >= 0 ? '+' : ''}{(trade.pnl ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} €
+                  {(trade.pnl ?? 0) >= 0 ? '+' : ''}{(trade.pnl ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
                 </p>
                 {trade.rr && (
                   <p style={{ fontSize: 9, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)' }}>1:{trade.rr.toFixed(1)}</p>

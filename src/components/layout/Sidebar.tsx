@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import MarketSessions from './MarketSessions'
 import BottomNav from './BottomNav'
-import { Profile } from '@/types/profile'
+import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
 import LogoMark from './LogoMark'
@@ -127,6 +127,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
   }
 
   const avatarInitial = activeProfile?.name?.[0]?.toUpperCase() ?? 'P'
+  const ProfileIconComp = activeProfile?.icon ? PROFILE_ICON_MAP[activeProfile.icon as keyof typeof PROFILE_ICON_MAP] : null
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -215,7 +216,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 11, fontWeight: 700, color: '#fff',
             }}>
-              {avatarInitial}
+              {ProfileIconComp ? <ProfileIconComp size={14} /> : avatarInitial}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -244,7 +245,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               fontSize: 12, fontWeight: 700, color: '#fff', cursor: 'pointer', border: 'none',
             }}
           >
-            {avatarInitial}
+            {ProfileIconComp ? <ProfileIconComp size={15} /> : avatarInitial}
           </button>
         </div>
       )}
