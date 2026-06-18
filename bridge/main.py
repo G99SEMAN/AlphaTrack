@@ -387,6 +387,7 @@ def main():
 
     display.log("ok", "BRIDGE", f"Laeuft | AlphaTrack: {config['alphatrack_url']}")
     display.log("info", "BRIDGE", f"Heartbeat {config['heartbeat_interval_sec']}s | Sync {config['trade_sync_interval_sec']}s | Strg+C zum Beenden")
+    display.log("info", "SYNC", f"sync_mode={config.get('sync_mode','?')} cutoff={config.get('sync_cutoff_timestamp',0)}")
     display.start()
 
     while running:
