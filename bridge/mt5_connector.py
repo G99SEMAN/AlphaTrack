@@ -117,16 +117,12 @@ class MT5Connector:
     def server_offset_sec(self) -> float:
         return self._server_offset_sec()
 
-    def get_open_positions(self, min_open_utc: float = 0) -> list[dict]:
+    def get_open_positions(self) -> list[dict]:
         positions = mt5.positions_get()
         if positions is None:
             return []
         result = []
         for p in positions:
-            if min_open_utc > 0:
-                open_utc = p.time - self._server_offset_sec()
-                if open_utc < min_open_utc:
-                    continue
             result.append({
                 "ticket": p.ticket,
                 "date": self._server_iso(p.time),

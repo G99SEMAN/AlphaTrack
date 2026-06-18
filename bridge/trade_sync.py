@@ -22,14 +22,13 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     sync_mode = config.get("sync_mode", "full")
     sync_cutoff = config.get("sync_cutoff_timestamp", 0) if sync_mode == "new_only" else 0
 
-    open_trades = mt5.get_open_positions(min_open_utc=sync_cutoff)
+    open_trades = mt5.get_open_positions()
     # Lookback-Fenster: immer mindestens _MIN_LOOKBACK_SEC zurückgehen damit
     # Trades die kurz vor dem letzten Sync geschlossen wurden nicht dauerhaft
     # als 'open' hängenbleiben.
     effective_ts = min(last_sync_ts, time.time() - _MIN_LOOKBACK_SEC) if last_sync_ts > 0 else last_sync_ts
     if sync_cutoff > 0:
-        server_cutoff = sync_cutoff + mt5.server_offset_sec()
-        effective_ts = max(effective_ts, server_cutoff)
+        effective_ts = max(effective_ts, sync_cutoff)
     closed_trades = mt5.get_closed_deals(from_timestamp=effective_ts)
 
     all_trades = open_trades + closed_trades
@@ -37,7 +36,8 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     global _sync_diag_logged
     if not _sync_diag_logged and display:
         display.log("info", "SYNC",
-                    f"Mode={sync_mode} cutoff={sync_cutoff} offset={mt5.server_offset_sec():.0f} "
+                    f"Mode={sync_mode} cutoff={sync_cutoff} eff_ts={effective_ts:.0f} "
+                    f"offset={mt5.server_offset_sec():.0f} "
                     f"open={len(open_trades)} closed={len(closed_trades)}")
         _sync_diag_logged = True
 
