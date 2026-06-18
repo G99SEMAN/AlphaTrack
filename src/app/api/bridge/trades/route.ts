@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { getBotTrades, saveBotTrades, addBridgeLogEntry, getBotById, getBots } from '@/lib/bot-data'
-import { getProfileTrades, saveProfileTrades, getProfiles } from '@/lib/profiles'
+import { getProfileTrades, saveProfileTrades, getProfiles, getProfileResetCutoff } from '@/lib/profiles'
 import { Trade } from '@/types/trade'
 import { nanoid } from 'nanoid'
 import { isValidApiKey } from '@/lib/auth'
@@ -118,7 +118,13 @@ export async function POST(req: NextRequest) {
   if (invalidCount > 0) {
     addBridgeLogEntry(resolvedBridgeId, 'warn', `${invalidCount} Trade(s) mit ungueltigem Format ignoriert`)
   }
-  const trades = validRaw.map(normalizeTrade)
+  const allNormalized = validRaw.map(normalizeTrade)
+
+  // Geschlossene Trades vor dem Reset-Cutoff ablehnen
+  const resetCutoff = getProfileResetCutoff(profileId)
+  const trades = resetCutoff
+    ? allNormalized.filter(t => t.status !== 'closed' || (t.closeTime ?? t.date) >= resetCutoff)
+    : allNormalized
 
   const existing = getBotTrades(profileId).map(t => t.sourceId ? t : { ...t, sourceId: 'bridge/tradeexecuter' })
   const existingMap = new Map(

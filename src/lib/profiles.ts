@@ -135,3 +135,17 @@ export function saveProfileTrades(profileId: string, trades: Trade[]): void {
   ensureDataDir()
   atomicWrite(getTradeFilePath(profileId), JSON.stringify(trades, null, 2))
 }
+
+export function getProfileResetCutoff(profileId: string): string | null {
+  try {
+    const raw = fs.readFileSync(path.join(DATA_DIR, `reset-cutoff-${profileId}.json`), 'utf-8')
+    return (JSON.parse(raw) as { cutoff: string }).cutoff ?? null
+  } catch {
+    return null
+  }
+}
+
+export function saveProfileResetCutoff(profileId: string, cutoff: string): void {
+  ensureDataDir()
+  atomicWrite(path.join(DATA_DIR, `reset-cutoff-${profileId}.json`), JSON.stringify({ cutoff }))
+}

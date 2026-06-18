@@ -17,6 +17,7 @@ import {
   getProfiles,
   getProfileTrades,
   saveProfileTrades,
+  saveProfileResetCutoff,
 } from '@/lib/profiles'
 import { getProfileStrategies, saveProfileStrategies } from '@/lib/strategies'
 import {
@@ -495,6 +496,8 @@ export async function resetTradesAction(): Promise<{
   saveBotTrades(activeId, [])
 
   const cutoffTimestamp = new Date().toISOString()
+  saveProfileResetCutoff(activeId, cutoffTimestamp)
+
   const bridgeBot = getBotsByProfileId(activeId).find(b => (b.type ?? 'bridge') === 'bridge')
   let cutoffSet = false
   let bridgeOffline = !bridgeBot
