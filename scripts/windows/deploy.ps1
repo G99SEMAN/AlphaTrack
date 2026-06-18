@@ -6,8 +6,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$ScriptDir  = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot   = (Resolve-Path (Join-Path $ScriptDir '..\..')).ProviderPath
+$ScriptDir  = (Split-Path -Parent $MyInvocation.MyCommand.Path) -replace '^Microsoft\.PowerShell\.Core\\FileSystem::', ''
+$RepoRoot   = [System.IO.Path]::GetFullPath((Join-Path $ScriptDir '..\..'))
 $ConfigPath = Join-Path $ScriptDir 'deploy.config.json'
 $Sep        = '-' * 55
 

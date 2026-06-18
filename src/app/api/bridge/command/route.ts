@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { addBotCommand, pruneOldCommands, addBridgeLogEntry, getBotById } from '@/lib/bot-data'
+import { addBotCommand, pruneOldCommands, addBridgeLogEntry, getBotById, acknowledgeBotCommand } from '@/lib/bot-data'
 import { BotCommandType, TradeOrderPayload, ClosePositionPayload, SetParametersPayload } from '@/types/bot'
 import { isSameOriginRequest } from '@/lib/auth'
 
@@ -83,15 +83,18 @@ export async function POST(req: NextRequest) {
 
     if (command === 'execute_trade' || command === 'close_position') {
       if (flaskRes.ok) {
+        acknowledgeBotCommand(bridgeId, entry.id)
         const result = await flaskRes.json()
         return NextResponse.json({ ok: true, delivered: true, commandId: entry.id, result })
       }
+      acknowledgeBotCommand(bridgeId, entry.id)
       const errBody = await flaskRes.json().catch(() => ({})) as { error?: string }
       addBridgeLogEntry(bridgeId, 'error', `Command fehlgeschlagen: ${command}`, errBody.error ?? `HTTP ${flaskRes.status}`)
       return NextResponse.json({ ok: false, error: errBody.error ?? 'Bridge returned error' }, { status: 502 })
     }
 
     if (!flaskRes.ok) {
+      acknowledgeBotCommand(bridgeId, entry.id)
       const errBody = await flaskRes.json().catch(() => ({})) as { error?: string }
       addBridgeLogEntry(bridgeId, 'error', `Command fehlgeschlagen: ${command}`, errBody.error ?? `HTTP ${flaskRes.status}`)
       return NextResponse.json({ ok: false, delivered: true, error: errBody.error ?? `Bridge returned ${flaskRes.status}` }, { status: 502 })
@@ -101,5 +104,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, delivered: false, queued: true, commandId: entry.id })
   }
 
+  acknowledgeBotCommand(bridgeId, entry.id)
   return NextResponse.json({ ok: true, delivered: true, commandId: entry.id })
 }
