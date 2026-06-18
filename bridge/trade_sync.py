@@ -8,6 +8,7 @@ from gateway import get_at_bot_id_for_ticket
 # Trades, die knapp vor einem Sync-Intervall geschlossen wurden, dauerhaft als
 # 'open' hängenbleiben.
 _MIN_LOOKBACK_SEC = 7200  # 2 Stunden
+_sync_diag_logged = False
 
 
 def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=None, local_log=None) -> tuple[bool, float]:
@@ -32,6 +33,14 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
     closed_trades = mt5.get_closed_deals(from_timestamp=effective_ts)
 
     all_trades = open_trades + closed_trades
+
+    global _sync_diag_logged
+    if not _sync_diag_logged and display:
+        display.log("info", "SYNC",
+                    f"Mode={sync_mode} cutoff={sync_cutoff} offset={mt5.server_offset_sec():.0f} "
+                    f"open={len(open_trades)} closed={len(closed_trades)}")
+        _sync_diag_logged = True
+
     if not all_trades:
         return True, last_sync_ts
 
