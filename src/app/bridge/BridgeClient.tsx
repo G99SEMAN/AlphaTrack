@@ -213,7 +213,7 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                   botState={selected.status?.state}
                   activeSymbols={selected.status?.activeSymbols}
                 />
-                <LiveTradeFeed profileId={selected.bot.profileId} />
+                <LiveTradeFeed profileId={selected.bot.profileId} bots={bots.map(b => b.bot)} />
               </div>
             </>
           )}

@@ -5,13 +5,23 @@ import { motion } from 'framer-motion'
 import { Activity, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { Trade } from '@/types/trade'
+import { BotEntry } from '@/types/bot'
 
 interface Props {
   profileId: string
+  bots?: BotEntry[]
   initialTrades?: Trade[]
 }
 
-export default function LiveTradeFeed({ profileId, initialTrades = [] }: Props) {
+export default function LiveTradeFeed({ profileId, bots = [], initialTrades = [] }: Props) {
+  const botNames = new Map(bots.map(b => [b.id, b.name]))
+
+  function resolveSourceLabel(trade: Trade): string | null {
+    if (!trade.sourceId && !trade.botId) return null
+    const sid = trade.sourceId ?? trade.botId
+    if (sid === 'bridge/tradeexecuter') return 'Bridge'
+    return botNames.get(sid!) ?? 'Bot'
+  }
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
 
   const fetch_ = useCallback(async () => {
@@ -74,6 +84,7 @@ export default function LiveTradeFeed({ profileId, initialTrades = [] }: Props) 
               const isLong = trade.type === 'long'
               const isOpen = trade.status === 'open'
               const pnl = trade.pnl ?? 0
+              const sourceLabel = resolveSourceLabel(trade)
               const time = new Date(trade.date).toLocaleString('de-DE', {
                 day: '2-digit', month: '2-digit',
                 hour: '2-digit', minute: '2-digit',
@@ -100,6 +111,12 @@ export default function LiveTradeFeed({ profileId, initialTrades = [] }: Props) 
                         }}>
                         {isOpen ? 'OFFEN' : 'CLOSED'}
                       </span>
+                      {sourceLabel && (
+                        <span className="text-xs px-1.5 rounded font-medium leading-none py-0.5"
+                          style={{ background: 'var(--bg)', color: 'var(--text-3)' }}>
+                          {sourceLabel}
+                        </span>
+                      )}
                     </div>
                     <p className="text-xs font-mono mt-0.5" style={{ color: 'var(--text-3)' }}>
                       {time} · {trade.size} Lot

@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
+import { getBots } from '@/lib/bot-data'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
 import Sidebar from '@/components/layout/Sidebar'
 import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
@@ -143,7 +144,7 @@ export default async function DashboardPage({
 
             {/* Zeile 3: Letzte Trades + Offene Trades nebeneinander */}
             <div className="lg:col-span-6">
-              <RecentTradesCard trades={allTrades} />
+              <RecentTradesCard trades={allTrades} bots={getBots()} />
             </div>
 
             <div className="lg:col-span-6">

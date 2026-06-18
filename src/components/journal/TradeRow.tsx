@@ -53,6 +53,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
   const pnlPositive = (trade.pnl ?? 0) > 0
   const hasPnl = trade.pnl != null
   const date = new Date(trade.date)
+  const displayDate = trade.status === 'closed' && trade.closeTime ? new Date(trade.closeTime) : date
   const strategy = trade.strategyId ? strategies.find(s => s.id === trade.strategyId) : undefined
 
   function handleDelete() {
@@ -93,9 +94,9 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
           </p>
           <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
             <p className="text-xs shrink-0" style={{ color: 'var(--text-3)' }}>
-              {date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+              {displayDate.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
               {' '}
-              {date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+              {displayDate.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
             </p>
             {/* Status-Badge auf Mobile in der linken Spalte */}
             <div className="sm:hidden shrink-0">
