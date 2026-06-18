@@ -1,2 +1,3 @@
 - Alle MD Dateinen aktualisieren
-
+- Bot Terminal Interface verbessern (Mehr daten um zu verstehen warum ein bot tradet oder nicht)
+- Bridge Terminal Interface verschönern
