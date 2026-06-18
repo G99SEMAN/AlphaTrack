@@ -26,6 +26,8 @@ import {
   getConnectionState,
   getBotStatus,
   getAllBotsWithStatus,
+  getBotTrades,
+  saveBotTrades,
 } from '@/lib/bot-data'
 import { isValidRawTrade, normalizeTrade } from '@/lib/normalize-trade'
 
@@ -467,4 +469,52 @@ export async function importBridgeHistoryAction(): Promise<
   }
 
   return { ok: true, imported: newTrades.length }
+}
+
+// --- Reset Actions ---
+
+export async function resetTradesAction(): Promise<{
+  success: boolean
+  deletedJournal: number
+  deletedBridge: number
+  cutoffSet: boolean
+  bridgeOffline: boolean
+}> {
+  const activeId = getActiveProfileId()
+  if (!activeId) return { success: false, deletedJournal: 0, deletedBridge: 0, cutoffSet: false, bridgeOffline: false }
+
+  const allTrades = getProfileTrades(activeId)
+  const closedTrades = allTrades.filter(t => t.status === 'closed')
+  const openTrades = allTrades.filter(t => t.status !== 'closed')
+  for (const trade of closedTrades) {
+    if (trade.screenshot) deleteScreenshotFile(trade.screenshot)
+  }
+  saveProfileTrades(activeId, openTrades)
+
+  const bridgeTrades = getBotTrades(activeId)
+  saveBotTrades(activeId, [])
+
+  const cutoffTimestamp = new Date().toISOString()
+  const bridgeBot = getBotsByProfileId(activeId).find(b => (b.type ?? 'bridge') === 'bridge')
+  let cutoffSet = false
+  let bridgeOffline = !bridgeBot
+
+  if (bridgeBot) {
+    try {
+      const r = await fetch(`${bridgeBot.url}/config`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Bot-Api-Key': process.env.BOT_API_KEY ?? '' },
+        body: JSON.stringify({ sync_cutoff_timestamp: cutoffTimestamp }),
+        signal: AbortSignal.timeout(8000),
+      })
+      cutoffSet = r.ok
+      bridgeOffline = !r.ok
+    } catch {
+      bridgeOffline = true
+    }
+  }
+
+  revalidatePath('/', 'layout')
+
+  return { success: true, deletedJournal: closedTrades.length, deletedBridge: bridgeTrades.length, cutoffSet, bridgeOffline }
 }

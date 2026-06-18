@@ -5,12 +5,12 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus } from 'lucide-react'
+import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert } from 'lucide-react'
 import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
 import { useSessionSettings } from '@/hooks/useSessionSettings'
 import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
-import { switchProfileAction, deleteProfileAction, stopBotsForProfileAction, checkStopAcknowledgedAction } from '@/lib/actions'
+import { switchProfileAction, deleteProfileAction, stopBotsForProfileAction, checkStopAcknowledgedAction, resetTradesAction } from '@/lib/actions'
 import ProfileEditModal from '@/components/profile/ProfileEditModal'
 import ProfileSetupModal from '@/components/profile/ProfileSetupModal'
 
@@ -40,6 +40,13 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   const [switching, setSwitching] = useState<string | null>(null)
   const [showEditModal, setShowEditModal] = useState<Profile | null>(null)
   const [showCreateModal, setShowCreateModal] = useState(false)
+  const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [resetting, setResetting] = useState(false)
+  const [resetResult, setResetResult] = useState<
+    | { type: 'success'; deletedJournal: number; deletedBridge: number; cutoffSet: boolean; bridgeOffline: boolean }
+    | { type: 'error' }
+    | null
+  >(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -167,6 +174,25 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
     } finally {
       setDeleting(false)
       setDeleteStatusMsg(null)
+    }
+  }
+
+  async function handleResetTrades() {
+    setShowResetConfirm(false)
+    setResetting(true)
+    setResetResult(null)
+    try {
+      const result = await resetTradesAction()
+      if (result.success) {
+        setResetResult({ type: 'success', ...result })
+        router.refresh()
+      } else {
+        setResetResult({ type: 'error' })
+      }
+    } catch {
+      setResetResult({ type: 'error' })
+    } finally {
+      setResetting(false)
     }
   }
 
@@ -671,6 +697,72 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Gefahrenzone */}
+            <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid rgba(239,68,68,0.4)' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <ShieldAlert size={15} style={{ color: '#ef4444' }} />
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#ef4444' }}>
+                  Gefahrenzone
+                </p>
+              </div>
+              <p className="text-sm mb-3" style={{ color: 'var(--text-2)' }}>
+                Diese Aktionen können nicht rückgängig gemacht werden.
+              </p>
+
+              <div className="flex items-start justify-between gap-4 py-3" style={{ borderTop: '1px solid var(--border)' }}>
+                <div>
+                  <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>Trades zurücksetzen</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
+                    Löscht alle geschlossenen Journal- und Bridge-Trades des aktiven Profils und setzt den Bridge-Sync-Cutoff auf jetzt.
+                  </p>
+                </div>
+                <button
+                  onClick={() => { setShowResetConfirm(true); setResetResult(null) }}
+                  disabled={resetting}
+                  className="shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer disabled:opacity-50"
+                  style={{ background: 'rgba(239,68,68,0.12)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.3)' }}
+                >
+                  <RotateCcw size={13} />
+                  {resetting ? 'Wird gelöscht…' : 'Zurücksetzen'}
+                </button>
+              </div>
+
+              <AnimatePresence>
+                {resetResult && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="mt-3 rounded-lg p-3 text-sm flex items-start gap-2.5"
+                    style={
+                      resetResult.type === 'success'
+                        ? { background: 'rgba(0,217,126,0.1)', color: 'var(--green)', border: '1px solid rgba(0,217,126,0.3)' }
+                        : { background: 'rgba(255,69,96,0.1)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.3)' }
+                    }
+                  >
+                    {resetResult.type === 'success' ? (
+                      <>
+                        <CheckCircle size={16} className="shrink-0 mt-0.5" />
+                        <div className="space-y-0.5">
+                          <p className="font-semibold">Trades zurückgesetzt</p>
+                          <p className="text-xs opacity-80">
+                            {resetResult.deletedJournal} Journal-Trade{resetResult.deletedJournal !== 1 ? 's' : ''} und{' '}
+                            {resetResult.deletedBridge} Bridge-Trade{resetResult.deletedBridge !== 1 ? 's' : ''} gelöscht.
+                            {' '}{resetResult.cutoffSet ? 'Bridge-Cutoff gesetzt.' : resetResult.bridgeOffline ? 'Bridge offline — Cutoff nicht gesetzt.' : ''}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <XCircle size={16} className="shrink-0 mt-0.5" />
+                        <p className="font-semibold">Zurücksetzen fehlgeschlagen</p>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </>
         )}
 
@@ -740,6 +832,64 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   >
                     <Trash2 size={14} />
                     {deleting ? 'Wird gelöscht...' : 'Löschen'}
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* Reset-Bestätigung */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {showResetConfirm && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+              style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
+              onClick={() => setShowResetConfirm(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                transition={{ duration: 0.15 }}
+                className="w-full max-w-sm rounded-2xl p-6 flex flex-col gap-4"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 24px 48px rgba(0,0,0,0.4)' }}
+                onClick={e => e.stopPropagation()}
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(239,68,68,0.15)' }}>
+                    <AlertTriangle size={20} style={{ color: '#ef4444' }} />
+                  </div>
+                  <div>
+                    <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>Trades zurücksetzen?</p>
+                    <p className="text-sm mt-1" style={{ color: 'var(--text-2)' }}>
+                      Alle geschlossenen Journal- und Bridge-Trades des aktiven Profils werden{' '}
+                      <span className="font-semibold" style={{ color: '#ef4444' }}>unwiderruflich gelöscht</span>.
+                      Der Bridge-Sync-Cutoff wird auf jetzt gesetzt.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2 justify-end">
+                  <button
+                    onClick={() => setShowResetConfirm(false)}
+                    className="px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer"
+                    style={{ background: 'var(--surface-2)', color: 'var(--text-1)', border: '1px solid var(--border)' }}
+                  >
+                    Abbrechen
+                  </button>
+                  <button
+                    onClick={handleResetTrades}
+                    className="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer"
+                    style={{ background: '#ef4444', color: '#fff' }}
+                  >
+                    <RotateCcw size={14} />
+                    Jetzt löschen
                   </button>
                 </div>
               </motion.div>
