@@ -25,13 +25,24 @@ function syncBridgeTradesToProfile(profileId: string, bridgeTrades: Trade[]): bo
     } else if (existing.status === 'open' && bt.status === 'closed') {
       const idx = updated.findIndex(t => t.externalId === bt.externalId)
       if (idx !== -1) {
-          updated[idx] = {
-            ...existing, ...bt, id: existing.id,
-            botId: existing.botId ?? bt.botId,
-            sourceId: existing.sourceId ?? bt.sourceId,
-          }
-          changed = true
+        updated[idx] = {
+          ...existing, ...bt, id: existing.id,
+          botId: existing.botId ?? bt.botId,
+          sourceId: existing.sourceId ?? bt.sourceId,
         }
+        changed = true
+      }
+    } else if (existing.status === 'open' && bt.status === 'open') {
+      const idx = updated.findIndex(t => t.externalId === bt.externalId)
+      if (idx !== -1) {
+        updated[idx] = {
+          ...updated[idx], ...bt,
+          id: updated[idx].id,
+          botId: updated[idx].botId ?? bt.botId,
+          sourceId: updated[idx].sourceId ?? bt.sourceId,
+        }
+        changed = true
+      }
     }
   }
 
@@ -137,6 +148,7 @@ export async function POST(req: NextRequest) {
 
   const newTrades: Trade[] = []
   let updatedCount = 0
+  let openPositionsChanged = false
   const merged = [...existing]
 
   for (const t of trades) {
@@ -166,14 +178,27 @@ export async function POST(req: NextRequest) {
         }
         updatedCount++
       }
+    } else if (prev.status === 'open' && t.status === 'open') {
+      const idx = merged.findIndex(x => x.externalId === externalId)
+      if (idx !== -1) {
+        merged[idx] = {
+          ...merged[idx], ...t,
+          id: merged[idx].id,
+          botId: merged[idx].botId ?? t.botId,
+          sourceId: merged[idx].sourceId ?? t.sourceId,
+        }
+        openPositionsChanged = true
+      }
     }
   }
 
   const total = newTrades.length + updatedCount
   const bridgeTradesFinal = [...merged, ...newTrades]
 
-  if (total > 0) {
+  if (total > 0 || openPositionsChanged) {
     saveBotTrades(profileId, bridgeTradesFinal)
+  }
+  if (total > 0) {
     addBridgeLogEntry(resolvedBridgeId, 'info', `${newTrades.length} neue, ${updatedCount} aktualisierte Trade(s)`, `Profil: ${profileId}`)
   }
 
