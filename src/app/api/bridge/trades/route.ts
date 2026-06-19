@@ -43,6 +43,25 @@ function syncBridgeTradesToProfile(profileId: string, bridgeTrades: Trade[]): bo
         }
         changed = true
       }
+    } else if (existing.status === 'closed' && bt.status === 'closed') {
+      // Heartbeat-Reconciliation kann Trades mit stale P&L/Commission schließen
+      // bevor der Trade-Sync die korrekten MT5-Werte liefert → hier korrigieren.
+      const needsUpdate = existing.pnl !== bt.pnl
+        || existing.commission !== bt.commission
+        || existing.swap !== bt.swap
+        || existing.exit !== bt.exit
+        || existing.closeTime !== bt.closeTime
+      if (needsUpdate) {
+        const idx = updated.findIndex(t => t.externalId === bt.externalId)
+        if (idx !== -1) {
+          updated[idx] = {
+            ...existing, ...bt, id: existing.id,
+            botId: existing.botId ?? bt.botId,
+            sourceId: existing.sourceId ?? bt.sourceId,
+          }
+          changed = true
+        }
+      }
     }
   }
 

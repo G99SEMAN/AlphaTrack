@@ -15,8 +15,9 @@ function reconcileOpenTrades(profileId: string, openTicketIds: number[]): void {
       return {
         ...t,
         status: 'closed' as const,
-        closeTime: new Date().toISOString(),
-        notes: (t.notes ? t.notes + ' | ' : '') + '[Auto-geschlossen via Heartbeat-Reconciliation]',
+        // P&L, Commission, Swap, Exit und CloseTime werden NICHT gesetzt —
+        // der Trade-Sync liefert die korrekten MT5-Werte nach und korrigiert
+        // über den closed→closed Update-Pfad.
       }
     }
     return t
