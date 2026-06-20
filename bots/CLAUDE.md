@@ -17,7 +17,7 @@ All WebSocket messages use the AGPv2 envelope:
 ```json
 {
   "agp": "2.0", "type": "register", "id": "uuid", "ts": "...",
-  "payload": {"name": "Bot Name", "version": "1.0.0", "component_type": "bot", "ip": "192.168.178.X", "port": 0}
+  "payload": {"id": "mybot-001", "name": "Bot Name", "version": "1.0.0", "component_type": "bot", "ip": "192.168.178.X", "port": 8771}
 }
 ```
 
@@ -25,14 +25,16 @@ All WebSocket messages use the AGPv2 envelope:
 ```json
 {
   "agp": "2.0", "type": "heartbeat", "id": "uuid", "ts": "...",
-  "payload": {"state": "running", "open_positions": 0, "balance": 1000.0, "currency": "USD", "uptime": 120, "active_symbols": [], "trades_sync": 0}
+  "payload": {"state": "running", "open_positions": 0, "balance": 1000.0, "currency": "USD", "uptime": 120, "active_symbols": [], "trades_sync": 0, "parameters": {"hold_minutes": 10}}
 }
 ```
 
-### Commands (From Bridge)
+### Commands (From Bridge — ohne AGPv2-Envelope)
 ```json
-{"agp": "2.0", "type": "command", "id": "uuid", "ts": "...", "payload": {"cmd_id": "uuid", "command": "execute_trade", "payload": {"symbol": "EURUSDp", "direction": "buy", "lots": 0.01, "sl": 1.08, "tp": 1.09}}}
-{"agp": "2.0", "type": "command", "id": "uuid", "ts": "...", "payload": {"cmd_id": "uuid", "command": "close_position", "payload": {"ticket": 12345678}}}
+{"type": "command", "cmd_id": "uuid", "command": "execute_trade", "payload": {"symbol": "EURUSDp", "direction": "buy", "lots": 0.01, "sl": 1.08, "tp": 1.09}}
+{"type": "command", "cmd_id": "uuid", "command": "close_position", "payload": {"ticket": 12345678}}
+{"type": "command", "cmd_id": "uuid", "command": "set_parameters", "payload": {"parameters": {"hold_minutes": 15}}}
+{"type": "command", "cmd_id": "uuid", "command": "mt5_error", "payload": {"error": "Insufficient margin", "bot_id": "mybot-001"}}
 ```
 
 ### Trade Result (Response)
@@ -112,15 +114,16 @@ set PYTHONPATH=%~dp0..
 
 ```json
 {
-  "alphatrack_url": "http://192.168.178.30:3002",
+  "alphatrack_url": "http://192.168.178.3:3002",
   "api_key": "REDACTED-API-KEY",
   "bot_id": "mybot-001",
   "bot_name": "My Trading Bot",
   "bot_version": "1.0.0",
   "bot_type": "bot",
+  "bot_ip": "",
   "bot_port": 8771,
   "profile_id": "YOUR_PROFILE_ID",
-  "bridge_url": "http://192.168.178.30:8765",
+  "bridge_url": "http://192.168.178.37:8765",
   "heartbeat_interval_sec": 10,
   "strategy": {
     "symbol": "EURUSDp",

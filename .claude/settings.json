@@ -21,7 +21,8 @@
       "Bash(cat > *)",
       "Bash(echo \"Task 1: complete \\(commits 34d6cbb..6db83c4, review clean\\)\" >> \"c:/Users/G99SEMAN/Desktop/AlphaTrack/.git/sdd/progress.md\")",
       "PowerShell($proc = Start-Process -FilePath \"node\" -ArgumentList '\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\" run dev' -WindowStyle Hidden -PassThru; $proc.Id)",
-      "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot ss.png /dashboard)"
+      "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot ss.png /dashboard)",
+      "Edit(/.claude/skills/trading-bot/**)"
     ],
     "deny": [
       "Read(./.env)",

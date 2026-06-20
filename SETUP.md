@@ -69,7 +69,7 @@ Das Script fragt einmalig nach NAS-IP, Mini-PC-IP, MT5-Zugangsdaten und SSH-Key-
 3. **Details** — Profilname, Zeitzone
 4. **Trade-Sync** — erst überspringen (`Erst ab heute dokumentieren`); nach der Bridge-Verbindung nachholen
 
-> Die `profile_id` des neuen Profils wird automatisch in `bridge/config.json` eingetragen, wenn du den Deploy (Schritt 4) danach erneut ausführst — oder manuell unter Einstellungen → Bridge-ID eintragen.
+> Die `profile_id` des neuen Profils muss in `bridge/config.json` eingetragen werden. Am einfachsten: Profil oeffnen → Profil-ID kopieren → in `bridge/config.json` unter `profile_id` eintragen → Deploy erneut ausfuehren.
 
 ---
 
@@ -90,9 +90,9 @@ Die Bridge verbindet sich zu MT5 und sendet alle 5 Sekunden einen Heartbeat an A
 
 ## 7 · Historische Trades importieren (optional)
 
-Einstellungen → Profil → **Historische Trades laden** — zieht alle bisherigen Deals aus MT5 via Bridge.
+Im Setup-Wizard Schritt 4 auf `Alle historischen Trades laden` klicken (Bridge muss verbunden sein).
 
-Oder: im Setup-Wizard Schritt 4 auf `Alle historischen Trades laden` klicken (Bridge muss verbunden sein).
+> **Hinweis:** Nachtraeglich ist kein UI-Import vorhanden — historische Trades koennen nur waehrend der Ersteinrichtung (Schritt 4) geladen werden. Falls uebersprungen: Profil loeschen und neu anlegen, oder Trades ueber die Bridge-API synchronisieren.
 
 ---
 

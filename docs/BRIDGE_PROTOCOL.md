@@ -1,19 +1,24 @@
-# AlphaTrack Gateway Protocol v1 (AGP/1)
+# AlphaTrack Gateway Protocol v2 (AGPv2)
 
-**Version**: 1.0.0  
-**Last Updated**: 2026-06-03  
+**Version**: 2.0.0  
+**Last Updated**: 2026-06-20  
 **Status**: Stable
 
 ---
 
 ## Overview
 
-AGP/1 is the exclusive communication protocol between AlphaTrack bots and the FastAPI Bridge Gateway. All bot interactions with MetaTrader 5, account data, and position management flow through the Bridge on a single WebSocket connection plus HTTP endpoints for bulk data retrieval.
+AGPv2 is the exclusive communication protocol between AlphaTrack bots and the FastAPI Bridge Gateway. All bot interactions with MetaTrader 5, account data, and position management flow through the Bridge on a single WebSocket connection plus HTTP endpoints for bulk data retrieval.
+
+Every WebSocket message is wrapped in an AGPv2 envelope:
+```json
+{"agp": "2.0", "type": "...", "id": "uuid", "ts": "2026-01-01T00:00:00+00:00", "payload": {...}}
+```
 
 ```
 ┌──────────────┐                    ┌─────────────────────┐                 ┌─────────┐
 │  AlphaTrack  │                    │  Bridge Gateway     │                 │   MT5   │
-│   UI/API     │◄─── HTTP REST ────►│  (FastAPI:8765)     │◄─ gRPC/HTTP ──►│Terminal │
+│   UI/API     │◄─── HTTP REST ────►│  (FastAPI:8765)     │◄── MT5 API ───►│Terminal │
 └──────────────┘                    └─────────────────────┘                 └─────────┘
                                               ▲
                                               │
@@ -34,37 +39,66 @@ AGP/1 is the exclusive communication protocol between AlphaTrack bots and the Fa
 
 ### 1. WebSocket Handshake
 ```
-ws://[bridge_host]:[bridge_port]/ws?api_key=[api_key]
+ws://[bridge_host]:8765/ws?api_key=[api_key]
 ```
 
 **Requirements:**
-- Port: 8765 (default)
-- Query parameter: `api_key` (provided by Bridge operator)
+- Port: 8765 (default, konfigurierbar via `command_server_port`)
+- Query parameter: `api_key` (muss mit Bridge-Config uebereinstimmen)
 - Must send `register` message immediately after connection
 
-### 2. Registration
-Bot sends (within 5 seconds of connection):
+### 2. Registration (AGPv2 Envelope)
+Bot sends (within 10 seconds of connection):
 ```json
-{"type": "register", "name": "Breakout v1", "version": "1.0.0"}
+{
+  "agp": "2.0",
+  "type": "register",
+  "id": "uuid",
+  "ts": "2026-01-01T00:00:00+00:00",
+  "payload": {
+    "id": "mybot-001",
+    "name": "Breakout v1",
+    "version": "1.0.0",
+    "component_type": "bot",
+    "ip": "192.168.178.37",
+    "port": 8771
+  }
+}
 ```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | string | Statische Bot-ID aus config.json |
+| name | string | Anzeigename (z.B. "Breakout v1") |
+| version | string | Bot semantic version (z.B. "1.0.0") |
+| component_type | string | `"bot"` (nie `"bridge"`) |
+| ip | string | Lokale IP des Bots (automatisch ermittelt) |
+| port | int | Bot-Port (z.B. 8771) |
 
 Bridge responds:
 ```json
-{"type": "registered", "bot_id": "bot_abc123"}
+{
+  "agp": "2.0",
+  "type": "registered",
+  "id": "uuid",
+  "ts": "...",
+  "payload": {"bot_id": "mybot-001"}
+}
 ```
 
 ### 3. Steady State
 - Bot sends **heartbeat** every `heartbeat_interval_sec` (default: 10s)
 - Bot processes **command** messages from Bridge immediately
 - Bot sends **trade_result** in response to execute_trade/close_position commands
-- Bridge sends **ping** every 30 seconds; bot must respond with **pong** within 5 seconds
+- Bridge sends **ping** periodically; bot must respond with **pong**
 
 ### 4. Reconnection
 If WebSocket closes:
-1. Wait exponential backoff: 1s, 2s, 4s, 8s, 16s (max 30s)
-2. Reconnect to ws://[bridge_host]:[bridge_port]/ws?api_key=[api_key]
+1. Wait 5 seconds
+2. Reconnect to `ws://[bridge_host]:8765/ws?api_key=[api_key]`
 3. Resend `register` message
 4. Resume heartbeat cycle
+5. Nach 3 fehlgeschlagenen Versuchen: Error-Log, dann weiter versuchen
 
 ---
 
@@ -72,22 +106,13 @@ If WebSocket closes:
 
 ### Bot → Bridge Messages
 
-#### **register** (Mandatory, send first)
-Sent immediately after WebSocket connection.
-
+Alle Nachrichten werden in ein AGPv2-Envelope gewrappt (`_agp2_wrap()` in `ws_client.py`):
 ```json
-{
-  "type": "register",
-  "name": "Breakout v1",
-  "version": "1.0.0"
-}
+{"agp": "2.0", "type": "<msg_type>", "id": "uuid", "ts": "ISO-8601", "payload": {...}}
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| type | string | Always: `"register"` |
-| name | string | Display name for bot (e.g., "Breakout v1") |
-| version | string | Bot semantic version (e.g., "1.0.0") |
+#### **register** (Mandatory, send first)
+Siehe oben unter "Registration".
 
 ---
 
@@ -96,27 +121,33 @@ Signals bot health and current state.
 
 ```json
 {
+  "agp": "2.0",
   "type": "heartbeat",
-  "state": "running",
-  "open_positions": 2,
-  "active_symbols": ["EURUSDp", "GBPUSDp"],
-  "trades_sync": 0,
-  "balance": 1250.50,
-  "currency": "USD",
-  "uptime": 7200
+  "id": "uuid",
+  "ts": "...",
+  "payload": {
+    "state": "running",
+    "open_positions": 2,
+    "active_symbols": ["EURUSDp", "GBPUSDp"],
+    "trades_sync": 0,
+    "uptime": 7200,
+    "balance": 1250.50,
+    "currency": "USD",
+    "parameters": {"hold_minutes": 10, "interval_minutes": 30}
+  }
 }
 ```
 
 | Field | Type | Description |
 |-------|------|-------------|
-| type | string | Always: `"heartbeat"` |
 | state | string | `"running"` \| `"paused"` \| `"stopped"` \| `"error"` |
 | open_positions | int | Count of open positions |
 | active_symbols | string[] | List of instruments with open positions |
 | trades_sync | int | Queue size of pending trade confirmations (0 = in sync) |
-| balance | float | Account balance (from last `/account` call) |
-| currency | string | Account currency (e.g., "USD") |
 | uptime | int | Seconds since bot started |
+| balance | float? | Account balance (optional, from last `/account` call) |
+| currency | string? | Account currency (optional, z.B. "USD") |
+| parameters | object? | Aktuelle Strategie-Parameter via `get_parameters()` (optional) |
 
 ---
 
@@ -125,19 +156,23 @@ Sends structured log entry to Bridge logs.
 
 ```json
 {
+  "agp": "2.0",
   "type": "log",
-  "level": "info",
-  "message": "Trade executed",
-  "details": "BUY 0.01 EURUSDp @ 1.08500"
+  "id": "uuid",
+  "ts": "...",
+  "payload": {
+    "level": "info",
+    "message": "Trade executed",
+    "details": "BUY 0.01 EURUSDp @ 1.08500"
+  }
 }
 ```
 
 | Field | Type | Description |
 |-------|------|-------------|
-| type | string | Always: `"log"` |
 | level | string | `"info"` \| `"warn"` \| `"error"` |
-| message | string | Short message (max 100 chars) |
-| details | string | Extended context (max 500 chars), optional |
+| message | string | Short message |
+| details | string? | Extended context (optional) |
 
 ---
 
@@ -146,28 +181,31 @@ Sent in response to `execute_trade` or `close_position` command.
 
 ```json
 {
+  "agp": "2.0",
   "type": "trade_result",
-  "cmd_id": "550e8400-e29b-41d4-a716-446655440000",
-  "success": true,
-  "ticket": 12345678,
-  "price": 1.08500,
-  "error": null
+  "id": "uuid",
+  "ts": "...",
+  "payload": {
+    "cmd_id": "550e8400-e29b-41d4-a716-446655440000",
+    "success": true,
+    "ticket": 12345678,
+    "price": 1.08500,
+    "error": null
+  }
 }
 ```
 
 | Field | Type | Description |
 |-------|------|-------------|
-| type | string | Always: `"trade_result"` |
 | cmd_id | string | UUID from Bridge command (echo back) |
 | success | bool | Trade succeeded (`true`) or failed (`false`) |
-| ticket | int | MT5 ticket number (if success=true) |
-| price | float | Execution price (if success=true) |
-| error | string | Error message if success=false |
+| ticket | int? | MT5 ticket number (if success=true) |
+| price | float? | Execution price (if success=true) |
+| error | string? | Error message if success=false |
 
 ---
 
 #### **pong** (Response to ping)
-Must be sent within 5 seconds of receiving a `ping`.
 
 ```json
 {"type": "pong"}
@@ -178,52 +216,37 @@ Must be sent within 5 seconds of receiving a `ping`.
 ### Bridge → Bot Messages
 
 #### **registered** (Response to register)
-Sent once after bot registration succeeds.
+Sent once after bot registration succeeds (AGPv2 envelope).
 
 ```json
-{"type": "registered", "bot_id": "bot_abc123"}
+{
+  "agp": "2.0",
+  "type": "registered",
+  "id": "uuid",
+  "ts": "...",
+  "payload": {"bot_id": "mybot-001"}
+}
 ```
-
-| Field | Type | Description |
-|-------|------|-------------|
-| type | string | Always: `"registered"` |
-| bot_id | string | Unique bot ID assigned by Bridge |
 
 ---
 
 #### **command** (Lifecycle Control)
 
-**Start:**
+Commands werden **ohne** AGPv2-Envelope gesendet (direkt als JSON-Frame):
+
 ```json
-{"type": "command", "cmd_id": "uuid", "command": "start", "payload": null}
+{"type": "command", "cmd_id": "uuid", "command": "<cmd>", "payload": null}
 ```
 
-**Stop:**
-```json
-{"type": "command", "cmd_id": "uuid", "command": "stop", "payload": null}
-```
+**Unterstuetzte Lifecycle-Commands:**
 
-**Pause:**
-```json
-{"type": "command", "cmd_id": "uuid", "command": "pause", "payload": null}
-```
-
-**Resume:**
-```json
-{"type": "command", "cmd_id": "uuid", "command": "resume", "payload": null}
-```
-
-**Restart:**
-```json
-{"type": "command", "cmd_id": "uuid", "command": "restart", "payload": null}
-```
-
-| Field | Type | Description |
-|-------|------|-------------|
-| type | string | Always: `"command"` |
-| cmd_id | string | UUID for tracking response |
-| command | string | `"start"` \| `"stop"` \| `"pause"` \| `"resume"` \| `"restart"` |
-| payload | object | Always `null` for lifecycle commands |
+| Command | Payload | Beschreibung |
+|---------|---------|--------------|
+| `start` | null | Bot starten / fortsetzen |
+| `stop` | null | Bot stoppen |
+| `pause` | null | Bot pausieren |
+| `resume` | null | Bot fortsetzen |
+| `restart` | null | Bot neustarten (Exit-Code 75) |
 
 ---
 
@@ -247,7 +270,7 @@ Sent once after bot registration succeeds.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| symbol | string | Instrument (e.g., "EURUSDp") |
+| symbol | string | Instrument (z.B. "EURUSDp") |
 | direction | string | `"buy"` or `"sell"` |
 | lots | float | Position size in lots |
 | sl | float | Stop-loss price (0 = no SL) |
@@ -259,77 +282,138 @@ Sent once after bot registration succeeds.
   "type": "command",
   "cmd_id": "550e8400-e29b-41d4-a716-446655440000",
   "command": "close_position",
-  "payload": {
-    "ticket": 12345678
-  }
+  "payload": {"ticket": 12345678}
 }
 ```
-
-| Field | Type | Description |
-|-------|------|-------------|
-| ticket | int | MT5 ticket number to close |
 
 Bot must respond with `trade_result` message containing the same `cmd_id`.
 
 ---
 
+#### **command** (Parameter-Editor)
+
+**set_parameters** — Setzt Strategie-Parameter live (von AlphaTrack UI):
+```json
+{
+  "type": "command",
+  "cmd_id": "uuid",
+  "command": "set_parameters",
+  "payload": {
+    "parameters": {"hold_minutes": 15, "interval_minutes": 45}
+  }
+}
+```
+
+BaseBot verarbeitet dies automatisch via `apply_parameters()` — Parameter werden in `config.json` persistiert (restart-safe).
+
+---
+
+#### **command** (MT5-Error Forwarding)
+
+**mt5_error** — Bridge leitet MT5-Fehler an den verursachenden Bot weiter (C3):
+```json
+{
+  "type": "command",
+  "cmd_id": "mt5_err_mybot-001",
+  "command": "mt5_error",
+  "payload": {"error": "Insufficient margin", "bot_id": "mybot-001"}
+}
+```
+
+BaseBot verarbeitet dies via `on_mt5_error()` — kann in der Strategie ueberschrieben werden.
+
+---
+
 #### **ping** (Keep-alive)
-Sent every 30 seconds by Bridge.
+Sent periodically by Bridge.
 
 ```json
 {"type": "ping"}
 ```
 
-Bot must respond with:
-```json
-{"type": "pong"}
-```
-
-If no `pong` is received within 5 seconds, Bridge may close the connection.
+Bot must respond with `{"type": "pong"}`.
 
 ---
 
 ## HTTP API Reference
 
-All HTTP requests require header: `X-Bot-Api-Key: [api_key]`
+Alle HTTP-Requests benoetigen den Header `X-Bot-Api-Key: [api_key]`, sofern nicht anders angegeben.
 
-Base URL: `http://[bridge_host]:[bridge_port]`
+Base URL: `http://[bridge_host]:8765`
+
+### GET /health (unauthenticated)
+
+AGPv2 Health-Check.
+
+```json
+{"ok": true, "agp": "2.0", "bots_connected": 2}
+```
+
+---
+
+### GET /info (unauthenticated)
+
+AGPv2 Discovery-Endpunkt.
+
+```json
+{
+  "agp": "2.0",
+  "name": "AlphaTrack Bridge",
+  "version": "2.0",
+  "ip": "192.168.178.37",
+  "port": 8765,
+  "profile_id": "FiFT3HmJf-",
+  "bridge_id": "bridge-001",
+  "bots_connected": 2
+}
+```
+
+---
 
 ### GET /candles
 
 Retrieve candlestick data.
 
-**Request:**
 ```
 GET /candles?symbol=EURUSDp&interval=M15&count=50
 ```
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| symbol | string | required | Instrument (e.g., "EURUSDp") |
-| interval | string | M15 | M1 \| M5 \| M15 \| H1 \| H4 \| D1 |
-| count | int | 50 | Number of candles (1–500) |
+| symbol | string | EURUSDp | Instrument |
+| interval | string | M5 | M1 \| M5 \| M15 \| H1 \| H4 \| D1 |
+| count | int | 50 | Number of candles (max 5000) |
 
 **Response:**
 ```json
 {
   "candles": [
-    {
-      "datetime": "2026-06-03T10:15:00Z",
-      "open": 1.08500,
-      "high": 1.08550,
-      "low": 1.08450,
-      "close": 1.08520
-    },
-    {
-      "datetime": "2026-06-03T10:30:00Z",
-      "open": 1.08520,
-      "high": 1.08600,
-      "low": 1.08500,
-      "close": 1.08580
-    }
-  ]
+    {"datetime": "2026-06-03T10:15:00Z", "open": 1.085, "high": 1.0855, "low": 1.0845, "close": 1.0852}
+  ],
+  "symbol": "EURUSDp"
 }
+```
+
+---
+
+### GET /historical_candles (authenticated)
+
+Historische Kerzendaten fuer Backtesting.
+
+```
+GET /historical_candles?symbol=EURUSDp&interval=M15&from_date=2026-01-01&to_date=2026-06-14
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| symbol | string | Instrument |
+| interval | string | M1 \| M5 \| M15 \| H1 \| H4 \| D1 |
+| from_date | string | Start-Datum (YYYY-MM-DD) |
+| to_date | string | End-Datum (YYYY-MM-DD) |
+
+**Response:**
+```json
+{"candles": [...], "symbol": "EURUSDp", "count": 1500}
 ```
 
 ---
@@ -338,12 +422,6 @@ GET /candles?symbol=EURUSDp&interval=M15&count=50
 
 Retrieve all open positions.
 
-**Request:**
-```
-GET /positions
-```
-
-**Response:**
 ```json
 {
   "positions": [
@@ -363,18 +441,15 @@ GET /positions
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| ticket | int | MT5 ticket number |
-| instrument | string | Trading pair |
-| type | string | `"long"` or `"short"` |
-| entry | float | Entry price |
-| size | float | Position size in lots |
-| sl | float | Stop-loss price |
-| tp | float | Take-profit price |
-| pnl | float | Profit/loss in account currency |
-| pnl_pct | float | Profit/loss percentage |
-| commission | float | Trading commission charged |
+---
+
+### GET /history
+
+Retrieve closed deal history from MT5.
+
+```json
+{"deals": [...]}
+```
 
 ---
 
@@ -382,12 +457,6 @@ GET /positions
 
 Retrieve account information.
 
-**Request:**
-```
-GET /account
-```
-
-**Response:**
 ```json
 {
   "balance": 1000.0,
@@ -399,65 +468,130 @@ GET /account
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| balance | float | Account balance |
-| equity | float | Balance + open P&L |
-| currency | string | Account currency |
-| free_margin | float | Available margin for new positions |
-| margin_used | float | Margin locked by open positions |
-| margin_level | float | Margin level (equity / margin_used) |
+---
+
+### GET /calendar
+
+Wirtschaftskalender-Events von MT5.
+
+```
+GET /calendar?days_back=2&days_ahead=7
+```
+
+```json
+{"events": [...], "fetchedAt": "2026-06-20T12:00:00"}
+```
 
 ---
 
-### POST /command
+### GET /bots/identities
+
+Identity-Records aller verbundenen Bots.
+
+```json
+{
+  "bots": [
+    {"id": "mybot-001", "name": "Breakout v1", "type": "bot", "ip": "192.168.178.37", "port": 8771}
+  ],
+  "count": 1
+}
+```
+
+---
+
+### POST /command (authenticated)
 
 Execute a trade command (alternative to WebSocket).
 
-**Request (Execute Trade):**
+**Execute Trade:**
 ```json
 {
   "command": "execute_trade",
-  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "id": "uuid",
+  "bot_id": "mybot-001",
   "payload": {
     "symbol": "EURUSDp",
     "direction": "buy",
     "lots": 0.01,
     "sl": 0,
-    "tp": 0
+    "tp": 0,
+    "bot_id": "mybot-001"
   }
 }
 ```
 
-**Request (Close Position):**
+`slPips` und `tpPips` werden ebenfalls unterstuetzt (float, optional, camelCase).
+
+**Close Position:**
 ```json
 {
   "command": "close_position",
-  "id": "550e8400-e29b-41d4-a716-446655440000",
-  "payload": {
-    "ticket": 12345678
-  }
+  "id": "uuid",
+  "bot_id": "mybot-001",
+  "payload": {"ticket": 12345678, "bot_id": "mybot-001"}
 }
 ```
 
-**Response:**
+**Lifecycle Commands** (start, stop, pause, resume, restart):
+```json
+{"command": "start", "id": "uuid"}
+```
+
+Gueltige Commands: `start`, `stop`, `pause`, `resume`, `execute_trade`, `close_position`, `restart`
+
+**Response (Trade):**
+```json
+{"ok": true, "success": true, "ticket": 12345678, "price": 1.08500, "error": null}
+```
+
+---
+
+### POST /bot/{bot_id}/command (authenticated)
+
+Sendet Command direkt an einen bestimmten Bot via WebSocket.
+Wird von AlphaTrack UI fuer `set_parameters`, `execute_trade`, `close_position` etc. genutzt.
+
 ```json
 {
-  "ok": true,
-  "success": true,
-  "ticket": 12345678,
-  "price": 1.08500,
-  "error": null
+  "command": "set_parameters",
+  "id": "uuid",
+  "payload": {"parameters": {"hold_minutes": 15}}
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| ok | bool | Request processed (true) or rejected (false) |
-| success | bool | Trade executed (true) or failed (false) |
-| ticket | int | MT5 ticket (if success=true) |
-| price | float | Execution price (if success=true) |
-| error | string | Error message if success=false |
+Bei `execute_trade` und `close_position`: synchrone Antwort mit Timeout (12s).
+
+---
+
+### GET /config (authenticated)
+
+Gibt die aktuelle Bridge-Konfiguration zurueck.
+
+---
+
+### POST /config (authenticated)
+
+Aktualisiert Bridge-Konfigurationsfelder.
+
+---
+
+## UDP Bridge Discovery (Port 8766)
+
+Die Bridge sendet alle 10 Sekunden einen UDP-Broadcast auf Port 8766:
+
+```json
+{
+  "type": "bridge_announce",
+  "agp": "2.0",
+  "ip": "192.168.178.37",
+  "port": 8765,
+  "name": "AlphaTrack Bridge",
+  "version": "2.0",
+  "profile_id": "FiFT3HmJf-"
+}
+```
+
+Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fallback auf HTTP-Scan `192.168.178.1-254:8765/health`.
 
 ---
 
@@ -467,241 +601,123 @@ Execute a trade command (alternative to WebSocket).
 
 ```json
 {
-  "alphatrack_url": "http://192.168.1.28:3000",
+  "alphatrack_url": "http://192.168.178.3:3002",
   "api_key": "REDACTED-API-KEY",
-  "bot_id": "",
+  "bot_id": "mybot-001",
   "bot_name": "My Trading Bot",
   "bot_version": "1.0.0",
-  "profile_id": "FiFT3HmJf-",
-  "bridge_url": "http://localhost:8765",
+  "bot_type": "bot",
+  "bot_ip": "",
+  "bot_port": 8771,
+  "profile_id": "PROFIL_ID",
+  "bridge_url": "http://192.168.178.37:8765",
   "heartbeat_interval_sec": 10,
-  "command_server_port": 8766,
   "strategy": {
     "symbol": "EURUSDp",
     "timeframe": "M15",
     "candles_count": 50,
-    "n_periods": 20,
     "lots": 0.01,
     "max_positions": 1,
-    "comment": "Bot Strategy"
+    "comment": "Bot Strategy",
+    "tick_interval_sec": 60
   }
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| alphatrack_url | string | AlphaTrack UI URL (for registration) |
-| api_key | string | Bridge API key (for auth) |
-| bot_id | string | Assigned by AlphaTrack (leave empty initially) |
-| bot_name | string | Display name |
-| bot_version | string | Semantic version |
-| profile_id | string | AlphaTrack profile ID |
-| bridge_url | string | Bridge gateway URL |
-| heartbeat_interval_sec | int | Heartbeat frequency (seconds) |
-| command_server_port | int | Local HTTP port for AlphaTrack→Bot commands |
-| strategy | object | Strategy-specific parameters |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| alphatrack_url | string | Yes | AlphaTrack UI URL (NAS Docker, z.B. `http://192.168.178.3:3002`) |
+| api_key | string | Yes | Bridge API key (muss mit `.env.local` `BOT_API_KEY` uebereinstimmen) |
+| bot_id | string | Yes | Statischer Identifier (z.B. `"mybot-001"`) |
+| bot_name | string | Yes | Anzeigename |
+| bot_version | string | Yes | Semantic version |
+| bot_type | string | Yes | Immer `"bot"` (nie `"bridge"`) |
+| bot_ip | string | No | Leer lassen — wird automatisch ermittelt |
+| bot_port | int | Yes | Eindeutiger Port — Bridge: 8765, TestBot 2: 8770, neue Bots ab 8771+ |
+| profile_id | string | Yes | AlphaTrack-Profil-ID |
+| bridge_url | string | No | Bridge-URL — leer lassen fuer Auto-Discovery via UDP/LAN-Scan |
+| heartbeat_interval_sec | int | No | Heartbeat-Frequenz (Standard: 10) |
+| strategy | object | Yes | Strategie-Parameter (bot-spezifisch) |
+
+**Hinweis:** `command_server_port` ist ein Bridge-Config-Feld (nicht Bot-Config). Bots verwenden `bot_port`.
 
 ---
 
 ## Error Handling & Reconnection
 
 ### WebSocket Errors
-- **Connection refused**: Bridge is offline. Retry with exponential backoff.
-- **Invalid API key**: Check `api_key` in config.json against Bridge config.
-- **Connection timeout**: Network issue or Bridge overloaded. Increase timeout and retry.
-- **Unexpected close**: May indicate Bridge restart. Reconnect after 5s delay.
+- **Connection refused**: Bridge ist offline. Retry nach 5s Wartezeit.
+- **Invalid API key**: `api_key` in config.json gegen Bridge-Config pruefen.
+- **Connection timeout**: Netzwerkproblem. Automatischer Reconnect.
+- **Unexpected close**: Bridge-Restart. Reconnect nach 5s.
 
-### Trade Errors
+### Trade Errors (C3: MT5-Error Forwarding)
+Bei fehlgeschlagenen Trades leitet die Bridge den MT5-Fehler automatisch via `mt5_error`-Command an den verursachenden Bot weiter. BaseBot verarbeitet dies via `on_mt5_error()`.
+
 | Error | Cause | Recovery |
 |-------|-------|----------|
-| Insufficient margin | Position size too large | Reduce `lots` in strategy config |
-| Invalid symbol | Symbol not available in MT5 | Check Bridge symbol list |
-| Order expired | Pending order not filled | Increase `tp`/`sl` spread |
-| Bridge offline | No connection to Bridge | Ensure Bridge is running |
-| MT5 disconnected | Terminal offline | Check MT5 terminal status |
+| Insufficient margin | Position size too large | `lots` reduzieren |
+| Invalid symbol | Symbol nicht in MT5 verfuegbar | Symbol im MT5 aktivieren |
+| MT5 disconnected | Terminal offline | MT5-Terminal-Status pruefen |
 
 ### Heartbeat Failure
-If heartbeat cannot be sent for >30 seconds:
-1. Log error to local log and AlphaTrack
-2. Attempt immediate reconnection
-3. Set state to `"error"` in next heartbeat
-4. AlphaTrack dashboard will show bot as unhealthy
-
-### Automatic Recovery
-Bots should implement:
-```python
-import time
-
-def reconnect_with_backoff(max_retries=5, base_delay=1):
-    for attempt in range(max_retries):
-        try:
-            ws = connect_websocket()
-            return ws
-        except Exception:
-            delay = min(base_delay * (2 ** attempt), 30)
-            time.sleep(delay)
-    raise Exception("Failed to reconnect after max retries")
-```
+Wenn der Heartbeat nicht gesendet werden kann:
+1. Error-Log lokal und an AlphaTrack
+2. Sofortiger Reconnect-Versuch
+3. State auf `"error"` im naechsten Heartbeat
+4. AlphaTrack Dashboard zeigt Bot als unhealthy
 
 ---
 
-## Security Considerations
+## BaseBot Implementation (bots/scaffold/)
 
-### API Key Management
-- **Never** commit `api_key` to version control
-- **Never** log API key in bot output
-- Rotate keys monthly in Bridge configuration
-- Use environment variables or secure config files
+Bots erben von `BaseBot` (`bots/scaffold/base_bot.py`). Das gesamte AGPv2-Protokoll wird automatisch gehandhabt:
 
-### HTTPS/WSS
-- Use `wss://` (WebSocket Secure) for Bridge connections over public networks
-- Use HTTPS for HTTP endpoints in production
-- Bridge should enforce SSL/TLS certificate validation
+- **Registrierung**: `BaseBot._connect_and_register()` — verbindet WS, sendet register, wartet auf registered
+- **Heartbeat**: automatisch im Loop mit state, positions, parameters
+- **Commands**: automatisch via `_process_commands()` verarbeitet
+- **Reconnect**: automatisch bei Verbindungsverlust
+- **AGPv2-Wrapping**: `_agp2_wrap()` in `ws_client.py` — Bots muessen sich nicht um das Envelope kuemmern
 
-### Input Validation
-Bot must validate all Bridge responses:
-- Check `success` flag in trade_result
-- Verify `cmd_id` matches sent command
-- Handle malformed JSON gracefully
-- Set maximum message size (e.g., 64KB)
+### Scaffold-Module (nicht kopieren!)
 
-### Rate Limiting
-- Default: 100 requests/minute to HTTP endpoints
-- Default: 1 command/second via WebSocket
-- Contact Bridge operator for increased limits
+| Modul | Beschreibung |
+|-------|-------------|
+| `base_bot.py` | Pflicht-Basisklasse |
+| `ws_client.py` | AGPv2 WebSocket Client |
+| `bridge_client.py` | HTTP Client (Candles, Positions, Trades, Account) |
+| `bot_display.py` | Live-Terminal-UI (rich) |
 
----
+### bridge_client.py — Verfuegbare Methoden
 
-## Python Implementation Example
-
-### Structure
-```
-mybot/
-  config.json
-  main.py
-  strategy.py
-  bridge_client.py     (HTTP client for candles/positions)
-  ws_client.py         (WebSocket client, import from bridge/)
-  requirements.txt
-  start.bat
-```
-
-### requirements.txt
-```
-requests==2.31.0
-websocket-client==1.6.2
-```
-
-### main.py (Skeleton)
-```python
-import json, sys, time
-from bridge_client import BridgeClient
-from strategy import on_tick
-
-def main():
-    with open('config.json') as f:
-        config = json.load(f)
-    
-    bridge = BridgeClient(config['bridge_url'], config['api_key'])
-    
-    # Verify connection
-    if not bridge.is_connected():
-        print("ERROR: Cannot reach Bridge")
-        sys.exit(1)
-    
-    print(f"Connected to Bridge at {config['bridge_url']}")
-    
-    symbol = config['strategy']['symbol']
-    timeframe = config['strategy']['timeframe']
-    
-    # Main loop
-    while True:
-        candles = bridge.get_candles(symbol, timeframe, 50)
-        positions = bridge.get_positions()
-        
-        signal = on_tick(candles, positions, config)
-        
-        if signal['action'] == 'buy':
-            result = bridge.execute_trade(
-                symbol=symbol,
-                direction='buy',
-                lots=config['strategy']['lots'],
-                sl=signal.get('sl', 0),
-                tp=signal.get('tp', 0)
-            )
-            print(f"BUY: {result}")
-        
-        time.sleep(60)
-
-if __name__ == '__main__':
-    main()
-```
-
-### strategy.py (Skeleton)
-```python
-def on_tick(candles, positions, config):
-    """
-    Called every tick_interval_sec.
-    
-    Args:
-        candles: List of OHLC dicts with 'open', 'high', 'low', 'close'
-        positions: List of position dicts from bridge.get_positions()
-        config: Dict from config.json
-    
-    Returns:
-        {
-            'action': 'buy' | 'sell' | 'close' | 'hold',
-            'lots': float,
-            'sl': float,
-            'tp': float,
-            'ticket': int (if action='close')
-        }
-    """
-    if len(candles) < 2:
-        return {'action': 'hold'}
-    
-    # Example: simple breakout
-    high_20 = max([c['high'] for c in candles[-20:]])
-    low_20 = min([c['low'] for c in candles[-20:]])
-    close = candles[-1]['close']
-    
-    if close > high_20:
-        return {
-            'action': 'buy',
-            'lots': 0.01,
-            'sl': low_20 - 0.005,
-            'tp': close + 0.01
-        }
-    
-    return {'action': 'hold'}
-```
+| Methode | Beschreibung |
+|---------|-------------|
+| `is_connected()` | Prueft Bridge-Erreichbarkeit via `/health` |
+| `get_candles(symbol, interval, count)` | Kerzendaten abrufen |
+| `get_positions()` | Offene Positionen abrufen |
+| `get_account_info()` | Kontodaten abrufen |
+| `execute_trade(symbol, direction, lots, sl, tp, sl_pips, tp_pips)` | Trade ausfuehren (C4: bot_id automatisch) |
+| `close_position(ticket)` | Position schliessen (C4: bot_id automatisch) |
+| `set_bot_id(bot_id)` | Bot-ID setzen (intern von BaseBot) |
+| `discover_bridge()` | Bridge via UDP/LAN-Scan finden |
 
 ---
 
 ## Version History
 
+### v2.0.0 (2026-06-20)
+- AGPv2-Envelope fuer alle WebSocket-Nachrichten
+- Registration mit `component_type`, `ip`, `port`
+- `set_parameters`-Command fuer Live-Parameter-Editor
+- `mt5_error`-Command fuer MT5-Fehler-Weiterleitung (C3)
+- UDP-Bridge-Discovery (Port 8766)
+- Neue HTTP-Endpoints: `/info`, `/historical_candles`, `/history`, `/calendar`, `/bots/identities`, `/config`, `/bot/{bot_id}/command`
+- `parameters`-Feld im Heartbeat
+- `slPips`/`tpPips` in execute_trade (camelCase)
+
 ### v1.0.0 (2026-06-03)
-- Initial protocol specification
-- WebSocket handshake and registration
-- Heartbeat and keep-alive mechanism
-- Trade command execution via WebSocket and HTTP
-- Account and position queries via HTTP
-- Error handling and reconnection guidance
-- Python implementation examples
-
----
-
-## Support & Changelog
-
-For protocol questions or issues, contact the Bridge operator.
-
-**Known Limitations (v1.0.0):**
-- Maximum message size: 64KB
-- Maximum positions per bot: 100 (hardcoded in Bridge)
-- Candles endpoint limited to 500 candles per request
-- WebSocket keep-alive: 30 seconds (pings)
-
-**Future (v1.1.0, planned):**
-- Streaming position updates via WebSocket
-- Historical trade export endpoint
-- Webhook notifications for external systems
+- Initiale Protokoll-Spezifikation
+- WebSocket Handshake und Registration
+- Heartbeat und Keep-alive
+- Trade-Ausfuehrung via WebSocket und HTTP
+- Account- und Position-Abfragen via HTTP

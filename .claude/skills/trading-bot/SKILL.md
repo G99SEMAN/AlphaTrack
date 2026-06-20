@@ -69,7 +69,9 @@ bots/<name>/            ← bot-spezifisch (nur diese 5 Dateien)
 - Registrierung laeuft **automatisch** beim Start via `BaseBot._connect_and_register()` (C7)
 - Jeder Trade traegt `bot_id` als Metadatum (C4) — `BaseBot.send_trade()` setzt das automatisch
 - MT5-Fehler kommen zurueck an den Bot via `on_mt5_error()` (C3)
+- AGPv2-Wrapping wird automatisch von `ws_client.py` gehandhabt — Bots muessen sich nicht um das Envelope kuemmern
 - `ws_client.py`, `bridge_client.py`, `bot_display.py` liegen **ausschliesslich** in `bots/scaffold/` — nie in einzelnen Bot-Ordnern
+- **Bridge-Discovery**: Wenn `bridge_url` leer ist, findet `bridge_client.py` die Bridge automatisch via UDP-Broadcast (Port 8766) oder LAN-Scan
 
 ---
 
@@ -108,12 +110,31 @@ def get_parameters(self) -> dict:
 
 ---
 
+## Verfuegbare Methoden (bridge_client.py)
+
+Die Bridge-Kommunikation laeuft ueber `self._bridge` (BridgeClient-Instanz in BaseBot):
+
+| Methode | Beschreibung |
+|---------|-------------|
+| `is_connected()` | Prueft Bridge-Erreichbarkeit via `/health` |
+| `get_candles(symbol, interval, count)` | Kerzendaten abrufen |
+| `get_positions()` | Offene Positionen abrufen |
+| `get_account_info()` | Kontodaten (Balance, Equity, Margin) abrufen |
+| `execute_trade(symbol, direction, lots, sl, tp, sl_pips, tp_pips)` | Trade ausfuehren — `sl_pips`/`tp_pips` werden als `slPips`/`tpPips` (camelCase) gesendet |
+| `close_position(ticket)` | Position schliessen |
+
+`set_bot_id()` und `discover_bridge()` werden intern von BaseBot verwendet.
+
+**Wichtig:** Trades immer ueber `self.send_trade()` senden (C4: setzt `bot_id` automatisch), nie direkt `self._bridge.execute_trade()`.
+
+---
+
 ## Templates
 
 ### `config.json`
 ```json
 {
-  "alphatrack_url": "http://192.168.178.30:3002",
+  "alphatrack_url": "http://192.168.178.3:3002",
   "api_key": "REDACTED-API-KEY",
   "bot_id": "mybot-001",
   "bot_name": "Mein Bot",
@@ -122,7 +143,7 @@ def get_parameters(self) -> dict:
   "bot_ip": "",
   "bot_port": 8771,
   "profile_id": "HIER_PROFIL_ID",
-  "bridge_url": "http://192.168.178.30:8765",
+  "bridge_url": "http://192.168.178.37:8765",
   "heartbeat_interval_sec": 10,
   "strategy": {
     "symbol": "EURUSDp",
@@ -144,7 +165,7 @@ Minimum: 1s). Wird pro Loop-Iteration aus der Config gelesen — via
 - `bot_id`: Einzigartiger statischer Identifier (z.B. `"mybot-001"`)
 - `bot_type`: Immer `"bot"` (nie `"bridge"`)
 - `bot_port`: Einzigartiger Port — Bridge: 8765, TestBot 2: 8770, neue Bots ab 8771+
-- `bridge_url`: URL zur Bridge (Standard-IP: 192.168.178.30, Port: 8765)
+- `bridge_url`: URL zur Bridge (Mini-PC-IP: 192.168.178.37, Port: 8765) — leer lassen fuer Auto-Discovery
 
 **Hinweis:** `config.json` darf committet werden — dieses Repo ist privat und der API-Key gilt nur im LAN.
 
@@ -234,8 +255,9 @@ class MyStrategy(BaseBot):
         Returns:
             {"action": "hold"}
             {"action": "buy",  "lots": 0.01, "sl": 1.0800, "tp": 1.0900}
-            {"action": "sell", "lots": 0.01, "sl": 1.0900, "tp": 1.0800}
+            {"action": "sell", "lots": 0.01, "sl_pips": 50, "tp_pips": 100}
             {"action": "close", "ticket": 12345}
+        sl/tp = absolute Preise, sl_pips/tp_pips = relative Pips (alternativ)
         """
         if len(candles) < 2:
             return {"action": "hold"}

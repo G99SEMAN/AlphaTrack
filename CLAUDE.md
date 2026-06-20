@@ -1,0 +1,122 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+npm run dev      # Entwicklungsserver starten (http://localhost:3000)
+npm run build    # Produktions-Build
+npm run start    # Produktions-Build starten
+```
+
+Deployment auf NAS + Mini-PC:
+```
+scripts\windows\deploy.bat       # AlphaTrack auf NAS deployen + Bridge auf Mini-PC
+scripts\windows\deploy-bot.bat   # Einzelnen Bot auf Mini-PC deployen
+```
+
+## Architektur-Überblick
+
+AlphaTrack ist ein persönliches Trading-Journal mit Bot-Management. Zwei physische Systeme:
+
+- **NAS** — Läuft die Next.js-App in Docker auf Port 3002. Speichert alle Daten als JSON-Dateien im `data/`-Verzeichnis (keine Datenbank).
+- **Mini-PC** — Läuft MetaTrader 5, die Python-Bridge (`bridge/`, Port 8765) und Trading-Bots (`bots/`).
+
+```
+NAS (Next.js :3002)          Mini-PC
+┌─────────────────────┐      ┌──────────────────────────┐
+│  UI + API Routes    │      │  Bridge (FastAPI :8765)  │
+│  data/*.json        │◄────►│    ↕ WebSocket           │
+└─────────────────────┘      │  Bots (Python)           │
+                              │  MetaTrader 5            │
+                              └──────────────────────────┘
+```
+
+### Datenhaltung (data/)
+
+Alle Daten liegen als JSON in `data/`. Schreibzugriffe immer atomar: `.tmp`-Datei schreiben, dann umbenennen.
+
+| Datei | Inhalt |
+|-------|--------|
+| `profiles.json` | Alle Profile |
+| `active.json` | Aktive Profil-ID |
+| `trades-{profileId}.json` | Manuell eingetragene Journal-Trades |
+| `bot-trades-{profileId}.json` | Bridge-synchronisierte Trades |
+| `bots.json` | Registrierte Bots und Bridges |
+| `bot-status-{botId}.json` | Letzter Heartbeat-Status |
+| `bot-commands-{botId}.json` | Ausstehende Befehls-Queue (pull-basiert) |
+| `bot-log-{botId}.json` | Bridge-Log-Einträge |
+| `bot-events-{botId}.json` | Bot-spezifische Ereignisse |
+| `bot-positions-{botId}.json` | Gecachte offene Positionen aus Heartbeat |
+| `reset-cutoff-{profileId}.json` | Trade-Reset-Cutoff-Timestamp |
+
+### Schichtenmodell
+
+```
+src/app/(pages)/          — Next.js App Router Seiten (Server Components)
+src/app/api/              — API-Routen (Next.js Route Handlers)
+src/lib/actions.ts        — Server Actions (mutations, revalidatePath)
+src/lib/profiles.ts       — Profile CRUD
+src/lib/bot-data.ts       — Bot/Bridge-Registry, Status, Commands, Logs
+src/lib/data.ts           — Trade-Statistiken, filterTradesByPeriod
+src/components/           — Client-Komponenten
+src/types/                — TypeScript-Typen
+```
+
+### Bridge-Kommunikation (pull-basiertes Command-Delivery)
+
+Die NAS-Docker-Umgebung kann keine HTTP-Anfragen an den Mini-PC initiieren. Deshalb:
+
+1. AlphaTrack queued Befehle via `addBotCommand()` → `bot-commands-{botId}.json`
+2. Bridge pollt `/api/bridge/commands` alle paar Sekunden
+3. Bridge liefert Befehl per WebSocket an den Bot
+4. Bot bestätigt → Bridge POSTs ACK an `/api/bridge/commands`
+
+Bridge-Heartbeat kommt alle 5 s auf `POST /api/bridge/heartbeat` an und enthält: aktueller Status, offene Ticket-IDs (`openTicketIds`) und Live-Positionen.
+
+Trade-Sync: Bridge postet alle ~30 s offene und geschlossene Trades an `POST /api/bridge/trades`.
+
+### Trade-Synchronisierung (zwei Stores)
+
+Trades existieren in zwei getrennten Stores, die synchron gehalten werden:
+
+- **`bot-trades-{profileId}.json`** — Bridge-Rohdaten (bridge-seitige Wahrheit)
+- **`trades-{profileId}.json`** — Journal-Trades (benutzerseitige Wahrheit, mit Notizen/Tags/Screenshots)
+
+`syncBridgeTradesToProfile()` in `src/app/api/bridge/trades/route.ts` hält beide in Sync. Beim Merge werden `id`, `botId`, `sourceId` und Benutzer-Annotationen aus dem Journal bewahrt; MT5-Felder (`pnl`, `commission`, `swap`, `exit`, `closeTime`) kommen von der Bridge.
+
+Update-Pfade beim Trade-Sync-POST:
+- `open → closed`: Journal-Trade mit MT5-Schlussdaten befüllen
+- `open → open`: P&L, Swap, currentPrice aktualisieren (Live-Positionen)
+- `closed → closed`: korrigiert Trades, die Heartbeat-Reconciliation vorzeitig geschlossen hat
+
+`externalId`-Format: `pos_{ticket}` für offene Positionen aus MT5.
+
+### Verbindungszustände (bot-data.ts)
+
+- `connected`: letzter Heartbeat < 45 s
+- `warning`: 45–120 s
+- `offline`: > 120 s
+
+### Cache-Gotcha
+
+`React.cache()` (in `profiles.ts`, `data.ts`) ist **per-Request**, nicht persistent. Nach jeder Mutation `revalidatePath()` aufrufen, sonst zeigt die nächste Server-Komponente veraltete Daten.
+
+## Env-Vars (.env.local)
+
+```env
+BOT_API_KEY=REDACTED-API-KEY   # muss mit bridge/config.json übereinstimmen
+ANTHROPIC_API_KEY=sk-ant-...                 # KI-Analyse (optional)
+TWELVE_DATA_API_KEY=...                      # Kursdaten (optional)
+```
+
+## Bot-Entwicklung
+
+Bots liegen unter `bots/`. Vollständige Protokoll-Spezifikation: `docs/BRIDGE_PROTOCOL.md`. Entwicklungsguide: `bots/CLAUDE.md`.
+
+Kurzfassung:
+- Bots erben von `bots/scaffold/base_bot.py` (AGPv2-Protokoll automatisch)
+- WebSocket-Verbindung zur Bridge auf Port 8765
+- Neue Bots bekommen eindeutigen Port ab 8771+
+- In `on_tick()` immer `self._now()` statt `datetime.now()` (Backtesting-Kompatibilität)
