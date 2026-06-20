@@ -2,12 +2,31 @@
 
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
 import { motion } from 'framer-motion'
-import { useTheme } from 'next-themes'
 import { currencySymbol } from '@/lib/currency'
 import { useEffect, useState, useMemo } from 'react'
 
 interface DataPoint { date: string; value: number }
 interface Props { data: DataPoint[]; startCapital?: number; currency?: string }
+
+function niceScale(min: number, max: number, targetTicks = 5): number[] {
+  if (min === max) return [min]
+  const range = max - min
+  const roughStep = range / (targetTicks - 1)
+  const mag = Math.pow(10, Math.floor(Math.log10(roughStep)))
+  const residual = roughStep / mag
+  let step: number
+  if (residual <= 1.5) step = mag
+  else if (residual <= 3) step = 2 * mag
+  else if (residual <= 7) step = 5 * mag
+  else step = 10 * mag
+  const niceMin = Math.floor(min / step) * step
+  const niceMax = Math.ceil(max / step) * step
+  const ticks: number[] = []
+  for (let v = niceMin; v <= niceMax + step * 0.5; v += step) {
+    ticks.push(Math.round(v * 100) / 100)
+  }
+  return ticks
+}
 
 function CustomTooltip({
   active, payload, label, startCapital,
@@ -38,28 +57,30 @@ function CustomTooltip({
 }
 
 export default function EquityChart({ data, startCapital = 0, currency = '€' }: Props) {
-  const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
-  const absoluteData = useMemo<DataPoint[]>(() =>
-    startCapital > 0 ? [{ date: 'Start', value: startCapital }, ...data] : data,
-    [data, startCapital]
-  )
+
+  const chartData = useMemo<DataPoint[]>(() => {
+    const base = startCapital > 0 ? [{ date: 'Start', value: startCapital }, ...data] : data
+    const dayMap = new Map<string, number>()
+    for (const d of base) {
+      dayMap.set(d.date, d.value)
+    }
+    return Array.from(dayMap, ([date, value]) => ({ date, value }))
+  }, [data, startCapital])
+
   if (!mounted) return null
 
-  const isDark = theme === 'dark'
-
-  const lastBalance = absoluteData[absoluteData.length - 1]?.value ?? startCapital
+  const lastBalance = chartData[chartData.length - 1]?.value ?? startCapital
   const pnl = lastBalance - startCapital
   const positive = pnl >= 0
   const strokeColor = positive ? 'var(--green)' : 'var(--red)'
 
-  // Y-axis domain — kleines Padding damit die Kurve den Raum gut nutzt
-  const values = absoluteData.map(d => d.value)
+  const values = chartData.map(d => d.value)
   const minVal = Math.min(...values, startCapital)
   const maxVal = Math.max(...values, startCapital)
-  const padding = (maxVal - minVal) * 0.08 || startCapital * 0.02 || 5
-  const yDomain: [number, number] = [Math.floor(minVal - padding), Math.ceil(maxVal + padding)]
+  const yTicks = niceScale(minVal, maxVal, 5)
+  const yDomain: [number, number] = [yTicks[0], yTicks[yTicks.length - 1]]
 
   return (
     <motion.div
@@ -104,7 +125,7 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
 
       <div style={{ height: 160 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={absoluteData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="equityGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={positive ? 'var(--green)' : 'var(--red)'} stopOpacity={0.25} />
@@ -114,13 +135,16 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
             <XAxis
               dataKey="date"
               tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'inherit' }}
-              axisLine={false} tickLine={false} interval="preserveStartEnd"
+              axisLine={false} tickLine={false}
+              interval="preserveStartEnd"
             />
             <YAxis
               tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'monospace' }}
               axisLine={false} tickLine={false}
+              ticks={yTicks}
+              domain={yDomain}
+              width={65}
               tickFormatter={v => `${v.toLocaleString('de-DE')}€`}
-              domain={yDomain} width={65}
             />
             {startCapital > 0 && (
               <ReferenceLine y={startCapital} stroke="var(--border)" strokeDasharray="3 3" strokeOpacity={0.8} />

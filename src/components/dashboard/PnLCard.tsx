@@ -1,8 +1,9 @@
 'use client'
 
-import { memo } from 'react'
+import { memo, useMemo, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
 
 interface DataPoint { date: string; value: number }
 
@@ -25,54 +26,68 @@ function fmt(val: number, currency: string) {
   return `${sign}${val.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} ${sym}`
 }
 
-function smoothCubicPath(pts: [number, number][]): string {
-  if (pts.length < 2) return ''
-  let d = `M ${pts[0][0]},${pts[0][1]}`
-  for (let i = 1; i < pts.length; i++) {
-    const [px, py] = pts[i - 1]
-    const [cx, cy] = pts[i]
-    const cpx = px + (cx - px) * 0.5
-    d += ` C ${cpx},${py} ${cpx},${cy} ${cx},${cy}`
+function niceScale(min: number, max: number, targetTicks = 5): number[] {
+  if (min === max) return [min]
+  const range = max - min
+  const roughStep = range / (targetTicks - 1)
+  const mag = Math.pow(10, Math.floor(Math.log10(roughStep)))
+  const residual = roughStep / mag
+  let step: number
+  if (residual <= 1.5) step = mag
+  else if (residual <= 3) step = 2 * mag
+  else if (residual <= 7) step = 5 * mag
+  else step = 10 * mag
+  const niceMin = Math.floor(min / step) * step
+  const niceMax = Math.ceil(max / step) * step
+  const ticks: number[] = []
+  for (let v = niceMin; v <= niceMax + step * 0.5; v += step) {
+    ticks.push(Math.round(v * 100) / 100)
   }
-  return d
+  return ticks
 }
 
-function Sparkline({ data, startCapital, positive }: { data: DataPoint[]; startCapital: number; positive: boolean }) {
-  if (data.length < 2) return null
-  const rawValues = [startCapital, ...data.map(d => d.value)]
-  const min = Math.min(...rawValues)
-  const max = Math.max(...rawValues)
-  const range = max - min || 1
-  const w = 400
-  const h = 64
-  // Leichtes vertikales Padding damit die Linie nicht an den Rand klebt
-  const vPad = h * 0.08
-  const pts: [number, number][] = rawValues.map((v, i) => [
-    (i / (rawValues.length - 1)) * w,
-    h - vPad - ((v - min) / range) * (h - vPad * 2),
-  ])
-  const color = positive ? 'var(--green)' : 'var(--red)'
-  const linePath = smoothCubicPath(pts)
-  const areaPath = `${linePath} L ${w},${h} L 0,${h} Z`
-
+function PnLTooltip({ active, payload, label, sym }: { active?: boolean; payload?: { value: number }[]; label?: string; sym: string }) {
+  if (!active || !payload?.length) return null
+  const v = payload[0].value
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} style={{ width: '100%', height: 64 }} preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity={positive ? 0.22 : 0.15} />
-          <stop offset="100%" stopColor={color} stopOpacity={0} />
-        </linearGradient>
-      </defs>
-      <path d={areaPath} fill="url(#sparkGrad)" />
-      <path d={linePath} fill="none" stroke={color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
+    <div
+      className="px-3 py-2 rounded-lg text-xs"
+      style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}
+    >
+      <p style={{ color: 'var(--text-2)' }}>{label}</p>
+      <p className="font-mono font-bold" style={{ color: v >= 0 ? 'var(--green)' : 'var(--red)' }}>
+        {v >= 0 ? '+' : ''}{v.toLocaleString('de-DE')} {sym}
+      </p>
+    </div>
   )
 }
 
 function PnLCard({ totalPnl, monthlyPnl, dailyPnl, netPnl, netMonthlyPnl, netDailyPnl, totalCosts, currency, equityCurve = [], startCapital = 0 }: Props) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   const positive = netPnl >= 0
   const hasCosts = totalCosts > 0
   const color = positive ? 'var(--green)' : 'var(--red)'
+  const sym = currencySymbol(currency)
+
+  const pnlData = useMemo(() => {
+    if (equityCurve.length < 2) return []
+    const dayMap = new Map<string, number>()
+    for (const d of equityCurve) {
+      dayMap.set(d.date, d.value - startCapital)
+    }
+    return [{ date: 'Start', value: 0 }, ...Array.from(dayMap, ([date, value]) => ({ date, value }))]
+  }, [equityCurve, startCapital])
+
+  const { yTicks, yDomain } = useMemo(() => {
+    if (pnlData.length === 0) return { yTicks: [0], yDomain: [0, 0] as [number, number] }
+    const values = pnlData.map(d => d.value)
+    const min = Math.min(0, ...values)
+    const max = Math.max(0, ...values)
+    const t = niceScale(min, max, 4)
+    return { yTicks: t, yDomain: [t[0], t[t.length - 1]] as [number, number] }
+  }, [pnlData])
 
   return (
     <motion.div
@@ -91,12 +106,10 @@ function PnLCard({ totalPnl, monthlyPnl, dailyPnl, netPnl, netMonthlyPnl, netDai
         background: 'linear-gradient(90deg,transparent,rgba(59,130,246,0.18),transparent)',
       }} />
 
-      {/* Label */}
       <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: 10 }}>
         {hasCosts ? 'Netto P&L · Gesamt' : 'P&L · Gesamt'}
       </p>
 
-      {/* Hero-Zahl */}
       <motion.p
         style={{
           fontSize: 32, fontWeight: 800, color, letterSpacing: '-0.04em', lineHeight: 1,
@@ -110,7 +123,6 @@ function PnLCard({ totalPnl, monthlyPnl, dailyPnl, netPnl, netMonthlyPnl, netDai
         {fmt(netPnl, currency)}
       </motion.p>
 
-      {/* Badge-Zeile */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
         {hasCosts && (
           <span style={{
@@ -134,14 +146,42 @@ function PnLCard({ totalPnl, monthlyPnl, dailyPnl, netPnl, netMonthlyPnl, netDai
         )}
       </div>
 
-      {/* Sparkline */}
-      {equityCurve.length >= 2 && (
-        <div style={{ marginBottom: 12 }}>
-          <Sparkline data={equityCurve} startCapital={startCapital} positive={positive} />
+      {pnlData.length >= 2 && mounted && (
+        <div style={{ height: 120, marginBottom: 12 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={pnlData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+              <defs>
+                <linearGradient id="pnlGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={color} stopOpacity={positive ? 0.22 : 0.15} />
+                  <stop offset="100%" stopColor={color} stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis
+                dataKey="date"
+                tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'inherit' }}
+                axisLine={false} tickLine={false}
+                interval="preserveStartEnd"
+              />
+              <YAxis
+                tick={{ fill: 'var(--text-3)', fontSize: 9, fontFamily: 'monospace' }}
+                axisLine={false} tickLine={false}
+                ticks={yTicks}
+                domain={yDomain}
+                width={45}
+                tickFormatter={(v: number) => `${v > 0 ? '+' : ''}${v}${sym}`}
+              />
+              <ReferenceLine y={0} stroke="var(--border)" strokeDasharray="3 3" strokeOpacity={0.8} />
+              <Tooltip content={<PnLTooltip sym={sym} />} />
+              <Area
+                type="monotone" dataKey="value" stroke={color} strokeWidth={1.5}
+                fill="url(#pnlGradient)" dot={false}
+                activeDot={{ r: 4, fill: color, strokeWidth: 0 }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       )}
 
-      {/* Stats Footer */}
       <div style={{ display: 'flex', gap: 20, paddingTop: 10, borderTop: '1px solid var(--border)', marginTop: 'auto' }}>
         <div>
           <p style={{ fontSize: 9, color: 'var(--text-3)', marginBottom: 3 }}>Diesen Monat</p>
