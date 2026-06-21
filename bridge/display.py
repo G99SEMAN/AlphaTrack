@@ -1,7 +1,10 @@
 """
 Terminal-UI fuer den AlphaTrack Bridge.
-Zeigt statischen Header (ID, Name, IP:Port, Latenz, Status-Felder, verbundene Bots)
-und scrollendes Bridge-Log darunter.
+Layout:
+  - Blauer Header (ID, Name, IP:Port, Latenz, Status, Uptime)
+  - Status-Zeile (AlphaTrack | MT5 | Balance + Positionen + Letzter Sync)
+  - Verbundene Bots (mit State-Indikator, Positionen, Verbindungsdauer)
+  - Scrollendes Bridge-Log
 Verwendet 'rich' fuer die Darstellung.
 """
 
@@ -33,7 +36,7 @@ class BridgeDisplay:
         self._console = Console()
         self._live: Live | None = None
 
-        # Identitaets-Felder (statischer Header, Spec 3.1 Bridge-Terminal)
+        # Identitaets-Felder (statischer Header)
         self._bridge_id: str = ""
         self._bridge_ip: str = ""
         self._bridge_port: int = 0
@@ -48,6 +51,10 @@ class BridgeDisplay:
         # MT5-Daten
         self._balance: float | None = None
         self._currency: str = "USD"
+        self._open_positions: int = 0
+
+        # Letzter Trade-Sync
+        self._last_sync_ts: float | None = None
 
         # Verbundene Bots — erweitertes Info-Dict fuer das Bots-Panel
         self._bots_info: list[dict] = []
@@ -82,13 +89,19 @@ class BridgeDisplay:
             self._at_ping_ms = at_ping_ms
             self._balance = balance
             self._currency = currency
+            self._open_positions = open_positions
             self._bridge_state = bridge_state
-            self._latency_ms = at_ping_ms  # Latenz zur AlphaTrack-Instanz
+            self._latency_ms = at_ping_ms
 
     def update_bots(self, bots: list[dict]) -> None:
         """Aktualisiert die Bots-Info-Liste fuer das Verbundene-Bots-Panel."""
         with self._lock:
             self._bots_info = bots
+
+    def update_last_sync(self) -> None:
+        """Setzt den Zeitstempel des letzten erfolgreichen Trade-Syncs."""
+        with self._lock:
+            self._last_sync_ts = time.time()
 
     def log(self, level: str, tag: str, message: str) -> None:
         """Fuegt eine Bridge-Log-Zeile hinzu. level: 'info'|'warn'|'error'|'ok'"""
@@ -102,7 +115,7 @@ class BridgeDisplay:
     # ── Render-Methoden ─────────────────────────────────────────────────
 
     def _render_identity_row(self) -> Table:
-        """Erste Header-Zeile: ID | Name | IP:Port | Latenz"""
+        """Header-Zeile: ID | Name | IP:Port | Latenz"""
         table = Table(box=box.SIMPLE_HEAD, show_header=False, padding=(0, 2), expand=True)
         table.add_column(justify="left", ratio=2)
         table.add_column(justify="left", ratio=2)
@@ -131,7 +144,7 @@ class BridgeDisplay:
         return table
 
     def _render_status_row(self) -> Table:
-        """Zweite Header-Zeile: AlphaTrack-Status | MT5-Status | MT5-Balance"""
+        """Status-Zeile: AlphaTrack | MT5 | Balance + Positionen + Letzter Sync"""
         table = Table(box=box.SIMPLE_HEAD, show_header=False, padding=(0, 2), expand=True)
         table.add_column(justify="center", ratio=1)
         table.add_column(justify="center", ratio=1)
@@ -160,17 +173,32 @@ class BridgeDisplay:
             mt5_text.append("MetaTrader 5\n", style="red")
             mt5_text.append("Getrennt", style="dim")
 
-        # MT5-Balance
-        bal_text = Text()
+        # Rechte Spalte: Balance · Positionen · Letzter Sync
+        right_text = Text()
         if self._balance is not None:
             bal_str = f"{self._balance:,.2f} {self._currency}".replace(",", ".")
-            bal_text.append(bal_str + "\n", style="bold white")
-            bal_text.append("MT5-Balance", style="dim")
+            right_text.append(bal_str, style="bold white")
         else:
-            bal_text.append("—\n", style="dim")
-            bal_text.append("MT5-Balance", style="dim")
+            right_text.append("—", style="dim")
 
-        table.add_row(at_text, mt5_text, bal_text)
+        if self._open_positions > 0:
+            right_text.append(f"  ·  {self._open_positions} Pos\n", style="bold yellow")
+        else:
+            right_text.append(f"  ·  0 Pos\n", style="dim")
+
+        if self._last_sync_ts is not None:
+            sec = int(time.time() - self._last_sync_ts)
+            if sec < 60:
+                sync_str = f"Sync vor {sec}s"
+            elif sec < 3600:
+                sync_str = f"Sync vor {sec // 60}m"
+            else:
+                sync_str = f"Sync vor {sec // 3600}h"
+            right_text.append(sync_str, style="dim")
+        else:
+            right_text.append("Kein Sync", style="dim")
+
+        table.add_row(at_text, mt5_text, right_text)
         return table
 
     def _render_log_panel(self, height: int) -> Panel:
@@ -202,10 +230,7 @@ class BridgeDisplay:
         )
 
     def _format_duration(self, connected_at) -> str:
-        """Formatiert die Verbindungsdauer aus einem Unix-Timestamp.
-
-        Format: '5s' (<60s), '12m' (<1h), '1h 03m' (>=1h). Bei None -> '—'.
-        """
+        """Formatiert die Verbindungsdauer aus einem Unix-Timestamp."""
         if connected_at is None:
             return "—"
         sec = int(time.time() - connected_at)
@@ -219,21 +244,39 @@ class BridgeDisplay:
         return f"{hours}h {mins_rem:02d}m"
 
     def _render_bots_panel(self) -> Panel:
-        """Rendert das 'Verbundene Bots'-Panel zwischen Status-Zeile und Log."""
+        """Rendert das 'Verbundene Bots'-Panel mit State-Indikator und Positionen."""
         with self._lock:
             bots_snapshot = list(self._bots_info)
 
         text = Text()
         if bots_snapshot:
             for bot in bots_snapshot:
-                text.append("● ", style="bold green")
-                text.append(bot.get("name", "?"), style="cyan")
-                text.append("   ID ", style="dim")
-                text.append(bot.get("at_id") or "—")
-                text.append("   Positionen: ", style="dim")
-                text.append(str(bot.get("positions", 0)))
-                text.append("   verbunden seit ", style="dim")
+                state = bot.get("state", "running")
+                if state == "running":
+                    dot_style = "bold green"
+                elif state in ("paused", "warning"):
+                    dot_style = "bold yellow"
+                else:
+                    dot_style = "bold red"
+
+                text.append("● ", style=dot_style)
+                text.append(bot.get("name", "?"), style="cyan bold")
+
+                pos = bot.get("positions", 0)
+                if pos > 0:
+                    text.append(f"  {pos} Pos", style="bold yellow")
+                else:
+                    text.append("  0 Pos", style="dim")
+
+                text.append("  ID ", style="dim")
+                text.append(bot.get("at_id") or "—", style="dim")
+                text.append("  verbunden seit ", style="dim")
                 text.append(self._format_duration(bot.get("connected_at")))
+
+                if state not in ("running", ""):
+                    label = {"paused": "pausiert", "stopped": "gestoppt", "error": "fehler"}.get(state, state)
+                    text.append(f"  [{label}]", style="dim yellow" if state == "paused" else "dim red")
+
                 text.append("\n")
         else:
             text.append("(keine Bots verbunden)", style="dim")

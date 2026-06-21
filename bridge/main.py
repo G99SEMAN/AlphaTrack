@@ -554,6 +554,7 @@ def main():
                 ok, last_sync = sync_trades(config, mt5, last_sync, display, local_log)
                 if ok:
                     state["trades_sync"] += state["open_positions"]
+                    display.update_last_sync()
             else:
                 last_sync = now
 

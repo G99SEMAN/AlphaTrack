@@ -113,6 +113,7 @@ class BaseBot:
         self._restart_requested = False
         self._my_tickets: set[int] = set()  # tickets opened by THIS bot, survived across restarts
         self._ticket_added_at: dict[int, float] = {}  # ticket -> Zeitpunkt der lokalen Aufnahme
+        self._last_reason: str = ""  # letzter Entscheidungsgrund aus on_tick()
 
     # ── Ticket-Persistenz (restart-safe) ────────────────────────────────
 
@@ -498,6 +499,7 @@ class BaseBot:
                         self._prune_tickets(all_tickets)
                         my_positions = [p for p in positions if int(p.get("ticket", 0)) in self._my_tickets]
                         signal_result = self.on_tick(candles, my_positions)
+                        self._last_reason = signal_result.get("reason", "")
                         action = signal_result.get("action", "hold")
                         open_count = len([p for p in my_positions if p.get("instrument") == symbol])
 

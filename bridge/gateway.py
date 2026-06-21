@@ -192,6 +192,7 @@ def get_connected_bots_info() -> list[dict]:
             "name": name,
             "at_id": _alphatrack_bot_ids.get(bot_id),
             "connected_at": connected_at,
+            "state": identity.get("state", "running") if identity else "running",
         })
     return result
 
@@ -453,6 +454,9 @@ async def ws_endpoint(websocket: WebSocket, api_key: str = Query(default="")):
             elif mtype == "heartbeat":
                 if not bot_id:
                     continue
+                # Bot-State live im Identity-Record aktualisieren (fuer Bridge-Display)
+                if bot_id in _bot_identities:
+                    _bot_identities[bot_id]["state"] = msg.get("state", "running")
                 body = {
                     "bridgeId": _alphatrack_bot_ids.get(bot_id, bot_id),
                     "status": {

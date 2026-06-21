@@ -77,12 +77,56 @@ bots/<name>/            ← bot-spezifisch (nur diese 5 Dateien)
 
 ## Terminal-UI
 
-Das Live-Terminal kommt **automatisch aus BaseBot** — Bots brauchen dafuer nichts zu tun:
+Das Live-Terminal kommt **automatisch aus BaseBot** — Bots brauchen dafuer nichts zu tun.
 
-- Wenn `rich>=13.0.0` installiert ist: gruener Header, Bridge-Verbindungsstatus, Strategie-Parameter, offene Positionen (identisches Layout wie Bridge-Terminal, aber gruene Farbe)
-- Ohne `rich`: statischer print-Header als Fallback
+**Layout (wenn `rich>=13.0.0` installiert):**
+```
+┌─ Bot-Name  Bot ──────────────────────────────────── Uptime | Status ─┐
+│  ID  …   Name  …   IP:Port  …   Latenz  …                            │
+├───────────────────────────────────────────────────────────────────────┤
+│  ● Bridge (2ms) Verbunden  │  EURUSDp  │  3 Positionen               │
+│                            │  M15      │                              │
+├──────────────────────────────┬────────────────────────────────────────┤
+│ Bot-Log                      │ Strategie                              │
+│ 12:34:56  [BOT]  ...         │ Letzter Entscheid                      │
+│ 12:34:55  [BOT]  ...         │ Außerhalb Einstiegsfenster 07:00-09:00 │
+│ ...                          │                                        │
+│                              │ Parameter                              │
+│                              │ lots              0.03                 │
+│                              │ sl_buffer_pips    5.0                  │
+│                              │ rr_ratio          1.5                  │
+│                              │ ...                                    │
+│                              │                                        │
+│                              │ Offene Positionen                      │
+│                              │ #12345678                              │
+└──────────────────────────────┴────────────────────────────────────────┘
+```
+
+- **Log links (60%):** scrollendes Bot-Log
+- **Strategie rechts (40%):** Letzter Entscheid (aus `on_tick()` `reason`-Feld) + alle Parameter aus `get_parameters()` + offene Ticket-Nummern
+- **Ohne `rich`:** statischer print-Header als Fallback
 
 `display_header()`, `log()`, `on_mt5_error()` und `run()` **nie in der Strategie ueberschreiben** — die Infrastruktur liegt in BaseBot.
+
+### Letzter Entscheid: `reason`-Feld in `on_tick()`
+
+Das Strategie-Panel rechts zeigt den Grund der letzten Entscheidung. Dafuer gibt `on_tick()` optional ein `"reason"`-Feld zurueck:
+
+```python
+# Kein Trade — Grund angeben
+return {"action": "hold", "reason": "Ausserhalb Einstiegsfenster 07:00-09:00 UTC"}
+
+# Trade geoeffnet — Grund optional
+return {"action": "buy", "lots": 0.03, "sl": 1.25, "tp": 1.26,
+        "reason": "Breakout ueber Asia-High 1.24850"}
+
+# Kein reason → Panel zeigt '—'
+return {"action": "hold"}
+```
+
+- `reason` ist optional — kein Pflichtfeld
+- BaseBot speichert den Wert in `self._last_reason` und das Display liest ihn automatisch
+- Gute `reason`-Strings sind kurz (1-2 Saetze) und erklaeren das *Warum*, nicht das *Was*
 
 ---
 
@@ -254,18 +298,21 @@ class MyStrategy(BaseBot):
 
         Returns:
             {"action": "hold"}
-            {"action": "buy",  "lots": 0.01, "sl": 1.0800, "tp": 1.0900}
-            {"action": "sell", "lots": 0.01, "sl_pips": 50, "tp_pips": 100}
+            {"action": "hold",  "reason": "Außerhalb Fenster 07:00-09:00"}
+            {"action": "buy",   "lots": 0.01, "sl": 1.0800, "tp": 1.0900, "reason": "Breakout"}
+            {"action": "sell",  "lots": 0.01, "sl_pips": 50, "tp_pips": 100}
             {"action": "close", "ticket": 12345}
-        sl/tp = absolute Preise, sl_pips/tp_pips = relative Pips (alternativ)
+
+        sl/tp = absolute Preise, sl_pips/tp_pips = relative Pips (alternativ).
+        "reason" ist optional — wird im Strategie-Panel des Bot-Terminals angezeigt.
         """
         if len(candles) < 2:
-            return {"action": "hold"}
+            return {"action": "hold", "reason": "Zu wenig Kerzen"}
 
         cfg = self._config.get("strategy", {})
         # --- Deine Logik hier ---
 
-        return {"action": "hold"}
+        return {"action": "hold", "reason": "Kein Signal"}
 ```
 
 ---
@@ -347,6 +394,7 @@ Im Backtest-Runner wird die Methode pro Kerze ueberschrieben.
 
 - [ ] `class MyBot(BaseBot)` — erbt von BaseBot?
 - [ ] `on_tick()` implementiert und gibt dict zurueck?
+- [ ] `on_tick()` gibt `"reason"` zurueck (optional, aber empfohlen fuer Terminal-Anzeige)?
 - [ ] `config.json`: `bot_id`, `bot_type="bot"`, `bot_port` vorhanden?
 - [ ] Kein `LocalLog` direkt importiert?
 - [ ] Alle Logs via `self.log()`, nicht via `print()` fuer wichtige Events?
