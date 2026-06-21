@@ -4,7 +4,7 @@ Layout:
   - Grüner Header (ID, Name, IP:Port, Latenz, Uptime, Status)
   - Status-Zeile (Bridge-Verbindung | Symbol/TF | Offene Positionen)
   - Hauptbereich: Log (links, 60%) | Strategie-Panel (rechts, 40%)
-    Das Strategie-Panel zeigt: Letzter Entscheid, alle Parameter aus
+    Das Strategie-Panel zeigt: Live-Preis, Letzter Entscheid, alle Parameter aus
     get_parameters(), offene Ticket-Nummern.
 Verwendet 'rich' — identischer Stil wie bridge/display.py, grüner Header.
 """
@@ -25,7 +25,6 @@ from rich import box
 
 MAX_LOG_LINES = 200
 _REFRESH_RATE = 2  # Hz
-_PLT_LOCK = threading.Lock()  # plotext hat globalen State — Lock fuer Thread-Safety
 
 
 class BotDisplay:
@@ -43,6 +42,11 @@ class BotDisplay:
         # Cache-Felder fuer die Bridge-Erreichbarkeit (5s-Drossel)
         self._bridge_ok: bool = False
         self._bridge_check_ts: float = 0.0
+
+        # Live-Preis-Ticker (Hintergrund-Thread, alle 5s)
+        self._live_price: float | None = None
+        self._prev_price: float | None = None
+        self._price_fetch_active: bool = False
 
     # ── Oeffentliche Methoden ───────────────────────────────────────────
 
@@ -75,6 +79,30 @@ class BotDisplay:
                 self._bridge_ok = False
             self._bridge_check_ts = now
         return self._bridge_ok
+
+    # ── Live-Preis (Hintergrund-Thread, alle 5s) ─────────────────────────
+
+    def _price_fetch_loop(self) -> None:
+        """Holt alle 5s den aktuellen M1-Close-Kurs vom gehandelten Symbol."""
+        while self._price_fetch_active:
+            try:
+                bot = self._bot
+                bridge = getattr(bot, "_bridge", None) if bot else None
+                if bridge:
+                    config = getattr(bot, "_config", {}) or {}
+                    symbol = config.get("strategy", {}).get("symbol", "")
+                    if symbol:
+                        candles = bridge.get_candles(symbol, "M1", 1)
+                        if candles:
+                            new_price = float(candles[-1].get("close", 0)) or None
+                            if new_price:
+                                with self._lock:
+                                    if new_price != self._live_price:
+                                        self._prev_price = self._live_price
+                                        self._live_price = new_price
+            except Exception:
+                pass
+            time.sleep(5.0)
 
     # ── Render-Methoden ─────────────────────────────────────────────────
 
@@ -189,37 +217,41 @@ class BotDisplay:
             padding=(0, 1),
         )
 
-    def _render_chart(self):
-        """Rendert einen Linienchart der Close-Preise via plotext. Gibt Text oder None zurück."""
-        bot = self._bot
-        if bot is None:
-            return None
-        candles = list(getattr(bot, "_last_candles", []))
-        if len(candles) < 2:
-            return None
-        try:
-            import plotext as plt  # optional — graceful fallback wenn nicht installiert
-            prices = [float(c.get("close", 0)) for c in candles]
-            if not prices or max(prices) == min(prices):
-                return None
-            term_width = self._console.width or 80
-            chart_w = max(20, int(term_width * 0.4) - 6)
-            chart_h = 8
-            with _PLT_LOCK:
-                plt.clear_figure()
-                plt.plot(prices, color="green")
-                plt.plotsize(chart_w, chart_h)
-                plt.theme("dark")
-                plt.xfrequency(0)  # keine X-Achsenbeschriftung — spart Platz
-                chart_str = plt.build()
-            return Text.from_ansi(chart_str)
-        except Exception:
-            return None
-
     def _render_strategy_panel(self) -> Panel:
-        """Rechtes Panel: Chart (oben) + Letzter Entscheid + alle Parameter + Tickets."""
+        """Rechtes Panel: Live-Preis + Letzter Entscheid + alle Parameter + Tickets."""
         bot = self._bot
         text = Text()
+
+        # ── Live-Preis ───────────────────────────────────────────────
+        with self._lock:
+            price = self._live_price
+            prev = self._prev_price
+
+        config = getattr(bot, "_config", None) if bot else None
+        strat = (config or {}).get("strategy", {})
+        symbol = strat.get("symbol", "—")
+
+        text.append("Live-Preis\n", style="bold dim")
+        text.append(f"{symbol}  ", style="dim")
+        if price is not None:
+            if price >= 1000:
+                price_str = f"{price:.2f}"
+            elif price >= 10:
+                price_str = f"{price:.3f}"
+            else:
+                price_str = f"{price:.5f}"
+            text.append(price_str, style="bold white")
+            if prev is not None and price != prev:
+                if price > prev:
+                    text.append("  ▲\n", style="bold green")
+                else:
+                    text.append("  ▼\n", style="bold red")
+            else:
+                text.append("\n")
+        else:
+            text.append("—\n", style="dim")
+
+        text.append("\n")
 
         # ── Letzter Entscheid ────────────────────────────────────────
         text.append("Letzter Entscheid\n", style="bold dim")
@@ -268,15 +300,8 @@ class BotDisplay:
         else:
             text.append("(keine)\n", style="dim")
 
-        chart = self._render_chart()
-        if chart is not None:
-            from rich.console import Group
-            content = Group(chart, Rule(style="dim"), text)
-        else:
-            content = text
-
         return Panel(
-            content,
+            text,
             title="[dim]Strategie[/dim]",
             border_style="green",
             padding=(0, 1),
@@ -298,7 +323,7 @@ class BotDisplay:
     # ── Start / Stop ─────────────────────────────────────────────────────
 
     def start(self) -> None:
-        """Startet den Live-Render-Loop in einem Hintergrund-Thread."""
+        """Startet den Live-Render-Loop und den Preis-Fetch-Thread."""
         layout = self._build_layout()
 
         self._live = Live(
@@ -309,6 +334,10 @@ class BotDisplay:
             transient=False,
         )
         self._live.start()
+
+        self._price_fetch_active = True
+        pt = threading.Thread(target=self._price_fetch_loop, daemon=True, name="BotPriceFetcher")
+        pt.start()
 
         def _render_loop():
             while self._live and self._live.is_started:
@@ -344,6 +373,7 @@ class BotDisplay:
         t.start()
 
     def stop(self) -> None:
+        self._price_fetch_active = False
         if self._live:
             self._live.stop()
             self._live = None
