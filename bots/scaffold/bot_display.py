@@ -25,6 +25,7 @@ from rich import box
 
 MAX_LOG_LINES = 200
 _REFRESH_RATE = 2  # Hz
+_PLT_LOCK = threading.Lock()  # plotext hat globalen State — Lock fuer Thread-Safety
 
 
 class BotDisplay:
@@ -188,8 +189,35 @@ class BotDisplay:
             padding=(0, 1),
         )
 
+    def _render_chart(self):
+        """Rendert einen Linienchart der Close-Preise via plotext. Gibt Text oder None zurück."""
+        bot = self._bot
+        if bot is None:
+            return None
+        candles = list(getattr(bot, "_last_candles", []))
+        if len(candles) < 2:
+            return None
+        try:
+            import plotext as plt  # optional — graceful fallback wenn nicht installiert
+            prices = [float(c.get("close", 0)) for c in candles]
+            if not prices or max(prices) == min(prices):
+                return None
+            term_width = self._console.width or 80
+            chart_w = max(20, int(term_width * 0.4) - 6)
+            chart_h = 8
+            with _PLT_LOCK:
+                plt.clear_figure()
+                plt.plot(prices, color="green")
+                plt.plotsize(chart_w, chart_h)
+                plt.theme("dark")
+                plt.xfrequency(0)  # keine X-Achsenbeschriftung — spart Platz
+                chart_str = plt.build()
+            return Text.from_ansi(chart_str)
+        except Exception:
+            return None
+
     def _render_strategy_panel(self) -> Panel:
-        """Rechtes Panel: Letzter Entscheid + alle Parameter + Tickets."""
+        """Rechtes Panel: Chart (oben) + Letzter Entscheid + alle Parameter + Tickets."""
         bot = self._bot
         text = Text()
 
@@ -240,8 +268,15 @@ class BotDisplay:
         else:
             text.append("(keine)\n", style="dim")
 
+        chart = self._render_chart()
+        if chart is not None:
+            from rich.console import Group
+            content = Group(chart, Rule(style="dim"), text)
+        else:
+            content = text
+
         return Panel(
-            text,
+            content,
             title="[dim]Strategie[/dim]",
             border_style="green",
             padding=(0, 1),

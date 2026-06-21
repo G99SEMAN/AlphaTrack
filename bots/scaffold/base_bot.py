@@ -114,6 +114,7 @@ class BaseBot:
         self._my_tickets: set[int] = set()  # tickets opened by THIS bot, survived across restarts
         self._ticket_added_at: dict[int, float] = {}  # ticket -> Zeitpunkt der lokalen Aufnahme
         self._last_reason: str = ""  # letzter Entscheidungsgrund aus on_tick()
+        self._last_candles: list = []  # letzte Kerzen aus get_candles() — fuer Terminal-Chart
 
     # ── Ticket-Persistenz (restart-safe) ────────────────────────────────
 
@@ -494,6 +495,7 @@ class BaseBot:
                 if self._state == "running" and bridge_ok and now - last_tick >= tick_interval_sec:
                     try:
                         candles = self._bridge.get_candles(symbol, timeframe, candles_count)
+                        self._last_candles = candles
                         positions = self._bridge.get_positions()
                         all_tickets = {int(p["ticket"]) for p in positions if p.get("ticket")}
                         self._prune_tickets(all_tickets)
