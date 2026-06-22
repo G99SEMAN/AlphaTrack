@@ -43,7 +43,8 @@ Anfrage beantwortet hat, wird nicht erneut gefragt — nur die Luecken.
    der naechste freie (ab 8771); nur nachfragen, wenn es Konflikte gibt.
 
 Erst wenn alle Punkte beantwortet sind: kurze Zusammenfassung der Entscheidungen
-zeigen, dann die Dateien erzeugen.
+zeigen, dann alle 6 Dateien erzeugen — inklusive `strategy.md`, die Claude aus dem
+generierten Code ableitet (Parameter-Tabelle + Funktionsweise, kein manuelles Befuellen).
 
 ---
 
@@ -57,10 +58,11 @@ bots/scaffold/          ← gemeinsame Infrastruktur (NICHT kopieren)
   bridge_client.py      ← HTTP Client (Candles, Positions, Trades)
   bot_display.py        ← Live-Terminal-UI (rich)
 
-bots/<name>/            ← bot-spezifisch (nur diese 5 Dateien)
+bots/<name>/            ← bot-spezifisch (nur diese 6 Dateien)
   config.json
   main.py
   strategy.py
+  strategy.md           ← Strategie-Dokumentation (von Claude aus Code generiert)
   start.bat
   requirements.txt
 ```
@@ -350,6 +352,48 @@ rich>=13.0.0
 
 ---
 
+### `strategy.md`
+
+**Pflicht** — wird von Claude beim Erstellen eines neuen Bots aus `strategy.py` und
+`config.json` generiert. Bei bestehenden Bots ebenfalls nachzupflegen.
+
+Inhalt:
+- **Funktionsweise:** Einstiegs- und Ausstiegs-Logik in Prosa (kein Code-Duplikat)
+- **Parameter-Tabelle:** Alle Werte aus `get_parameters()` mit Standard, Typ und Bedeutung
+- **Wichtige Hinweise:** Fallstricke, Zeitzonenfragen, Broker-Besonderheiten
+
+Struktur-Vorlage:
+```markdown
+# <Bot-Name> — Strategie-Dokumentation
+
+## Funktionsweise
+
+<Kurzbeschreibung, 2-4 Saetze>
+
+**Einstieg:**
+- BUY: <Bedingung>
+- SELL: <Bedingung>
+
+**Kein Einstieg wenn:**
+- <Bedingung>
+
+**Ausstieg:**
+- <SL/TP-Logik oder zeitbasiert>
+
+## Parameter
+
+| Parameter | Standard | Beschreibung |
+|-----------|----------|-------------|
+| `param_a` | 10 | ... |
+| `param_b` | 0.03 | ... |
+
+## Wichtige Hinweise
+
+- ...
+```
+
+---
+
 ## Wichtige Hinweise
 
 - **`BaseBot` ist Pflicht** (C6) — alle neuen Bots erben von `bots/scaffold/base_bot.py`
@@ -402,3 +446,4 @@ Im Backtest-Runner wird die Methode pro Kerze ueberschrieben.
 - [ ] Bot-Ordner enthaelt KEINE eigenen Kopien von `ws_client.py`, `bridge_client.py`, `bot_display.py`?
 - [ ] `get_parameters()` implementiert, wenn Parameter einstellbar sein sollen?
 - [ ] Zeit-Checks nutzen `self._now()` statt `datetime.now()` (Backtest-Pflicht)?
+- [ ] `strategy.md` vorhanden und alle Parameter dokumentiert?

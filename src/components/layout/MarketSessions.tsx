@@ -150,10 +150,24 @@ function SessionRow({ name, isOpen, timeStr, pct, compact }: { name: string; isO
 
 export default function MarketSessions({ compact = false }: { compact?: boolean }) {
   const [tick, setTick] = useState(0)
+  const [utcTime, setUtcTime] = useState('')
   const { settings } = useSessionSettings()
 
   useEffect(() => {
     const id = setInterval(() => setTick(t => t + 1), 60_000)
+    return () => clearInterval(id)
+  }, [])
+
+  useEffect(() => {
+    const update = () => {
+      const now = new Date()
+      const h = String(now.getUTCHours()).padStart(2, '0')
+      const m = String(now.getUTCMinutes()).padStart(2, '0')
+      const s = String(now.getUTCSeconds()).padStart(2, '0')
+      setUtcTime(`UTC ${h}:${m}:${s}`)
+    }
+    update()
+    const id = setInterval(update, 1_000)
     return () => clearInterval(id)
   }, [])
 
@@ -166,6 +180,15 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
 
   return (
     <div style={{ borderTop: '1px solid var(--border)' }}>
+
+      {/* UTC-Uhr */}
+      {utcTime && (
+        <div className={compact ? 'px-3 pt-1.5' : 'px-4 pt-2'}>
+          <span style={{ fontSize: compact ? 9 : 10, fontFamily: 'monospace', color: 'var(--text-3)' }}>
+            {utcTime}
+          </span>
+        </div>
+      )}
 
       {/* Forex */}
       <div className={compact ? 'px-2 pt-2 pb-1' : 'px-3 pt-3 pb-2'}>
