@@ -1,0 +1,4 @@
+requests>=2.31.0
+websocket-client>=1.6.0
+rich>=13.0.0
+pytz>=2023.3
