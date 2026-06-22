@@ -118,15 +118,21 @@ function Invoke-Questionnaire($cfg) {
 
     Write-Step '[4] Sync-Modus'
     Write-Host '  Sollen vergangene Trades vom MetaTrader-Account geladen werden?'
-    $syncDefault = if ($cfg.sync_mode -eq 'new_only') { '2' } else { '1' }
+    $syncDefault = switch ($cfg.sync_mode) {
+        'new_only' { '2' }
+        'keep'     { '3' }
+        default    { '1' }
+    }
     Write-Host "    1) Komplette History laden"
     Write-Host "    2) Nur neue Trades ab jetzt"
+    Write-Host "    3) Stand unveraendert lassen (Trades in AlphaTrack bleiben erhalten)"
     while ($true) {
-        $raw = Read-Host "  Sync-Modus waehlen [1-2, Standard: $syncDefault]"
+        $raw = Read-Host "  Sync-Modus waehlen [1-3, Standard: $syncDefault]"
         if ($raw -eq '') { $raw = $syncDefault }
         if ($raw -eq '1') { $cfg.sync_mode = 'full'; break }
         if ($raw -eq '2') { $cfg.sync_mode = 'new_only'; break }
-        Write-Warn2 'Bitte 1 oder 2 eingeben.'
+        if ($raw -eq '3') { $cfg.sync_mode = 'keep'; break }
+        Write-Warn2 'Bitte 1, 2 oder 3 eingeben.'
     }
 }
 
@@ -302,8 +308,10 @@ function New-BridgeConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [str
     Set-JsonField $c 'mt5_server'          "$($cfg.mt5_server)"
     Set-JsonField $c 'mt5_exe_path'        "$($cfg.mt5_exe_path)"
     $syncMode = if ($cfg.sync_mode) { $cfg.sync_mode } else { 'full' }
-    Set-JsonField $c 'sync_mode'           $syncMode
-    if ($syncMode -eq 'new_only') {
+    # 'keep': Bridge bekommt new_only + aktuellem Cutoff, aber bestehende Trades werden NICHT geloescht.
+    $bridgeSyncMode = if ($syncMode -eq 'keep') { 'new_only' } else { $syncMode }
+    Set-JsonField $c 'sync_mode'           $bridgeSyncMode
+    if ($bridgeSyncMode -eq 'new_only') {
         Set-JsonField $c 'sync_cutoff_timestamp' ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
     } else {
         Set-JsonField $c 'sync_cutoff_timestamp' 0
