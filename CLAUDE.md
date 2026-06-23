@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Pflichtverhalten: Rückfragen vor jeder Umsetzung
+
+**Vor dem Schreiben von Code oder dem Ändern von Dateien MUSS Claude immer zuerst Rückfragen stellen**, bis der Auftrag vollständig verstanden ist. Kein Schritt darf ohne vollständige Klarheit begonnen werden.
+
+- Rückfragen werden **immer mit dem `AskUserQuestion`-Tool** gestellt — niemals als Fließtext.
+- So lange fragen, bis alle Unklarheiten zu Umfang, Verhalten und Randfällen beseitigt sind.
+- Erst wenn der Benutzer alle Fragen beantwortet hat, mit der Umsetzung beginnen.
+
 ## Commands
 
 ```bash

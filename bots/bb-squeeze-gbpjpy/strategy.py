@@ -78,7 +78,7 @@ class BBSqueezeStrategy(BaseBot):
             return {"action": "hold", "reason": f"Zu wenig Kerzen ({len(candles)}/{min_candles})"}
 
         # --- Bollinger Bands berechnen ---
-        closes = [c["close"] for c in candles]
+        closes = [float(c["close"]) for c in candles]
         bb_std = float(cfg.get("bb_std", 2.0))
         bands  = self._calc_bb(closes, bb_period, bb_std)
 
