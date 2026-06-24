@@ -175,13 +175,15 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
             Aktualisieren
           </button>
         </div>
-        <div className="overflow-y-auto max-h-80 p-4 space-y-1">
+        <div className="overflow-y-auto max-h-80 p-4 space-y-1 flex flex-col-reverse">
           {log.length === 0 ? (
             <p className="text-xs text-center py-6" style={{ color: 'var(--text-3)' }}>Keine Log-Eintraege</p>
           ) : (
             log.map(entry => (
               <div key={entry.id} className="flex items-start gap-2 text-xs font-mono">
                 <span className="shrink-0" style={{ color: 'var(--text-3)' }}>
+                  {new Date(entry.timestamp).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
+                  {' '}
                   {new Date(entry.timestamp).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                 </span>
                 <span className="shrink-0 font-semibold" style={{ color: logLevelColor(entry.level) }}>

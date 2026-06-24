@@ -105,7 +105,7 @@ class BridgeDisplay:
 
     def log(self, level: str, tag: str, message: str) -> None:
         """Fuegt eine Bridge-Log-Zeile hinzu. level: 'info'|'warn'|'error'|'ok'"""
-        ts = datetime.now().strftime("%H:%M:%S")
+        ts = datetime.now().strftime("%d.%m %H:%M:%S")
         with self._lock:
             self._log_lines.append((ts, f"[{tag}]", message))
         if self._live is None:
