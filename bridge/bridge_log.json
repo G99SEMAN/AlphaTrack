@@ -1,5 +1,32 @@
 [
   {
+    "id": "fd0fe0608a",
+    "timestamp": "2026-06-26T23:17:17.670569+00:00",
+    "level": "error",
+    "message": "MT5-Verbindung verloren",
+    "details": "Neustart-Sequenz gestartet",
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "AGP v1"
+  },
+  {
+    "id": "b4e0127538",
+    "timestamp": "2026-06-26T23:17:16.651077+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.30', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.30', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "AGP v1"
+  },
+  {
+    "id": "0097bb189e",
+    "timestamp": "2026-06-26T23:17:07.457636+00:00",
+    "level": "warn",
+    "message": "SYNC Netzwerkfehler: HTTPConnectionPool(host='192.168.178.30', port=3000): Max retries exceeded with url: /api/bridge/trades (Caused by NewConnectionError(\"HTTPConnection(host='192.168.178.30', port=3000): Failed to establish a new connection: [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte\"))",
+    "details": null,
+    "bridgeId": "QfVwWrt6tA",
+    "bridgeName": "AGP v1"
+  },
+  {
     "id": "c0efc29aac",
     "timestamp": "2026-06-26T23:17:00.304484+00:00",
     "level": "warn",
