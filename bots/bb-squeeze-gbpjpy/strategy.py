@@ -33,6 +33,7 @@ class BBSqueezeStrategy(BaseBot):
         super().__init__(bot_id, name, port)
         # {ticket: {"entry": float, "direction": str, "be_activated": bool}}
         self._be_tracker = {}
+        self._last_entry_date: str = ""  # YYYY-MM-DD Berliner Zeit
 
     def get_parameters(self) -> dict:
         strat = self._config.get("strategy", {})
@@ -47,6 +48,7 @@ class BBSqueezeStrategy(BaseBot):
             "be_threshold_pips":   float(strat.get("be_threshold_pips", 20)),
             "trading_start_hour":  float(strat.get("trading_start_hour", 8)),
             "trading_end_hour":    float(strat.get("trading_end_hour", 11)),
+            "ema_period":          float(strat.get("ema_period", 50)),
         }
 
     def on_tick(self, candles: list, positions: list) -> dict:
@@ -67,6 +69,11 @@ class BBSqueezeStrategy(BaseBot):
         max_pos = int(cfg.get("max_positions", 1))
         if len(positions) >= max_pos:
             return {"action": "hold", "reason": "Max. 1 Position bereits offen"}
+
+        # --- Tages-Limit: max. 1 Trade pro Handelstag ---
+        today_str = self._today_berlin()
+        if self._last_entry_date == today_str:
+            return {"action": "hold", "reason": f"Tages-Limit erreicht ({today_str})"}
 
         # --- Mindestanzahl Kerzen ---
         bb_period      = int(cfg.get("bb_period", 20))
@@ -106,6 +113,15 @@ class BBSqueezeStrategy(BaseBot):
         # --- Richtung des Breakouts ---
         direction = "buy" if last_close > upper else "sell"
 
+        # --- Trendfilter: nur mit EMA-Trend handeln ---
+        ema_period = int(cfg.get("ema_period", 50))
+        ema = self._calc_ema(closes, ema_period)
+        if ema is not None:
+            if direction == "buy" and last_close < ema:
+                return {"action": "hold", "reason": f"Trendfilter: BUY blockiert (Preis {last_close:.3f} < EMA{ema_period} {ema:.3f})"}
+            if direction == "sell" and last_close > ema:
+                return {"action": "hold", "reason": f"Trendfilter: SELL blockiert (Preis {last_close:.3f} > EMA{ema_period} {ema:.3f})"}
+
         # --- SL und TP berechnen ---
         sl_price = lower if direction == "buy" else upper
         sl_dist  = abs(last_close - sl_price)
@@ -122,6 +138,7 @@ class BBSqueezeStrategy(BaseBot):
             f"SL {sl_price:.3f} | TP {tp_price:.3f} | Lots {lots:.2f}"
         )
 
+        self._last_entry_date = today_str
         return {
             "action": direction,
             "lots":   lots,
@@ -149,6 +166,25 @@ class BBSqueezeStrategy(BaseBot):
         offset     = datetime.timezone(datetime.timedelta(hours=2))
         now_approx = now_utc.astimezone(offset)
         return start_h <= now_approx.hour < end_h
+
+    def _today_berlin(self) -> str:
+        """Aktuelles Datum in Berliner Zeit als YYYY-MM-DD."""
+        import datetime as _dt
+        now_utc = self._now()
+        if _BERLIN is not None:
+            return now_utc.astimezone(_BERLIN).strftime("%Y-%m-%d")
+        offset = _dt.timezone(_dt.timedelta(hours=2))
+        return now_utc.astimezone(offset).strftime("%Y-%m-%d")
+
+    def _calc_ema(self, closes: list, period: int) -> float | None:
+        """Berechnet den letzten EMA-Wert über alle verfügbaren Kerzen."""
+        if len(closes) < period:
+            return None
+        k = 2.0 / (period + 1)
+        ema = sum(closes[:period]) / period
+        for price in closes[period:]:
+            ema = price * k + ema * (1 - k)
+        return ema
 
     def _manage_breakeven(self, positions: list, cfg: dict) -> dict:
         """
@@ -215,7 +251,7 @@ class BBSqueezeStrategy(BaseBot):
         risk_percent    = float(cfg.get("risk_percent", 1.0))
         pip_val_per_lot = float(cfg.get("pip_value_per_lot", 7.0))
 
-        account = self._bridge.get_account_info()
+        account = self._bridge.get_account_info() if self._bridge else None
         balance = float(account.get("balance", 1000.0)) if account else 1000.0
 
         risk_amount = balance * (risk_percent / 100.0)

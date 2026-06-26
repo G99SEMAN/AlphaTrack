@@ -194,6 +194,7 @@ def main():
     bot._my_tickets = set()
     bot._ticket_added_at = {}
     bot._be_tracker = {}
+    bot._last_entry_date = ""
 
     all_candles = _fetch_candles(bridge_url, api_key, symbol, timeframe, args.from_date, args.to_date)
 
