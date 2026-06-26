@@ -49,6 +49,7 @@ class BBSqueezeStrategy(BaseBot):
             "trading_start_hour":  float(strat.get("trading_start_hour", 8)),
             "trading_end_hour":    float(strat.get("trading_end_hour", 11)),
             "ema_period":          float(strat.get("ema_period", 50)),
+            "atr_sl_cap_multiplier": float(strat.get("atr_sl_cap_multiplier", 2.0)),
         }
 
     def on_tick(self, candles: list, positions: list) -> dict:
@@ -128,6 +129,14 @@ class BBSqueezeStrategy(BaseBot):
         rr_ratio = float(cfg.get("rr_ratio", 1.5))
         tp_price = (last_close + sl_dist * rr_ratio) if direction == "buy" else (last_close - sl_dist * rr_ratio)
 
+        # --- ATR-Cap für SL-Distanz (verhindert übermäßig breite SL bei hoher Volatilität) ---
+        atr_cap_mult = float(cfg.get("atr_sl_cap_multiplier", 2.0))
+        atr = self._calc_atr(candles, period=14)
+        if atr is not None and sl_dist > atr * atr_cap_mult:
+            sl_dist  = atr * atr_cap_mult
+            sl_price = (last_close - sl_dist) if direction == "buy" else (last_close + sl_dist)
+            tp_price = (last_close + sl_dist * rr_ratio) if direction == "buy" else (last_close - sl_dist * rr_ratio)
+
         # --- Lotgröße: 1% Kontorisiko ---
         lots = self._calc_lots(sl_dist, cfg)
 
@@ -185,6 +194,19 @@ class BBSqueezeStrategy(BaseBot):
         for price in closes[period:]:
             ema = price * k + ema * (1 - k)
         return ema
+
+    def _calc_atr(self, candles: list, period: int = 14) -> float | None:
+        """Berechnet ATR(period) über Wilder's Smoothing auf den letzten Kerzen."""
+        if len(candles) < period + 1:
+            return None
+        true_ranges = []
+        for i in range(1, len(candles)):
+            high       = float(candles[i]["high"])
+            low        = float(candles[i]["low"])
+            prev_close = float(candles[i - 1]["close"])
+            tr = max(high - low, abs(high - prev_close), abs(low - prev_close))
+            true_ranges.append(tr)
+        return sum(true_ranges[-period:]) / period
 
     def _manage_breakeven(self, positions: list, cfg: dict) -> dict:
         """

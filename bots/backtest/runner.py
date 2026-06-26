@@ -61,11 +61,20 @@ def _fetch_candles(bridge_url: str, api_key: str, symbol: str, interval: str,
     return candles
 
 
-def _pnl(action: str, entry: float, exit_price: float, lots: float) -> float:
-    """P&L in USD für 5-stellige Forex-Preise (1 lot = 100.000)."""
-    if action == "buy":
-        return round((exit_price - entry) * lots * 100000, 2)
-    return round((entry - exit_price) * lots * 100000, 2)
+def _pnl(action: str, entry: float, exit_price: float, lots: float,
+         symbol: str = "", pip_value_per_lot: float = 0.0) -> float:
+    """P&L in USD.
+
+    Mit pip_value_per_lot (aus config): korrekt für alle Paare inkl. JPY.
+    Ohne pip_value_per_lot: Fallback-Formel, nur korrekt für 5-stellige
+    Nicht-JPY-Paare (EUR/USD, GBP/USD usw.).
+    """
+    price_diff = (exit_price - entry) if action == "buy" else (entry - exit_price)
+    if pip_value_per_lot > 0:
+        pip_size = 0.01 if "JPY" in symbol.upper() else 0.0001
+        pips = price_diff / pip_size
+        return round(pips * lots * pip_value_per_lot, 2)
+    return round(price_diff * lots * 100000, 2)
 
 
 def _check_sl_tp(pos: dict, candle: dict):
@@ -162,6 +171,7 @@ def main():
     candles_count = int(strat.get("candles_count", 50))
     max_positions = int(strat.get("max_positions", 1))
     default_lots = float(strat.get("lots", 0.01))
+    pip_value_per_lot = float(strat.get("pip_value_per_lot", 0.0))
 
     strategy_class = _load_strategy_class(args.bot)
 
@@ -195,6 +205,8 @@ def main():
     bot._ticket_added_at = {}
     bot._be_tracker = {}
     bot._last_entry_date = ""
+    bot._last_trade_date = ""
+    bot._daily_trades = 0
 
     all_candles = _fetch_candles(bridge_url, api_key, symbol, timeframe, args.from_date, args.to_date)
 
@@ -225,7 +237,7 @@ def main():
                 trades.append({
                     **pos,
                     "exit": exit_price,
-                    "pnl": _pnl(pos["action"], pos["entry"], exit_price, pos["lots"]),
+                    "pnl": _pnl(pos["action"], pos["entry"], exit_price, pos["lots"], symbol, pip_value_per_lot),
                     "exit_type": reason,
                     "close_time": next_candle["datetime"],
                 })
@@ -255,7 +267,7 @@ def main():
             trades.append({
                 **pos,
                 "exit": last_close,
-                "pnl": _pnl(pos["action"], pos["entry"], last_close, pos["lots"]),
+                "pnl": _pnl(pos["action"], pos["entry"], last_close, pos["lots"], symbol, pip_value_per_lot),
                 "exit_type": "END",
                 "close_time": all_candles[-1]["datetime"],
             })
