@@ -13,8 +13,8 @@ const SC: Record<Status, string> = {
 const ACCENT = { at: '#00d97e', bridge: '#a855f7', mt5: '#60a5fa', bot: '#f59e0b' }
 
 const R     = 28
-const SVG_W = 480
-const SVG_H = 400
+const MIN_W = 480
+const MIN_H = 400
 
 const DEFAULT_POS: Record<string, { x: number; y: number }> = {
   at:     { x: 200, y: 65  },
@@ -62,6 +62,7 @@ export default function NetworkDiagramFull() {
   })
   const [dragging, setDragging] = useState<string | null>(null)
   const dragStart = useRef<{ mx: number; my: number; nx: number; ny: number } | null>(null)
+  const svgDimsRef = useRef({ w: MIN_W, h: MIN_H })
 
   // Persist positions to localStorage on every change
   useEffect(() => {
@@ -91,8 +92,8 @@ export default function NetworkDiagramFull() {
       setPositions(prev => ({
         ...prev,
         [dragging]: {
-          x: Math.max(R + 4, Math.min(SVG_W - R - 4, nx + (e.clientX - mx))),
-          y: Math.max(R + 4, Math.min(SVG_H - R - 50, ny + (e.clientY - my))),
+          x: Math.max(R + 4, Math.min(svgDimsRef.current.w - R - 4, nx + (e.clientX - mx))),
+          y: Math.max(R + 4, Math.min(svgDimsRef.current.h - R - 50, ny + (e.clientY - my))),
         },
       }))
     }
@@ -161,6 +162,10 @@ export default function NetworkDiagramFull() {
     }),
   ]
 
+  const svgW = nodes.length === 0 ? MIN_W : Math.max(MIN_W, Math.max(...nodes.map(n => n.x)) + 90)
+  const svgH = nodes.length === 0 ? MIN_H : Math.max(MIN_H, Math.max(...nodes.map(n => n.y)) + 80)
+  svgDimsRef.current = { w: svgW, h: svgH }
+
   const nodeMap = new Map(nodes.map(n => [n.id, n]))
 
   // Edges defined A→B, animation runs reversed (1→0) so dots travel towards AlphaTrack
@@ -215,9 +220,9 @@ export default function NetworkDiagramFull() {
 
       {/* Canvas */}
       <div className="p-5" style={{ cursor: dragging ? 'grabbing' : 'default' }}>
-        <div style={{ position: 'relative', width: SVG_W, height: SVG_H, userSelect: 'none', WebkitUserSelect: 'none' }}>
+        <div style={{ position: 'relative', width: svgW, height: svgH, userSelect: 'none', WebkitUserSelect: 'none' }}>
 
-          <svg width={SVG_W} height={SVG_H}
+          <svg width={svgW} height={svgH}
             style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}>
             <defs>
               {edges.map(e => {
