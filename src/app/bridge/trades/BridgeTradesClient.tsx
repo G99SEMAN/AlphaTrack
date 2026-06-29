@@ -9,6 +9,14 @@ import {
 import { BotEntry } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
 
+const BOT_COLORS = ['#3b82f6', '#a855f7', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16']
+
+function getBotColor(botId: string | undefined, bots: BotEntry[]): string {
+  if (!botId) return '#6b7280'
+  const idx = bots.findIndex(b => b.id === botId)
+  return BOT_COLORS[(idx >= 0 ? idx : 0) % BOT_COLORS.length]
+}
+
 interface LivePosition {
   ticket: number
   date: string
@@ -178,16 +186,18 @@ export default function BridgeTradesClient({ bots }: Props) {
             }}>
             Alle
           </button>
-          {bots.map(bot => {
+          {bots.map((bot, i) => {
             const active = selectedBotIds.has(bot.id)
+            const dotColor = BOT_COLORS[i % BOT_COLORS.length]
             return (
               <button key={bot.id} onClick={() => toggleBot(bot.id)}
-                className="px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
                 style={{
-                  background: active ? 'rgba(239,68,68,0.12)' : 'var(--surface)',
-                  border: active ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--border)',
-                  color: active ? '#ef4444' : 'var(--text-2)',
+                  background: active ? `${dotColor}18` : 'var(--surface)',
+                  border: active ? `1px solid ${dotColor}66` : '1px solid var(--border)',
+                  color: active ? dotColor : 'var(--text-2)',
                 }}>
+                <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dotColor }} />
                 {bot.name}
               </button>
             )
@@ -285,11 +295,12 @@ export default function BridgeTradesClient({ bots }: Props) {
                               <p className="text-sm font-black font-mono" style={{ color: 'var(--text-1)' }}>
                                 {pos.instrument}
                               </p>
-                              {pos.botName && bots.length > 1 && (
-                                <span className="text-xs px-1.5 py-0.5 rounded font-semibold leading-none"
-                                  style={{ background: 'rgba(239,68,68,0.08)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
-                                  {pos.botName}
-                                </span>
+                              {pos.botName && (
+                                <span
+                                  title={pos.botName}
+                                  className="w-2.5 h-2.5 rounded-full shrink-0"
+                                  style={{ background: getBotColor(pos.botId, bots) }}
+                                />
                               )}
                             </div>
                             <p className="text-xs font-semibold" style={{ color: isLong ? '#22c55e' : '#ef4444' }}>
