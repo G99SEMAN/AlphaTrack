@@ -71,7 +71,22 @@ def execute_trade(symbol: str, direction: str, lots: float,
 
     # SL/TP validieren: falsche Seite und Stops-Level prüfen
     min_dist = (symbol_info.trade_stops_level + 5) * symbol_info.point
-    sl_price, tp_price = _validate_stops(sl_price, tp_price, price, is_buy, min_dist, symbol_info.digits)
+    sl_price, tp_price, removed_stops = _validate_stops(sl_price, tp_price, price, is_buy, min_dist, symbol_info.digits)
+
+    # SL wurde entfernt obwohl mitgegeben → Trade abbrechen (Risiko)
+    sl_intended = sl > 0 or sl_pips > 0
+    tp_intended = tp > 0 or tp_pips > 0
+    if sl_intended and sl_price == 0:
+        msg = f"Trade abgebrochen: SL ungültig nach Preisvalidierung (SL={sl}, Preis={price:.{symbol_info.digits}f})"
+        if removed_stops:
+            msg += f" — {'; '.join(removed_stops)}"
+        print(f"[EXECUTOR] {msg}")
+        return _err(msg, symbol, direction, lots, timestamp)
+
+    sltp_warning: str | None = None
+    if tp_intended and tp_price == 0:
+        sltp_warning = f"TP entfernt: {'; '.join(removed_stops)}" if removed_stops else "TP durch Preisvalidierung entfernt"
+        print(f"[EXECUTOR] WARNUNG: {sltp_warning}")
 
     print(f"[EXECUTOR] {direction.upper()} {lots} {symbol} @ {price:.{symbol_info.digits}f}"
           f"  SL={sl_price if sl_price else 'none'}  TP={tp_price if tp_price else 'none'}"
@@ -111,7 +126,6 @@ def execute_trade(symbol: str, direction: str, lots: float,
     print(f"[EXECUTOR] Order OK: {direction.upper()} {lots} {symbol} @ {price} Ticket={ticket}")
 
     # SL/TP nachträglich setzen falls Broker sie in der Market-Order ignoriert hat
-    sltp_warning: str | None = None
     if sl_price > 0 or tp_price > 0:
         time.sleep(0.5)
         positions = mt5.positions_get(ticket=ticket)
@@ -196,58 +210,57 @@ def close_position(ticket: int) -> dict:
 
 
 def _validate_stops(sl: float, tp: float, price: float, is_buy: bool,
-                    min_dist: float, digits: int) -> tuple[float, float]:
+                    min_dist: float, digits: int) -> tuple[float, float, list[str]]:
     """
-    Prüft SL/TP auf Gültigkeit und passt sie an:
-    - Falsche Seite (SL über Preis bei BUY etc.) → entfernen
-    - Zu nah am Preis (unter Stops-Level) → auf Mindestabstand verschieben
+    Prüft SL/TP auf Gültigkeit und passt sie an.
+    Returns (sl_price, tp_price, removed_reasons).
+    removed_reasons enthält Meldungen für jeden Stop der auf der falschen Seite lag.
     """
-    def fix(val: float, must_be_below: bool) -> float:
-        if val <= 0:
-            return 0.0
-        if must_be_below:
-            if val >= price:            # falsche Seite
-                print(f"[EXECUTOR] SL {val:.{digits}f} >= Preis {price:.{digits}f} (BUY) - wird entfernt")
-                return 0.0
-            if price - val < min_dist:  # zu nah
-                adjusted = round(price - min_dist, digits)
-                print(f"[EXECUTOR] SL zu nah, angepasst: {val:.{digits}f} → {adjusted:.{digits}f}")
-                return adjusted
-        else:
-            if val <= price:            # falsche Seite
-                print(f"[EXECUTOR] TP {val:.{digits}f} <= Preis {price:.{digits}f} (BUY) - wird entfernt")
-                return 0.0
-            if val - price < min_dist:  # zu nah
-                adjusted = round(price + min_dist, digits)
-                print(f"[EXECUTOR] TP zu nah, angepasst: {val:.{digits}f} → {adjusted:.{digits}f}")
-                return adjusted
-        return val
+    removed: list[str] = []
 
     if is_buy:
-        return fix(sl, must_be_below=True), fix(tp, must_be_below=False)
+        # SL muss unter Preis
+        if sl > 0:
+            if sl >= price:
+                removed.append(f"SL {sl:.{digits}f} >= Ask {price:.{digits}f} (BUY)")
+                print(f"[EXECUTOR] SL {sl:.{digits}f} >= Preis {price:.{digits}f} (BUY) - wird entfernt")
+                sl = 0.0
+            elif price - sl < min_dist:
+                adjusted = round(price - min_dist, digits)
+                print(f"[EXECUTOR] SL zu nah, angepasst: {sl:.{digits}f} → {adjusted:.{digits}f}")
+                sl = adjusted
+        # TP muss über Preis
+        if tp > 0:
+            if tp <= price:
+                removed.append(f"TP {tp:.{digits}f} <= Ask {price:.{digits}f} (BUY)")
+                print(f"[EXECUTOR] TP {tp:.{digits}f} <= Preis {price:.{digits}f} (BUY) - wird entfernt")
+                tp = 0.0
+            elif tp - price < min_dist:
+                adjusted = round(price + min_dist, digits)
+                print(f"[EXECUTOR] TP zu nah, angepasst: {tp:.{digits}f} → {adjusted:.{digits}f}")
+                tp = adjusted
     else:
         # SELL: SL muss über Preis, TP muss unter Preis
-        def fix_sell(val: float, must_be_above: bool) -> float:
-            if val <= 0:
-                return 0.0
-            if must_be_above:
-                if val <= price:
-                    print(f"[EXECUTOR] SL {val:.{digits}f} <= Preis {price:.{digits}f} (SELL) - wird entfernt")
-                    return 0.0
-                if val - price < min_dist:
-                    adjusted = round(price + min_dist, digits)
-                    print(f"[EXECUTOR] SL zu nah, angepasst: {val:.{digits}f} → {adjusted:.{digits}f}")
-                    return adjusted
-            else:
-                if val >= price:
-                    print(f"[EXECUTOR] TP {val:.{digits}f} >= Preis {price:.{digits}f} (SELL) - wird entfernt")
-                    return 0.0
-                if price - val < min_dist:
-                    adjusted = round(price - min_dist, digits)
-                    print(f"[EXECUTOR] TP zu nah, angepasst: {val:.{digits}f} → {adjusted:.{digits}f}")
-                    return adjusted
-            return val
-        return fix_sell(sl, must_be_above=True), fix_sell(tp, must_be_above=False)
+        if sl > 0:
+            if sl <= price:
+                removed.append(f"SL {sl:.{digits}f} <= Bid {price:.{digits}f} (SELL)")
+                print(f"[EXECUTOR] SL {sl:.{digits}f} <= Preis {price:.{digits}f} (SELL) - wird entfernt")
+                sl = 0.0
+            elif sl - price < min_dist:
+                adjusted = round(price + min_dist, digits)
+                print(f"[EXECUTOR] SL zu nah, angepasst: {sl:.{digits}f} → {adjusted:.{digits}f}")
+                sl = adjusted
+        if tp > 0:
+            if tp >= price:
+                removed.append(f"TP {tp:.{digits}f} >= Bid {price:.{digits}f} (SELL)")
+                print(f"[EXECUTOR] TP {tp:.{digits}f} >= Preis {price:.{digits}f} (SELL) - wird entfernt")
+                tp = 0.0
+            elif price - tp < min_dist:
+                adjusted = round(price - min_dist, digits)
+                print(f"[EXECUTOR] TP zu nah, angepasst: {tp:.{digits}f} → {adjusted:.{digits}f}")
+                tp = adjusted
+
+    return sl, tp, removed
 
 
 def _get_filling_mode(symbol_info) -> int:
