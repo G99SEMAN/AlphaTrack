@@ -1,0 +1,422 @@
+- generic [active] [ref=f11e1]:
+  - generic [ref=f11e2]:
+    - complementary [ref=f11e3]:
+      - generic [ref=f11e4]:
+        - generic [ref=f11e5]:
+          - img "AlphaTrack Logo" [ref=f11e6]
+          - button "Sidebar ausklappen" [ref=f11e13] [cursor=pointer]:
+            - img [ref=f11e14]
+        - button "Demo Konto" [ref=f11e17] [cursor=pointer]:
+          - img [ref=f11e18]
+        - navigation [ref=f11e21]:
+          - link "Dashboard" [ref=f11e23] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=f11e24]
+          - link "Trades" [ref=f11e29] [cursor=pointer]:
+            - /url: /journal
+            - img [ref=f11e30]
+          - link "Statistiken" [ref=f11e32] [cursor=pointer]:
+            - /url: /statistiken
+            - img [ref=f11e33]
+          - link "Kalender" [ref=f11e34] [cursor=pointer]:
+            - /url: /kalender
+            - img [ref=f11e35]
+          - link "Netzwerk" [ref=f11e37] [cursor=pointer]:
+            - /url: /netzwerk
+            - img [ref=f11e38]
+          - link "Bridge" [ref=f11e44] [cursor=pointer]:
+            - /url: /bridge
+            - img [ref=f11e45]
+          - link "Bridge Log" [ref=f11e48] [cursor=pointer]:
+            - /url: /bridge/log
+            - img [ref=f11e49]
+          - link "Bots" [ref=f11e52] [cursor=pointer]:
+            - /url: /bots
+            - img [ref=f11e53]
+          - link "Bot Settings" [ref=f11e56] [cursor=pointer]:
+            - /url: /bots/settings
+            - img [ref=f11e57]
+          - link "Strategien" [ref=f11e58] [cursor=pointer]:
+            - /url: /strategien
+            - img [ref=f11e59]
+          - link "Performance" [ref=f11e63] [cursor=pointer]:
+            - /url: /bots/performance
+            - img [ref=f11e64]
+          - link "Live Trades" [ref=f11e65] [cursor=pointer]:
+            - /url: /bridge/trades
+            - img [ref=f11e66]
+          - link "Trade Analyzer" [ref=f11e68] [cursor=pointer]:
+            - /url: /bridge/analyse
+            - img [ref=f11e69]
+        - generic [ref=f11e72]:
+          - generic [ref=f11e360]: UTC 21:57:15
+          - generic [ref=f11e75]:
+            - generic [ref=f11e77]: Forex
+            - generic [ref=f11e78]: 72h 3m
+          - generic [ref=f11e80]:
+            - generic [ref=f11e81]:
+              - paragraph [ref=f11e82]: Börsen
+              - generic [ref=f11e83]: 0/4
+            - generic [ref=f11e84]:
+              - generic [ref=f11e86]:
+                - generic [ref=f11e88]: NYSE
+                - generic [ref=f11e89]: 15h 33m
+              - generic [ref=f11e91]:
+                - generic [ref=f11e93]: LSE
+                - generic [ref=f11e94]: 9h 3m
+              - generic [ref=f11e96]:
+                - generic [ref=f11e98]: XETRA
+                - generic [ref=f11e99]: 9h 3m
+              - generic [ref=f11e101]:
+                - generic [ref=f11e103]: Tokio
+                - generic [ref=f11e104]: 2h 3m
+        - generic [ref=f11e105]:
+          - button "Einstellungen" [ref=f11e106] [cursor=pointer]:
+            - img [ref=f11e107]
+          - button "Trading entsperren" [ref=f11e110] [cursor=pointer]:
+            - img [ref=f11e111]
+    - main [ref=f11e114]:
+      - generic [ref=f11e115]:
+        - generic [ref=f11e116]:
+          - generic [ref=f11e117]:
+            - heading "Dashboard" [level=1] [ref=f11e118]
+            - generic [ref=f11e119]:
+              - img [ref=f11e120]
+              - text: Spielgeld
+          - paragraph [ref=f11e122]:
+            - text: "IC Markets · Startkapital:"
+            - generic [ref=f11e123]: 1.000 EUR
+            - generic [ref=f11e124]: (+328.1% auf Kapital)
+        - button "Gesamt" [ref=f11e126] [cursor=pointer]:
+          - img [ref=f11e127]
+          - text: Gesamt
+          - img [ref=f11e129]
+      - generic [ref=f11e132]:
+        - generic [ref=f11e133]:
+          - generic [ref=f11e134]:
+            - paragraph [ref=f11e136]: Net P&L
+            - generic [ref=f11e138]:
+              - paragraph [ref=f11e139]: +3.3K €
+              - paragraph [ref=f11e140]: 100 Trades
+          - generic [ref=f11e141]:
+            - paragraph [ref=f11e143]: Profit Factor
+            - generic [ref=f11e144]:
+              - generic [ref=f11e145]:
+                - paragraph [ref=f11e146]: "2.46"
+                - paragraph [ref=f11e147]: Sehr gut
+              - img [ref=f11e148]
+          - generic [ref=f11e151]:
+            - paragraph [ref=f11e153]: Trade Win %
+            - generic [ref=f11e154]:
+              - generic [ref=f11e155]:
+                - paragraph [ref=f11e156]: 57.00%
+                - paragraph [ref=f11e157]: Alle geschlossen
+              - generic [ref=f11e158]:
+                - img [ref=f11e159]
+                - generic [ref=f11e162]:
+                  - generic [ref=f11e163]: "57"
+                  - generic [ref=f11e164]: "43"
+          - generic [ref=f11e165]:
+            - paragraph [ref=f11e167]: Avg Win / Loss Trade
+            - paragraph [ref=f11e168]: "1.86"
+            - generic [ref=f11e170]:
+              - generic [ref=f11e171]: +108 €
+              - generic [ref=f11e172]: "-58 €"
+        - generic [ref=f11e175]:
+          - generic [ref=f11e176]:
+            - generic [ref=f11e177]:
+              - generic [ref=f11e178]:
+                - button "Letzte Trades" [ref=f11e179] [cursor=pointer]
+                - button "Offene Pos. (0)" [ref=f11e180] [cursor=pointer]
+              - generic [ref=f11e181]:
+                - generic [ref=f11e182]:
+                  - generic [ref=f11e183]: 27.04.2026
+                  - generic [ref=f11e184]: EUR/USD
+                  - generic [ref=f11e185]: "-46,06 €"
+                - generic [ref=f11e186]:
+                  - generic [ref=f11e187]: 27.04.2026
+                  - generic [ref=f11e188]: XAUUSD
+                  - generic [ref=f11e189]: "-58,21 €"
+                - generic [ref=f11e190]:
+                  - generic [ref=f11e191]: 21.04.2026
+                  - generic [ref=f11e192]: BTC/USDT
+                  - generic [ref=f11e193]: "-52,70 €"
+                - generic [ref=f11e194]:
+                  - generic [ref=f11e195]: 21.04.2026
+                  - generic [ref=f11e196]: ETH/USDT
+                  - generic [ref=f11e197]: +34,95 €
+                - generic [ref=f11e198]:
+                  - generic [ref=f11e199]: 17.04.2026
+                  - generic [ref=f11e200]: EUR/USD
+                  - generic [ref=f11e201]: "-49,76 €"
+                - generic [ref=f11e202]:
+                  - generic [ref=f11e203]: 16.04.2026
+                  - generic [ref=f11e204]: ES
+                  - generic [ref=f11e205]: "-80,07 €"
+              - link "Alle Trades anzeigen →" [ref=f11e207] [cursor=pointer]:
+                - /url: /journal
+            - generic [ref=f11e362]:
+              - generic [ref=f11e364]:
+                - paragraph [ref=f11e365]: Account Balance
+                - paragraph [ref=f11e366]: 4.656,35 €
+              - generic [ref=f11e367]:
+                - generic [ref=f11e370]: Kontostand
+                - generic [ref=f11e373]: Einzahlungen
+              - application [ref=f11e377]:
+                - generic [ref=f11e383]:
+                  - generic [ref=f11e385]: Start
+                  - generic [ref=f11e387]: "28.10"
+                  - generic [ref=f11e389]: "17.11"
+                  - generic [ref=f11e391]: "05.12"
+                  - generic [ref=f11e393]: "29.12"
+                  - generic [ref=f11e395]: "19.01"
+                  - generic [ref=f11e397]: "11.02"
+                  - generic [ref=f11e399]: "02.03"
+                  - generic [ref=f11e401]: "24.03"
+                  - generic [ref=f11e403]: "27.04"
+          - generic [ref=f11e209]:
+            - generic [ref=f11e211]:
+              - generic [ref=f11e212]:
+                - button [ref=f11e213] [cursor=pointer]:
+                  - img [ref=f11e214]
+                - generic [ref=f11e216]: April 2026
+                - button [ref=f11e217] [cursor=pointer]:
+                  - img [ref=f11e218]
+              - button "Dieser Monat" [ref=f11e220] [cursor=pointer]
+              - generic [ref=f11e221]:
+                - generic [ref=f11e222]: +95 €
+                - generic [ref=f11e223]: 10 Tage
+            - generic [ref=f11e224]:
+              - generic [ref=f11e225]:
+                - generic [ref=f11e226]:
+                  - generic [ref=f11e227]: Mo
+                  - generic [ref=f11e228]: Di
+                  - generic [ref=f11e229]: Mi
+                  - generic [ref=f11e230]: Do
+                  - generic [ref=f11e231]: Fr
+                  - generic [ref=f11e232]: Sa
+                  - generic [ref=f11e233]: So
+                - generic [ref=f11e234]:
+                  - generic [ref=f11e235]:
+                    - generic [ref=f11e506] [cursor=pointer]:
+                      - generic [ref=f11e507]: "1"
+                      - generic [ref=f11e508]: "-€77"
+                      - generic [ref=f11e509]:
+                        - generic [ref=f11e510]: 1 Trade
+                        - generic [ref=f11e511]: 0%
+                    - generic [ref=f11e513]: "2"
+                    - generic [ref=f11e244] [cursor=pointer]:
+                      - generic [ref=f11e245]: "3"
+                      - generic [ref=f11e514]: €82
+                      - generic [ref=f11e515]:
+                        - generic [ref=f11e516]: 1 Trade
+                        - generic [ref=f11e517]: 100%
+                    - generic [ref=f11e247]: "4"
+                    - generic [ref=f11e249]: "5"
+                  - generic [ref=f11e250]:
+                    - generic [ref=f11e251] [cursor=pointer]:
+                      - generic [ref=f11e252]: "6"
+                      - generic [ref=f11e518]: "-€24"
+                      - generic [ref=f11e519]:
+                        - generic [ref=f11e520]: 1 Trade
+                        - generic [ref=f11e521]: 0%
+                    - generic [ref=f11e254]: "7"
+                    - generic [ref=f11e255] [cursor=pointer]:
+                      - generic [ref=f11e256]: "8"
+                      - generic [ref=f11e522]: €225
+                      - generic [ref=f11e523]:
+                        - generic [ref=f11e524]: 1 Trade
+                        - generic [ref=f11e525]: 100%
+                    - generic [ref=f11e258]: "9"
+                    - generic [ref=f11e259] [cursor=pointer]:
+                      - generic [ref=f11e260]: "10"
+                      - generic [ref=f11e526]: "-€30"
+                      - generic [ref=f11e527]:
+                        - generic [ref=f11e528]: 1 Trade
+                        - generic [ref=f11e529]: 0%
+                    - generic [ref=f11e262]: "11"
+                    - generic [ref=f11e264]: "12"
+                  - generic [ref=f11e265]:
+                    - generic [ref=f11e266] [cursor=pointer]:
+                      - generic [ref=f11e267]: "13"
+                      - generic [ref=f11e530]: €171
+                      - generic [ref=f11e531]:
+                        - generic [ref=f11e532]: 2 Trades
+                        - generic [ref=f11e533]: 100%
+                    - generic [ref=f11e269]: "14"
+                    - generic [ref=f11e271]: "15"
+                    - generic [ref=f11e272] [cursor=pointer]:
+                      - generic [ref=f11e273]: "16"
+                      - generic [ref=f11e534]: "-€80"
+                      - generic [ref=f11e535]:
+                        - generic [ref=f11e536]: 1 Trade
+                        - generic [ref=f11e537]: 0%
+                    - generic [ref=f11e274] [cursor=pointer]:
+                      - generic [ref=f11e275]: "17"
+                      - generic [ref=f11e538]: "-€50"
+                      - generic [ref=f11e539]:
+                        - generic [ref=f11e540]: 1 Trade
+                        - generic [ref=f11e541]: 0%
+                    - generic [ref=f11e277]: "18"
+                    - generic [ref=f11e279]: "19"
+                  - generic [ref=f11e280]:
+                    - generic [ref=f11e282]: "20"
+                    - generic [ref=f11e283] [cursor=pointer]:
+                      - generic [ref=f11e284]: "21"
+                      - generic [ref=f11e542]: "-€18"
+                      - generic [ref=f11e543]:
+                        - generic [ref=f11e544]: 2 Trades
+                        - generic [ref=f11e545]: 50%
+                    - generic [ref=f11e286]: "22"
+                    - generic [ref=f11e288]: "23"
+                    - generic [ref=f11e290]: "24"
+                    - generic [ref=f11e292]: "25"
+                    - generic [ref=f11e294]: "26"
+                  - generic [ref=f11e295]:
+                    - generic [ref=f11e296] [cursor=pointer]:
+                      - generic [ref=f11e297]: "27"
+                      - generic [ref=f11e546]: "-€104"
+                      - generic [ref=f11e547]:
+                        - generic [ref=f11e548]: 2 Trades
+                        - generic [ref=f11e549]: 0%
+                    - generic [ref=f11e299]: "28"
+                    - generic [ref=f11e497]: "29"
+                    - generic [ref=f11e499]: "30"
+              - generic [ref=f11e305]:
+                - generic [ref=f11e307]: Woche
+                - generic [ref=f11e308]:
+                  - generic [ref=f11e309]: KW 1
+                  - generic [ref=f11e553]: +5 €
+                  - generic [ref=f11e554]: 2 Tage
+                - generic [ref=f11e311]:
+                  - generic [ref=f11e312]: KW 2
+                  - generic [ref=f11e555]: +170 €
+                  - generic [ref=f11e556]: 3 Tage
+                - generic [ref=f11e314]:
+                  - generic [ref=f11e315]: KW 3
+                  - generic [ref=f11e557]: +41 €
+                  - generic [ref=f11e558]: 3 Tage
+                - generic [ref=f11e317]:
+                  - generic [ref=f11e318]: KW 4
+                  - generic [ref=f11e559]: "-18 €"
+                  - generic [ref=f11e560]: 1 Tag
+                - generic [ref=f11e320]:
+                  - generic [ref=f11e321]: KW 5
+                  - generic [ref=f11e561]: "-104 €"
+                  - generic [ref=f11e562]: 1 Tag
+            - generic [ref=f11e564]:
+              - generic [ref=f11e565]:
+                - generic [ref=f11e566]:
+                  - generic [ref=f11e567]: Montag, 13. April 2026
+                  - generic [ref=f11e568]: Net P&L +€163,38
+                - button [ref=f11e569] [cursor=pointer]:
+                  - img [ref=f11e570]
+              - img [ref=f11e574]
+              - generic [ref=f11e577]:
+                - generic [ref=f11e578]:
+                  - generic [ref=f11e579]: Total Trades
+                  - generic [ref=f11e580]: "2"
+                - generic [ref=f11e581]:
+                  - generic [ref=f11e582]: Winners
+                  - generic [ref=f11e583]: "2"
+                - generic [ref=f11e584]:
+                  - generic [ref=f11e585]: Losers
+                  - generic [ref=f11e586]: "0"
+                - generic [ref=f11e587]:
+                  - generic [ref=f11e588]: Winrate
+                  - generic [ref=f11e589]: 100%
+                - generic [ref=f11e590]:
+                  - generic [ref=f11e591]: Gross P&L
+                  - generic [ref=f11e592]: +€171,02
+                - generic [ref=f11e593]:
+                  - generic [ref=f11e594]: Volumen
+                  - generic [ref=f11e595]: "0"
+                - generic [ref=f11e596]:
+                  - generic [ref=f11e597]: Kosten
+                  - generic [ref=f11e598]: €7,64
+                - generic [ref=f11e599]:
+                  - generic [ref=f11e600]: Profit Factor
+                  - generic [ref=f11e601]: ∞
+              - table [ref=f11e603]:
+                - rowgroup [ref=f11e604]:
+                  - row "Uhrzeit Instrument Side Net P&L R:R" [ref=f11e605]:
+                    - columnheader "Uhrzeit" [ref=f11e606]
+                    - columnheader "Instrument" [ref=f11e607]
+                    - columnheader "Side" [ref=f11e608]
+                    - columnheader "Net P&L" [ref=f11e609]
+                    - columnheader "R:R" [ref=f11e610]
+                - rowgroup [ref=f11e611]:
+                  - row "12:16 WTI SHORT +€50,73 2.20R" [ref=f11e612] [cursor=pointer]:
+                    - cell "12:16" [ref=f11e613]
+                    - cell "WTI" [ref=f11e614]
+                    - cell "SHORT" [ref=f11e615]
+                    - cell "+€50,73" [ref=f11e616]
+                    - cell "2.20R" [ref=f11e617]
+                  - row "17:52 BTC/USDT SHORT +€112,65 2.40R" [ref=f11e618] [cursor=pointer]:
+                    - cell "17:52" [ref=f11e619]
+                    - cell "BTC/USDT" [ref=f11e620]
+                    - cell "SHORT" [ref=f11e621]
+                    - cell "+€112,65" [ref=f11e622]
+                    - cell "2.40R" [ref=f11e623]
+              - button "Schließen" [ref=f11e625] [cursor=pointer]
+          - generic [ref=f11e323]:
+            - generic [ref=f11e324]:
+              - paragraph [ref=f11e327]: Alpha Score
+              - application [ref=f11e405]:
+                - generic [ref=f11e425]:
+                  - generic [ref=f11e427]: Win %
+                  - generic [ref=f11e429]: Profit Factor
+                  - generic [ref=f11e431]: Avg Win/Loss
+                  - generic [ref=f11e433]: Recovery
+                  - generic [ref=f11e435]: Max DD
+                  - generic [ref=f11e437]: Konsistenz
+              - generic [ref=f11e330]:
+                - generic [ref=f11e332]: Dein Alpha Score
+                - paragraph [ref=f11e333]: "71"
+                - generic [ref=f11e335]:
+                  - generic [ref=f11e336]: "0"
+                  - generic [ref=f11e337]: "100"
+                - generic [ref=f11e341]:
+                  - generic [ref=f11e342]:
+                    - generic [ref=f11e343]: Win %
+                    - generic [ref=f11e344]: "67"
+                  - generic [ref=f11e345]:
+                    - generic [ref=f11e346]: Profit Factor
+                    - generic [ref=f11e347]: "79"
+                  - generic [ref=f11e348]:
+                    - generic [ref=f11e349]: Avg Win/Loss
+                    - generic [ref=f11e350]: "62"
+                  - generic [ref=f11e351]:
+                    - generic [ref=f11e352]: Recovery
+                    - generic [ref=f11e353]: "100"
+                  - generic [ref=f11e354]:
+                    - generic [ref=f11e355]: Max DD
+                    - generic [ref=f11e356]: "50"
+                  - generic [ref=f11e357]:
+                    - generic [ref=f11e358]: Konsistenz
+                    - generic [ref=f11e359]: "58"
+            - generic [ref=f11e446]:
+              - generic [ref=f11e448]:
+                - generic [ref=f11e449]:
+                  - paragraph [ref=f11e450]: Kontostand
+                  - paragraph [ref=f11e451]: 4.656,35 €
+                  - paragraph [ref=f11e452]: +3.656,35 € seit Deposit
+                - generic [ref=f11e453]: +365.6%
+              - application [ref=f11e457]:
+                - generic [ref=f11e463]:
+                  - generic [ref=f11e464]:
+                    - generic [ref=f11e466]: Start
+                    - generic [ref=f11e468]: "30.10"
+                    - generic [ref=f11e470]: "27.11"
+                    - generic [ref=f11e472]: "29.12"
+                    - generic [ref=f11e474]: "30.01"
+                    - generic [ref=f11e476]: "02.03"
+                    - generic [ref=f11e478]: "27.04"
+                  - generic [ref=f11e479]:
+                    - generic [ref=f11e481]: 1.000€
+                    - generic [ref=f11e483]: 2.000€
+                    - generic [ref=f11e485]: 3.000€
+                    - generic [ref=f11e487]: 4.000€
+                    - generic [ref=f11e489]: 5.000€
+  - alert [ref=f11e490]
+  - generic [ref=f11e491]: 1.000€
