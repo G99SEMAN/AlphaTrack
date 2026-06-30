@@ -45,6 +45,7 @@ export interface TradeStats {
   maxDrawdown: number
   currentStreak: number
   equityCurve: { date: string; value: number }[]
+  depositCurve: { date: string; value: number }[]
   profitFactor: number
   avgWin: number
   avgLoss: number

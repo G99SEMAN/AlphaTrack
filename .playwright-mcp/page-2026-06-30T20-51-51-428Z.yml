@@ -1,0 +1,279 @@
+- generic [ref=f9e2]:
+  - complementary [ref=f9e3]:
+    - generic [ref=f9e4]:
+      - generic [ref=f9e5]:
+        - img "AlphaTrack Logo" [ref=f9e6]
+        - generic [ref=f9e13]:
+          - paragraph [ref=f9e14]: AlphaTrack
+          - paragraph [ref=f9e15]: Trading Journal
+        - button "Sidebar einklappen" [ref=f9e16] [cursor=pointer]:
+          - img [ref=f9e17]
+      - button "Demo Konto Demo · 1.000 EUR" [ref=f9e20] [cursor=pointer]:
+        - img [ref=f9e22]
+        - generic [ref=f9e25]:
+          - generic [ref=f9e26]: Demo Konto
+          - generic [ref=f9e27]: Demo · 1.000 EUR
+        - img [ref=f9e28]
+      - navigation [ref=f9e31]:
+        - generic [ref=f9e34]: Übersicht
+        - link "Dashboard" [ref=f9e36] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=f9e38]
+          - generic [ref=f9e43]: Dashboard
+        - link "Trades" [ref=f9e44] [cursor=pointer]:
+          - /url: /journal
+          - img [ref=f9e45]
+          - generic [ref=f9e47]: Trades
+        - link "Statistiken" [ref=f9e48] [cursor=pointer]:
+          - /url: /statistiken
+          - img [ref=f9e49]
+          - generic [ref=f9e50]: Statistiken
+        - link "Kalender" [ref=f9e51] [cursor=pointer]:
+          - /url: /kalender
+          - img [ref=f9e52]
+          - generic [ref=f9e54]: Kalender
+        - link "Netzwerk" [ref=f9e55] [cursor=pointer]:
+          - /url: /netzwerk
+          - img [ref=f9e56]
+          - generic [ref=f9e61]: Netzwerk
+        - generic [ref=f9e64]: Bridge & Bots
+        - link "Bridge" [ref=f9e66] [cursor=pointer]:
+          - /url: /bridge
+          - img [ref=f9e67]
+          - generic [ref=f9e70]: Bridge
+        - link "Bridge Log" [ref=f9e71] [cursor=pointer]:
+          - /url: /bridge/log
+          - img [ref=f9e72]
+          - generic [ref=f9e75]: Bridge Log
+        - link "Bots" [ref=f9e76] [cursor=pointer]:
+          - /url: /bots
+          - img [ref=f9e77]
+          - generic [ref=f9e80]: Bots
+        - link "Bot Settings" [ref=f9e81] [cursor=pointer]:
+          - /url: /bots/settings
+          - img [ref=f9e82]
+          - generic [ref=f9e83]: Bot Settings
+        - link "Strategien" [ref=f9e84] [cursor=pointer]:
+          - /url: /strategien
+          - img [ref=f9e85]
+          - generic [ref=f9e89]: Strategien
+        - link "Performance" [ref=f9e90] [cursor=pointer]:
+          - /url: /bots/performance
+          - img [ref=f9e91]
+          - generic [ref=f9e92]: Performance
+        - link "Live Trades" [ref=f9e93] [cursor=pointer]:
+          - /url: /bridge/trades
+          - img [ref=f9e94]
+          - generic [ref=f9e96]: Live Trades
+        - link "Trade Analyzer" [ref=f9e97] [cursor=pointer]:
+          - /url: /bridge/analyse
+          - img [ref=f9e98]
+          - generic [ref=f9e101]: Trade Analyzer
+      - generic [ref=f9e102]:
+        - generic [ref=f9e105]:
+          - generic [ref=f9e107]: Forex
+          - generic [ref=f9e108]: 73h 9m
+        - generic [ref=f9e112]:
+          - generic [ref=f9e113]:
+            - paragraph [ref=f9e114]: Börsen
+            - generic [ref=f9e115]: 0/4
+          - generic [ref=f9e116]:
+            - generic [ref=f9e118]:
+              - generic [ref=f9e120]: NYSE
+              - generic [ref=f9e121]: 16h 39m
+            - generic [ref=f9e124]:
+              - generic [ref=f9e126]: LSE
+              - generic [ref=f9e127]: 10h 9m
+            - generic [ref=f9e130]:
+              - generic [ref=f9e132]: XETRA
+              - generic [ref=f9e133]: 10h 9m
+            - generic [ref=f9e136]:
+              - generic [ref=f9e138]: Tokio
+              - generic [ref=f9e139]: 3h 9m
+      - generic [ref=f9e141]:
+        - button "Einstellungen" [ref=f9e142] [cursor=pointer]:
+          - img [ref=f9e143]
+          - text: Einstellungen
+        - button "Trading entsperren" [ref=f9e146] [cursor=pointer]:
+          - img [ref=f9e147]
+  - main [ref=f9e150]:
+    - generic [ref=f9e151]:
+      - generic [ref=f9e152]:
+        - generic [ref=f9e153]:
+          - heading "Dashboard" [level=1] [ref=f9e154]
+          - generic [ref=f9e155]:
+            - img [ref=f9e156]
+            - text: Spielgeld
+        - paragraph [ref=f9e158]:
+          - text: "IC Markets · Startkapital:"
+          - generic [ref=f9e159]: 1.000 EUR
+          - generic [ref=f9e160]: (+328.1% auf Kapital)
+      - button "Gesamt" [ref=f9e162] [cursor=pointer]:
+        - img [ref=f9e163]
+        - text: Gesamt
+        - img [ref=f9e165]
+    - generic [ref=f9e168]:
+      - generic [ref=f9e169]:
+        - generic [ref=f9e170]:
+          - paragraph [ref=f9e172]: Net P&L
+          - generic [ref=f9e174]:
+            - paragraph [ref=f9e175]: +3.3K €
+            - paragraph [ref=f9e176]: 100 Trades
+        - generic [ref=f9e177]:
+          - paragraph [ref=f9e179]: Profit Factor
+          - generic [ref=f9e180]:
+            - generic [ref=f9e181]:
+              - paragraph [ref=f9e182]: "2.46"
+              - paragraph [ref=f9e183]: Sehr gut
+            - img [ref=f9e184]
+        - generic [ref=f9e187]:
+          - paragraph [ref=f9e189]: Trade Win %
+          - generic [ref=f9e190]:
+            - generic [ref=f9e191]:
+              - paragraph [ref=f9e192]: 57.00%
+              - paragraph [ref=f9e193]: Alle geschlossen
+            - generic [ref=f9e194]:
+              - img [ref=f9e195]
+              - generic [ref=f9e198]:
+                - generic [ref=f9e199]: "57"
+                - generic [ref=f9e200]: "43"
+        - generic [ref=f9e201]:
+          - paragraph [ref=f9e203]: Avg Win / Loss Trade
+          - paragraph [ref=f9e204]: "1.86"
+          - generic [ref=f9e206]:
+            - generic [ref=f9e207]: +108 €
+            - generic [ref=f9e208]: "-58 €"
+      - generic [ref=f9e211]:
+        - generic [ref=f9e213]:
+          - generic [ref=f9e214]:
+            - button "Letzte Trades" [ref=f9e215] [cursor=pointer]
+            - button "Offene Pos. (0)" [ref=f9e216] [cursor=pointer]
+          - generic [ref=f9e217]:
+            - generic [ref=f9e218]:
+              - generic [ref=f9e219]: 27.04.2026
+              - generic [ref=f9e220]: EUR/USD
+              - generic [ref=f9e221]: "-46,06 €"
+            - generic [ref=f9e222]:
+              - generic [ref=f9e223]: 27.04.2026
+              - generic [ref=f9e224]: XAUUSD
+              - generic [ref=f9e225]: "-58,21 €"
+            - generic [ref=f9e226]:
+              - generic [ref=f9e227]: 21.04.2026
+              - generic [ref=f9e228]: BTC/USDT
+              - generic [ref=f9e229]: "-52,70 €"
+            - generic [ref=f9e230]:
+              - generic [ref=f9e231]: 21.04.2026
+              - generic [ref=f9e232]: ETH/USDT
+              - generic [ref=f9e233]: +34,95 €
+            - generic [ref=f9e234]:
+              - generic [ref=f9e235]: 17.04.2026
+              - generic [ref=f9e236]: EUR/USD
+              - generic [ref=f9e237]: "-49,76 €"
+            - generic [ref=f9e238]:
+              - generic [ref=f9e239]: 16.04.2026
+              - generic [ref=f9e240]: ES
+              - generic [ref=f9e241]: "-80,07 €"
+          - link "Alle Trades anzeigen →" [ref=f9e243] [cursor=pointer]:
+            - /url: /journal
+        - generic [ref=f9e245]:
+          - generic [ref=f9e247]:
+            - generic [ref=f9e248]:
+              - button [ref=f9e249] [cursor=pointer]:
+                - img [ref=f9e250]
+              - generic [ref=f9e252]: Juni 2026
+              - button [ref=f9e253] [cursor=pointer]:
+                - img [ref=f9e254]
+            - button "Dieser Monat" [ref=f9e256] [cursor=pointer]
+            - generic [ref=f9e257]:
+              - generic [ref=f9e258]: +0 €
+              - generic [ref=f9e259]: 0 Tage
+          - generic [ref=f9e260]:
+            - generic [ref=f9e261]:
+              - generic [ref=f9e262]:
+                - generic [ref=f9e263]: Mo
+                - generic [ref=f9e264]: Di
+                - generic [ref=f9e265]: Mi
+                - generic [ref=f9e266]: Do
+                - generic [ref=f9e267]: Fr
+                - generic [ref=f9e268]: Sa
+                - generic [ref=f9e269]: So
+              - generic [ref=f9e270]:
+                - generic [ref=f9e271]:
+                  - generic [ref=f9e273]: "1"
+                  - generic [ref=f9e275]: "2"
+                  - generic [ref=f9e277]: "3"
+                  - generic [ref=f9e279]: "4"
+                  - generic [ref=f9e281]: "5"
+                  - generic [ref=f9e283]: "6"
+                  - generic [ref=f9e285]: "7"
+                - generic [ref=f9e286]:
+                  - generic [ref=f9e288]: "8"
+                  - generic [ref=f9e290]: "9"
+                  - generic [ref=f9e292]: "10"
+                  - generic [ref=f9e294]: "11"
+                  - generic [ref=f9e296]: "12"
+                  - generic [ref=f9e298]: "13"
+                  - generic [ref=f9e300]: "14"
+                - generic [ref=f9e301]:
+                  - generic [ref=f9e303]: "15"
+                  - generic [ref=f9e305]: "16"
+                  - generic [ref=f9e307]: "17"
+                  - generic [ref=f9e309]: "18"
+                  - generic [ref=f9e311]: "19"
+                  - generic [ref=f9e313]: "20"
+                  - generic [ref=f9e315]: "21"
+                - generic [ref=f9e316]:
+                  - generic [ref=f9e318]: "22"
+                  - generic [ref=f9e320]: "23"
+                  - generic [ref=f9e322]: "24"
+                  - generic [ref=f9e324]: "25"
+                  - generic [ref=f9e326]: "26"
+                  - generic [ref=f9e328]: "27"
+                  - generic [ref=f9e330]: "28"
+                - generic [ref=f9e331]:
+                  - generic [ref=f9e333]: "29"
+                  - generic [ref=f9e335]: "30"
+            - generic [ref=f9e341]:
+              - generic [ref=f9e343]: Woche
+              - generic [ref=f9e344]:
+                - generic [ref=f9e345]: KW 1
+                - generic [ref=f9e346]: 0 €
+              - generic [ref=f9e347]:
+                - generic [ref=f9e348]: KW 2
+                - generic [ref=f9e349]: 0 €
+              - generic [ref=f9e350]:
+                - generic [ref=f9e351]: KW 3
+                - generic [ref=f9e352]: 0 €
+              - generic [ref=f9e353]:
+                - generic [ref=f9e354]: KW 4
+                - generic [ref=f9e355]: 0 €
+              - generic [ref=f9e356]:
+                - generic [ref=f9e357]: KW 5
+                - generic [ref=f9e358]: 0 €
+        - generic [ref=f9e360]:
+          - paragraph [ref=f9e363]: Alpha Score
+          - generic [ref=f9e366]:
+            - generic [ref=f9e368]: Dein Alpha Score
+            - paragraph [ref=f9e369]: "71"
+            - generic [ref=f9e371]:
+              - generic [ref=f9e372]: "0"
+              - generic [ref=f9e373]: "100"
+            - generic [ref=f9e377]:
+              - generic [ref=f9e378]:
+                - generic [ref=f9e379]: Win %
+                - generic [ref=f9e380]: "67"
+              - generic [ref=f9e381]:
+                - generic [ref=f9e382]: Profit Factor
+                - generic [ref=f9e383]: "79"
+              - generic [ref=f9e384]:
+                - generic [ref=f9e385]: Avg Win/Loss
+                - generic [ref=f9e386]: "62"
+              - generic [ref=f9e387]:
+                - generic [ref=f9e388]: Recovery
+                - generic [ref=f9e389]: "100"
+              - generic [ref=f9e390]:
+                - generic [ref=f9e391]: Max DD
+                - generic [ref=f9e392]: "50"
+              - generic [ref=f9e393]:
+                - generic [ref=f9e394]: Konsistenz
+                - generic [ref=f9e395]: "58"

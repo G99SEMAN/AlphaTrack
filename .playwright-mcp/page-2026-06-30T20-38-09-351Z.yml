@@ -1,0 +1,441 @@
+- generic [ref=f8e1]:
+  - generic [ref=f8e364]:
+    - complementary [ref=f8e365]:
+      - generic [ref=f8e366]:
+        - generic [ref=f8e367]:
+          - img "AlphaTrack Logo" [ref=f8e368]
+          - button "Sidebar ausklappen" [ref=f8e375] [cursor=pointer]:
+            - img [ref=f8e376]
+        - button "Demo Konto" [ref=f8e379] [cursor=pointer]:
+          - img [ref=f8e380]
+        - navigation [ref=f8e383]:
+          - link "Dashboard" [ref=f8e385] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=f8e386]
+          - link "Trades" [ref=f8e391] [cursor=pointer]:
+            - /url: /journal
+            - img [ref=f8e392]
+          - link "Statistiken" [ref=f8e394] [cursor=pointer]:
+            - /url: /statistiken
+            - img [ref=f8e395]
+          - link "Kalender" [ref=f8e396] [cursor=pointer]:
+            - /url: /kalender
+            - img [ref=f8e397]
+          - link "Netzwerk" [ref=f8e399] [cursor=pointer]:
+            - /url: /netzwerk
+            - img [ref=f8e400]
+          - link "Bridge" [ref=f8e406] [cursor=pointer]:
+            - /url: /bridge
+            - img [ref=f8e407]
+          - link "Bridge Log" [ref=f8e410] [cursor=pointer]:
+            - /url: /bridge/log
+            - img [ref=f8e411]
+          - link "Bots" [ref=f8e414] [cursor=pointer]:
+            - /url: /bots
+            - img [ref=f8e415]
+          - link "Bot Settings" [ref=f8e418] [cursor=pointer]:
+            - /url: /bots/settings
+            - img [ref=f8e419]
+          - link "Strategien" [ref=f8e420] [cursor=pointer]:
+            - /url: /strategien
+            - img [ref=f8e421]
+          - link "Performance" [ref=f8e425] [cursor=pointer]:
+            - /url: /bots/performance
+            - img [ref=f8e426]
+          - link "Live Trades" [ref=f8e427] [cursor=pointer]:
+            - /url: /bridge/trades
+            - img [ref=f8e428]
+          - link "Trade Analyzer" [ref=f8e430] [cursor=pointer]:
+            - /url: /bridge/analyse
+            - img [ref=f8e431]
+        - generic [ref=f8e434]:
+          - generic [ref=f8e435]: UTC 20:38:08
+          - generic [ref=f8e438]:
+            - generic [ref=f8e440]: Forex
+            - generic [ref=f8e441]: 73h 22m
+          - generic [ref=f8e443]:
+            - generic [ref=f8e444]:
+              - paragraph [ref=f8e445]: Börsen
+              - generic [ref=f8e446]: 0/4
+            - generic [ref=f8e447]:
+              - generic [ref=f8e449]:
+                - generic [ref=f8e451]: NYSE
+                - generic [ref=f8e452]: 16h 52m
+              - generic [ref=f8e454]:
+                - generic [ref=f8e456]: LSE
+                - generic [ref=f8e457]: 10h 22m
+              - generic [ref=f8e459]:
+                - generic [ref=f8e461]: XETRA
+                - generic [ref=f8e462]: 10h 22m
+              - generic [ref=f8e464]:
+                - generic [ref=f8e466]: Tokio
+                - generic [ref=f8e467]: 3h 22m
+        - generic [ref=f8e468]:
+          - button "Einstellungen" [ref=f8e469] [cursor=pointer]:
+            - img [ref=f8e470]
+          - button "Trading entsperren" [ref=f8e473] [cursor=pointer]:
+            - img [ref=f8e474]
+    - main [ref=f8e477]:
+      - generic [ref=f8e478]:
+        - generic [ref=f8e479]:
+          - generic [ref=f8e480]:
+            - heading "Dashboard" [level=1] [ref=f8e481]
+            - generic [ref=f8e482]:
+              - img [ref=f8e483]
+              - text: Spielgeld
+          - paragraph [ref=f8e485]:
+            - text: "IC Markets · Startkapital:"
+            - generic [ref=f8e486]: 1.000 EUR
+            - generic [ref=f8e487]: (+328.1% auf Kapital)
+        - generic [ref=f8e488]:
+          - button "Gesamt" [active] [ref=f8e489] [cursor=pointer]:
+            - img [ref=f8e490]
+            - text: Gesamt
+            - img [ref=f8e492]
+          - generic [ref=f8e494]:
+            - generic [ref=f8e495]:
+              - generic [ref=f8e496]: Startdatum
+              - generic [ref=f8e497]: →
+              - generic [ref=f8e498]: Enddatum
+            - generic [ref=f8e499]:
+              - generic [ref=f8e500]:
+                - generic [ref=f8e501]:
+                  - generic [ref=f8e502]:
+                    - button [ref=f8e503] [cursor=pointer]:
+                      - img [ref=f8e504]
+                    - generic [ref=f8e506]:
+                      - generic [ref=f8e507]:
+                        - combobox [ref=f8e508] [cursor=pointer]:
+                          - option "Jan"
+                          - option "Feb"
+                          - option "Mär"
+                          - option "Apr"
+                          - option "Mai" [selected]
+                          - option "Jun"
+                          - option "Jul"
+                          - option "Aug"
+                          - option "Sep"
+                          - option "Okt"
+                          - option "Nov"
+                          - option "Dez"
+                        - img
+                      - generic [ref=f8e509]:
+                        - combobox [ref=f8e510] [cursor=pointer]:
+                          - option "2021"
+                          - option "2022"
+                          - option "2023"
+                          - option "2024"
+                          - option "2025"
+                          - option "2026" [selected]
+                          - option "2027"
+                          - option "2028"
+                          - option "2029"
+                          - option "2030"
+                          - option "2031"
+                          - option "2032"
+                        - img
+                  - generic [ref=f8e511]:
+                    - generic [ref=f8e512]: Mo
+                    - generic [ref=f8e513]: Di
+                    - generic [ref=f8e514]: Mi
+                    - generic [ref=f8e515]: Do
+                    - generic [ref=f8e516]: Fr
+                    - generic [ref=f8e517]: Sa
+                    - generic [ref=f8e518]: So
+                  - generic [ref=f8e519]:
+                    - generic [ref=f8e521]: "27"
+                    - generic [ref=f8e523]: "28"
+                    - generic [ref=f8e525]: "29"
+                    - generic [ref=f8e527]: "30"
+                    - generic [ref=f8e529] [cursor=pointer]: "1"
+                    - generic [ref=f8e531] [cursor=pointer]: "2"
+                    - generic [ref=f8e533] [cursor=pointer]: "3"
+                    - generic [ref=f8e535] [cursor=pointer]: "4"
+                    - generic [ref=f8e537] [cursor=pointer]: "5"
+                    - generic [ref=f8e539] [cursor=pointer]: "6"
+                    - generic [ref=f8e541] [cursor=pointer]: "7"
+                    - generic [ref=f8e543] [cursor=pointer]: "8"
+                    - generic [ref=f8e545] [cursor=pointer]: "9"
+                    - generic [ref=f8e547] [cursor=pointer]: "10"
+                    - generic [ref=f8e549] [cursor=pointer]: "11"
+                    - generic [ref=f8e551] [cursor=pointer]: "12"
+                    - generic [ref=f8e553] [cursor=pointer]: "13"
+                    - generic [ref=f8e555] [cursor=pointer]: "14"
+                    - generic [ref=f8e557] [cursor=pointer]: "15"
+                    - generic [ref=f8e559] [cursor=pointer]: "16"
+                    - generic [ref=f8e561] [cursor=pointer]: "17"
+                    - generic [ref=f8e563] [cursor=pointer]: "18"
+                    - generic [ref=f8e565] [cursor=pointer]: "19"
+                    - generic [ref=f8e567] [cursor=pointer]: "20"
+                    - generic [ref=f8e569] [cursor=pointer]: "21"
+                    - generic [ref=f8e571] [cursor=pointer]: "22"
+                    - generic [ref=f8e573] [cursor=pointer]: "23"
+                    - generic [ref=f8e575] [cursor=pointer]: "24"
+                    - generic [ref=f8e577] [cursor=pointer]: "25"
+                    - generic [ref=f8e579] [cursor=pointer]: "26"
+                    - generic [ref=f8e581] [cursor=pointer]: "27"
+                    - generic [ref=f8e583] [cursor=pointer]: "28"
+                    - generic [ref=f8e585] [cursor=pointer]: "29"
+                    - generic [ref=f8e587] [cursor=pointer]: "30"
+                    - generic [ref=f8e589] [cursor=pointer]: "31"
+                - generic [ref=f8e591]:
+                  - generic [ref=f8e592]:
+                    - generic [ref=f8e593]:
+                      - generic [ref=f8e594]:
+                        - combobox [ref=f8e595] [cursor=pointer]:
+                          - option "Jan"
+                          - option "Feb"
+                          - option "Mär"
+                          - option "Apr"
+                          - option "Mai"
+                          - option "Jun" [selected]
+                          - option "Jul"
+                          - option "Aug"
+                          - option "Sep"
+                          - option "Okt"
+                          - option "Nov"
+                          - option "Dez"
+                        - img
+                      - generic [ref=f8e596]:
+                        - combobox [ref=f8e597] [cursor=pointer]:
+                          - option "2021"
+                          - option "2022"
+                          - option "2023"
+                          - option "2024"
+                          - option "2025"
+                          - option "2026" [selected]
+                          - option "2027"
+                          - option "2028"
+                          - option "2029"
+                          - option "2030"
+                          - option "2031"
+                          - option "2032"
+                        - img
+                    - button [ref=f8e598] [cursor=pointer]:
+                      - img [ref=f8e599]
+                  - generic [ref=f8e601]:
+                    - generic [ref=f8e602]: Mo
+                    - generic [ref=f8e603]: Di
+                    - generic [ref=f8e604]: Mi
+                    - generic [ref=f8e605]: Do
+                    - generic [ref=f8e606]: Fr
+                    - generic [ref=f8e607]: Sa
+                    - generic [ref=f8e608]: So
+                  - generic [ref=f8e609]:
+                    - generic [ref=f8e611] [cursor=pointer]: "1"
+                    - generic [ref=f8e613] [cursor=pointer]: "2"
+                    - generic [ref=f8e615] [cursor=pointer]: "3"
+                    - generic [ref=f8e617] [cursor=pointer]: "4"
+                    - generic [ref=f8e619] [cursor=pointer]: "5"
+                    - generic [ref=f8e621] [cursor=pointer]: "6"
+                    - generic [ref=f8e623] [cursor=pointer]: "7"
+                    - generic [ref=f8e625] [cursor=pointer]: "8"
+                    - generic [ref=f8e627] [cursor=pointer]: "9"
+                    - generic [ref=f8e629] [cursor=pointer]: "10"
+                    - generic [ref=f8e631] [cursor=pointer]: "11"
+                    - generic [ref=f8e633] [cursor=pointer]: "12"
+                    - generic [ref=f8e635] [cursor=pointer]: "13"
+                    - generic [ref=f8e637] [cursor=pointer]: "14"
+                    - generic [ref=f8e639] [cursor=pointer]: "15"
+                    - generic [ref=f8e641] [cursor=pointer]: "16"
+                    - generic [ref=f8e643] [cursor=pointer]: "17"
+                    - generic [ref=f8e645] [cursor=pointer]: "18"
+                    - generic [ref=f8e647] [cursor=pointer]: "19"
+                    - generic [ref=f8e649] [cursor=pointer]: "20"
+                    - generic [ref=f8e651] [cursor=pointer]: "21"
+                    - generic [ref=f8e653] [cursor=pointer]: "22"
+                    - generic [ref=f8e655] [cursor=pointer]: "23"
+                    - generic [ref=f8e657] [cursor=pointer]: "24"
+                    - generic [ref=f8e659] [cursor=pointer]: "25"
+                    - generic [ref=f8e661] [cursor=pointer]: "26"
+                    - generic [ref=f8e663] [cursor=pointer]: "27"
+                    - generic [ref=f8e665] [cursor=pointer]: "28"
+                    - generic [ref=f8e667] [cursor=pointer]: "29"
+                    - generic [ref=f8e669] [cursor=pointer]: "30"
+                    - generic [ref=f8e671]: "1"
+                    - generic [ref=f8e673]: "2"
+                    - generic [ref=f8e675]: "3"
+                    - generic [ref=f8e677]: "4"
+                    - generic [ref=f8e679]: "5"
+              - generic [ref=f8e680]:
+                - paragraph [ref=f8e681]: Schnellauswahl
+                - button "Gesamt" [ref=f8e682] [cursor=pointer]
+                - button "Heute" [ref=f8e683] [cursor=pointer]
+                - button "Diese Woche" [ref=f8e684] [cursor=pointer]
+                - button "Dieser Monat" [ref=f8e685] [cursor=pointer]
+                - button "Letzte 30 Tage" [ref=f8e686] [cursor=pointer]
+                - button "Letzter Monat" [ref=f8e687] [cursor=pointer]
+                - button "Dieses Quartal" [ref=f8e688] [cursor=pointer]
+                - button "Dieses Jahr" [ref=f8e689] [cursor=pointer]
+            - generic [ref=f8e690]:
+              - button "Zurücksetzen" [ref=f8e691] [cursor=pointer]
+              - button "Anwenden" [disabled] [ref=f8e692]
+      - generic [ref=f8e694]:
+        - generic [ref=f8e695]:
+          - generic [ref=f8e696]:
+            - paragraph [ref=f8e698]: Net P&L
+            - generic [ref=f8e700]:
+              - paragraph [ref=f8e701]: +3.3K €
+              - paragraph [ref=f8e702]: 100 Trades
+          - generic [ref=f8e703]:
+            - paragraph [ref=f8e705]: Profit Factor
+            - generic [ref=f8e706]:
+              - generic [ref=f8e707]:
+                - paragraph [ref=f8e708]: "2.46"
+                - paragraph [ref=f8e709]: Sehr gut
+              - img [ref=f8e710]
+          - generic [ref=f8e713]:
+            - paragraph [ref=f8e715]: Trade Win %
+            - generic [ref=f8e716]:
+              - generic [ref=f8e717]:
+                - paragraph [ref=f8e718]: 57.00%
+                - paragraph [ref=f8e719]: Alle geschlossen
+              - generic [ref=f8e720]:
+                - img [ref=f8e721]
+                - generic [ref=f8e724]:
+                  - generic [ref=f8e725]: "57"
+                  - generic [ref=f8e726]: "43"
+          - generic [ref=f8e727]:
+            - paragraph [ref=f8e729]: Avg Win / Loss Trade
+            - paragraph [ref=f8e730]: "1.86"
+            - generic [ref=f8e732]:
+              - generic [ref=f8e733]: +108 €
+              - generic [ref=f8e734]: "-58 €"
+        - generic [ref=f8e738]:
+          - generic [ref=f8e740]:
+            - generic [ref=f8e742]:
+              - generic [ref=f8e743]:
+                - button [ref=f8e744] [cursor=pointer]:
+                  - img [ref=f8e745]
+                - generic [ref=f8e747]: Juni 2026
+                - button [ref=f8e748] [cursor=pointer]:
+                  - img [ref=f8e749]
+              - button "Dieser Monat" [ref=f8e751] [cursor=pointer]
+              - generic [ref=f8e752]:
+                - generic [ref=f8e753]: +0 €
+                - generic [ref=f8e754]: 0 Tage
+            - generic [ref=f8e755]:
+              - generic [ref=f8e756]:
+                - generic [ref=f8e757]:
+                  - generic [ref=f8e758]: Mo
+                  - generic [ref=f8e759]: Di
+                  - generic [ref=f8e760]: Mi
+                  - generic [ref=f8e761]: Do
+                  - generic [ref=f8e762]: Fr
+                  - generic [ref=f8e763]: Sa
+                  - generic [ref=f8e764]: So
+                - generic [ref=f8e765]:
+                  - generic [ref=f8e766]:
+                    - generic [ref=f8e768]: "1"
+                    - generic [ref=f8e770]: "2"
+                    - generic [ref=f8e772]: "3"
+                    - generic [ref=f8e774]: "4"
+                    - generic [ref=f8e776]: "5"
+                    - generic [ref=f8e778]: "6"
+                    - generic [ref=f8e780]: "7"
+                  - generic [ref=f8e781]:
+                    - generic [ref=f8e783]: "8"
+                    - generic [ref=f8e785]: "9"
+                    - generic [ref=f8e787]: "10"
+                    - generic [ref=f8e789]: "11"
+                    - generic [ref=f8e791]: "12"
+                    - generic [ref=f8e793]: "13"
+                    - generic [ref=f8e795]: "14"
+                  - generic [ref=f8e796]:
+                    - generic [ref=f8e798]: "15"
+                    - generic [ref=f8e800]: "16"
+                    - generic [ref=f8e802]: "17"
+                    - generic [ref=f8e804]: "18"
+                    - generic [ref=f8e806]: "19"
+                    - generic [ref=f8e808]: "20"
+                    - generic [ref=f8e810]: "21"
+                  - generic [ref=f8e811]:
+                    - generic [ref=f8e813]: "22"
+                    - generic [ref=f8e815]: "23"
+                    - generic [ref=f8e817]: "24"
+                    - generic [ref=f8e819]: "25"
+                    - generic [ref=f8e821]: "26"
+                    - generic [ref=f8e823]: "27"
+                    - generic [ref=f8e825]: "28"
+                  - generic [ref=f8e826]:
+                    - generic [ref=f8e828]: "29"
+                    - generic [ref=f8e830]: "30"
+              - generic [ref=f8e836]:
+                - generic [ref=f8e838]: Woche
+                - generic [ref=f8e839]:
+                  - generic [ref=f8e840]: KW 1
+                  - generic [ref=f8e841]: 0 €
+                - generic [ref=f8e842]:
+                  - generic [ref=f8e843]: KW 2
+                  - generic [ref=f8e844]: 0 €
+                - generic [ref=f8e845]:
+                  - generic [ref=f8e846]: KW 3
+                  - generic [ref=f8e847]: 0 €
+                - generic [ref=f8e848]:
+                  - generic [ref=f8e849]: KW 4
+                  - generic [ref=f8e850]: 0 €
+                - generic [ref=f8e851]:
+                  - generic [ref=f8e852]: KW 5
+                  - generic [ref=f8e853]: 0 €
+          - generic [ref=f8e854]:
+            - generic [ref=f8e855]:
+              - paragraph [ref=f8e858]: Alpha Score
+              - application [ref=f8e862]:
+                - generic [ref=f8e882]:
+                  - generic [ref=f8e884]: Win %
+                  - generic [ref=f8e886]: Profit Factor
+                  - generic [ref=f8e888]: Avg Win/Loss
+                  - generic [ref=f8e890]: Recovery
+                  - generic [ref=f8e892]: Max DD
+                  - generic [ref=f8e894]: Konsistenz
+              - generic [ref=f8e903]:
+                - generic [ref=f8e905]: Dein Alpha Score
+                - paragraph [ref=f8e906]: "71"
+                - generic [ref=f8e908]:
+                  - generic [ref=f8e909]: "0"
+                  - generic [ref=f8e910]: "100"
+                - generic [ref=f8e914]:
+                  - generic [ref=f8e915]:
+                    - generic [ref=f8e916]: Win %
+                    - generic [ref=f8e917]: "67"
+                  - generic [ref=f8e918]:
+                    - generic [ref=f8e919]: Profit Factor
+                    - generic [ref=f8e920]: "79"
+                  - generic [ref=f8e921]:
+                    - generic [ref=f8e922]: Avg Win/Loss
+                    - generic [ref=f8e923]: "62"
+                  - generic [ref=f8e924]:
+                    - generic [ref=f8e925]: Recovery
+                    - generic [ref=f8e926]: "100"
+                  - generic [ref=f8e927]:
+                    - generic [ref=f8e928]: Max DD
+                    - generic [ref=f8e929]: "50"
+                  - generic [ref=f8e930]:
+                    - generic [ref=f8e931]: Konsistenz
+                    - generic [ref=f8e932]: "58"
+            - generic [ref=f8e933]:
+              - generic [ref=f8e935]:
+                - generic [ref=f8e936]:
+                  - paragraph [ref=f8e937]: Kontostand
+                  - paragraph [ref=f8e938]: 4.656,35 €
+                  - paragraph [ref=f8e939]: +3.656,35 € seit Deposit
+                - generic [ref=f8e940]: +365.6%
+              - application [ref=f8e944]:
+                - generic [ref=f8e950]:
+                  - generic [ref=f8e951]:
+                    - generic [ref=f8e953]: Start
+                    - generic [ref=f8e955]: "27.10"
+                    - generic [ref=f8e957]: "19.11"
+                    - generic [ref=f8e959]: "12.12"
+                    - generic [ref=f8e961]: "09.01"
+                    - generic [ref=f8e963]: "11.02"
+                    - generic [ref=f8e965]: "09.03"
+                    - generic [ref=f8e967]: "27.04"
+                  - generic [ref=f8e968]:
+                    - generic [ref=f8e970]: 1.000€
+                    - generic [ref=f8e972]: 2.000€
+                    - generic [ref=f8e974]: 3.000€
+                    - generic [ref=f8e976]: 4.000€
+                    - generic [ref=f8e978]: 5.000€
+  - alert [ref=f8e979]
+  - generic [ref=f8e980]: 1.000€

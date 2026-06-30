@@ -92,18 +92,20 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
   let peak = startCapital
   let maxDrawdown = 0
   let balance = startCapital
+  let depositRunning = 0
   const equityCurve: { date: string; value: number }[] = []
+  const depositCurve: { date: string; value: number }[] = []
 
   for (const ev of events) {
     balance += ev.delta
+    if (ev.isDeposit) depositRunning += ev.delta
     if (balance > peak) peak = balance
     const dd = peak > 0 ? ((peak - balance) / peak) * 100 : 0
     if (dd > maxDrawdown) maxDrawdown = dd
     const parts = ev.date.slice(0, 10).split('-')
-    equityCurve.push({
-      date: `${parts[2]}.${parts[1]}`,
-      value: Math.round(balance * 100) / 100,
-    })
+    const dateLabel = `${parts[2]}.${parts[1]}`
+    equityCurve.push({ date: dateLabel, value: Math.round(balance * 100) / 100 })
+    depositCurve.push({ date: dateLabel, value: Math.round(depositRunning * 100) / 100 })
   }
 
   // Streak berechnen
@@ -126,6 +128,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
     maxDrawdown,
     currentStreak: streak,
     equityCurve,
+    depositCurve,
     profitFactor,
     avgWin,
     avgLoss,
@@ -134,7 +137,15 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
   return result
 }
 
-export function filterTradesByPeriod(trades: Trade[], period: string): Trade[] {
+export function filterTradesByPeriod(trades: Trade[], period: string, from?: string, to?: string): Trade[] {
+  // Free date range via from/to params
+  if (from && to) {
+    return trades.filter(t => {
+      const d = (t.closeTime ?? t.date).slice(0, 10)
+      return d >= from && d <= to
+    })
+  }
+
   if (!period || period === 'gesamt') return trades
   const now = new Date()
   const todayStr = now.toISOString().slice(0, 10)

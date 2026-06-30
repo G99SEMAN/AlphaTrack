@@ -1,11 +1,10 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
-import { getBots } from '@/lib/bot-data'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
 import Sidebar from '@/components/layout/Sidebar'
 import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
-import DashboardTimeFilter from '@/components/dashboard/DashboardTimeFilter'
+import DateRangePicker from '@/components/dashboard/DateRangePicker'
 import { StaggerWrapper } from '@/components/dashboard/StaggerWrapper'
 import { Banknote, Gamepad2 } from 'lucide-react'
 
@@ -21,14 +20,22 @@ const AlphaScoreChart = dynamic(() => import('@/components/dashboard/AlphaScoreC
 const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), {
   loading: () => <div style={{ minHeight: 200 }} />,
 })
+const RecentTradesCard = dynamic(() => import('@/components/dashboard/RecentTradesCard'), {
+  loading: () => <div style={{ minHeight: 200 }} />,
+})
+const AccountBalanceCard = dynamic(() => import('@/components/dashboard/AccountBalanceCard'), {
+  loading: () => <div style={{ minHeight: 180 }} />,
+})
 
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ period?: string }>
+  searchParams: Promise<{ period?: string; from?: string; to?: string }>
 }) {
   const params = await searchParams
   const period = params?.period ?? 'gesamt'
+  const from = params?.from
+  const to = params?.to
 
   const profiles = getProfiles()
 
@@ -50,7 +57,7 @@ export default async function DashboardPage({
   }
 
   const allTrades = getProfileTrades(activeProfile.id)
-  const trades = filterTradesByPeriod(allTrades, period)
+  const trades = filterTradesByPeriod(allTrades, period, from, to)
   const stats = computeStats(trades, activeProfile.startCapital, activeProfile.deposits ?? [])
   const allStats = computeStats(allTrades, activeProfile.startCapital, activeProfile.deposits ?? [])
 
@@ -98,7 +105,7 @@ export default async function DashboardPage({
           </div>
 
           <Suspense fallback={null}>
-            <DashboardTimeFilter />
+            <DateRangePicker />
           </Suspense>
         </div>
 
@@ -117,10 +124,24 @@ export default async function DashboardPage({
               currency={activeProfile.currency}
             />
 
-            {/* Haupt-Bereich: Kalender links + rechtes Panel */}
+            {/* Haupt-Bereich: linkes Panel | Kalender (Mitte) | rechtes Panel */}
             <div className="flex gap-4" style={{ alignItems: 'flex-start' }}>
 
-              {/* Kalender — linke Seite */}
+              {/* Linkes Panel: Recent Trades + Account Balance */}
+              <div style={{ width: 270, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <RecentTradesCard
+                  trades={allTrades}
+                  currency={activeProfile.currency}
+                />
+                <AccountBalanceCard
+                  equityCurve={allStats.equityCurve}
+                  depositCurve={allStats.depositCurve}
+                  startCapital={activeProfile.startCapital}
+                  currency={activeProfile.currency}
+                />
+              </div>
+
+              {/* Kalender — Mitte */}
               <div style={{ flex: '1 1 0', minWidth: 0 }}>
                 <TradingCalendar
                   trades={allTrades}
@@ -129,7 +150,7 @@ export default async function DashboardPage({
               </div>
 
               {/* Rechtes Panel: Alpha Score + Equity Chart */}
-              <div style={{ width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ width: 280, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <AlphaScoreChart
                   winRate={allStats.winRate}
                   profitFactor={allStats.profitFactor}

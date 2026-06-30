@@ -1,3 +1,2 @@
-
-
-
+- Daly Checkliste, wie auch immer diese aussehen soll
+- Bei Click auf trade im Kalender den trade mittels tradingview plugin anzeigen, wo rein gegangen und wo raus im entsprechenden timeframe

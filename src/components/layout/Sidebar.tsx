@@ -6,7 +6,7 @@ import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
   Sparkles, ShieldCheck, ShieldOff, Network, Cpu,
-  TrendingUp, Eye, EyeOff, ChevronLeft, ChevronRight,
+  Eye, EyeOff, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
@@ -22,7 +22,6 @@ const UEBERSICHT_NAV = [
   { href: '/journal',     label: 'Trades',       icon: BookOpen },
   { href: '/statistiken', label: 'Statistiken',  icon: BarChart2 },
   { href: '/kalender',    label: 'Kalender',     icon: CalendarDays },
-  { href: '/tpc',         label: 'TPC',          icon: TrendingUp },
   { href: '/netzwerk',    label: 'Netzwerk',     icon: Network },
 ]
 

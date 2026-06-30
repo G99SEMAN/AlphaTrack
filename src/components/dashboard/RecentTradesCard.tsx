@@ -1,132 +1,152 @@
 'use client'
 
-import { useMemo, memo } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import { Trade } from '@/types/trade'
-import { BotEntry } from '@/types/bot'
-import { ArrowUpRight, ArrowDownRight, Bot } from 'lucide-react'
+import { currencySymbol } from '@/lib/currency'
 
-interface Props { trades: Trade[]; bots?: BotEntry[] }
+interface Props {
+  trades: Trade[]
+  currency: string
+}
 
-function RecentTradesCard({ trades, bots = [] }: Props) {
-  const botNames = useMemo(() => new Map(bots.map(b => [b.id, b.name])), [bots])
+const ROWS = 6
 
-  function resolveSourceLabel(trade: Trade): string | null {
-    const sid = trade.sourceId ?? trade.botId
-    if (!sid) return null
-    if (sid === 'bridge/tradeexecuter') return 'Bridge'
-    return botNames.get(sid) ?? 'Bot'
-  }
+export default function RecentTradesCard({ trades, currency }: Props) {
+  const [tab, setTab] = useState<'recent' | 'open'>('recent')
+  const sym = currencySymbol(currency)
 
-  const recent = useMemo(() =>
-    trades
-      .filter(t => t.status === 'closed')
-      .sort((a, b) => {
-        const aClose = a.closeTime ?? a.date
-        const bClose = b.closeTime ?? b.date
-        return aClose > bClose ? -1 : aClose < bClose ? 1 : 0
-      })
-      .slice(0, 5),
+  const recentTrades = useMemo(() =>
+    [...trades]
+      .filter(t => t.status === 'closed' && t.pnl !== undefined)
+      .sort((a, b) => new Date(b.closeTime ?? b.date).getTime() - new Date(a.closeTime ?? a.date).getTime())
+      .slice(0, ROWS),
     [trades]
   )
 
+  const openTrades = useMemo(() =>
+    trades.filter(t => t.status === 'open'),
+    [trades]
+  )
+
+  function fmtDate(s: string): string {
+    return s.slice(0, 10).split('-').reverse().join('.')
+  }
+
+  function fmtPnl(v: number): string {
+    return `${v >= 0 ? '+' : ''}${v.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${sym}`
+  }
+
   return (
-    <motion.div
-      className="rounded-2xl flex flex-col h-full"
+    <div
+      className="rounded-2xl flex flex-col"
       style={{
         background: 'var(--surface)', border: '1px solid var(--border)',
-        boxShadow: 'var(--card-shadow)', padding: 16,
-        position: 'relative', overflow: 'hidden',
+        boxShadow: 'var(--card-shadow)', overflow: 'hidden',
       }}
-      whileHover={{ boxShadow: 'var(--card-shadow-hover)' }}
-      transition={{ duration: 0.15 }}
     >
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-        background: 'linear-gradient(90deg,transparent,rgba(59,130,246,0.15),transparent)',
-      }} />
-
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em' }}>
-          Letzte Trades
-        </p>
-        <span style={{
-          fontSize: 9, padding: '2px 7px', borderRadius: 5,
-          background: 'var(--surface-2)', color: 'var(--text-3)',
-          fontFamily: 'var(--font-dm-mono)',
-        }}>
-          {trades.filter(t => t.status === 'closed').length} geschlossen
-        </span>
+      {/* Tabs */}
+      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)' }}>
+        {(['recent', 'open'] as const).map(t => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            style={{
+              flex: 1, padding: '10px 8px',
+              fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: tab === t ? 'var(--accent)' : 'var(--text-3)',
+              borderBottom: tab === t ? '2px solid var(--accent)' : '2px solid transparent',
+              transition: 'color 0.15s',
+              marginBottom: -1,
+            }}
+          >
+            {t === 'recent' ? 'Letzte Trades' : `Offene Pos. (${openTrades.length})`}
+          </button>
+        ))}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {recent.map((trade, i) => {
-          const isLong = trade.type === 'long'
-          const pnlPos = (trade.pnl ?? 0) >= 0
-          const sourceLabel = resolveSourceLabel(trade)
-          const displayDate = trade.closeTime ? new Date(trade.closeTime) : new Date(trade.date)
-
-          return (
-            <motion.div
-              key={trade.id}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 10,
-                padding: '8px 10px', borderRadius: 10,
-                background: 'var(--surface-2)', border: '1px solid var(--border-subtle)',
-              }}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.06 }}
-            >
-              <div style={{
-                width: 26, height: 26, borderRadius: 8, flexShrink: 0,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: isLong ? 'rgba(0,217,126,0.10)' : 'rgba(255,69,96,0.10)',
-                border: isLong ? '1px solid rgba(0,217,126,0.18)' : '1px solid rgba(255,69,96,0.18)',
-              }}>
-                {isLong
-                  ? <ArrowUpRight size={13} style={{ color: 'var(--green)' }} />
-                  : <ArrowDownRight size={13} style={{ color: 'var(--red)' }} />
-                }
-              </div>
-
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <p style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {trade.instrument}
-                  </p>
-                  {sourceLabel && (
-                    <span style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 3,
-                      fontSize: 8, fontWeight: 600, padding: '1px 5px', borderRadius: 4,
-                      background: 'rgba(59,130,246,0.10)', color: 'var(--accent)',
-                    }}>
-                      <Bot size={8} />
-                      {sourceLabel}
-                    </span>
-                  )}
+      {/* Content */}
+      <div style={{ flex: 1 }}>
+        {tab === 'recent' ? (
+          recentTrades.length === 0 ? (
+            <p style={{ padding: '20px 16px', fontSize: 11, color: 'var(--text-3)', textAlign: 'center' }}>
+              Keine geschlossenen Trades
+            </p>
+          ) : (
+            recentTrades.map(t => {
+              const pnl = t.pnl ?? 0
+              return (
+                <div
+                  key={t.id}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '7px 14px', borderBottom: '1px solid var(--border)',
+                  }}
+                >
+                  <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)', minWidth: 56 }}>
+                    {fmtDate(t.closeTime ?? t.date)}
+                  </span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', flex: 1, textAlign: 'center' }}>
+                    {t.instrument}
+                  </span>
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, fontFamily: 'var(--font-dm-mono)',
+                    color: pnl >= 0 ? 'var(--green)' : 'var(--red)',
+                    minWidth: 80, textAlign: 'right',
+                  }}>
+                    {fmtPnl(pnl)}
+                  </span>
                 </div>
-                <p style={{ fontSize: 9, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)' }}>
-                  {displayDate.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
-                  {' '}{displayDate.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
-                  {' · '}{isLong ? 'Long' : 'Short'}
-                </p>
-              </div>
-
-              <div style={{ textAlign: 'right' }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: pnlPos ? 'var(--green)' : 'var(--red)', fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
-                  {(trade.pnl ?? 0) >= 0 ? '+' : ''}{(trade.pnl ?? 0).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
-                </p>
-                {trade.rr && (
-                  <p style={{ fontSize: 9, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)' }}>1:{trade.rr.toFixed(1)}</p>
-                )}
-              </div>
-            </motion.div>
+              )
+            })
           )
-        })}
+        ) : (
+          openTrades.length === 0 ? (
+            <p style={{ padding: '20px 16px', fontSize: 11, color: 'var(--text-3)', textAlign: 'center' }}>
+              Keine offenen Positionen
+            </p>
+          ) : (
+            openTrades.slice(0, ROWS).map(t => {
+              const pnl = t.pnl ?? 0
+              return (
+                <div
+                  key={t.id}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '7px 14px', borderBottom: '1px solid var(--border)',
+                  }}
+                >
+                  <span style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                    padding: '2px 5px', borderRadius: 4,
+                    background: t.type === 'long' ? 'var(--green-bg)' : 'var(--red-bg)',
+                    color: t.type === 'long' ? 'var(--green)' : 'var(--red)',
+                  }}>
+                    {t.type === 'long' ? 'BUY' : 'SELL'}
+                  </span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', flex: 1, textAlign: 'center' }}>
+                    {t.instrument}
+                  </span>
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, fontFamily: 'var(--font-dm-mono)',
+                    color: pnl >= 0 ? 'var(--green)' : pnl < 0 ? 'var(--red)' : 'var(--text-3)',
+                  }}>
+                    {t.pnl !== undefined ? fmtPnl(pnl) : '—'}
+                  </span>
+                </div>
+              )
+            })
+          )
+        )}
       </div>
-    </motion.div>
+
+      {/* Footer */}
+      <div style={{ padding: '8px 14px', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+        <Link href="/journal" style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
+          Alle Trades anzeigen →
+        </Link>
+      </div>
+    </div>
   )
 }
-
-export default memo(RecentTradesCard)
