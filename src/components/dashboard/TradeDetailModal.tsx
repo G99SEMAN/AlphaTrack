@@ -99,7 +99,7 @@ export default function TradeDetailModal({ trade, currency, onBack, onClose }: T
 
           {/* Left: Trade Fields */}
           <div style={{ width: 280, flexShrink: 0, overflowY: 'auto', borderRight: '1px solid var(--border)', padding: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <FieldRow label="Net P&L" value={`${netPnl >= 0 ? '+' : ''}${sym}${Math.abs(netPnl).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} color={netPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
+            <FieldRow label="Net P&L" value={`${netPnl >= 0 ? '+' : '-'}${sym}${Math.abs(netPnl).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} color={netPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
             <FieldRow label="Gross P&L" value={`${sym}${fmtNum(trade.pnl)}`} />
             <FieldRow
               label="Side"
