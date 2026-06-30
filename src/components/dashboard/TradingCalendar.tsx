@@ -309,6 +309,7 @@ function TradingCalendar({ trades, currency }: Props) {
           currency={currency}
           onClose={() => setSelectedDay(null)}
           onSelectTrade={(trade) => setSelectedTrade(trade)}
+          isTopModal={selectedTrade === null}
         />
       )}
 

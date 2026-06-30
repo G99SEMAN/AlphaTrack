@@ -11,6 +11,7 @@ interface DayModalProps {
   currency: string
   onClose: () => void
   onSelectTrade: (trade: Trade) => void
+  isTopModal?: boolean
 }
 
 function fmtDay(day: string): string {
@@ -21,6 +22,7 @@ function fmtDay(day: string): string {
 }
 
 function fmtTime(dateStr: string): string {
+  if (dateStr.length <= 10) return '—'
   return new Date(dateStr).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
 }
 
@@ -73,14 +75,15 @@ function MiniChart({ trades }: { trades: Trade[] }) {
   )
 }
 
-export default function DayModal({ day, trades, currency, onClose, onSelectTrade }: DayModalProps) {
+export default function DayModal({ day, trades, currency, onClose, onSelectTrade, isTopModal = true }: DayModalProps) {
   const sym = currencySymbol(currency)
 
   useEffect(() => {
+    if (isTopModal === false) return
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [onClose])
+  }, [onClose, isTopModal])
 
   const grossPnl = trades.reduce((s, t) => s + (t.pnl ?? 0), 0)
   const totalCosts = trades.reduce((s, t) => s + (t.commission ?? 0) + (t.swap ?? 0), 0)

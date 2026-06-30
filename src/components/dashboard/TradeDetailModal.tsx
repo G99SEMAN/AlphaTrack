@@ -13,7 +13,8 @@ interface TradeDetailModalProps {
 }
 
 function toTvSymbol(instrument: string): string {
-  const clean = instrument.replace(/[^A-Za-z]/g, '').toUpperCase()
+  const base = instrument.split(/[._]/)[0]
+  const clean = base.replace(/[^A-Za-z]/g, '').toUpperCase()
   if (/^[A-Z]{6}$/.test(clean)) return `FX:${clean}`
   return clean
 }
@@ -140,6 +141,8 @@ export default function TradeDetailModal({ trade, currency, onBack, onClose }: T
           <div style={{ flex: 1, minWidth: 0, padding: 12 }}>
             <iframe
               src={tvSrc}
+              sandbox="allow-scripts allow-same-origin"
+              referrerPolicy="no-referrer"
               style={{ width: '100%', height: '100%', border: 'none', borderRadius: 8, display: 'block' }}
               title={`Chart ${trade.instrument}`}
             />
