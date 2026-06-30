@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { currencySymbol } from '@/lib/currency'
+import DayModal from './DayModal'
+import TradeDetailModal from './TradeDetailModal'
 
 interface Props {
   trades: Trade[]
@@ -35,6 +37,8 @@ function TradingCalendar({ trades, currency }: Props) {
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
+  const [selectedDay, setSelectedDay] = useState<string | null>(null)
+  const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null)
 
   const sym = currencySymbol(currency)
 
@@ -197,6 +201,7 @@ function TradingCalendar({ trades, currency }: Props) {
                   return (
                     <motion.div
                       key={di}
+                      onClick={data ? () => setSelectedDay(key) : undefined}
                       style={{
                         aspectRatio: '1 / 0.85',
                         borderRadius: 8,
@@ -206,7 +211,7 @@ function TradingCalendar({ trades, currency }: Props) {
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        cursor: data ? 'default' : 'default',
+                        cursor: data ? 'pointer' : 'default',
                         boxShadow: isToday ? '0 0 0 1px var(--accent)' : undefined,
                       }}
                       whileHover={data ? { scale: 1.03 } : {}}
@@ -292,6 +297,29 @@ function TradingCalendar({ trades, currency }: Props) {
           ))}
         </div>
       </div>
+
+      {selectedDay && (
+        <DayModal
+          day={selectedDay}
+          trades={trades.filter(t =>
+            t.status === 'closed' &&
+            t.pnl !== undefined &&
+            (t.closeTime ?? t.date).slice(0, 10) === selectedDay
+          )}
+          currency={currency}
+          onClose={() => setSelectedDay(null)}
+          onSelectTrade={(trade) => setSelectedTrade(trade)}
+        />
+      )}
+
+      {selectedTrade && (
+        <TradeDetailModal
+          trade={selectedTrade}
+          currency={currency}
+          onBack={() => setSelectedTrade(null)}
+          onClose={() => { setSelectedTrade(null); setSelectedDay(null) }}
+        />
+      )}
     </motion.div>
   )
 }
