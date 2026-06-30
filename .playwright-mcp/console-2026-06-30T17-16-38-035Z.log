@@ -1,0 +1,23 @@
+[     288ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[   28572ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:183
+[   28744ms] [LOG] [Fast Refresh] done in 172ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   82432ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:183
+[   82597ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:183
+[   82609ms] [LOG] [Fast Refresh] done in 11ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   82815ms] [LOG] [Fast Refresh] done in 218ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   82873ms] [WARNING] The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width. @ webpack-internal:///(app-pages-browser)/./node_modules/recharts/es6/util/LogUtils.js:18
+[   82874ms] [WARNING] The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width. @ webpack-internal:///(app-pages-browser)/./node_modules/recharts/es6/util/LogUtils.js:18
+[   82931ms] [WARNING] The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width. @ webpack-internal:///(app-pages-browser)/./node_modules/recharts/es6/util/LogUtils.js:18
+[   82931ms] [WARNING] The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width. @ webpack-internal:///(app-pages-browser)/./node_modules/recharts/es6/util/LogUtils.js:18

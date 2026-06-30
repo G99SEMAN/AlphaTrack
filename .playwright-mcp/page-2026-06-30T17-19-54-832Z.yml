@@ -1,0 +1,112 @@
+- generic [active] [ref=f2e1]:
+  - alert [ref=f2e460]
+  - generic [ref=f2e461]: 1.000€
+  - generic [ref=f2e722]:
+    - complementary [ref=f2e723]:
+      - generic [ref=f2e724]:
+        - generic [ref=f2e725]:
+          - img "AlphaTrack Logo" [ref=f2e726]
+          - button "Sidebar ausklappen" [ref=f2e733] [cursor=pointer]:
+            - img [ref=f2e734]
+        - button "Demo Konto" [ref=f2e737] [cursor=pointer]:
+          - img [ref=f2e738]
+        - navigation [ref=f2e741]:
+          - link "Dashboard" [ref=f2e743] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=f2e744]
+          - link "Trades" [ref=f2e749] [cursor=pointer]:
+            - /url: /journal
+            - img [ref=f2e750]
+          - link "Statistiken" [ref=f2e752] [cursor=pointer]:
+            - /url: /statistiken
+            - img [ref=f2e753]
+          - link "Kalender" [ref=f2e754] [cursor=pointer]:
+            - /url: /kalender
+            - img [ref=f2e755]
+          - link "TPC" [ref=f2e757] [cursor=pointer]:
+            - /url: /tpc
+            - img [ref=f2e758]
+          - link "Netzwerk" [ref=f2e761] [cursor=pointer]:
+            - /url: /netzwerk
+            - img [ref=f2e762]
+          - link "Bridge" [ref=f2e768] [cursor=pointer]:
+            - /url: /bridge
+            - img [ref=f2e769]
+          - link "Bridge Log" [ref=f2e772] [cursor=pointer]:
+            - /url: /bridge/log
+            - img [ref=f2e773]
+          - link "Bots" [ref=f2e776] [cursor=pointer]:
+            - /url: /bots
+            - img [ref=f2e777]
+          - link "Bot Settings" [ref=f2e780] [cursor=pointer]:
+            - /url: /bots/settings
+            - img [ref=f2e781]
+          - link "Strategien" [ref=f2e782] [cursor=pointer]:
+            - /url: /strategien
+            - img [ref=f2e783]
+          - link "Performance" [ref=f2e787] [cursor=pointer]:
+            - /url: /bots/performance
+            - img [ref=f2e788]
+          - link "Live Trades" [ref=f2e789] [cursor=pointer]:
+            - /url: /bridge/trades
+            - img [ref=f2e790]
+          - link "Trade Analyzer" [ref=f2e792] [cursor=pointer]:
+            - /url: /bridge/analyse
+            - img [ref=f2e793]
+        - generic [ref=f2e796]:
+          - generic [ref=f2e797]: UTC 17:19:54
+          - generic [ref=f2e800]:
+            - generic [ref=f2e802]: Forex
+            - generic [ref=f2e803]: 76h 41m
+          - generic [ref=f2e805]:
+            - generic [ref=f2e806]:
+              - paragraph [ref=f2e807]: Börsen
+              - generic [ref=f2e808]: 1/4
+            - generic [ref=f2e809]:
+              - generic [ref=f2e811]:
+                - generic [ref=f2e813]: NYSE
+                - generic [ref=f2e814]: 2h 41m
+              - generic [ref=f2e816]:
+                - generic [ref=f2e818]: LSE
+                - generic [ref=f2e819]: 13h 41m
+              - generic [ref=f2e821]:
+                - generic [ref=f2e823]: XETRA
+                - generic [ref=f2e824]: 13h 41m
+              - generic [ref=f2e826]:
+                - generic [ref=f2e828]: Tokio
+                - generic [ref=f2e829]: 6h 41m
+        - generic [ref=f2e830]:
+          - button "Einstellungen" [ref=f2e831] [cursor=pointer]:
+            - img [ref=f2e832]
+          - button "Trading entsperren" [ref=f2e835] [cursor=pointer]:
+            - img [ref=f2e836]
+    - main [ref=f2e839]:
+      - heading "Einstellungen" [level=1] [ref=f2e841]
+      - generic [ref=f2e842]:
+        - button "Darstellung" [ref=f2e843] [cursor=pointer]
+        - button "Dashboard" [ref=f2e844] [cursor=pointer]
+        - button "Profile" [ref=f2e845] [cursor=pointer]
+        - button "Daten" [ref=f2e846] [cursor=pointer]
+      - generic [ref=f2e847]:
+        - generic [ref=f2e848]:
+          - generic [ref=f2e849]:
+            - img [ref=f2e850]
+            - paragraph [ref=f2e856]: Farbschema
+          - paragraph [ref=f2e857]: Wähle ein Farbschema für die gesamte Oberfläche.
+          - generic [ref=f2e858]:
+            - button "Blau" [ref=f2e859] [cursor=pointer]:
+              - generic [ref=f2e866]: Blau
+            - button "Crimson" [ref=f2e868] [cursor=pointer]:
+              - generic [ref=f2e875]: Crimson
+            - button "Violett" [ref=f2e876] [cursor=pointer]:
+              - generic [ref=f2e883]: Violett
+        - generic [ref=f2e884]:
+          - paragraph [ref=f2e885]: Erscheinungsbild
+          - paragraph [ref=f2e886]: Wähle zwischen hellem und dunklem Design.
+          - generic [ref=f2e887]:
+            - button "Hell" [ref=f2e888] [cursor=pointer]:
+              - img [ref=f2e889]
+              - text: Hell
+            - button "Dunkel" [ref=f2e895] [cursor=pointer]:
+              - img [ref=f2e896]
+              - text: Dunkel

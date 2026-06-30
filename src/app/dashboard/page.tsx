@@ -5,18 +5,22 @@ import { getBots } from '@/lib/bot-data'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
 import Sidebar from '@/components/layout/Sidebar'
 import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
-import PnLCard from '@/components/dashboard/PnLCard'
-import RiskCard from '@/components/dashboard/RiskCard'
-import RecentTradesCard from '@/components/dashboard/RecentTradesCard'
-
-const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), {
-  loading: () => <div style={{ minHeight: 280 }} />,
-})
-import DashboardWinRate from '@/components/dashboard/DashboardWinRate'
 import DashboardTimeFilter from '@/components/dashboard/DashboardTimeFilter'
-import CriticalOpenTradesCard from '@/components/dashboard/CriticalOpenTradesCard'
 import { StaggerWrapper } from '@/components/dashboard/StaggerWrapper'
 import { Banknote, Gamepad2 } from 'lucide-react'
+
+const KpiStrip = dynamic(() => import('@/components/dashboard/KpiStrip'), {
+  loading: () => <div style={{ height: 100 }} />,
+})
+const TradingCalendar = dynamic(() => import('@/components/dashboard/TradingCalendar'), {
+  loading: () => <div style={{ minHeight: 400 }} />,
+})
+const AlphaScoreChart = dynamic(() => import('@/components/dashboard/AlphaScoreChart'), {
+  loading: () => <div style={{ minHeight: 300 }} />,
+})
+const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), {
+  loading: () => <div style={{ minHeight: 200 }} />,
+})
 
 export default async function DashboardPage({
   searchParams,
@@ -47,8 +51,8 @@ export default async function DashboardPage({
 
   const allTrades = getProfileTrades(activeProfile.id)
   const trades = filterTradesByPeriod(allTrades, period)
-
   const stats = computeStats(trades, activeProfile.startCapital, activeProfile.deposits ?? [])
+  const allStats = computeStats(allTrades, activeProfile.startCapital, activeProfile.deposits ?? [])
 
   const TypeIcon = activeProfile.type === 'live' ? Banknote : Gamepad2
   const totalCapital = activeProfile.startCapital + (activeProfile.deposits ?? []).reduce((s, d) => s + d.amount, 0)
@@ -60,7 +64,7 @@ export default async function DashboardPage({
 
       <main className="flex-1 min-w-0 p-4 md:p-6">
         {/* Header */}
-        <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-3">
+        <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
@@ -93,68 +97,61 @@ export default async function DashboardPage({
             </p>
           </div>
 
-          {/* Zeitachse-Filter */}
           <Suspense fallback={null}>
             <DashboardTimeFilter />
           </Suspense>
         </div>
 
-        {/* Premium Grid */}
         <StaggerWrapper>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+          <div className="flex flex-col gap-4">
 
-            {/* Zeile 1: PnL Hero (8) + WinRate (4) */}
-            <div className="lg:col-span-8 lg:row-span-2" style={{ minHeight: 280 }}>
-              <PnLCard
-                totalPnl={stats.totalPnl}
-                monthlyPnl={stats.monthlyPnl}
-                dailyPnl={stats.dailyPnl}
-                netPnl={stats.netPnl}
-                netMonthlyPnl={stats.netMonthlyPnl}
-                netDailyPnl={stats.netDailyPnl}
-                totalCosts={stats.totalCosts}
-                currency={activeProfile.currency}
-                equityCurve={stats.equityCurve}
-                startCapital={activeProfile.startCapital}
-              />
-            </div>
+            {/* KPI Strip — 4 Karten oben */}
+            <KpiStrip
+              netPnl={stats.netPnl}
+              totalTrades={stats.totalTrades}
+              profitFactor={stats.profitFactor}
+              winRate={stats.winRate}
+              openTrades={stats.openTrades}
+              avgWin={stats.avgWin}
+              avgLoss={stats.avgLoss}
+              currency={activeProfile.currency}
+            />
 
-            <div className="lg:col-span-4" style={{ minHeight: 130 }}>
-              <DashboardWinRate
-                winRate={stats.winRate}
-                totalTrades={stats.totalTrades}
-                openTrades={stats.openTrades}
-                currentStreak={stats.currentStreak}
-              />
-            </div>
+            {/* Haupt-Bereich: Kalender links + rechtes Panel */}
+            <div className="flex gap-4" style={{ alignItems: 'flex-start' }}>
 
-            {/* Zeile 1 rechts unten: Risiko */}
-            <div className="lg:col-span-4" style={{ minHeight: 130 }}>
-              <RiskCard avgRR={stats.avgRR} maxDrawdown={stats.maxDrawdown} />
-            </div>
+              {/* Kalender — linke Seite */}
+              <div style={{ flex: '1 1 0', minWidth: 0 }}>
+                <TradingCalendar
+                  trades={allTrades}
+                  currency={activeProfile.currency}
+                />
+              </div>
 
-            {/* Zeile 2: Equity Chart volle Breite */}
-            <div className="lg:col-span-12" style={{ minHeight: 200 }}>
-              <EquityChart
-                data={stats.equityCurve}
-                startCapital={activeProfile.startCapital}
-                currency={activeProfile.currency}
-              />
-            </div>
+              {/* Rechtes Panel: Alpha Score + Equity Chart */}
+              <div style={{ width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <AlphaScoreChart
+                  winRate={allStats.winRate}
+                  profitFactor={allStats.profitFactor}
+                  avgWin={allStats.avgWin}
+                  avgLoss={allStats.avgLoss}
+                  maxDrawdown={allStats.maxDrawdown}
+                  netPnl={allStats.netPnl}
+                  trades={allTrades}
+                />
 
-            {/* Zeile 3: Letzte Trades + Offene Trades nebeneinander */}
-            <div className="lg:col-span-6">
-              <RecentTradesCard trades={allTrades} bots={getBots()} />
-            </div>
-
-            <div className="lg:col-span-6">
-              <CriticalOpenTradesCard trades={allTrades} currency={activeProfile.currency} />
+                <EquityChart
+                  data={allStats.equityCurve}
+                  startCapital={activeProfile.startCapital}
+                  currency={activeProfile.currency}
+                />
+              </div>
             </div>
 
           </div>
         </StaggerWrapper>
 
-        {/* Leerer Zustand */}
+        {/* Leer-Zustand */}
         {trades.length === 0 && allTrades.length === 0 && (
           <div
             className="mt-8 rounded-2xl p-8 flex flex-col items-center text-center"

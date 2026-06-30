@@ -1,0 +1,255 @@
+- generic [ref=f4e2]:
+  - complementary [ref=f4e3]:
+    - generic [ref=f4e4]:
+      - generic [ref=f4e5]:
+        - img "AlphaTrack Logo" [ref=f4e6]
+        - generic [ref=f4e13]:
+          - paragraph [ref=f4e14]: AlphaTrack
+          - paragraph [ref=f4e15]: Trading Journal
+        - button "Sidebar einklappen" [ref=f4e16] [cursor=pointer]:
+          - img [ref=f4e17]
+      - button "Demo Konto Demo · 1.000 EUR" [ref=f4e20] [cursor=pointer]:
+        - img [ref=f4e22]
+        - generic [ref=f4e25]:
+          - generic [ref=f4e26]: Demo Konto
+          - generic [ref=f4e27]: Demo · 1.000 EUR
+        - img [ref=f4e28]
+      - navigation [ref=f4e31]:
+        - generic [ref=f4e34]: Übersicht
+        - link "Dashboard" [ref=f4e36] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=f4e38]
+          - generic [ref=f4e43]: Dashboard
+        - link "Trades" [ref=f4e44] [cursor=pointer]:
+          - /url: /journal
+          - img [ref=f4e45]
+          - generic [ref=f4e47]: Trades
+        - link "Statistiken" [ref=f4e48] [cursor=pointer]:
+          - /url: /statistiken
+          - img [ref=f4e49]
+          - generic [ref=f4e50]: Statistiken
+        - link "Kalender" [ref=f4e51] [cursor=pointer]:
+          - /url: /kalender
+          - img [ref=f4e52]
+          - generic [ref=f4e54]: Kalender
+        - link "TPC" [ref=f4e55] [cursor=pointer]:
+          - /url: /tpc
+          - img [ref=f4e56]
+          - generic [ref=f4e59]: TPC
+        - link "Netzwerk" [ref=f4e60] [cursor=pointer]:
+          - /url: /netzwerk
+          - img [ref=f4e61]
+          - generic [ref=f4e66]: Netzwerk
+        - generic [ref=f4e69]: Bridge & Bots
+        - link "Bridge" [ref=f4e71] [cursor=pointer]:
+          - /url: /bridge
+          - img [ref=f4e72]
+          - generic [ref=f4e75]: Bridge
+        - link "Bridge Log" [ref=f4e76] [cursor=pointer]:
+          - /url: /bridge/log
+          - img [ref=f4e77]
+          - generic [ref=f4e80]: Bridge Log
+        - link "Bots" [ref=f4e81] [cursor=pointer]:
+          - /url: /bots
+          - img [ref=f4e82]
+          - generic [ref=f4e85]: Bots
+        - link "Bot Settings" [ref=f4e86] [cursor=pointer]:
+          - /url: /bots/settings
+          - img [ref=f4e87]
+          - generic [ref=f4e88]: Bot Settings
+        - link "Strategien" [ref=f4e89] [cursor=pointer]:
+          - /url: /strategien
+          - img [ref=f4e90]
+          - generic [ref=f4e94]: Strategien
+        - link "Performance" [ref=f4e95] [cursor=pointer]:
+          - /url: /bots/performance
+          - img [ref=f4e96]
+          - generic [ref=f4e97]: Performance
+        - link "Live Trades" [ref=f4e98] [cursor=pointer]:
+          - /url: /bridge/trades
+          - img [ref=f4e99]
+          - generic [ref=f4e101]: Live Trades
+        - link "Trade Analyzer" [ref=f4e102] [cursor=pointer]:
+          - /url: /bridge/analyse
+          - img [ref=f4e103]
+          - generic [ref=f4e106]: Trade Analyzer
+      - generic [ref=f4e107]:
+        - generic [ref=f4e110]:
+          - generic [ref=f4e112]: Forex
+          - generic [ref=f4e113]: 76h 33m
+        - generic [ref=f4e117]:
+          - generic [ref=f4e118]:
+            - paragraph [ref=f4e119]: Börsen
+            - generic [ref=f4e120]: 1/4
+          - generic [ref=f4e121]:
+            - generic [ref=f4e123]:
+              - generic [ref=f4e125]: NYSE
+              - generic [ref=f4e126]: 2h 33m
+            - generic [ref=f4e130]:
+              - generic [ref=f4e132]: LSE
+              - generic [ref=f4e133]: 13h 33m
+            - generic [ref=f4e136]:
+              - generic [ref=f4e138]: XETRA
+              - generic [ref=f4e139]: 13h 33m
+            - generic [ref=f4e142]:
+              - generic [ref=f4e144]: Tokio
+              - generic [ref=f4e145]: 6h 33m
+      - generic [ref=f4e147]:
+        - button "Einstellungen" [ref=f4e148] [cursor=pointer]:
+          - img [ref=f4e149]
+          - text: Einstellungen
+        - button "Trading entsperren" [ref=f4e152] [cursor=pointer]:
+          - img [ref=f4e153]
+  - main [ref=f4e156]:
+    - generic [ref=f4e157]:
+      - generic [ref=f4e158]:
+        - generic [ref=f4e159]:
+          - heading "Dashboard" [level=1] [ref=f4e160]
+          - generic [ref=f4e161]:
+            - img [ref=f4e162]
+            - text: Spielgeld
+        - paragraph [ref=f4e164]:
+          - text: "IC Markets · Startkapital:"
+          - generic [ref=f4e165]: 1.000 EUR
+      - generic [ref=f4e166]:
+        - button "Tag" [ref=f4e167] [cursor=pointer]
+        - button "Woche" [ref=f4e168] [cursor=pointer]
+        - button "Monat" [ref=f4e169] [cursor=pointer]
+        - button "Jahr" [ref=f4e170] [cursor=pointer]
+        - button "Gesamt" [ref=f4e171] [cursor=pointer]
+    - generic [ref=f4e173]:
+      - generic [ref=f4e174]:
+        - generic [ref=f4e175]:
+          - paragraph [ref=f4e177]: Net P&L
+          - generic [ref=f4e179]:
+            - paragraph [ref=f4e180]: +0 €
+            - paragraph [ref=f4e181]: 0 Trades
+        - generic [ref=f4e182]:
+          - paragraph [ref=f4e184]: Profit Factor
+          - generic [ref=f4e185]:
+            - generic [ref=f4e186]:
+              - paragraph [ref=f4e187]: "0.00"
+              - paragraph [ref=f4e188]: Verlust
+            - img [ref=f4e189]
+        - generic [ref=f4e192]:
+          - paragraph [ref=f4e194]: Trade Win %
+          - generic [ref=f4e195]:
+            - generic [ref=f4e196]:
+              - paragraph [ref=f4e197]: 0.00%
+              - paragraph [ref=f4e198]: Alle geschlossen
+            - generic [ref=f4e199]:
+              - img [ref=f4e200]
+              - generic [ref=f4e203]:
+                - generic [ref=f4e204]: "0"
+                - generic [ref=f4e205]: "0"
+        - generic [ref=f4e206]:
+          - paragraph [ref=f4e208]: Avg Win / Loss Trade
+          - paragraph [ref=f4e209]: —
+          - paragraph [ref=f4e210]: Noch keine Daten
+      - generic [ref=f4e211]:
+        - generic [ref=f4e213]:
+          - generic [ref=f4e215]:
+            - generic [ref=f4e216]:
+              - button [ref=f4e217] [cursor=pointer]:
+                - img [ref=f4e218]
+              - generic [ref=f4e220]: Juni 2026
+              - button [ref=f4e221] [cursor=pointer]:
+                - img [ref=f4e222]
+            - button "Dieser Monat" [ref=f4e224] [cursor=pointer]
+            - generic [ref=f4e225]:
+              - generic [ref=f4e226]: +0 €
+              - generic [ref=f4e227]: 0 Tage
+          - generic [ref=f4e228]:
+            - generic [ref=f4e229]:
+              - generic [ref=f4e230]:
+                - generic [ref=f4e231]: Mo
+                - generic [ref=f4e232]: Di
+                - generic [ref=f4e233]: Mi
+                - generic [ref=f4e234]: Do
+                - generic [ref=f4e235]: Fr
+                - generic [ref=f4e236]: Sa
+                - generic [ref=f4e237]: So
+              - generic [ref=f4e238]:
+                - generic [ref=f4e239]:
+                  - generic [ref=f4e241]: "1"
+                  - generic [ref=f4e243]: "2"
+                  - generic [ref=f4e245]: "3"
+                  - generic [ref=f4e247]: "4"
+                  - generic [ref=f4e249]: "5"
+                  - generic [ref=f4e251]: "6"
+                  - generic [ref=f4e253]: "7"
+                - generic [ref=f4e254]:
+                  - generic [ref=f4e256]: "8"
+                  - generic [ref=f4e258]: "9"
+                  - generic [ref=f4e260]: "10"
+                  - generic [ref=f4e262]: "11"
+                  - generic [ref=f4e264]: "12"
+                  - generic [ref=f4e266]: "13"
+                  - generic [ref=f4e268]: "14"
+                - generic [ref=f4e269]:
+                  - generic [ref=f4e271]: "15"
+                  - generic [ref=f4e273]: "16"
+                  - generic [ref=f4e275]: "17"
+                  - generic [ref=f4e277]: "18"
+                  - generic [ref=f4e279]: "19"
+                  - generic [ref=f4e281]: "20"
+                  - generic [ref=f4e283]: "21"
+                - generic [ref=f4e284]:
+                  - generic [ref=f4e286]: "22"
+                  - generic [ref=f4e288]: "23"
+                  - generic [ref=f4e290]: "24"
+                  - generic [ref=f4e292]: "25"
+                  - generic [ref=f4e294]: "26"
+                  - generic [ref=f4e296]: "27"
+                  - generic [ref=f4e298]: "28"
+                - generic [ref=f4e299]:
+                  - generic [ref=f4e301]: "29"
+                  - generic [ref=f4e303]: "30"
+            - generic [ref=f4e309]:
+              - generic [ref=f4e311]: Woche
+              - generic [ref=f4e312]:
+                - generic [ref=f4e313]: KW 1
+                - generic [ref=f4e314]: 0 €
+              - generic [ref=f4e315]:
+                - generic [ref=f4e316]: KW 2
+                - generic [ref=f4e317]: 0 €
+              - generic [ref=f4e318]:
+                - generic [ref=f4e319]: KW 3
+                - generic [ref=f4e320]: 0 €
+              - generic [ref=f4e321]:
+                - generic [ref=f4e322]: KW 4
+                - generic [ref=f4e323]: 0 €
+              - generic [ref=f4e324]:
+                - generic [ref=f4e325]: KW 5
+                - generic [ref=f4e326]: 0 €
+        - generic [ref=f4e328]:
+          - paragraph [ref=f4e331]: Alpha Score
+          - generic [ref=f4e334]:
+            - generic [ref=f4e336]: Dein Alpha Score
+            - paragraph [ref=f4e337]: "18"
+            - generic [ref=f4e339]:
+              - generic [ref=f4e340]: "0"
+              - generic [ref=f4e341]: "100"
+            - generic [ref=f4e345]:
+              - generic [ref=f4e346]:
+                - generic [ref=f4e347]: Win %
+                - generic [ref=f4e348]: "0"
+              - generic [ref=f4e349]:
+                - generic [ref=f4e350]: Profit Factor
+                - generic [ref=f4e351]: "0"
+              - generic [ref=f4e352]:
+                - generic [ref=f4e353]: Avg Win/Loss
+                - generic [ref=f4e354]: "0"
+              - generic [ref=f4e355]:
+                - generic [ref=f4e356]: Recovery
+                - generic [ref=f4e357]: "50"
+              - generic [ref=f4e358]:
+                - generic [ref=f4e359]: Max DD
+                - generic [ref=f4e360]: "100"
+              - generic [ref=f4e361]:
+                - generic [ref=f4e362]: Konsistenz
+                - generic [ref=f4e363]: "0"
+    - generic [ref=f4e364]:
+      - img [ref=f4e366]
+      - heading "Deine Journey beginnt hier" [level=3] [ref=f4e368]
+      - paragraph [ref=f4e369]: Du hast noch keine Trades eingetragen. Geh zu Trades und trage deinen ersten Trade ein.

@@ -45,6 +45,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
   let totalCostsSum = 0, totalCommission = 0, totalSwap = 0
   let netMonthlyPnl = 0, netDailyPnl = 0
   let winnerCount = 0, rrSum = 0, rrCount = 0
+  let grossProfit = 0, grossLoss = 0, winSum = 0, lossSum = 0, lossCount = 0
 
   for (const t of closed) {
     const pnl = t.pnl ?? 0
@@ -59,7 +60,8 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
 
     if (monthStr === thisMonthStr) { monthlyPnl += pnl; netMonthlyPnl += pnl - cost }
     if (dayStr === todayStr) { dailyPnl += pnl; netDailyPnl += pnl - cost }
-    if (pnl > 0) winnerCount++
+    if (pnl > 0) { winnerCount++; grossProfit += pnl; winSum += pnl }
+    else if (pnl < 0) { grossLoss += Math.abs(pnl); lossSum += pnl; lossCount++ }
     if (t.rr !== undefined && t.rr > 0) { rrSum += t.rr; rrCount++ }
   }
 
@@ -69,6 +71,9 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
   const allClosedCount = closed.length + paper.length
   const winRate = allClosedCount > 0 ? ((winnerCount + paperWins) / allClosedCount) * 100 : 0
   const avgRR = rrCount > 0 ? rrSum / rrCount : 0
+  const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? 999 : 0
+  const avgWin = winnerCount > 0 ? winSum / winnerCount : 0
+  const avgLoss = lossCount > 0 ? lossSum / lossCount : 0
 
   const sorted = [...closed].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
@@ -121,6 +126,9 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
     maxDrawdown,
     currentStreak: streak,
     equityCurve,
+    profitFactor,
+    avgWin,
+    avgLoss,
   }
   _statsCache = { key: cacheKey, result }
   return result

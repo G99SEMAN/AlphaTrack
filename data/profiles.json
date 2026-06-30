@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "demo001",
+    "name": "Demo Konto",
+    "broker": "IC Markets",
+    "type": "demo",
+    "currency": "EUR",
+    "startCapital": 1000,
+    "color": "#3b82f6",
+    "icon": "TrendingUp",
+    "deposits": []
+  }
+]
