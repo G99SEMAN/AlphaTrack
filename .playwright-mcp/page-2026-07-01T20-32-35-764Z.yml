@@ -1,0 +1,131 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - complementary [ref=f3e3]:
+      - generic [ref=f3e4]:
+        - generic [ref=f3e5]:
+          - img "AlphaTrack Logo" [ref=f3e6]
+          - generic [ref=f3e13]:
+            - paragraph [ref=f3e14]: AlphaTrack
+            - paragraph [ref=f3e15]: Trading Journal
+          - button "Sidebar einklappen" [ref=f3e16] [cursor=pointer]:
+            - img [ref=f3e17]
+        - button "FW-Test Demo · 1.016,39 EUR" [ref=f3e20] [cursor=pointer]:
+          - img [ref=f3e22]
+          - generic [ref=f3e23]:
+            - generic [ref=f3e24]: FW-Test
+            - generic [ref=f3e25]: Demo · 1.016,39 EUR
+          - img [ref=f3e26]
+        - navigation [ref=f3e29]:
+          - generic [ref=f3e32]: Übersicht
+          - link "Dashboard" [ref=f3e34] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=f3e35]
+            - generic [ref=f3e40]: Dashboard
+          - link "Trades" [ref=f3e41] [cursor=pointer]:
+            - /url: /journal
+            - img [ref=f3e42]
+            - generic [ref=f3e44]: Trades
+          - link "Statistiken" [ref=f3e45] [cursor=pointer]:
+            - /url: /statistiken
+            - img [ref=f3e46]
+            - generic [ref=f3e47]: Statistiken
+          - link "Kalender" [ref=f3e48] [cursor=pointer]:
+            - /url: /kalender
+            - img [ref=f3e49]
+            - generic [ref=f3e51]: Kalender
+          - link "Netzwerk" [ref=f3e52] [cursor=pointer]:
+            - /url: /netzwerk
+            - img [ref=f3e53]
+            - generic [ref=f3e58]: Netzwerk
+          - generic [ref=f3e61]: Bridge & Bots
+          - link "Bridge" [ref=f3e63] [cursor=pointer]:
+            - /url: /bridge
+            - img [ref=f3e64]
+            - generic [ref=f3e67]: Bridge
+          - link "Bridge Log" [ref=f3e68] [cursor=pointer]:
+            - /url: /bridge/log
+            - img [ref=f3e69]
+            - generic [ref=f3e72]: Bridge Log
+          - link "Bots" [ref=f3e73] [cursor=pointer]:
+            - /url: /bots
+            - img [ref=f3e74]
+            - generic [ref=f3e77]: Bots
+          - link "Bot Settings" [ref=f3e78] [cursor=pointer]:
+            - /url: /bots/settings
+            - img [ref=f3e79]
+            - generic [ref=f3e80]: Bot Settings
+          - link "Strategien" [ref=f3e81] [cursor=pointer]:
+            - /url: /strategien
+            - img [ref=f3e82]
+            - generic [ref=f3e86]: Strategien
+          - link "Performance" [ref=f3e87] [cursor=pointer]:
+            - /url: /bots/performance
+            - img [ref=f3e88]
+            - generic [ref=f3e89]: Performance
+          - link "Live Trades" [ref=f3e90] [cursor=pointer]:
+            - /url: /bridge/trades
+            - img [ref=f3e91]
+            - generic [ref=f3e93]: Live Trades
+          - link "Trade Analyzer" [ref=f3e94] [cursor=pointer]:
+            - /url: /bridge/analyse
+            - img [ref=f3e95]
+            - generic [ref=f3e98]: Trade Analyzer
+        - generic [ref=f3e99]:
+          - generic [ref=f3e100]: UTC 20:32:35
+          - generic [ref=f3e103]:
+            - generic [ref=f3e105]: Forex
+            - generic [ref=f3e106]: 49h 28m
+          - generic [ref=f3e110]:
+            - generic [ref=f3e111]:
+              - paragraph [ref=f3e112]: Börsen
+              - generic [ref=f3e113]: 0/4
+            - generic [ref=f3e114]:
+              - generic [ref=f3e116]:
+                - generic [ref=f3e118]: NYSE
+                - generic [ref=f3e119]: 16h 58m
+              - generic [ref=f3e122]:
+                - generic [ref=f3e124]: LSE
+                - generic [ref=f3e125]: 10h 28m
+              - generic [ref=f3e128]:
+                - generic [ref=f3e130]: XETRA
+                - generic [ref=f3e131]: 10h 28m
+              - generic [ref=f3e134]:
+                - generic [ref=f3e136]: Tokio
+                - generic [ref=f3e137]: 3h 28m
+        - generic [ref=f3e139]:
+          - button "Einstellungen" [ref=f3e140] [cursor=pointer]:
+            - img [ref=f3e141]
+            - text: Einstellungen
+          - button "Trading entsperren" [ref=f3e144] [cursor=pointer]:
+            - img [ref=f3e145]
+    - main [ref=f3e148]:
+      - heading "Einstellungen" [level=1] [ref=f3e150]
+      - generic [ref=f3e151]:
+        - button "Darstellung" [ref=f3e152] [cursor=pointer]
+        - button "Dashboard" [ref=f3e153] [cursor=pointer]
+        - button "Profile" [ref=f3e154] [cursor=pointer]
+        - button "Daten" [ref=f3e155] [cursor=pointer]
+      - generic [ref=f3e156]:
+        - generic [ref=f3e157]:
+          - generic [ref=f3e158]:
+            - img [ref=f3e159]
+            - paragraph [ref=f3e165]: Farbschema
+          - paragraph [ref=f3e166]: Wähle ein Farbschema für die gesamte Oberfläche.
+          - generic [ref=f3e167]:
+            - button "Blau" [ref=f3e168] [cursor=pointer]:
+              - generic [ref=f3e175]: Blau
+            - button "Crimson" [ref=f3e177] [cursor=pointer]:
+              - generic [ref=f3e184]: Crimson
+            - button "Violett" [ref=f3e185] [cursor=pointer]:
+              - generic [ref=f3e192]: Violett
+        - generic [ref=f3e193]:
+          - paragraph [ref=f3e194]: Erscheinungsbild
+          - paragraph [ref=f3e195]: Wähle zwischen hellem und dunklem Design.
+          - generic [ref=f3e196]:
+            - button "Hell" [ref=f3e197] [cursor=pointer]:
+              - img [ref=f3e198]
+              - text: Hell
+            - button "Dunkel" [ref=f3e204] [cursor=pointer]:
+              - img [ref=f3e205]
+              - text: Dunkel
+  - alert [ref=f3e207]

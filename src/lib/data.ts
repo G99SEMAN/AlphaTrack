@@ -100,6 +100,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
     balance += ev.delta
     if (ev.isDeposit) depositRunning += ev.delta
     if (balance > peak) peak = balance
+    // Ohne Startkapital (peak=0) ergibt der %-Drawdown keine sinnvolle Zahl
     const dd = peak > 0 ? ((peak - balance) / peak) * 100 : 0
     if (dd > maxDrawdown) maxDrawdown = dd
     const parts = ev.date.slice(0, 10).split('-')

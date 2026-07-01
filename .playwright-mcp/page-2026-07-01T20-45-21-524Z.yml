@@ -1,0 +1,577 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - complementary [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e5]:
+          - img "AlphaTrack Logo" [ref=f7e6]
+          - generic [ref=f7e13]:
+            - paragraph [ref=f7e14]: AlphaTrack
+            - paragraph [ref=f7e15]: Trading Journal
+          - button "Sidebar einklappen" [ref=f7e16] [cursor=pointer]:
+            - img [ref=f7e17]
+        - button "FW-Test Demo · 1.016,39 EUR" [ref=f7e20] [cursor=pointer]:
+          - img [ref=f7e22]
+          - generic [ref=f7e23]:
+            - generic [ref=f7e24]: FW-Test
+            - generic [ref=f7e25]: Demo · 1.016,39 EUR
+          - img [ref=f7e26]
+        - navigation [ref=f7e29]:
+          - generic [ref=f7e32]: Übersicht
+          - link "Dashboard" [ref=f7e34] [cursor=pointer]:
+            - /url: /dashboard
+            - img [ref=f7e35]
+            - generic [ref=f7e40]: Dashboard
+          - link "Trades" [ref=f7e41] [cursor=pointer]:
+            - /url: /journal
+            - img [ref=f7e42]
+            - generic [ref=f7e44]: Trades
+          - link "Statistiken" [ref=f7e45] [cursor=pointer]:
+            - /url: /statistiken
+            - img [ref=f7e47]
+            - generic [ref=f7e48]: Statistiken
+          - link "Kalender" [ref=f7e49] [cursor=pointer]:
+            - /url: /kalender
+            - img [ref=f7e50]
+            - generic [ref=f7e52]: Kalender
+          - link "Netzwerk" [ref=f7e53] [cursor=pointer]:
+            - /url: /netzwerk
+            - img [ref=f7e54]
+            - generic [ref=f7e59]: Netzwerk
+          - generic [ref=f7e62]: Bridge & Bots
+          - link "Bridge" [ref=f7e64] [cursor=pointer]:
+            - /url: /bridge
+            - img [ref=f7e65]
+            - generic [ref=f7e68]: Bridge
+          - link "Bridge Log" [ref=f7e69] [cursor=pointer]:
+            - /url: /bridge/log
+            - img [ref=f7e70]
+            - generic [ref=f7e73]: Bridge Log
+          - link "Bots" [ref=f7e74] [cursor=pointer]:
+            - /url: /bots
+            - img [ref=f7e75]
+            - generic [ref=f7e78]: Bots
+          - link "Bot Settings" [ref=f7e79] [cursor=pointer]:
+            - /url: /bots/settings
+            - img [ref=f7e80]
+            - generic [ref=f7e81]: Bot Settings
+          - link "Strategien" [ref=f7e82] [cursor=pointer]:
+            - /url: /strategien
+            - img [ref=f7e83]
+            - generic [ref=f7e87]: Strategien
+          - link "Performance" [ref=f7e88] [cursor=pointer]:
+            - /url: /bots/performance
+            - img [ref=f7e89]
+            - generic [ref=f7e90]: Performance
+          - link "Live Trades" [ref=f7e91] [cursor=pointer]:
+            - /url: /bridge/trades
+            - img [ref=f7e92]
+            - generic [ref=f7e94]: Live Trades
+          - link "Trade Analyzer" [ref=f7e95] [cursor=pointer]:
+            - /url: /bridge/analyse
+            - img [ref=f7e96]
+            - generic [ref=f7e99]: Trade Analyzer
+        - generic [ref=f7e101]:
+          - generic [ref=f7e104]:
+            - paragraph [ref=f7e105]: MT5 Konto
+            - paragraph [ref=f7e106]: 1.016,21 EUR
+          - button "Ausblenden" [ref=f7e107] [cursor=pointer]:
+            - img [ref=f7e108]
+        - generic [ref=f7e113]:
+          - generic [ref=f7e114]: UTC 20:45:21
+          - generic [ref=f7e117]:
+            - generic [ref=f7e119]: Forex
+            - generic [ref=f7e120]: 49h 15m
+          - generic [ref=f7e124]:
+            - generic [ref=f7e125]:
+              - paragraph [ref=f7e126]: Börsen
+              - generic [ref=f7e127]: 0/4
+            - generic [ref=f7e128]:
+              - generic [ref=f7e130]:
+                - generic [ref=f7e132]: NYSE
+                - generic [ref=f7e133]: 16h 45m
+              - generic [ref=f7e136]:
+                - generic [ref=f7e138]: LSE
+                - generic [ref=f7e139]: 10h 15m
+              - generic [ref=f7e142]:
+                - generic [ref=f7e144]: XETRA
+                - generic [ref=f7e145]: 10h 15m
+              - generic [ref=f7e148]:
+                - generic [ref=f7e150]: Tokio
+                - generic [ref=f7e151]: 3h 15m
+        - generic [ref=f7e153]:
+          - button "Einstellungen" [ref=f7e154] [cursor=pointer]:
+            - img [ref=f7e155]
+            - text: Einstellungen
+          - button "Trading entsperren" [ref=f7e158] [cursor=pointer]:
+            - img [ref=f7e159]
+    - main [ref=f7e162]:
+      - generic [ref=f7e163]:
+        - heading "Statistiken" [level=1] [ref=f7e164]
+        - paragraph [ref=f7e165]: FW-Test · 70 abgeschlossene Trades
+      - generic [ref=f7e166]:
+        - generic [ref=f7e167]:
+          - generic [ref=f7e168]:
+            - generic [ref=f7e169]:
+              - paragraph [ref=f7e170]: Profit Factor
+              - generic [ref=f7e171]:
+                - img [ref=f7e172]
+                - generic: "Summe aller Gewinne ÷ Summe aller Verluste. Ziel: >1.5. >2.0 gilt als exzellent."
+            - paragraph [ref=f7e174]: "1.13"
+            - paragraph [ref=f7e175]: "Solide (Ziel: >1.5)"
+          - generic [ref=f7e176]:
+            - generic [ref=f7e177]:
+              - paragraph [ref=f7e178]: Erwartungswert
+              - generic [ref=f7e179]:
+                - img [ref=f7e180]
+                - generic: Durchschnittlicher erwarteter Gewinn pro Trade. Positiv = System verdient langfristig.
+            - paragraph [ref=f7e182]: +0,09 €
+            - paragraph [ref=f7e183]: Erwarteter Gewinn je Trade
+          - generic [ref=f7e184]:
+            - generic [ref=f7e185]:
+              - paragraph [ref=f7e186]: Gewinn / Verlust
+              - generic [ref=f7e187]:
+                - img [ref=f7e188]
+                - generic: Durchschnittlicher Gewinn ÷ durchschnittlicher Verlust (absolut). >1.5 empfohlen.
+            - paragraph [ref=f7e190]: "1.38"
+            - paragraph [ref=f7e191]: Ø+2,16 / Ø-1,56 €
+          - generic [ref=f7e192]:
+            - generic [ref=f7e193]:
+              - paragraph [ref=f7e194]: Kosten-Quote
+              - generic [ref=f7e195]:
+                - img [ref=f7e196]
+                - generic: Provision + Swap + Spread als % des Brutto-P&L. <10% ist sehr gut.
+            - paragraph [ref=f7e198]: 101.9%
+            - paragraph [ref=f7e199]: Provision+Swap / |Brutto-P&L|
+          - generic [ref=f7e200]:
+            - generic [ref=f7e201]:
+              - paragraph [ref=f7e202]: Gesamt-ROI
+              - generic [ref=f7e203]:
+                - img [ref=f7e204]
+                - generic: Netto-P&L ÷ eingesetztes Startkapital × 100.
+            - paragraph [ref=f7e206]: "-0.01%"
+            - paragraph [ref=f7e207]: Netto-P&L / eingesetztes Kapital
+          - generic [ref=f7e208]:
+            - generic [ref=f7e209]:
+              - paragraph [ref=f7e210]: Trades / Tag
+              - generic [ref=f7e211]:
+                - img [ref=f7e212]
+                - generic: Durchschnittliche Trades pro Kalendertag seit dem ersten Trade.
+            - paragraph [ref=f7e214]: "7.00"
+            - paragraph [ref=f7e215]: Ø Trades pro Kalendertag
+        - generic [ref=f7e216]:
+          - generic [ref=f7e217]:
+            - generic [ref=f7e218]:
+              - generic [ref=f7e219]:
+                - paragraph [ref=f7e220]: Max Drawdown
+                - generic [ref=f7e221]:
+                  - img [ref=f7e222]
+                  - generic: Größter kumulativer Verlust vom Equity-Höchststand bis zum Tief. Misst das maximale Risiko deines Systems.
+              - img [ref=f7e225]
+            - generic [ref=f7e228]:
+              - generic [ref=f7e229]:
+                - paragraph [ref=f7e230]: Max Drawdown
+                - paragraph [ref=f7e231]: "-463.9%"
+                - paragraph [ref=f7e232]: Hoch (>25%)
+              - generic [ref=f7e233]:
+                - paragraph [ref=f7e234]: Recovery Factor
+                - paragraph [ref=f7e235]: "-"
+                - paragraph [ref=f7e236]: N/A
+          - generic [ref=f7e239]:
+            - generic [ref=f7e240]:
+              - generic [ref=f7e241]:
+                - paragraph [ref=f7e242]: Konsistenz-Score
+                - generic [ref=f7e243]:
+                  - img [ref=f7e244]
+                  - generic: Anteil der Wochen mit positivem P&L. 70%+ gilt als konsistent profitabel.
+              - img [ref=f7e247]
+            - generic [ref=f7e251]:
+              - paragraph [ref=f7e252]: 50%
+              - paragraph [ref=f7e253]: 1/2 Wochen
+            - paragraph [ref=f7e256]: Mäßig konsistent
+          - generic [ref=f7e257]:
+            - generic [ref=f7e258]:
+              - generic [ref=f7e259]:
+                - paragraph [ref=f7e260]: Trade-Dauer
+                - generic [ref=f7e261]:
+                  - img [ref=f7e262]
+                  - generic: Durchschnittliche Haltedauer deiner Trades (aus closeTime - openTime). Getrennt nach Long/Short.
+              - img [ref=f7e265]
+            - generic [ref=f7e268]:
+              - generic [ref=f7e269]:
+                - paragraph [ref=f7e270]: Gesamt Ø
+                - paragraph [ref=f7e271]: 1.4 Std
+              - generic [ref=f7e272]:
+                - paragraph [ref=f7e273]: Long Ø
+                - paragraph [ref=f7e274]: 1.0 Std
+              - generic [ref=f7e275]:
+                - paragraph [ref=f7e276]: Short Ø
+                - paragraph [ref=f7e277]: 2.6 Std
+            - paragraph [ref=f7e278]: Nur Trades mit closeTime werden berechnet
+        - generic [ref=f7e279]:
+          - generic [ref=f7e281]:
+            - generic [ref=f7e283]:
+              - generic [ref=f7e284]:
+                - paragraph [ref=f7e285]: Monatlicher P&L
+                - generic [ref=f7e286]:
+                  - img [ref=f7e287]
+                  - generic: Brutto-P&L pro Kalendermonat. Balken zeigen Gewinne (grün) und Verluste (rot).
+              - paragraph [ref=f7e289]: 2 Monate
+            - application [ref=f7e296]:
+              - generic [ref=f7e297]:
+                - generic [ref=f7e298]:
+                  - generic [ref=f7e300]: Juni 26
+                  - generic [ref=f7e302]: Juli 26
+                - generic [ref=f7e303]:
+                  - generic [ref=f7e305]: "-3€"
+                  - generic [ref=f7e307]: +0€
+                  - generic [ref=f7e309]: +3€
+                  - generic [ref=f7e311]: +6€
+                  - generic [ref=f7e313]: +9€
+          - generic [ref=f7e315]:
+            - generic [ref=f7e316]:
+              - generic [ref=f7e317]:
+                - generic [ref=f7e318]:
+                  - paragraph [ref=f7e319]: Long-Trades
+                  - generic [ref=f7e320]:
+                    - img [ref=f7e321]
+                    - generic: Performance aller Long-Positionen (Kauf). Winrate und P&L-Übersicht.
+                - img [ref=f7e324]
+              - generic [ref=f7e327]:
+                - generic [ref=f7e329]:
+                  - generic [ref=f7e330]: Win Rate
+                  - generic [ref=f7e331]: 42.6%
+                - generic [ref=f7e333]:
+                  - generic [ref=f7e334]:
+                    - paragraph [ref=f7e335]: Trades
+                    - paragraph [ref=f7e336]: "54"
+                  - generic [ref=f7e337]:
+                    - paragraph [ref=f7e338]: Gesamt P&L
+                    - paragraph [ref=f7e339]: "-9,75"
+                  - generic [ref=f7e340]:
+                    - paragraph [ref=f7e341]: Ø pro Trade
+                    - paragraph [ref=f7e342]: "-0,18"
+                  - generic [ref=f7e343]:
+                    - paragraph [ref=f7e344]: Währung
+                    - paragraph [ref=f7e345]: EUR
+            - generic [ref=f7e346]:
+              - generic [ref=f7e347]:
+                - generic [ref=f7e348]:
+                  - paragraph [ref=f7e349]: Short-Trades
+                  - generic [ref=f7e350]:
+                    - img [ref=f7e351]
+                    - generic: Performance aller Short-Positionen (Verkauf/Leerverkauf).
+                - img [ref=f7e354]
+              - generic [ref=f7e357]:
+                - generic [ref=f7e359]:
+                  - generic [ref=f7e360]: Win Rate
+                  - generic [ref=f7e361]: 50.0%
+                - generic [ref=f7e363]:
+                  - generic [ref=f7e364]:
+                    - paragraph [ref=f7e365]: Trades
+                    - paragraph [ref=f7e366]: "16"
+                  - generic [ref=f7e367]:
+                    - paragraph [ref=f7e368]: Gesamt P&L
+                    - paragraph [ref=f7e369]: +17,62
+                  - generic [ref=f7e370]:
+                    - paragraph [ref=f7e371]: Ø pro Trade
+                    - paragraph [ref=f7e372]: +1,10
+                  - generic [ref=f7e373]:
+                    - paragraph [ref=f7e374]: Währung
+                    - paragraph [ref=f7e375]: EUR
+        - generic [ref=f7e376]:
+          - generic [ref=f7e377]:
+            - generic [ref=f7e379]:
+              - paragraph [ref=f7e380]: Top 5 Assets nach Trades
+              - generic [ref=f7e381]:
+                - img [ref=f7e382]
+                - generic: Deine 5 meist-gehandelten Instrumente nach Trade-Anzahl.
+            - table [ref=f7e385]:
+              - rowgroup [ref=f7e386]:
+                - row "# Asset Trades Win Rate P&L" [ref=f7e387]:
+                  - columnheader "#" [ref=f7e388]
+                  - columnheader "Asset" [ref=f7e389]
+                  - columnheader "Trades" [ref=f7e390]
+                  - columnheader "Win Rate" [ref=f7e391]
+                  - columnheader "P&L" [ref=f7e392]
+              - rowgroup [ref=f7e393]:
+                - row "1 EURUSDp 59 40.7% -4,36 €" [ref=f7e394]:
+                  - cell "1" [ref=f7e395]
+                  - cell "EURUSDp" [ref=f7e396]
+                  - cell "59" [ref=f7e397]
+                  - cell "40.7%" [ref=f7e398]
+                  - cell "-4,36 €" [ref=f7e399]
+                - row "2 GBPUSDp 9 55.6% +1,84 €" [ref=f7e400]:
+                  - cell "2" [ref=f7e401]
+                  - cell "GBPUSDp" [ref=f7e402]
+                  - cell "9" [ref=f7e403]
+                  - cell "55.6%" [ref=f7e404]
+                  - cell "+1,84 €" [ref=f7e405]
+                - row "3 GBPJPYp 2 100.0% +10,39 €" [ref=f7e406]:
+                  - cell "3" [ref=f7e407]
+                  - cell "GBPJPYp" [ref=f7e408]
+                  - cell "2" [ref=f7e409]
+                  - cell "100.0%" [ref=f7e410]
+                  - cell "+10,39 €" [ref=f7e411]
+          - generic [ref=f7e412]:
+            - generic [ref=f7e414]:
+              - paragraph [ref=f7e415]: Performance nach Strategie
+              - generic [ref=f7e416]:
+                - img [ref=f7e417]
+                - generic: Performance-Vergleich deiner definierten Handelsstrategien.
+            - table [ref=f7e420]:
+              - rowgroup [ref=f7e421]:
+                - row "Strategie Trades Win Rate Profit Factor Ø RR P&L ROI" [ref=f7e422]:
+                  - columnheader "Strategie" [ref=f7e423]
+                  - columnheader "Trades" [ref=f7e424]
+                  - columnheader "Win Rate" [ref=f7e425]
+                  - columnheader "Profit Factor" [ref=f7e426]
+                  - columnheader "Ø RR" [ref=f7e427]
+                  - columnheader "P&L" [ref=f7e428]
+                  - columnheader "ROI" [ref=f7e429]
+              - rowgroup [ref=f7e430]:
+                - row "Ohne Strategie 70 44.3% 1.13 - +7,87 +0.77%" [ref=f7e431]:
+                  - cell "Ohne Strategie" [ref=f7e432]:
+                    - generic [ref=f7e434]: Ohne Strategie
+                  - cell "70" [ref=f7e435]
+                  - cell "44.3%" [ref=f7e436]
+                  - cell "1.13" [ref=f7e437]
+                  - cell "-" [ref=f7e438]
+                  - cell "+7,87" [ref=f7e439]
+                  - cell "+0.77%" [ref=f7e440]
+        - generic [ref=f7e441]:
+          - generic [ref=f7e443]:
+            - paragraph [ref=f7e444]: Performance nach Instrument
+            - generic [ref=f7e445]:
+              - img [ref=f7e446]
+              - generic: P&L-Übersicht nach gehandeltem Instrument, sortiert nach Gesamtertrag.
+          - table [ref=f7e449]:
+            - rowgroup [ref=f7e450]:
+              - row "Instrument Trades Win% Gesamt ↓ Ø Trade" [ref=f7e451]:
+                - columnheader "Instrument" [ref=f7e452]
+                - columnheader "Trades" [ref=f7e453] [cursor=pointer]
+                - columnheader "Win%" [ref=f7e454] [cursor=pointer]
+                - columnheader "Gesamt ↓" [ref=f7e455] [cursor=pointer]
+                - columnheader "Ø Trade" [ref=f7e456] [cursor=pointer]
+            - rowgroup [ref=f7e457]:
+              - row "GBPJPYp 2 100.0% +10,39 +5,20" [ref=f7e458]:
+                - cell "GBPJPYp" [ref=f7e459]
+                - cell "2" [ref=f7e460]
+                - cell "100.0%" [ref=f7e461]
+                - cell "+10,39" [ref=f7e462]
+                - cell "+5,20" [ref=f7e463]
+              - row "GBPUSDp 9 55.6% +1,84 +0,20" [ref=f7e464]:
+                - cell "GBPUSDp" [ref=f7e465]
+                - cell "9" [ref=f7e466]
+                - cell "55.6%" [ref=f7e467]
+                - cell "+1,84" [ref=f7e468]
+                - cell "+0,20" [ref=f7e469]
+              - row "EURUSDp 59 40.7% -4,36 -0,07" [ref=f7e470]:
+                - cell "EURUSDp" [ref=f7e471]
+                - cell "59" [ref=f7e472]
+                - cell "40.7%" [ref=f7e473]
+                - cell "-4,36" [ref=f7e474]
+                - cell "-0,07" [ref=f7e475]
+          - generic [ref=f7e476]: Alle Werte in EUR
+        - generic [ref=f7e477]:
+          - generic [ref=f7e479]:
+            - generic [ref=f7e480]:
+              - paragraph [ref=f7e481]: Wochentags-Analyse — Ø P&L pro Tag
+              - generic [ref=f7e482]:
+                - img [ref=f7e483]
+                - generic: Performance nach Wochentag. Zeigt an welchen Tagen du am profitabelsten tradest.
+            - application [ref=f7e488]:
+              - generic [ref=f7e489]:
+                - generic [ref=f7e490]:
+                  - generic [ref=f7e492]: Mo
+                  - generic [ref=f7e494]: Di
+                  - generic [ref=f7e496]: Mi
+                  - generic [ref=f7e498]: Do
+                  - generic [ref=f7e500]: Fr
+                - generic [ref=f7e501]:
+                  - generic [ref=f7e503]: "-4€"
+                  - generic [ref=f7e505]: "-2€"
+                  - generic [ref=f7e507]: +0€
+                  - generic [ref=f7e509]: +2€
+                  - generic [ref=f7e511]: +4€
+            - generic [ref=f7e512]:
+              - generic [ref=f7e516]: 45%
+              - generic [ref=f7e520]: 40%
+              - generic [ref=f7e524]: 29%
+              - generic [ref=f7e528]: 33%
+              - generic [ref=f7e532]: 100%
+          - generic [ref=f7e534]:
+            - generic [ref=f7e535]:
+              - generic [ref=f7e536]:
+                - paragraph [ref=f7e537]: R-Multiple Verteilung
+                - generic [ref=f7e538]:
+                  - img [ref=f7e539]
+                  - generic: Verteilung der Trades als Vielfaches des initial riskierten Betrags (1R). >+1R bedeutet mehr gewonnen als riskiert.
+              - paragraph [ref=f7e541]: "Trades mit Stop-Loss: 70"
+            - application [ref=f7e545]:
+              - generic [ref=f7e546]:
+                - generic [ref=f7e547]:
+                  - generic [ref=f7e549]: <-2R
+                  - generic [ref=f7e551]: "-2R"
+                  - generic [ref=f7e553]: "-1R"
+                  - generic [ref=f7e555]: ~0
+                  - generic [ref=f7e557]: +1R
+                  - generic [ref=f7e559]: +2R
+                  - generic [ref=f7e561]: ">+2R"
+                - generic [ref=f7e562]:
+                  - generic [ref=f7e564]: "0"
+                  - generic [ref=f7e566]: "9"
+                  - generic [ref=f7e568]: "18"
+                  - generic [ref=f7e570]: "27"
+                  - generic [ref=f7e572]: "36"
+            - paragraph [ref=f7e573]: "Ideal: wenige Verluste links, viele Gewinne rechts"
+        - generic [ref=f7e574]:
+          - generic [ref=f7e575]:
+            - paragraph [ref=f7e576]: Stunden-Analyse — Gesamt-P&L pro Stunde
+            - generic [ref=f7e577]:
+              - img [ref=f7e578]
+              - generic: Kumulierter P&L nach Tageszeit (Schlussstunde des Trades). Zeigt welche Handelsstunden insgesamt am profitabelsten sind.
+          - application [ref=f7e583]:
+            - generic [ref=f7e584]:
+              - generic [ref=f7e585]:
+                - generic [ref=f7e587]: 07:00
+                - generic [ref=f7e589]: 08:00
+                - generic [ref=f7e591]: 10:00
+                - generic [ref=f7e593]: 11:00
+                - generic [ref=f7e595]: 12:00
+                - generic [ref=f7e597]: 13:00
+                - generic [ref=f7e599]: 14:00
+                - generic [ref=f7e601]: 15:00
+                - generic [ref=f7e603]: 16:00
+                - generic [ref=f7e605]: 19:00
+                - generic [ref=f7e607]: 20:00
+                - generic [ref=f7e609]: 21:00
+              - generic [ref=f7e610]:
+                - generic [ref=f7e612]: "-10€"
+                - generic [ref=f7e614]: "-5.0€"
+                - generic [ref=f7e616]: 0€
+                - generic [ref=f7e618]: +5.0€
+                - generic [ref=f7e620]: +10€
+          - generic [ref=f7e621]:
+            - paragraph [ref=f7e622]: Win-Rate & Anzahl Trades
+            - generic [ref=f7e623]:
+              - generic [ref=f7e624]:
+                - generic [ref=f7e625]: 07:00
+                - generic [ref=f7e626]: 33%
+                - generic [ref=f7e627]: 6×
+              - generic [ref=f7e628]:
+                - generic [ref=f7e629]: 08:00
+                - generic [ref=f7e630]: 57%
+                - generic [ref=f7e631]: 7×
+              - generic [ref=f7e632]:
+                - generic [ref=f7e633]: 10:00
+                - generic [ref=f7e634]: 50%
+                - generic [ref=f7e635]: 2×
+              - generic [ref=f7e636]:
+                - generic [ref=f7e637]: 11:00
+                - generic [ref=f7e638]: 67%
+                - generic [ref=f7e639]: 3×
+              - generic [ref=f7e640]:
+                - generic [ref=f7e641]: 12:00
+                - generic [ref=f7e642]: 43%
+                - generic [ref=f7e643]: 23×
+              - generic [ref=f7e644]:
+                - generic [ref=f7e645]: 13:00
+                - generic [ref=f7e646]: 43%
+                - generic [ref=f7e647]: 7×
+              - generic [ref=f7e648]:
+                - generic [ref=f7e649]: 14:00
+                - generic [ref=f7e650]: 67%
+                - generic [ref=f7e651]: 6×
+              - generic [ref=f7e652]:
+                - generic [ref=f7e653]: 15:00
+                - generic [ref=f7e654]: 25%
+                - generic [ref=f7e655]: 8×
+              - generic [ref=f7e656]:
+                - generic [ref=f7e657]: 16:00
+                - generic [ref=f7e658]: 20%
+                - generic [ref=f7e659]: 5×
+              - generic [ref=f7e660]:
+                - generic [ref=f7e661]: 19:00
+                - generic [ref=f7e662]: 100%
+                - generic [ref=f7e663]: 1×
+              - generic [ref=f7e664]:
+                - generic [ref=f7e665]: 20:00
+                - generic [ref=f7e666]: 100%
+                - generic [ref=f7e667]: 1×
+              - generic [ref=f7e668]:
+                - generic [ref=f7e669]: 21:00
+                - generic [ref=f7e670]: 0%
+                - generic [ref=f7e671]: 1×
+        - generic [ref=f7e672]:
+          - generic [ref=f7e673]:
+            - img [ref=f7e675]
+            - heading "Beste Trades" [level=3] [ref=f7e681]
+            - generic [ref=f7e682]:
+              - img [ref=f7e683]
+              - generic: Die 7 profitabelsten abgeschlossenen Einzeltrades.
+          - generic [ref=f7e685]:
+            - generic [ref=f7e686]:
+              - generic [ref=f7e687]:
+                - generic [ref=f7e688]: "#1"
+                - generic [ref=f7e689]:
+                  - generic [ref=f7e690]:
+                    - generic [ref=f7e691]: EURUSDp
+                    - generic [ref=f7e692]: Short
+                  - generic [ref=f7e694]: 29. Juni 26
+              - generic [ref=f7e696]: +8,78 EUR
+            - generic [ref=f7e697]:
+              - generic [ref=f7e698]:
+                - generic [ref=f7e699]: "#2"
+                - generic [ref=f7e700]:
+                  - generic [ref=f7e701]:
+                    - generic [ref=f7e702]: EURUSDp
+                    - generic [ref=f7e703]: Short
+                  - generic [ref=f7e705]: 24. Juni 26
+              - generic [ref=f7e707]: +6,62 EUR
+            - generic [ref=f7e708]:
+              - generic [ref=f7e709]:
+                - generic [ref=f7e710]: "#3"
+                - generic [ref=f7e711]:
+                  - generic [ref=f7e712]:
+                    - generic [ref=f7e713]: EURUSDp
+                    - generic [ref=f7e714]: Short
+                  - generic [ref=f7e716]: 23. Juni 26
+              - generic [ref=f7e718]: +6,57 EUR
+            - generic [ref=f7e719]:
+              - generic [ref=f7e720]:
+                - generic [ref=f7e721]: "#4"
+                - generic [ref=f7e722]:
+                  - generic [ref=f7e723]:
+                    - generic [ref=f7e724]: EURUSDp
+                    - generic [ref=f7e725]: Short
+                  - generic [ref=f7e727]: 26. Juni 26
+              - generic [ref=f7e729]: +6,57 EUR
+            - generic [ref=f7e730]:
+              - generic [ref=f7e731]:
+                - generic [ref=f7e732]: "#5"
+                - generic [ref=f7e733]:
+                  - generic [ref=f7e734]:
+                    - generic [ref=f7e735]: EURUSDp
+                    - generic [ref=f7e736]: Short
+                  - generic [ref=f7e738]: 22. Juni 26
+              - generic [ref=f7e740]: +6,56 EUR
+            - generic [ref=f7e741]:
+              - generic [ref=f7e742]:
+                - generic [ref=f7e743]: "#6"
+                - generic [ref=f7e744]:
+                  - generic [ref=f7e745]:
+                    - generic [ref=f7e746]: EURUSDp
+                    - generic [ref=f7e747]: Short
+                  - generic [ref=f7e749]: 22. Juni 26
+              - generic [ref=f7e751]: +6,52 EUR
+            - generic [ref=f7e752]:
+              - generic [ref=f7e753]:
+                - generic [ref=f7e754]: "#7"
+                - generic [ref=f7e755]:
+                  - generic [ref=f7e756]:
+                    - generic [ref=f7e757]: GBPJPYp
+                    - generic [ref=f7e758]: Long
+                  - generic [ref=f7e760]: 29. Juni 26
+              - generic [ref=f7e762]: +6,18 EUR
+  - alert [ref=f7e763]
+  - generic [ref=f7e764]: "-10€"

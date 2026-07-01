@@ -330,16 +330,19 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
     }))
 
   // Max Drawdown (peak-to-trough auf Equity-Kurve; startCapital als Basis)
-  let peak = startCapital
-  let balance = startCapital
+  // Ohne gesetztes Startkapital ist der %-Wert bedeutungslos (Division durch ~0).
   let maxDD = 0
   let maxDDAbs = 0
-  for (const t of [...closed].sort((a, b) => a.date.localeCompare(b.date))) {
-    balance += (t.pnl ?? 0)
-    if (balance > peak) peak = balance
-    const ddAbs = Math.max(0, peak - balance)
-    const dd = peak > 0 ? (ddAbs / peak) * 100 : 0
-    if (dd > maxDD) { maxDD = dd; maxDDAbs = ddAbs }
+  if (startCapital > 0) {
+    let peak = startCapital
+    let balance = startCapital
+    for (const t of [...closed].sort((a, b) => a.date.localeCompare(b.date))) {
+      balance += (t.pnl ?? 0)
+      if (balance > peak) peak = balance
+      const ddAbs = Math.max(0, peak - balance)
+      const dd = peak > 0 ? (ddAbs / peak) * 100 : 0
+      if (dd > maxDD) { maxDD = dd; maxDDAbs = ddAbs }
+    }
   }
   const maxDrawdown = round2(maxDD)
   const recoveryFactor = maxDDAbs > 0 ? round2(netPnl / maxDDAbs) : 0
