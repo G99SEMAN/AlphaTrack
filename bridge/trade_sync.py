@@ -78,11 +78,6 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
             data = resp.json()
             synced = data.get("synced", 0)
 
-            if closed_count > 0 and local_log:
-                total_pnl = sum(t.get("pnl") or 0 for t in closed_trades)
-                summary = f"{closed_count} Trade(s) synchronisiert | PnL gesamt: {total_pnl:+.2f}"
-                local_log.add("info", summary)
-
             return True, time.time()
         else:
             if display:

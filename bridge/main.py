@@ -366,6 +366,7 @@ def main():
         "start_time": time.time(),
         "balance": None,
         "currency": None,
+        "last_trade_sync": None,
     }
 
     cmd_queue: queue.Queue = get_command_queue()
@@ -554,6 +555,7 @@ def main():
                 ok, last_sync = sync_trades(config, mt5, last_sync, display, local_log)
                 if ok:
                     state["trades_sync"] += state["open_positions"]
+                    state["last_trade_sync"] = time.time()
                     display.update_last_sync()
             else:
                 last_sync = now

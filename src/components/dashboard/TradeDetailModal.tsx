@@ -13,7 +13,7 @@ interface TradeDetailModalProps {
 }
 
 function toTvSymbol(instrument: string): string {
-  const base = instrument.split(/[._]/)[0]
+  const base = instrument.split(/[._]/)[0].replace(/[a-z]+$/, '')
   const clean = base.replace(/[^A-Za-z]/g, '').toUpperCase()
   if (/^[A-Z]{6}$/.test(clean)) return `FX:${clean}`
   return clean

@@ -74,6 +74,7 @@ export interface BotStatus {
   openTicketIds?: number[]
   positions?: LivePosition[]
   tradesSync: number
+  lastTradeSync?: string
   uptime: number
   balance?: number
   currency?: string

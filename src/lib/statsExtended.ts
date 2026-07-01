@@ -329,19 +329,20 @@ export function computeExtendedStats(trades: Trade[], strategies: Strategy[], st
       strategyName: strategies.find(s => s.id === t.strategyId)?.name,
     }))
 
-  // Max Drawdown (peak-to-trough auf kumulativer PnL-Kurve)
-  let peak = 0
+  // Max Drawdown (peak-to-trough auf Equity-Kurve; startCapital als Basis)
+  let peak = startCapital
+  let balance = startCapital
   let maxDD = 0
-  let cumPnl = 0
+  let maxDDAbs = 0
   for (const t of [...closed].sort((a, b) => a.date.localeCompare(b.date))) {
-    cumPnl += (t.pnl ?? 0)
-    if (cumPnl > peak) peak = cumPnl
-    const dd = peak > 0 ? (peak - cumPnl) / peak * 100 : 0
-    if (dd > maxDD) maxDD = dd
+    balance += (t.pnl ?? 0)
+    if (balance > peak) peak = balance
+    const ddAbs = Math.max(0, peak - balance)
+    const dd = peak > 0 ? (ddAbs / peak) * 100 : 0
+    if (dd > maxDD) { maxDD = dd; maxDDAbs = ddAbs }
   }
   const maxDrawdown = round2(maxDD)
-  const ddAbs = peak * (maxDD / 100)
-  const recoveryFactor = ddAbs > 0 ? round2(netPnl / ddAbs) : 0
+  const recoveryFactor = maxDDAbs > 0 ? round2(netPnl / maxDDAbs) : 0
 
   // Konsistenz-Score — % der Wochen mit positivem P&L
   const weekMap = new Map<string, number>()

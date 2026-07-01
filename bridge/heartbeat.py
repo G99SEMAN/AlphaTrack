@@ -1,5 +1,6 @@
 import requests
 import time
+from datetime import datetime, timezone
 
 from gateway import get_positions_cache
 
@@ -28,6 +29,10 @@ def send_heartbeat(config: dict, state: dict, display=None) -> tuple[bool, bool]
         status_payload["balance"] = state["balance"]
     if state.get("currency"):
         status_payload["currency"] = state["currency"]
+    if state.get("last_trade_sync") is not None:
+        status_payload["lastTradeSync"] = datetime.fromtimestamp(
+            state["last_trade_sync"], tz=timezone.utc
+        ).isoformat().replace("+00:00", "Z")
 
     positions = get_positions_cache()
     status_payload["openTicketIds"] = [p["ticket"] for p in positions]

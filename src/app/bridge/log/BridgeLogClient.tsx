@@ -6,7 +6,7 @@ import {
   ScrollText, RefreshCw, Search, Trash2, Download,
   ChevronDown, AlertTriangle, Info, X,
 } from 'lucide-react'
-import { BotEntry, BridgeLogEntry } from '@/types/bot'
+import { BotEntry, BotStatus, BridgeLogEntry } from '@/types/bot'
 
 interface Props {
   bots: BotEntry[]
@@ -67,6 +67,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
   const [confirmClear, setConfirmClear] = useState<string | null>(null)
   const [clearing, setClearing] = useState(false)
   const [showExport, setShowExport] = useState(false)
+  const [lastTradeSync, setLastTradeSync] = useState<string | null>(null)
   const exportRef = useRef<HTMLDivElement>(null)
 
   const fetchAll = useCallback(async () => {
@@ -82,10 +83,24 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
     if (Object.keys(updated).length > 0) setLogs(prev => ({ ...prev, ...updated }))
   }, [bots])
 
+  const fetchStatus = useCallback(async () => {
+    const bridge = bots[0]
+    if (!bridge) return
+    try {
+      const res = await fetch(`/api/bridge/status?bridgeId=${encodeURIComponent(bridge.id)}`)
+      if (res.ok) {
+        const data = await res.json() as { status: BotStatus | null }
+        setLastTradeSync(data.status?.lastTradeSync ?? null)
+      }
+    } catch { /* silent */ }
+  }, [bots])
+
   useEffect(() => {
+    fetchStatus()
     const id = setInterval(fetchAll, 10_000)
-    return () => clearInterval(id)
-  }, [fetchAll])
+    const sid = setInterval(fetchStatus, 10_000)
+    return () => { clearInterval(id); clearInterval(sid) }
+  }, [fetchAll, fetchStatus])
 
   useEffect(() => {
     function handler(e: MouseEvent) {
@@ -154,7 +169,13 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
           <div>
             <h1 className="text-lg font-bold" style={{ color: 'var(--text-1)' }}>Bridge Log</h1>
             <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-              Systemzeit - alle Meldungen aller Bots
+              Systemzeit · alle Meldungen aller Bots
+              {lastTradeSync && (
+                <span className="ml-3" style={{ color: 'var(--accent)' }}>
+                  Letzter Sync:{' '}
+                  {new Date(lastTradeSync).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              )}
             </p>
           </div>
         </div>
