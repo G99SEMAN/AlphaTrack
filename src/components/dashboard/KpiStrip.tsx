@@ -176,7 +176,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
   const pfColor = profitFactor >= 2 ? 'var(--green)' : profitFactor >= 1 ? 'var(--amber)' : 'var(--red)'
 
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       {/* 1 — Net P&L */}
       <KpiCard delay={0}>
         <Label>Net P&amp;L</Label>

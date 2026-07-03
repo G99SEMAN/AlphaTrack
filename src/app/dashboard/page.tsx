@@ -88,7 +88,7 @@ export default async function DashboardPage({
                 {activeProfile.type === 'live' ? 'Echtgeld' : 'Spielgeld'}
               </span>
             </div>
-            <p className="text-sm truncate" style={{ color: 'var(--text-3)' }}>
+            <p className="text-sm md:truncate" style={{ color: 'var(--text-3)' }}>
               {activeProfile.broker} · Startkapital:{' '}
               <span className="font-mono font-semibold" style={{ color: 'var(--text-2)' }}>
                 {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
@@ -124,11 +124,11 @@ export default async function DashboardPage({
               currency={activeProfile.currency}
             />
 
-            {/* Haupt-Bereich: linkes Panel | Kalender (Mitte) | rechtes Panel */}
-            <div className="flex gap-4" style={{ alignItems: 'flex-start' }}>
+            {/* Haupt-Bereich: linkes Panel | Kalender (Mitte) | rechtes Panel — unter xl gestapelt */}
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
 
               {/* Linkes Panel: Recent Trades + Account Balance */}
-              <div style={{ width: 270, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div className="flex w-full flex-col gap-3 xl:w-[270px] xl:shrink-0">
                 <RecentTradesCard
                   trades={allTrades}
                   currency={activeProfile.currency}
@@ -142,7 +142,7 @@ export default async function DashboardPage({
               </div>
 
               {/* Kalender — Mitte */}
-              <div style={{ flex: '1 1 0', minWidth: 0 }}>
+              <div className="w-full min-w-0 xl:flex-1">
                 <TradingCalendar
                   trades={allTrades}
                   currency={activeProfile.currency}
@@ -150,7 +150,7 @@ export default async function DashboardPage({
               </div>
 
               {/* Rechtes Panel: Alpha Score + Equity Chart */}
-              <div style={{ width: 280, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div className="flex w-full flex-col gap-3 xl:w-[280px] xl:shrink-0">
                 <AlphaScoreChart
                   winRate={allStats.winRate}
                   profitFactor={allStats.profitFactor}

@@ -250,8 +250,8 @@ function TradingCalendar({ trades, currency }: Props) {
           </div>
         </div>
 
-        {/* Weekly summary column */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, width: 110 }}>
+        {/* Weekly summary column — auf sehr schmalen Screens ausgeblendet */}
+        <div className="hidden sm:flex" style={{ flexDirection: 'column', gap: 3, width: 110 }}>
           {/* Header */}
           <div style={{ height: 28, display: 'flex', alignItems: 'center' }}>
             <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Woche</span>
