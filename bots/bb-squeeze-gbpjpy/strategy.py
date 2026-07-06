@@ -139,6 +139,7 @@ class BBSqueezeStrategy(BaseBot):
 
         # --- Lotgröße: 1% Kontorisiko ---
         lots = self._calc_lots(sl_dist, cfg)
+        tp_dist = abs(tp_price - last_close)
 
         arrow  = "↑" if direction == "buy" else "↓"
         reason = (
@@ -149,11 +150,13 @@ class BBSqueezeStrategy(BaseBot):
 
         self._last_entry_date = today_str
         return {
-            "action": direction,
-            "lots":   lots,
-            "sl":     round(sl_price, 3),
-            "tp":     round(tp_price, 3),
-            "reason": reason,
+            "action":  direction,
+            "lots":    lots,
+            "sl":      round(sl_price, 3),
+            "tp":      round(tp_price, 3),
+            "sl_pips": round(sl_dist / 0.01, 1),   # JPY-Pair: 1 Pip = 0.01
+            "tp_pips": round(tp_dist / 0.01, 1),
+            "reason":  reason,
         }
 
     # -------------------------------------------------------------------------

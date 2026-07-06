@@ -41,6 +41,7 @@ _history_fetcher = None
 _historical_candles_fetcher = None
 _account_fetcher = None
 _calendar_fetcher = None
+_tick_fetcher = None
 _log_callback = None
 _display_callback = None
 
@@ -130,6 +131,11 @@ def set_account_fetcher(func):
 def set_calendar_fetcher(func):
     global _calendar_fetcher
     _calendar_fetcher = func
+
+
+def set_tick_fetcher(func):
+    global _tick_fetcher
+    _tick_fetcher = func
 
 
 def set_display_callback(func):
@@ -565,6 +571,16 @@ async def get_candles(
     if not candles:
         raise HTTPException(status_code=503, detail=f"Keine Kerzen für {symbol} - Symbol im MT5 aktiviert?")
     return {"candles": candles, "symbol": symbol}
+
+
+@app.get("/tick")
+async def get_tick(symbol: str = Query(default="EURUSDp")):
+    if _tick_fetcher is None:
+        raise HTTPException(status_code=503, detail="MT5 nicht initialisiert")
+    tick = await asyncio.to_thread(_tick_fetcher, symbol)
+    if tick is None:
+        raise HTTPException(status_code=503, detail=f"Kein Tick für {symbol} - Symbol im MT5 aktiviert?")
+    return tick
 
 
 @app.get("/historical_candles")

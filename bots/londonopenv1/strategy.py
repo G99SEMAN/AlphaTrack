@@ -142,7 +142,11 @@ class LondonOpenV1Strategy(BaseBot):
             tp = round(current_close + sl_distance * rr, 5)
             self._last_trade_date = today_str
             self.log("info", "BUY-Signal", f"Breakout ueber Asia-High {asia_high:.5f} | SL={sl} TP={tp}")
-            return {"action": "buy", "lots": lots, "sl": sl, "tp": tp}
+            return {
+                "action": "buy", "lots": lots, "sl": sl, "tp": tp,
+                "sl_pips": round(sl_distance / pip, 1),
+                "tp_pips": round(sl_distance * rr / pip, 1),
+            }
 
         # Breakout SELL: Kurs schliess unter Asia-Low
         if current_close < asia_low:
@@ -151,6 +155,10 @@ class LondonOpenV1Strategy(BaseBot):
             tp = round(current_close - sl_distance * rr, 5)
             self._last_trade_date = today_str
             self.log("info", "SELL-Signal", f"Breakout unter Asia-Low {asia_low:.5f} | SL={sl} TP={tp}")
-            return {"action": "sell", "lots": lots, "sl": sl, "tp": tp}
+            return {
+                "action": "sell", "lots": lots, "sl": sl, "tp": tp,
+                "sl_pips": round(sl_distance / pip, 1),
+                "tp_pips": round(sl_distance * rr / pip, 1),
+            }
 
         return {"action": "hold"}

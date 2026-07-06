@@ -112,11 +112,13 @@ class ScalpingV1Strategy(BaseBot):
             tp = round(last_close + tp_pips * 0.0001, 5)
             self._daily_trades += 1
             return {
-                "action": "buy",
-                "lots":   lots,
-                "sl":     sl,
-                "tp":     tp,
-                "reason": f"BUY EMA-Cross | RSI={rsi:.1f} | EMA200={ema_trend:.5f} | SL={sl_pips}p TP={tp_pips}p",
+                "action":  "buy",
+                "lots":    lots,
+                "sl":      sl,
+                "tp":      tp,
+                "sl_pips": sl_pips,
+                "tp_pips": tp_pips,
+                "reason":  f"BUY EMA-Cross | RSI={rsi:.1f} | EMA200={ema_trend:.5f} | SL={sl_pips}p TP={tp_pips}p",
             }
 
         # Bearisches Crossover + EMA200-Filter + RSI < Schwelle
@@ -126,11 +128,13 @@ class ScalpingV1Strategy(BaseBot):
             tp = round(last_close - tp_pips * 0.0001, 5)
             self._daily_trades += 1
             return {
-                "action": "sell",
-                "lots":   lots,
-                "sl":     sl,
-                "tp":     tp,
-                "reason": f"SELL EMA-Cross | RSI={rsi:.1f} | EMA200={ema_trend:.5f} | SL={sl_pips}p TP={tp_pips}p",
+                "action":  "sell",
+                "lots":    lots,
+                "sl":      sl,
+                "tp":      tp,
+                "sl_pips": sl_pips,
+                "tp_pips": tp_pips,
+                "reason":  f"SELL EMA-Cross | RSI={rsi:.1f} | EMA200={ema_trend:.5f} | SL={sl_pips}p TP={tp_pips}p",
             }
 
         return {"action": "hold", "reason": f"Kein Signal | RSI={rsi:.1f} | EMA200={ema_trend:.5f}"}

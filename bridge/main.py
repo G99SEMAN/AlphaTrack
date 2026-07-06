@@ -15,7 +15,7 @@ import time
 
 import requests
 
-from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_historical_candles_fetcher, set_account_fetcher, set_calendar_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket, get_alphatrack_bot_ids
+from gateway import get_command_queue, set_trade_result, update_positions_cache, set_candles_fetcher, set_history_fetcher, set_historical_candles_fetcher, set_account_fetcher, set_calendar_fetcher, set_tick_fetcher, set_log_callback, set_display_callback, start_server, config_lock, configure, get_connected_bots_info, get_at_bot_id_for_ticket, get_alphatrack_bot_ids
 from heartbeat import send_heartbeat
 from mt5_connector import MT5Connector
 from trade_executor import execute_trade, close_position
@@ -351,6 +351,7 @@ def main():
     set_historical_candles_fetcher(mt5.copy_rates_range)
     set_account_fetcher(mt5.get_account_info)
     set_calendar_fetcher(mt5.get_calendar)
+    set_tick_fetcher(mt5.get_tick)
 
     # FastAPI Gateway starten
     start_server(config["command_server_port"])
@@ -419,6 +420,7 @@ def main():
                     set_candles_fetcher(mt5.copy_rates)
                     set_history_fetcher(mt5.get_closed_deals)
                     set_account_fetcher(mt5.get_account_info)
+                    set_tick_fetcher(mt5.get_tick)
                 else:
                     display.log("error", "MT5", "*** CRITICAL ERROR *** MT5 konnte nicht neu gestartet werden!")
                     display.log("error", "MT5", "Alle Neustart-Versuche fehlgeschlagen - Bridge wird gestoppt.")

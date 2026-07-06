@@ -128,11 +128,13 @@ class FVGStrategy(BaseBot):
                 f"Preis {current_price:.5f} | SL {sl:.5f} | TP {tp:.5f} | RR {rr:.2f}"
             )
             return {
-                "action": direction,
-                "lots":   lots,
-                "sl":     round(sl, 5),
-                "tp":     round(tp, 5),
-                "reason": reason,
+                "action":  direction,
+                "lots":    lots,
+                "sl":      round(sl, 5),
+                "tp":      round(tp, 5),
+                "sl_pips": round(sl_dist / PIP_SIZE, 1),
+                "tp_pips": round(tp_dist / PIP_SIZE, 1),
+                "reason":  reason,
             }
 
         n_active = len(fvgs)

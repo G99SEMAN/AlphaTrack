@@ -2,14 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, Activity, Bot, BarChart2 } from 'lucide-react'
+import { LayoutDashboard, BookOpen, TrendingUp, Network, BarChart2 } from 'lucide-react'
 
 const ITEMS = [
-  { href: '/dashboard',       label: 'Dashboard',  icon: LayoutDashboard },
-  { href: '/journal',         label: 'Trades',     icon: BookOpen },
-  { href: '/bridge/trades',   label: 'Live',       icon: Activity },
-  { href: '/bots',            label: 'Bots',       icon: Bot },
-  { href: '/statistiken',     label: 'Statistik',  icon: BarChart2 },
+  { href: '/dashboard',        label: 'Dashboard',    icon: LayoutDashboard },
+  { href: '/journal',          label: 'Trades',       icon: BookOpen },
+  { href: '/bots/performance', label: 'Performance',  icon: TrendingUp },
+  { href: '/netzwerk',         label: 'Netzwerk',     icon: Network },
+  { href: '/statistiken',      label: 'Statistik',    icon: BarChart2 },
 ]
 
 export default function BottomNav() {

@@ -207,6 +207,23 @@ class MT5Connector:
             "currency": info.currency,
         }
 
+    def get_tick(self, symbol: str) -> dict | None:
+        """Aktueller Bid/Ask/Spread für ein Symbol — für Spread-Filter in Bot-Strategien."""
+        info = mt5.symbol_info(symbol)
+        tick = mt5.symbol_info_tick(symbol)
+        if info is None or tick is None:
+            return None
+        digits = info.digits
+        pip_size = 10 * info.point if digits in (3, 5) else info.point
+        spread_price = tick.ask - tick.bid
+        return {
+            "symbol": symbol,
+            "bid": tick.bid,
+            "ask": tick.ask,
+            "spread_pips": round(spread_price / pip_size, 2) if pip_size > 0 else 0.0,
+            "time": tick.time,
+        }
+
     def get_active_symbols(self) -> list[str]:
         positions = mt5.positions_get()
         if not positions:

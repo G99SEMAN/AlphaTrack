@@ -135,6 +135,34 @@ class BridgeClient:
         except Exception:
             return None
 
+    def get_tick(self, symbol: str) -> dict | None:
+        """Aktueller Bid/Ask/Spread — fuer Spread-Filter vor Order-Eroeffnung."""
+        try:
+            r = requests.get(f"{self._url}/tick", params={"symbol": symbol}, timeout=5)
+            return r.json() if r.ok else None
+        except Exception:
+            return None
+
+    def get_calendar(self, days_back: int = 1, days_ahead: int = 1) -> list:
+        """Forex-Wirtschaftskalender — fuer News-Blackout-Filter."""
+        try:
+            r = requests.get(
+                f"{self._url}/calendar",
+                params={"days_back": days_back, "days_ahead": days_ahead},
+                timeout=8,
+            )
+            return r.json().get("events", []) if r.ok else []
+        except Exception:
+            return []
+
+    def get_history(self) -> list:
+        """Abgeschlossene Trades (alle Bots) — fuer Verlustserien-Erkennung."""
+        try:
+            r = requests.get(f"{self._url}/history", timeout=8)
+            return r.json().get("deals", []) if r.ok else []
+        except Exception:
+            return []
+
     def execute_trade(self, symbol: str, direction: str, lots: float,
                       sl: float = 0, tp: float = 0,
                       sl_pips: float = 0, tp_pips: float = 0) -> dict:

@@ -3,6 +3,7 @@
 import { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from 'recharts'
+import InfoTooltip from '@/components/statistiken/InfoTooltip'
 
 interface Props {
   winRate: number        // 0-100
@@ -10,45 +11,51 @@ interface Props {
   avgWin: number         // positive €
   avgLoss: number        // negative €
   maxDrawdown: number    // 0-100 %
-  netPnl: number         // € (for recovery factor)
+  maxDrawdownAbs: number // größter Drawdown in € (für Recovery Factor)
+  netPnl: number         // € (für Recovery Factor)
   trades: { pnl?: number; date: string; status: string }[]
 }
+
+const MIN_TRADES_FOR_FULL_SCORE = 20
+
+const OVERALL_TOOLTIP =
+  'Gewichteter Mix aus 6 Kennzahlen (0-100): Profit Factor 25%, Recovery Factor 20%, Max Drawdown 20%, Konsistenz 15%, Win Rate 10%, Avg Win/Loss-Ratio 10%. Risiko & Konsistenz zählen zusammen 55%, reine Trefferquote nur 45% — ein hoher Score steht für nachhaltige, kontrollierte Performance statt bloß viele Gewinner-Trades.'
 
 function clamp(v: number, min = 0, max = 100): number {
   return Math.max(min, Math.min(max, v))
 }
 
 export function computeAlphaScore(props: Props): {
-  scores: { axis: string; value: number }[]
+  scores: { axis: string; value: number; tooltip: string }[]
   overall: number
+  tradeCount: number
+  isProvisional: boolean
 } {
-  const { winRate, profitFactor, avgWin, avgLoss, maxDrawdown, netPnl, trades } = props
+  const { winRate, profitFactor, avgWin, avgLoss, maxDrawdown, maxDrawdownAbs, netPnl, trades } = props
 
-  // 1. Win Rate (20%): 30% = 0, 70% = 100
+  // 1. Win Rate (10%): 30% = 0, 70% = 100
   const winScore = clamp((winRate - 30) / 40 * 100)
 
   // 2. Profit Factor (25%): PF 0.5 = 0, PF 3.0 = 100
   const pfScore = clamp((profitFactor - 0.5) / 2.5 * 100)
 
-  // 3. Avg Win/Loss ratio (20%): ratio 1=33, 3=100
+  // 3. Avg Win/Loss ratio (10%): ratio 1=33, 3=100
   const ratio = avgLoss < 0 ? avgWin / Math.abs(avgLoss) : avgWin > 0 ? 3 : 0
   const wlScore = clamp(ratio / 3 * 100)
 
-  // 4. Recovery Factor (15%): RF = netPnl / maxDrawdownAbs
-  // We approximate max drawdown absolute from maxDrawdown % and netPnl
-  // Simpler: use netPnl / (maxDrawdown/100 * (netPnl + 1)) — just use the ratio
-  let rfScore = 50
-  if (maxDrawdown > 0) {
-    const rf = netPnl > 0 ? netPnl / (maxDrawdown * 10) : 0
-    rfScore = clamp(rf / 3 * 100)
-  } else if (netPnl > 0) {
-    rfScore = 100
+  // 4. Recovery Factor (20%): Netto-Gewinn ÷ größter Drawdown in €. RF 0 = 0, RF 3+ = 100
+  let rfScore: number
+  if (maxDrawdownAbs > 0) {
+    const recoveryFactor = netPnl / maxDrawdownAbs
+    rfScore = clamp(recoveryFactor / 3 * 100)
+  } else {
+    rfScore = netPnl > 0 ? 100 : 50
   }
 
-  // 5. Max Drawdown (10%): 0% = 100, 20%+ = 0 (inverse)
+  // 5. Max Drawdown (20%): 0% = 100, 20%+ = 0 (invers)
   const ddScore = clamp(100 - maxDrawdown * 5)
 
-  // 6. Consistency (10%): % profitable trading days
+  // 6. Consistency (15%): % profitabler Handelstage
   const closedTrades = trades.filter(t => t.status === 'closed' && t.pnl !== undefined)
   const dayMap = new Map<string, number>()
   for (const t of closedTrades) {
@@ -59,20 +66,42 @@ export function computeAlphaScore(props: Props): {
   const profitableDays = [...dayMap.values()].filter(v => v > 0).length
   const consistencyScore = tradingDays > 0 ? clamp((profitableDays / tradingDays) * 100) : 0
 
-  const weights = [0.20, 0.25, 0.20, 0.15, 0.10, 0.10]
+  const weights = [0.10, 0.25, 0.10, 0.20, 0.20, 0.15]
   const rawScores = [winScore, pfScore, wlScore, rfScore, ddScore, consistencyScore]
   const overall = rawScores.reduce((sum, s, i) => sum + s * weights[i], 0)
 
+  const tradeCount = closedTrades.length
+
   return {
     scores: [
-      { axis: 'Win %', value: Math.round(winScore) },
-      { axis: 'Profit Factor', value: Math.round(pfScore) },
-      { axis: 'Avg Win/Loss', value: Math.round(wlScore) },
-      { axis: 'Recovery', value: Math.round(rfScore) },
-      { axis: 'Max DD', value: Math.round(ddScore) },
-      { axis: 'Konsistenz', value: Math.round(consistencyScore) },
+      {
+        axis: 'Win %', value: Math.round(winScore),
+        tooltip: 'Anteil gewonnener Trades (Gewichtung 10%). 30% oder weniger = 0 Punkte, 70% oder mehr = 100 Punkte. Steigt mit jedem Gewinn-Trade, sinkt mit jedem Verlust-Trade. Bei Strategien mit hohem Chance-Risiko-Verhältnis ist eine niedrige Win Rate normal und kein Warnsignal.',
+      },
+      {
+        axis: 'Profit Factor', value: Math.round(pfScore),
+        tooltip: 'Bruttogewinn ÷ Bruttoverlust (Gewichtung 25%, wichtigste Einzelkennzahl). PF 0.5 oder weniger = 0 Punkte, PF 3.0 oder mehr = 100 Punkte. Bildet Trefferquote und Risiko-Ertrags-Verhältnis gemeinsam ab — jeder Trade wirkt sich direkt darauf aus.',
+      },
+      {
+        axis: 'Avg Win/Loss', value: Math.round(wlScore),
+        tooltip: 'Verhältnis von Ø-Gewinn zu Ø-Verlust (Gewichtung 10%). 1:1 = 33 Punkte, 3:1 oder mehr = 100 Punkte. Steigt, wenn Gewinner im Schnitt größer sind als Verlierer, z. B. durch Trailing-Stops oder frühzeitiges Schneiden von Verlusten.',
+      },
+      {
+        axis: 'Recovery', value: Math.round(rfScore),
+        tooltip: 'Recovery Factor = Netto-Gewinn ÷ größter Drawdown in € (Gewichtung 20%). Zeigt, wie gut sich das Konto von Verlustphasen erholt. RF 0 = 0 Punkte, RF 3 oder mehr = 100 Punkte. Verschlechtert sich durch tiefe Drawdowns, verbessert sich durch stetiges Gewinnwachstum.',
+      },
+      {
+        axis: 'Max DD', value: Math.round(ddScore),
+        tooltip: 'Größter Rückgang vom bisherigen Kontohoch in Prozent (Gewichtung 20%). 0% Drawdown = 100 Punkte, ab 20% Drawdown = 0 Punkte. Jede Verlustserie, die einen neuen Tiefpunkt unter dem letzten Hoch erzeugt, verschlechtert diesen Wert dauerhaft.',
+      },
+      {
+        axis: 'Konsistenz', value: Math.round(consistencyScore),
+        tooltip: 'Anteil profitabler Handelstage an allen Handelstagen (Gewichtung 15%). Ein Tag zählt als profitabel, wenn die Summe aller Trades an diesem Tag positiv ist. Viele einzelne Verlusttage verschlechtern diesen Wert, auch wenn die Gesamtbilanz positiv ist.',
+      },
     ],
     overall: Math.round(overall),
+    tradeCount,
+    isProvisional: tradeCount < MIN_TRADES_FOR_FULL_SCORE,
   }
 }
 
@@ -112,7 +141,7 @@ function ScoreBar({ score }: { score: number }) {
 }
 
 function AlphaScoreChart(props: Props) {
-  const { scores, overall } = useMemo(() => computeAlphaScore(props), [props])
+  const { scores, overall, tradeCount, isProvisional } = useMemo(() => computeAlphaScore(props), [props])
 
   const scoreColor = overall >= 70 ? 'var(--green)' : overall >= 45 ? 'var(--amber)' : 'var(--red)'
 
@@ -135,10 +164,11 @@ function AlphaScoreChart(props: Props) {
         background: 'linear-gradient(90deg,transparent,rgba(139,92,246,0.25),transparent)',
       }} />
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
         <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
           Alpha Score
         </p>
+        <InfoTooltip text={OVERALL_TOOLTIP} />
       </div>
 
       {/* Radar Chart */}
@@ -168,8 +198,20 @@ function AlphaScoreChart(props: Props) {
 
       {/* Score number + bar */}
       <div style={{ marginTop: 4 }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 9, color: 'var(--text-3)', fontWeight: 600 }}>Dein Alpha Score</span>
+          {isProvisional && (
+            <span
+              title={`Nur ${tradeCount}/${MIN_TRADES_FOR_FULL_SCORE} geschlossene Trades — Score noch statistisch unsicher`}
+              style={{
+                fontSize: 8, fontWeight: 700, color: 'var(--amber)',
+                background: 'rgba(245,158,11,0.12)', borderRadius: 99,
+                padding: '1px 6px', letterSpacing: '0.02em',
+              }}
+            >
+              Vorläufig · {tradeCount}/{MIN_TRADES_FOR_FULL_SCORE} Trades
+            </span>
+          )}
         </div>
         <motion.p
           style={{
@@ -189,8 +231,11 @@ function AlphaScoreChart(props: Props) {
         {/* Axis breakdown */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', marginTop: 12, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
           {scores.map(s => (
-            <div key={s.axis} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: 9, color: 'var(--text-3)' }}>{s.axis}</span>
+            <div key={s.axis} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 4 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                <span style={{ fontSize: 9, color: 'var(--text-3)' }}>{s.axis}</span>
+                <InfoTooltip text={s.tooltip} />
+              </span>
               <span style={{
                 fontSize: 9, fontWeight: 700, fontFamily: 'var(--font-dm-mono)',
                 color: s.value >= 70 ? 'var(--green)' : s.value >= 45 ? 'var(--amber)' : 'var(--red)',

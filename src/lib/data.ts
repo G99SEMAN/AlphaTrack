@@ -91,6 +91,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
   // Drawdown und Equity-Kurve gemeinsam berechnen (absolute Kontosaldos)
   let peak = startCapital
   let maxDrawdown = 0
+  let maxDrawdownAbs = 0
   let balance = startCapital
   let depositRunning = 0
   const equityCurve: { date: string; value: number }[] = []
@@ -103,6 +104,8 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
     // Ohne Startkapital (peak=0) ergibt der %-Drawdown keine sinnvolle Zahl
     const dd = peak > 0 ? ((peak - balance) / peak) * 100 : 0
     if (dd > maxDrawdown) maxDrawdown = dd
+    const ddAbs = peak - balance
+    if (ddAbs > maxDrawdownAbs) maxDrawdownAbs = ddAbs
     const parts = ev.date.slice(0, 10).split('-')
     const dateLabel = `${parts[2]}.${parts[1]}`
     equityCurve.push({ date: dateLabel, value: Math.round(balance * 100) / 100 })
@@ -127,6 +130,7 @@ export function computeStats(trades: Trade[], startCapital = 0, deposits: Deposi
     openTrades: trades.filter(t => t.status === 'open').length,
     avgRR,
     maxDrawdown,
+    maxDrawdownAbs,
     currentStreak: streak,
     equityCurve,
     depositCurve,

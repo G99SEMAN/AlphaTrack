@@ -43,6 +43,7 @@ export interface TradeStats {
   openTrades: number
   avgRR: number
   maxDrawdown: number
+  maxDrawdownAbs: number
   currentStreak: number
   equityCurve: { date: string; value: number }[]
   depositCurve: { date: string; value: number }[]

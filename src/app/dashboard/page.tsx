@@ -157,6 +157,7 @@ export default async function DashboardPage({
                   avgWin={allStats.avgWin}
                   avgLoss={allStats.avgLoss}
                   maxDrawdown={allStats.maxDrawdown}
+                  maxDrawdownAbs={allStats.maxDrawdownAbs}
                   netPnl={allStats.netPnl}
                   trades={allTrades}
                 />
