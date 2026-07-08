@@ -438,7 +438,10 @@ def main():
         if mt5_ok:
             state["active_symbols"] = mt5.get_active_symbols()
             state["open_positions"] = mt5.get_open_positions_count()
-            update_positions_cache(mt5.get_open_positions())
+            open_positions = mt5.get_open_positions()
+            for pos in open_positions:
+                pos["botId"] = get_at_bot_id_for_ticket(pos["ticket"])
+            update_positions_cache(open_positions)
             account = mt5.get_account_info()
             if account:
                 state["balance"] = account["balance"]
