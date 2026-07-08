@@ -35,9 +35,10 @@ interface LivePosition {
 
 interface Props {
   bots: BotEntry[]
+  strategyBots: BotEntry[]
 }
 
-export default function BridgeTradesClient({ bots }: Props) {
+export default function BridgeTradesClient({ bots, strategyBots }: Props) {
   const { isUnlocked } = useTradingLock()
   const [selectedBotIds, setSelectedBotIds] = useState<Set<string>>(
     new Set(bots.map(b => b.id))
@@ -89,22 +90,25 @@ export default function BridgeTradesClient({ bots }: Props) {
     setLoadingPositions(true)
     try {
       const results = await Promise.all(
-        [...selectedBotIds].map(async (botId) => {
-          const bot = bots.find(b => b.id === botId)
-          const res = await fetch(`/api/bridge/positions?bridgeId=${botId}`)
+        [...selectedBotIds].map(async (bridgeId) => {
+          const bridge = bots.find(b => b.id === bridgeId)
+          const res = await fetch(`/api/bridge/positions?bridgeId=${bridgeId}`)
           if (!res.ok) return []
           const data = await res.json()
-          return (data.positions ?? []).map((p: LivePosition) => ({
-            ...p,
-            botId,
-            botName: bot?.name ?? botId,
-          }))
+          return (data.positions ?? []).map((p: LivePosition) => {
+            const strategyBot = p.botId ? strategyBots.find(b => b.id === p.botId) : undefined
+            return {
+              ...p,
+              botId: p.botId ?? bridgeId,
+              botName: strategyBot?.name ?? bridge?.name ?? bridgeId,
+            }
+          })
         })
       )
       setPositions(results.flat())
     } catch { /* silent */ }
     finally { setLoadingPositions(false) }
-  }, [selectedBotIds, bots])
+  }, [selectedBotIds, bots, strategyBots])
 
   useEffect(() => {
     fetchPositions()
@@ -272,6 +276,7 @@ export default function BridgeTradesClient({ bots }: Props) {
                   const pnlTint = pnlPositive ? 'rgba(34,197,94,0.04)' : 'rgba(239,68,68,0.04)'
                   const isClosing = closingTicket === pos.ticket
                   const rMultiple = calcRMultiple(pos)
+                  const botColor = getBotColor(pos.botId, strategyBots)
                   const openedAt = pos.date
                     ? new Date(pos.date).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
                     : null
@@ -295,12 +300,17 @@ export default function BridgeTradesClient({ bots }: Props) {
                               <p className="text-sm font-black font-mono" style={{ color: 'var(--text-1)' }}>
                                 {pos.instrument}
                               </p>
-                              {pos.botName && (
+                              {pos.botId && strategyBots.some(b => b.id === pos.botId) && (
                                 <span
-                                  title={pos.botName}
-                                  className="w-2.5 h-2.5 rounded-full shrink-0"
-                                  style={{ background: getBotColor(pos.botId, bots) }}
-                                />
+                                  className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0"
+                                  style={{
+                                    background: `${botColor}18`,
+                                    border: `1px solid ${botColor}66`,
+                                    color: botColor,
+                                  }}>
+                                  <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: botColor }} />
+                                  {pos.botName}
+                                </span>
                               )}
                             </div>
                             <p className="text-xs font-semibold" style={{ color: isLong ? '#22c55e' : '#ef4444' }}>
