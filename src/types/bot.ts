@@ -62,6 +62,7 @@ export interface LivePosition {
   tp: number | null
   pnl: number
   swap: number
+  botId?: string | null
 }
 
 export interface BotStatus {
