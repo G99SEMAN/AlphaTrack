@@ -16,6 +16,8 @@ export default async function BridgeTradesPage() {
     activeProfile = profiles[0]
   }
 
+  const allBots = getAllBotsWithStatus().map(({ bot }) => bot)
+
   const bots = getAllBotsWithStatus()
     .filter(({ bot, status }) =>
       (bot.type === 'bridge' || !bot.type) &&
@@ -23,10 +25,12 @@ export default async function BridgeTradesPage() {
     )
     .map(({ bot }) => bot)
 
+  const strategyBots = allBots.filter(bot => bot.type === 'bot')
+
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
-      <BridgeTradesClient bots={bots} />
+      <BridgeTradesClient bots={bots} strategyBots={strategyBots} />
     </div>
   )
 }
