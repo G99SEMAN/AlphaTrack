@@ -99,7 +99,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
                     {fmtDateTime(t.closeTime ?? t.date)}
                   </span>
                   <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexWrap: 'wrap', gap: 5, flex: 1, minWidth: 0 }}>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)' }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', minWidth: 62, flexShrink: 0 }}>
                       {t.instrument}
                     </span>
                     {bot && (
@@ -150,7 +150,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
                     {t.type === 'long'
                       ? <TrendingUp size={11} style={{ color: 'var(--green)', flexShrink: 0 }} />
                       : <TrendingDown size={11} style={{ color: 'var(--red)', flexShrink: 0 }} />}
-                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)' }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', minWidth: 62, flexShrink: 0 }}>
                       {t.instrument}
                     </span>
                     {bot && (
