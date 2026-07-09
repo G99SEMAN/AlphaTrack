@@ -6,30 +6,18 @@ import {
   Activity, TrendingUp, TrendingDown, X, AlertTriangle,
   Clock, Layers, RefreshCw
 } from 'lucide-react'
-import { BotEntry } from '@/types/bot'
+import { BotEntry, LivePosition as BridgeLivePosition } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
 
 const BOT_COLORS = ['#3b82f6', '#a855f7', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16']
 
-function getBotColor(botId: string | undefined, bots: BotEntry[]): string {
+function getBotColor(botId: string | null | undefined, bots: BotEntry[]): string {
   if (!botId) return '#6b7280'
   const idx = bots.findIndex(b => b.id === botId)
   return BOT_COLORS[(idx >= 0 ? idx : 0) % BOT_COLORS.length]
 }
 
-interface LivePosition {
-  ticket: number
-  date: string
-  instrument: string
-  type: 'long' | 'short'
-  entry: number
-  currentPrice: number
-  size: number
-  sl: number | null
-  tp: number | null
-  pnl: number
-  swap: number
-  botId?: string
+interface LivePosition extends BridgeLivePosition {
   botName?: string
   bridgeId: string
 }
@@ -92,16 +80,15 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
     try {
       const results = await Promise.all(
         [...selectedBotIds].map(async (bridgeId) => {
-          const bridge = bots.find(b => b.id === bridgeId)
           const res = await fetch(`/api/bridge/positions?bridgeId=${bridgeId}`)
           if (!res.ok) return []
           const data = await res.json()
-          return (data.positions ?? []).map((p: LivePosition) => {
+          return (data.positions ?? []).map((p: BridgeLivePosition) => {
             const strategyBot = p.botId ? strategyBots.find(b => b.id === p.botId) : undefined
             return {
               ...p,
               botId: p.botId ?? bridgeId,
-              botName: strategyBot?.name ?? bridge?.name ?? bridgeId,
+              botName: strategyBot?.name,
               bridgeId,
             }
           })
