@@ -74,6 +74,17 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
     return map
   }, [trades])
 
+  // High-Impact-Events pro Tag (Key: YYYY-MM-DD, wie WirtschaftsEvent.date bereits formatiert ist)
+  const newsByDate = useMemo(() => {
+    const map = new Map<string, WirtschaftsEvent[]>()
+    for (const e of highImpactEvents) {
+      const existing = map.get(e.date) ?? []
+      existing.push(e)
+      map.set(e.date, existing)
+    }
+    return map
+  }, [highImpactEvents])
+
   // Calendar grid
   const firstDay = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
@@ -249,6 +260,7 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
                 const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
                 const data = pnlByDay.get(key)
                 const dayBotIds = botsByDay.get(key) ?? []
+                const dayNews = newsByDate.get(key)
                 const isToday = key === todayStr
                 const pnlPos = data ? data.pnl >= 0 : null
                 const winPct = data && data.count > 0 ? Math.round((data.wins / data.count) * 100) : null
@@ -292,9 +304,21 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
                     whileHover={data ? { scale: 1.03, boxShadow: '0 6px 16px -4px rgba(0,0,0,0.4)' } : {}}
                     transition={{ duration: 0.12 }}
                   >
-                    <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
-                      {day}
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                      <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
+                        {day}
+                      </span>
+                      {dayNews && (
+                        <span
+                          title={dayNews.map(e => `${e.title} (${e.time})`).join(', ')}
+                          style={{
+                            width: 5, height: 5, borderRadius: '50%',
+                            background: '#ff4560', flexShrink: 0,
+                            boxShadow: '0 0 4px rgba(255,69,96,0.6)',
+                          }}
+                        />
+                      )}
+                    </div>
                     {data && (
                       <>
                         <span style={{
