@@ -150,6 +150,27 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
     return result
   }, [pnlByDay, year, month])
 
+  // Bester/schlechtester Handelstag im sichtbaren Monat (nur wenn P&L > 0 bzw. < 0 — kein "bester Tag"
+  // in einem komplett negativen Monat). Bei Gleichstand werden alle betroffenen Tage markiert.
+  const topFlopDates = useMemo(() => {
+    const prefix = `${year}-${String(month + 1).padStart(2, '0')}-`
+    let bestPnl = -Infinity
+    let worstPnl = Infinity
+    for (const [key, data] of pnlByDay) {
+      if (!key.startsWith(prefix)) continue
+      if (data.pnl > bestPnl) bestPnl = data.pnl
+      if (data.pnl < worstPnl) worstPnl = data.pnl
+    }
+    const best = new Set<string>()
+    const worst = new Set<string>()
+    for (const [key, data] of pnlByDay) {
+      if (!key.startsWith(prefix)) continue
+      if (bestPnl > 0 && data.pnl === bestPnl) best.add(key)
+      if (worstPnl < 0 && data.pnl === worstPnl) worst.add(key)
+    }
+    return { best, worst }
+  }, [pnlByDay, year, month])
+
   function prevMonth() {
     if (month === 0) { setYear(y => y - 1); setMonth(11) }
     else setMonth(m => m - 1)
@@ -279,6 +300,13 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
                     borderColor = `rgba(255, 69, 96, ${0.15 + intensity * 0.2})`
                     glow = `0 2px 10px -2px rgba(255, 69, 96, ${0.1 + intensity * 0.25})`
                   }
+                }
+                if (topFlopDates.best.has(key)) {
+                  borderColor = '#fbbf24'
+                  glow = '0 2px 12px -2px rgba(251,191,36,0.5)'
+                } else if (topFlopDates.worst.has(key)) {
+                  borderColor = '#94a3b8'
+                  glow = '0 2px 10px -2px rgba(148,163,184,0.35)'
                 }
                 const streak = streakByDate.get(key)
 
