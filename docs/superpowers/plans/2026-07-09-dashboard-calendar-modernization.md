@@ -469,6 +469,8 @@ git commit -m "style: modernize calendar cell depth, spacing and header pills"
 
 ## Task 4: Streak-Berechnung (Gewinn-/Verlustserien)
 
+> **Nachtrag (post-implementation):** Der in Step 1 unten gezeigte Code hatte einen Bug — er behielt bei Serien länger als 3 Tage einen Eintrag pro Tag statt nur für den letzten Tag. Gefunden im Task-Review, gefixt in Commit `4bcdaab` ("fix: streak map must only retain the last day of a streak, not every day past length 3"), per Re-Review verifiziert. Der Code unten ist unverändert als historisches Artefakt belassen — die tatsächlich ausgelieferte Logik ist in `TradingCalendar.tsx` maßgeblich.
+
 **Files:**
 - Modify: `src/components/dashboard/TradingCalendar.tsx` (neue `useMemo`-Berechnung nach `weekSummaries`)
 
