@@ -8,14 +8,7 @@ import {
 } from 'lucide-react'
 import { BotEntry, LivePosition as BridgeLivePosition } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
-
-const BOT_COLORS = ['#3b82f6', '#a855f7', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16']
-
-function getBotColor(botId: string | null | undefined, bots: BotEntry[]): string {
-  if (!botId) return '#6b7280'
-  const idx = bots.findIndex(b => b.id === botId)
-  return BOT_COLORS[(idx >= 0 ? idx : 0) % BOT_COLORS.length]
-}
+import { BOT_COLORS, getBotColor } from '@/lib/bot-colors'
 
 interface LivePosition extends BridgeLivePosition {
   botName?: string

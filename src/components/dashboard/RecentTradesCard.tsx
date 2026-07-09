@@ -6,6 +6,7 @@ import { TrendingUp, TrendingDown } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { BotEntry } from '@/types/bot'
 import { currencySymbol } from '@/lib/currency'
+import { getBotColor } from '@/lib/bot-colors'
 
 interface Props {
   trades: Trade[]
@@ -14,13 +15,6 @@ interface Props {
 }
 
 const ROWS = 6
-const BOT_COLORS = ['#3b82f6', '#a855f7', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16']
-
-function getBotColor(botId: string | null | undefined, bots: BotEntry[]): string {
-  if (!botId) return '#6b7280'
-  const idx = bots.findIndex(b => b.id === botId)
-  return BOT_COLORS[(idx >= 0 ? idx : 0) % BOT_COLORS.length]
-}
 
 export default function RecentTradesCard({ trades, currency, strategyBots }: Props) {
   const [tab, setTab] = useState<'recent' | 'open'>('recent')
