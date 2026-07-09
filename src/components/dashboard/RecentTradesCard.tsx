@@ -38,7 +38,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
   }
 
   function fmtDateTime(s: string): string {
-    const time = new Date(s).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+    const time = new Date(s).toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' })
     return `${fmtDate(s)} ${time}`
   }
 

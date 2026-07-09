@@ -363,10 +363,10 @@ export default function BotImportModal({ bots, profiles, existingExternalIdsByPr
                                 </span>
                               </td>
                               <td className="px-3 py-2 whitespace-nowrap" style={{ color: 'var(--text-2)' }}>
-                                {new Date(d.date).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                {new Date(d.date).toLocaleString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
                               </td>
                               <td className="px-3 py-2 whitespace-nowrap" style={{ color: 'var(--text-2)' }}>
-                                {new Date(d.closeTime).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                                {new Date(d.closeTime).toLocaleString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' })}
                               </td>
                               <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ color: 'var(--text-2)' }}>
                                 {d.entry.toFixed(5)}

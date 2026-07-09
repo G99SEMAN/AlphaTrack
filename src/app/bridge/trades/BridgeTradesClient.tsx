@@ -260,7 +260,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                   const rMultiple = calcRMultiple(pos)
                   const botColor = getBotColor(pos.botId, strategyBots)
                   const openedAt = pos.date
-                    ? new Date(pos.date).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+                    ? new Date(pos.date).toLocaleString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
                     : null
 
                   return (

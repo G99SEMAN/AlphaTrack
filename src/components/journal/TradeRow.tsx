@@ -94,9 +94,9 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
           </p>
           <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
             <p className="text-xs shrink-0" style={{ color: 'var(--text-3)' }}>
-              {displayDate.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+              {displayDate.toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric' })}
               {' '}
-              {displayDate.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+              {displayDate.toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' })}
             </p>
             {/* Status-Badge auf Mobile in der linken Spalte */}
             <div className="sm:hidden shrink-0">
@@ -273,18 +273,18 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
               <div>
                 <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Öffnungszeit</p>
                 <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
-                  {date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                  {date.toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric' })}
                   {' '}
-                  {date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+                  {date.toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' })}
                 </p>
               </div>
               {trade.closeTime && (
                 <div>
                   <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Schließzeit</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
-                    {new Date(trade.closeTime).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                    {new Date(trade.closeTime).toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric' })}
                     {' '}
-                    {new Date(trade.closeTime).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+                    {new Date(trade.closeTime).toLocaleTimeString('de-DE', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
               )}
