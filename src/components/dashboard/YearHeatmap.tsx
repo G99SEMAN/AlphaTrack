@@ -59,9 +59,11 @@ export default function YearHeatmap({ trades, year, onSelectMonth }: Props) {
   const jan1Dow = (jan1.getDay() + 6) % 7
   const gridStart = new Date(year, 0, 1 - jan1Dow)
 
-  // 53 Wochenspalten decken jedes Jahr sicher ab
+  // 54 Wochenspalten decken jedes Jahr sicher ab, auch Schaltjahre, deren 1. Januar
+  // auf einen Sonntag fällt (z.B. 2012, 2040) — mit 53 Wochen würde der 31. Dezember
+  // in diesen Fällen aus dem Raster fallen
   const weeks: Date[][] = []
-  for (let w = 0; w < 53; w++) {
+  for (let w = 0; w < 54; w++) {
     const week: Date[] = []
     for (let d = 0; d < 7; d++) {
       const day = new Date(gridStart)
