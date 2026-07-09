@@ -31,6 +31,7 @@ interface LivePosition {
   swap: number
   botId?: string
   botName?: string
+  bridgeId: string
 }
 
 interface Props {
@@ -101,6 +102,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
               ...p,
               botId: p.botId ?? bridgeId,
               botName: strategyBot?.name ?? bridge?.name ?? bridgeId,
+              bridgeId,
             }
           })
         })
@@ -118,7 +120,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
 
   async function confirmClose() {
     if (!closeTarget) return
-    const bridgeId = closeTarget.botId ?? [...selectedBotIds][0]
+    const bridgeId = closeTarget.bridgeId
     setClosingTicket(closeTarget.ticket)
     setCloseTarget(null)
     try {
