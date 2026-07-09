@@ -252,6 +252,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                     glow = `0 2px 10px -2px rgba(255, 69, 96, ${0.1 + intensity * 0.25})`
                   }
                 }
+                const streak = streakByDate.get(key)
 
                 return (
                   <motion.div
@@ -299,6 +300,24 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                           )}
                         </div>
                       </>
+                    )}
+                    {streak && (
+                      <span
+                        title={streak.isWin ? `${streak.length} Gewinntage in Folge` : `${streak.length} Verlusttage in Folge`}
+                        style={{
+                          position: 'absolute', top: -5, right: -5,
+                          display: 'flex', alignItems: 'center', gap: 1,
+                          fontSize: 8, fontWeight: 700, padding: '1px 4px', borderRadius: 8,
+                          background: streak.isWin ? 'var(--green)' : 'var(--red)',
+                          color: '#0a0f14',
+                          boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
+                        }}
+                      >
+                        {streak.isWin
+                          ? <Flame size={9} strokeWidth={2.5} />
+                          : <TriangleAlert size={9} strokeWidth={2.5} />}
+                        {streak.length}
+                      </span>
                     )}
                   </motion.div>
                 )
