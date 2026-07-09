@@ -106,6 +106,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
 
     let runLength = 0
     let runIsWin: boolean | null = null
+    let prevKey: string | null = null
     for (const key of tradingDayKeys) {
       const isWin = (pnlByDay.get(key)?.pnl ?? 0) >= 0
       if (runIsWin === isWin) {
@@ -115,10 +116,10 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
         runLength = 1
       }
       if (runLength >= 3) {
+        if (prevKey && runLength > 3) result.delete(prevKey)
         result.set(key, { length: runLength, isWin })
-      } else {
-        result.delete(key)
       }
+      prevKey = key
     }
     return result
   }, [pnlByDay, year, month])
