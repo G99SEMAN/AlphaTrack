@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Flame, TriangleAlert } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { BotEntry } from '@/types/bot'
+import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
 import { currencySymbol } from '@/lib/currency'
 import { getBotColor } from '@/lib/bot-colors'
 import DayModal from './DayModal'
@@ -14,6 +15,7 @@ interface Props {
   trades: Trade[]
   currency: string
   strategyBots: BotEntry[]
+  highImpactEvents: WirtschaftsEvent[]
 }
 
 interface DayData {
@@ -36,7 +38,7 @@ function fmtPnl(val: number): string {
   return `${val >= 0 ? '' : '-'}$${abs.toLocaleString('de-DE', { maximumFractionDigits: 0 })}`
 }
 
-function TradingCalendar({ trades, currency, strategyBots }: Props) {
+function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: Props) {
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
