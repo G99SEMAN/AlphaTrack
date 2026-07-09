@@ -78,3 +78,7 @@ w-56
 
 # Deploy-Konfiguration (enthaelt MT5-Zugangsdaten des Nutzers)
 scripts/windows/deploy.config.json
+scripts/windows/sync-dev.config.json
+
+# Dev-Container (Hot-Reload) - isolierte Datenkopie, nur lokal relevant
+/data-dev/

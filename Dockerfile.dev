@@ -1,0 +1,8 @@
+# AlphaTrack Dev-Container — Hot-Reload fuer schnelle Iteration (NICHT fuer Produktion)
+# Quellcode wird zur Laufzeit per Bind-Mount eingehaengt (siehe docker-compose.dev.yml).
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm ci
+EXPOSE 3000
+CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]

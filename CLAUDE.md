@@ -24,6 +24,20 @@ scripts\windows\deploy.bat       # AlphaTrack auf NAS deployen + Bridge auf Mini
 scripts\windows\deploy-bot.bat   # Einzelnen Bot auf Mini-PC deployen
 ```
 
+**Vollständiger Deploy- und Test-Workflow (inkl. schnellem Hot-Reload-Testen ohne vollen Deploy, Live-Datenzugriff auf NAS/Bridge für Debugging, SSH-Key-Setup, Troubleshooting): siehe [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).**
+
+## Testen
+
+**Es gibt keine automatisierten Tests** (kein Jest/Vitest/Playwright-Testsuite, kein `npm test`). Verifikation läuft über folgende Wege:
+
+- **TypeScript-Check läuft automatisch** — ein Hook (`.claude/hooks/ts-check.py`) führt nach jedem Edit/Write an einer `.ts`/`.tsx`-Datei `npx tsc --noEmit` aus und blockiert bei Fehlern.
+- **UI im Browser prüfen** — Skill `run-alphatrack` (`.claude/skills/run-alphatrack/`, Playwright-Treiber `driver.mjs`): Screenshots aufnehmen, Seiten-Status/Titel prüfen, API-Routen abfragen. Läuft gegen den bereits laufenden `localhost:3000`-Dev-Server. Details/Gotchas in dessen `SKILL.md`.
+- **Änderungen live gegen echte Daten testen, ohne die Produktion zu berühren** — Hot-Reload-Dev-Container auf dem NAS (`http://192.168.178.3:3003`), siehe [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) Abschnitt 3.
+- **Vor einem echten Deploy** — Skill `deploy-status` prüft Git-Status, TypeScript-Build, Konfiguration und Netzwerk-Erreichbarkeit.
+- **Live-Daten direkt abfragen** (z.B. um ein Bot-/Trade-Verhalten zu debuggen, ohne SSH) — siehe [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) Abschnitt 4.
+
+Für Python-seitigen Code (`bridge/`, `bots/`) existiert ebenfalls keine Testsuite — Verifikation erfolgt durch Beobachtung im laufenden Bridge-Terminal bzw. über die Bot-Logs in AlphaTrack (`/bots`-Seite).
+
 ## Architektur-Überblick
 
 AlphaTrack ist ein persönliches Trading-Journal mit Bot-Management. Zwei physische Systeme:

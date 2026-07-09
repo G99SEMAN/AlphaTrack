@@ -1,0 +1,22 @@
+# AlphaTrack Dev-Container — laeuft parallel zur Produktion (docker-compose.yml)
+# auf Port 3003, mit isolierter Datenkopie (data-dev/). Gestartet/aktualisiert
+# ueber scripts\windows\sync-dev.bat vom DevPC aus.
+version: '3.8'
+services:
+  alphatrack-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: alphatrack-dev
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    env_file:
+      - .env.local
+    volumes:
+      - ./:/app
+      - alphatrack_dev_node_modules:/app/node_modules
+      - ./data-dev:/app/data
+
+volumes:
+  alphatrack_dev_node_modules:

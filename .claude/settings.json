@@ -23,7 +23,11 @@
       "PowerShell($proc = Start-Process -FilePath \"node\" -ArgumentList '\"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npm-cli.js\" run dev' -WindowStyle Hidden -PassThru; $proc.Id)",
       "PowerShell(node \".claude\\\\skills\\\\run-alphatrack\\\\driver.mjs\" screenshot ss.png /dashboard)",
       "Edit(/.claude/skills/trading-bot/**)",
-      "mcp__plugin_claude-mem_mcp-search__search"
+      "mcp__plugin_claude-mem_mcp-search__search",
+      "Bash(curl -s http://192.168.178.3:3002/*)",
+      "Bash(curl -s http://192.168.178.37:8765/*)",
+      "PowerShell(Invoke-RestMethod -Uri http://192.168.178.3:3002/*)",
+      "PowerShell(Invoke-RestMethod -Uri http://192.168.178.37:8765/*)"
     ],
     "deny": [
       "Read(./.env)",
