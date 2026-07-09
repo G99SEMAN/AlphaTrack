@@ -1,4 +1,5 @@
 import type { WirtschaftsEvent, WirtschaftskalenderData } from '@/types/wirtschaftskalender'
+import { getBots } from '@/lib/bot-data'
 
 const FOREX_CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD', 'NZD']
 
@@ -101,4 +102,31 @@ export async function fetchWirtschaftskalender(): Promise<WirtschaftskalenderDat
     .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
 
   return { events, fetchedAt: new Date().toISOString() }
+}
+
+export interface WirtschaftskalenderResult extends WirtschaftskalenderData {
+  source: 'bridge' | 'tradays' | 'error'
+}
+
+export async function getWirtschaftskalenderData(): Promise<WirtschaftskalenderResult> {
+  // Bridge zuerst probieren - nur wenn Events zurückkommen
+  const bots = getBots()
+  for (const bot of bots) {
+    try {
+      const data = await fetchWirtschaftskalenderFromBridge(bot.url)
+      if (data.events.length > 0) {
+        return { ...data, source: 'bridge' }
+      }
+    } catch {
+      // nächsten Bot oder Fallback versuchen
+    }
+  }
+
+  // Fallback: Tradays
+  try {
+    const data = await fetchWirtschaftskalender()
+    return { ...data, source: 'tradays' }
+  } catch {
+    return { events: [], fetchedAt: new Date().toISOString(), source: 'error' }
+  }
 }
