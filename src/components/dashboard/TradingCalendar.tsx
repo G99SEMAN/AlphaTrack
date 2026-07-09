@@ -151,13 +151,20 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{
             fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 8,
-            background: monthlyPnl >= 0 ? 'rgba(0,217,126,0.12)' : 'rgba(255,69,96,0.12)',
+            background: monthlyPnl >= 0
+              ? 'linear-gradient(135deg, rgba(0,217,126,0.18), rgba(0,217,126,0.08))'
+              : 'linear-gradient(135deg, rgba(255,69,96,0.18), rgba(255,69,96,0.08))',
+            border: `1px solid ${monthlyPnl >= 0 ? 'rgba(0,217,126,0.25)' : 'rgba(255,69,96,0.25)'}`,
             color: monthlyPnl >= 0 ? 'var(--green)' : 'var(--red)',
             fontFamily: 'var(--font-dm-mono)',
           }}>
             {monthlyPnl >= 0 ? '+' : ''}{monthlyPnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
           </span>
-          <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 8, background: 'var(--accent-bg)', color: 'var(--accent)' }}>
+          <span style={{
+            fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 8,
+            background: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08))',
+            border: '1px solid rgba(59,130,246,0.25)', color: 'var(--accent)',
+          }}>
             {monthlyTradingDays} {monthlyTradingDays === 1 ? 'Tag' : 'Tage'}
           </span>
         </div>
@@ -166,7 +173,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
       {/* Grid + Week column — ein gemeinsames Grid, damit KW-Boxen exakt auf Zeilenhöhe der jeweiligen Woche sitzen */}
       <div
         className="grid grid-cols-7 sm:[grid-template-columns:repeat(7,minmax(0,1fr))_130px]"
-        style={{ gap: 3 }}
+        style={{ gap: 5 }}
       >
         {/* Day headers */}
         {dayNames.map((d, di) => (
@@ -185,7 +192,15 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
             <Fragment key={wi}>
               {week.map((day, di) => {
                 if (day === null) {
-                  return <div key={di} style={{ gridColumn: di + 1, gridRow: wi + 2, aspectRatio: '1 / 0.85', borderRadius: 8 }} />
+                  return (
+                    <div
+                      key={di}
+                      style={{
+                        gridColumn: di + 1, gridRow: wi + 2, aspectRatio: '1 / 0.85',
+                        borderRadius: 10, border: '1px solid transparent',
+                      }}
+                    />
+                  )
                 }
                 const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
                 const data = pnlByDay.get(key)
@@ -193,17 +208,19 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                 const pnlPos = data ? data.pnl >= 0 : null
                 const winPct = data && data.count > 0 ? Math.round((data.wins / data.count) * 100) : null
 
-                let bg = 'var(--surface-2)'
+                let bg = 'rgba(255,255,255,0.015)'
                 let borderColor = 'var(--border-subtle)'
+                let glow: string | undefined
                 if (data) {
+                  const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
                   if (pnlPos) {
-                    const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
                     bg = `rgba(0, 217, 126, ${0.08 + intensity * 0.18})`
                     borderColor = `rgba(0, 217, 126, ${0.15 + intensity * 0.2})`
+                    glow = `0 2px 10px -2px rgba(0, 217, 126, ${0.1 + intensity * 0.25})`
                   } else {
-                    const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
                     bg = `rgba(255, 69, 96, ${0.08 + intensity * 0.18})`
                     borderColor = `rgba(255, 69, 96, ${0.15 + intensity * 0.2})`
+                    glow = `0 2px 10px -2px rgba(255, 69, 96, ${0.1 + intensity * 0.25})`
                   }
                 }
 
@@ -214,18 +231,19 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                     style={{
                       gridColumn: di + 1,
                       gridRow: wi + 2,
+                      position: 'relative',
                       aspectRatio: '1 / 0.85',
-                      borderRadius: 8,
+                      borderRadius: 10,
                       background: bg,
                       border: `1px solid ${isToday ? 'var(--accent)' : borderColor}`,
-                      padding: '4px 5px',
+                      padding: '5px 6px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
                       cursor: data ? 'pointer' : 'default',
-                      boxShadow: isToday ? '0 0 0 1px var(--accent)' : undefined,
+                      boxShadow: isToday ? '0 0 0 1px var(--accent)' : glow,
                     }}
-                    whileHover={data ? { scale: 1.03 } : {}}
+                    whileHover={data ? { scale: 1.03, boxShadow: '0 6px 16px -4px rgba(0,0,0,0.4)' } : {}}
                     transition={{ duration: 0.12 }}
                   >
                     <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
