@@ -59,6 +59,19 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
     return map
   }, [trades])
 
+  // Eindeutige Bot-IDs pro Tag (nur Trades mit botId, für die Bot-Punkte-Anzeige)
+  const botsByDay = useMemo(() => {
+    const map = new Map<string, string[]>()
+    for (const t of trades) {
+      if (t.status !== 'closed' || t.pnl === undefined || !t.botId) continue
+      const dateStr = (t.closeTime ?? t.date).slice(0, 10)
+      const existing = map.get(dateStr) ?? []
+      if (!existing.includes(t.botId)) existing.push(t.botId)
+      map.set(dateStr, existing)
+    }
+    return map
+  }, [trades])
+
   // Calendar grid
   const firstDay = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
@@ -233,6 +246,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                 }
                 const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
                 const data = pnlByDay.get(key)
+                const dayBotIds = botsByDay.get(key) ?? []
                 const isToday = key === todayStr
                 const pnlPos = data ? data.pnl >= 0 : null
                 const winPct = data && data.count > 0 ? Math.round((data.wins / data.count) * 100) : null
@@ -297,6 +311,25 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                             <span style={{ fontSize: 8, color: pnlPos ? 'var(--green)' : 'var(--red)', display: 'block' }}>
                               {winPct}%
                             </span>
+                          )}
+                          {dayBotIds.length > 0 && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 2 }}>
+                              {dayBotIds.slice(0, 4).map(botId => (
+                                <span
+                                  key={botId}
+                                  title={strategyBots.find(b => b.id === botId)?.name ?? botId}
+                                  style={{
+                                    width: 5, height: 5, borderRadius: '50%',
+                                    background: getBotColor(botId, strategyBots), flexShrink: 0,
+                                  }}
+                                />
+                              ))}
+                              {dayBotIds.length > 4 && (
+                                <span style={{ fontSize: 7, color: 'var(--text-3)', lineHeight: 1 }}>
+                                  +{dayBotIds.length - 4}
+                                </span>
+                              )}
+                            </div>
                           )}
                         </div>
                       </>
