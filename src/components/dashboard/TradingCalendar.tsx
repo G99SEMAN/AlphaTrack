@@ -95,6 +95,34 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
   const monthlyPnl = weekSummaries.reduce((s, w) => s + w.pnl, 0)
   const monthlyTradingDays = weekSummaries.reduce((s, w) => s + w.tradingDays, 0)
 
+  // Streaks: aufeinanderfolgende Handelstage mit gleichem Vorzeichen (nur innerhalb des sichtbaren Monats,
+  // handelsfreie Tage unterbrechen die Serie nicht — siehe Spec Abschnitt 4). Map enthält nur den jeweils
+  // letzten Tag einer Serie ab Länge 3.
+  const streakByDate = useMemo(() => {
+    const result = new Map<string, { length: number; isWin: boolean }>()
+    const tradingDayKeys = Array.from(pnlByDay.keys())
+      .filter(k => k.startsWith(`${year}-${String(month + 1).padStart(2, '0')}-`))
+      .sort()
+
+    let runLength = 0
+    let runIsWin: boolean | null = null
+    for (const key of tradingDayKeys) {
+      const isWin = (pnlByDay.get(key)?.pnl ?? 0) >= 0
+      if (runIsWin === isWin) {
+        runLength++
+      } else {
+        runIsWin = isWin
+        runLength = 1
+      }
+      if (runLength >= 3) {
+        result.set(key, { length: runLength, isWin })
+      } else {
+        result.delete(key)
+      }
+    }
+    return result
+  }, [pnlByDay, year, month])
+
   function prevMonth() {
     if (month === 0) { setYear(y => y - 1); setMonth(11) }
     else setMonth(m => m - 1)
