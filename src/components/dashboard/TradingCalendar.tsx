@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useMemo, useState } from 'react'
+import { Fragment, memo, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Trade } from '@/types/trade'
@@ -73,7 +73,7 @@ function TradingCalendar({ trades, currency }: Props) {
   for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7))
 
   // Weekly summaries
-  const weekSummaries = weeks.map(week => {
+  const weekSummaries = weeks.map((week, wi) => {
     let pnl = 0
     let tradingDays = 0
     for (const d of week) {
@@ -82,7 +82,10 @@ function TradingCalendar({ trades, currency }: Props) {
       const data = pnlByDay.get(key)
       if (data) { pnl += data.pnl; tradingDays++ }
     }
-    return { pnl, tradingDays }
+    // Montag dieser Grid-Zeile (auch bei Vor-/Nachmonats-Padding), für die echte ISO-Kalenderwoche
+    const mondayOfRow = new Date(year, month, 1 - startDow + wi * 7)
+    const isoWeek = getISOWeek(mondayOfRow)
+    return { pnl, tradingDays, isoWeek }
   })
 
   // Monthly totals
@@ -157,145 +160,141 @@ function TradingCalendar({ trades, currency }: Props) {
         </div>
       </div>
 
-      {/* Grid + Week column */}
-      <div style={{ display: 'flex', gap: 10 }}>
-        {/* Calendar grid */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Day headers */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 3, marginBottom: 3 }}>
-            {dayNames.map(d => (
-              <div key={d} style={{ textAlign: 'center', fontSize: 10, fontWeight: 600, color: 'var(--text-3)', padding: '4px 0' }}>
-                {d}
-              </div>
-            ))}
+      {/* Grid + Week column — ein gemeinsames Grid, damit KW-Boxen exakt auf Zeilenhöhe der jeweiligen Woche sitzen */}
+      <div
+        className="grid grid-cols-7 sm:[grid-template-columns:repeat(7,minmax(0,1fr))_130px]"
+        style={{ gap: 3 }}
+      >
+        {/* Day headers */}
+        {dayNames.map((d, di) => (
+          <div key={d} style={{ gridColumn: di + 1, gridRow: 1, textAlign: 'center', fontSize: 10, fontWeight: 600, color: 'var(--text-3)', padding: '4px 0' }}>
+            {d}
           </div>
+        ))}
+        <div className="hidden sm:flex" style={{ gridColumn: 8, gridRow: 1, alignItems: 'center' }}>
+          <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Woche</span>
+        </div>
 
-          {/* Weeks */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            {weeks.map((week, wi) => (
-              <div key={wi} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 3 }}>
-                {week.map((day, di) => {
-                  if (day === null) {
-                    return <div key={di} style={{ aspectRatio: '1 / 0.85', borderRadius: 8 }} />
+        {/* Weeks */}
+        {weeks.map((week, wi) => {
+          const ws = weekSummaries[wi]
+          return (
+            <Fragment key={wi}>
+              {week.map((day, di) => {
+                if (day === null) {
+                  return <div key={di} style={{ gridColumn: di + 1, gridRow: wi + 2, aspectRatio: '1 / 0.85', borderRadius: 8 }} />
+                }
+                const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+                const data = pnlByDay.get(key)
+                const isToday = key === todayStr
+                const pnlPos = data ? data.pnl >= 0 : null
+                const winPct = data && data.count > 0 ? Math.round((data.wins / data.count) * 100) : null
+
+                let bg = 'var(--surface-2)'
+                let borderColor = 'var(--border-subtle)'
+                if (data) {
+                  if (pnlPos) {
+                    const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
+                    bg = `rgba(0, 217, 126, ${0.08 + intensity * 0.18})`
+                    borderColor = `rgba(0, 217, 126, ${0.15 + intensity * 0.2})`
+                  } else {
+                    const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
+                    bg = `rgba(255, 69, 96, ${0.08 + intensity * 0.18})`
+                    borderColor = `rgba(255, 69, 96, ${0.15 + intensity * 0.2})`
                   }
-                  const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-                  const data = pnlByDay.get(key)
-                  const isToday = key === todayStr
-                  const pnlPos = data ? data.pnl >= 0 : null
-                  const winPct = data && data.count > 0 ? Math.round((data.wins / data.count) * 100) : null
+                }
 
-                  let bg = 'var(--surface-2)'
-                  let borderColor = 'var(--border-subtle)'
-                  if (data) {
-                    if (pnlPos) {
-                      const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
-                      bg = `rgba(0, 217, 126, ${0.08 + intensity * 0.18})`
-                      borderColor = `rgba(0, 217, 126, ${0.15 + intensity * 0.2})`
-                    } else {
-                      const intensity = Math.min(Math.abs(data.pnl) / 500, 1)
-                      bg = `rgba(255, 69, 96, ${0.08 + intensity * 0.18})`
-                      borderColor = `rgba(255, 69, 96, ${0.15 + intensity * 0.2})`
-                    }
-                  }
-
-                  return (
-                    <motion.div
-                      key={di}
-                      onClick={data ? () => setSelectedDay(key) : undefined}
-                      style={{
-                        aspectRatio: '1 / 0.85',
-                        borderRadius: 8,
-                        background: bg,
-                        border: `1px solid ${isToday ? 'var(--accent)' : borderColor}`,
-                        padding: '4px 5px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        cursor: data ? 'pointer' : 'default',
-                        boxShadow: isToday ? '0 0 0 1px var(--accent)' : undefined,
-                      }}
-                      whileHover={data ? { scale: 1.03 } : {}}
-                      transition={{ duration: 0.12 }}
-                    >
-                      <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
-                        {day}
-                      </span>
-                      {data && (
-                        <>
-                          <span style={{
-                            fontSize: 9, fontWeight: 700,
-                            color: pnlPos ? 'var(--green)' : 'var(--red)',
-                            fontFamily: 'var(--font-dm-mono)',
-                            lineHeight: 1.1,
-                          }}>
-                            {fmtPnl(data.pnl).replace('$', sym)}
+                return (
+                  <motion.div
+                    key={di}
+                    onClick={data ? () => setSelectedDay(key) : undefined}
+                    style={{
+                      gridColumn: di + 1,
+                      gridRow: wi + 2,
+                      aspectRatio: '1 / 0.85',
+                      borderRadius: 8,
+                      background: bg,
+                      border: `1px solid ${isToday ? 'var(--accent)' : borderColor}`,
+                      padding: '4px 5px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      cursor: data ? 'pointer' : 'default',
+                      boxShadow: isToday ? '0 0 0 1px var(--accent)' : undefined,
+                    }}
+                    whileHover={data ? { scale: 1.03 } : {}}
+                    transition={{ duration: 0.12 }}
+                  >
+                    <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
+                      {day}
+                    </span>
+                    {data && (
+                      <>
+                        <span style={{
+                          fontSize: 9, fontWeight: 700,
+                          color: pnlPos ? 'var(--green)' : 'var(--red)',
+                          fontFamily: 'var(--font-dm-mono)',
+                          lineHeight: 1.1,
+                        }}>
+                          {fmtPnl(data.pnl).replace('$', sym)}
+                        </span>
+                        <div>
+                          <span style={{ fontSize: 8, color: 'var(--text-3)' }}>
+                            {data.count} {data.count === 1 ? 'Trade' : 'Trades'}
                           </span>
-                          <div>
-                            <span style={{ fontSize: 8, color: 'var(--text-3)' }}>
-                              {data.count} {data.count === 1 ? 'Trade' : 'Trades'}
+                          {winPct !== null && (
+                            <span style={{ fontSize: 8, color: pnlPos ? 'var(--green)' : 'var(--red)', display: 'block' }}>
+                              {winPct}%
                             </span>
-                            {winPct !== null && (
-                              <span style={{ fontSize: 8, color: pnlPos ? 'var(--green)' : 'var(--red)', display: 'block' }}>
-                                {winPct}%
-                              </span>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </motion.div>
-                  )
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                )
+              })}
 
-        {/* Weekly summary column — auf sehr schmalen Screens ausgeblendet */}
-        <div className="hidden sm:flex" style={{ flexDirection: 'column', gap: 3, width: 110 }}>
-          {/* Header */}
-          <div style={{ height: 28, display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Woche</span>
-          </div>
-          {weekSummaries.map((ws, wi) => (
-            <div
-              key={wi}
-              style={{
-                aspectRatio: '1 / 0.85',
-                borderRadius: 8,
-                background: ws.tradingDays > 0
-                  ? (ws.pnl >= 0 ? 'rgba(0,217,126,0.06)' : 'rgba(255,69,96,0.06)')
-                  : 'var(--surface-2)',
-                border: `1px solid ${ws.tradingDays > 0 ? (ws.pnl >= 0 ? 'rgba(0,217,126,0.15)' : 'rgba(255,69,96,0.15)') : 'var(--border-subtle)'}`,
-                padding: '6px 8px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <span style={{ fontSize: 9, fontWeight: 600, color: 'var(--text-3)' }}>KW {wi + 1}</span>
-              {ws.tradingDays > 0 ? (
-                <>
-                  <span style={{
-                    fontSize: 11, fontWeight: 700,
-                    color: ws.pnl >= 0 ? 'var(--green)' : 'var(--red)',
-                    fontFamily: 'var(--font-dm-mono)',
-                  }}>
-                    {ws.pnl >= 0 ? '+' : ''}{ws.pnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
-                  </span>
-                  <span style={{
-                    fontSize: 9, fontWeight: 600, padding: '1px 6px', borderRadius: 5,
-                    background: 'var(--accent-bg)', color: 'var(--accent)',
-                    alignSelf: 'flex-start',
-                  }}>
-                    {ws.tradingDays} {ws.tradingDays === 1 ? 'Tag' : 'Tage'}
-                  </span>
-                </>
-              ) : (
-                <span style={{ fontSize: 9, color: 'var(--text-3)' }}>0 €</span>
-              )}
-            </div>
-          ))}
-        </div>
+              {/* Wochen-Summary — Höhe kommt aus derselben Grid-Zeile wie die Tageszellen (align-items: stretch) */}
+              <div
+                className="hidden sm:flex"
+                style={{
+                  gridColumn: 8,
+                  gridRow: wi + 2,
+                  borderRadius: 8,
+                  background: ws.tradingDays > 0
+                    ? (ws.pnl >= 0 ? 'rgba(0,217,126,0.06)' : 'rgba(255,69,96,0.06)')
+                    : 'var(--surface-2)',
+                  border: `1px solid ${ws.tradingDays > 0 ? (ws.pnl >= 0 ? 'rgba(0,217,126,0.15)' : 'rgba(255,69,96,0.15)') : 'var(--border-subtle)'}`,
+                  padding: '8px 10px',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-3)' }}>KW {ws.isoWeek}</span>
+                {ws.tradingDays > 0 ? (
+                  <>
+                    <span style={{
+                      fontSize: 12, fontWeight: 700,
+                      color: ws.pnl >= 0 ? 'var(--green)' : 'var(--red)',
+                      fontFamily: 'var(--font-dm-mono)',
+                    }}>
+                      {ws.pnl >= 0 ? '+' : ''}{ws.pnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
+                    </span>
+                    <span style={{
+                      fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 5,
+                      background: 'var(--accent-bg)', color: 'var(--accent)',
+                      alignSelf: 'flex-start',
+                    }}>
+                      {ws.tradingDays} {ws.tradingDays === 1 ? 'Tag' : 'Tage'}
+                    </span>
+                  </>
+                ) : (
+                  <span style={{ fontSize: 10, color: 'var(--text-3)' }}>0 €</span>
+                )}
+              </div>
+            </Fragment>
+          )
+        })}
       </div>
 
       {selectedDay && (

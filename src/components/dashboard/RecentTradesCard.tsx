@@ -2,17 +2,27 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { TrendingUp, TrendingDown } from 'lucide-react'
 import { Trade } from '@/types/trade'
+import { BotEntry } from '@/types/bot'
 import { currencySymbol } from '@/lib/currency'
 
 interface Props {
   trades: Trade[]
   currency: string
+  strategyBots: BotEntry[]
 }
 
 const ROWS = 6
+const BOT_COLORS = ['#3b82f6', '#a855f7', '#f59e0b', '#06b6d4', '#ec4899', '#84cc16']
 
-export default function RecentTradesCard({ trades, currency }: Props) {
+function getBotColor(botId: string | null | undefined, bots: BotEntry[]): string {
+  if (!botId) return '#6b7280'
+  const idx = bots.findIndex(b => b.id === botId)
+  return BOT_COLORS[(idx >= 0 ? idx : 0) % BOT_COLORS.length]
+}
+
+export default function RecentTradesCard({ trades, currency, strategyBots }: Props) {
   const [tab, setTab] = useState<'recent' | 'open'>('recent')
   const sym = currencySymbol(currency)
 
@@ -31,6 +41,11 @@ export default function RecentTradesCard({ trades, currency }: Props) {
 
   function fmtDate(s: string): string {
     return s.slice(0, 10).split('-').reverse().join('.')
+  }
+
+  function fmtDateTime(s: string): string {
+    const time = new Date(s).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+    return `${fmtDate(s)} ${time}`
   }
 
   function fmtPnl(v: number): string {
@@ -76,19 +91,34 @@ export default function RecentTradesCard({ trades, currency }: Props) {
           ) : (
             recentTrades.map(t => {
               const pnl = t.pnl ?? 0
+              const bot = t.botId ? strategyBots.find(b => b.id === t.botId) : undefined
+              const botColor = getBotColor(t.botId, strategyBots)
               return (
                 <div
                   key={t.id}
                   style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
                     padding: '7px 14px', borderBottom: '1px solid var(--border)',
                   }}
                 >
-                  <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)', minWidth: 56 }}>
-                    {fmtDate(t.closeTime ?? t.date)}
+                  <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)', minWidth: 96, whiteSpace: 'nowrap' }}>
+                    {fmtDateTime(t.closeTime ?? t.date)}
                   </span>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', flex: 1, textAlign: 'center' }}>
-                    {t.instrument}
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexWrap: 'wrap', gap: 5, flex: 1, minWidth: 0 }}>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)' }}>
+                      {t.instrument}
+                    </span>
+                    {bot && (
+                      <span style={{
+                        display: 'flex', alignItems: 'center', gap: 3,
+                        fontSize: 8, fontWeight: 700, padding: '1px 5px', borderRadius: 8,
+                        background: `${botColor}18`, border: `1px solid ${botColor}66`, color: botColor,
+                        whiteSpace: 'nowrap',
+                      }}>
+                        <span style={{ width: 4, height: 4, borderRadius: '50%', background: botColor, flexShrink: 0 }} />
+                        {bot.name}
+                      </span>
+                    )}
                   </span>
                   <span style={{
                     fontSize: 11, fontWeight: 700, fontFamily: 'var(--font-dm-mono)',
@@ -109,28 +139,42 @@ export default function RecentTradesCard({ trades, currency }: Props) {
           ) : (
             openTrades.slice(0, ROWS).map(t => {
               const pnl = t.pnl ?? 0
+              const bot = t.botId ? strategyBots.find(b => b.id === t.botId) : undefined
+              const botColor = getBotColor(t.botId, strategyBots)
               return (
                 <div
                   key={t.id}
                   style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
                     padding: '7px 14px', borderBottom: '1px solid var(--border)',
                   }}
                 >
-                  <span style={{
-                    fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
-                    padding: '2px 5px', borderRadius: 4,
-                    background: t.type === 'long' ? 'var(--green-bg)' : 'var(--red-bg)',
-                    color: t.type === 'long' ? 'var(--green)' : 'var(--red)',
-                  }}>
-                    {t.type === 'long' ? 'BUY' : 'SELL'}
+                  <span style={{ fontSize: 10, color: 'var(--text-3)', fontFamily: 'var(--font-dm-mono)', minWidth: 96, whiteSpace: 'nowrap' }}>
+                    {fmtDateTime(t.date)}
                   </span>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', flex: 1, textAlign: 'center' }}>
-                    {t.instrument}
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flexWrap: 'wrap', gap: 5, flex: 1, minWidth: 0 }}>
+                    {t.type === 'long'
+                      ? <TrendingUp size={11} style={{ color: 'var(--green)', flexShrink: 0 }} />
+                      : <TrendingDown size={11} style={{ color: 'var(--red)', flexShrink: 0 }} />}
+                    <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)' }}>
+                      {t.instrument}
+                    </span>
+                    {bot && (
+                      <span style={{
+                        display: 'flex', alignItems: 'center', gap: 3,
+                        fontSize: 8, fontWeight: 700, padding: '1px 5px', borderRadius: 8,
+                        background: `${botColor}18`, border: `1px solid ${botColor}66`, color: botColor,
+                        whiteSpace: 'nowrap',
+                      }}>
+                        <span style={{ width: 4, height: 4, borderRadius: '50%', background: botColor, flexShrink: 0 }} />
+                        {bot.name}
+                      </span>
+                    )}
                   </span>
                   <span style={{
                     fontSize: 11, fontWeight: 700, fontFamily: 'var(--font-dm-mono)',
                     color: pnl >= 0 ? 'var(--green)' : pnl < 0 ? 'var(--red)' : 'var(--text-3)',
+                    minWidth: 80, textAlign: 'right',
                   }}>
                     {t.pnl !== undefined ? fmtPnl(pnl) : '—'}
                   </span>

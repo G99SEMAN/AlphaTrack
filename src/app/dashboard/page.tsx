@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
+import { getAllBotsWithStatus } from '@/lib/bot-data'
 import Sidebar from '@/components/layout/Sidebar'
 import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
 import DateRangePicker from '@/components/dashboard/DateRangePicker'
@@ -60,6 +61,7 @@ export default async function DashboardPage({
   const trades = filterTradesByPeriod(allTrades, period, from, to)
   const stats = computeStats(trades, activeProfile.startCapital, activeProfile.deposits ?? [])
   const allStats = computeStats(allTrades, activeProfile.startCapital, activeProfile.deposits ?? [])
+  const strategyBots = getAllBotsWithStatus().map(({ bot }) => bot).filter(bot => bot.type === 'bot')
 
   const TypeIcon = activeProfile.type === 'live' ? Banknote : Gamepad2
   const totalCapital = activeProfile.startCapital + (activeProfile.deposits ?? []).reduce((s, d) => s + d.amount, 0)
@@ -128,10 +130,11 @@ export default async function DashboardPage({
             <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
 
               {/* Linkes Panel: Recent Trades + Account Balance */}
-              <div className="flex w-full flex-col gap-3 xl:w-[270px] xl:shrink-0">
+              <div className="flex w-full flex-col gap-3 xl:w-[380px] xl:shrink-0">
                 <RecentTradesCard
                   trades={allTrades}
                   currency={activeProfile.currency}
+                  strategyBots={strategyBots}
                 />
                 <AccountBalanceCard
                   equityCurve={allStats.equityCurve}
@@ -150,7 +153,7 @@ export default async function DashboardPage({
               </div>
 
               {/* Rechtes Panel: Alpha Score + Equity Chart */}
-              <div className="flex w-full flex-col gap-3 xl:w-[280px] xl:shrink-0">
+              <div className="flex w-full flex-col gap-3 xl:w-[330px] xl:shrink-0">
                 <AlphaScoreChart
                   winRate={allStats.winRate}
                   profitFactor={allStats.profitFactor}
