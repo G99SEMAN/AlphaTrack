@@ -149,6 +149,7 @@ export default async function DashboardPage({
                 <TradingCalendar
                   trades={allTrades}
                   currency={activeProfile.currency}
+                  strategyBots={strategyBots}
                 />
               </div>
 
