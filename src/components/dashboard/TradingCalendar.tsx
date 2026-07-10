@@ -10,6 +10,7 @@ import { currencySymbol } from '@/lib/currency'
 import { getBotColor } from '@/lib/bot-colors'
 import DayModal from './DayModal'
 import TradeDetailModal from './TradeDetailModal'
+import YearHeatmap from './YearHeatmap'
 
 interface Props {
   trades: Trade[]
@@ -44,6 +45,7 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
   const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null)
+  const [viewMode, setViewMode] = useState<'month' | 'year'>('month')
 
   const sym = currencySymbol(currency)
 
@@ -180,6 +182,8 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
     else setMonth(m => m + 1)
   }
   function goToday() { setYear(now.getFullYear()); setMonth(now.getMonth()) }
+  function prevYear() { setYear(y => y - 1) }
+  function nextYear() { setYear(y => y + 1) }
 
   const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
   const dayNames = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
@@ -204,49 +208,93 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
 
       {/* Header row */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button onClick={prevMonth} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
-            <ChevronLeft size={14} />
-          </button>
-          <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', minWidth: 120, textAlign: 'center' }}>
-            {monthNames[month]} {year}
-          </span>
-          <button onClick={nextMonth} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
-            <ChevronRight size={14} />
-          </button>
-        </div>
+        {viewMode === 'month' ? (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <button onClick={prevMonth} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
+                <ChevronLeft size={14} />
+              </button>
+              <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', minWidth: 120, textAlign: 'center' }}>
+                {monthNames[month]} {year}
+              </span>
+              <button onClick={nextMonth} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
+                <ChevronRight size={14} />
+              </button>
+            </div>
 
-        <button
-          onClick={goToday}
-          style={{ fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', cursor: 'pointer' }}
-        >
-          Dieser Monat
-        </button>
+            <button
+              onClick={goToday}
+              style={{ fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', cursor: 'pointer' }}
+            >
+              Dieser Monat
+            </button>
 
-        {/* Monthly stats */}
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{
-            fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 8,
-            background: monthlyPnl >= 0
-              ? 'linear-gradient(135deg, rgba(0,217,126,0.18), rgba(0,217,126,0.08))'
-              : 'linear-gradient(135deg, rgba(255,69,96,0.18), rgba(255,69,96,0.08))',
-            border: `1px solid ${monthlyPnl >= 0 ? 'rgba(0,217,126,0.25)' : 'rgba(255,69,96,0.25)'}`,
-            color: monthlyPnl >= 0 ? 'var(--green)' : 'var(--red)',
-            fontFamily: 'var(--font-dm-mono)',
-          }}>
-            {monthlyPnl >= 0 ? '+' : ''}{monthlyPnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
-          </span>
-          <span style={{
-            fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 8,
-            background: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08))',
-            border: '1px solid rgba(59,130,246,0.25)', color: 'var(--accent)',
-          }}>
-            {monthlyTradingDays} {monthlyTradingDays === 1 ? 'Tag' : 'Tage'}
-          </span>
-        </div>
+            <button
+              onClick={() => setViewMode('year')}
+              style={{ fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', cursor: 'pointer' }}
+            >
+              Jahr
+            </button>
+
+            {/* Monthly stats */}
+            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{
+                fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 8,
+                background: monthlyPnl >= 0
+                  ? 'linear-gradient(135deg, rgba(0,217,126,0.18), rgba(0,217,126,0.08))'
+                  : 'linear-gradient(135deg, rgba(255,69,96,0.18), rgba(255,69,96,0.08))',
+                border: `1px solid ${monthlyPnl >= 0 ? 'rgba(0,217,126,0.25)' : 'rgba(255,69,96,0.25)'}`,
+                color: monthlyPnl >= 0 ? 'var(--green)' : 'var(--red)',
+                fontFamily: 'var(--font-dm-mono)',
+              }}>
+                {monthlyPnl >= 0 ? '+' : ''}{monthlyPnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
+              </span>
+              <span style={{
+                fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 8,
+                background: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08))',
+                border: '1px solid rgba(59,130,246,0.25)', color: 'var(--accent)',
+              }}>
+                {monthlyTradingDays} {monthlyTradingDays === 1 ? 'Tag' : 'Tage'}
+              </span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <button onClick={prevYear} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
+                <ChevronLeft size={14} />
+              </button>
+              <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)', minWidth: 60, textAlign: 'center' }}>
+                {year}
+              </span>
+              <button onClick={nextYear} style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)' }}>
+                <ChevronRight size={14} />
+              </button>
+            </div>
+
+            <button
+              onClick={() => setViewMode('month')}
+              style={{ marginLeft: 'auto', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--accent-bg)', border: '1px solid var(--accent)', color: 'var(--accent)', cursor: 'pointer' }}
+            >
+              Monat
+            </button>
+          </>
+        )}
       </div>
 
       {/* Grid + Week column — ein gemeinsames Grid, damit KW-Boxen exakt auf Zeilenhöhe der jeweiligen Woche sitzen */}
+      {viewMode === 'year' ? (
+        <YearHeatmap
+          trades={trades}
+          year={year}
+          onSelectMonth={(y, m, day) => {
+            setYear(y)
+            setMonth(m)
+            setViewMode('month')
+            setSelectedDay(day)
+          }}
+        />
+      ) : (
       <div
         className="grid grid-cols-7 sm:[grid-template-columns:repeat(7,minmax(0,1fr))_130px]"
         style={{ gap: 5 }}
@@ -452,6 +500,7 @@ function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: P
           )
         })}
       </div>
+      )}
 
       {selectedDay && (
         <DayModal
