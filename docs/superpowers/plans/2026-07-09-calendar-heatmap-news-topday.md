@@ -578,6 +578,8 @@ git commit -m "feat: highlight best and worst trading day of the month"
 - Consumes: `Trade` Typ aus `@/types/trade` (Felder `status`, `pnl`, `closeTime`, `date` — bereits bekannt aus `TradingCalendar.tsx`).
 - Produces: `YearHeatmap({ trades, year, onSelectMonth }: { trades: Trade[]; year: number; onSelectMonth: (year: number, month: number, day: string) => void })` — Default-Export. Task 6 importiert und rendert diese Komponente.
 
+> **Nachtrag (post-implementation):** Der Code unten zeigt noch `for (let w = 0; w < 53; w++)`. Das Review fand einen Bug — 53 Wochen decken nicht jedes Jahr ab (Schaltjahre, deren 1. Januar auf einen Sonntag fällt, z.B. 2012, 2040, verlieren den 31. Dezember). Gefixt in Commit `76a8c6a` auf `w < 54`. Der Code unten ist unverändert als historisches Artefakt belassen — die tatsächlich ausgelieferte Logik in `YearHeatmap.tsx` nutzt 54 Wochen.
+
 - [ ] **Step 1: Komponente erstellen**
 
 ```tsx
