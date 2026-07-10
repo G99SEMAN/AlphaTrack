@@ -3,12 +3,15 @@
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { Trade } from '@/types/trade'
+import { BotEntry } from '@/types/bot'
 import { currencySymbol } from '@/lib/currency'
+import { getBotColor } from '@/lib/bot-colors'
 
 interface DayModalProps {
   day: string
   trades: Trade[]
   currency: string
+  strategyBots: BotEntry[]
   onClose: () => void
   onSelectTrade: (trade: Trade) => void
   isTopModal?: boolean
@@ -24,6 +27,15 @@ function fmtDay(day: string): string {
 function fmtTime(dateStr: string): string {
   if (dateStr.length <= 10) return '—'
   return new Date(dateStr).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+}
+
+function calcRR(trade: Trade): number | undefined {
+  if (trade.rr != null) return trade.rr
+  if (trade.entry == null || trade.sl == null || trade.tp == null) return undefined
+  const reward = trade.type === 'long' ? trade.tp - trade.entry : trade.entry - trade.tp
+  const risk = trade.type === 'long' ? trade.entry - trade.sl : trade.sl - trade.entry
+  if (risk <= 0) return undefined
+  return Math.round((reward / risk) * 100) / 100
 }
 
 function fmtPnl(val: number, sym: string): string {
@@ -75,7 +87,7 @@ function MiniChart({ trades }: { trades: Trade[] }) {
   )
 }
 
-export default function DayModal({ day, trades, currency, onClose, onSelectTrade, isTopModal = true }: DayModalProps) {
+export default function DayModal({ day, trades, currency, strategyBots, onClose, onSelectTrade, isTopModal = true }: DayModalProps) {
   const sym = currencySymbol(currency)
 
   useEffect(() => {
@@ -96,7 +108,9 @@ export default function DayModal({ day, trades, currency, onClose, onSelectTrade
   const grossLossAbs = Math.abs(losers.reduce((s, t) => s + (t.pnl ?? 0), 0))
   const profitFactor = grossLossAbs > 0 ? grossWins / grossLossAbs : grossWins > 0 ? Infinity : 0
 
-  const sortedTrades = [...trades].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  const sortedTrades = [...trades].sort((a, b) =>
+    new Date(a.closeTime ?? a.date).getTime() - new Date(b.closeTime ?? b.date).getTime()
+  )
 
   return (
     <div
@@ -145,7 +159,7 @@ export default function DayModal({ day, trades, currency, onClose, onSelectTrade
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: 'var(--surface-2)', position: 'sticky', top: 0 }}>
-                {['Uhrzeit', 'Instrument', 'Side', 'Net P&L', 'R:R'].map(h => (
+                {['Schließzeit', 'Instrument', 'Side', 'Net P&L', 'R:R'].map(h => (
                   <th key={h} style={{ padding: '8px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                     {h}
                   </th>
@@ -155,6 +169,9 @@ export default function DayModal({ day, trades, currency, onClose, onSelectTrade
             <tbody>
               {sortedTrades.map(trade => {
                 const tradeNet = (trade.pnl ?? 0) - (trade.commission ?? 0) - (trade.swap ?? 0)
+                const bot = trade.botId ? strategyBots.find(b => b.id === trade.botId) : undefined
+                const botColor = getBotColor(trade.botId, strategyBots)
+                const rr = calcRR(trade)
                 return (
                   <tr
                     key={trade.id}
@@ -164,10 +181,25 @@ export default function DayModal({ day, trades, currency, onClose, onSelectTrade
                     onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                   >
                     <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text-2)', fontFamily: 'var(--font-dm-mono)' }}>
-                      {fmtTime(trade.date)}
+                      {fmtTime(trade.closeTime ?? trade.date)}
                     </td>
-                    <td style={{ padding: '10px 16px', fontSize: 13, fontWeight: 600, color: 'var(--text-1)' }}>
-                      {trade.instrument}
+                    <td style={{ padding: '10px 16px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 5 }}>
+                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)' }}>
+                          {trade.instrument}
+                        </span>
+                        {bot && (
+                          <span style={{
+                            display: 'flex', alignItems: 'center', gap: 3,
+                            fontSize: 8, fontWeight: 700, padding: '1px 5px', borderRadius: 8,
+                            background: `${botColor}18`, border: `1px solid ${botColor}66`, color: botColor,
+                            whiteSpace: 'nowrap',
+                          }}>
+                            <span style={{ width: 4, height: 4, borderRadius: '50%', background: botColor, flexShrink: 0 }} />
+                            {bot.name}
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td style={{ padding: '10px 16px' }}>
                       <span style={{
@@ -182,7 +214,7 @@ export default function DayModal({ day, trades, currency, onClose, onSelectTrade
                       {fmtPnl(tradeNet, sym)}
                     </td>
                     <td style={{ padding: '10px 16px', fontSize: 12, color: 'var(--text-2)', fontFamily: 'var(--font-dm-mono)' }}>
-                      {trade.rr != null ? `${trade.rr.toFixed(2)}R` : '—'}
+                      {rr != null ? `${rr.toFixed(2)}R` : '—'}
                     </td>
                   </tr>
                 )

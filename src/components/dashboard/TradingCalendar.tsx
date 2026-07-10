@@ -526,6 +526,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
             (t.closeTime ?? t.date).slice(0, 10) === selectedDay
           )}
           currency={currency}
+          strategyBots={strategyBots}
           onClose={() => setSelectedDay(null)}
           onSelectTrade={(trade) => setSelectedTrade(trade)}
           isTopModal={selectedTrade === null}
