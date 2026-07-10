@@ -3,8 +3,6 @@ import dynamic from 'next/dynamic'
 import { getProfiles, getActiveProfile, setActiveProfileId, getProfileTrades } from '@/lib/profiles'
 import { computeStats, filterTradesByPeriod } from '@/lib/data'
 import { getAllBotsWithStatus } from '@/lib/bot-data'
-import { getWirtschaftskalenderData } from '@/lib/wirtschaftskalender'
-import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
 import Sidebar from '@/components/layout/Sidebar'
 import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
 import DateRangePicker from '@/components/dashboard/DateRangePicker'
@@ -64,14 +62,6 @@ export default async function DashboardPage({
   const stats = computeStats(trades, activeProfile.startCapital, activeProfile.deposits ?? [])
   const allStats = computeStats(allTrades, activeProfile.startCapital, activeProfile.deposits ?? [])
   const strategyBots = getAllBotsWithStatus().map(({ bot }) => bot).filter(bot => bot.type === 'bot')
-
-  let highImpactEvents: WirtschaftsEvent[] = []
-  try {
-    const newsData = await getWirtschaftskalenderData()
-    highImpactEvents = newsData.events.filter(e => e.impact === 'High')
-  } catch {
-    highImpactEvents = []
-  }
 
   const TypeIcon = activeProfile.type === 'live' ? Banknote : Gamepad2
   const totalCapital = activeProfile.startCapital + (activeProfile.deposits ?? []).reduce((s, d) => s + d.amount, 0)
@@ -160,7 +150,6 @@ export default async function DashboardPage({
                   trades={allTrades}
                   currency={activeProfile.currency}
                   strategyBots={strategyBots}
-                  highImpactEvents={highImpactEvents}
                 />
               </div>
 

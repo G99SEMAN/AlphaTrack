@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, memo, useMemo, useState } from 'react'
+import { Fragment, memo, useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Flame, TriangleAlert } from 'lucide-react'
 import { Trade } from '@/types/trade'
@@ -16,7 +16,6 @@ interface Props {
   trades: Trade[]
   currency: string
   strategyBots: BotEntry[]
-  highImpactEvents: WirtschaftsEvent[]
 }
 
 interface DayData {
@@ -39,13 +38,29 @@ function fmtPnl(val: number): string {
   return `${val >= 0 ? '' : '-'}$${abs.toLocaleString('de-DE', { maximumFractionDigits: 0 })}`
 }
 
-function TradingCalendar({ trades, currency, strategyBots, highImpactEvents }: Props) {
+function TradingCalendar({ trades, currency, strategyBots }: Props) {
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
   const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null)
   const [viewMode, setViewMode] = useState<'month' | 'year'>('month')
+  const [highImpactEvents, setHighImpactEvents] = useState<WirtschaftsEvent[]>([])
+
+  // News-Events werden clientseitig nachgeladen (nicht serverseitig vor dem ersten Render),
+  // damit ein offline erreichbarer Bot/Bridge-Fetch nicht das gesamte Dashboard blockiert.
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/wirtschaftskalender', { cache: 'no-store' })
+      .then(res => (res.ok ? res.json() : { events: [] }))
+      .then(data => {
+        if (!cancelled) setHighImpactEvents((data.events as WirtschaftsEvent[]).filter(e => e.impact === 'High'))
+      })
+      .catch(() => {
+        if (!cancelled) setHighImpactEvents([])
+      })
+    return () => { cancelled = true }
+  }, [])
 
   const sym = currencySymbol(currency)
 
