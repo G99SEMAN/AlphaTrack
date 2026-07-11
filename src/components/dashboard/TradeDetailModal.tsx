@@ -14,9 +14,9 @@ interface TradeDetailModalProps {
 }
 
 function fmtDuration(open: string, close?: string): string {
-  if (!close) return '–'
+  if (!close) return '—'
   const ms = new Date(close).getTime() - new Date(open).getTime()
-  if (ms <= 0) return '–'
+  if (ms <= 0) return '—'
   const mins = Math.floor(ms / 60000)
   const h = Math.floor(mins / 60)
   const m = mins % 60
@@ -24,7 +24,7 @@ function fmtDuration(open: string, close?: string): string {
 }
 
 function fmtNum(val: number | undefined, decimals = 2): string {
-  if (val == null) return '–'
+  if (val == null) return '—'
   return val.toLocaleString('de-DE', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
 }
 
@@ -105,12 +105,12 @@ export default function TradeDetailModal({ trade, currency, onBack, onClose }: T
             <FieldRow label="Stop Loss" value={fmtNum(trade.sl)} />
             <FieldRow label="Take Profit" value={fmtNum(trade.tp)} />
             <FieldRow label="Size" value={fmtNum(trade.size)} />
-            <FieldRow label="Commission" value={trade.commission != null ? `${sym}${fmtNum(trade.commission)}` : '–'} />
-            <FieldRow label="Swap" value={trade.swap != null ? `${sym}${fmtNum(trade.swap)}` : '–'} />
-            <FieldRow label="R:R" value={trade.rr != null ? `${fmtNum(trade.rr)}R` : '–'} />
+            <FieldRow label="Commission" value={trade.commission != null ? `${sym}${fmtNum(trade.commission)}` : '—'} />
+            <FieldRow label="Swap" value={trade.swap != null ? `${sym}${fmtNum(trade.swap)}` : '—'} />
+            <FieldRow label="R:R" value={trade.rr != null ? `${fmtNum(trade.rr)}R` : '—'} />
             <FieldRow label="Laufzeit" value={fmtDuration(trade.date, trade.closeTime)} />
             <FieldRow label="Eröffnet" value={fmtDateTime(trade.date)} />
-            <FieldRow label="Geschlossen" value={trade.closeTime ? fmtDateTime(trade.closeTime) : '–'} />
+            <FieldRow label="Geschlossen" value={trade.closeTime ? fmtDateTime(trade.closeTime) : '—'} />
 
             {trade.notes && (
               <div style={{ marginTop: 4, padding: '10px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border-subtle)' }}>
