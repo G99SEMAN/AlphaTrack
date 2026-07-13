@@ -70,6 +70,10 @@ export async function POST(req: NextRequest) {
   try {
     const flaskBody: Record<string, unknown> = { command, id: entry.id }
     if (payload) flaskBody.payload = payload
+    // Manuelle Ausfuehrung ueber den Trade Executor traegt keine echte Bot-Identitaet;
+    // Sentinel sorgt dafuer, dass die Bridge das Ticket der Ticket-Registry zuordnet
+    // (siehe TRADE_EXECUTOR_SOURCE_ID in src/lib/bot-source.ts).
+    if (command === 'execute_trade') flaskBody.bot_id = 'bridge/tradeexecuter'
 
     const flaskRes = await fetch(`${bridge.url}/command`, {
       method: 'POST',

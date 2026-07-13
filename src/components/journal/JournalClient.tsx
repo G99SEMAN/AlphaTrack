@@ -8,6 +8,7 @@ import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { Profile } from '@/types/profile'
 import { BotEntry } from '@/types/bot'
+import { resolveBotLabel } from '@/lib/bot-source'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
@@ -64,12 +65,8 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
   function resetPage() { setPage(1) }
 
-  const botNames = useMemo(() => new Map(bots.map(b => [b.id, b.name])), [bots])
-
   function resolveSourceLabel(trade: Trade): string | undefined {
-    if (!trade.sourceId) return undefined
-    if (trade.sourceId === 'bridge/tradeexecuter') return 'Bridge'
-    return botNames.get(trade.sourceId) ?? 'Bot'
+    return resolveBotLabel(trade.sourceId, bots)
   }
 
   const filtered = useMemo(() => trades

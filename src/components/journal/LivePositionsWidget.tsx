@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { TrendingUp, TrendingDown, X, RefreshCw, Activity } from 'lucide-react'
+import { TrendingUp, TrendingDown, X, RefreshCw, Activity, Bot } from 'lucide-react'
 import { useBotStatus } from '@/context/BotStatusContext'
 import { useTradingLock } from '@/context/TradingLockContext'
+import { resolveBotLabel } from '@/lib/bot-source'
 
 interface LivePosition {
   ticket: number
@@ -17,6 +18,7 @@ interface LivePosition {
   tp: number | null
   pnl: number
   swap: number
+  botId?: string | null
 }
 
 export default function LivePositionsWidget() {
@@ -123,6 +125,7 @@ export default function LivePositionsWidget() {
             const pnlColor = pnlPos ? 'var(--green)' : '#ef4444'
             const isConfirming = confirmTicket === pos.ticket
             const isClosing = closingTicket === pos.ticket
+            const botLabel = resolveBotLabel(pos.botId, bots.map(b => ({ id: b.bot.id, name: b.bot.name })))
 
             return (
               <div key={pos.ticket}
@@ -141,6 +144,16 @@ export default function LivePositionsWidget() {
                 <span className="font-black font-mono w-20 shrink-0" style={{ color: 'var(--text-1)' }}>
                   {pos.instrument}
                 </span>
+                {botLabel && (
+                  <span
+                    className="hidden md:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-semibold shrink-0 max-w-32 truncate"
+                    style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent)', border: '1px solid rgba(59,130,246,0.25)' }}
+                    title={`Quelle: ${botLabel}`}
+                  >
+                    <Bot size={10} className="shrink-0" />
+                    {botLabel}
+                  </span>
+                )}
                 <span className="font-semibold shrink-0"
                   style={{ color: isLong ? '#22c55e' : '#ef4444' }}>
                   {isLong ? 'LONG' : 'SHORT'}

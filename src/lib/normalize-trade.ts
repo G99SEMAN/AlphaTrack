@@ -1,4 +1,5 @@
 import { Trade } from '@/types/trade'
+import { MANUAL_MT5_SOURCE_ID } from '@/lib/bot-source'
 
 export function isValidRawTrade(raw: Record<string, unknown>): boolean {
   return (
@@ -15,6 +16,6 @@ export function isValidRawTrade(raw: Record<string, unknown>): boolean {
 export function normalizeTrade(raw: Record<string, unknown>): Omit<Trade, 'id'> {
   const { bot_id, botId, ...rest } = raw as Record<string, unknown> & { bot_id?: string | null; botId?: string | null }
   const resolvedBotId = botId ?? bot_id ?? null
-  const sourceId = resolvedBotId !== null ? resolvedBotId : 'bridge/tradeexecuter'
+  const sourceId = resolvedBotId !== null ? resolvedBotId : MANUAL_MT5_SOURCE_ID
   return { ...rest, botId: resolvedBotId, sourceId } as unknown as Omit<Trade, 'id'>
 }

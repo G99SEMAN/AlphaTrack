@@ -63,7 +63,7 @@ def sync_trades(config: dict, mt5: MT5Connector, last_sync_ts: float, display=No
         if resolved is None and t.get("status") == "closed" and display:
             ext_id = t.get("externalId", "?")
             symbol = t.get("instrument") or t.get("symbol", "?")
-            display.log("warn", "SYNC", f"Kein Bot fuer {symbol} Ticket #{ext_id} — als Bridge-Trade gespeichert")
+            display.log("warn", "SYNC", f"Kein Bot fuer {symbol} Ticket #{ext_id} — als Manuell/MT5-Trade gespeichert")
         tagged_trades.append({**t, "bot_id": resolved})
 
     payload = {
