@@ -69,8 +69,14 @@ export function saveChecklistLog(log: ChecklistLog): void {
 
 export function calcChecklistStreak(log: ChecklistLog, today: Date = new Date()): number {
   const entryByDate = new Map(log.entries.map(e => [e.date, e]))
+  const todayEntry = entryByDate.get(toLocalDateStr(today))
+  const todayHeld = !!todayEntry && (todayEntry.completed || todayEntry.freeze)
+
   let streak = 0
   const cursor = new Date(today)
+  if (!todayHeld) {
+    cursor.setDate(cursor.getDate() - 1)
+  }
   for (;;) {
     const entry = entryByDate.get(toLocalDateStr(cursor))
     if (entry && (entry.completed || entry.freeze)) {

@@ -19,6 +19,7 @@ export default function ChecklistModal({ config, onClose }: Props) {
   const [items, setItems] = useState<EditableItem[]>(
     config.items.map(i => ({ id: i.id, label: i.label, type: i.type }))
   )
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -28,11 +29,21 @@ export default function ChecklistModal({ config, onClose }: Props) {
   if (!mounted) return null
 
   function handleSave() {
+    const filledItems = items.filter(i => i.label.trim())
+    if (filledItems.length === 0) {
+      setSaveError('Mindestens ein Punkt ist erforderlich.')
+      return
+    }
     const fd = new FormData()
-    fd.set('items', JSON.stringify(items.filter(i => i.label.trim())))
+    fd.set('items', JSON.stringify(filledItems))
+    setSaveError(null)
     startTransition(async () => {
-      await saveChecklistConfigAction(fd)
-      onClose()
+      try {
+        await saveChecklistConfigAction(fd)
+        onClose()
+      } catch {
+        setSaveError('Checkliste konnte nicht gespeichert werden.')
+      }
     })
   }
 
@@ -96,6 +107,9 @@ export default function ChecklistModal({ config, onClose }: Props) {
               Speichern
             </button>
           </div>
+          {saveError && (
+            <p className="text-xs text-center mt-2" style={{ color: 'var(--red)' }}>{saveError}</p>
+          )}
         </div>
       </motion.div>
     </div>,

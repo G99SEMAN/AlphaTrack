@@ -15,6 +15,7 @@ export default function FreezeDayModal({ onClose }: Props) {
   const [mounted, setMounted] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [date, setDate] = useState(toLocalDateStr())
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -26,9 +27,14 @@ export default function FreezeDayModal({ onClose }: Props) {
   function confirmFreeze() {
     const fd = new FormData()
     fd.set('date', date)
+    setSaveError(null)
     startTransition(async () => {
-      await setChecklistFreezeAction(fd)
-      onClose()
+      try {
+        await setChecklistFreezeAction(fd)
+        onClose()
+      } catch {
+        setSaveError('Freeze konnte nicht gesetzt werden.')
+      }
     })
   }
 
@@ -94,6 +100,9 @@ export default function FreezeDayModal({ onClose }: Props) {
             Freeze setzen
           </button>
         </div>
+        {saveError && (
+          <p className="text-xs text-center mt-2" style={{ color: 'var(--red)' }}>{saveError}</p>
+        )}
       </motion.div>
     </div>,
     document.body

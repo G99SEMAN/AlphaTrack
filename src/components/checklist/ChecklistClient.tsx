@@ -26,12 +26,25 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
   const [values, setValues] = useState<Record<string, boolean | number>>(todayEntry?.values ?? {})
   const [showEditor, setShowEditor] = useState(false)
   const [showFreeze, setShowFreeze] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   if (!config) {
     function activate() {
+      const filledItems = setupItems.filter(i => i.label.trim())
+      if (filledItems.length === 0) {
+        setSaveError('Mindestens ein Punkt ist erforderlich.')
+        return
+      }
       const fd = new FormData()
-      fd.set('items', JSON.stringify(setupItems))
-      startTransition(async () => { await saveChecklistConfigAction(fd) })
+      fd.set('items', JSON.stringify(filledItems))
+      setSaveError(null)
+      startTransition(async () => {
+        try {
+          await saveChecklistConfigAction(fd)
+        } catch {
+          setSaveError('Checkliste konnte nicht aktiviert werden.')
+        }
+      })
     }
 
     return (
@@ -49,6 +62,9 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
         >
           Checkliste aktivieren
         </button>
+        {saveError && (
+          <p className="text-xs" style={{ color: 'var(--red)' }}>{saveError}</p>
+        )}
       </div>
     )
   }
@@ -59,7 +75,14 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
     const fd = new FormData()
     fd.set('date', today)
     fd.set('values', JSON.stringify(next))
-    startTransition(async () => { await saveChecklistEntryAction(fd) })
+    setSaveError(null)
+    startTransition(async () => {
+      try {
+        await saveChecklistEntryAction(fd)
+      } catch {
+        setSaveError('Eintrag konnte nicht gespeichert werden.')
+      }
+    })
   }
 
   const sortedItems = [...config.items].sort((a, b) => a.order - b.order)
@@ -139,6 +162,10 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
           </div>
         ))}
       </div>
+
+      {saveError && (
+        <p className="text-xs" style={{ color: 'var(--red)' }}>{saveError}</p>
+      )}
 
       <div>
         <h2 className="text-sm font-bold mb-2" style={{ color: 'var(--text-1)' }}>Achievements</h2>
