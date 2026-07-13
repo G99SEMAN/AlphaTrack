@@ -6,7 +6,8 @@ import { saveChecklistConfigAction, saveChecklistEntryAction } from '@/lib/actio
 import { toLocalDateStr } from '@/lib/checklist-date'
 import ChecklistItemEditor, { EditableItem } from './ChecklistItemEditor'
 import ChecklistModal from './ChecklistModal'
-import { SlidersHorizontal } from 'lucide-react'
+import FreezeDayModal from './FreezeDayModal'
+import { SlidersHorizontal, Snowflake } from 'lucide-react'
 
 interface Props {
   config: ChecklistConfig | null
@@ -23,6 +24,7 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
   const todayEntry = log.entries.find(e => e.date === today)
   const [values, setValues] = useState<Record<string, boolean | number>>(todayEntry?.values ?? {})
   const [showEditor, setShowEditor] = useState(false)
+  const [showFreeze, setShowFreeze] = useState(false)
 
   if (!config) {
     function activate() {
@@ -77,6 +79,15 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
           <SlidersHorizontal size={13} />
           Punkte bearbeiten
         </button>
+        <button
+          type="button"
+          onClick={() => setShowFreeze(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer"
+          style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
+        >
+          <Snowflake size={13} />
+          Freeze einlegen
+        </button>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -129,6 +140,7 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
       </div>
 
       {showEditor && <ChecklistModal config={config} onClose={() => setShowEditor(false)} />}
+      {showFreeze && <FreezeDayModal onClose={() => setShowFreeze(false)} />}
     </div>
   )
 }
