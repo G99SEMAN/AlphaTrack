@@ -8,6 +8,8 @@ import path from 'path'
 import { Profile, Deposit } from '@/types/profile'
 import { Trade } from '@/types/trade'
 import { Strategy, Timeframe } from '@/types/strategy'
+import { ChecklistItem, ChecklistItemType, ChecklistConfig } from '@/types/checklist'
+import { getChecklistConfig, saveChecklistConfig, saveDayEntry, setFreezeDay } from '@/lib/checklist'
 import {
   createProfile,
   updateProfile,
@@ -520,4 +522,55 @@ export async function resetTradesAction(): Promise<{
   revalidatePath('/', 'layout')
 
   return { success: true, deletedJournal: closedTrades.length, deletedBridge: bridgeTrades.length, cutoffSet, bridgeOffline }
+}
+
+// --- Checklist Actions ---
+
+function parseChecklistItems(raw: string, existingItems: ChecklistItem[]): ChecklistItem[] {
+  const existingById = new Map(existingItems.map(i => [i.id, i]))
+  const parsed = JSON.parse(raw) as { id?: string; label: string; type: ChecklistItemType }[]
+  return parsed.map((item, index) => {
+    const existing = item.id ? existingById.get(item.id) : undefined
+    return {
+      id: existing?.id ?? nanoid(10),
+      label: item.label,
+      type: item.type,
+      order: index,
+      createdAt: existing?.createdAt ?? new Date().toISOString(),
+    }
+  })
+}
+
+export async function saveChecklistConfigAction(formData: FormData) {
+  const activeId = getActiveProfileId()
+  if (!activeId) redirect('/setup')
+
+  const existing = getChecklistConfig(activeId)
+  const items = parseChecklistItems(formData.get('items') as string, existing?.items ?? [])
+  const config: ChecklistConfig = {
+    profileId: activeId,
+    items,
+    createdAt: existing?.createdAt ?? new Date().toISOString(),
+  }
+  saveChecklistConfig(config)
+  revalidatePath('/checklist')
+}
+
+export async function saveChecklistEntryAction(formData: FormData) {
+  const activeId = getActiveProfileId()
+  if (!activeId) redirect('/setup')
+
+  const date = formData.get('date') as string
+  const values = JSON.parse(formData.get('values') as string) as Record<string, boolean | number>
+  saveDayEntry(activeId, date, values)
+  revalidatePath('/checklist')
+}
+
+export async function setChecklistFreezeAction(formData: FormData) {
+  const activeId = getActiveProfileId()
+  if (!activeId) redirect('/setup')
+
+  const date = formData.get('date') as string
+  setFreezeDay(activeId, date)
+  revalidatePath('/checklist')
 }
