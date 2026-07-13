@@ -7,6 +7,7 @@ import { toLocalDateStr } from '@/lib/checklist-date'
 import ChecklistItemEditor, { EditableItem } from './ChecklistItemEditor'
 import ChecklistModal from './ChecklistModal'
 import FreezeDayModal from './FreezeDayModal'
+import BadgeGallery from './BadgeGallery'
 import { SlidersHorizontal, Snowflake } from 'lucide-react'
 
 interface Props {
@@ -137,6 +138,11 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
             )}
           </div>
         ))}
+      </div>
+
+      <div>
+        <h2 className="text-sm font-bold mb-2" style={{ color: 'var(--text-1)' }}>Achievements</h2>
+        <BadgeGallery unlockedBadges={log.unlockedBadges} streak={streak} lifetime={lifetime} />
       </div>
 
       {showEditor && <ChecklistModal config={config} onClose={() => setShowEditor(false)} />}
