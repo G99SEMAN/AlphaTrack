@@ -38,10 +38,6 @@
       "c:\\Users\\G99SEMAN\\Desktop\\AlphaTrack\\.git\\sdd"
     ]
   },
-  "enabledPlugins": {
-    "claude-mem@thedotmack": true,
-    "ui-ux-pro-max@ui-ux-pro-max-skill": true
-  },
   "hooks": {
     "PreToolUse": [
       {
@@ -65,5 +61,8 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true
   }
 }
