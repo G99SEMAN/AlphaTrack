@@ -5,6 +5,8 @@ import { ChecklistConfig, ChecklistLog, ChecklistItemType } from '@/types/checkl
 import { saveChecklistConfigAction, saveChecklistEntryAction } from '@/lib/actions'
 import { toLocalDateStr } from '@/lib/checklist-date'
 import ChecklistItemEditor, { EditableItem } from './ChecklistItemEditor'
+import ChecklistModal from './ChecklistModal'
+import { SlidersHorizontal } from 'lucide-react'
 
 interface Props {
   config: ChecklistConfig | null
@@ -20,6 +22,7 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
   const today = toLocalDateStr()
   const todayEntry = log.entries.find(e => e.date === today)
   const [values, setValues] = useState<Record<string, boolean | number>>(todayEntry?.values ?? {})
+  const [showEditor, setShowEditor] = useState(false)
 
   if (!config) {
     function activate() {
@@ -60,9 +63,20 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center gap-4">
-        <span style={{ color: 'var(--text-1)', fontWeight: 700 }}>🔥 {streak} {streak === 1 ? 'Tag' : 'Tage'} Streak</span>
-        <span style={{ color: 'var(--text-3)' }}>{lifetime} Tage insgesamt</span>
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        <div className="flex items-center gap-4">
+          <span style={{ color: 'var(--text-1)', fontWeight: 700 }}>🔥 {streak} {streak === 1 ? 'Tag' : 'Tage'} Streak</span>
+          <span style={{ color: 'var(--text-3)' }}>{lifetime} Tage insgesamt</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowEditor(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer"
+          style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
+        >
+          <SlidersHorizontal size={13} />
+          Punkte bearbeiten
+        </button>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -113,6 +127,8 @@ export default function ChecklistClient({ config, log, streak, lifetime, default
           </div>
         ))}
       </div>
+
+      {showEditor && <ChecklistModal config={config} onClose={() => setShowEditor(false)} />}
     </div>
   )
 }
