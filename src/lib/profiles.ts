@@ -75,6 +75,8 @@ export function deleteProfile(profileId: string): void {
     getTradeFilePath(profileId),
     path.join(DATA_DIR, `strategies-${profileId}.json`),
     path.join(DATA_DIR, `bot-trades-${profileId}.json`),
+    path.join(DATA_DIR, `checklist-${profileId}.json`),
+    path.join(DATA_DIR, `checklist-log-${profileId}.json`),
   ]
   for (const f of filesToDelete) {
     try { fs.unlinkSync(f) } catch { /* ignorieren */ }
