@@ -199,7 +199,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             <SlidersHorizontal size={13} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
 
             {/* Status-Filter */}
-            {(['all', 'open', 'closed', 'cancelled'] as FilterStatus[]).map(s => (
+            {(['all', 'cancelled'] as FilterStatus[]).map(s => (
               <button
                 key={s}
                 onClick={() => { setFilterStatus(s); resetPage() }}
@@ -210,7 +210,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                   border: `1px solid ${filterStatus === s ? 'var(--accent)' : 'transparent'}`,
                 }}
               >
-                {s === 'all' ? 'Alle' : s === 'open' ? 'Offen' : s === 'closed' ? 'Geschl.' : 'Abgebr.'}
+                {s === 'all' ? 'Alle' : 'Abgebr.'}
               </button>
             ))}
 
