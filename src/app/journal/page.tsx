@@ -38,7 +38,6 @@ export default function JournalPage() {
           currency={activeProfile.currency}
           startCapital={activeProfile.startCapital}
           broker={activeProfile.broker}
-          profiles={profiles}
           bots={bots}
         />
       </main>

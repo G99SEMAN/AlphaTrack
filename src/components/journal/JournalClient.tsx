@@ -3,16 +3,14 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { currencySymbol } from '@/lib/currency'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload, Bot } from 'lucide-react'
+import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
-import { Profile } from '@/types/profile'
 import { BotEntry } from '@/types/bot'
 import { resolveBotLabel } from '@/lib/bot-source'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
-import BotImportModal from './BotImportModal'
 
 interface Props {
   trades: Trade[]
@@ -20,7 +18,6 @@ interface Props {
   currency: string
   startCapital: number
   broker?: string
-  profiles?: Profile[]
   bots?: BotEntry[]
 }
 
@@ -28,11 +25,10 @@ type FilterStatus = 'all' | 'open' | 'closed' | 'cancelled'
 type FilterDir = 'all' | 'long' | 'short'
 type SortKey = 'date' | 'pnl' | 'instrument'
 
-export default function JournalClient({ trades: initialTrades, strategies, currency, startCapital, broker, profiles = [], bots = [] }: Props) {
+export default function JournalClient({ trades: initialTrades, strategies, currency, startCapital, broker, bots = [] }: Props) {
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
   const [showModal, setShowModal] = useState(false)
   const [showImport, setShowImport] = useState(false)
-  const [showBotImport, setShowBotImport] = useState(false)
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all')
   const [filterDir, setFilterDir] = useState<FilterDir>('all')
@@ -248,22 +244,6 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
             {/* Action-Buttons rechtsbündig */}
             <div className="flex items-center gap-1.5 ml-auto">
-              {bots.length > 0 && (
-                <button
-                  onClick={() => setShowBotImport(true)}
-                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
-                  style={{
-                    background: 'rgba(59,130,246,0.08)',
-                    color: '#3b82f6',
-                    border: '1px solid rgba(59,130,246,0.3)',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.15)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.08)' }}
-                >
-                  <Bot size={13} />
-                  <span className="hidden sm:inline">Via Bot</span>
-                </button>
-              )}
               <button
                 onClick={() => setShowImport(true)}
                 className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
@@ -417,18 +397,6 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             onClose={() => { setShowImport(false); void fetchTrades() }}
             existingExternalIds={new Set(trades.map(t => t.externalId).filter(Boolean) as string[])}
             profileStartCapital={startCapital}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showBotImport && bots.length > 0 && (
-          <BotImportModal
-            bots={bots}
-            profiles={profiles}
-            existingExternalIdsByProfile={Object.fromEntries(
-              profiles.map(p => [p.id, new Set(trades.map(t => t.externalId).filter(Boolean) as string[])])
-            )}
-            onClose={() => { setShowBotImport(false); void fetchTrades() }}
           />
         )}
       </AnimatePresence>
