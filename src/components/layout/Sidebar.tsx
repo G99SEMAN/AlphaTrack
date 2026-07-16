@@ -18,11 +18,14 @@ import { useBotStatus } from '@/context/BotStatusContext'
 import LogoMark from './LogoMark'
 
 const UEBERSICHT_NAV = [
-  { href: '/dashboard',   label: 'Dashboard',   icon: LayoutDashboard },
-  { href: '/journal',     label: 'Trades',       icon: BookOpen },
-  { href: '/statistiken', label: 'Statistiken',  icon: BarChart2 },
-  { href: '/kalender',    label: 'Kalender',     icon: CalendarDays },
-  { href: '/netzwerk',    label: 'Netzwerk',     icon: Network },
+  { href: '/dashboard',      label: 'Dashboard',      icon: LayoutDashboard },
+  { href: '/journal',        label: 'Trades',         icon: BookOpen },
+  { href: '/bridge/trades',  label: 'Live Trades',    icon: Activity },
+  { href: '/strategien',     label: 'Strategien',     icon: Target },
+  { href: '/bridge/analyse', label: 'Trade Analyzer', icon: Sparkles },
+  { href: '/statistiken',    label: 'Statistiken',    icon: BarChart2 },
+  { href: '/kalender',       label: 'Kalender',       icon: CalendarDays },
+  { href: '/netzwerk',       label: 'Netzwerk',       icon: Network },
 ]
 
 const BRIDGE_BOTS_NAV = [
@@ -30,10 +33,7 @@ const BRIDGE_BOTS_NAV = [
   { href: '/bridge/log',        label: 'Bridge Log',    icon: ScrollText },
   { href: '/bots',              label: 'Bots',          icon: Bot },
   { href: '/bots/settings',     label: 'Bot Settings',  icon: SlidersHorizontal },
-  { href: '/strategien',        label: 'Strategien',    icon: Target },
   { href: '/bots/performance',  label: 'Performance',   icon: BarChart2 },
-  { href: '/bridge/trades',     label: 'Live Trades',   icon: Activity },
-  { href: '/bridge/analyse',    label: 'Trade Analyzer',icon: Sparkles },
 ]
 
 const EXACT_MATCH = new Set(['/dashboard', '/bridge', '/bots'])
