@@ -3,16 +3,16 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { currencySymbol } from '@/lib/currency'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload, Bot } from 'lucide-react'
+import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
-import { Profile } from '@/types/profile'
 import { BotEntry } from '@/types/bot'
 import { resolveBotLabel } from '@/lib/bot-source'
+import { getBotColor } from '@/lib/bot-colors'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
-import BotImportModal from './BotImportModal'
+import BotFilterDropdown, { MANUAL_FILTER_VALUE } from './BotFilterDropdown'
 
 interface Props {
   trades: Trade[]
@@ -20,7 +20,6 @@ interface Props {
   currency: string
   startCapital: number
   broker?: string
-  profiles?: Profile[]
   bots?: BotEntry[]
 }
 
@@ -28,14 +27,16 @@ type FilterStatus = 'all' | 'open' | 'closed' | 'cancelled'
 type FilterDir = 'all' | 'long' | 'short'
 type SortKey = 'date' | 'pnl' | 'instrument'
 
-export default function JournalClient({ trades: initialTrades, strategies, currency, startCapital, broker, profiles = [], bots = [] }: Props) {
+export default function JournalClient({ trades: initialTrades, strategies, currency, startCapital, broker, bots = [] }: Props) {
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
   const [showModal, setShowModal] = useState(false)
   const [showImport, setShowImport] = useState(false)
-  const [showBotImport, setShowBotImport] = useState(false)
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all')
   const [filterDir, setFilterDir] = useState<FilterDir>('all')
+  const [selectedBots, setSelectedBots] = useState<Set<string>>(
+    () => new Set([...bots.map(b => b.id), MANUAL_FILTER_VALUE])
+  )
   const [sortKey, setSortKey] = useState<SortKey>('date')
   const [sortAsc, setSortAsc] = useState(false)
   const [page, setPage] = useState(1)
@@ -69,10 +70,20 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
     return resolveBotLabel(trade.sourceId, bots)
   }
 
+  function resolveSourceColor(trade: Trade): string {
+    return getBotColor(trade.botId, bots)
+  }
+
   const filtered = useMemo(() => trades
     .filter(t => {
       if (filterStatus !== 'all' && t.status !== filterStatus) return false
       if (filterDir !== 'all' && t.type !== filterDir) return false
+      const isRegisteredBot = t.botId && bots.some(b => b.id === t.botId)
+      if (isRegisteredBot) {
+        if (!selectedBots.has(t.botId as string)) return false
+      } else if (!selectedBots.has(MANUAL_FILTER_VALUE)) {
+        return false
+      }
       if (search) {
         const q = search.toLowerCase()
         if (!t.instrument.toLowerCase().includes(q) && !(t.notes ?? '').toLowerCase().includes(q) && !(t.tags ?? []).some(tag => tag.toLowerCase().includes(q))) return false
@@ -100,7 +111,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       else if (sortKey === 'instrument') diff = a.instrument.localeCompare(b.instrument)
       return sortAsc ? diff : -diff
     }),
-    [trades, filterStatus, filterDir, search, sortKey, sortAsc]
+    [trades, filterStatus, filterDir, selectedBots, search, sortKey, sortAsc]
   )
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
@@ -203,7 +214,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             <SlidersHorizontal size={13} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
 
             {/* Status-Filter */}
-            {(['all', 'open', 'closed', 'cancelled'] as FilterStatus[]).map(s => (
+            {(['all', 'cancelled'] as FilterStatus[]).map(s => (
               <button
                 key={s}
                 onClick={() => { setFilterStatus(s); resetPage() }}
@@ -214,7 +225,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                   border: `1px solid ${filterStatus === s ? 'var(--accent)' : 'transparent'}`,
                 }}
               >
-                {s === 'all' ? 'Alle' : s === 'open' ? 'Offen' : s === 'closed' ? 'Geschl.' : 'Abgebr.'}
+                {s === 'all' ? 'Alle' : 'Abgebr.'}
               </button>
             ))}
 
@@ -246,24 +257,22 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
               </button>
             ))}
 
+            {bots.length > 0 && (
+              <>
+                {/* Trennlinie */}
+                <span style={{ width: 1, height: 14, background: 'var(--border)', margin: '0 2px', flexShrink: 0 }} />
+
+                {/* Bot-Filter */}
+                <BotFilterDropdown
+                  bots={bots}
+                  selected={selectedBots}
+                  onChange={next => { setSelectedBots(next); resetPage() }}
+                />
+              </>
+            )}
+
             {/* Action-Buttons rechtsbündig */}
             <div className="flex items-center gap-1.5 ml-auto">
-              {bots.length > 0 && (
-                <button
-                  onClick={() => setShowBotImport(true)}
-                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
-                  style={{
-                    background: 'rgba(59,130,246,0.08)',
-                    color: '#3b82f6',
-                    border: '1px solid rgba(59,130,246,0.3)',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.15)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(59,130,246,0.08)' }}
-                >
-                  <Bot size={13} />
-                  <span className="hidden sm:inline">Via Bot</span>
-                </button>
-              )}
               <button
                 onClick={() => setShowImport(true)}
                 className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
@@ -340,7 +349,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
         ) : (
           <div>
             {paginated.map(trade => (
-              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} sourceLabel={resolveSourceLabel(trade)} />
+              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} sourceLabel={resolveSourceLabel(trade)} botColor={resolveSourceColor(trade)} />
             ))}
           </div>
         )}
@@ -417,18 +426,6 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             onClose={() => { setShowImport(false); void fetchTrades() }}
             existingExternalIds={new Set(trades.map(t => t.externalId).filter(Boolean) as string[])}
             profileStartCapital={startCapital}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showBotImport && bots.length > 0 && (
-          <BotImportModal
-            bots={bots}
-            profiles={profiles}
-            existingExternalIdsByProfile={Object.fromEntries(
-              profiles.map(p => [p.id, new Set(trades.map(t => t.externalId).filter(Boolean) as string[])])
-            )}
-            onClose={() => { setShowBotImport(false); void fetchTrades() }}
           />
         )}
       </AnimatePresence>

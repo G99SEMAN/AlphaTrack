@@ -380,36 +380,6 @@ export async function importTradesAction(
   return { imported: withIds.length, skipped: incoming.length - withIds.length }
 }
 
-export async function importBotTradesAction(
-  profileId: string,
-  incoming: Omit<Trade, 'id'>[],
-  newStartCapital?: number,
-): Promise<{ imported: number; skipped: number }> {
-  const profiles = getProfiles()
-  const profile = profiles.find(p => p.id === profileId)
-  if (!profile) return { imported: 0, skipped: 0 }
-
-  if (newStartCapital !== undefined && newStartCapital !== profile.startCapital) {
-    updateProfile({ ...profile, startCapital: newStartCapital })
-  }
-
-  const existing = getProfileTrades(profileId)
-  const existingExternalIds = new Set(
-    existing.map(t => t.externalId).filter(Boolean)
-  )
-
-  const toAdd = incoming.filter(
-    t => !t.externalId || !existingExternalIds.has(t.externalId)
-  )
-
-  const withIds: Trade[] = toAdd.map(t => ({ ...t, id: nanoid(10) }))
-  saveProfileTrades(profileId, [...existing, ...withIds])
-  revalidatePath('/journal')
-  revalidatePath('/dashboard')
-
-  return { imported: withIds.length, skipped: incoming.length - withIds.length }
-}
-
 export async function importBridgeHistoryAction(): Promise<
   | { ok: true; imported: number }
   | { ok: false; reason: 'no_bridge' | 'bridge_offline' | 'fetch_error' }
