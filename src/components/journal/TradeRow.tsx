@@ -17,6 +17,7 @@ interface Props {
   startCapital?: number
   onRefresh?: () => void
   sourceLabel?: string
+  botColor: string
 }
 
 function isSafeScreenshotUrl(url: string): boolean {
@@ -40,7 +41,7 @@ function StatusBadge({ status }: { status: Trade['status'] }) {
   )
 }
 
-export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh, sourceLabel }: Props) {
+export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh, sourceLabel, botColor }: Props) {
   const [expanded, setExpanded] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -105,7 +106,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
             {sourceLabel && (
               <span
                 className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-semibold shrink-0 max-w-32 truncate"
-                style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent)', border: '1px solid rgba(59,130,246,0.25)' }}
+                style={{ background: `${botColor}18`, color: botColor, border: `1px solid ${botColor}66` }}
                 title={`Quelle: ${sourceLabel}`}
               >
                 <Bot size={10} className="shrink-0" />

@@ -16,7 +16,7 @@ export default function JournalPage() {
 
   const trades = getProfileTrades(activeProfile.id)
   const strategies = getProfileStrategies(activeProfile.id)
-  const bots = getBots()
+  const bots = getBots().filter(bot => bot.type === 'bot')
 
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>

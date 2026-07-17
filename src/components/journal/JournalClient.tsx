@@ -8,6 +8,7 @@ import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { BotEntry } from '@/types/bot'
 import { resolveBotLabel } from '@/lib/bot-source'
+import { getBotColor } from '@/lib/bot-colors'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
@@ -63,6 +64,10 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
   function resolveSourceLabel(trade: Trade): string | undefined {
     return resolveBotLabel(trade.sourceId, bots)
+  }
+
+  function resolveSourceColor(trade: Trade): string {
+    return getBotColor(trade.botId, bots)
   }
 
   const filtered = useMemo(() => trades
@@ -320,7 +325,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
         ) : (
           <div>
             {paginated.map(trade => (
-              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} sourceLabel={resolveSourceLabel(trade)} />
+              <TradeRow key={trade.id} trade={trade} strategies={strategies} broker={broker} currency={currency} startCapital={startCapital} onRefresh={fetchTrades} sourceLabel={resolveSourceLabel(trade)} botColor={resolveSourceColor(trade)} />
             ))}
           </div>
         )}
