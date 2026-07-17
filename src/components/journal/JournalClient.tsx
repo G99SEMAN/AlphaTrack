@@ -12,6 +12,7 @@ import { getBotColor } from '@/lib/bot-colors'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
+import BotFilterDropdown, { MANUAL_FILTER_VALUE } from './BotFilterDropdown'
 
 interface Props {
   trades: Trade[]
@@ -33,6 +34,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all')
   const [filterDir, setFilterDir] = useState<FilterDir>('all')
+  const [selectedBots, setSelectedBots] = useState<Set<string>>(
+    () => new Set([...bots.map(b => b.id), MANUAL_FILTER_VALUE])
+  )
   const [sortKey, setSortKey] = useState<SortKey>('date')
   const [sortAsc, setSortAsc] = useState(false)
   const [page, setPage] = useState(1)
@@ -74,6 +78,11 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
     .filter(t => {
       if (filterStatus !== 'all' && t.status !== filterStatus) return false
       if (filterDir !== 'all' && t.type !== filterDir) return false
+      if (t.botId) {
+        if (!selectedBots.has(t.botId)) return false
+      } else if (!selectedBots.has(MANUAL_FILTER_VALUE)) {
+        return false
+      }
       if (search) {
         const q = search.toLowerCase()
         if (!t.instrument.toLowerCase().includes(q) && !(t.notes ?? '').toLowerCase().includes(q) && !(t.tags ?? []).some(tag => tag.toLowerCase().includes(q))) return false
@@ -101,7 +110,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       else if (sortKey === 'instrument') diff = a.instrument.localeCompare(b.instrument)
       return sortAsc ? diff : -diff
     }),
-    [trades, filterStatus, filterDir, search, sortKey, sortAsc]
+    [trades, filterStatus, filterDir, selectedBots, search, sortKey, sortAsc]
   )
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
@@ -246,6 +255,20 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                 {label}
               </button>
             ))}
+
+            {bots.length > 0 && (
+              <>
+                {/* Trennlinie */}
+                <span style={{ width: 1, height: 14, background: 'var(--border)', margin: '0 2px', flexShrink: 0 }} />
+
+                {/* Bot-Filter */}
+                <BotFilterDropdown
+                  bots={bots}
+                  selected={selectedBots}
+                  onChange={next => { setSelectedBots(next); resetPage() }}
+                />
+              </>
+            )}
 
             {/* Action-Buttons rechtsbündig */}
             <div className="flex items-center gap-1.5 ml-auto">
