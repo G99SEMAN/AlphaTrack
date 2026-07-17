@@ -78,8 +78,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
     .filter(t => {
       if (filterStatus !== 'all' && t.status !== filterStatus) return false
       if (filterDir !== 'all' && t.type !== filterDir) return false
-      if (t.botId) {
-        if (!selectedBots.has(t.botId)) return false
+      const isRegisteredBot = t.botId && bots.some(b => b.id === t.botId)
+      if (isRegisteredBot) {
+        if (!selectedBots.has(t.botId as string)) return false
       } else if (!selectedBots.has(MANUAL_FILTER_VALUE)) {
         return false
       }
