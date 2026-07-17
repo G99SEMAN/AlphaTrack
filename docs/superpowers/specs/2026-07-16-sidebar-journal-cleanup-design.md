@@ -38,12 +38,12 @@ Die Buttons `Offen` und `Geschlossen` werden aus der Status-Filterzeile entfernt
 
 ### Neuer Bot-Filter
 Ein Dropdown mit Checkboxen (Mehrfachauswahl), platziert in der bestehenden Filter-Zeile neben Status/Richtung. Einträge:
-- Ein Eintrag pro registriertem Bot (`bots` Prop)
-- Ein zusätzlicher Eintrag "Manuell" für Trades ohne `botId`/`sourceId`
+- Ein Eintrag pro registriertem Bot (`bots` Prop, Eintrag-Wert = `bot.id`)
+- Ein zusätzlicher Eintrag "Manuell" (Wert: spezieller Marker `'manual'`) für alle Nicht-Bot-Trades. Laut `resolveBotLabel()` (`src/lib/bot-source.ts`) sind das drei Fälle, die hier bewusst zusammengefasst werden: `sourceId === TRADE_EXECUTOR_SOURCE_ID` ("Trade Executor"), `sourceId === null || sourceId === MANUAL_MT5_SOURCE_ID` ("Manuell/MT5"), und `sourceId === undefined` (Alt-Trades ohne Zuordnung, aktuell taglos). Alle drei zählen fürs Filtern als "Manuell".
 
-Standardzustand: alle Einträge ausgewählt (= kein Filtereffekt). Die Filterlogik (`filtered` useMemo) bekommt ein zusätzliches Prädikat: ein Trade wird nur angezeigt, wenn sein zugehöriger Bot (über `sourceId`/`botId`, siehe `resolveBotLabel`) in der aktuellen Auswahl ist, bzw. wenn er keinem Bot zugeordnet ist und "Manuell" ausgewählt ist.
+Standardzustand: alle Einträge ausgewählt (= kein Filtereffekt). Die Filterlogik (`filtered` useMemo) bekommt ein zusätzliches Prädikat: ein Trade wird nur angezeigt, wenn — für `sourceId`, das einer registrierten Bot-`id` entspricht — diese Bot-ID in der Auswahl ist, oder — für alle anderen Fälle (Trade Executor, Manuell/MT5, `undefined`) — `'manual'` in der Auswahl ist.
 
-Neuer State: `selectedBotFilter: Set<string>` (Bot-IDs + spezieller Marker `'manual'`), initialisiert mit allen IDs + `'manual'`.
+Neuer State: `selectedBotFilter: Set<string>` (Bot-IDs + spezieller Marker `'manual'`), initialisiert mit allen Bot-IDs + `'manual'`.
 
 ## 3. Bot-Tag-Farben (Konsistenz)
 
