@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { currencySymbol } from '@/lib/currency'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload } from 'lucide-react'
+import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload, Download } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { BotEntry } from '@/types/bot'
@@ -12,6 +12,7 @@ import { getBotColor } from '@/lib/bot-colors'
 import TradeRow from './TradeRow'
 import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
+import ExportModal from './ExportModal'
 import BotFilterDropdown, { MANUAL_FILTER_VALUE } from './BotFilterDropdown'
 
 interface Props {
@@ -31,6 +32,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
   const [showModal, setShowModal] = useState(false)
   const [showImport, setShowImport] = useState(false)
+  const [showExport, setShowExport] = useState(false)
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all')
   const [filterDir, setFilterDir] = useState<FilterDir>('all')
@@ -274,6 +276,20 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             {/* Action-Buttons rechtsbündig */}
             <div className="flex items-center gap-1.5 ml-auto">
               <button
+                onClick={() => setShowExport(true)}
+                className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
+                style={{
+                  background: 'var(--surface-2)',
+                  color: 'var(--text-2)',
+                  border: '1px solid var(--border)',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
+              >
+                <Download size={13} />
+                <span className="hidden sm:inline">Exportieren</span>
+              </button>
+              <button
                 onClick={() => setShowImport(true)}
                 className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
                 style={{
@@ -426,6 +442,15 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             onClose={() => { setShowImport(false); void fetchTrades() }}
             existingExternalIds={new Set(trades.map(t => t.externalId).filter(Boolean) as string[])}
             profileStartCapital={startCapital}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {showExport && (
+          <ExportModal
+            trades={trades}
+            filtered={filtered}
+            onClose={() => setShowExport(false)}
           />
         )}
       </AnimatePresence>
