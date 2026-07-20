@@ -51,7 +51,7 @@ function TradeReportDocument({ trades, profile, yearLabel }: Props) {
     else acc.loss += pnl
     return acc
   }, { win: 0, loss: 0 })
-  const totalCosts = closed.reduce((s, t) => s + (t.commission ?? 0) + (t.swap ?? 0), 0)
+  const totalCosts = closed.reduce((s, t) => s + (t.commission ?? 0) + (t.swap ?? 0) + (t.spreadCost ?? 0), 0)
   const netResult = gross.win + gross.loss - totalCosts
   const sorted = [...trades].sort((a, b) => {
     const aClose = a.closeTime ?? a.date
@@ -83,7 +83,7 @@ function TradeReportDocument({ trades, profile, yearLabel }: Props) {
             <Text style={styles.summaryValue}>{fmt(gross.loss)} {symbol}</Text>
           </View>
           <View style={styles.summaryItem}>
-            <Text style={styles.summaryLabel}>Kommission + Swap</Text>
+            <Text style={styles.summaryLabel}>Kommission + Swap + Spread</Text>
             <Text style={styles.summaryValue}>-{fmt(totalCosts)} {symbol}</Text>
           </View>
           <View style={styles.summaryItem}>
@@ -105,7 +105,7 @@ function TradeReportDocument({ trades, profile, yearLabel }: Props) {
             <Text style={[styles.cell, styles.colNetto]}>Netto</Text>
           </View>
           {sorted.map(t => {
-            const costs = (t.commission ?? 0) + (t.swap ?? 0)
+            const costs = (t.commission ?? 0) + (t.swap ?? 0) + (t.spreadCost ?? 0)
             const netto = t.pnl !== undefined ? t.pnl - costs : undefined
             return (
               <View style={styles.tableRow} key={t.id} wrap={false}>

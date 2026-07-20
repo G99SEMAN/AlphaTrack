@@ -5,7 +5,7 @@ import { resolveBotLabel } from '@/lib/bot-source'
 
 const CSV_HEADERS = [
   'Datum', 'Schlussdatum', 'Instrument', 'Typ', 'Status', 'Entry', 'Exit', 'Size',
-  'TP', 'SL', 'P&L', 'Kommission', 'Swap', 'Netto-Ergebnis', 'RR', 'Strategie', 'Quelle', 'Tags', 'Notizen',
+  'TP', 'SL', 'P&L', 'Kommission', 'Swap', 'Spread', 'Netto-Ergebnis', 'RR', 'Strategie', 'Quelle', 'Tags', 'Notizen',
 ]
 
 function csvEscape(value: string): string {
@@ -22,7 +22,7 @@ function statusLabel(status: Trade['status']): string {
 export function buildTradeCsv(trades: Trade[], bots: BotEntry[], strategies: Strategy[]): string {
   const rows = trades.map(t => {
     const netto = t.pnl !== undefined
-      ? t.pnl - (t.commission ?? 0) - (t.swap ?? 0)
+      ? t.pnl - (t.commission ?? 0) - (t.swap ?? 0) - (t.spreadCost ?? 0)
       : undefined
     const strategyName = strategies.find(s => s.id === t.strategyId)?.name ?? ''
     const quelle = resolveBotLabel(t.sourceId, bots) ?? ''
@@ -41,6 +41,7 @@ export function buildTradeCsv(trades: Trade[], bots: BotEntry[], strategies: Str
       t.pnl !== undefined ? t.pnl.toFixed(2) : '',
       t.commission !== undefined ? t.commission.toFixed(2) : '',
       t.swap !== undefined ? t.swap.toFixed(2) : '',
+      t.spreadCost !== undefined ? t.spreadCost.toFixed(2) : '',
       netto !== undefined ? netto.toFixed(2) : '',
       t.rr !== undefined ? String(t.rr) : '',
       strategyName,
