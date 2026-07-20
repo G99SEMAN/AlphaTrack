@@ -3,6 +3,7 @@ import { getActiveProfile, getProfileTrades } from '@/lib/profiles'
 import { getProfileStrategies } from '@/lib/strategies'
 import { getBots } from '@/lib/bot-data'
 import { buildTradeCsv } from '@/lib/trade-export-csv'
+import { buildTradePdf } from '@/lib/trade-export-pdf'
 
 export async function POST(req: Request) {
   try {
@@ -41,8 +42,14 @@ export async function POST(req: Request) {
       })
     }
 
-    // PDF-Pfad folgt in Task 2
-    return NextResponse.json({ error: 'PDF-Export noch nicht verfügbar' }, { status: 501 })
+    const yearLabel = body.year === undefined || body.year === 'all' ? 'Alle Jahre' : String(body.year)
+    const pdfBuffer = await buildTradePdf(trades, profile, yearLabel)
+    return new NextResponse(new Uint8Array(pdfBuffer), {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="alphatrack-steuerreport-${date}.pdf"`,
+      },
+    })
   } catch (err) {
     console.error('Export-Fehler:', err)
     return NextResponse.json({ error: 'Export fehlgeschlagen' }, { status: 500 })

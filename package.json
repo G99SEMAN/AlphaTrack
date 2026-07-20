@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
+    "@react-pdf/renderer": "^4.5.1",
     "@types/jszip": "^3.4.0",
     "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
