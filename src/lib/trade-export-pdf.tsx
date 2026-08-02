@@ -24,12 +24,15 @@ const styles = StyleSheet.create({
   colPnl: { width: '11%', textAlign: 'right' },
   colCosts: { width: '11%', textAlign: 'right' },
   colNetto: { width: '12%', textAlign: 'right' },
-  footer: { position: 'absolute', bottom: 20, left: 32, right: 32, fontSize: 7, color: '#888888', borderTopWidth: 0.5, borderTopColor: '#dddddd', paddingTop: 6 },
   pageNumber: { position: 'absolute', bottom: 20, right: 32, fontSize: 7, color: '#888888' },
 })
 
 function fmt(n: number): string {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+function fmtPrice(n: number): string {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 5 })
 }
 
 function fmtDate(iso: string): string {
@@ -112,8 +115,8 @@ function TradeReportDocument({ trades, profile, yearLabel }: Props) {
                 <Text style={[styles.cell, styles.colDate]}>{fmtDate(t.closeTime ?? t.date)}</Text>
                 <Text style={[styles.cell, styles.colInstrument]}>{t.instrument}</Text>
                 <Text style={[styles.cell, styles.colType]}>{t.type === 'long' ? 'Long' : 'Short'}</Text>
-                <Text style={[styles.cell, styles.colEntry]}>{t.entry}</Text>
-                <Text style={[styles.cell, styles.colExit]}>{t.exit ?? '-'}</Text>
+                <Text style={[styles.cell, styles.colEntry]}>{fmtPrice(t.entry)}</Text>
+                <Text style={[styles.cell, styles.colExit]}>{t.exit !== undefined ? fmtPrice(t.exit) : '-'}</Text>
                 <Text style={[styles.cell, styles.colSize]}>{t.size}</Text>
                 <Text style={[styles.cell, styles.colPnl]}>{t.pnl !== undefined ? fmt(t.pnl) : '-'}</Text>
                 <Text style={[styles.cell, styles.colCosts]}>{fmt(costs)}</Text>
@@ -123,9 +126,6 @@ function TradeReportDocument({ trades, profile, yearLabel }: Props) {
           })}
         </View>
 
-        <Text style={styles.footer} fixed>
-          Dies ist kein amtliches Steuerdokument. Bitte in Zusammenarbeit mit einem Steuerberater prüfen. Bei Fremdwährungskonten ist ggf. eine manuelle Umrechnung zum Tageskurs erforderlich.
-        </Text>
         <Text
           style={styles.pageNumber}
           fixed
