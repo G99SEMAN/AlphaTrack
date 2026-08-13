@@ -219,6 +219,7 @@ def main():
 
     sim_positions = []
     trades = []
+    next_ticket = 1
 
     for i in range(candles_count, len(all_candles) - 1):
         window = all_candles[i - candles_count:i]
@@ -245,20 +246,50 @@ def main():
                 still_open.append(pos)
         sim_positions = still_open
 
-        # Strategie-Signal
-        signal = bot.on_tick(window, sim_positions)
+        # Live-Preis (letzter geschlossener Kerzen-Close) für Break-Even-Logik etc. aktualisieren
+        last_price = float(window[-1]["close"])
+        for pos in sim_positions:
+            pos["currentPrice"] = last_price
+
+        # Strategie-Signal — Exceptions wie im Live-Betrieb (base_bot.py) abfangen statt den
+        # gesamten Backtest abzubrechen, damit sich Strategie-Bugs identisch zum Live-Verhalten zeigen
+        try:
+            signal = bot.on_tick(window, sim_positions)
+        except Exception as exc:
+            signal = {"action": "hold", "reason": f"[EXCEPTION] {exc}"}
         action = signal.get("action", "hold")
 
         if action in ("buy", "sell") and len(sim_positions) < max_positions:
             entry_price = float(window[-1]["close"])
             sim_positions.append({
+                "ticket": next_ticket,
+                "type": "long" if action == "buy" else "short",
                 "action": action,
                 "entry": entry_price,
+                "currentPrice": entry_price,
                 "lots": float(signal.get("lots", default_lots)),
                 "sl": signal.get("sl"),
                 "tp": signal.get("tp"),
                 "open_time": window[-1]["datetime"],
             })
+            next_ticket += 1
+
+        elif action == "close":
+            ticket = signal.get("ticket")
+            close_price = float(window[-1]["close"])
+            remaining = []
+            for pos in sim_positions:
+                if ticket is not None and pos.get("ticket") == ticket:
+                    trades.append({
+                        **pos,
+                        "exit": close_price,
+                        "pnl": _pnl(pos["action"], pos["entry"], close_price, pos["lots"], symbol, pip_value_per_lot),
+                        "exit_type": "BE",
+                        "close_time": window[-1]["datetime"],
+                    })
+                else:
+                    remaining.append(pos)
+            sim_positions = remaining
 
     # Noch offene Positionen am Backtest-Ende zum letzten Close schließen
     if sim_positions:

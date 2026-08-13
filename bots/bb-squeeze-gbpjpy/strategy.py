@@ -231,10 +231,9 @@ class BBSqueezeStrategy(BaseBot):
 
         for pos in positions:
             ticket    = int(pos.get("ticket", 0))
-            pos_type  = int(pos.get("type", 0))  # 0 = buy, 1 = sell
-            direction = "buy" if pos_type == 0 else "sell"
-            entry     = float(pos.get("price_open", pos.get("open_price", 0)))
-            current   = float(pos.get("price_current", pos.get("current_price", entry)))
+            direction = "buy" if pos.get("type") == "long" else "sell"
+            entry     = float(pos.get("entry", 0))
+            current   = float(pos.get("currentPrice", entry))
 
             if ticket not in self._be_tracker:
                 self._be_tracker[ticket] = {
