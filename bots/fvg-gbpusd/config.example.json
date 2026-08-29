@@ -1,0 +1,28 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bot_id": "fvg-gbpusd-001",
+  "bot_name": "FVG GBP/USD",
+  "bot_version": "1.0.0",
+  "bot_type": "bot",
+  "bot_ip": "",
+  "bot_port": 8775,
+  "profile_id": "",
+  "bridge_url": "http://<mini-pc-ip>:8765",
+  "heartbeat_interval_sec": 10,
+  "strategy": {
+    "symbol": "GBPUSDp",
+    "timeframe": "M15",
+    "candles_count": 300,
+    "lots": 0.01,
+    "max_positions": 1,
+    "ema_period": 200,
+    "fvg_max_age_bars": 20,
+    "sl_buffer_pips": 5,
+    "session_filter": 1,
+    "min_rr": 1.0,
+    "tp_extension_mult": 2.0,
+    "comment": "FVG GBP/USD",
+    "tick_interval_sec": 60
+  }
+}

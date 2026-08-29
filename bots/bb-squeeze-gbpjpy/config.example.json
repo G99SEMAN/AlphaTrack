@@ -1,0 +1,33 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bot_id": "bb-squeeze-gbpjpy-001",
+  "bot_name": "BB Squeeze GBP/JPY",
+  "bot_version": "1.0.0",
+  "bot_type": "bot",
+  "bot_ip": "",
+  "bot_port": 8774,
+  "profile_id": "",
+  "bridge_url": "http://<mini-pc-ip>:8765",
+  "heartbeat_interval_sec": 10,
+  "strategy": {
+    "symbol": "GBPJPYp",
+    "timeframe": "M15",
+    "candles_count": 300,
+    "max_positions": 1,
+    "comment": "BB Squeeze GBPJPYp",
+    "tick_interval_sec": 30,
+    "bb_period": 20,
+    "bb_std": 2.0,
+    "squeeze_lookback": 50,
+    "squeeze_recent_bars": 12,
+    "rr_ratio": 1.5,
+    "ema_period": 200,
+    "atr_sl_cap_multiplier": 1.5,
+    "risk_percent": 1.0,
+    "pip_value_per_lot": 7.0,
+    "be_threshold_pips": 10,
+    "trading_start_hour": 8,
+    "trading_end_hour": 11
+  }
+}

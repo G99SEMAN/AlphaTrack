@@ -1,0 +1,28 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bot_id": "londonopenv1-001",
+  "bot_name": "London Open V1",
+  "bot_version": "1.0.0",
+  "bot_type": "bot",
+  "bot_ip": "",
+  "bot_port": 8773,
+  "profile_id": "",
+  "bridge_url": "http://<mini-pc-ip>:8765",
+  "heartbeat_interval_sec": 10,
+  "strategy": {
+    "symbol": "GBPUSDp",
+    "timeframe": "M15",
+    "candles_count": 60,
+    "lots": 0.03,
+    "max_positions": 1,
+    "sl_buffer_pips": 5,
+    "rr_ratio": 1.5,
+    "asia_start_utc": 0,
+    "asia_end_utc": 7,
+    "entry_start_utc": 7,
+    "entry_end_utc": 9,
+    "comment": "London Open V1",
+    "tick_interval_sec": 60
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bot_id": "testbot2-001",
+  "bot_name": "TestBot 2",
+  "bot_version": "1.0.0",
+  "bot_type": "bot",
+  "bot_port": 8770,
+  "profile_id": "",
+  "bridge_url": "http://<mini-pc-ip>:8765",
+  "heartbeat_interval_sec": 10,
+  "strategy": {
+    "symbol": "EURUSDp",
+    "timeframe": "M1",
+    "candles_count": 5,
+    "lots": 0.01,
+    "max_positions": 1,
+    "comment": "TestBot2 Timer-Trade",
+    "hold_minutes": 1,
+    "interval_minutes": 1
+  }
+}

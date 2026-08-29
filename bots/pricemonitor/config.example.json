@@ -1,0 +1,22 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bot_id": "pricemonitor-001",
+  "bot_name": "Price Monitor",
+  "bot_version": "1.0.0",
+  "bot_type": "bot",
+  "bot_ip": "",
+  "bot_port": 8771,
+  "profile_id": "",
+  "bridge_url": "http://<mini-pc-ip>:8765",
+  "heartbeat_interval_sec": 10,
+  "strategy": {
+    "symbol": "EURUSDp",
+    "timeframe": "M1",
+    "candles_count": 2,
+    "lots": 0.0,
+    "max_positions": 0,
+    "comment": "Price Monitor",
+    "tick_interval_sec": 2
+  }
+}

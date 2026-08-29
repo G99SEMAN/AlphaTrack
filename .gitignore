@@ -31,8 +31,6 @@ yarn-error.log*
 .pnpm-debug.log*
 dev-server.log
 
-# env files - tracked intentionally (private repo only!)
-# .env*
 
 # vercel
 .vercel
@@ -82,3 +80,8 @@ scripts/windows/sync-dev.config.json
 
 # Dev-Container (Hot-Reload) - isolierte Datenkopie, nur lokal relevant
 /data-dev/
+
+# secrets - niemals tracken (siehe docs/superpowers/specs/2026-08-29-secrets-cleanup-mt5-credentials-design.md)
+.env*
+!.env.example
+bots/*/config.json

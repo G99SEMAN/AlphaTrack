@@ -1,0 +1,21 @@
+{
+  "alphatrack_url": "http://<nas-ip>:3000",
+  "api_key": "",
+  "bridge_id": "",
+  "bridge_name": "",
+  "bridge_version": "1.0.0",
+  "profile_id": "",
+  "heartbeat_interval_sec": 5,
+  "trade_sync_interval_sec": 30,
+  "command_server_port": 8765,
+  "mt5_login": 0,
+  "mt5_password": "",
+  "mt5_server": "",
+  "symbols_to_watch": ["EURUSD", "GBPUSD", "XAUUSD", "USDJPY"],
+  "mt5_exe_path": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+  "mt5_restart_wait_sec": 10,
+  "mt5_restart_max_attempts": 3,
+  "mt5_startup_wait_sec": 15,
+  "sync_mode": "full",
+  "sync_cutoff_timestamp": 0
+}
