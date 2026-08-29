@@ -85,3 +85,6 @@ scripts/windows/sync-dev.config.json
 .env*
 !.env.example
 bots/*/config.json
+
+# claude-mem local database - never track (war historisch getrackt, enthielt echte MT5-Login-Nummer)
+.claude/memory.db
