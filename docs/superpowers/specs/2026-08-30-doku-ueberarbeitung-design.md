@@ -20,7 +20,9 @@ Bestandsaufnahme der `.md`-Dateien im Repo, grob in drei Kategorien:
 
 Zusätzlich gefunden: `.claude/worktrees/wave-manifest.json` ist getrackt — eine verwaiste Reststandsdatei eines längst abgeschlossenen Feature-Worktrees (Branch bereits gemergt).
 
-`README.md` ist bereits recht ausgereift (Badges, Feature-Tabellen, Inhaltsverzeichnis, 428 Zeilen) — "vollständige Überarbeitung" bedeutet hier primär: echte Screenshots, ein generischer Einstiegspfad für Fremde ohne NAS/Mini-PC-Setup, und eine Lizenz (aktuell keine `LICENSE`-Datei vorhanden). `SETUP.md`/`docs/DEPLOYMENT.md` sind inhaltlich bereits gut, brauchen nur einen Korrektheits-Check.
+`README.md` ist bereits recht ausgereift (Badges, Feature-Tabellen, Inhaltsverzeichnis, 428 Zeilen) und hat **bereits einen funktionierenden generischen "Schnellstart"-Abschnitt** (Zeilen 81–101: `git clone` → `npm install` → `.env.local` → `npm run dev`, keine NAS-Voraussetzung) — ein neuer Quick-Start-Abschnitt ist also NICHT nötig, anders als ursprünglich angenommen. "Vollständige Überarbeitung" bedeutet nach genauerem Lesen: echte Screenshots (aktuell keine vorhanden), eine Lizenz (aktuell keine `LICENSE`-Datei, der bestehende "Lizenz"-Abschnitt sagt sogar noch "Privates Projekt, nicht für öffentliche Verbreitung vorgesehen" — das wird nach der Veröffentlichung falsch), und eine Korrektur der "Datenspeicherung"-Sektion (siehe unten). `SETUP.md`/`docs/DEPLOYMENT.md` sind inhaltlich bereits gut, brauchen nur einen Korrektheits-Check.
+
+**Zusätzlicher Fund beim vollständigen Lesen von `README.md`:** Zeile 285 sagt *"Der `data/`-Ordner ist bewusst in Git getrackt (privates Repo, Multi-Device-Sync). Handelsdaten bleiben ausschliesslich im privaten Repository."* — diese Design-Aussage wird nach der Veröffentlichung irreführend: `data/` ist weiterhin getrackt (aktuell nur Demo-Profil-Daten, siehe Teilprojekt-1-Spec, "Nicht im Scope"), aber die Behauptung "bleiben ausschliesslich im privaten Repository" stimmt nicht mehr, sobald das Repo öffentlich ist. Mit dem Nutzer abgestimmt: siehe Entscheidungen unten.
 
 ## Entscheidungen (mit Nutzer abgestimmt)
 
@@ -30,6 +32,7 @@ Zusätzlich gefunden: `.claude/worktrees/wave-manifest.json` ist getrackt — ei
 - Lizenz: MIT, Copyright-Inhaber „G99SEMAN".
 - `TODO.md` bleibt bestehen, obwohl aktuell leer (0 Zeilen) — für spätere Nutzung aufgehoben, kein Cleanup-Ziel dieses Specs.
 - `SETUP.md`/`docs/DEPLOYMENT.md` bekommen nur einen Korrektheits-Check, kein Neuschreiben — sind inhaltlich bereits solide.
+- **`data/`-Handhabung nach Veröffentlichung:** Der Nutzer wird für seine eigenen echten Trades künftig eine private Kopie/einen privaten Fork verwenden — in dieses öffentliche Repo werden keine echten Handelsdaten mehr gepusht. Das öffentliche Repo bleibt mit den vorhandenen Demo-Profil-Daten eine Vorlage/Demo. Die README-Aussage in der "Datenspeicherung"-Sektion wird entsprechend präzisiert (siehe Abschnitt 3), `data/` selbst bleibt technisch unverändert getrackt (kein neuer Task nötig, nur eine Doku-Korrektur).
 
 ## 1. Repo-Zusammensetzung bereinigen
 
@@ -54,12 +57,12 @@ Neue Datei `LICENSE` im Root, MIT-Lizenztext, Copyright-Zeile: `Copyright (c) 20
 
 ## 3. README.md — Überarbeitung
 
-Bestehende Struktur (Badges, Feature-Tabellen, Inhaltsverzeichnis) bleibt erhalten. Änderungen:
+Bestehende Struktur (Badges, Feature-Tabellen, Inhaltsverzeichnis, „Schnellstart"-Abschnitt) bleibt erhalten — der Schnellstart (Zeilen 81–101) funktioniert bereits generisch ohne NAS-Voraussetzung, hier ist **keine** Änderung nötig. Tatsächliche Änderungen:
 
-- **Neuer Abschnitt „Quick Start (lokal, ohne NAS)"**, direkt nach der Einleitung/vor dem bestehenden „Docker / NAS-Deployment"-Abschnitt: `git clone` → `npm install` → `.env.local` aus `.env.example` anlegen → `npm run dev` → App läuft lokal auf `localhost:3000` mit manueller Trade-Erfassung. Bot-/Bridge-Anbindung (MT5) wird als optionaler nächster Schritt erwähnt, mit Verweis auf `SETUP.md` für den vollständigen Produktions-Pfad (NAS + Mini-PC).
-- Bestehender „Docker / NAS-Deployment"-Abschnitt bleibt als fortgeschrittener Pfad bestehen, wird nur auf Korrektheit geprüft (keine veralteten Befehle/Pfade).
-- **Screenshots ergänzen:** Dashboard, Journal, Bridge/Bots-Übersicht — aufgenommen über den `run-alphatrack`-Skill gegen den laufenden Dev-Server, als PNG-Dateien unter `public/screenshots/readme/` abgelegt (neues Verzeichnis, getrennt von `data/screenshots/`, das echte Nutzer-Trade-Screenshots enthält) und im README per relativem Pfad eingebunden.
-- **Lizenz-Badge** in der bestehenden Badge-Zeile ergänzen (`MIT License`), verlinkt auf `LICENSE`. Bestehender Lizenz-Abschnitt im Inhaltsverzeichnis (`#lizenz`) wird mit dem tatsächlichen Lizenztext/Verweis gefüllt (aktuell vermutlich Platzhalter oder fehlend — wird bei Umsetzung geprüft).
+- **Lizenz-Badge** in der bestehenden Badge-Zeile (nach dem Docker-Badge) ergänzen: `MIT License`, verlinkt auf `LICENSE`.
+- **„Lizenz"-Abschnitt am Ende (Zeile 426–428) ersetzen:** Der aktuelle Text „Copyright (c) G99SEMAN - Privates Projekt, nicht für öffentliche Verbreitung vorgesehen." ist nach der Veröffentlichung falsch. Ersetzen durch einen kurzen Verweis auf die MIT-Lizenz und die `LICENSE`-Datei (z.B. „Dieses Projekt steht unter der MIT-Lizenz — siehe [LICENSE](LICENSE).").
+- **„Datenspeicherung"-Abschnitt (Zeile 285) korrigieren:** Der Satz „Handelsdaten bleiben ausschliesslich im privaten Repository." wird ersetzt durch eine Klarstellung, dass die im Repo enthaltenen `data/*.json`-Dateien Demo-Profil-Daten sind (kein echtes Trading), und dass eigene, echte Handelsdaten in einer privaten Kopie/einem privaten Fork gehalten werden sollten, wenn `data/` weiterhin per Git synchronisiert werden soll.
+- **Screenshots ergänzen:** Dashboard, Journal, Bridge/Bots-Übersicht — aufgenommen über den `run-alphatrack`-Skill gegen den laufenden Dev-Server, als PNG-Dateien unter `public/screenshots/readme/` abgelegt (neues Verzeichnis, getrennt von `data/screenshots/`, das echte Nutzer-Trade-Screenshots enthält) und im README per relativem Pfad eingebunden — sinnvollerweise direkt unter der Feature-Tabelle oder im „Schnellstart"-Abschnitt, damit Besucher sofort sehen, wie die App aussieht.
 
 ## 4. SETUP.md / docs/DEPLOYMENT.md — Korrektheits-Check
 
