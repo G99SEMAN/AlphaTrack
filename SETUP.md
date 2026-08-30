@@ -69,7 +69,7 @@ Das Script fragt einmalig nach NAS-IP, Mini-PC-IP, MT5-Zugangsdaten und SSH-Key-
 3. **Details** — Profilname, Zeitzone
 4. **Trade-Sync** — erst überspringen (`Erst ab heute dokumentieren`); nach der Bridge-Verbindung nachholen
 
-> Die `profile_id` des neuen Profils muss in `bridge/config.json` eingetragen werden. Am einfachsten: Profil oeffnen → Profil-ID kopieren → in `bridge/config.json` unter `profile_id` eintragen → Deploy erneut ausfuehren.
+> Die `profile_id` des neuen Profils muss in `bridge/config.json` eingetragen werden (auf dem Mini-PC — die Datei existiert dort nach dem ersten Deploy oder nach `bridge/setup.py`; `bridge/config.example.json` im Repo zeigt die erwartete Struktur). Am einfachsten: Profil oeffnen → Profil-ID kopieren → in `bridge/config.json` unter `profile_id` eintragen → Deploy erneut ausfuehren.
 
 ---
 
