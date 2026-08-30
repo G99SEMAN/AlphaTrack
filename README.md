@@ -18,6 +18,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 - [Features](#features)
 - [Navigation](#navigation)
+- [Screenshots](#screenshots)
 - [Schnellstart](#schnellstart)
 - [Docker / NAS-Deployment](#docker--nas-deployment)
 - [Konfiguration](#konfiguration)
@@ -76,6 +77,14 @@ Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 **Schutzschalter:** Neben dem Logo in der Sidebar - `ShieldCheck` (grün = gesperrt/sicher) / `ShieldOff` (rot = Trading aktiv). Standard: gesperrt.
 
 **Farbthemen:** 3 wählbare Akzentfarben - Blau (Standard), Crimson (`#f43f5e`), Violett (`#a855f7`)
+
+---
+
+## Screenshots
+
+| Dashboard | Trading Journal | Bridge-Übersicht |
+|---|---|---|
+| ![Dashboard](public/screenshots/readme/dashboard.png) | ![Journal](public/screenshots/readme/journal.png) | ![Bridge](public/screenshots/readme/bridge.png) |
 
 ---
 
