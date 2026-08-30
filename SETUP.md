@@ -37,12 +37,14 @@ icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:US
 
 ## 3 · `.env.local` auf dem NAS
 
-Datei im Projektroot anlegen (wird beim Deploy auf den NAS kopiert):
+`BOT_API_KEY` wird beim Deploy automatisch erzeugt: `deploy.ps1` prüft direkt auf dem NAS, ob `/volume1/docker/alphatrack/.env.local` bereits existiert — falls nicht, legt es sie mit einem neu generierten `BOT_API_KEY` an. Der Key wird anschließend aus der Datei ausgelesen und für `bridge/config.json` sowie die Bot-Configs auf dem Mini-PC übernommen. Hier ist **keine manuelle Eingabe nötig** (existiert die Datei bereits ohne `BOT_API_KEY`-Eintrag, bricht der Deploy mit einer Fehlermeldung ab — dann den Eintrag von Hand ergänzen).
+
+Nur für die optionalen Zusatzfunktionen muss direkt auf dem NAS in `/volume1/docker/alphatrack/.env.local` von Hand ergänzt werden (per SSH, `vi`/`nano`), da diese Werte von keinem Skript automatisch gesetzt werden:
 ```env
-ANTHROPIC_API_KEY=sk-ant-...         # KI-Analyse (optional)
-TWELVE_DATA_API_KEY=...               # Kursdaten (optional)
-BOT_API_KEY=<dein-api-key>   # muss mit bridge/config.json übereinstimmen
+ANTHROPIC_API_KEY=sk-ant-...    # KI-Analyse (optional)
+TWELVE_DATA_API_KEY=...          # Kursdaten (optional)
 ```
+Nach dem Ergänzen den Container neu starten (`docker compose restart`) bzw. beim nächsten Deploy läuft er ohnehin neu.
 
 ---
 
@@ -117,8 +119,8 @@ Der Bot registriert sich automatisch bei AlphaTrack und ist unter **Bots** sicht
 
 ```
 1. SSH-Key einrichten (einmalig)
-2. .env.local erstellen
-3. deploy.bat → NAS + Mini-PC
+2. (optional) `ANTHROPIC_API_KEY`/`TWELVE_DATA_API_KEY` in `.env.local` auf dem NAS ergänzen
+3. deploy.bat → NAS + Mini-PC (erzeugt `.env.local`/`BOT_API_KEY` auf dem NAS automatisch, falls noch nicht vorhanden)
 4. AlphaTrack öffnen → Profil anlegen
 5. start_bridge.bat auf Mini-PC
 6. Netzwerk-Tab: Bridge als verbunden prüfen
