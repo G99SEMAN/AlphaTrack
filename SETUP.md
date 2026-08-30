@@ -41,7 +41,7 @@ Datei im Projektroot anlegen (wird beim Deploy auf den NAS kopiert):
 ```env
 ANTHROPIC_API_KEY=sk-ant-...         # KI-Analyse (optional)
 TWELVE_DATA_API_KEY=...               # Kursdaten (optional)
-BOT_API_KEY=REDACTED-API-KEY   # muss mit bridge/config.json übereinstimmen
+BOT_API_KEY=<dein-api-key>   # muss mit bridge/config.json übereinstimmen
 ```
 
 ---

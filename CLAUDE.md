@@ -128,7 +128,7 @@ Update-Pfade beim Trade-Sync-POST:
 ## Env-Vars (.env.local)
 
 ```env
-BOT_API_KEY=REDACTED-API-KEY   # muss mit bridge/config.json übereinstimmen
+BOT_API_KEY=<dein-api-key>   # muss mit bridge/config.json übereinstimmen
 ANTHROPIC_API_KEY=sk-ant-...                 # KI-Analyse (optional)
 TWELVE_DATA_API_KEY=...                      # Kursdaten (optional)
 ```

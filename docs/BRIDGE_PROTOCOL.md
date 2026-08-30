@@ -602,7 +602,7 @@ Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fall
 ```json
 {
   "alphatrack_url": "http://192.168.178.3:3002",
-  "api_key": "REDACTED-API-KEY",
+  "api_key": "<dein-api-key>",
   "bot_id": "mybot-001",
   "bot_name": "My Trading Bot",
   "bot_version": "1.0.0",

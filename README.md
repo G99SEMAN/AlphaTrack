@@ -187,7 +187,7 @@ ANTHROPIC_API_KEY=sk-ant-...
 TWELVE_DATA_API_KEY=...
 
 # Bot-Authentifizierung - muss mit der Python-Bridge übereinstimmen
-BOT_API_KEY=REDACTED-API-KEY
+BOT_API_KEY=<dein-api-key>
 ```
 
 | Variable | Pflicht | Zweck |
