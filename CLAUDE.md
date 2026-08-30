@@ -125,12 +125,12 @@ Update-Pfade beim Trade-Sync-POST:
 
 `React.cache()` (in `profiles.ts`, `data.ts`) ist **per-Request**, nicht persistent. Nach jeder Mutation `revalidatePath()` aufrufen, sonst zeigt die nächste Server-Komponente veraltete Daten.
 
-## Env-Vars (.env.local)
+## Env-Vars (.env.local, liegt auf dem NAS)
 
 ```env
-BOT_API_KEY=<dein-api-key>   # muss mit bridge/config.json übereinstimmen
-ANTHROPIC_API_KEY=sk-ant-...                 # KI-Analyse (optional)
-TWELVE_DATA_API_KEY=...                      # Kursdaten (optional)
+BOT_API_KEY=...                              # wird von deploy.ps1 automatisch generiert, falls die Datei fehlt (siehe SETUP.md)
+ANTHROPIC_API_KEY=sk-ant-...                 # KI-Analyse (optional, manuell auf dem NAS ergänzen)
+TWELVE_DATA_API_KEY=...                      # Kursdaten (optional, manuell auf dem NAS ergänzen)
 ```
 
 ## Bot-Entwicklung
