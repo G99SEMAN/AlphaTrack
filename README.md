@@ -10,6 +10,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 ---
 
@@ -282,7 +283,7 @@ data/
 
 Trade-Screenshots werden unter `data/screenshots/` gespeichert.
 
-> Der `data/`-Ordner ist bewusst in Git getrackt (privates Repo, Multi-Device-Sync). Handelsdaten bleiben ausschliesslich im privaten Repository.
+> Der `data/`-Ordner ist bewusst in Git getrackt (Multi-Device-Sync ohne separate Datenbank). Die hier enthaltenen Daten sind ein Demo-Profil ohne echte Trades. **Wenn du AlphaTrack für deine eigenen, echten Trades nutzt, halte deinen Fork/deine Kopie privat** — sonst werden deine Handelsdaten bei jedem `git push` öffentlich sichtbar.
 
 ### Backup & Restore
 
@@ -425,4 +426,4 @@ PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
 
 ## Lizenz
 
-Copyright (c) G99SEMAN - Privates Projekt, nicht für öffentliche Verbreitung vorgesehen.
+MIT License — siehe [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
