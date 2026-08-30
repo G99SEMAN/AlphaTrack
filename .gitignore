@@ -88,3 +88,8 @@ bots/*/config.json
 
 # claude-mem local database - never track (war historisch getrackt, enthielt echte MT5-Login-Nummer)
 .claude/memory.db
+
+# interne KI-Arbeitsartefakte - nicht fuer oeffentliches Repo (siehe docs/superpowers/specs/2026-08-30-doku-ueberarbeitung-design.md)
+/.planning/
+/docs/superpowers/
+/.claude/worktrees/
