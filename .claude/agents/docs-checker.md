@@ -20,7 +20,7 @@ Die folgenden Dateien gegen das tatsächliche Verhalten im Code:
 - [ ] Verweise auf Dateien/Skripte/Pfade, die nicht mehr existieren (`test -e <pfad>` prüfen, nicht raten)
 - [ ] Beschriebenes Verhalten (z.B. "X wird automatisch Y", "Datei Z wird beim Deploy kopiert"), das der aktuelle Code in den referenzierten Skripten/Modulen nicht mehr zeigt
 - [ ] Umgebungsvariablen-Listen, die nicht mehr mit dem tatsächlichen Code übereinstimmen, der sie liest (z.B. `process.env.X` im Code vs. Doku-Liste)
-- [ ] Veraltete Bot-/Feature-Listen (z.B. ein in der Doku erwähnter Bot, der nicht mehr unter `bots/` existiert, oder umgekehrt ein existierender Bot, der nirgends erwähert wird, wo eine vollständige Liste erwartet wird)
+- [ ] Veraltete Bot-/Feature-Listen (z.B. ein in der Doku erwähnter Bot, der nicht mehr unter `bots/` existiert, oder umgekehrt ein existierender Bot, der nirgends erwähnt wird, wo eine vollständige Liste erwartet wird)
 - [ ] Versionsangaben oder Zahlen (Ports, Intervalle, Pfade), die von den tatsächlichen Werten in Config-Dateien oder Code abweichen
 
 ## Wie du prüfst
