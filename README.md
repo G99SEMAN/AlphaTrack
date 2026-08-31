@@ -143,21 +143,21 @@ services:
 
 > Das `data/`-Volume sichert alle Trades, Profile, Bot-Daten und gecachte KI-Erklärungen persistent ausserhalb des Containers.
 
-### Deploy (NAS + Mini-PC)
+### Deploy (NAS + Trading-Rechner)
 
 `scripts\windows\deploy.bat` startet das interaktive Deploy:
 
-1. **Konfigurationsabfrage** — NAS-Zugang, Mini-PC-Zugang, MT5-Logindaten.
+1. **Konfigurationsabfrage** — NAS-Zugang, Trading-Rechner-Zugang, MT5-Logindaten.
    Antworten werden in `scripts/windows/deploy.config.json` gespeichert (gitignored);
    Enter übernimmt beim nächsten Lauf den gespeicherten Wert.
 2. **NAS** — git push, `.env.local` mit `BOT_API_KEY` sicherstellen, Container-Rebuild,
    Auswahl des Trading-Profils vom NAS.
-3. **Mini-PC** — `bridge/` + `bots/` per SSH kopieren, Configs generieren,
+3. **Trading-Rechner** — `bridge/` + `bots/` per SSH kopieren, Configs generieren,
    Firewall-Regel (TCP 8765) und geplante Aufgabe "AlphaTrack Bridge" (Start bei
    Anmeldung). Bots werden nur kopiert — Start manuell per `start.bat`.
 4. **Check** — wartet, bis die Bridge sich beim NAS-AlphaTrack registriert hat.
 
-**Einmalig auf dem Mini-PC:** OpenSSH-Server aktivieren (Einstellungen → Optionale
+**Einmalig auf dem Trading-Rechner:** OpenSSH-Server aktivieren (Einstellungen → Optionale
 Features → "OpenSSH-Server", dann `Set-Service sshd -StartupType Automatic` +
 `Start-Service sshd` als Admin). Der SSH-Benutzer braucht Admin-Rechte
 (Firewall/Aufgabenplanung). MetaTrader 5 und Python müssen installiert sein.
@@ -169,17 +169,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\windows\setup-ssh-ke
 ```
 
 Das Script erzeugt ein ed25519-Schlüsselpaar unter `%USERPROFILE%\.ssh\alphatrack_deploy`
-und gibt den Public Key mit Kopierbefehlen für den Mini-PC aus.
+und gibt den Public Key mit Kopierbefehlen für den Trading-Rechner aus.
 Da Windows-OpenSSH keine leeren Passwörter erlaubt, muss der Public Key **einmalig manuell**
-auf dem Mini-PC eingetragen werden (physisch oder per Remote Desktop):
+auf dem Trading-Rechner eingetragen werden (physisch oder per Remote Desktop):
 
 ```powershell
-# Auf dem Mini-PC ausführen:
+# Auf dem Trading-Rechner ausführen:
 Add-Content "$env:USERPROFILE\.ssh\authorized_keys" "ssh-ed25519 AAAA... (Public Key einfügen)"
 icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:USERNAME}:F"
 ```
 
-Beim nächsten `deploy.bat`-Lauf den angezeigten Key-Pfad bei **"Mini-PC SSH-Key-Pfad"** eingeben —
+Beim nächsten `deploy.bat`-Lauf den angezeigten Key-Pfad bei **"Trading-Rechner SSH-Key-Pfad"** eingeben —
 danach läuft der Deploy passwortlos.
 
 ---
@@ -306,7 +306,7 @@ Bots können gegen echte MetaTrader-Daten zurückgetestet werden — ohne Live-T
 
 ### Voraussetzungen
 
-- **Bridge läuft** auf dem Mini PC (MT5 verbunden, Port 8765 erreichbar)
+- **Bridge läuft** auf dem Trading-Rechner (MT5 verbunden, Port 8765 erreichbar)
 - **Python** + `requests` auf dem ausführenden Computer installiert
 - Bot hat eine gültige `config.json` mit `bridge_url` und `api_key`
 
@@ -424,8 +424,10 @@ PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
                              ^
                              | Heartbeat / Commands
                              |
-                        Mini PC (MT5 + Python-Bridge)
+                        Trading-Rechner (MT5 + Python-Bridge)
 ```
+
+**Warum eine Bridge?** MetaTrader 5 läuft nur unter Windows und muss dauerhaft mit dem Broker verbunden bleiben. Die Bridge kapselt diese Verbindung in einem eigenständigen Python-Prozess auf dem Trading-Rechner — die eigentliche AlphaTrack-App bleibt dadurch plattformunabhängig (läuft z. B. problemlos in Docker auf einem NAS) und muss selbst nie direkten Zugriff auf MT5 oder Windows haben. Vorteile: Trading läuft weiter, auch wenn die App neu startet oder kurzzeitig nicht erreichbar ist; MT5-Zugangsdaten bleiben ausschließlich lokal auf dem Trading-Rechner; die App selbst lässt sich unabhängig vom Trading-Setup aktualisieren und betreiben.
 
 - **AlphaTrack** läuft auf dem NAS (Docker) oder lokal auf dem PC
 - **Python-Bridge** läuft auf dem Bot-PC neben MT5 und sendet Heartbeats an AlphaTrack
