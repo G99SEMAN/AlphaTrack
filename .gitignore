@@ -86,10 +86,14 @@ scripts/windows/sync-dev.config.json
 !.env.example
 bots/*/config.json
 
-# claude-mem local database - never track (war historisch getrackt, enthielt echte MT5-Login-Nummer)
-.claude/memory.db
-
 # interne KI-Arbeitsartefakte - nicht fuer oeffentliches Repo (siehe docs/superpowers/specs/2026-08-30-doku-ueberarbeitung-design.md)
 /.planning/
 /docs/superpowers/
-/.claude/worktrees/
+
+# Claude-Code-Projektkonfiguration - nicht oeffentlich sichtbar (kompletter Ordner,
+# inkl. Agenten/Hooks/Skills/Settings; enthielt zudem ungewollt einen getrackten
+# node_modules-Baum + Server-Logs unter skills/run-alphatrack)
+/.claude/
+CLAUDE.md
+bots/CLAUDE.md
+/.superpowers/brainstorm/
