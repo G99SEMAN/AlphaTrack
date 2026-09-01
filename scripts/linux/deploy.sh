@@ -27,16 +27,9 @@ echo -e "   AlphaTrack - Deploy zu Synology NAS"
 echo -e " ==========================================${RESET}"
 echo
 
-echo " [1/2] Code zu GitHub pushen..."
-if ! git push; then
-    echo
-    echo -e "${RED} FEHLER: git push fehlgeschlagen.${RESET}"
-    exit 1
-fi
-
-echo
-echo " [2/2] Update auf NAS ausfuehren..."
-echo "       Verbinde mit ${NAS_USER}@${NAS_HOST}..."
+echo " Update auf NAS ausfuehren..."
+echo " Verbinde mit ${NAS_USER}@${NAS_HOST}..."
+echo " (Erwartet, dass der aktuelle Stand bereits per 'git push' auf GitHub liegt.)"
 echo
 
 if ! ssh -p "$NAS_PORT" "${NAS_USER}@${NAS_HOST}" "bash ${NAS_PROJECT_DIR}/scripts/nas-update.sh"; then

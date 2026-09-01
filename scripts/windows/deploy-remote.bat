@@ -18,18 +18,9 @@ echo   AlphaTrack - Deploy zu NAS (Tailscale)
 echo  ==========================================
 echo.
 
-echo  [1/2] Code zu GitHub pushen...
-git push
-if %errorlevel% neq 0 (
-    echo.
-    echo  FEHLER: git push fehlgeschlagen.
-    pause
-    exit /b 1
-)
-
-echo.
-echo  [2/2] Update auf NAS ausfuehren (via Tailscale)...
-echo        Verbinde mit %NAS_USER%@%NAS_HOST%...
+echo  Update auf NAS ausfuehren (via Tailscale)...
+echo  Verbinde mit %NAS_USER%@%NAS_HOST%...
+echo  (Erwartet, dass der aktuelle Stand bereits per 'git push' auf GitHub liegt.)
 echo.
 
 ssh -p %NAS_PORT% %NAS_USER%@%NAS_HOST% "bash %NAS_PROJECT_DIR%/scripts/nas-update.sh"

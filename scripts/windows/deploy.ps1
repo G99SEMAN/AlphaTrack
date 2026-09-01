@@ -145,16 +145,6 @@ function Invoke-NasSsh($cfg, [string]$RemoteCmd) {
     }
 }
 
-function Invoke-GitPush {
-    Write-Host '  git push ...'
-    Push-Location $RepoRoot
-    & git push
-    $ec = $LASTEXITCODE
-    Pop-Location
-    if ($ec -ne 0) { throw 'git push fehlgeschlagen.' }
-    Write-Ok 'Code zu GitHub gepusht.'
-}
-
 # Einzelner SSH-Aufruf: .env.local pruefen/anlegen, BOT_API_KEY ausgeben, Container updaten.
 # Update-Output geht auf stderr (bleibt im Terminal sichtbar), Key kommt auf stdout (wird geparst).
 function Invoke-NasSetupAndUpdate($cfg) {
@@ -429,7 +419,7 @@ function Invoke-Main {
     }
 
     Write-Step '[Phase 1/3] NAS-Deploy'
-    Invoke-GitPush
+    Write-Host '  (Erwartet, dass der aktuelle Stand bereits per "git push" auf GitHub liegt.)'
     $apiKey = Invoke-NasSetupAndUpdate $cfg
     $info = Wait-ForAlphaTrack $cfg
     $profileId = Select-TradingProfile $info $cfg $apiKey
