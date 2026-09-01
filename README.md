@@ -6,7 +6,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 ---
 
-[![Version](https://img.shields.io/badge/version-1.2-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack/releases)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
