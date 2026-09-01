@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Outfit, DM_Mono } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import SplashScreen from '@/components/layout/SplashScreen'
 import SwRegister from '@/components/layout/SwRegister'
 import { TradingLockProvider } from '@/context/TradingLockContext'
@@ -43,9 +45,12 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('alphatrack-accent-theme');if(t==='red')document.documentElement.classList.add('theme-red');if(t==='violet')document.documentElement.classList.add('theme-violet');})();` }} />
       </head>
@@ -53,14 +58,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${outfit.variable} ${dmMono.variable}`}
         style={{ fontFamily: 'var(--font-outfit), system-ui, sans-serif' }}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <TradingLockProvider>
-            <BotStatusProvider>
-              <SplashScreen />
-              {children}
-            </BotStatusProvider>
-          </TradingLockProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+            <TradingLockProvider>
+              <BotStatusProvider>
+                <SplashScreen />
+                {children}
+              </BotStatusProvider>
+            </TradingLockProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
         <SwRegister />
       </body>
     </html>
