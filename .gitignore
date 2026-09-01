@@ -97,3 +97,9 @@ bots/*/config.json
 CLAUDE.md
 bots/CLAUDE.md
 /.superpowers/brainstorm/
+
+# nach GitHub-Wiki migriert (Setup, Deployment, Bridge-Protocol) - lokal weiter gepflegt,
+# aber nicht mehr im Repo getrackt
+/SETUP.md
+/docs/DEPLOYMENT.md
+/docs/BRIDGE_PROTOCOL.md

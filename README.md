@@ -87,6 +87,14 @@ Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 |---|---|---|
 | ![Dashboard](public/screenshots/readme/dashboard.png) | ![Journal](public/screenshots/readme/journal.png) | ![Bridge](public/screenshots/readme/bridge.png) |
 
+| Statistiken | Kalender | Strategien |
+|---|---|---|
+| ![Statistiken](public/screenshots/readme/statistiken.png) | ![Kalender](public/screenshots/readme/kalender.png) | ![Strategien](public/screenshots/readme/strategien.png) |
+
+| Bot Performance |
+|---|
+| ![Bot Performance](public/screenshots/readme/bot-performance.png) |
+
 ---
 
 ## Schnellstart
@@ -110,6 +118,8 @@ npm run dev
 ```
 
 App läuft unter: **http://localhost:3000**
+
+> Beim allerersten Aufruf einer Seite kompiliert Next.js die Route erst im Hintergrund — das kann beim ersten Laden 20-40 Sekunden dauern. Kein Fehler, danach ist es schnell.
 
 ---
 

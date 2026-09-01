@@ -5,11 +5,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
-  Sparkles, ShieldCheck, ShieldOff, Network, Cpu, ListChecks,
+  Sparkles, ShieldCheck, ShieldOff, Network, Cpu,
   Eye, EyeOff, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import MarketSessions from './MarketSessions'
 import BottomNav from './BottomNav'
 import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
@@ -111,14 +111,6 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
     try { return localStorage.getItem('alphatrack-mt5-balance-visible') !== 'false' }
     catch { return true }
   })
-
-  const [checklistStreak, setChecklistStreak] = useState(0)
-  useEffect(() => {
-    fetch('/api/checklist/streak')
-      .then(r => r.json())
-      .then(d => setChecklistStreak(d.streak ?? 0))
-      .catch(() => {})
-  }, [pathname])
 
   const bridgeBot = bots.find(b => b.bot.type === 'bridge' && b.status?.balance !== undefined)
   const mt5Balance = bridgeBot?.status?.balance
@@ -259,27 +251,6 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
 
       {/* Navigation */}
       <nav style={{ flex: 1, padding: '8px 8px', display: 'flex', flexDirection: 'column', gap: 1, overflowY: 'auto', minHeight: 0 }}>
-
-        <Link
-          href="/checklist"
-          onClick={onNav}
-          title={collapsed ? 'Daily Checklist' : undefined}
-          className="flex items-center gap-2.5 px-2.5 py-2.5 mb-1 rounded-lg text-sm font-bold transition-all"
-          style={{
-            background: 'rgba(245,158,11,0.1)',
-            border: '1px solid rgba(245,158,11,0.3)',
-            color: '#f59e0b',
-            justifyContent: collapsed ? 'center' : 'space-between',
-          }}
-        >
-          <span className="flex items-center gap-2">
-            <ListChecks size={15} strokeWidth={2.5} />
-            {!collapsed && 'Daily Checklist'}
-          </span>
-          {!collapsed && checklistStreak > 0 && (
-            <span style={{ fontSize: 11, fontWeight: 700 }}>🔥 {checklistStreak}</span>
-          )}
-        </Link>
 
         <SectionDivider label="Übersicht" collapsed={collapsed} />
         {UEBERSICHT_NAV.map(item => (
