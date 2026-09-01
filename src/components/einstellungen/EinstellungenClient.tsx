@@ -8,6 +8,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert } from 'lucide-react'
 import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
+import { useTranslations, useLocale } from 'next-intl'
+import { setLocaleAction } from '@/lib/locale'
+import type { AppLocale } from '@/i18n/request'
 import { useSessionSettings } from '@/hooks/useSessionSettings'
 import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
 import { switchProfileAction, deleteProfileAction, stopBotsForProfileAction, checkStopAcknowledgedAction, resetTradesAction } from '@/lib/actions'
@@ -198,6 +201,8 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
 
   const { settings, updateSetting } = useStatsSettings()
   const { accent, setAccent } = useAccentTheme()
+  const tCommon = useTranslations('common')
+  const locale = useLocale() as AppLocale
   const { settings: sessionSettings, updateExchanges } = useSessionSettings()
   const isDark = mounted ? theme === 'dark' : true
 
@@ -297,6 +302,32 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   })}
                 </div>
               )}
+            </div>
+
+            {/* Sprache */}
+            <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
+                {tCommon('language')}
+              </p>
+              <div className="flex gap-3 mt-4">
+                {(['de', 'en'] as AppLocale[]).map(l => {
+                  const isActive = locale === l
+                  return (
+                    <button
+                      key={l}
+                      onClick={() => setLocaleAction(l)}
+                      className="flex-1 px-3 py-3 rounded-xl text-sm font-semibold cursor-pointer transition-all"
+                      style={{
+                        border: isActive ? '2px solid var(--accent)' : '2px solid var(--border)',
+                        background: isActive ? 'var(--accent-bg)' : 'var(--surface-2)',
+                        color: isActive ? 'var(--accent)' : 'var(--text-2)',
+                      }}
+                    >
+                      {l === 'de' ? tCommon('german') : tCommon('english')}
+                    </button>
+                  )
+                })}
+              </div>
             </div>
 
             {/* Erscheinungsbild */}
