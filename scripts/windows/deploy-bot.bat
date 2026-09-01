@@ -14,14 +14,14 @@ if "!BOT!"=="" (
 
 set "REPO_ROOT=%~dp0..\.."
 REM Trading-Rechner-Zugangsdaten -- bei Bedarf anpassen
-set "MINIPC_HOST=192.168.1.100"
-set "MINIPC_USER=deinuser"
-set "MINIPC_KEY=%USERPROFILE%\.ssh\alphatrack_deploy"
-set "MINIPC_TARGET=C:\Users\PC\Desktop\AlphaTrack\bots"
+set "TRADING_RECHNER_HOST=192.168.1.100"
+set "TRADING_RECHNER_USER=deinuser"
+set "TRADING_RECHNER_KEY=%USERPROFILE%\.ssh\alphatrack_deploy"
+set "TRADING_RECHNER_TARGET=C:\Users\PC\Desktop\AlphaTrack\bots"
 
 echo.
 echo  Bot:     !BOT!
-echo  Ziel:    !MINIPC_USER!@!MINIPC_HOST!:!MINIPC_TARGET!\!BOT!
+echo  Ziel:    !TRADING_RECHNER_USER!@!TRADING_RECHNER_HOST!:!TRADING_RECHNER_TARGET!\!BOT!
 echo  Quelle:  !REPO_ROOT!\bots\!BOT!
 echo.
 
@@ -32,7 +32,7 @@ if not exist "!REPO_ROOT!\bots\!BOT!" (
 )
 
 echo  Kopiere...
-tar cf - -C "!REPO_ROOT!\bots" "!BOT!" | ssh -i "!MINIPC_KEY!" !MINIPC_USER!@!MINIPC_HOST! "tar xf - -C \"!MINIPC_TARGET!\""
+tar cf - -C "!REPO_ROOT!\bots" "!BOT!" | ssh -i "!TRADING_RECHNER_KEY!" !TRADING_RECHNER_USER!@!TRADING_RECHNER_HOST! "tar xf - -C \"!TRADING_RECHNER_TARGET!\""
 
 if !errorlevel! neq 0 (
     echo.
@@ -42,7 +42,7 @@ if !errorlevel! neq 0 (
 )
 
 echo.
-echo  [OK] !BOT! erfolgreich auf Mini-PC deployt.
+echo  [OK] !BOT! erfolgreich auf Trading-Rechner deployt.
 pause
 exit /b 0
 

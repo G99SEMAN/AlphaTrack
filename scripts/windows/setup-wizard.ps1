@@ -602,9 +602,9 @@ function Step-CreateDeployConfig {
     Write-Host "  ── Bot-PC (MetaTrader & Bots) ──" -ForegroundColor White
     Write-Note $(if ($LANG -eq "DE") { "Leer lassen, wenn noch nicht bekannt." } else { "Leave empty if not yet known." })
     Write-Nl
-    $botpcIp   = Ask-Input $(if ($LANG -eq "DE") { "IP-Adresse des Bot-PCs" } else { "Bot PC IP address" }) (GetEx "minipc_host" "")
-    $botpcUser = Ask-Input $(if ($LANG -eq "DE") { "SSH-Benutzername auf dem Bot-PC" } else { "Bot PC SSH username" }) (GetEx "minipc_ssh_user" "")
-    $botpcDir  = Ask-Input $(if ($LANG -eq "DE") { "Zielverzeichnis auf dem Bot-PC" } else { "Target directory on Bot PC" }) (GetEx "minipc_target_dir" "C:\AlphaTrack")
+    $botpcIp   = Ask-Input $(if ($LANG -eq "DE") { "IP-Adresse des Bot-PCs" } else { "Bot PC IP address" }) (GetEx "trading_rechner_host" "")
+    $botpcUser = Ask-Input $(if ($LANG -eq "DE") { "SSH-Benutzername auf dem Bot-PC" } else { "Bot PC SSH username" }) (GetEx "trading_rechner_ssh_user" "")
+    $botpcDir  = Ask-Input $(if ($LANG -eq "DE") { "Zielverzeichnis auf dem Bot-PC" } else { "Target directory on Bot PC" }) (GetEx "trading_rechner_target_dir" "C:\AlphaTrack")
 
     Write-Nl
     Write-Host "  ── MetaTrader 5 ──" -ForegroundColor White
@@ -622,10 +622,10 @@ function Step-CreateDeployConfig {
         nas_ssh_user      = $nasSshUser
         nas_project_dir   = $nasDir
         nas_app_port      = $nasAppPort
-        minipc_host       = $botpcIp
-        minipc_ssh_user   = $botpcUser
-        minipc_ssh_key    = $sshKeyPath
-        minipc_target_dir = $botpcDir
+        trading_rechner_host       = $botpcIp
+        trading_rechner_ssh_user   = $botpcUser
+        trading_rechner_ssh_key    = $sshKeyPath
+        trading_rechner_target_dir = $botpcDir
         mt5_login         = $mt5Login
         mt5_password      = $mt5Pw
         mt5_server        = $mt5Server

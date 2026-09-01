@@ -1,5 +1,5 @@
 @echo off
-title AlphaTrack - Deploy (NAS + Mini-PC)
+title AlphaTrack - Deploy (NAS + Trading-Rechner)
 color 0B
 cls
 

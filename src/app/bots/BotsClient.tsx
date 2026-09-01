@@ -142,7 +142,7 @@ export default function BotsClient({ initialBots, profiles }: Props) {
           </div>
           <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>Kein Bot aktiv</h3>
           <p className="text-sm max-w-sm" style={{ color: 'var(--text-3)' }}>
-            Starte einen Bot auf dem Mini PC — er erscheint automatisch hier sobald er sich mit der Bridge verbindet.
+            Starte einen Bot auf dem Trading-Rechner — er erscheint automatisch hier sobald er sich mit der Bridge verbindet.
           </p>
         </motion.div>
       )}

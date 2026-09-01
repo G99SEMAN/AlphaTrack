@@ -1,6 +1,6 @@
 # AlphaTrack — Ersteinrichtung
 
-Infrastruktur: **NAS** (AlphaTrack Docker) · **Mini-PC** (MT5 + Python-Bridge + Bots)
+Infrastruktur: **NAS** (AlphaTrack Docker) · **Trading-Rechner** (MT5 + Python-Bridge + Bots)
 
 ---
 
@@ -9,10 +9,10 @@ Infrastruktur: **NAS** (AlphaTrack Docker) · **Mini-PC** (MT5 + Python-Bridge +
 | Gerät | Software |
 |---|---|
 | NAS | Docker, Git |
-| Mini-PC | Python 3.10+, MetaTrader 5, OpenSSH-Server |
+| Trading-Rechner | Python 3.10+, MetaTrader 5, OpenSSH-Server |
 | Dev-PC | Node.js ≥ 18 (nur für lokalen Dev-Run) |
 
-**OpenSSH auf dem Mini-PC einmalig aktivieren** (als Admin):
+**OpenSSH auf dem Trading-Rechner einmalig aktivieren** (als Admin):
 ```powershell
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Set-Service sshd -StartupType Automatic
@@ -27,7 +27,7 @@ Auf dem Dev-PC ausführen:
 ```
 scripts\windows\setup-ssh-key.ps1
 ```
-Den ausgegebenen Public Key **einmalig manuell auf dem Mini-PC** eintragen:
+Den ausgegebenen Public Key **einmalig manuell auf dem Trading-Rechner** eintragen:
 ```powershell
 Add-Content "$env:USERPROFILE\.ssh\authorized_keys" "ssh-ed25519 AAAA... (Public Key)"
 icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:USERNAME}:F"
@@ -37,7 +37,7 @@ icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:US
 
 ## 3 · `.env.local` auf dem NAS
 
-`BOT_API_KEY` wird beim Deploy automatisch erzeugt: `deploy.ps1` prüft direkt auf dem NAS, ob `/volume1/docker/alphatrack/.env.local` bereits existiert — falls nicht, legt es sie mit einem neu generierten `BOT_API_KEY` an. Der Key wird anschließend aus der Datei ausgelesen und für `bridge/config.json` sowie die Bot-Configs auf dem Mini-PC übernommen. Hier ist **keine manuelle Eingabe nötig** (existiert die Datei bereits ohne `BOT_API_KEY`-Eintrag, bricht der Deploy mit einer Fehlermeldung ab — dann den Eintrag von Hand ergänzen).
+`BOT_API_KEY` wird beim Deploy automatisch erzeugt: `deploy.ps1` prüft direkt auf dem NAS, ob `/volume1/docker/alphatrack/.env.local` bereits existiert — falls nicht, legt es sie mit einem neu generierten `BOT_API_KEY` an. Der Key wird anschließend aus der Datei ausgelesen und für `bridge/config.json` sowie die Bot-Configs auf dem Trading-Rechner übernommen. Hier ist **keine manuelle Eingabe nötig** (existiert die Datei bereits ohne `BOT_API_KEY`-Eintrag, bricht der Deploy mit einer Fehlermeldung ab — dann den Eintrag von Hand ergänzen).
 
 Nur für die optionalen Zusatzfunktionen muss direkt auf dem NAS in `/volume1/docker/alphatrack/.env.local` von Hand ergänzt werden (per SSH, `vi`/`nano`), da diese Werte von keinem Skript automatisch gesetzt werden:
 ```env
@@ -54,11 +54,11 @@ Nach dem Ergänzen den Container neu starten (`docker compose restart`) bzw. bei
 scripts\windows\deploy.bat
 ```
 
-Das Script fragt einmalig nach NAS-IP, Mini-PC-IP, MT5-Zugangsdaten und SSH-Key-Pfad — Antworten werden in `deploy.config.json` gespeichert, danach reicht Enter.
+Das Script fragt einmalig nach NAS-IP, Trading-Rechner-IP, MT5-Zugangsdaten und SSH-Key-Pfad — Antworten werden in `deploy.config.json` gespeichert, danach reicht Enter.
 
 **Was passiert:**
 1. NAS → git push, Container-Rebuild, AlphaTrack läuft auf `:3002`
-2. Mini-PC → `bridge/` + `bots/` per SSH kopieren, Firewall TCP 8765 öffnen, Aufgabenplanung für Auto-Start der Bridge
+2. Trading-Rechner → `bridge/` + `bots/` per SSH kopieren, Firewall TCP 8765 öffnen, Aufgabenplanung für Auto-Start der Bridge
 
 ---
 
@@ -71,13 +71,13 @@ Das Script fragt einmalig nach NAS-IP, Mini-PC-IP, MT5-Zugangsdaten und SSH-Key-
 3. **Details** — Profilname, Zeitzone
 4. **Trade-Sync** — erst überspringen (`Erst ab heute dokumentieren`); nach der Bridge-Verbindung nachholen
 
-> Die `profile_id` des neuen Profils muss in `bridge/config.json` eingetragen werden (auf dem Mini-PC — die Datei existiert dort nach dem ersten Deploy oder nach `bridge/setup.py`; `bridge/config.example.json` im Repo zeigt die erwartete Struktur). Am einfachsten: Profil oeffnen → Profil-ID kopieren → in `bridge/config.json` unter `profile_id` eintragen → Deploy erneut ausfuehren.
+> Die `profile_id` des neuen Profils muss in `bridge/config.json` eingetragen werden (auf dem Trading-Rechner — die Datei existiert dort nach dem ersten Deploy oder nach `bridge/setup.py`; `bridge/config.example.json` im Repo zeigt die erwartete Struktur). Am einfachsten: Profil oeffnen → Profil-ID kopieren → in `bridge/config.json` unter `profile_id` eintragen → Deploy erneut ausfuehren.
 
 ---
 
-## 6 · Bridge starten (Mini-PC)
+## 6 · Bridge starten (Trading-Rechner)
 
-Auf dem Mini-PC im `bridge/`-Ordner:
+Auf dem Trading-Rechner im `bridge/`-Ordner:
 ```
 start_bridge.bat
 ```
@@ -106,7 +106,7 @@ Bots liegen unter `bots/<botname>/`. Nach Anpassung von `config.json` (Symbol, P
 scripts\windows\deploy-bot.bat
 ```
 
-Auf dem Mini-PC im `bots/<botname>/`-Ordner:
+Auf dem Trading-Rechner im `bots/<botname>/`-Ordner:
 ```
 start.bat
 ```
@@ -120,9 +120,9 @@ Der Bot registriert sich automatisch bei AlphaTrack und ist unter **Bots** sicht
 ```
 1. SSH-Key einrichten (einmalig)
 2. (optional) `ANTHROPIC_API_KEY`/`TWELVE_DATA_API_KEY` in `.env.local` auf dem NAS ergänzen
-3. deploy.bat → NAS + Mini-PC (erzeugt `.env.local`/`BOT_API_KEY` auf dem NAS automatisch, falls noch nicht vorhanden)
+3. deploy.bat → NAS + Trading-Rechner (erzeugt `.env.local`/`BOT_API_KEY` auf dem NAS automatisch, falls noch nicht vorhanden)
 4. AlphaTrack öffnen → Profil anlegen
-5. start_bridge.bat auf Mini-PC
+5. start_bridge.bat auf Trading-Rechner
 6. Netzwerk-Tab: Bridge als verbunden prüfen
 7. (optional) Historische Trades importieren
 8. start.bat für jeden Bot
@@ -134,7 +134,7 @@ Der Bot registriert sich automatisch bei AlphaTrack und ist unter **Bots** sicht
 
 | Problem | Ursache | Lösung |
 |---|---|---|
-| Bridge nicht sichtbar im Netzwerk-Tab | UDP-Broadcast blockiert | Bridge manuell unter Netzwerk → URL eintragen (`http://<Mini-PC-IP>:8765`) |
+| Bridge nicht sichtbar im Netzwerk-Tab | UDP-Broadcast blockiert | Bridge manuell unter Netzwerk → URL eintragen (`http://<Trading-Rechner-IP>:8765`) |
 | Heartbeat schlägt fehl | `BOT_API_KEY` stimmt nicht überein | `.env.local` und `bridge/config.json` vergleichen |
 | MT5 verbindet nicht | Falscher Login/Server | `bridge/config.json` → `mt5_login`, `mt5_password`, `mt5_server` prüfen |
 | Bot taucht nicht auf | Falsche `alphatrack_url` in Bot-Config | `bots/<botname>/config.json` → `alphatrack_url` auf NAS-IP setzen |

@@ -1,4 +1,4 @@
-﻿# AlphaTrack Deploy — NAS (Docker) + Mini-PC (Bridge/Bots) via SSH
+﻿# AlphaTrack Deploy — NAS (Docker) + Trading-Rechner (Bridge/Bots) via SSH
 # Aufruf ueber deploy.bat oder: powershell -NoProfile -ExecutionPolicy Bypass -File deploy.ps1 [-ConfigOnly]
 [CmdletBinding()]
 param(
@@ -27,20 +27,20 @@ function Write-Utf8NoBom([string]$Path, [string]$Text) {
 
 function Read-DeployConfig {
     $cfg = [ordered]@{
-        nas_host          = ''
-        nas_ssh_port      = '88'
-        nas_ssh_user      = ''
-        nas_project_dir   = '/volume1/docker/alphatrack'
-        nas_app_port      = '3002'
-        minipc_host       = ''
-        minipc_ssh_user   = ''
-        minipc_ssh_key    = ''
-        minipc_target_dir = 'C:\AlphaTrack'
-        mt5_login         = ''
-        mt5_password      = ''
-        mt5_server        = ''
-        mt5_exe_path      = 'C:\Program Files\MetaTrader 5\terminal64.exe'
-        sync_mode         = 'full'
+        nas_host                   = ''
+        nas_ssh_port               = '88'
+        nas_ssh_user               = ''
+        nas_project_dir            = '/volume1/docker/alphatrack'
+        nas_app_port               = '3002'
+        trading_rechner_host       = ''
+        trading_rechner_ssh_user   = ''
+        trading_rechner_ssh_key    = ''
+        trading_rechner_target_dir = 'C:\AlphaTrack'
+        mt5_login                  = ''
+        mt5_password               = ''
+        mt5_server                 = ''
+        mt5_exe_path               = 'C:\Program Files\MetaTrader 5\terminal64.exe'
+        sync_mode                  = 'full'
     }
     if (Test-Path $ConfigPath) {
         try {
@@ -80,8 +80,8 @@ function Ask-Required([string]$Label, [string]$Current, [switch]$Secret) {
     }
 }
 
-function Get-MiniPcSshArgs($cfg) {
-    if ($cfg.minipc_ssh_key -and (Test-Path $cfg.minipc_ssh_key)) { return @('-i', $cfg.minipc_ssh_key) }
+function Get-TradingRechnerSshArgs($cfg) {
+    if ($cfg.trading_rechner_ssh_key -and (Test-Path $cfg.trading_rechner_ssh_key)) { return @('-i', $cfg.trading_rechner_ssh_key) }
     return @()
 }
 
@@ -99,11 +99,11 @@ function Invoke-Questionnaire($cfg) {
     $cfg.nas_project_dir = Ask-Required 'NAS Projektpfad'     $cfg.nas_project_dir
     $cfg.nas_app_port    = Ask-Required 'AlphaTrack-Port'     $cfg.nas_app_port
 
-    Write-Step '[2] Mini-PC (Bridge, Bots, MetaTrader)'
-    $cfg.minipc_host       = Ask-Required 'Mini-PC IP/Hostname'  $cfg.minipc_host
-    $cfg.minipc_ssh_user   = Ask-Required 'Mini-PC SSH-Benutzer'                   $cfg.minipc_ssh_user
-    $cfg.minipc_ssh_key    = Ask-Value    'Mini-PC SSH-Key-Pfad (leer = Passwort)' $cfg.minipc_ssh_key
-    $cfg.minipc_target_dir = Ask-Required 'Mini-PC Zielordner'                     $cfg.minipc_target_dir
+    Write-Step '[2] Trading-Rechner (Bridge, Bots, MetaTrader)'
+    $cfg.trading_rechner_host       = Ask-Required 'Trading-Rechner IP/Hostname'  $cfg.trading_rechner_host
+    $cfg.trading_rechner_ssh_user   = Ask-Required 'Trading-Rechner SSH-Benutzer'                   $cfg.trading_rechner_ssh_user
+    $cfg.trading_rechner_ssh_key    = Ask-Value    'Trading-Rechner SSH-Key-Pfad (leer = Passwort)' $cfg.trading_rechner_ssh_key
+    $cfg.trading_rechner_target_dir = Ask-Required 'Trading-Rechner Zielordner'                     $cfg.trading_rechner_target_dir
 
     Write-Step '[3] MetaTrader 5 — Zugangsdaten'
     while ($true) {
@@ -227,34 +227,34 @@ function Select-TradingProfile($info, $cfg, [string]$ApiKey) {
     }
 }
 
-# --- Phase 2: Mini-PC --------------------------------------
+# --- Phase 2: Trading-Rechner --------------------------------------
 
-function Invoke-MiniPcSsh($cfg, [string]$RemoteCmd) {
-    $keyArgs = Get-MiniPcSshArgs $cfg
-    & ssh @keyArgs "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" $RemoteCmd
+function Invoke-TradingRechnerSsh($cfg, [string]$RemoteCmd) {
+    $keyArgs = Get-TradingRechnerSshArgs $cfg
+    & ssh @keyArgs "$($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host)" $RemoteCmd
     if ($LASTEXITCODE -eq 255) {
-        throw "SSH-Verbindung zum Mini-PC abgebrochen ($($cfg.minipc_ssh_user)@$($cfg.minipc_host))."
+        throw "SSH-Verbindung zum Trading-Rechner abgebrochen ($($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host))."
     }
 }
 
-function Test-MiniPcSsh($cfg) {
-    $keyArgs = Get-MiniPcSshArgs $cfg
-    & ssh @keyArgs -o ConnectTimeout=5 "$($cfg.minipc_ssh_user)@$($cfg.minipc_host)" "exit"
+function Test-TradingRechnerSsh($cfg) {
+    $keyArgs = Get-TradingRechnerSshArgs $cfg
+    & ssh @keyArgs -o ConnectTimeout=5 "$($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host)" "exit"
     if ($LASTEXITCODE -ne 0) {
-        Write-Fail "Mini-PC per SSH nicht erreichbar: $($cfg.minipc_ssh_user)@$($cfg.minipc_host)"
+        Write-Fail "Trading-Rechner per SSH nicht erreichbar: $($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host)"
         Write-Host ''
-        Write-Host '  Einmalige Einrichtung auf dem Mini-PC (lokal ausfuehren):'
+        Write-Host '  Einmalige Einrichtung auf dem Trading-Rechner (lokal ausfuehren):'
         Write-Host '    1. Einstellungen > System > Optionale Features > "OpenSSH-Server" hinzufuegen'
         Write-Host '    2. PowerShell als Administrator:'
         Write-Host '         Set-Service sshd -StartupType Automatic'
         Write-Host '         Start-Service sshd'
         Write-Host '    3. Deploy erneut starten.'
-        throw 'Mini-PC nicht erreichbar.'
+        throw 'Trading-Rechner nicht erreichbar.'
     }
-    Write-Ok 'Mini-PC per SSH erreichbar.'
+    Write-Ok 'Trading-Rechner per SSH erreichbar.'
 }
 
-function Copy-CodeToMiniPc($cfg) {
+function Copy-CodeToTradingRechner($cfg) {
     $tarFile = Join-Path $env:TEMP 'alphatrack-deploy.tar'
     if (Test-Path $tarFile) { Remove-Item $tarFile -Force }
 
@@ -269,19 +269,19 @@ function Copy-CodeToMiniPc($cfg) {
         bridge bots
     if ($LASTEXITCODE -ne 0) { throw 'tar (lokal packen) fehlgeschlagen.' }
 
-    $target    = $cfg.minipc_target_dir                       # z.B. C:\AlphaTrack
+    $target    = $cfg.trading_rechner_target_dir                       # z.B. C:\AlphaTrack
     $targetFwd = $target -replace '\\', '/'                   # C:/AlphaTrack fuer scp/tar
 
-    Invoke-MiniPcSsh $cfg "cmd /c if not exist ""$target"" mkdir ""$target"""
+    Invoke-TradingRechnerSsh $cfg "cmd /c if not exist ""$target"" mkdir ""$target"""
     if ($LASTEXITCODE -ne 0) { throw "Zielordner $target konnte nicht angelegt werden." }
 
-    Write-Host '  Kopiere zum Mini-PC ...'
-    $keyArgs = Get-MiniPcSshArgs $cfg
-    & scp -q @keyArgs $tarFile "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/alphatrack-deploy.tar"
-    if ($LASTEXITCODE -ne 0) { throw 'scp zum Mini-PC fehlgeschlagen.' }
+    Write-Host '  Kopiere zum Trading-Rechner ...'
+    $keyArgs = Get-TradingRechnerSshArgs $cfg
+    & scp -q @keyArgs $tarFile "$($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host):$targetFwd/alphatrack-deploy.tar"
+    if ($LASTEXITCODE -ne 0) { throw 'scp zum Trading-Rechner fehlgeschlagen.' }
 
-    Invoke-MiniPcSsh $cfg "tar -xf ""$targetFwd/alphatrack-deploy.tar"" -C ""$targetFwd"" && del ""$target\alphatrack-deploy.tar"""
-    if ($LASTEXITCODE -ne 0) { throw 'Entpacken auf dem Mini-PC fehlgeschlagen.' }
+    Invoke-TradingRechnerSsh $cfg "tar -xf ""$targetFwd/alphatrack-deploy.tar"" -C ""$targetFwd"" && del ""$target\alphatrack-deploy.tar"""
+    if ($LASTEXITCODE -ne 0) { throw 'Entpacken auf dem Trading-Rechner fehlgeschlagen.' }
 
     Remove-Item $tarFile -Force
     Write-Ok "Code nach $target kopiert (bridge/ + bots/)."
@@ -326,22 +326,22 @@ function New-BotConfigJson([string]$TemplatePath, $cfg, [string]$ApiKey, [string
     Set-JsonField $c 'alphatrack_url' "http://$($cfg.nas_host):$($cfg.nas_app_port)"
     Set-JsonField $c 'api_key'        $ApiKey
     Set-JsonField $c 'profile_id'     $ProfileId
-    Set-JsonField $c 'bridge_url'     "http://$($cfg.minipc_host):8765"
+    Set-JsonField $c 'bridge_url'     "http://$($cfg.trading_rechner_host):8765"
     return ($c | ConvertTo-Json -Depth 10)
 }
 
 function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
-    $targetFwd = $cfg.minipc_target_dir -replace '\\', '/'
+    $targetFwd = $cfg.trading_rechner_target_dir -replace '\\', '/'
     $tmpDir = Join-Path $env:TEMP 'alphatrack-configs'
     if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force }
     New-Item -ItemType Directory -Path $tmpDir | Out-Null
-    $keyArgs = Get-MiniPcSshArgs $cfg
+    $keyArgs = Get-TradingRechnerSshArgs $cfg
 
     # Bridge
     $bridgeJson = New-BridgeConfigJson (Join-Path $RepoRoot 'bridge\config.json') $cfg $ApiKey $ProfileId
     $bridgeTmp  = Join-Path $tmpDir 'bridge-config.json'
     Write-Utf8NoBom $bridgeTmp $bridgeJson
-    & scp -q @keyArgs $bridgeTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bridge/config.json"
+    & scp -q @keyArgs $bridgeTmp "$($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host):$targetFwd/bridge/config.json"
     if ($LASTEXITCODE -ne 0) { throw 'Bridge-Config konnte nicht geschrieben werden.' }
     Write-Ok 'bridge/config.json geschrieben (MT5 + NAS-URL + API-Key + Profil).'
 
@@ -352,7 +352,7 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
         $botJson = New-BotConfigJson (Join-Path $dir.FullName 'config.json') $cfg $ApiKey $ProfileId
         $botTmp  = Join-Path $tmpDir "$($dir.Name)-config.json"
         Write-Utf8NoBom $botTmp $botJson
-        & scp -q @keyArgs $botTmp "$($cfg.minipc_ssh_user)@$($cfg.minipc_host):$targetFwd/bots/$($dir.Name)/config.json"
+        & scp -q @keyArgs $botTmp "$($cfg.trading_rechner_ssh_user)@$($cfg.trading_rechner_host):$targetFwd/bots/$($dir.Name)/config.json"
         if ($LASTEXITCODE -ne 0) { throw "Bot-Config fuer $($dir.Name) konnte nicht geschrieben werden." }
         Write-Ok "bots/$($dir.Name)/config.json geschrieben."
     }
@@ -361,14 +361,14 @@ function Write-RemoteConfigs($cfg, [string]$ApiKey, [string]$ProfileId) {
 }
 
 # Firewall: NAS-AlphaTrack muss die Bridge auf Port 8765 erreichen koennen.
-# Remote-Shell auf dem Mini-PC ist cmd.exe -> ||/&& sind dort erlaubt.
+# Remote-Shell auf dem Trading-Rechner ist cmd.exe -> ||/&& sind dort erlaubt.
 # Kein Leerzeichen im Namen: Quotes ueberleben den SSH->cmd.exe-Weg nicht zuverlaessig.
-function Set-MiniPcFirewall($cfg) {
+function Set-TradingRechnerFirewall($cfg) {
     $ruleName = 'AlphaTrackBridge8765'
     $remote = "netsh advfirewall firewall show rule name=$ruleName >nul 2>&1 || netsh advfirewall firewall add rule name=$ruleName dir=in action=allow protocol=TCP localport=8765"
-    Invoke-MiniPcSsh $cfg $remote
+    Invoke-TradingRechnerSsh $cfg $remote
     if ($LASTEXITCODE -ne 0) {
-        throw "Firewall-Regel konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC."
+        throw "Firewall-Regel konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Trading-Rechner."
     }
     Write-Ok "Firewall-Regel '$ruleName' vorhanden."
 }
@@ -377,12 +377,12 @@ function Set-MiniPcFirewall($cfg) {
 # Kein Leerzeichen im TN: Quotes ueberleben den SSH->cmd.exe-Weg nicht zuverlaessig.
 function Register-BridgeTask($cfg) {
     $taskName = 'AlphaTrackBridge'
-    $batPath  = "$($cfg.minipc_target_dir)\bridge\start_bridge.bat"
+    $batPath  = "$($cfg.trading_rechner_target_dir)\bridge\start_bridge.bat"
 
     $create  = "schtasks /Create /TN $taskName /TR $batPath /SC ONLOGON /F"
-    Invoke-MiniPcSsh $cfg $create
+    Invoke-TradingRechnerSsh $cfg $create
     if ($LASTEXITCODE -ne 0) {
-        throw 'Geplante Aufgabe konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Mini-PC.'
+        throw 'Geplante Aufgabe konnte nicht angelegt werden. SSH-Benutzer braucht Admin-Rechte auf dem Trading-Rechner.'
     }
     Write-Ok "Geplante Aufgabe '$taskName' angelegt (Start bei Anmeldung)."
 
@@ -390,7 +390,7 @@ function Register-BridgeTask($cfg) {
     # /End schlaegt fehl, wenn die Aufgabe nicht laeuft -> wird remote unterdrueckt.
     # Ohne /RU laeuft die Aufgabe nur bei angemeldetem Benutzer — sichtbar im Desktop des SSH-Users.
     $restart = "schtasks /End /TN $taskName >nul 2>&1 & timeout /t 2 /nobreak >nul & schtasks /Run /TN $taskName"
-    Invoke-MiniPcSsh $cfg $restart
+    Invoke-TradingRechnerSsh $cfg $restart
     if ($LASTEXITCODE -ne 0) { throw 'Bridge konnte nicht gestartet werden (schtasks /Run).' }
     Write-Ok 'Bridge gestartet.'
 }
@@ -398,7 +398,7 @@ function Register-BridgeTask($cfg) {
 # --- Phase 3: Abschluss-Check ------------------------------
 
 # Die Bridge registriert sich beim Start selbst per POST /api/bots.
-# Wir pollen, bis ein Bridge-Eintrag mit der Mini-PC-IP auftaucht.
+# Wir pollen, bis ein Bridge-Eintrag mit der Trading-Rechner-IP auftaucht.
 function Wait-ForBridgeRegistration($cfg) {
     $url = "http://$($cfg.nas_host):$($cfg.nas_app_port)/api/bots"
     Write-Host '  Warte auf Bridge-Registrierung (max. 90s) ...'
@@ -407,7 +407,7 @@ function Wait-ForBridgeRegistration($cfg) {
         try {
             $resp = Invoke-RestMethod -Uri $url -TimeoutSec 5
             $bridge = @($resp.bots) | Where-Object {
-                ($_.type -eq 'bridge' -or -not $_.type) -and $_.url -like "*$($cfg.minipc_host)*"
+                ($_.type -eq 'bridge' -or -not $_.type) -and $_.url -like "*$($cfg.trading_rechner_host)*"
             } | Select-Object -First 1
             if ($bridge) { return $bridge }
         } catch { }
@@ -444,11 +444,11 @@ function Invoke-Main {
         }
     }
 
-    Write-Step '[Phase 2/3] Mini-PC-Deploy'
-    Test-MiniPcSsh $cfg
-    Copy-CodeToMiniPc $cfg
+    Write-Step '[Phase 2/3] Trading-Rechner-Deploy'
+    Test-TradingRechnerSsh $cfg
+    Copy-CodeToTradingRechner $cfg
     Write-RemoteConfigs $cfg $apiKey $profileId
-    Set-MiniPcFirewall $cfg
+    Set-TradingRechnerFirewall $cfg
     Register-BridgeTask $cfg
 
     Write-Step '[Phase 3/3] Abschluss-Check'
@@ -460,11 +460,11 @@ function Invoke-Main {
         Write-Ok "Bridge '$($bridge.name)' ist beim NAS-AlphaTrack registriert."
         Write-Host "  AlphaTrack:  http://$($cfg.nas_host):$($cfg.nas_app_port)"
         Write-Host "  Bridge:      $($bridge.url)"
-        Write-Host '  Bots:        auf dem Mini-PC manuell per start.bat starten.'
+        Write-Host '  Bots:        auf dem Trading-Rechner manuell per start.bat starten.'
     } else {
         Write-Warn2 'Bridge hat sich nicht innerhalb von 90s registriert.'
         Write-Host '  Naechste Schritte:'
-        Write-Host "    - Auf dem Mini-PC das Bridge-Fenster pruefen ($($cfg.minipc_target_dir)\bridge)"
+        Write-Host "    - Auf dem Trading-Rechner das Bridge-Fenster pruefen ($($cfg.trading_rechner_target_dir)\bridge)"
         Write-Host '    - MT5-Zugangsdaten in der Ausgabe der Bridge pruefen'
         Write-Host "    - Bridge-Log im AlphaTrack-UI: http://$($cfg.nas_host):$($cfg.nas_app_port)/bridge"
         throw 'Abschluss-Check fehlgeschlagen.'

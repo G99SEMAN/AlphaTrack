@@ -134,7 +134,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                   autoFocus
                 />
                 <p className="mt-1 text-[10px]" style={{ color: 'var(--text-3)' }}>
-                  IP-Adresse des Mini PCs + Port 8765
+                  IP-Adresse des Trading-Rechners + Port 8765
                 </p>
               </div>
 

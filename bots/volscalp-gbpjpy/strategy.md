@@ -93,7 +93,7 @@ automatisch inaktiv (kein `self._bridge` vorhanden) — die Kernstrategie
   auf älteste-zuerst, bevor die Indikatoren berechnet werden.
 - **Neue Bridge-Route `/tick`**: Wurde für den Spread-Filter ergänzt
   (`bridge/gateway.py` + `bridge/mt5_connector.py`) — additiv, keine
-  Änderung an bestehenden Routen. Erfordert Bridge-Neustart auf dem Mini-PC.
+  Änderung an bestehenden Routen. Erfordert Bridge-Neustart auf dem Trading-Rechner.
 - **GBPJPY-Spreads** sind bei Brokern tendenziell breiter als bei EURUSD —
   der Spread-Filter und Mindest-TP-Faktor sind deshalb hier besonders wichtig.
 - Zeit-Checks nutzen konsequent `self._now()` (Backtest-Pflicht).

@@ -1,4 +1,4 @@
-# AlphaTrack - Einmaliger SSH-Key-Setup fuer Mini-PC
+# AlphaTrack - Einmaliger SSH-Key-Setup fuer Trading-Rechner
 # Aufruf: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\windows\setup-ssh-key.ps1
 
 $ErrorActionPreference = 'Stop'
@@ -31,7 +31,7 @@ if (Test-Path $KeyPath) {
 
 # --- Schritt 2: Public Key anzeigen ----------------------
 
-Write-Step 'Public Key (auf Mini-PC eintragen)'
+Write-Step 'Public Key (auf Trading-Rechner eintragen)'
 $pubKey = (Get-Content $PubPath -Raw).Trim()
 Write-Host ''
 Write-Host "  $pubKey" -ForegroundColor White
@@ -39,12 +39,12 @@ Write-Host ''
 
 # --- Schritt 3: Anleitung --------------------------------
 
-Write-Step 'Anleitung: Public Key auf Mini-PC einrichten'
+Write-Step 'Anleitung: Public Key auf Trading-Rechner einrichten'
 Write-Host ''
-Write-Info 'Da der Mini-PC kein Windows-Passwort hat, muss der Key manuell'
+Write-Info 'Da der Trading-Rechner kein Windows-Passwort hat, muss der Key manuell'
 Write-Info 'eingetragen werden. Einmal physisch (oder per Remote Desktop) anmelden:'
 Write-Host ''
-Write-Info '  PowerShell auf dem Mini-PC oeffnen und ausfuehren:'
+Write-Info '  PowerShell auf dem Trading-Rechner oeffnen und ausfuehren:'
 Write-Host ''
 Write-Host "       Add-Content ""`$env:USERPROFILE\.ssh\authorized_keys"" ``" -ForegroundColor DarkGray
 Write-Host "         ""$pubKey""" -ForegroundColor Yellow
@@ -54,12 +54,12 @@ Write-Host ''
 # --- Schritt 4: Verbindungstest --------------------------
 
 Write-Step 'Verbindungstest (optional)'
-$user = Read-Host "  Mini-PC SSH-Benutzer (Enter zum Ueberspringen)"
+$user = Read-Host "  Trading-Rechner SSH-Benutzer (Enter zum Ueberspringen)"
 if ($user.Trim() -ne '') {
-    $minipcHost = Read-Host "  Mini-PC IP/Hostname"
-    if ($minipcHost.Trim() -ne '') {
-        Write-Info "Teste Verbindung zu $($user.Trim())@$($minipcHost.Trim()) ..."
-        & ssh -i $KeyPath -o ConnectTimeout=10 -o BatchMode=yes "$($user.Trim())@$($minipcHost.Trim())" "echo KEY_AUTH_OK"
+    $tradingRechnerHost = Read-Host "  Trading-Rechner IP/Hostname"
+    if ($tradingRechnerHost.Trim() -ne '') {
+        Write-Info "Teste Verbindung zu $($user.Trim())@$($tradingRechnerHost.Trim()) ..."
+        & ssh -i $KeyPath -o ConnectTimeout=10 -o BatchMode=yes "$($user.Trim())@$($tradingRechnerHost.Trim())" "echo KEY_AUTH_OK"
         if ($LASTEXITCODE -eq 0) {
             Write-Ok 'SSH-Key-Authentifizierung funktioniert!'
         } else {

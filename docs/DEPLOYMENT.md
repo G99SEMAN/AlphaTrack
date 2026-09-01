@@ -11,7 +11,7 @@ Diese Datei beschreibt, wie das AlphaTrack-Setup aus drei Rechnern zusammenspiel
 | Rechner | IP | Rolle |
 |---|---|---|
 | **NAS** | `<NAS-IP>` | Next.js-App (AlphaTrack) als Docker-Container, Port `3002`. Alle Daten als JSON in `data/`. SSH auf Port `88`. |
-| **Mini-PC** | `<TRADING-RECHNER-IP>` | MetaTrader 5, Python-Bridge (FastAPI, Port `8765`), Trading-Bots (Port `8770+`). |
+| **Trading-Rechner** | `<TRADING-RECHNER-IP>` | MetaTrader 5, Python-Bridge (FastAPI, Port `8765`), Trading-Bots (Port `8770+`). |
 | **DevPC** | `<DEV-PC-IP>` | Entwicklung, Claude Code, Deploy-Auslösung. |
 
 ```
@@ -19,7 +19,7 @@ DevPC (Entwicklung)  ──git push──▶  GitHub  ──git pull──▶  N
        │                                                         ▲
        │                                                         │ HTTP: Heartbeat/Commands/Trade-Sync
        └──sync-dev.bat──▶  NAS (Next.js :3003, Dev/Hot-Reload)    │
-                                                              Mini-PC (Bridge :8765 ◄─WebSocket─► Bots, MT5)
+                                                              Trading-Rechner (Bridge :8765 ◄─WebSocket─► Bots, MT5)
 ```
 
 Alle drei Rechner kommunizieren ausschließlich im lokalen Netz (gleiches Subnetz).
@@ -31,15 +31,15 @@ Alle drei Rechner kommunizieren ausschließlich im lokalen Netz (gleiches Subnet
 **Wann:** Für alles, was tatsächlich live gehen soll — nach erfolgreichem Test im Dev-Container (Abschnitt 3).
 
 ```
-scripts\windows\deploy.bat       # AlphaTrack (NAS) + Bridge (Mini-PC) deployen
-scripts\windows\deploy-bot.bat   # Einzelnen Bot auf den Mini-PC deployen
+scripts\windows\deploy.bat       # AlphaTrack (NAS) + Bridge (Trading-Rechner) deployen
+scripts\windows\deploy-bot.bat   # Einzelnen Bot auf den Trading-Rechner deployen
 ```
 
 Ablauf von `deploy.bat` (siehe `scripts/windows/deploy.ps1`):
 
-1. **Konfigurationsabfrage** — NAS-Zugang, Mini-PC-Zugang, MT5-Login (gespeichert in `scripts/windows/deploy.config.json`, gitignored)
+1. **Konfigurationsabfrage** — NAS-Zugang, Trading-Rechner-Zugang, MT5-Login (gespeichert in `scripts/windows/deploy.config.json`, gitignored)
 2. **NAS** — `git push`, `.env.local`/`BOT_API_KEY` sicherstellen, Container-Rebuild via `scripts/nas-update.sh` (`docker compose build --no-cache && up -d`), Datensicherung/-wiederherstellung von `data/` um `git reset --hard` zu überstehen
-3. **Mini-PC** — `bridge/` + `bots/` per SSH kopieren, Configs generieren, Firewall-Regel (TCP 8765), geplante Aufgabe "AlphaTrack-Bridge" (Autostart)
+3. **Trading-Rechner** — `bridge/` + `bots/` per SSH kopieren, Configs generieren, Firewall-Regel (TCP 8765), geplante Aufgabe "AlphaTrack-Bridge" (Autostart)
 4. **Check** — wartet, bis die Bridge sich beim NAS registriert hat
 
 Dauer: mehrere Minuten (Docker-Rebuild ohne Cache). Für kleine UI-Checks zu langsam — siehe Abschnitt 3.
@@ -75,7 +75,7 @@ Ablauf (`scripts/windows/sync-dev.ps1`):
 ```
 scripts\windows\setup-ssh-key-nas.ps1
 ```
-Erzeugt `%USERPROFILE%\.ssh\alphatrack_nas`. Der angezeigte Public Key muss danach einmalig per Passwort-SSH auf dem NAS eingetragen werden (Anleitung erscheint im Skript). Analog gibt es `setup-ssh-key.ps1` für den Mini-PC (Key: `alphatrack_deploy`, für `deploy.bat`).
+Erzeugt `%USERPROFILE%\.ssh\alphatrack_nas`. Der angezeigte Public Key muss danach einmalig per Passwort-SSH auf dem NAS eingetragen werden (Anleitung erscheint im Skript). Analog gibt es `setup-ssh-key.ps1` für den Trading-Rechner (Key: `alphatrack_deploy`, für `deploy.bat`).
 
 Relevante Dateien:
 - `Dockerfile.dev`, `docker-compose.dev.yml` (Repo-Root)
@@ -98,7 +98,7 @@ curl -s http://<TRADING-RECHNER-IP>:8765/history
 
 Dieses exakte Präfix-Format (`curl -s http://<NAS-IP>:3002/...` bzw. `<TRADING-RECHNER-IP>:8765/...`) lässt sich in `.claude/settings.json` als Allowlist eintragen — dann fragt Claude dafür nicht extra nach.
 
-SSH auf das NAS/den Mini-PC bleibt nötig für alles, was nicht über die API läuft: rohe Logs, Configs, Dateisystem-Zugriffe.
+SSH auf das NAS/den Trading-Rechner bleibt nötig für alles, was nicht über die API läuft: rohe Logs, Configs, Dateisystem-Zugriffe.
 
 ---
 

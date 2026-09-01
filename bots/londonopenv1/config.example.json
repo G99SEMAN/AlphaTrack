@@ -8,7 +8,7 @@
   "bot_ip": "",
   "bot_port": 8773,
   "profile_id": "",
-  "bridge_url": "http://<mini-pc-ip>:8765",
+  "bridge_url": "http://<trading-rechner-ip>:8765",
   "heartbeat_interval_sec": 10,
   "strategy": {
     "symbol": "GBPUSDp",

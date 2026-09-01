@@ -1,6 +1,6 @@
 """
 AlphaTrack Bridge - Hauptprogramm
-Laeuft auf dem Mini PC, verbindet sich mit MetaTrader 5 und sendet
+Laeuft auf dem Trading-Rechner, verbindet sich mit MetaTrader 5 und sendet
 Daten an die AlphaTrack Webapp im Heimnetz.
 """
 
