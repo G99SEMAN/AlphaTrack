@@ -33,5 +33,12 @@
     "unlockTrading": "Trading entsperren",
     "live": "Live",
     "demo": "Demo"
+  },
+  "bottomNav": {
+    "dashboard": "Dashboard",
+    "trades": "Trades",
+    "performance": "Performance",
+    "network": "Netzwerk",
+    "statistics": "Statistik"
   }
 }
