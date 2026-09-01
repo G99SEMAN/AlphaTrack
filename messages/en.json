@@ -32,7 +32,8 @@
     "lockTrading": "Lock trading",
     "unlockTrading": "Unlock trading",
     "live": "Live",
-    "demo": "Demo"
+    "demo": "Demo",
+    "exchanges": "Exchanges"
   },
   "bottomNav": {
     "dashboard": "Dashboard",

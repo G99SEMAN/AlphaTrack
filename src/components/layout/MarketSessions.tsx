@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { useSessionSettings } from '@/hooks/useSessionSettings'
 
 const EXCHANGES = [
   { id: 'nyse',  name: 'NYSE',  tz: 'America/New_York', oH: 9,  oM: 30, cH: 16, cM: 0  },
   { id: 'lse',   name: 'LSE',   tz: 'Europe/London',    oH: 8,  oM: 0,  cH: 16, cM: 30 },
   { id: 'xetra', name: 'XETRA', tz: 'Europe/Berlin',    oH: 9,  oM: 0,  cH: 17, cM: 30 },
-  { id: 'tse',   name: 'Tokio', tz: 'Asia/Tokyo',       oH: 9,  oM: 0,  cH: 15, cM: 30 },
+  { id: 'tse',   name: 'TSE',   tz: 'Asia/Tokyo',       oH: 9,  oM: 0,  cH: 15, cM: 30 },
 ]
 
 function getLocalParts(tz: string) {
@@ -152,6 +153,7 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
   const [tick, setTick] = useState(0)
   const [utcTime, setUtcTime] = useState('')
   const { settings } = useSessionSettings()
+  const t = useTranslations('sidebar')
 
   useEffect(() => {
     const id = setInterval(() => setTick(t => t + 1), 60_000)
@@ -201,7 +203,7 @@ export default function MarketSessions({ compact = false }: { compact?: boolean 
       {statuses.length > 0 && <div className={compact ? 'px-2 pt-1 pb-2' : 'px-3 pt-2 pb-3'}>
         <div className="flex items-center justify-between px-1 mb-1">
           <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)', fontSize: compact ? 9 : undefined }}>
-            Börsen
+            {t('exchanges')}
           </p>
           <span
             className="text-xs px-1.5 py-0.5 rounded font-medium"

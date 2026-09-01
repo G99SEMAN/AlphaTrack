@@ -32,7 +32,8 @@
     "lockTrading": "Trading sperren",
     "unlockTrading": "Trading entsperren",
     "live": "Live",
-    "demo": "Demo"
+    "demo": "Demo",
+    "exchanges": "Börsen"
   },
   "bottomNav": {
     "dashboard": "Dashboard",
