@@ -44,7 +44,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 | **Strategien** | Trading-Strategien anlegen, mit Trades verknüpfen und Performance je Strategie automatisch auswerten |
 | **Wirtschaftskalender** | Wirtschaftsdaten der nächsten 2 Wochen (via Tradays/MQL5), filterbar nach Wichtigkeit und Währung |
 | **KI-Marktanalyse** | Echtzeit-Kerzenanalyse via MT5-Bot - Bias, Entry, SL/TP und R/R Empfehlung per Claude AI |
-| **KI-Erklärungen** | Wirtschaftsereignisse automatisch per Claude AI auf Deutsch erklären lassen (gecacht) |
+| **KI-Erklärungen** | Klick auf ein Ereignis im Wirtschaftskalender liefert eine Erklärung auf Deutsch (was gemessen wird, warum relevant, Einfluss auf die Währung). Braucht `ANTHROPIC_API_KEY`, läuft über Claude Haiku mit knapp bemessenem Tokenlimit und wird pro Ereignis gecacht — Tokenverbrauch bleibt dadurch minimal |
 | **Multi-Profile** | Mehrere Konten parallel verwalten (Live, Demo) mit eigenem Startkapital, Broker und Währung |
 | **Backup & Restore** | Vollständige Datensicherung als ZIP-Bundle inkl. Screenshots; Import zum Wiederherstellen |
 | **PWA-fähig** | Als App auf dem Smartphone oder Tablet installierbar |
@@ -94,6 +94,10 @@ Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 | Bot Performance | Netzwerk | Tagesdetails |
 |---|---|---|
 | ![Bot Performance](public/screenshots/readme/bot-performance.png) | ![Netzwerk](public/screenshots/readme/netzwerk.png) | ![Tagesdetails](public/screenshots/readme/tagesdetails.png) |
+
+| Wirtschaftskalender: KI-Erklärung |
+|---|
+| ![KI-Erklärung](public/screenshots/readme/ki-erklaerung.png) |
 
 ---
 
