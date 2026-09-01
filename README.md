@@ -91,9 +91,9 @@ Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 |---|---|---|
 | ![Statistiken](public/screenshots/readme/statistiken.png) | ![Kalender](public/screenshots/readme/kalender.png) | ![Strategien](public/screenshots/readme/strategien.png) |
 
-| Bot Performance |
-|---|
-| ![Bot Performance](public/screenshots/readme/bot-performance.png) |
+| Bot Performance | Netzwerk | Tagesdetails |
+|---|---|---|
+| ![Bot Performance](public/screenshots/readme/bot-performance.png) | ![Netzwerk](public/screenshots/readme/netzwerk.png) | ![Tagesdetails](public/screenshots/readme/tagesdetails.png) |
 
 ---
 
