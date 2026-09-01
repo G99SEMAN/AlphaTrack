@@ -4,6 +4,10 @@ import { addBot } from '@/lib/bot-data'
 const BRIDGE_PORT = 8765
 const SCAN_CONCURRENCY = 30
 const SCAN_TIMEOUT_MS = 2000
+// Der Next.js-Server laeuft im Docker-Bridge-Netzwerk und sieht daher nicht die
+// tatsaechliche LAN-IP des Hosts - das eigene Subnetz kann er nicht zuverlaessig
+// selbst ermitteln. Ueber LAN_SUBNET_PREFIX in .env.local anpassbar.
+const LAN_SUBNET_PREFIX = process.env.LAN_SUBNET_PREFIX || '192.168.178'
 
 function validateBridgeUrl(raw: string): string | null {
   let parsed: URL
@@ -45,7 +49,7 @@ async function autoScan(): Promise<{ url: string; name: string; profileId: strin
   for (let i = 0; i < 254; i += SCAN_CONCURRENCY) {
     const batch: string[] = []
     for (let j = i + 1; j <= Math.min(i + SCAN_CONCURRENCY, 254); j++) {
-      batch.push(`192.168.178.${j}`)
+      batch.push(`${LAN_SUBNET_PREFIX}.${j}`)
     }
     const results = await Promise.all(batch.map(ip => probeInfo(ip)))
     const found = results.find(r => r !== null)
@@ -62,7 +66,7 @@ export async function POST(req: NextRequest) {
     const found = await autoScan()
     if (!found) {
       return NextResponse.json(
-        { error: 'Keine Bridge im Subnetz 192.168.178.X gefunden' },
+        { error: `Keine Bridge im Subnetz ${LAN_SUBNET_PREFIX}.X gefunden` },
         { status: 404 },
       )
     }

@@ -12,7 +12,7 @@ interface Props {
 type Step = 'input' | 'scanning' | 'searching' | 'success' | 'error'
 
 export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
-  const [url, setUrl] = useState('http://192.168.178.x:8765')
+  const [url, setUrl] = useState('http://192.168.1.x:8765')
   const [step, setStep] = useState<Step>('scanning')
   const [error, setError] = useState<string | null>(null)
   const [foundName, setFoundName] = useState<string | null>(null)
@@ -104,7 +104,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                 Suche Bridge im Netzwerk...
               </p>
               <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-                Scanne 192.168.178.1–254 : 8765
+                Scanne lokales Netzwerk : 8765
               </p>
               <button
                 onClick={() => setStep('input')}
@@ -127,7 +127,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                   type="text"
                   value={url}
                   onChange={e => setUrl(e.target.value)}
-                  placeholder="http://192.168.178.x:8765"
+                  placeholder="http://192.168.1.x:8765"
                   className="w-full px-3 py-2.5 rounded-xl text-sm font-mono outline-none"
                   style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
                   onKeyDown={e => e.key === 'Enter' && handleDiscover()}

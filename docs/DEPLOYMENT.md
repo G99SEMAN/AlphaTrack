@@ -10,9 +10,9 @@ Diese Datei beschreibt, wie das AlphaTrack-Setup aus drei Rechnern zusammenspiel
 
 | Rechner | IP | Rolle |
 |---|---|---|
-| **NAS** | `192.168.178.3` | Next.js-App (AlphaTrack) als Docker-Container, Port `3002`. Alle Daten als JSON in `data/`. SSH auf Port `88`. |
-| **Mini-PC** | `192.168.178.37` | MetaTrader 5, Python-Bridge (FastAPI, Port `8765`), Trading-Bots (Port `8770+`). |
-| **DevPC** | `192.168.178.30` | Entwicklung, Claude Code, Deploy-Auslösung. |
+| **NAS** | `<NAS-IP>` | Next.js-App (AlphaTrack) als Docker-Container, Port `3002`. Alle Daten als JSON in `data/`. SSH auf Port `88`. |
+| **Mini-PC** | `<TRADING-RECHNER-IP>` | MetaTrader 5, Python-Bridge (FastAPI, Port `8765`), Trading-Bots (Port `8770+`). |
+| **DevPC** | `<DEV-PC-IP>` | Entwicklung, Claude Code, Deploy-Auslösung. |
 
 ```
 DevPC (Entwicklung)  ──git push──▶  GitHub  ──git pull──▶  NAS (Next.js :3002, Prod)
@@ -22,7 +22,7 @@ DevPC (Entwicklung)  ──git push──▶  GitHub  ──git pull──▶  N
                                                               Mini-PC (Bridge :8765 ◄─WebSocket─► Bots, MT5)
 ```
 
-Alle drei Rechner kommunizieren ausschließlich im lokalen Netz (`192.168.178.0/24`).
+Alle drei Rechner kommunizieren ausschließlich im lokalen Netz (gleiches Subnetz).
 
 ---
 
@@ -58,7 +58,7 @@ scripts\windows\sync-dev.bat -Rebuild    # nach Änderungen an package.json
 scripts\windows\sync-dev.bat -KeepData   # Datenkopie NICHT anfassen (z.B. wenn du gerade selbst Testdaten im Dev-Container angelegt hast)
 ```
 
-Aufruf: `http://192.168.178.3:3003`
+Aufruf: `http://<NAS-IP>:3003`
 
 Ablauf (`scripts/windows/sync-dev.ps1`):
 1. Quellcode wird als `tar.gz` gepackt (ohne `node_modules`, `.git`, `.next`, `data`)
@@ -89,14 +89,14 @@ Relevante Dateien:
 NAS (`:3002`) und Bridge (`:8765`) haben **unauthenticated GET-Endpunkte** direkt im LAN erreichbar (`src/app/api/**` — nur POST braucht `BOT_API_KEY`). Fragen wie *"warum hatten die letzten 3 Trades keinen Stoploss?"* lassen sich direkt per `curl`/`Invoke-RestMethod` beantworten, ohne SSH oder Deploy:
 
 ```
-curl -s http://192.168.178.3:3002/api/trades
-curl -s http://192.168.178.3:3002/api/bots/trades
-curl -s http://192.168.178.3:3002/api/bots/<id>/log
-curl -s http://192.168.178.37:8765/positions
-curl -s http://192.168.178.37:8765/history
+curl -s http://<NAS-IP>:3002/api/trades
+curl -s http://<NAS-IP>:3002/api/bots/trades
+curl -s http://<NAS-IP>:3002/api/bots/<id>/log
+curl -s http://<TRADING-RECHNER-IP>:8765/positions
+curl -s http://<TRADING-RECHNER-IP>:8765/history
 ```
 
-Dieses exakte Präfix-Format (`curl -s http://192.168.178.3:3002/...` bzw. `.37:8765/...`) ist in `.claude/settings.json` als Allowlist eingetragen — Claude fragt dafür nicht extra nach.
+Dieses exakte Präfix-Format (`curl -s http://<NAS-IP>:3002/...` bzw. `<TRADING-RECHNER-IP>:8765/...`) lässt sich in `.claude/settings.json` als Allowlist eintragen — dann fragt Claude dafür nicht extra nach.
 
 SSH auf das NAS/den Mini-PC bleibt nötig für alles, was nicht über die API läuft: rohe Logs, Configs, Dateisystem-Zugriffe.
 

@@ -9,5 +9,16 @@
     "color": "#3b82f6",
     "icon": "TrendingUp",
     "deposits": []
+  },
+  {
+    "id": "1ZT9EC94IR",
+    "name": "test",
+    "type": "demo",
+    "broker": "BlackBull Markets",
+    "startCapital": 1000,
+    "currency": "EUR",
+    "color": "#00d97e",
+    "icon": "DollarSign",
+    "createdAt": "2026-08-31T20:14:26.746Z"
   }
 ]

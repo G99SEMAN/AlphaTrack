@@ -15,6 +15,13 @@ function Write-Warn([string]$Msg)  { Write-Host "  [!] $Msg" -ForegroundColor Ye
 
 Write-Step 'SSH-Key-Setup fuer AlphaTrack NAS (Dev-Sync + Live-Datenzugriff)'
 
+# --- Schritt 0: NAS-Zugangsdaten abfragen ----------------
+
+$NasHost = Read-Host '  NAS-IP-Adresse'
+$NasUser = Read-Host '  NAS-SSH-Benutzername'
+$NasPortInput = Read-Host '  NAS-SSH-Port [88]'
+$NasPort = if ($NasPortInput.Trim()) { $NasPortInput.Trim() } else { '88' }
+
 if (Test-Path $KeyPath) {
     Write-Ok "Schluessel existiert bereits: $KeyPath"
 } else {
@@ -42,7 +49,7 @@ Write-Step 'Anleitung: Public Key auf dem NAS einrichten (einmalig)'
 Write-Host ''
 Write-Info 'Einmal per SSH mit Passwort auf das NAS verbinden und ausfuehren:'
 Write-Host ''
-Write-Host "       ssh -p 88 G99SEMAN@192.168.178.3" -ForegroundColor DarkGray
+Write-Host "       ssh -p $NasPort $NasUser@$NasHost" -ForegroundColor DarkGray
 Write-Host ''
 Write-Info 'Dort (Passwort-Login):'
 Write-Host ''
@@ -58,8 +65,8 @@ Write-Host ''
 # --- Schritt 4: Verbindungstest --------------------------
 
 Write-Step 'Verbindungstest'
-Write-Info "Teste Verbindung zu G99SEMAN@192.168.178.3:88 ..."
-& ssh -i $KeyPath -p 88 -o ConnectTimeout=10 -o BatchMode=yes "G99SEMAN@192.168.178.3" "echo KEY_AUTH_OK"
+Write-Info "Teste Verbindung zu ${NasUser}@${NasHost}:${NasPort} ..."
+& ssh -i $KeyPath -p $NasPort -o ConnectTimeout=10 -o BatchMode=yes "$NasUser@$NasHost" "echo KEY_AUTH_OK"
 if ($LASTEXITCODE -eq 0) {
     Write-Ok 'SSH-Key-Authentifizierung funktioniert!'
 } else {

@@ -6,8 +6,8 @@ cls
 :: ==========================================
 ::  Konfiguration - bitte anpassen
 :: ==========================================
-set NAS_USER=G99SEMAN
-set NAS_HOST=100.80.41.12
+set NAS_USER=deinuser
+set NAS_HOST=100.x.x.x
 set NAS_PORT=88
 set NAS_PROJECT_DIR=/volume1/docker/alphatrack
 :: ==========================================

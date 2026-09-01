@@ -28,6 +28,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 - [Tech Stack](#tech-stack)
 - [PWA / Mobile](#pwa--mobile)
 - [Lizenz](#lizenz)
+- [Disclaimer](#disclaimer)
 
 ---
 
@@ -197,6 +198,9 @@ TWELVE_DATA_API_KEY=...
 
 # Bot-Authentifizierung - muss mit der Python-Bridge übereinstimmen
 BOT_API_KEY=<dein-api-key>
+
+# Nur falls die Bridge-Auto-Discovery nicht funktioniert (anderes Subnetz als 192.168.178.x)
+LAN_SUBNET_PREFIX=192.168.1
 ```
 
 | Variable | Pflicht | Zweck |
@@ -204,6 +208,7 @@ BOT_API_KEY=<dein-api-key>
 | `ANTHROPIC_API_KEY` | Optional | KI-Marktanalyse, Wirtschaftskalender-Erklärungen |
 | `TWELVE_DATA_API_KEY` | Optional | Kursdaten |
 | `BOT_API_KEY` | Nur mit Bridge | Authentifizierung der Python-Bridge gegen AlphaTrack |
+| `LAN_SUBNET_PREFIX` | Optional | Subnetz-Präfix für die Bridge-Auto-Discovery im Docker-Container (Standard: `192.168.178`) |
 
 > Auf dem NAS importierte API-Keys werden in `data/api-keys.json` persistiert und überleben Container-Rebuilds.
 
@@ -317,7 +322,7 @@ Bots können gegen echte MetaTrader-Daten zurückgetestet werden — ohne Live-T
 python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14
 
 # Mit expliziter Bridge-URL (falls abweichend von config.json):
-python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://192.168.178.37:8765
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://<TRADING-RECHNER-IP>:8765
 ```
 
 **Parameter:**
@@ -427,7 +432,9 @@ PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
                         Trading-Rechner (MT5 + Python-Bridge)
 ```
 
-**Warum eine Bridge?** MetaTrader 5 läuft nur unter Windows und muss dauerhaft mit dem Broker verbunden bleiben. Die Bridge kapselt diese Verbindung in einem eigenständigen Python-Prozess auf dem Trading-Rechner — die eigentliche AlphaTrack-App bleibt dadurch plattformunabhängig (läuft z. B. problemlos in Docker auf einem NAS) und muss selbst nie direkten Zugriff auf MT5 oder Windows haben. Vorteile: Trading läuft weiter, auch wenn die App neu startet oder kurzzeitig nicht erreichbar ist; MT5-Zugangsdaten bleiben ausschließlich lokal auf dem Trading-Rechner; die App selbst lässt sich unabhängig vom Trading-Setup aktualisieren und betreiben.
+**Warum eine Bridge?** MetaTrader 5 läuft nur unter Windows und muss dauerhaft mit dem Broker verbunden bleiben. Die Bridge kapselt diese Verbindung in einem eigenständigen Python-Prozess auf dem Trading-Rechner. Dadurch bleibt die eigentliche AlphaTrack-App plattformunabhängig (läuft z. B. problemlos in Docker auf einem NAS) und braucht selbst nie direkten Zugriff auf MT5 oder Windows.
+
+Das bringt handfeste Vorteile: Trading läuft weiter, auch wenn die App neu startet oder kurzzeitig nicht erreichbar ist. MT5-Zugangsdaten bleiben ausschließlich lokal auf dem Trading-Rechner. Und App und Trading-Setup lassen sich unabhängig voneinander aktualisieren.
 
 - **AlphaTrack** läuft auf dem NAS (Docker) oder lokal auf dem PC
 - **Python-Bridge** läuft auf dem Bot-PC neben MT5 und sendet Heartbeats an AlphaTrack
@@ -438,3 +445,12 @@ PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
 ## Lizenz
 
 MIT License — siehe [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+
+---
+
+## Disclaimer
+
+AlphaTrack wurde unter anderem mit Hilfe von KI entwickelt. Fehler sind
+nicht ausgeschlossen. Nutzung auf eigene Gefahr — es wird keine Haftung
+für Schäden oder Handelsverluste übernommen. Ausschließlich für den
+Privatgebrauch gedacht.

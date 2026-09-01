@@ -4,8 +4,8 @@
 # ==========================================
 #  Konfiguration - bitte anpassen
 # ==========================================
-NAS_USER="G99SEMAN"
-NAS_HOST="192.168.178.3"
+NAS_USER="deinuser"
+NAS_HOST="192.168.1.100"
 NAS_PORT="88"
 NAS_PROJECT_DIR="/volume1/docker/alphatrack"
 # ==========================================

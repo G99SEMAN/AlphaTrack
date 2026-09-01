@@ -27,9 +27,9 @@ function Write-Utf8NoBom([string]$Path, [string]$Text) {
 
 function Read-DeployConfig {
     $cfg = [ordered]@{
-        nas_host          = '192.168.178.3'
+        nas_host          = ''
         nas_ssh_port      = '88'
-        nas_ssh_user      = 'G99SEMAN'
+        nas_ssh_user      = ''
         nas_project_dir   = '/volume1/docker/alphatrack'
         nas_app_port      = '3002'
         minipc_host       = ''

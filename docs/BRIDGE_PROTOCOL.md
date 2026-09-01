@@ -60,7 +60,7 @@ Bot sends (within 10 seconds of connection):
     "name": "Breakout v1",
     "version": "1.0.0",
     "component_type": "bot",
-    "ip": "192.168.178.37",
+    "ip": "<TRADING-RECHNER-IP>",
     "port": 8771
   }
 }
@@ -360,7 +360,7 @@ AGPv2 Discovery-Endpunkt.
   "agp": "2.0",
   "name": "AlphaTrack Bridge",
   "version": "2.0",
-  "ip": "192.168.178.37",
+  "ip": "<TRADING-RECHNER-IP>",
   "port": 8765,
   "profile_id": "FiFT3HmJf-",
   "bridge_id": "bridge-001",
@@ -491,7 +491,7 @@ Identity-Records aller verbundenen Bots.
 ```json
 {
   "bots": [
-    {"id": "mybot-001", "name": "Breakout v1", "type": "bot", "ip": "192.168.178.37", "port": 8771}
+    {"id": "mybot-001", "name": "Breakout v1", "type": "bot", "ip": "<TRADING-RECHNER-IP>", "port": 8771}
   ],
   "count": 1
 }
@@ -583,7 +583,7 @@ Die Bridge sendet alle 10 Sekunden einen UDP-Broadcast auf Port 8766:
 {
   "type": "bridge_announce",
   "agp": "2.0",
-  "ip": "192.168.178.37",
+  "ip": "<TRADING-RECHNER-IP>",
   "port": 8765,
   "name": "AlphaTrack Bridge",
   "version": "2.0",
@@ -591,7 +591,7 @@ Die Bridge sendet alle 10 Sekunden einen UDP-Broadcast auf Port 8766:
 }
 ```
 
-Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fallback auf HTTP-Scan `192.168.178.1-254:8765/health`.
+Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fallback auf HTTP-Scan des eigenen /24-Subnetzes (`:8765/health`).
 
 ---
 
@@ -601,7 +601,7 @@ Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fall
 
 ```json
 {
-  "alphatrack_url": "http://192.168.178.3:3002",
+  "alphatrack_url": "http://<NAS-IP>:3002",
   "api_key": "<dein-api-key>",
   "bot_id": "mybot-001",
   "bot_name": "My Trading Bot",
@@ -610,7 +610,7 @@ Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fall
   "bot_ip": "",
   "bot_port": 8771,
   "profile_id": "PROFIL_ID",
-  "bridge_url": "http://192.168.178.37:8765",
+  "bridge_url": "http://<TRADING-RECHNER-IP>:8765",
   "heartbeat_interval_sec": 10,
   "strategy": {
     "symbol": "EURUSDp",
@@ -626,7 +626,7 @@ Bots mit leerer `bridge_url` entdecken die Bridge automatisch via UDP, dann Fall
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| alphatrack_url | string | Yes | AlphaTrack UI URL (NAS Docker, z.B. `http://192.168.178.3:3002`) |
+| alphatrack_url | string | Yes | AlphaTrack UI URL (NAS Docker, z.B. `http://<NAS-IP>:3002`) |
 | api_key | string | Yes | Bridge API key (muss mit `.env.local` `BOT_API_KEY` uebereinstimmen) |
 | bot_id | string | Yes | Statischer Identifier (z.B. `"mybot-001"`) |
 | bot_name | string | Yes | Anzeigename |

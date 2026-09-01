@@ -13,9 +13,10 @@ if "!BOT!"=="" (
 )
 
 set "REPO_ROOT=%~dp0..\.."
-set "MINIPC_HOST=192.168.178.37"
-set "MINIPC_USER=pc"
-set "MINIPC_KEY=C:\Users\G99SEMAN\.ssh\alphatrack_deploy"
+REM Trading-Rechner-Zugangsdaten -- bei Bedarf anpassen
+set "MINIPC_HOST=192.168.1.100"
+set "MINIPC_USER=deinuser"
+set "MINIPC_KEY=%USERPROFILE%\.ssh\alphatrack_deploy"
 set "MINIPC_TARGET=C:\Users\PC\Desktop\AlphaTrack\bots"
 
 echo.

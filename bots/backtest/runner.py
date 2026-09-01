@@ -5,7 +5,7 @@ Läuft auf jedem Computer im LAN. Daten kommen ausschließlich über die Bridge 
 
 Usage:
     python backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14
-    python backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://192.168.178.37:8765
+    python backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://<TRADING-RECHNER-IP>:8765
 """
 import argparse
 import importlib.util

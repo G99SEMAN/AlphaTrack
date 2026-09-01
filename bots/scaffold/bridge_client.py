@@ -39,8 +39,21 @@ def _cache_bridge_url(url: str, config_path: str | None) -> None:
         pass
 
 
+def _get_local_subnet_prefix() -> str | None:
+    """Ermittelt das eigene /24-Subnetz (z.B. '192.168.178') fuer den HTTP-Scan-Fallback."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(("8.8.8.8", 80))  # kein echter Traffic, nur um das ausgehende Interface zu ermitteln
+        local_ip = s.getsockname()[0]
+        return ".".join(local_ip.split(".")[:3])
+    except Exception:
+        return None
+    finally:
+        s.close()
+
+
 def discover_bridge(timeout: float = 10.0, config_path: str | None = None) -> str | None:
-    """Findet Bridge via UDP-Broadcast oder HTTP-Scan 192.168.178.1-254."""
+    """Findet Bridge via UDP-Broadcast oder HTTP-Scan im eigenen /24-Subnetz."""
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -70,7 +83,10 @@ def discover_bridge(timeout: float = 10.0, config_path: str | None = None) -> st
         except Exception:
             pass
 
-    candidates = [f"http://192.168.178.{i}:8765" for i in range(1, 255)]
+    prefix = _get_local_subnet_prefix()
+    if not prefix:
+        return None
+    candidates = [f"http://{prefix}.{i}:8765" for i in range(1, 255)]
     with ThreadPoolExecutor(max_workers=30) as ex:
         futures = {ex.submit(_probe_bridge, url, 2.0): url for url in candidates}
         for future in as_completed(futures):
