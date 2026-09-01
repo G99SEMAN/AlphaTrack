@@ -16,25 +16,28 @@ import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
 import LogoMark from './LogoMark'
+import { useTranslations, useLocale } from 'next-intl'
+import { setLocaleAction } from '@/lib/locale'
+import type { AppLocale } from '@/i18n/request'
 
 const UEBERSICHT_NAV = [
-  { href: '/dashboard',      label: 'Dashboard',      icon: LayoutDashboard },
-  { href: '/journal',        label: 'Trades',         icon: BookOpen },
-  { href: '/bridge/trades',  label: 'Live Trades',    icon: Activity },
-  { href: '/strategien',     label: 'Strategien',     icon: Target },
-  { href: '/bridge/analyse', label: 'Trade Analyzer', icon: Sparkles },
-  { href: '/statistiken',    label: 'Statistiken',    icon: BarChart2 },
-  { href: '/kalender',       label: 'Kalender',       icon: CalendarDays },
-  { href: '/netzwerk',       label: 'Netzwerk',       icon: Network },
-]
+  { href: '/dashboard',      labelKey: 'navDashboard',      icon: LayoutDashboard },
+  { href: '/journal',        labelKey: 'navTrades',         icon: BookOpen },
+  { href: '/bridge/trades',  labelKey: 'navLiveTrades',     icon: Activity },
+  { href: '/strategien',     labelKey: 'navStrategies',     icon: Target },
+  { href: '/bridge/analyse', labelKey: 'navTradeAnalyzer',  icon: Sparkles },
+  { href: '/statistiken',    labelKey: 'navStatistics',     icon: BarChart2 },
+  { href: '/kalender',       labelKey: 'navCalendar',       icon: CalendarDays },
+  { href: '/netzwerk',       labelKey: 'navNetwork',        icon: Network },
+] as const
 
 const BRIDGE_BOTS_NAV = [
-  { href: '/bridge',            label: 'Bridge',        icon: Cpu },
-  { href: '/bridge/log',        label: 'Bridge Log',    icon: ScrollText },
-  { href: '/bots',              label: 'Bots',          icon: Bot },
-  { href: '/bots/settings',     label: 'Bot Settings',  icon: SlidersHorizontal },
-  { href: '/bots/performance',  label: 'Performance',   icon: BarChart2 },
-]
+  { href: '/bridge',            labelKey: 'navBridge',        icon: Cpu },
+  { href: '/bridge/log',        labelKey: 'navBridgeLog',     icon: ScrollText },
+  { href: '/bots',              labelKey: 'navBots',          icon: Bot },
+  { href: '/bots/settings',     labelKey: 'navBotSettings',   icon: SlidersHorizontal },
+  { href: '/bots/performance',  labelKey: 'navPerformance',   icon: BarChart2 },
+] as const
 
 const EXACT_MATCH = new Set(['/dashboard', '/bridge', '/bots'])
 
@@ -107,6 +110,9 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
   const router = useRouter()
   const { isUnlocked, toggle } = useTradingLock()
   const { bots } = useBotStatus()
+  const t = useTranslations('sidebar')
+  const tCommon = useTranslations('common')
+  const locale = useLocale() as AppLocale
   const [balanceVisible, setBalanceVisible] = useState(() => {
     try { return localStorage.getItem('alphatrack-mt5-balance-visible') !== 'false' }
     catch { return true }
@@ -149,7 +155,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               AlphaTrack
             </p>
             <p style={{ fontSize: 9, color: 'var(--text-3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Trading Journal
+              {t('tagline')}
             </p>
           </div>
         )}
@@ -164,7 +170,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', color: 'var(--text-3)',
             }}
-            title="Sidebar einklappen"
+            title={t('collapseSidebar')}
           >
             <ChevronLeft size={12} />
           </button>
@@ -181,7 +187,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', color: 'var(--text-3)', zIndex: 10,
             }}
-            title="Sidebar ausklappen"
+            title={t('expandSidebar')}
           >
             <ChevronRight size={10} />
           </button>
@@ -191,7 +197,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
       {/* Trading Lock Hinweis */}
       {isUnlocked && !collapsed && (
         <div style={{ margin: '8px 10px 0', padding: '6px 10px', borderRadius: 8, background: 'rgba(255,69,96,0.06)', border: '1px solid rgba(255,69,96,0.2)' }}>
-          <p style={{ fontSize: 11, color: 'var(--red)' }}>Trading aktiv!</p>
+          <p style={{ fontSize: 11, color: 'var(--red)' }}>{t('tradingActive')}</p>
         </div>
       )}
 
@@ -207,7 +213,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               background: 'var(--surface-2)', border: '1px solid var(--border)',
               cursor: 'pointer', textAlign: 'left',
             }}
-            title="Profile verwalten"
+            title={t('manageProfiles')}
           >
             <div style={{
               width: 26, height: 26, flexShrink: 0,
@@ -222,7 +228,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
                 {activeProfile.name}
               </div>
               <div style={{ fontSize: 9, color: 'var(--text-3)' }}>
-                {activeProfile.type === 'live' ? 'Live' : 'Demo'} · {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
+                {activeProfile.type === 'live' ? t('live') : t('demo')} · {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
               </div>
             </div>
             <Settings size={12} style={{ color: 'var(--text-3)', flexShrink: 0 }} />
@@ -252,14 +258,14 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
       {/* Navigation */}
       <nav style={{ flex: 1, padding: '8px 8px', display: 'flex', flexDirection: 'column', gap: 1, overflowY: 'auto', minHeight: 0 }}>
 
-        <SectionDivider label="Übersicht" collapsed={collapsed} />
+        <SectionDivider label={t('sectionOverview')} collapsed={collapsed} />
         {UEBERSICHT_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} collapsed={collapsed} onNav={onNav} />
+          <NavLink key={item.href} href={item.href} icon={item.icon} label={t(item.labelKey)} pathname={pathname} collapsed={collapsed} onNav={onNav} />
         ))}
 
-        <SectionDivider label="Bridge & Bots" collapsed={collapsed} />
+        <SectionDivider label={t('sectionBridgeBots')} collapsed={collapsed} />
         {BRIDGE_BOTS_NAV.map(item => (
-          <NavLink key={item.href} {...item} pathname={pathname} collapsed={collapsed} onNav={onNav} />
+          <NavLink key={item.href} href={item.href} icon={item.icon} label={t(item.labelKey)} pathname={pathname} collapsed={collapsed} onNav={onNav} />
         ))}
 
       </nav>
@@ -283,7 +289,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               }} />
               {!collapsed && (
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 8, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>MT5 Konto</p>
+                  <p style={{ fontSize: 8, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>{t('mt5Account')}</p>
                   {balanceVisible && (
                     <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-1)', fontFamily: 'var(--font-dm-mono)', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
                       {mt5Balance.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -294,7 +300,7 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
               )}
             </div>
             {!collapsed && (
-              <button type="button" onClick={toggleBalance} style={{ color: 'var(--text-3)', cursor: 'pointer' }} title={balanceVisible ? 'Ausblenden' : 'Einblenden'}>
+              <button type="button" onClick={toggleBalance} style={{ color: 'var(--text-3)', cursor: 'pointer' }} title={balanceVisible ? t('hideBalance') : t('showBalance')}>
                 {balanceVisible ? <EyeOff size={11} /> : <Eye size={11} />}
               </button>
             )}
@@ -317,15 +323,15 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
             background: 'rgba(249,115,22,0.07)', color: '#fb923c',
             border: '1px solid rgba(249,115,22,0.2)',
           }}
-          title="Einstellungen"
+          title={tCommon('settings')}
         >
           <Settings size={13} style={{ opacity: 0.85 }} />
-          {!collapsed && 'Einstellungen'}
+          {!collapsed && tCommon('settings')}
         </button>
 
         <button
           type="button"
-          title={isUnlocked ? 'Trading sperren' : 'Trading entsperren'}
+          title={isUnlocked ? t('lockTrading') : t('unlockTrading')}
           onClick={toggle}
           style={{
             width: 30, height: 30, flexShrink: 0,
@@ -340,6 +346,20 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
           }}
         >
           {isUnlocked ? <ShieldOff size={14} strokeWidth={2} /> : <ShieldCheck size={14} strokeWidth={2.5} />}
+        </button>
+
+        <button
+          type="button"
+          title={tCommon('language')}
+          onClick={() => setLocaleAction(locale === 'de' ? 'en' : 'de')}
+          style={{
+            width: 30, height: 30, flexShrink: 0,
+            borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', fontSize: 10, fontWeight: 700,
+            background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)',
+          }}
+        >
+          {locale === 'de' ? 'EN' : 'DE'}
         </button>
       </div>
 
