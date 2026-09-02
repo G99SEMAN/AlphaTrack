@@ -180,5 +180,62 @@
       "noOpenPositions": "Keine offenen Positionen",
       "viewAll": "Alle Trades anzeigen →"
     }
+  },
+  "kalender": {
+    "page": {
+      "title": "Wirtschaftskalender",
+      "subtitle": "Wichtige Termine und Wirtschaftsdaten - Diese & Nächste Woche"
+    },
+    "client": {
+      "loadError": "Daten konnten nicht geladen werden.",
+      "noEvents": "Keine Termine für den gewählten Zeitraum",
+      "appointment": "Termin",
+      "appointments": "Termine",
+      "tableTime": "Zeit",
+      "tableCountry": "Land",
+      "tableEvent": "Ereignis",
+      "tableImpact": "Wichtigkeit",
+      "tableForecast": "Prognose",
+      "tablePrevious": "Vorher",
+      "tableActual": "Aktuell",
+      "footerResults": "{count} Termine angezeigt - Quelle: ForexFactory"
+    },
+    "toolbar": {
+      "filter7Days": "7 Tage",
+      "filterThisWeek": "Diese Woche",
+      "filterNextWeek": "Nächste Woche",
+      "filterAll": "Alles",
+      "today": "Heute",
+      "todayTitle": "Zum heutigen Tag springen",
+      "refreshTitle": "Aktualisieren",
+      "currencyLabel": "Währung:",
+      "clearAll": "Alle",
+      "impactLabel": "Wichtigkeit:",
+      "impactHigh": "Hoch",
+      "impactMedium": "Mittel",
+      "impactLow": "Niedrig",
+      "justUpdated": "gerade aktualisiert",
+      "minuteAgo": "vor 1 Min.",
+      "minutesAgo": "vor {count} Min.",
+      "hourAgo": "vor 1 Std.",
+      "hoursAgo": "vor {count} Std."
+    },
+    "eventRow": {
+      "forecast": "Prognose",
+      "previous": "Vorher",
+      "actual": "Aktuell"
+    },
+    "impact": {
+      "high": "Hoch",
+      "medium": "Mittel",
+      "low": "Niedrig",
+      "holiday": "Feiertag"
+    },
+    "explanation": {
+      "noExplanation": "Keine Erklärung verfügbar",
+      "whatIsMeasured": "Was wird gemessen?",
+      "whyImportant": "Warum wichtig für Trader?",
+      "influenceOn": "Einfluss auf {country}"
+    }
   }
 }

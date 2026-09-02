@@ -180,5 +180,62 @@
       "noOpenPositions": "No open positions",
       "viewAll": "View all trades →"
     }
+  },
+  "kalender": {
+    "page": {
+      "title": "Economic Calendar",
+      "subtitle": "Important events and economic data - This & Next Week"
+    },
+    "client": {
+      "loadError": "Failed to load data.",
+      "noEvents": "No events for the selected period",
+      "appointment": "event",
+      "appointments": "events",
+      "tableTime": "Time",
+      "tableCountry": "Country",
+      "tableEvent": "Event",
+      "tableImpact": "Impact",
+      "tableForecast": "Forecast",
+      "tablePrevious": "Previous",
+      "tableActual": "Actual",
+      "footerResults": "{count} events shown - Source: ForexFactory"
+    },
+    "toolbar": {
+      "filter7Days": "7 Days",
+      "filterThisWeek": "This Week",
+      "filterNextWeek": "Next Week",
+      "filterAll": "All",
+      "today": "Today",
+      "todayTitle": "Jump to today",
+      "refreshTitle": "Refresh",
+      "currencyLabel": "Currency:",
+      "clearAll": "All",
+      "impactLabel": "Impact:",
+      "impactHigh": "High",
+      "impactMedium": "Medium",
+      "impactLow": "Low",
+      "justUpdated": "just updated",
+      "minuteAgo": "1 min ago",
+      "minutesAgo": "{count} min ago",
+      "hourAgo": "1 hr ago",
+      "hoursAgo": "{count} hr ago"
+    },
+    "eventRow": {
+      "forecast": "Forecast",
+      "previous": "Previous",
+      "actual": "Actual"
+    },
+    "impact": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "holiday": "Holiday"
+    },
+    "explanation": {
+      "noExplanation": "No explanation available",
+      "whatIsMeasured": "What is measured?",
+      "whyImportant": "Why it matters for traders?",
+      "influenceOn": "Impact on {country}"
+    }
   }
 }
