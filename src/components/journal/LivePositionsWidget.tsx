@@ -5,6 +5,7 @@ import { TrendingUp, TrendingDown, X, RefreshCw, Activity, Bot } from 'lucide-re
 import { useBotStatus } from '@/context/BotStatusContext'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { resolveBotLabel } from '@/lib/bot-source'
+import { useTranslations } from 'next-intl'
 
 interface LivePosition {
   ticket: number
@@ -22,6 +23,7 @@ interface LivePosition {
 }
 
 export default function LivePositionsWidget() {
+  const t = useTranslations('journal.livePositions')
   const { bots } = useBotStatus()
   const { isUnlocked } = useTradingLock()
 
@@ -85,7 +87,7 @@ export default function LivePositionsWidget() {
               boxShadow: bridgeId ? '0 0 5px var(--green)' : 'none',
             }} />
           <p className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-2)' }}>
-            Offene Positionen
+            {t('title')}
           </p>
           {positions.length > 0 && (
             <span className="text-xs font-mono px-1.5 py-0.5 rounded"
@@ -114,7 +116,7 @@ export default function LivePositionsWidget() {
         <div className="flex items-center gap-2 px-4 py-3">
           <Activity size={13} style={{ color: 'var(--text-3)', opacity: 0.5 }} />
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            {bridgeId ? 'Keine offenen Positionen' : 'Keine Bridge verbunden'}
+            {bridgeId ? t('noPositions') : t('noBridge')}
           </p>
         </div>
       ) : (
@@ -196,7 +198,7 @@ export default function LivePositionsWidget() {
                   <button
                     onClick={() => setConfirmTicket(pos.ticket)}
                     disabled={!isUnlocked}
-                    title={!isUnlocked ? 'Trading-Schutzschalter aktivieren' : 'Position schließen'}
+                    title={!isUnlocked ? t('closeTooltipDisabled') : t('closeTooltipEnabled')}
                     className="shrink-0 w-6 h-6 flex items-center justify-center rounded-md cursor-pointer transition-all disabled:opacity-30"
                     style={{ background: 'rgba(239,68,68,0.08)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
                     <X size={11} />
