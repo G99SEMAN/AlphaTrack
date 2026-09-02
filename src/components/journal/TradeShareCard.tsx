@@ -2,6 +2,7 @@ import React from 'react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { currencySymbol } from '@/lib/currency'
+import { useTranslations } from 'next-intl'
 
 export interface VisibleSections {
   pnl: boolean
@@ -53,6 +54,7 @@ function Row({ label, value, valueColor }: { label: string; value: string; value
 
 const TradeShareCard = React.forwardRef<HTMLDivElement, Props>(
   function TradeShareCard({ trade, broker, currency, startCapital, strategies, visible }, ref) {
+    const t = useTranslations('journal.tradeShareCard')
     const isLong = trade.type === 'long'
     const hasPnl = trade.pnl !== undefined
     const pnlPositive = (trade.pnl ?? 0) >= 0
@@ -147,7 +149,7 @@ const TradeShareCard = React.forwardRef<HTMLDivElement, Props>(
           }}>
             <div>
               <div style={{ fontSize: 11, color: C.text3, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>
-                Ergebnis
+                {t('resultLabel')}
               </div>
               <div style={{ fontSize: 28, fontWeight: 800, color: pnlColor, fontFamily: 'monospace', letterSpacing: '-0.02em', lineHeight: 1 }}>
                 {pnlPositive ? '+' : ''}{fmt(trade.pnl)} {currencySymbol(currency)}
@@ -173,12 +175,12 @@ const TradeShareCard = React.forwardRef<HTMLDivElement, Props>(
         {/* Stats */}
         {showStats && (
           <div style={{ margin: '0 24px 20px' }}>
-            {visible.prices && <Row label="Entry" value={fmt(trade.entry, 4)} />}
-            {visible.prices && <Row label="Exit" value={trade.exit !== undefined ? fmt(trade.exit, 4) : '-'} />}
-            {visible.sltp && <Row label="Stop Loss" value={trade.sl !== undefined ? fmt(trade.sl, 4) : '-'} />}
-            {visible.sltp && <Row label="Take Profit" value={trade.tp !== undefined ? fmt(trade.tp, 4) : '-'} />}
-            {visible.rrLots && <Row label="Risk / Reward" value={trade.rr !== undefined ? `1 : ${fmt(trade.rr, 1)}` : '-'} valueColor={C.accent} />}
-            {visible.rrLots && <Row label="Lots" value={fmt(trade.size, 2)} />}
+            {visible.prices && <Row label={t('entryLabel')} value={fmt(trade.entry, 4)} />}
+            {visible.prices && <Row label={t('exitLabel')} value={trade.exit !== undefined ? fmt(trade.exit, 4) : '-'} />}
+            {visible.sltp && <Row label={t('stopLossLabel')} value={trade.sl !== undefined ? fmt(trade.sl, 4) : '-'} />}
+            {visible.sltp && <Row label={t('takeProfitLabel')} value={trade.tp !== undefined ? fmt(trade.tp, 4) : '-'} />}
+            {visible.rrLots && <Row label={t('riskRewardLabel')} value={trade.rr !== undefined ? `1 : ${fmt(trade.rr, 1)}` : '-'} valueColor={C.accent} />}
+            {visible.rrLots && <Row label={t('lotsLabel')} value={fmt(trade.size, 2)} />}
           </div>
         )}
 
