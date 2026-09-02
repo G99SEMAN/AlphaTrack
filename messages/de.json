@@ -88,6 +88,62 @@
       "allClosed": "Alle geschlossen",
       "avgWinLossTrade": "Avg Win / Loss Trade",
       "noDataYet": "Noch keine Daten"
+    },
+    "calendar": {
+      "monthsFull": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+      "thisMonth": "Dieser Monat",
+      "year": "Jahr",
+      "month": "Monat",
+      "week": "Woche",
+      "weekLabel": "KW {number}",
+      "day": "Tag",
+      "days": "Tage",
+      "trade": "Trade",
+      "trades": "Trades",
+      "winStreak": "{count} Gewinntage in Folge",
+      "lossStreak": "{count} Verlusttage in Folge",
+      "noTrades": "Keine Trades",
+      "hoverHint": "Tag mit Trades anklicken für Details"
+    },
+    "dayModal": {
+      "closeTime": "Schließzeit",
+      "instrument": "Instrument",
+      "side": "Side",
+      "netPnl": "Net P&L",
+      "rr": "R:R",
+      "totalTrades": "Total Trades",
+      "winners": "Winners",
+      "losers": "Losers",
+      "winrate": "Winrate",
+      "grossPnl": "Gross P&L",
+      "volume": "Volumen",
+      "costs": "Kosten",
+      "profitFactor": "Profit Factor",
+      "close": "Schließen"
+    },
+    "tradeDetail": {
+      "back": "Zurück",
+      "netPnl": "Net P&L",
+      "grossPnl": "Gross P&L",
+      "side": "Side",
+      "entry": "Entry",
+      "exit": "Exit",
+      "stopLoss": "Stop Loss",
+      "takeProfit": "Take Profit",
+      "size": "Size",
+      "commission": "Commission",
+      "swap": "Swap",
+      "rr": "R:R",
+      "duration": "Laufzeit",
+      "opened": "Eröffnet",
+      "closed": "Geschlossen",
+      "notes": "Notes"
+    },
+    "tradeChart": {
+      "loading": "Lade Kursdaten…",
+      "unsupported": "Chart für dieses Instrument wird aktuell nicht unterstützt.",
+      "noData": "Für diesen Zeitraum sind keine Kursdaten verfügbar.",
+      "error": "Kursdaten konnten nicht geladen werden."
     }
   }
 }

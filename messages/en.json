@@ -88,6 +88,62 @@
       "allClosed": "All closed",
       "avgWinLossTrade": "Avg Win / Loss Trade",
       "noDataYet": "No data yet"
+    },
+    "calendar": {
+      "monthsFull": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      "thisMonth": "This month",
+      "year": "Year",
+      "month": "Month",
+      "week": "Week",
+      "weekLabel": "Week {number}",
+      "day": "day",
+      "days": "days",
+      "trade": "Trade",
+      "trades": "Trades",
+      "winStreak": "{count} winning days in a row",
+      "lossStreak": "{count} losing days in a row",
+      "noTrades": "No trades",
+      "hoverHint": "Click a day with trades for details"
+    },
+    "dayModal": {
+      "closeTime": "Close Time",
+      "instrument": "Instrument",
+      "side": "Side",
+      "netPnl": "Net P&L",
+      "rr": "R:R",
+      "totalTrades": "Total Trades",
+      "winners": "Winners",
+      "losers": "Losers",
+      "winrate": "Winrate",
+      "grossPnl": "Gross P&L",
+      "volume": "Volume",
+      "costs": "Costs",
+      "profitFactor": "Profit Factor",
+      "close": "Close"
+    },
+    "tradeDetail": {
+      "back": "Back",
+      "netPnl": "Net P&L",
+      "grossPnl": "Gross P&L",
+      "side": "Side",
+      "entry": "Entry",
+      "exit": "Exit",
+      "stopLoss": "Stop Loss",
+      "takeProfit": "Take Profit",
+      "size": "Size",
+      "commission": "Commission",
+      "swap": "Swap",
+      "rr": "R:R",
+      "duration": "Duration",
+      "opened": "Opened",
+      "closed": "Closed",
+      "notes": "Notes"
+    },
+    "tradeChart": {
+      "loading": "Loading price data…",
+      "unsupported": "Chart is currently not supported for this instrument.",
+      "noData": "No price data available for this period.",
+      "error": "Failed to load price data."
     }
   }
 }
