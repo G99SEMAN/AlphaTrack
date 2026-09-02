@@ -1,10 +1,13 @@
 import { EventImpact } from '@/types/wirtschaftskalender'
+import { useTranslations } from 'next-intl'
 
-const IMPACT_CONFIG: Record<EventImpact, { color: string; bg: string; label: string }> = {
-  High:    { color: '#ff4560', bg: 'rgba(255,69,96,0.12)',    label: 'Hoch' },
-  Medium:  { color: '#f97316', bg: 'rgba(249,115,22,0.12)',   label: 'Mittel' },
-  Low:     { color: '#00d97e', bg: 'rgba(0,217,126,0.12)',    label: 'Niedrig' },
-  Holiday: { color: '#7a8fa6', bg: 'rgba(122,143,166,0.12)', label: 'Feiertag' },
+function getImpactConfig(t: ReturnType<typeof useTranslations<'kalender.impact'>>): Record<EventImpact, { color: string; bg: string; label: string }> {
+  return {
+    High:    { color: '#ff4560', bg: 'rgba(255,69,96,0.12)',    label: t('high') },
+    Medium:  { color: '#f97316', bg: 'rgba(249,115,22,0.12)',   label: t('medium') },
+    Low:     { color: '#00d97e', bg: 'rgba(0,217,126,0.12)',    label: t('low') },
+    Holiday: { color: '#7a8fa6', bg: 'rgba(122,143,166,0.12)', label: t('holiday') },
+  }
 }
 
 interface Props {
@@ -13,7 +16,8 @@ interface Props {
 }
 
 export default function ImpactBadge({ impact, compact = false }: Props) {
-  const cfg = IMPACT_CONFIG[impact] ?? IMPACT_CONFIG.Low
+  const t = useTranslations('kalender.impact')
+  const cfg = getImpactConfig(t)[impact] ?? getImpactConfig(t).Low
 
   if (compact) {
     return (
