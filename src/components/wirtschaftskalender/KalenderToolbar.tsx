@@ -2,6 +2,7 @@
 
 import { RefreshCw, CalendarCheck } from 'lucide-react'
 import { EventImpact } from '@/types/wirtschaftskalender'
+import { useTranslations } from 'next-intl'
 
 export type TimeFilter = 'rolling' | 'thisweek' | 'nextweek' | 'all'
 
@@ -15,13 +16,13 @@ const IMPACT_COLORS: Record<EventImpact, string> = {
   Holiday: '#7a8fa6',
 }
 
-function formatFetchedAt(iso: string): string {
+function formatFetchedAt(iso: string, t: ReturnType<typeof useTranslations<'kalender.toolbar'>>): string {
   const diff = Math.floor((Date.now() - new Date(iso).getTime()) / 60000)
-  if (diff < 1) return 'gerade aktualisiert'
-  if (diff === 1) return 'vor 1 Min.'
-  if (diff < 60) return `vor ${diff} Min.`
+  if (diff < 1) return t('justUpdated')
+  if (diff === 1) return t('minuteAgo')
+  if (diff < 60) return t('minutesAgo', { count: diff })
   const h = Math.floor(diff / 60)
-  return h === 1 ? 'vor 1 Std.' : `vor ${h} Std.`
+  return h === 1 ? t('hourAgo') : t('hoursAgo', { count: h })
 }
 
 interface Props {
@@ -44,6 +45,7 @@ export default function KalenderToolbar({
   impactFilter, onToggleImpact,
   fetchedAt, loading, onRefresh, onScrollToToday,
 }: Props) {
+  const t = useTranslations('kalender.toolbar')
   const chip: React.CSSProperties = {
     padding: '4px 10px',
     borderRadius: 6,
@@ -71,10 +73,10 @@ export default function KalenderToolbar({
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {([
-            { v: 'rolling'  as TimeFilter, l: '7 Tage' },
-            { v: 'thisweek' as TimeFilter, l: 'Diese Woche' },
-            { v: 'nextweek' as TimeFilter, l: 'Nächste Woche' },
-            { v: 'all'      as TimeFilter, l: 'Alles' },
+            { v: 'rolling'  as TimeFilter, l: t('filter7Days') },
+            { v: 'thisweek' as TimeFilter, l: t('filterThisWeek') },
+            { v: 'nextweek' as TimeFilter, l: t('filterNextWeek') },
+            { v: 'all'      as TimeFilter, l: t('filterAll') },
           ]).map(({ v, l }) => (
             <button
               key={v}
@@ -93,11 +95,11 @@ export default function KalenderToolbar({
 
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6 }}>
           <span style={{ fontSize: 11, color: 'var(--text-3)' }}>
-            {formatFetchedAt(fetchedAt)}
+            {formatFetchedAt(fetchedAt, t)}
           </span>
           <button
             onClick={onScrollToToday}
-            title="Zum heutigen Tag springen"
+            title={t('todayTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 5,
               height: 30, padding: '0 10px', borderRadius: 7,
@@ -111,12 +113,12 @@ export default function KalenderToolbar({
             }}
           >
             <CalendarCheck size={12} />
-            Heute
+            {t('today')}
           </button>
           <button
             onClick={onRefresh}
             disabled={loading}
-            title="Aktualisieren"
+            title={t('refreshTitle')}
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               width: 30, height: 30, borderRadius: 7,
@@ -135,7 +137,7 @@ export default function KalenderToolbar({
 
       {/* Zeile 2: Währungs-Chips */}
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 600, marginRight: 2 }}>Währung:</span>
+        <span style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 600, marginRight: 2 }}>{t('currencyLabel')}</span>
         {CURRENCIES.map(c => {
           const active = currencies.has(c)
           return (
@@ -160,14 +162,14 @@ export default function KalenderToolbar({
             onClick={onClearCurrencies}
             style={{ ...chip, padding: '3px 7px', color: 'var(--text-3)', fontSize: 11 }}
           >
-            Alle
+            {t('clearAll')}
           </button>
         )}
       </div>
 
       {/* Zeile 3: Impact-Chips */}
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 600, marginRight: 2 }}>Wichtigkeit:</span>
+        <span style={{ fontSize: 11, color: 'var(--text-3)', fontWeight: 600, marginRight: 2 }}>{t('impactLabel')}</span>
         {IMPACTS.map(imp => {
           const active = impactFilter.has(imp)
           const color = IMPACT_COLORS[imp]
@@ -185,7 +187,7 @@ export default function KalenderToolbar({
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: color, display: 'inline-block' }} />
-              {imp === 'High' ? 'Hoch' : imp === 'Medium' ? 'Mittel' : 'Niedrig'}
+              {imp === 'High' ? t('impactHigh') : imp === 'Medium' ? t('impactMedium') : t('impactLow')}
             </button>
           )
         })}
