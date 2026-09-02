@@ -3,6 +3,7 @@
 import { memo, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   netPnl: number
@@ -172,6 +173,7 @@ function Label({ children }: { children: React.ReactNode }) {
 }
 
 function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgWin, avgLoss, currency }: Props) {
+  const t = useTranslations('dashboard.kpi')
   const pnlColor = netPnl >= 0 ? 'var(--green)' : 'var(--red)'
   const pfColor = profitFactor >= 2 ? 'var(--green)' : profitFactor >= 1 ? 'var(--amber)' : 'var(--red)'
 
@@ -179,7 +181,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       {/* 1 — Net P&L */}
       <KpiCard delay={0}>
-        <Label>Net P&amp;L</Label>
+        <Label>{t('netPnl')}</Label>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 8 }}>
           <div>
             <motion.p
@@ -191,7 +193,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
               {fmt(netPnl, currency)}
             </motion.p>
             <p style={{ fontSize: 10, color: 'var(--text-3)', marginTop: 5, fontFamily: 'var(--font-dm-mono)' }}>
-              {totalTrades} Trades
+              {totalTrades} {t('trades')}
             </p>
           </div>
         </div>
@@ -199,7 +201,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
 
       {/* 2 — Profit Factor */}
       <KpiCard delay={0.06}>
-        <Label>Profit Factor</Label>
+        <Label>{t('profitFactor')}</Label>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
           <div>
             <motion.p
@@ -211,7 +213,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
               {profitFactor >= 99 ? '∞' : profitFactor.toFixed(2)}
             </motion.p>
             <p style={{ fontSize: 10, color: 'var(--text-3)', marginTop: 5 }}>
-              {profitFactor >= 2 ? 'Sehr gut' : profitFactor >= 1.5 ? 'Gut' : profitFactor >= 1 ? 'Profitabel' : 'Verlust'}
+              {profitFactor >= 2 ? t('veryGood') : profitFactor >= 1.5 ? t('good') : profitFactor >= 1 ? t('profitable') : t('loss')}
             </p>
           </div>
           <DonutRing value={profitFactor} max={4} />
@@ -220,7 +222,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
 
       {/* 3 — Win Rate */}
       <KpiCard delay={0.12}>
-        <Label>Trade Win %</Label>
+        <Label>{t('tradeWinRate')}</Label>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
           <div>
             <motion.p
@@ -232,7 +234,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
               {winRate.toFixed(2)}%
             </motion.p>
             <p style={{ fontSize: 10, color: 'var(--text-3)', marginTop: 5 }}>
-              {openTrades > 0 ? `${openTrades} offen` : 'Alle geschlossen'}
+              {openTrades > 0 ? `${openTrades} ${t('open')}` : t('allClosed')}
             </p>
           </div>
           <WinGauge winRate={winRate} total={totalTrades} open={openTrades} />
@@ -241,7 +243,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
 
       {/* 4 — Avg Win/Loss */}
       <KpiCard delay={0.18}>
-        <Label>Avg Win / Loss Trade</Label>
+        <Label>{t('avgWinLossTrade')}</Label>
         <motion.p
           style={{ fontSize: 26, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.04em', lineHeight: 1, fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums', marginBottom: 10 }}
           initial={{ opacity: 0, y: 6 }}
@@ -252,7 +254,7 @@ function KpiStrip({ netPnl, totalTrades, profitFactor, winRate, openTrades, avgW
         </motion.p>
         {avgWin > 0 || avgLoss < 0
           ? <AvgBar avgWin={avgWin} avgLoss={avgLoss} currency={currency} />
-          : <p style={{ fontSize: 10, color: 'var(--text-3)' }}>Noch keine Daten</p>
+          : <p style={{ fontSize: 10, color: 'var(--text-3)' }}>{t('noDataYet')}</p>
         }
       </KpiCard>
     </div>
