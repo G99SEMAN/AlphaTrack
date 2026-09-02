@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 
@@ -60,11 +60,13 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
   const [data, setData] = useState<ExplanationData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [fetched, setFetched] = useState(false)
+  const fetchedKey = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!isExpanded || fetched) return
-    setFetched(true)
+    if (!isExpanded) return
+    const key = `${locale}|${eventTitle}|${country}`
+    if (fetchedKey.current === key) return
+    fetchedKey.current = key
     setLoading(true)
     setError(false)
     const url = `/api/wirtschaftskalender/erklaerung?title=${encodeURIComponent(eventTitle)}&country=${encodeURIComponent(country)}&lang=${locale}`
@@ -76,7 +78,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [isExpanded, fetched, eventTitle, country, locale])
+  }, [isExpanded, eventTitle, country, locale])
 
   const panelStyle: React.CSSProperties = {
     background: 'var(--surface-2)',
