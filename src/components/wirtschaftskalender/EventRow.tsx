@@ -2,6 +2,7 @@ import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
 import ImpactBadge from './ImpactBadge'
 import ExplanationPanel from './ExplanationPanel'
 import { ChevronRight, ChevronDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 const FLAG_CODES: Record<string, string> = {
   USD: 'us', EUR: 'eu', GBP: 'gb', JPY: 'jp',
@@ -115,6 +116,7 @@ export function DesktopRow({ event, isToday, isExpanded, onToggle }: Props) {
 
 // Mobile-Karte
 export function MobileCard({ event, isToday, isExpanded, onToggle }: Props) {
+  const t = useTranslations('kalender.eventRow')
   return (
     <div
       onClick={onToggle}
@@ -155,9 +157,9 @@ export function MobileCard({ event, isToday, isExpanded, onToggle }: Props) {
         {/* Werte */}
         <div style={{ display: 'flex', gap: 12 }}>
           {[
-            { label: 'Prognose', value: event.forecast },
-            { label: 'Vorher',   value: event.previous },
-            { label: 'Aktuell',  value: null, actual: event.actual, forecast: event.forecast },
+            { label: t('forecast'), value: event.forecast },
+            { label: t('previous'), value: event.previous },
+            { label: t('actual'),   value: null, actual: event.actual, forecast: event.forecast },
           ].map(({ label, value, actual, forecast }) => (
             <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <span style={{ fontSize: 10, color: 'var(--text-3)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
