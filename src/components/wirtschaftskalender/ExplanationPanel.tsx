@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations, useLocale } from 'next-intl'
 
 interface ExplanationData {
   name: string
@@ -18,16 +19,18 @@ interface Props {
   isExpanded: boolean
 }
 
-function InfluenceLines({ einfluss }: { einfluss: string }) {
+function InfluenceLines({ einfluss, locale }: { einfluss: string; locale: string }) {
   const parts = einfluss.split(/(?<=\.)\s+/)
   if (parts.length < 2) {
     return <p style={{ fontSize: 13, color: 'var(--text-2)', margin: 0, lineHeight: 1.5 }}>{einfluss}</p>
   }
+  const betterPattern = locale === 'en' ? /better/i : /besser/i
+  const worsePattern = locale === 'en' ? /worse/i : /schlechter/i
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       {parts.map((part, i) => {
-        const isBetter = /besser/i.test(part)
-        const isWorse = /schlechter/i.test(part)
+        const isBetter = betterPattern.test(part)
+        const isWorse = worsePattern.test(part)
         const color = isBetter ? 'var(--green)' : isWorse ? 'var(--red)' : 'var(--text-2)'
         const prefix = isBetter ? '✅ ' : isWorse ? '❌ ' : ''
         return (
@@ -52,6 +55,8 @@ function SkeletonLine({ width }: { width: string }) {
 }
 
 export default function ExplanationPanel({ eventTitle, country, isExpanded }: Props) {
+  const t = useTranslations('kalender.explanation')
+  const locale = useLocale()
   const [data, setData] = useState<ExplanationData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -62,7 +67,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
     setFetched(true)
     setLoading(true)
     setError(false)
-    const url = `/api/wirtschaftskalender/erklaerung?title=${encodeURIComponent(eventTitle)}&country=${encodeURIComponent(country)}`
+    const url = `/api/wirtschaftskalender/erklaerung?title=${encodeURIComponent(eventTitle)}&country=${encodeURIComponent(country)}&lang=${locale}`
     fetch(url)
       .then(r => r.json())
       .then(json => {
@@ -71,7 +76,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false))
-  }, [isExpanded, fetched, eventTitle, country])
+  }, [isExpanded, fetched, eventTitle, country, locale])
 
   const panelStyle: React.CSSProperties = {
     background: 'var(--surface-2)',
@@ -100,7 +105,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
 
           {error && !loading && (
             <p style={{ fontSize: 13, color: 'var(--text-3)', margin: 0 }}>
-              Keine Erklärung verfügbar
+              {t('noExplanation')}
             </p>
           )}
 
@@ -129,7 +134,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
               {/* Was wird gemessen */}
               <div>
                 <p style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px' }}>
-                  Was wird gemessen?
+                  {t('whatIsMeasured')}
                 </p>
                 <p style={{ fontSize: 13, color: 'var(--text-2)', margin: 0, lineHeight: 1.5 }}>
                   {data.zusammenfassung}
@@ -139,7 +144,7 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
               {/* Warum wichtig */}
               <div>
                 <p style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 4px' }}>
-                  Warum wichtig für Trader?
+                  {t('whyImportant')}
                 </p>
                 <p style={{ fontSize: 13, color: 'var(--text-2)', margin: 0, lineHeight: 1.5 }}>
                   {data.warum_wichtig}
@@ -149,9 +154,9 @@ export default function ExplanationPanel({ eventTitle, country, isExpanded }: Pr
               {/* Einfluss */}
               <div>
                 <p style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 6px' }}>
-                  Einfluss auf {country}
+                  {t('influenceOn', { country })}
                 </p>
-                <InfluenceLines einfluss={data.einfluss} />
+                <InfluenceLines einfluss={data.einfluss} locale={locale} />
               </div>
             </div>
           )}
