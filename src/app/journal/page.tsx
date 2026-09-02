@@ -7,12 +7,15 @@ import { redirect } from 'next/navigation'
 import Sidebar from '@/components/layout/Sidebar'
 import JournalClient from '@/components/journal/JournalClient'
 import LivePositionsWidget from '@/components/journal/LivePositionsWidget'
+import { getTranslations } from 'next-intl/server'
 
-export default function JournalPage() {
+export default async function JournalPage() {
   const profiles = getProfiles()
   if (profiles.length === 0) redirect('/setup')
   const activeProfile = getActiveProfile()
   if (!activeProfile) redirect('/setup')
+
+  const t = await getTranslations('journal.page')
 
   const trades = getProfileTrades(activeProfile.id)
   const strategies = getProfileStrategies(activeProfile.id)
@@ -24,10 +27,10 @@ export default function JournalPage() {
       <main className="flex-1 p-4 md:p-6 max-w-full overflow-hidden">
         <div className="mb-5">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
-            Trades
+            {t('title')}
           </h1>
           <p className="text-sm mt-0.5" style={{ color: 'var(--text-3)' }}>
-            {activeProfile.name} - alle Trade-Eintrage im Uberblick
+            {t('subtitle', { name: activeProfile.name })}
           </p>
         </div>
 
