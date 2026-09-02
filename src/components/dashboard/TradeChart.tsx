@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes'
 import { createChart, IChartApi, LineStyle, UTCTimestamp, CandlestickData } from 'lightweight-charts'
 import { Trade } from '@/types/trade'
 import { mapToForexSymbol, computeChartWindow } from '@/lib/quotes'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trade: Trade
@@ -20,17 +21,17 @@ interface RawCandle {
   close: number
 }
 
-const MESSAGES: Record<Exclude<ChartState, 'ready'>, string> = {
-  loading: 'Lade Kursdaten…',
-  unsupported: 'Chart für dieses Instrument wird aktuell nicht unterstützt.',
-  'no-data': 'Für diesen Zeitraum sind keine Kursdaten verfügbar.',
-  error: 'Kursdaten konnten nicht geladen werden.',
-}
-
 export default function TradeChart({ trade }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
   const [state, setState] = useState<ChartState>('loading')
+  const t = useTranslations('dashboard.tradeChart')
+  const MESSAGES: Record<Exclude<ChartState, 'ready'>, string> = {
+    loading: t('loading'),
+    unsupported: t('unsupported'),
+    'no-data': t('noData'),
+    error: t('error'),
+  }
 
   useEffect(() => {
     const container = containerRef.current
