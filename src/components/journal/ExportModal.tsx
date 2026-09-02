@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { X, FileText, Table, AlertCircle, Download } from 'lucide-react'
 import { Trade } from '@/types/trade'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: Trade[]
@@ -19,6 +20,7 @@ function tradeYear(t: Trade): number {
 }
 
 export default function ExportModal({ trades, filtered, onClose }: Props) {
+  const t = useTranslations('journal.exportModal')
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => { document.body.style.overflow = '' }
@@ -53,7 +55,7 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        throw new Error(err.error ?? 'Export fehlgeschlagen')
+        throw new Error(err.error ?? t('exportFailed'))
       }
       const blob = await res.blob()
       const date = new Date().toISOString().slice(0, 10)
@@ -66,7 +68,7 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
       URL.revokeObjectURL(a.href)
       onClose()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Export fehlgeschlagen')
+      setError(err instanceof Error ? err.message : t('exportFailed'))
     } finally {
       setIsExporting(false)
     }
@@ -88,8 +90,8 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
           <div>
-            <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>Trades exportieren</h2>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>Als PDF-Steuerreport oder CSV-Rohdaten herunterladen</p>
+            <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>{t('subtitle')}</p>
           </div>
           <button
             onClick={onClose}
@@ -104,11 +106,11 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
         <div className="px-5 py-4 flex flex-col gap-4">
           {/* Format */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-3)' }}>Format</p>
+            <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-3)' }}>{t('formatLabel')}</p>
             <div className="flex gap-2">
               {([
-                { val: 'pdf' as const, label: 'PDF (Steuerreport)', icon: FileText },
-                { val: 'csv' as const, label: 'CSV (Rohdaten)', icon: Table },
+                { val: 'pdf' as const, label: t('formatPdf'), icon: FileText },
+                { val: 'csv' as const, label: t('formatCsv'), icon: Table },
               ]).map(({ val, label, icon: Icon }) => (
                 <button
                   key={val}
@@ -130,14 +132,14 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
 
           {/* Jahr */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-3)' }}>Jahr</p>
+            <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-3)' }}>{t('yearLabel')}</p>
             <select
               value={year}
               onChange={e => setYear(e.target.value === 'all' ? 'all' : Number(e.target.value))}
               className="w-full px-3 py-2 rounded-lg text-sm outline-none"
               style={{ background: 'var(--surface-2)', color: 'var(--text-1)', border: '1px solid var(--border)' }}
             >
-              <option value="all">Alle Jahre</option>
+              <option value="all">{t('allYears')}</option>
               {availableYears.map(y => (
                 <option key={y} value={y}>{y}</option>
               ))}
@@ -152,18 +154,18 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
               onChange={e => setUseJournalFilters(e.target.checked)}
             />
             <span className="text-sm" style={{ color: 'var(--text-2)' }}>
-              Aktuelle Journal-Filter übernehmen (Status, Richtung, Bot, Suche)
+              {t('useFiltersLabel')}
             </span>
           </label>
 
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            Für den Steuerreport werden nur geschlossene Trades berücksichtigt.
+            {t('taxReportHint')}
           </p>
 
           {finalTrades.length === 0 && (
             <div className="flex items-center gap-2 px-3 py-2.5 rounded-lg" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.3)' }}>
               <AlertCircle size={14} style={{ color: '#f59e0b' }} />
-              <p className="text-xs" style={{ color: '#f59e0b' }}>Keine Trades für diese Auswahl</p>
+              <p className="text-xs" style={{ color: '#f59e0b' }}>{t('noTradesSelected')}</p>
             </div>
           )}
 
@@ -178,7 +180,7 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
         {/* Footer */}
         <div className="flex items-center justify-between gap-3 px-5 py-3.5" style={{ borderTop: '1px solid var(--border)' }}>
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            {finalTrades.length} Trade{finalTrades.length !== 1 ? 's' : ''} ausgewählt
+            {finalTrades.length === 1 ? t('selectedOne', { count: finalTrades.length }) : t('selectedMany', { count: finalTrades.length })}
           </p>
           <div className="flex items-center gap-2">
             <button
@@ -187,7 +189,7 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
               className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
-              Abbrechen
+              {t('cancelBtn')}
             </button>
             <button
               type="button"
@@ -203,7 +205,7 @@ export default function ExportModal({ trades, filtered, onClose }: Props) {
               }}
             >
               <Download size={14} />
-              {isExporting ? 'Exportiere...' : 'Exportieren'}
+              {isExporting ? t('exportingBtn') : t('exportBtn')}
             </button>
           </div>
         </div>
