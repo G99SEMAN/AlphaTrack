@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Trade } from '@/types/trade'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: Trade[]
@@ -14,7 +15,6 @@ interface DayPnl {
   count: number
 }
 
-const MONTH_LABELS = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
 const CELL_SIZE = 11
 const CELL_GAP = 3
 
@@ -38,6 +38,10 @@ function cellColor(data: DayPnl | undefined, inYear: boolean): string {
 }
 
 export default function YearHeatmap({ trades, year, onSelectMonth }: Props) {
+  const t = useTranslations('dashboard.calendar')
+  const tDate = useTranslations('dashboard.dateRange')
+  const rawMonths = tDate.raw('monthsShort')
+  const MONTH_LABELS = Array.isArray(rawMonths) ? rawMonths as string[] : []
   const [hovered, setHovered] = useState<string | null>(null)
 
   const pnlByDay = useMemo(() => {
@@ -127,10 +131,10 @@ export default function YearHeatmap({ trades, year, onSelectMonth }: Props) {
         {hovered
           ? `${hovered.split('-').reverse().join('.')} · ${
               hoveredData
-                ? `${hoveredData.pnl >= 0 ? '+' : ''}${fmtPnlShort(hoveredData.pnl)} € · ${hoveredData.count} ${hoveredData.count === 1 ? 'Trade' : 'Trades'}`
-                : 'Keine Trades'
+                ? `${hoveredData.pnl >= 0 ? '+' : ''}${fmtPnlShort(hoveredData.pnl)} € · ${hoveredData.count} ${hoveredData.count === 1 ? t('trade') : t('trades')}`
+                : t('noTrades')
             }`
-          : 'Tag mit Trades anklicken für Details'}
+          : t('hoverHint')}
       </div>
     </div>
   )
