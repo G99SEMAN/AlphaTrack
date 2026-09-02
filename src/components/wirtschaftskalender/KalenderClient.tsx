@@ -6,6 +6,7 @@ import { CalendarX2 } from 'lucide-react'
 import { WirtschaftsEvent, EventImpact } from '@/types/wirtschaftskalender'
 import { DesktopRow, MobileCard } from './EventRow'
 import KalenderToolbar, { TimeFilter } from './KalenderToolbar'
+import { useTranslations } from 'next-intl'
 
 function getRollingBounds() {
   const now = new Date()
@@ -67,6 +68,7 @@ interface Props {
 }
 
 export default function KalenderClient({ initialEvents, initialFetchedAt }: Props) {
+  const t = useTranslations('kalender.client')
   const [events, setEvents] = useState<WirtschaftsEvent[]>(initialEvents)
   const [fetchedAt, setFetchedAt] = useState(initialFetchedAt)
   const [loading, setLoading] = useState(false)
@@ -91,7 +93,7 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
       setEvents(data.events)
       setFetchedAt(data.fetchedAt)
     } catch {
-      setError('Daten konnten nicht geladen werden.')
+      setError(t('loadError'))
     } finally {
       setLoading(false)
     }
@@ -188,7 +190,7 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '60px 0', gap: 10 }}>
           <CalendarX2 size={36} style={{ color: 'var(--text-3)', opacity: 0.4 }} />
           <p style={{ fontSize: 14, color: 'var(--text-3)', fontWeight: 500, margin: 0 }}>
-            Keine Termine für den gewählten Zeitraum
+            {t('noEvents')}
           </p>
         </div>
       )}
@@ -217,7 +219,7 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
                   </span>
                   <div style={{ flex: 1, height: 1, background: isToday ? 'rgba(59,130,246,0.35)' : 'var(--border)' }} />
                   <span style={{ fontSize: 11, color: 'var(--text-3)', whiteSpace: 'nowrap' }}>
-                    {evs.length} {evs.length === 1 ? 'Termin' : 'Termine'}
+                    {evs.length} {evs.length === 1 ? t('appointment') : t('appointments')}
                   </span>
                 </div>
 
@@ -227,14 +229,14 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                       <thead>
                         <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                          {['Zeit', 'Land', 'Ereignis', 'Wichtigkeit', 'Prognose', 'Vorher', 'Aktuell', ''].map(h => (
+                          {[t('tableTime'), t('tableCountry'), t('tableEvent'), t('tableImpact'), t('tableForecast'), t('tablePrevious'), t('tableActual'), ''].map(h => (
                             <th
                               key={h}
                               style={{
                                 padding: '8px 12px',
                                 fontSize: 11, fontWeight: 600,
                                 color: 'var(--text-3)',
-                                textAlign: ['Prognose', 'Vorher', 'Aktuell'].includes(h) ? 'right' : 'left',
+                                textAlign: [t('tableForecast'), t('tablePrevious'), t('tableActual')].includes(h) ? 'right' : 'left',
                                 textTransform: 'uppercase', letterSpacing: '0.05em',
                                 background: 'var(--surface-2)',
                               }}
@@ -279,7 +281,7 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
 
       {totalFiltered > 0 && (
         <p style={{ fontSize: 11, color: 'var(--text-3)', textAlign: 'center', marginTop: 4 }}>
-          {totalFiltered} Termine angezeigt - Quelle: ForexFactory
+          {t('footerResults', { count: totalFiltered })}
         </p>
       )}
     </div>
