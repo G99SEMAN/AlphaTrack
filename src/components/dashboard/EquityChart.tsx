@@ -4,6 +4,7 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceL
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { useEffect, useState, useMemo } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface DataPoint { date: string; value: number }
 interface Props { data: DataPoint[]; startCapital?: number; currency?: string }
@@ -57,6 +58,7 @@ function CustomTooltip({
 }
 
 export default function EquityChart({ data, startCapital = 0, currency = '€' }: Props) {
+  const t = useTranslations('dashboard.equityChart')
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
@@ -102,14 +104,14 @@ export default function EquityChart({ data, startCapital = 0, currency = '€' }
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
         <div>
           <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: 4 }}>
-            Kontostand
+            {t('balance')}
           </p>
           <p style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', lineHeight: 1, fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
             {lastBalance.toLocaleString('de-DE')} {currencySymbol(currency)}
           </p>
           {startCapital > 0 && (
             <p style={{ fontSize: 10, fontFamily: 'var(--font-dm-mono)', marginTop: 2, color: positive ? 'var(--green)' : 'var(--red)' }}>
-              {pnl >= 0 ? '+' : ''}{pnl.toLocaleString('de-DE')} {currencySymbol(currency)} seit Deposit
+              {pnl >= 0 ? '+' : ''}{pnl.toLocaleString('de-DE')} {currencySymbol(currency)} {t('sinceDeposit')}
             </p>
           )}
         </div>
