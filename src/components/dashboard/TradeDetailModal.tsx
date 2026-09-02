@@ -5,6 +5,7 @@ import { X, ArrowLeft } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { currencySymbol } from '@/lib/currency'
 import TradeChart from './TradeChart'
+import { useTranslations } from 'next-intl'
 
 interface TradeDetailModalProps {
   trade: Trade
@@ -48,6 +49,7 @@ function FieldRow({ label, value, color }: { label: string; value: string; color
 }
 
 export default function TradeDetailModal({ trade, currency, onBack, onClose }: TradeDetailModalProps) {
+  const t = useTranslations('dashboard.tradeDetail')
   const sym = currencySymbol(currency)
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export default function TradeDetailModal({ trade, currency, onBack, onClose }: T
             style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 8, padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--text-2)', fontSize: 13, fontWeight: 600, flexShrink: 0 }}
           >
             <ArrowLeft size={14} />
-            Zurück
+            {t('back')}
           </button>
           <div style={{ flex: 1, minWidth: 0 }}>
             <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--text-1)' }}>{trade.instrument}</span>
@@ -93,28 +95,28 @@ export default function TradeDetailModal({ trade, currency, onBack, onClose }: T
 
           {/* Left: Trade Fields */}
           <div style={{ width: 280, flexShrink: 0, overflowY: 'auto', borderRight: '1px solid var(--border)', padding: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <FieldRow label="Net P&L" value={`${netPnl >= 0 ? '+' : '-'}${sym}${Math.abs(netPnl).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} color={netPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
-            <FieldRow label="Gross P&L" value={`${sym}${fmtNum(trade.pnl)}`} />
+            <FieldRow label={t('netPnl')} value={`${netPnl >= 0 ? '+' : '-'}${sym}${Math.abs(netPnl).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} color={netPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
+            <FieldRow label={t('grossPnl')} value={`${sym}${fmtNum(trade.pnl)}`} />
             <FieldRow
-              label="Side"
+              label={t('side')}
               value={trade.type === 'long' ? 'LONG' : 'SHORT'}
               color={trade.type === 'long' ? '#60a5fa' : '#fb923c'}
             />
-            <FieldRow label="Entry" value={fmtNum(trade.entry)} />
-            <FieldRow label="Exit" value={fmtNum(trade.exit)} />
-            <FieldRow label="Stop Loss" value={fmtNum(trade.sl)} />
-            <FieldRow label="Take Profit" value={fmtNum(trade.tp)} />
-            <FieldRow label="Size" value={fmtNum(trade.size)} />
-            <FieldRow label="Commission" value={trade.commission != null ? `${sym}${fmtNum(trade.commission)}` : '—'} />
-            <FieldRow label="Swap" value={trade.swap != null ? `${sym}${fmtNum(trade.swap)}` : '—'} />
-            <FieldRow label="R:R" value={trade.rr != null ? `${fmtNum(trade.rr)}R` : '—'} />
-            <FieldRow label="Laufzeit" value={fmtDuration(trade.date, trade.closeTime)} />
-            <FieldRow label="Eröffnet" value={fmtDateTime(trade.date)} />
-            <FieldRow label="Geschlossen" value={trade.closeTime ? fmtDateTime(trade.closeTime) : '—'} />
+            <FieldRow label={t('entry')} value={fmtNum(trade.entry)} />
+            <FieldRow label={t('exit')} value={fmtNum(trade.exit)} />
+            <FieldRow label={t('stopLoss')} value={fmtNum(trade.sl)} />
+            <FieldRow label={t('takeProfit')} value={fmtNum(trade.tp)} />
+            <FieldRow label={t('size')} value={fmtNum(trade.size)} />
+            <FieldRow label={t('commission')} value={trade.commission != null ? `${sym}${fmtNum(trade.commission)}` : '—'} />
+            <FieldRow label={t('swap')} value={trade.swap != null ? `${sym}${fmtNum(trade.swap)}` : '—'} />
+            <FieldRow label={t('rr')} value={trade.rr != null ? `${fmtNum(trade.rr)}R` : '—'} />
+            <FieldRow label={t('duration')} value={fmtDuration(trade.date, trade.closeTime)} />
+            <FieldRow label={t('opened')} value={fmtDateTime(trade.date)} />
+            <FieldRow label={t('closed')} value={trade.closeTime ? fmtDateTime(trade.closeTime) : '—'} />
 
             {trade.notes && (
               <div style={{ marginTop: 4, padding: '10px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>Notes</div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>{t('notes')}</div>
                 <p style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.5, margin: 0 }}>{trade.notes}</p>
               </div>
             )}
