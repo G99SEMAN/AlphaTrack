@@ -41,5 +41,53 @@
     "performance": "Performance",
     "network": "Netzwerk",
     "statistics": "Statistik"
+  },
+  "dashboard": {
+    "page": {
+      "title": "Dashboard",
+      "liveAccount": "Echtgeld",
+      "demoAccount": "Spielgeld",
+      "startCapital": "Startkapital",
+      "onCapital": "auf Kapital",
+      "emptyTitle": "Deine Journey beginnt hier",
+      "emptyDescription": "Du hast noch keine Trades eingetragen. Geh zu Trades und trage deinen ersten Trade ein."
+    },
+    "emptyProfile": {
+      "title": "Noch kein Profil vorhanden",
+      "description": "Erstelle dein erstes Profil um deine Trades zu verfolgen.",
+      "createButton": "Profil erstellen"
+    },
+    "dateRange": {
+      "total": "Gesamt",
+      "today": "Heute",
+      "thisWeek": "Diese Woche",
+      "thisMonth": "Dieser Monat",
+      "last30Days": "Letzte 30 Tage",
+      "lastMonth": "Letzter Monat",
+      "thisQuarter": "Dieses Quartal",
+      "thisYear": "Dieses Jahr",
+      "quickSelect": "Schnellauswahl",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "chooseEndDate": "Enddatum wählen …",
+      "reset": "Zurücksetzen",
+      "apply": "Anwenden",
+      "monthsShort": ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+      "daysShort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+    },
+    "kpi": {
+      "netPnl": "Net P&L",
+      "trades": "Trades",
+      "profitFactor": "Profit Factor",
+      "veryGood": "Sehr gut",
+      "good": "Gut",
+      "profitable": "Profitabel",
+      "loss": "Verlust",
+      "tradeWinRate": "Trade Win %",
+      "open": "offen",
+      "allClosed": "Alle geschlossen",
+      "avgWinLossTrade": "Avg Win / Loss Trade",
+      "noDataYet": "Noch keine Daten"
+    }
   }
 }
