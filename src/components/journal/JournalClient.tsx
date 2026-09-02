@@ -14,6 +14,7 @@ import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
 import ExportModal from './ExportModal'
 import BotFilterDropdown, { MANUAL_FILTER_VALUE } from './BotFilterDropdown'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: Trade[]
@@ -29,6 +30,7 @@ type FilterDir = 'all' | 'long' | 'short'
 type SortKey = 'date' | 'pnl' | 'instrument'
 
 export default function JournalClient({ trades: initialTrades, strategies, currency, startCapital, broker, bots = [] }: Props) {
+  const t = useTranslations('journal.client')
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
   const [showModal, setShowModal] = useState(false)
   const [showImport, setShowImport] = useState(false)
@@ -137,23 +139,23 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
   const summaryCards = [
     {
-      label: 'Gesamt P&L',
+      label: t('summaryTotalPnl'),
       value: `${totalPnl >= 0 ? '+' : ''}${totalPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} ${currencySymbol(currency)}`,
       color: totalPnl >= 0 ? 'var(--green)' : 'var(--red)',
     },
     {
-      label: 'Win Rate',
+      label: t('summaryWinRate'),
       value: `${winRate}%`,
       color: winRate >= 50 ? 'var(--green)' : 'var(--red)',
     },
     {
-      label: 'Trades gesamt',
+      label: t('summaryTradesTotal'),
       value: `${allClosedCount} / ${trades.length}`,
       color: 'var(--text-1)',
-      sub: 'geschlossen / alle',
+      sub: t('summaryTradesSub'),
     },
     {
-      label: 'Offene Trades',
+      label: t('summaryOpenTrades'),
       value: String(openCount),
       color: openCount > 0 ? 'var(--accent)' : 'var(--text-2)',
     },
@@ -205,7 +207,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
             <input
               value={search}
               onChange={e => { setSearch(e.target.value); resetPage() }}
-              placeholder="Instrument, Tag oder Notiz suchen..."
+              placeholder={t('searchPlaceholder')}
               className="flex-1 text-sm bg-transparent outline-none"
               style={{ color: 'var(--text-1)' }}
             />
@@ -227,7 +229,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                   border: `1px solid ${filterStatus === s ? 'var(--accent)' : 'transparent'}`,
                 }}
               >
-                {s === 'all' ? 'Alle' : 'Abgebr.'}
+                {s === 'all' ? t('filterAll') : t('filterCancelled')}
               </button>
             ))}
 
@@ -236,9 +238,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
             {/* Richtungsfilter */}
             {([
-              { val: 'all', label: 'Beide' },
-              { val: 'long', label: 'Long' },
-              { val: 'short', label: 'Short' },
+              { val: 'all', label: t('dirBoth') },
+              { val: 'long', label: t('dirLong') },
+              { val: 'short', label: t('dirShort') },
             ] as { val: FilterDir; label: string }[]).map(({ val, label }) => (
               <button
                 key={val}
@@ -287,7 +289,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
               >
                 <Download size={13} />
-                <span className="hidden sm:inline">Exportieren</span>
+                <span className="hidden sm:inline">{t('exportBtn')}</span>
               </button>
               <button
                 onClick={() => setShowImport(true)}
@@ -301,7 +303,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
               >
                 <Upload size={13} />
-                <span className="hidden sm:inline">Import</span>
+                <span className="hidden sm:inline">{t('importBtn')}</span>
               </button>
               <button
                 onClick={() => setShowModal(true)}
@@ -311,7 +313,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
               >
                 <Plus size={14} />
-                Trade
+                {t('addTradeBtn')}
               </button>
             </div>
           </div>
@@ -326,18 +328,18 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
           <div className="w-8 shrink-0" />
           {/* Instrument */}
           <button onClick={() => toggleSort('instrument')} className="flex-1 min-w-0 text-left cursor-pointer hover:text-inherit transition-colors">
-            Instrument {sortKey === 'instrument' ? (sortAsc ? '↑' : '↓') : ''}
+            {t('colInstrument')} {sortKey === 'instrument' ? (sortAsc ? '↑' : '↓') : ''}
           </button>
           {/* Status - min-w passt zu StatusBadge "Geschlossen" */}
-          <div className="shrink-0" style={{ minWidth: 88 }}>Status</div>
+          <div className="shrink-0" style={{ minWidth: 88 }}>{t('colStatus')}</div>
           {/* Einstieg */}
-          <div className="text-right shrink-0" style={{ minWidth: 70 }}>Einstieg</div>
+          <div className="text-right shrink-0" style={{ minWidth: 70 }}>{t('colEntry')}</div>
           {/* P&L */}
           <button onClick={() => toggleSort('pnl')} className="text-right shrink-0 cursor-pointer hover:text-inherit transition-colors" style={{ minWidth: 80 }}>
-            P&L {sortKey === 'pnl' ? (sortAsc ? '↑' : '↓') : ''}
+            {t('colPnl')} {sortKey === 'pnl' ? (sortAsc ? '↑' : '↓') : ''}
           </button>
           {/* RR */}
-          <div className="hidden lg:block text-right shrink-0" style={{ minWidth: 50 }}>RR</div>
+          <div className="hidden lg:block text-right shrink-0" style={{ minWidth: 50 }}>{t('colRR')}</div>
           {/* Actions Platzhalter: 3× w-7 (28px) + 2× gap-1 (4px) = 92px */}
           <div className="shrink-0" style={{ width: 92 }} />
           {/* Expand-Icon Platzhalter */}
@@ -349,7 +351,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
           <div className="flex flex-col items-center justify-center py-16 gap-3">
             <BookOpen size={36} style={{ color: 'var(--text-3)', opacity: 0.4 }} />
             <p className="text-sm font-medium" style={{ color: 'var(--text-3)' }}>
-              {trades.length === 0 ? 'Noch keine Trades eingetragen' : 'Keine Trades mit diesen Filtern'}
+              {trades.length === 0 ? t('noTradesAtAll') : t('noTradesFiltered')}
             </p>
             {trades.length === 0 && (
               <button
@@ -358,7 +360,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                 style={{ background: 'var(--accent)', color: '#fff' }}
               >
                 <Plus size={14} />
-                Ersten Trade hinzufugen
+                {t('addFirstTrade')}
               </button>
             )}
           </div>
@@ -378,9 +380,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
           >
             <span className="text-xs">
               {filtered.length === trades.length
-                ? `${trades.length} Trades`
-                : `${filtered.length} von ${trades.length} Trades`}
-              {totalPages > 1 && ` · Seite ${safePage} / ${totalPages}`}
+                ? t('tradesCountAll', { count: trades.length })
+                : t('tradesCountFiltered', { filteredCount: filtered.length, totalCount: trades.length })}
+              {totalPages > 1 && ` · ${t('pageOf', { page: safePage, total: totalPages })}`}
             </span>
             {totalPages > 1 && (
               <div className="flex items-center gap-1">
@@ -395,7 +397,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                     opacity: safePage === 1 ? 0.5 : 1,
                   }}
                 >
-                  Zurück
+                  {t('prevPage')}
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1)
                   .filter(p => p === 1 || p === totalPages || Math.abs(p - safePage) <= 2)
@@ -424,7 +426,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                     opacity: safePage === totalPages ? 0.5 : 1,
                   }}
                 >
-                  Weiter
+                  {t('nextPage')}
                 </button>
               </div>
             )}
