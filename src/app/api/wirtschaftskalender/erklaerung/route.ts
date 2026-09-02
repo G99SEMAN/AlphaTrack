@@ -35,7 +35,28 @@ function saveCache(data: Record<string, EventExplanation>): void {
   }
 }
 
-async function fetchFromClaude(title: string, country: string): Promise<EventExplanation> {
+function buildPrompt(title: string, country: string, lang: 'de' | 'en'): string {
+  if (lang === 'en') {
+    return `Explain the economic indicator "${title}" (currency: ${country}) for a forex trader in English. Respond ONLY with a JSON object (no markdown):
+{
+  "name": "Full name",
+  "zusammenfassung": "What is measured (1-2 sentences)",
+  "warum_wichtig": "Why it matters for forex traders (1-2 sentences)",
+  "einfluss": "Better than expected: X. Worse than expected: Y.",
+  "kategorie": "Employment/Inflation/Monetary Policy/Economic Growth/Trade/Sentiment/Real Estate/Commodities"
+}`
+  }
+  return `Erkläre den Wirtschaftsindikator "${title}" (Währung: ${country}) für einen Forex-Trader auf Deutsch. Antworte NUR mit einem JSON-Objekt (kein Markdown):
+{
+  "name": "Vollständiger Name",
+  "zusammenfassung": "Was wird gemessen (1-2 Sätze)",
+  "warum_wichtig": "Warum wichtig für Forex-Trader (1-2 Sätze)",
+  "einfluss": "Besser als erwartet: X. Schlechter als erwartet: Y.",
+  "kategorie": "Arbeitsmarkt/Inflation/Geldpolitik/Wirtschaftswachstum/Handel/Stimmung/Immobilien/Rohstoffe"
+}`
+}
+
+async function fetchFromClaude(title: string, country: string, lang: 'de' | 'en'): Promise<EventExplanation> {
   const { default: Anthropic } = await import('@anthropic-ai/sdk')
   const client = new Anthropic()
 
@@ -44,14 +65,7 @@ async function fetchFromClaude(title: string, country: string): Promise<EventExp
     max_tokens: 400,
     messages: [{
       role: 'user',
-      content: `Erkläre den Wirtschaftsindikator "${title}" (Währung: ${country}) für einen Forex-Trader auf Deutsch. Antworte NUR mit einem JSON-Objekt (kein Markdown):
-{
-  "name": "Vollständiger Name",
-  "zusammenfassung": "Was wird gemessen (1-2 Sätze)",
-  "warum_wichtig": "Warum wichtig für Forex-Trader (1-2 Sätze)",
-  "einfluss": "Besser als erwartet: X. Schlechter als erwartet: Y.",
-  "kategorie": "Arbeitsmarkt/Inflation/Geldpolitik/Wirtschaftswachstum/Handel/Stimmung/Immobilien/Rohstoffe"
-}`
+      content: buildPrompt(title, country, lang)
     }]
   })
 
@@ -66,15 +80,17 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const title = searchParams.get('title')?.trim().toLowerCase() ?? ''
   const country = searchParams.get('country') ?? ''
+  const lang: 'de' | 'en' = searchParams.get('lang') === 'en' ? 'en' : 'de'
 
   if (!title) {
     return NextResponse.json({ explanation: null, error: 'Kein Titel' }, { status: 400 })
   }
 
+  const cacheKey = `${lang}:${title}`
   const cache = loadCache()
 
-  if (cache[title]) {
-    return NextResponse.json({ explanation: cache[title], source: 'cache' })
+  if (cache[cacheKey]) {
+    return NextResponse.json({ explanation: cache[cacheKey], source: 'cache' })
   }
 
   if (!getApiKey('ANTHROPIC_API_KEY')) {
@@ -83,8 +99,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const explanation = await fetchFromClaude(title, country)
-    cache[title] = explanation
+    const explanation = await fetchFromClaude(title, country, lang)
+    cache[cacheKey] = explanation
     saveCache(cache)
     return NextResponse.json({ explanation, source: 'ai' })
   } catch (e) {
