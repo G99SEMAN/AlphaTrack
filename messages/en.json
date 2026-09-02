@@ -315,7 +315,7 @@
       "title": "Open Positions",
       "noPositions": "No open positions",
       "noBridge": "No bridge connected",
-      "closeTooltipDisabled": "Enable trading lock",
+      "closeTooltipDisabled": "Unlock trading first",
       "closeTooltipEnabled": "Close position"
     },
     "tradeModal": {
