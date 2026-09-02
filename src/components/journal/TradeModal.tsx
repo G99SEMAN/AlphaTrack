@@ -7,6 +7,7 @@ import { X, TrendingUp, TrendingDown, Loader2, ImagePlus, Trash2 } from 'lucide-
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { createTradeAction, updateTradeAction } from '@/lib/actions'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trade?: Trade
@@ -18,6 +19,7 @@ interface Props {
 const INSTRUMENTS = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD', 'USD/CHF', 'NZD/USD', 'USD/CAD', 'EUR/GBP', 'XAU/USD', 'BTC/USDT']
 
 export default function TradeModal({ trade, strategies, broker, onClose }: Props) {
+  const t = useTranslations('journal.tradeModal')
   const [mounted, setMounted] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [saveError, setSaveError] = useState<string | null>(null)
@@ -101,7 +103,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
         }
         onClose()
       } catch {
-        setSaveError('Trade konnte nicht gespeichert werden.')
+        setSaveError(t('saveError'))
       }
     })
   }
@@ -135,10 +137,10 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
         >
           <div>
             <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>
-              {isEdit ? 'Trade bearbeiten' : 'Neuer Trade'}
+              {isEdit ? t('titleEdit') : t('titleNew')}
             </h2>
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
-              {isEdit ? `ID: ${trade!.id}` : 'Trade eintragen und speichern'}
+              {isEdit ? t('subtitleEditId', { id: trade!.id }) : t('subtitleNew')}
             </p>
           </div>
           <button
@@ -162,7 +164,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* Richtung Toggle */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Richtung
+                {t('directionLabel')}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 {(['long', 'short'] as const).map(d => (
@@ -184,7 +186,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                     }}
                   >
                     {d === 'long' ? <TrendingUp size={15} /> : <TrendingDown size={15} />}
-                    {d === 'long' ? 'Long' : 'Short'}
+                    {d === 'long' ? t('long') : t('short')}
                   </button>
                 ))}
               </div>
@@ -194,7 +196,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {strategies.length > 0 && (
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Strategie
+                  {t('strategyLabel')}
                 </label>
                 <select
                   name="strategyId"
@@ -202,7 +204,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                   className={inputClass}
                   style={{ ...inputStyle, cursor: 'pointer' }}
                 >
-                  <option value="">Keine Strategie</option>
+                  <option value="">{t('noStrategy')}</option>
                   {strategies.map(s => (
                     <option key={s.id} value={s.id}>
                       {s.name} ({s.timeframe})
@@ -216,7 +218,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Öffnungszeit
+                  {t('openTimeLabel')}
                 </label>
                 <input
                   name="date"
@@ -229,13 +231,13 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Instrument
+                  {t('instrumentLabel')}
                 </label>
                 <input
                   name="instrument"
                   list="instruments-list"
                   defaultValue={trade?.instrument ?? ''}
-                  placeholder="z.B. EUR/USD"
+                  placeholder={t('instrumentPlaceholder')}
                   required
                   className={inputClass}
                   style={inputStyle}
@@ -250,7 +252,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {status === 'closed' && (
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Schließzeit
+                  {t('closeTimeLabel')}
                 </label>
                 <input
                   name="closeTime"
@@ -266,7 +268,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Einstieg
+                  {t('entryLabel')}
                 </label>
                 <input
                   name="entry"
@@ -282,7 +284,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Ausstieg
+                  {t('exitLabel')}
                 </label>
                 <input
                   name="exit"
@@ -296,7 +298,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Grosse / Lots
+                  {t('sizeLabel')}
                 </label>
                 <input
                   name="size"
@@ -316,7 +318,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Take Profit
+                  {t('takeProfitLabel')}
                 </label>
                 <input
                   name="tp"
@@ -331,7 +333,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Stop Loss
+                  {t('stopLossLabel')}
                 </label>
                 <input
                   name="sl"
@@ -346,7 +348,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Risk/Reward
+                  {t('riskRewardLabel')}
                 </label>
                 <input type="hidden" name="rr" value={computedRR ?? ''} />
                 <div
@@ -363,7 +365,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                   }}
                 >
                   {computedRR === null ? (
-                    <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>Automatisch</span>
+                    <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>{t('automatic')}</span>
                   ) : (
                     <>
                       <span>1 : {computedRR}</span>
@@ -376,7 +378,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* P&L */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                P&L (Brutto)
+                {t('pnlLabel')}
               </label>
               <input
                 name="pnl"
@@ -404,7 +406,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                       border: outcome === 'win' ? '1px solid rgba(0,217,126,0.4)' : '1px solid var(--border)',
                     }}
                   >
-                    WIN
+                    {t('win')}
                   </button>
                   <button
                     type="button"
@@ -416,7 +418,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                       border: outcome === 'loss' ? '1px solid rgba(255,69,96,0.4)' : '1px solid var(--border)',
                     }}
                   >
-                    LOSS
+                    {t('loss')}
                   </button>
                 </div>
               )}
@@ -426,7 +428,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className={labelClass} style={{ color: 'var(--text-3)', marginBottom: 0 }}>
-                  Kosten & Gebühren
+                  {t('costsLabel')}
                 </label>
                 {isBlackBull && (
                   <button
@@ -435,13 +437,13 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                     className="text-xs px-2 py-1 rounded-md font-semibold cursor-pointer transition-all"
                     style={{ background: 'var(--accent-bg)', color: 'var(--accent)', border: '1px solid var(--accent)' }}
                   >
-                    BlackBull Auto ($6/Lot)
+                    {t('blackBullAuto')}
                   </button>
                 )}
               </div>
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Kommission</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('commissionLabel')}</p>
                   <input
                     name="commission"
                     type="number"
@@ -454,7 +456,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                   />
                 </div>
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Swap / Overnight</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('swapLabel')}</p>
                   <input
                     name="swap"
                     type="number"
@@ -467,7 +469,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                   />
                 </div>
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Spread-Kosten</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('spreadCostLabel')}</p>
                   <input
                     name="spreadCost"
                     type="number"
@@ -482,7 +484,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               </div>
               {(commission || swap || spreadCost) && (
                 <p className="text-xs mt-1.5 font-mono" style={{ color: 'var(--red)' }}>
-                  Gesamt: -{(
+                  {t('totalCosts')} -{(
                     (parseFloat(commission) || 0) +
                     (parseFloat(swap) || 0) +
                     (parseFloat(spreadCost) || 0)
@@ -494,13 +496,13 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* Status */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Status
+                {t('statusLabel')}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {([
-                  { val: 'open', label: 'Offen', color: 'var(--accent)' },
-                  { val: 'closed', label: 'Geschlossen', color: 'var(--green)' },
-                  { val: 'cancelled', label: 'Abgebrochen', color: 'var(--text-3)' },
+                  { val: 'open', label: t('statusOpen'), color: 'var(--accent)' },
+                  { val: 'closed', label: t('statusClosed'), color: 'var(--green)' },
+                  { val: 'cancelled', label: t('statusCancelled'), color: 'var(--text-3)' },
                 ] as const).map(({ val, label, color }) => (
                   <button
                     key={val}
@@ -522,7 +524,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* Tags */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Tags <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>(Komma-getrennt)</span>
+                {t('tagsLabel')} <span style={{ color: 'var(--text-3)', fontWeight: 400 }}>{t('tagsHint')}</span>
               </label>
               <input
                 name="tags"
@@ -537,7 +539,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* Screenshot */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Chart Screenshot
+                {t('screenshotLabel')}
               </label>
               <input
                 ref={fileInputRef}
@@ -564,7 +566,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                       style={{ background: 'rgba(0,0,0,0.7)', color: '#fff', backdropFilter: 'blur(4px)' }}
                     >
                       <ImagePlus size={12} />
-                      Ersetzen
+                      {t('replaceBtn')}
                     </button>
                     <button
                       type="button"
@@ -596,7 +598,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
                   }}
                 >
                   <ImagePlus size={20} />
-                  <span className="text-xs font-medium">Chart-Screenshot hochladen</span>
+                  <span className="text-xs font-medium">{t('uploadPrompt')}</span>
                   <span className="text-xs opacity-60">PNG, JPG, WebP</span>
                 </button>
               )}
@@ -605,12 +607,12 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
             {/* Notizen */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Notizen
+                {t('notesLabel')}
               </label>
               <textarea
                 name="notes"
                 defaultValue={trade?.notes ?? ''}
-                placeholder="Setup-Beschreibung, Gedanken, Lessons Learned..."
+                placeholder={t('notesPlaceholder')}
                 rows={3}
                 className={inputClass + ' resize-none'}
                 style={inputStyle}
@@ -629,7 +631,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all"
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
-              Abbrechen
+              {t('cancelBtn')}
             </button>
             <button
               type="submit"
@@ -642,7 +644,7 @@ export default function TradeModal({ trade, strategies, broker, onClose }: Props
               }}
             >
               {isPending && <Loader2 size={14} className="animate-spin" />}
-              {isEdit ? 'Speichern' : 'Trade hinzufugen'}
+              {isEdit ? t('saveBtn') : t('addBtn')}
             </button>
           </div>
           {saveError && (
