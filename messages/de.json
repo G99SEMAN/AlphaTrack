@@ -144,6 +144,41 @@
       "unsupported": "Chart für dieses Instrument wird aktuell nicht unterstützt.",
       "noData": "Für diesen Zeitraum sind keine Kursdaten verfügbar.",
       "error": "Kursdaten konnten nicht geladen werden."
+    },
+    "alphaScore": {
+      "title": "Alpha Score",
+      "overallTooltip": "Gewichteter Mix aus 6 Kennzahlen (0-100): Profit Factor 25%, Recovery Factor 20%, Max Drawdown 20%, Konsistenz 15%, Win Rate 10%, Avg Win/Loss-Ratio 10%. Risiko & Konsistenz zählen zusammen 55%, reine Trefferquote nur 45% — ein hoher Score steht für nachhaltige, kontrollierte Performance statt bloß viele Gewinner-Trades.",
+      "yourScore": "Dein Alpha Score",
+      "provisional": "Vorläufig · {count}/{total} Trades",
+      "provisionalTitle": "Nur {count}/{total} geschlossene Trades — Score noch statistisch unsicher",
+      "axisWinRate": "Win %",
+      "axisWinRateTooltip": "Anteil gewonnener Trades (Gewichtung 10%). 30% oder weniger = 0 Punkte, 70% oder mehr = 100 Punkte. Steigt mit jedem Gewinn-Trade, sinkt mit jedem Verlust-Trade. Bei Strategien mit hohem Chance-Risiko-Verhältnis ist eine niedrige Win Rate normal und kein Warnsignal.",
+      "axisProfitFactor": "Profit Factor",
+      "axisProfitFactorTooltip": "Bruttogewinn ÷ Bruttoverlust (Gewichtung 25%, wichtigste Einzelkennzahl). PF 0.5 oder weniger = 0 Punkte, PF 3.0 oder mehr = 100 Punkte. Bildet Trefferquote und Risiko-Ertrags-Verhältnis gemeinsam ab — jeder Trade wirkt sich direkt darauf aus.",
+      "axisAvgWinLoss": "Avg Win/Loss",
+      "axisAvgWinLossTooltip": "Verhältnis von Ø-Gewinn zu Ø-Verlust (Gewichtung 10%). 1:1 = 33 Punkte, 3:1 oder mehr = 100 Punkte. Steigt, wenn Gewinner im Schnitt größer sind als Verlierer, z. B. durch Trailing-Stops oder frühzeitiges Schneiden von Verlusten.",
+      "axisRecovery": "Recovery",
+      "axisRecoveryTooltip": "Recovery Factor = Netto-Gewinn ÷ größter Drawdown in € (Gewichtung 20%). Zeigt, wie gut sich das Konto von Verlustphasen erholt. RF 0 = 0 Punkte, RF 3 oder mehr = 100 Punkte. Verschlechtert sich durch tiefe Drawdowns, verbessert sich durch stetiges Gewinnwachstum.",
+      "axisMaxDrawdown": "Max DD",
+      "axisMaxDrawdownTooltip": "Größter Rückgang vom bisherigen Kontohoch in Prozent (Gewichtung 20%). 0% Drawdown = 100 Punkte, ab 20% Drawdown = 0 Punkte. Jede Verlustserie, die einen neuen Tiefpunkt unter dem letzten Hoch erzeugt, verschlechtert diesen Wert dauerhaft.",
+      "axisConsistency": "Konsistenz",
+      "axisConsistencyTooltip": "Anteil profitabler Handelstage an allen Handelstagen (Gewichtung 15%). Ein Tag zählt als profitabel, wenn die Summe aller Trades an diesem Tag positiv ist. Viele einzelne Verlusttage verschlechtern diesen Wert, auch wenn die Gesamtbilanz positiv ist."
+    },
+    "equityChart": {
+      "balance": "Kontostand",
+      "sinceDeposit": "seit Deposit"
+    },
+    "accountBalance": {
+      "title": "Account Balance",
+      "balance": "Kontostand",
+      "deposits": "Einzahlungen"
+    },
+    "recentTrades": {
+      "recentTab": "Letzte Trades",
+      "openTab": "Offene Pos. ({count})",
+      "noClosedTrades": "Keine geschlossenen Trades",
+      "noOpenPositions": "Keine offenen Positionen",
+      "viewAll": "Alle Trades anzeigen →"
     }
   }
 }

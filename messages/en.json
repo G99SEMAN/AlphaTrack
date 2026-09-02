@@ -144,6 +144,41 @@
       "unsupported": "Chart is currently not supported for this instrument.",
       "noData": "No price data available for this period.",
       "error": "Failed to load price data."
+    },
+    "alphaScore": {
+      "title": "Alpha Score",
+      "overallTooltip": "Weighted mix of 6 metrics (0-100): Profit Factor 25%, Recovery Factor 20%, Max Drawdown 20%, Consistency 15%, Win Rate 10%, Avg Win/Loss Ratio 10%. Risk & consistency together account for 55%, raw hit rate only 45% — a high score reflects sustainable, controlled performance rather than just a lot of winning trades.",
+      "yourScore": "Your Alpha Score",
+      "provisional": "Provisional · {count}/{total} trades",
+      "provisionalTitle": "Only {count}/{total} closed trades — score still statistically uncertain",
+      "axisWinRate": "Win %",
+      "axisWinRateTooltip": "Share of winning trades (weighting 10%). 30% or less = 0 points, 70% or more = 100 points. Rises with every winning trade, falls with every losing trade. For strategies with a high reward-risk ratio, a low win rate is normal and not a warning sign.",
+      "axisProfitFactor": "Profit Factor",
+      "axisProfitFactorTooltip": "Gross profit ÷ gross loss (weighting 25%, the single most important metric). PF 0.5 or less = 0 points, PF 3.0 or more = 100 points. Captures hit rate and risk-reward ratio together — every trade directly affects it.",
+      "axisAvgWinLoss": "Avg Win/Loss",
+      "axisAvgWinLossTooltip": "Ratio of average win to average loss (weighting 10%). 1:1 = 33 points, 3:1 or more = 100 points. Rises when winners are on average larger than losers, e.g. through trailing stops or cutting losses early.",
+      "axisRecovery": "Recovery",
+      "axisRecoveryTooltip": "Recovery Factor = net profit ÷ largest drawdown in € (weighting 20%). Shows how well the account recovers from losing phases. RF 0 = 0 points, RF 3 or more = 100 points. Worsens with deep drawdowns, improves with steady profit growth.",
+      "axisMaxDrawdown": "Max DD",
+      "axisMaxDrawdownTooltip": "Largest decline from the account's prior high, in percent (weighting 20%). 0% drawdown = 100 points, 20% drawdown or more = 0 points. Any losing streak that creates a new low below the last high permanently worsens this value.",
+      "axisConsistency": "Consistency",
+      "axisConsistencyTooltip": "Share of profitable trading days out of all trading days (weighting 15%). A day counts as profitable if the sum of all trades on that day is positive. Many individual losing days worsen this value, even if the overall balance is positive."
+    },
+    "equityChart": {
+      "balance": "Balance",
+      "sinceDeposit": "since deposit"
+    },
+    "accountBalance": {
+      "title": "Account Balance",
+      "balance": "Balance",
+      "deposits": "Deposits"
+    },
+    "recentTrades": {
+      "recentTab": "Recent Trades",
+      "openTab": "Open Pos. ({count})",
+      "noClosedTrades": "No closed trades",
+      "noOpenPositions": "No open positions",
+      "viewAll": "View all trades →"
     }
   }
 }
