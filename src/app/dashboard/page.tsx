@@ -8,6 +8,7 @@ import EmptyProfileState from '@/components/dashboard/EmptyProfileState'
 import DateRangePicker from '@/components/dashboard/DateRangePicker'
 import { StaggerWrapper } from '@/components/dashboard/StaggerWrapper'
 import { Banknote, Gamepad2 } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 
 const KpiStrip = dynamic(() => import('@/components/dashboard/KpiStrip'), {
   loading: () => <div style={{ height: 100 }} />,
@@ -34,6 +35,7 @@ export default async function DashboardPage({
   searchParams: Promise<{ period?: string; from?: string; to?: string }>
 }) {
   const params = await searchParams
+  const t = await getTranslations('dashboard.page')
   const period = params?.period ?? 'gesamt'
   const from = params?.from
   const to = params?.to
@@ -77,7 +79,7 @@ export default async function DashboardPage({
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
-                Dashboard
+                {t('title')}
               </h1>
               <span
                 className="text-xs px-2 py-0.5 rounded-full font-medium flex items-center gap-1 shrink-0"
@@ -87,11 +89,11 @@ export default async function DashboardPage({
                 }}
               >
                 <TypeIcon size={10} />
-                {activeProfile.type === 'live' ? 'Echtgeld' : 'Spielgeld'}
+                {activeProfile.type === 'live' ? t('liveAccount') : t('demoAccount')}
               </span>
             </div>
             <p className="text-sm md:truncate" style={{ color: 'var(--text-3)' }}>
-              {activeProfile.broker} · Startkapital:{' '}
+              {activeProfile.broker} · {t('startCapital')}:{' '}
               <span className="font-mono font-semibold" style={{ color: 'var(--text-2)' }}>
                 {activeProfile.startCapital.toLocaleString('de-DE')} {activeProfile.currency}
               </span>
@@ -100,7 +102,7 @@ export default async function DashboardPage({
                   className="ml-2 font-mono text-xs"
                   style={{ color: capitalReturn >= 0 ? 'var(--green)' : 'var(--red)' }}
                 >
-                  ({capitalReturn >= 0 ? '+' : ''}{capitalReturn.toFixed(1)}% auf Kapital)
+                  ({capitalReturn >= 0 ? '+' : ''}{capitalReturn.toFixed(1)}% {t('onCapital')})
                 </span>
               )}
             </p>
@@ -190,10 +192,10 @@ export default async function DashboardPage({
               <TypeIcon size={22} style={{ color: 'var(--accent)' }} />
             </div>
             <h3 className="font-semibold mb-2" style={{ color: 'var(--text-1)' }}>
-              Deine Journey beginnt hier
+              {t('emptyTitle')}
             </h3>
             <p className="text-sm max-w-xs" style={{ color: 'var(--text-2)' }}>
-              Du hast noch keine Trades eingetragen. Geh zu Trades und trage deinen ersten Trade ein.
+              {t('emptyDescription')}
             </p>
           </div>
         )}
