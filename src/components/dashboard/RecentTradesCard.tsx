@@ -7,6 +7,7 @@ import { Trade } from '@/types/trade'
 import { BotEntry } from '@/types/bot'
 import { currencySymbol } from '@/lib/currency'
 import { getBotColor } from '@/lib/bot-colors'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: Trade[]
@@ -17,6 +18,7 @@ interface Props {
 const ROWS = 6
 
 export default function RecentTradesCard({ trades, currency, strategyBots }: Props) {
+  const t = useTranslations('dashboard.recentTrades')
   const [tab, setTab] = useState<'recent' | 'open'>('recent')
   const sym = currencySymbol(currency)
 
@@ -56,21 +58,21 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
     >
       {/* Tabs */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)' }}>
-        {(['recent', 'open'] as const).map(t => (
+        {(['recent', 'open'] as const).map(tabKey => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={tabKey}
+            onClick={() => setTab(tabKey)}
             style={{
               flex: 1, padding: '10px 8px',
               fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
               background: 'none', border: 'none', cursor: 'pointer',
-              color: tab === t ? 'var(--accent)' : 'var(--text-3)',
-              borderBottom: tab === t ? '2px solid var(--accent)' : '2px solid transparent',
+              color: tab === tabKey ? 'var(--accent)' : 'var(--text-3)',
+              borderBottom: tab === tabKey ? '2px solid var(--accent)' : '2px solid transparent',
               transition: 'color 0.15s',
               marginBottom: -1,
             }}
           >
-            {t === 'recent' ? 'Letzte Trades' : `Offene Pos. (${openTrades.length})`}
+            {tabKey === 'recent' ? t('recentTab') : t('openTab', { count: openTrades.length })}
           </button>
         ))}
       </div>
@@ -80,7 +82,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
         {tab === 'recent' ? (
           recentTrades.length === 0 ? (
             <p style={{ padding: '20px 16px', fontSize: 11, color: 'var(--text-3)', textAlign: 'center' }}>
-              Keine geschlossenen Trades
+              {t('noClosedTrades')}
             </p>
           ) : (
             recentTrades.map(t => {
@@ -128,7 +130,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
         ) : (
           openTrades.length === 0 ? (
             <p style={{ padding: '20px 16px', fontSize: 11, color: 'var(--text-3)', textAlign: 'center' }}>
-              Keine offenen Positionen
+              {t('noOpenPositions')}
             </p>
           ) : (
             openTrades.slice(0, ROWS).map(t => {
@@ -182,7 +184,7 @@ export default function RecentTradesCard({ trades, currency, strategyBots }: Pro
       {/* Footer */}
       <div style={{ padding: '8px 14px', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
         <Link href="/journal" style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
-          Alle Trades anzeigen →
+          {t('viewAll')}
         </Link>
       </div>
     </div>
