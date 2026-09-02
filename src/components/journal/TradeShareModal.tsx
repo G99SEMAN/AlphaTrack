@@ -6,6 +6,7 @@ import { X, Download, Loader2 } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import TradeShareCard, { VisibleSections } from './TradeShareCard'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trade: Trade
@@ -16,18 +17,22 @@ interface Props {
   onClose: () => void
 }
 
-const TOGGLES: { key: keyof VisibleSections; label: string }[] = [
-  { key: 'pnl',      label: 'P&L & Prozent' },
-  { key: 'prices',   label: 'Entry & Exit' },
-  { key: 'sltp',     label: 'Stop Loss & Take Profit' },
-  { key: 'rrLots',   label: 'Risk/Reward & Lots' },
-  { key: 'strategy', label: 'Strategie & Tags' },
-]
+function getToggles(t: ReturnType<typeof useTranslations<'journal.tradeShare'>>): { key: keyof VisibleSections; label: string }[] {
+  return [
+    { key: 'pnl',      label: t('togglePnl') },
+    { key: 'prices',   label: t('togglePrices') },
+    { key: 'sltp',     label: t('toggleSltp') },
+    { key: 'rrLots',   label: t('toggleRrLots') },
+    { key: 'strategy', label: t('toggleStrategy') },
+  ]
+}
 
 // Skalierungsfaktor für die Vorschau (Karte ist 400px breit)
 const PREVIEW_SCALE = 0.58
 
 export default function TradeShareModal({ trade, broker, currency, startCapital, strategies, onClose }: Props) {
+  const t = useTranslations('journal.tradeShare')
+  const toggles = getToggles(t)
   const captureRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState<VisibleSections>({
@@ -95,8 +100,8 @@ export default function TradeShareModal({ trade, broker, currency, startCapital,
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
           <div>
-            <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>Trade teilen</h2>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>Karte anpassen und als PNG speichern</p>
+            <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h2>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>{t('subtitle')}</p>
           </div>
           <button
             onClick={onClose}
@@ -111,10 +116,10 @@ export default function TradeShareModal({ trade, broker, currency, startCapital,
           {/* Toggles */}
           <div className="md:w-52 shrink-0 p-5" style={{ borderRight: '1px solid var(--border)' }}>
             <p className="text-xs font-semibold uppercase tracking-wide mb-4" style={{ color: 'var(--text-3)' }}>
-              Sichtbare Infos
+              {t('visibleInfoLabel')}
             </p>
             <div className="flex flex-col gap-3">
-              {TOGGLES.map(({ key, label }) => (
+              {toggles.map(({ key, label }) => (
                 <button
                   key={key}
                   type="button"
@@ -163,7 +168,7 @@ export default function TradeShareModal({ trade, broker, currency, startCapital,
             className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
             style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
           >
-            Abbrechen
+            {t('cancelBtn')}
           </button>
           <button
             onClick={handleDownload}
@@ -172,7 +177,7 @@ export default function TradeShareModal({ trade, broker, currency, startCapital,
             style={{ background: 'var(--accent)', color: '#fff', opacity: loading ? 0.7 : 1 }}
           >
             {loading ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-            {loading ? 'Wird erstellt...' : 'Als PNG speichern'}
+            {loading ? t('creatingBtn') : t('saveAsPngBtn')}
           </button>
         </div>
       </motion.div>
