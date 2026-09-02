@@ -7,6 +7,7 @@ import KalenderClient from '@/components/wirtschaftskalender/KalenderClient'
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import { fetchWirtschaftskalender } from '@/lib/wirtschaftskalender'
 import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
+import { getTranslations } from 'next-intl/server'
 
 export const metadata: Metadata = { title: 'Wirtschaftskalender - AlphaTrack' }
 
@@ -18,6 +19,8 @@ export default async function KalenderPage() {
 
   const activeProfile = getActiveProfile()
   if (!activeProfile) redirect('/setup')
+
+  const t = await getTranslations('kalender.page')
 
   let initialEvents: WirtschaftsEvent[] = []
   let initialFetchedAt = new Date().toISOString()
@@ -36,10 +39,10 @@ export default async function KalenderPage() {
       <main className="flex-1 min-w-0 p-4 md:p-6">
         <div className="mb-5">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>
-            Wirtschaftskalender
+            {t('title')}
           </h1>
           <p className="text-sm mt-0.5" style={{ color: 'var(--text-3)' }}>
-            Wichtige Termine und Wirtschaftsdaten - Diese &amp; Nächste Woche
+            {t('subtitle')}
           </p>
         </div>
 
