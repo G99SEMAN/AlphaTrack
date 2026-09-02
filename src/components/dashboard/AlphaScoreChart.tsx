@@ -4,6 +4,7 @@ import { memo, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from 'recharts'
 import InfoTooltip from '@/components/statistiken/InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   winRate: number        // 0-100
@@ -18,14 +19,11 @@ interface Props {
 
 const MIN_TRADES_FOR_FULL_SCORE = 20
 
-const OVERALL_TOOLTIP =
-  'Gewichteter Mix aus 6 Kennzahlen (0-100): Profit Factor 25%, Recovery Factor 20%, Max Drawdown 20%, Konsistenz 15%, Win Rate 10%, Avg Win/Loss-Ratio 10%. Risiko & Konsistenz zählen zusammen 55%, reine Trefferquote nur 45% — ein hoher Score steht für nachhaltige, kontrollierte Performance statt bloß viele Gewinner-Trades.'
-
 function clamp(v: number, min = 0, max = 100): number {
   return Math.max(min, Math.min(max, v))
 }
 
-export function computeAlphaScore(props: Props): {
+export function computeAlphaScore(props: Props, t: ReturnType<typeof useTranslations<'dashboard.alphaScore'>>): {
   scores: { axis: string; value: number; tooltip: string }[]
   overall: number
   tradeCount: number
@@ -74,30 +72,12 @@ export function computeAlphaScore(props: Props): {
 
   return {
     scores: [
-      {
-        axis: 'Win %', value: Math.round(winScore),
-        tooltip: 'Anteil gewonnener Trades (Gewichtung 10%). 30% oder weniger = 0 Punkte, 70% oder mehr = 100 Punkte. Steigt mit jedem Gewinn-Trade, sinkt mit jedem Verlust-Trade. Bei Strategien mit hohem Chance-Risiko-Verhältnis ist eine niedrige Win Rate normal und kein Warnsignal.',
-      },
-      {
-        axis: 'Profit Factor', value: Math.round(pfScore),
-        tooltip: 'Bruttogewinn ÷ Bruttoverlust (Gewichtung 25%, wichtigste Einzelkennzahl). PF 0.5 oder weniger = 0 Punkte, PF 3.0 oder mehr = 100 Punkte. Bildet Trefferquote und Risiko-Ertrags-Verhältnis gemeinsam ab — jeder Trade wirkt sich direkt darauf aus.',
-      },
-      {
-        axis: 'Avg Win/Loss', value: Math.round(wlScore),
-        tooltip: 'Verhältnis von Ø-Gewinn zu Ø-Verlust (Gewichtung 10%). 1:1 = 33 Punkte, 3:1 oder mehr = 100 Punkte. Steigt, wenn Gewinner im Schnitt größer sind als Verlierer, z. B. durch Trailing-Stops oder frühzeitiges Schneiden von Verlusten.',
-      },
-      {
-        axis: 'Recovery', value: Math.round(rfScore),
-        tooltip: 'Recovery Factor = Netto-Gewinn ÷ größter Drawdown in € (Gewichtung 20%). Zeigt, wie gut sich das Konto von Verlustphasen erholt. RF 0 = 0 Punkte, RF 3 oder mehr = 100 Punkte. Verschlechtert sich durch tiefe Drawdowns, verbessert sich durch stetiges Gewinnwachstum.',
-      },
-      {
-        axis: 'Max DD', value: Math.round(ddScore),
-        tooltip: 'Größter Rückgang vom bisherigen Kontohoch in Prozent (Gewichtung 20%). 0% Drawdown = 100 Punkte, ab 20% Drawdown = 0 Punkte. Jede Verlustserie, die einen neuen Tiefpunkt unter dem letzten Hoch erzeugt, verschlechtert diesen Wert dauerhaft.',
-      },
-      {
-        axis: 'Konsistenz', value: Math.round(consistencyScore),
-        tooltip: 'Anteil profitabler Handelstage an allen Handelstagen (Gewichtung 15%). Ein Tag zählt als profitabel, wenn die Summe aller Trades an diesem Tag positiv ist. Viele einzelne Verlusttage verschlechtern diesen Wert, auch wenn die Gesamtbilanz positiv ist.',
-      },
+      { axis: t('axisWinRate'), value: Math.round(winScore), tooltip: t('axisWinRateTooltip') },
+      { axis: t('axisProfitFactor'), value: Math.round(pfScore), tooltip: t('axisProfitFactorTooltip') },
+      { axis: t('axisAvgWinLoss'), value: Math.round(wlScore), tooltip: t('axisAvgWinLossTooltip') },
+      { axis: t('axisRecovery'), value: Math.round(rfScore), tooltip: t('axisRecoveryTooltip') },
+      { axis: t('axisMaxDrawdown'), value: Math.round(ddScore), tooltip: t('axisMaxDrawdownTooltip') },
+      { axis: t('axisConsistency'), value: Math.round(consistencyScore), tooltip: t('axisConsistencyTooltip') },
     ],
     overall: Math.round(overall),
     tradeCount,
@@ -141,7 +121,8 @@ function ScoreBar({ score }: { score: number }) {
 }
 
 function AlphaScoreChart(props: Props) {
-  const { scores, overall, tradeCount, isProvisional } = useMemo(() => computeAlphaScore(props), [props])
+  const t = useTranslations('dashboard.alphaScore')
+  const { scores, overall, tradeCount, isProvisional } = useMemo(() => computeAlphaScore(props, t), [props, t])
 
   const scoreColor = overall >= 70 ? 'var(--green)' : overall >= 45 ? 'var(--amber)' : 'var(--red)'
 
@@ -166,9 +147,9 @@ function AlphaScoreChart(props: Props) {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 4 }}>
         <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
-          Alpha Score
+          {t('title')}
         </p>
-        <InfoTooltip text={OVERALL_TOOLTIP} />
+        <InfoTooltip text={t('overallTooltip')} />
       </div>
 
       {/* Radar Chart */}
@@ -199,17 +180,17 @@ function AlphaScoreChart(props: Props) {
       {/* Score number + bar */}
       <div style={{ marginTop: 4 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 8, flexWrap: 'wrap' }}>
-          <span style={{ fontSize: 9, color: 'var(--text-3)', fontWeight: 600 }}>Dein Alpha Score</span>
+          <span style={{ fontSize: 9, color: 'var(--text-3)', fontWeight: 600 }}>{t('yourScore')}</span>
           {isProvisional && (
             <span
-              title={`Nur ${tradeCount}/${MIN_TRADES_FOR_FULL_SCORE} geschlossene Trades — Score noch statistisch unsicher`}
+              title={t('provisionalTitle', { count: tradeCount, total: MIN_TRADES_FOR_FULL_SCORE })}
               style={{
                 fontSize: 8, fontWeight: 700, color: 'var(--amber)',
                 background: 'rgba(245,158,11,0.12)', borderRadius: 99,
                 padding: '1px 6px', letterSpacing: '0.02em',
               }}
             >
-              Vorläufig · {tradeCount}/{MIN_TRADES_FOR_FULL_SCORE} Trades
+              {t('provisional', { count: tradeCount, total: MIN_TRADES_FOR_FULL_SCORE })}
             </span>
           )}
         </div>
