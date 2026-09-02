@@ -3,10 +3,12 @@
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Plus, BarChart2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import ProfileSetupModal from '@/components/profile/ProfileSetupModal'
 
 export default function EmptyProfileState() {
   const [showModal, setShowModal] = useState(false)
+  const t = useTranslations('dashboard.emptyProfile')
 
   return (
     <>
@@ -22,10 +24,10 @@ export default function EmptyProfileState() {
             <BarChart2 size={26} style={{ color: 'var(--accent)' }} />
           </div>
           <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-1)' }}>
-            Noch kein Profil vorhanden
+            {t('title')}
           </h3>
           <p className="text-sm mb-6" style={{ color: 'var(--text-2)' }}>
-            Erstelle dein erstes Profil um deine Trades zu verfolgen.
+            {t('description')}
           </p>
           <button
             onClick={() => setShowModal(true)}
@@ -33,7 +35,7 @@ export default function EmptyProfileState() {
             style={{ background: 'var(--accent)', color: '#fff' }}
           >
             <Plus size={15} />
-            Profil erstellen
+            {t('createButton')}
           </button>
         </div>
       </div>
