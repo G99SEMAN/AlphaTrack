@@ -3,6 +3,7 @@
 import { useMemo, useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { currencySymbol } from '@/lib/currency'
+import { useTranslations } from 'next-intl'
 
 interface DataPoint { date: string; value: number }
 
@@ -28,6 +29,7 @@ function CustomTooltip({ active, payload, label, sym }: { active?: boolean; payl
 }
 
 export default function AccountBalanceCard({ equityCurve, depositCurve, startCapital, currency }: Props) {
+  const t = useTranslations('dashboard.accountBalance')
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
   const sym = currencySymbol(currency)
@@ -58,7 +60,7 @@ export default function AccountBalanceCard({ equityCurve, depositCurve, startCap
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
         <div>
           <p style={{ fontSize: 8, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: 3 }}>
-            Account Balance
+            {t('title')}
           </p>
           <p style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', fontFamily: 'var(--font-dm-mono)', fontVariantNumeric: 'tabular-nums' }}>
             {lastBalance.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {sym}
@@ -70,11 +72,11 @@ export default function AccountBalanceCard({ equityCurve, depositCurve, startCap
       <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
           <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#3b82f6' }} />
-          <span style={{ fontSize: 9, color: 'var(--text-3)' }}>Kontostand</span>
+          <span style={{ fontSize: 9, color: 'var(--text-3)' }}>{t('balance')}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
           <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#ef4444' }} />
-          <span style={{ fontSize: 9, color: 'var(--text-3)' }}>Einzahlungen</span>
+          <span style={{ fontSize: 9, color: 'var(--text-3)' }}>{t('deposits')}</span>
         </div>
       </div>
 
