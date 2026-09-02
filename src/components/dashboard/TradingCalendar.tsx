@@ -11,6 +11,7 @@ import { getBotColor } from '@/lib/bot-colors'
 import DayModal from './DayModal'
 import TradeDetailModal from './TradeDetailModal'
 import YearHeatmap from './YearHeatmap'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: Trade[]
@@ -39,6 +40,8 @@ function fmtPnl(val: number): string {
 }
 
 function TradingCalendar({ trades, currency, strategyBots }: Props) {
+  const t = useTranslations('dashboard.calendar')
+  const tDate = useTranslations('dashboard.dateRange')
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
@@ -200,8 +203,10 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
   function prevYear() { setYear(y => y - 1) }
   function nextYear() { setYear(y => y + 1) }
 
-  const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
-  const dayNames = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
+  const rawMonths = t.raw('monthsFull')
+  const monthNames = Array.isArray(rawMonths) ? rawMonths as string[] : []
+  const rawDays = tDate.raw('daysShort')
+  const dayNames = Array.isArray(rawDays) ? rawDays as string[] : []
   const todayStr = now.toISOString().slice(0, 10)
 
   return (
@@ -241,14 +246,14 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
               onClick={goToday}
               style={{ fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', cursor: 'pointer' }}
             >
-              Dieser Monat
+              {t('thisMonth')}
             </button>
 
             <button
               onClick={() => setViewMode('year')}
               style={{ fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', cursor: 'pointer' }}
             >
-              Jahr
+              {t('year')}
             </button>
 
             {/* Monthly stats */}
@@ -269,7 +274,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                 background: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08))',
                 border: '1px solid rgba(59,130,246,0.25)', color: 'var(--accent)',
               }}>
-                {monthlyTradingDays} {monthlyTradingDays === 1 ? 'Tag' : 'Tage'}
+                {monthlyTradingDays} {monthlyTradingDays === 1 ? t('day') : t('days')}
               </span>
             </div>
           </>
@@ -291,7 +296,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
               onClick={() => setViewMode('month')}
               style={{ marginLeft: 'auto', fontSize: 11, fontWeight: 600, padding: '4px 12px', borderRadius: 8, background: 'var(--accent-bg)', border: '1px solid var(--accent)', color: 'var(--accent)', cursor: 'pointer' }}
             >
-              Monat
+              {t('month')}
             </button>
           </>
         )}
@@ -321,7 +326,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
           </div>
         ))}
         <div className="hidden sm:flex" style={{ gridColumn: 8, gridRow: 1, alignItems: 'center' }}>
-          <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>Woche</span>
+          <span style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>{t('week')}</span>
         </div>
 
         {/* Weeks */}
@@ -422,7 +427,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                         </span>
                         <div>
                           <span style={{ fontSize: 8, color: 'var(--text-3)' }}>
-                            {data.count} {data.count === 1 ? 'Trade' : 'Trades'}
+                            {data.count} {data.count === 1 ? t('trade') : t('trades')}
                           </span>
                           {winPct !== null && (
                             <span style={{ fontSize: 8, color: pnlPos ? 'var(--green)' : 'var(--red)', display: 'block' }}>
@@ -453,7 +458,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                     )}
                     {streak && (
                       <span
-                        title={streak.isWin ? `${streak.length} Gewinntage in Folge` : `${streak.length} Verlusttage in Folge`}
+                        title={streak.isWin ? t('winStreak', { count: streak.length }) : t('lossStreak', { count: streak.length })}
                         style={{
                           position: 'absolute', top: -5, right: -5,
                           display: 'flex', alignItems: 'center', gap: 1,
@@ -489,7 +494,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                   justifyContent: 'space-between',
                 }}
               >
-                <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-3)' }}>KW {ws.isoWeek}</span>
+                <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-3)' }}>{t('weekLabel', { number: ws.isoWeek })}</span>
                 {ws.tradingDays > 0 ? (
                   <>
                     <span style={{
@@ -504,7 +509,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                       background: 'var(--accent-bg)', color: 'var(--accent)',
                       alignSelf: 'flex-start',
                     }}>
-                      {ws.tradingDays} {ws.tradingDays === 1 ? 'Tag' : 'Tage'}
+                      {ws.tradingDays} {ws.tradingDays === 1 ? t('day') : t('days')}
                     </span>
                   </>
                 ) : (
