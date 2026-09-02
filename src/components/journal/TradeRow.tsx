@@ -8,6 +8,7 @@ import { Strategy } from '@/types/strategy'
 import { deleteTradeAction } from '@/lib/actions'
 import TradeModal from './TradeModal'
 import TradeShareModal from './TradeShareModal'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trade: Trade
@@ -25,10 +26,11 @@ function isSafeScreenshotUrl(url: string): boolean {
 }
 
 function StatusBadge({ status }: { status: Trade['status'] }) {
+  const t = useTranslations('journal.tradeRow')
   const map = {
-    open:      { label: 'Offen',        color: 'var(--accent)',  bg: 'rgba(59,130,246,0.12)' },
-    closed:    { label: 'Geschlossen',  color: 'var(--green)',   bg: 'rgba(0,217,126,0.12)' },
-    cancelled: { label: 'Abgebrochen',  color: 'var(--text-3)',  bg: 'var(--surface-2)' },
+    open:      { label: t('statusOpen'),      color: 'var(--accent)',  bg: 'rgba(59,130,246,0.12)' },
+    closed:    { label: t('statusClosed'),    color: 'var(--green)',   bg: 'rgba(0,217,126,0.12)' },
+    cancelled: { label: t('statusCancelled'), color: 'var(--text-3)',  bg: 'var(--surface-2)' },
   }
   const { label, color, bg } = map[status]
   return (
@@ -42,6 +44,7 @@ function StatusBadge({ status }: { status: Trade['status'] }) {
 }
 
 export default function TradeRow({ trade, strategies, broker, currency, startCapital, onRefresh, sourceLabel, botColor }: Props) {
+  const t = useTranslations('journal.tradeRow')
   const [expanded, setExpanded] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -58,7 +61,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
   const strategy = trade.strategyId ? strategies.find(s => s.id === trade.strategyId) : undefined
 
   function handleDelete() {
-    if (!confirm(`Trade "${trade.instrument}" wirklich loschen?`)) return
+    if (!confirm(t('deleteConfirm', { instrument: trade.instrument }))) return
     startTransition(async () => {
       await deleteTradeAction(trade.id)
       onRefresh?.()
@@ -160,7 +163,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
 
         {/* Entry */}
         <div className="hidden md:block text-right shrink-0" style={{ minWidth: 70 }}>
-          <p className="text-xs" style={{ color: 'var(--text-3)' }}>Einstieg</p>
+          <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('entryLabel')}</p>
           <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
             {trade.entry.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
           </p>
@@ -227,7 +230,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
             onClick={() => setShowShare(true)}
             className="w-7 h-7 flex items-center justify-center rounded-md cursor-pointer transition-all"
             style={{ color: 'var(--text-3)' }}
-            title="Trade teilen"
+            title={t('shareTitle')}
             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#06d6a0'; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(6,214,160,0.1)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-3)'; (e.currentTarget as HTMLButtonElement).style.background = 'transparent' }}
           >
@@ -272,7 +275,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
           >
             <div className="px-4 py-3 grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
-                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Öffnungszeit</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('openTime')}</p>
                 <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
                   {date.toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric' })}
                   {' '}
@@ -281,7 +284,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
               </div>
               {trade.closeTime && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Schließzeit</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('closeTime')}</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
                     {new Date(trade.closeTime).toLocaleDateString('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', year: 'numeric' })}
                     {' '}
@@ -290,12 +293,12 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 </div>
               )}
               <div>
-                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Grosse / Lots</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('sizeLabel')}</p>
                 <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>{trade.size}</p>
               </div>
               {trade.exit != null && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Ausstieg</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('exitLabel')}</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-1)' }}>
                     {trade.exit.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
                   </p>
@@ -303,7 +306,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
               )}
               {trade.tp != null && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Take Profit</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('takeProfitLabel')}</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--green)' }}>
                     {trade.tp.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
                   </p>
@@ -311,25 +314,25 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
               )}
               {trade.sl != null && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Stop Loss</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('stopLossLabel')}</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--red)' }}>
                     {trade.sl.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
               )}
               <div className="sm:hidden">
-                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Status</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('statusLabel')}</p>
                 <StatusBadge status={trade.status} />
               </div>
               {trade.rr != null && (
                 <div className="lg:hidden">
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Risk/Reward</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('riskReward')}</p>
                   <p className="text-sm font-mono font-medium" style={{ color: 'var(--text-2)' }}>{trade.rr.toFixed(1)}R</p>
                 </div>
               )}
               {strategy && (
                 <div className="col-span-2 sm:col-span-4">
-                  <p className="text-xs mb-1.5" style={{ color: 'var(--text-3)' }}>Strategie</p>
+                  <p className="text-xs mb-1.5" style={{ color: 'var(--text-3)' }}>{t('strategyLabel')}</p>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full shrink-0" style={{ background: strategy.color }} />
                     <span className="text-sm font-medium" style={{ color: 'var(--text-1)' }}>
@@ -339,14 +342,14 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                       {strategy.timeframe}
                     </span>
                     <span className="text-xs" style={{ color: 'var(--text-3)' }}>
-                      {strategy.riskPerTrade}% Risiko
+                      {strategy.riskPerTrade}{t('riskSuffix')}
                     </span>
                   </div>
                 </div>
               )}
               {trade.tags && trade.tags.length > 0 && (
                 <div className="col-span-2 sm:col-span-4">
-                  <p className="text-xs mb-1.5" style={{ color: 'var(--text-3)' }}>Tags</p>
+                  <p className="text-xs mb-1.5" style={{ color: 'var(--text-3)' }}>{t('tagsLabel')}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {trade.tags.map(tag => (
                       <span
@@ -362,38 +365,38 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
               )}
               {(trade.commission != null || trade.swap != null || trade.spreadCost != null) && (
                 <div className="col-span-2 sm:col-span-4">
-                  <p className="text-xs mb-2" style={{ color: 'var(--text-3)' }}>Kosten & Gebühren</p>
+                  <p className="text-xs mb-2" style={{ color: 'var(--text-3)' }}>{t('costsLabel')}</p>
                   <div className="flex flex-wrap gap-2">
                     {trade.commission != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
-                        Kommission: -{trade.commission.toFixed(2)}
+                        {t('commissionLabel')} -{trade.commission.toFixed(2)}
                       </span>
                     )}
                     {trade.swap != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
-                        Swap: -{trade.swap.toFixed(2)}
+                        {t('swapLabel')} -{trade.swap.toFixed(2)}
                       </span>
                     )}
                     {trade.spreadCost != null && (
                       <span className="text-xs px-2 py-1 rounded-md font-mono" style={{ background: 'rgba(255,69,96,0.08)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.2)' }}>
-                        Spread: -{trade.spreadCost.toFixed(2)}
+                        {t('spreadLabel')} -{trade.spreadCost.toFixed(2)}
                       </span>
                     )}
                     <span className="text-xs px-2 py-1 rounded-md font-mono font-semibold" style={{ background: 'rgba(255,69,96,0.12)', color: 'var(--red)', border: '1px solid rgba(255,69,96,0.25)' }}>
-                      Gesamt: -{((trade.commission ?? 0) + (trade.swap ?? 0) + (trade.spreadCost ?? 0)).toFixed(2)}
+                      {t('totalLabel')} -{((trade.commission ?? 0) + (trade.swap ?? 0) + (trade.spreadCost ?? 0)).toFixed(2)}
                     </span>
                   </div>
                 </div>
               )}
               {trade.notes && (
                 <div className="col-span-2 sm:col-span-4">
-                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Notizen</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('notesLabel')}</p>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--text-2)' }}>{trade.notes}</p>
                 </div>
               )}
               {trade.screenshot && (
                 <div className="col-span-2 sm:col-span-4">
-                  <p className="text-xs mb-2" style={{ color: 'var(--text-3)' }}>Chart Screenshot</p>
+                  <p className="text-xs mb-2" style={{ color: 'var(--text-3)' }}>{t('screenshotLabel')}</p>
                   <button
                     onClick={() => setShowLightbox(true)}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer"
@@ -406,7 +409,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)' }}
                   >
                     <ZoomIn size={14} />
-                    Screenshot anzeigen
+                    {t('showScreenshot')}
                   </button>
                 </div>
               )}
@@ -447,7 +450,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 style={{ color: 'var(--text-1)', borderBottom: '1px solid var(--border)' }}
               >
                 <Share2 size={16} style={{ color: 'var(--text-3)' }} />
-                Teilen
+                {t('mobileShare')}
               </button>
               <button
                 onClick={() => { setShowEdit(true); setShowMobileMenu(false) }}
@@ -455,7 +458,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)' }}
               >
                 <Pencil size={16} />
-                Bearbeiten
+                {t('mobileEdit')}
               </button>
               <button
                 onClick={() => { setShowMobileMenu(false); handleDelete() }}
@@ -464,14 +467,14 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                 style={{ color: 'var(--red)', borderBottom: '1px solid var(--border)' }}
               >
                 {isPending ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
-                Loschen
+                {t('mobileDelete')}
               </button>
               <button
                 onClick={() => setShowMobileMenu(false)}
                 className="w-full flex items-center justify-center px-4 py-4 text-sm font-semibold cursor-pointer"
                 style={{ color: 'var(--text-3)' }}
               >
-                Abbrechen
+                {t('mobileCancel')}
               </button>
             </motion.div>
           </>
@@ -512,7 +515,7 @@ export default function TradeRow({ trade, strategies, broker, currency, startCap
                   style={{ color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.2)' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
-                  title={lightboxZoomed ? 'Verkleinern' : 'Originalgröße'}
+                  title={lightboxZoomed ? t('zoomOut') : t('zoomOriginal')}
                 >
                   {lightboxZoomed ? <ZoomOut size={15} /> : <ZoomIn size={15} />}
                 </button>
