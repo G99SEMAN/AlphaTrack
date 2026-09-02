@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ChevronLeft, ChevronRight, Calendar, ChevronDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -38,7 +39,7 @@ function cellStr(y: number, m: number, d: number): string {
 
 interface Preset { label: string; from?: string; to?: string }
 
-function getPresets(): Preset[] {
+function getPresets(t: ReturnType<typeof useTranslations>): Preset[] {
   const now = new Date()
   const today = toDateStr(now)
   const wkStart = startOfWeek(now)
@@ -52,21 +53,18 @@ function getPresets(): Preset[] {
   const qE = new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3 + 3, 0)
   const ytdS = new Date(now.getFullYear(), 0, 1)
   return [
-    { label: 'Gesamt' },
-    { label: 'Heute', from: today, to: today },
-    { label: 'Diese Woche', from: toDateStr(wkStart), to: toDateStr(wkEnd) },
-    { label: 'Dieser Monat', from: toDateStr(mStart), to: toDateStr(mEnd) },
-    { label: 'Letzte 30 Tage', from: toDateStr(l30), to: today },
-    { label: 'Letzter Monat', from: toDateStr(lmStart), to: toDateStr(lmEnd) },
-    { label: 'Dieses Quartal', from: toDateStr(qS), to: toDateStr(qE) },
-    { label: 'Dieses Jahr', from: toDateStr(ytdS), to: today },
+    { label: t('total') },
+    { label: t('today'), from: today, to: today },
+    { label: t('thisWeek'), from: toDateStr(wkStart), to: toDateStr(wkEnd) },
+    { label: t('thisMonth'), from: toDateStr(mStart), to: toDateStr(mEnd) },
+    { label: t('last30Days'), from: toDateStr(l30), to: today },
+    { label: t('lastMonth'), from: toDateStr(lmStart), to: toDateStr(lmEnd) },
+    { label: t('thisQuarter'), from: toDateStr(qS), to: toDateStr(qE) },
+    { label: t('thisYear'), from: toDateStr(ytdS), to: today },
   ]
 }
 
 // ── sub-components ────────────────────────────────────────────────────────────
-
-const MONTH_SHORT = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez']
-const DAY_LABELS  = ['Mo','Di','Mi','Do','Fr','Sa','So']
 
 function NavBtn({ onClick, dir }: { onClick?: () => void; dir: 'left' | 'right' }) {
   if (!onClick) return <div style={{ width: 24 }} />
@@ -117,6 +115,10 @@ interface GridProps {
 }
 
 function CalendarGrid({ year, month, start, end, hovered, onDayClick, onDayHover, onPrev, onNext, onChangeMonth }: GridProps) {
+  const t = useTranslations('dashboard.dateRange')
+  const MONTH_SHORT = t.raw('monthsShort') as string[]
+  const DAY_LABELS = t.raw('daysShort') as string[]
+
   const firstDay = new Date(year, month, 1)
   const lastDay  = new Date(year, month + 1, 0)
   const startDow = (firstDay.getDay() + 6) % 7  // Monday = 0
@@ -240,6 +242,7 @@ function CalendarGrid({ year, month, start, end, hovered, onDayClick, onDayHover
 
 export default function DateRangePicker() {
   const router = useRouter()
+  const t = useTranslations('dashboard.dateRange')
   const sp = useSearchParams()
   const fromParam = sp.get('from') ?? ''
   const toParam   = sp.get('to')   ?? ''
@@ -293,7 +296,7 @@ export default function DateRangePicker() {
   }
 
   function applyRange() {
-    if (!start) return applyPreset({ label: 'Gesamt' })
+    if (!start) return applyPreset({ label: t('total') })
     const p = new URLSearchParams()
     p.set('from', start); p.set('to', end ?? start)
     router.push(`/dashboard?${p.toString()}`)
@@ -310,11 +313,11 @@ export default function DateRangePicker() {
   function getLabel(): string {
     if (fromParam && toParam) {
       if (fromParam === toParam) return fmtDisplay(fromParam)
-      const match = getPresets().find(p => p.from === fromParam && p.to === toParam)
+      const match = getPresets(t).find(p => p.from === fromParam && p.to === toParam)
       if (match) return match.label
       return `${fmtDisplay(fromParam)} – ${fmtDisplay(toParam)}`
     }
-    return 'Gesamt'
+    return t('total')
   }
 
   function isActivePreset(p: Preset) {
@@ -322,7 +325,7 @@ export default function DateRangePicker() {
     return p.from === fromParam && p.to === toParam
   }
 
-  const presets = getPresets()
+  const presets = getPresets(t)
 
   return (
     <div ref={ref} style={{ position: 'relative' }}>
@@ -358,11 +361,11 @@ export default function DateRangePicker() {
             display: 'flex', alignItems: 'center', gap: 10, fontSize: 12,
           }}>
             <span style={{ fontFamily: 'var(--font-dm-mono)', fontWeight: start ? 600 : 400, color: start ? 'var(--text-1)' : 'var(--text-3)' }}>
-              {start ? fmtDisplay(start) : 'Startdatum'}
+              {start ? fmtDisplay(start) : t('startDate')}
             </span>
             <span style={{ color: 'var(--text-3)', fontSize: 14 }}>→</span>
             <span style={{ fontFamily: 'var(--font-dm-mono)', fontWeight: end ? 600 : 400, color: end ? 'var(--text-1)' : 'var(--text-3)' }}>
-              {end ? fmtDisplay(end) : start ? 'Enddatum wählen …' : 'Enddatum'}
+              {end ? fmtDisplay(end) : start ? t('chooseEndDate') : t('endDate')}
             </span>
           </div>
 
@@ -389,7 +392,7 @@ export default function DateRangePicker() {
             {/* Presets */}
             <div style={{ borderLeft: '1px solid var(--border)', padding: '14px 12px', minWidth: 145 }}>
               <p style={{ fontSize: 9, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 10 }}>
-                Schnellauswahl
+                {t('quickSelect')}
               </p>
               {presets.map(p => {
                 const active = isActivePreset(p)
@@ -425,7 +428,7 @@ export default function DateRangePicker() {
                 border: '1px solid var(--border)', fontSize: 11,
               }}
             >
-              Zurücksetzen
+              {t('reset')}
             </button>
             <button
               onClick={applyRange}
@@ -439,7 +442,7 @@ export default function DateRangePicker() {
                 transition: 'all 0.15s',
               }}
             >
-              Anwenden
+              {t('apply')}
             </button>
           </div>
         </div>
