@@ -6,6 +6,7 @@ import { Trade } from '@/types/trade'
 import { BotEntry } from '@/types/bot'
 import { currencySymbol } from '@/lib/currency'
 import { getBotColor } from '@/lib/bot-colors'
+import { useTranslations } from 'next-intl'
 
 interface DayModalProps {
   day: string
@@ -88,6 +89,7 @@ function MiniChart({ trades }: { trades: Trade[] }) {
 }
 
 export default function DayModal({ day, trades, currency, strategyBots, onClose, onSelectTrade, isTopModal = true }: DayModalProps) {
+  const t = useTranslations('dashboard.dayModal')
   const sym = currencySymbol(currency)
 
   useEffect(() => {
@@ -126,7 +128,7 @@ export default function DayModal({ day, trades, currency, strategyBots, onClose,
           <div>
             <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-3)', marginBottom: 4 }}>{fmtDay(day)}</div>
             <div style={{ fontSize: 22, fontWeight: 800, color: netPnl >= 0 ? 'var(--green)' : 'var(--red)', fontFamily: 'var(--font-dm-mono)' }}>
-              Net P&amp;L {fmtPnl(netPnl, sym)}
+              {t('netPnl')} {fmtPnl(netPnl, sym)}
             </div>
           </div>
           <button
@@ -144,14 +146,14 @@ export default function DayModal({ day, trades, currency, strategyBots, onClose,
 
         {/* Stats Grid */}
         <div style={{ padding: '12px 20px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, flexShrink: 0 }}>
-          <StatCell label="Total Trades" value={String(trades.length)} />
-          <StatCell label="Winners" value={String(winners.length)} />
-          <StatCell label="Losers" value={String(losers.length)} />
-          <StatCell label="Winrate" value={`${winrate.toFixed(0)}%`} />
-          <StatCell label="Gross P&L" value={fmtPnl(grossPnl, sym)} color={grossPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
-          <StatCell label="Volumen" value={totalVolume.toLocaleString('de-DE', { maximumFractionDigits: 2 })} />
-          <StatCell label="Kosten" value={`${sym}${totalCosts.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} />
-          <StatCell label="Profit Factor" value={isFinite(profitFactor) ? profitFactor.toFixed(2) : '∞'} />
+          <StatCell label={t('totalTrades')} value={String(trades.length)} />
+          <StatCell label={t('winners')} value={String(winners.length)} />
+          <StatCell label={t('losers')} value={String(losers.length)} />
+          <StatCell label={t('winrate')} value={`${winrate.toFixed(0)}%`} />
+          <StatCell label={t('grossPnl')} value={fmtPnl(grossPnl, sym)} color={grossPnl >= 0 ? 'var(--green)' : 'var(--red)'} />
+          <StatCell label={t('volume')} value={totalVolume.toLocaleString('de-DE', { maximumFractionDigits: 2 })} />
+          <StatCell label={t('costs')} value={`${sym}${totalCosts.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`} />
+          <StatCell label={t('profitFactor')} value={isFinite(profitFactor) ? profitFactor.toFixed(2) : '∞'} />
         </div>
 
         {/* Trade List */}
@@ -159,7 +161,7 @@ export default function DayModal({ day, trades, currency, strategyBots, onClose,
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ background: 'var(--surface-2)', position: 'sticky', top: 0 }}>
-                {['Schließzeit', 'Instrument', 'Side', 'Net P&L', 'R:R'].map(h => (
+                {[t('closeTime'), t('instrument'), t('side'), t('netPnl'), t('rr')].map(h => (
                   <th key={h} style={{ padding: '8px 16px', textAlign: 'left', fontSize: 10, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                     {h}
                   </th>
@@ -229,7 +231,7 @@ export default function DayModal({ day, trades, currency, strategyBots, onClose,
             onClick={onClose}
             style={{ padding: '8px 20px', borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}
           >
-            Schließen
+            {t('close')}
           </button>
         </div>
       </div>
