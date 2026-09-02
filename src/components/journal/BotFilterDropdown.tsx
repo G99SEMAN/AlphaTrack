@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { ChevronDown, Bot } from 'lucide-react'
 import { BotEntry } from '@/types/bot'
 import { getBotColor } from '@/lib/bot-colors'
+import { useTranslations } from 'next-intl'
 
 export const MANUAL_FILTER_VALUE = 'manual'
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function BotFilterDropdown({ bots, selected, onChange }: Props) {
+  const t = useTranslations('journal.botFilter')
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -37,9 +39,9 @@ export default function BotFilterDropdown({ bots, selected, onChange }: Props) {
   }
 
   function label(): string {
-    if (allSelected) return 'Alle Bots'
-    if (selected.size === 0) return 'Keine Bots'
-    return `${selected.size} ausgewählt`
+    if (allSelected) return t('allBots')
+    if (selected.size === 0) return t('noBots')
+    return t('selectedCount', { count: selected.size })
   }
 
   return (
@@ -95,7 +97,7 @@ export default function BotFilterDropdown({ bots, selected, onChange }: Props) {
             onMouseLeave={e => { (e.currentTarget as HTMLLabelElement).style.background = 'transparent' }}
           >
             <input type="checkbox" checked={selected.has(MANUAL_FILTER_VALUE)} onChange={() => toggle(MANUAL_FILTER_VALUE)} />
-            <span className="truncate">Manuell</span>
+            <span className="truncate">{t('manual')}</span>
           </label>
         </div>
       )}
