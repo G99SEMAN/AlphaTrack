@@ -7,6 +7,7 @@ import { X, Upload, ChevronRight, Check, ArrowLeft, FileText, AlertCircle } from
 import { Trade } from '@/types/trade'
 import { parseMT5Html, extractInitialBalance } from '@/lib/parsers/mt5'
 import { importTradesAction, updateStartCapitalAction } from '@/lib/actions'
+import { useTranslations } from 'next-intl'
 
 interface Broker {
   id: string
@@ -16,50 +17,52 @@ interface Broker {
   available: boolean
 }
 
-const BROKERS: Broker[] = [
-  {
-    id: 'metatrader5',
-    name: 'MetaTrader 5',
-    description: 'Kontoauszug als HTML exportieren (Rechtsklick → Als HTML speichern)',
-    fileTypes: 'HTML',
-    available: true,
-  },
-  {
-    id: 'metatrader4',
-    name: 'MetaTrader 4',
-    description: 'Kontoauszug als HTML oder CSV exportieren',
-    fileTypes: 'HTML, CSV',
-    available: false,
-  },
-  {
-    id: 'tradingview',
-    name: 'TradingView',
-    description: 'Trade-History als CSV exportieren',
-    fileTypes: 'CSV',
-    available: false,
-  },
-  {
-    id: 'ctrader',
-    name: 'cTrader',
-    description: 'Kontoauszug als CSV exportieren',
-    fileTypes: 'CSV',
-    available: false,
-  },
-  {
-    id: 'ninja',
-    name: 'NinjaTrader',
-    description: 'Performance-Report als CSV exportieren',
-    fileTypes: 'CSV',
-    available: false,
-  },
-  {
-    id: 'ibkr',
-    name: 'Interactive Brokers',
-    description: 'Activity Statement als CSV exportieren',
-    fileTypes: 'CSV',
-    available: false,
-  },
-]
+function getBrokers(t: ReturnType<typeof useTranslations<'journal.importModal'>>): Broker[] {
+  return [
+    {
+      id: 'metatrader5',
+      name: 'MetaTrader 5',
+      description: t('brokerMt5Desc'),
+      fileTypes: 'HTML',
+      available: true,
+    },
+    {
+      id: 'metatrader4',
+      name: 'MetaTrader 4',
+      description: t('brokerMt4Desc'),
+      fileTypes: 'HTML, CSV',
+      available: false,
+    },
+    {
+      id: 'tradingview',
+      name: 'TradingView',
+      description: t('brokerTvDesc'),
+      fileTypes: 'CSV',
+      available: false,
+    },
+    {
+      id: 'ctrader',
+      name: 'cTrader',
+      description: t('brokerCtraderDesc'),
+      fileTypes: 'CSV',
+      available: false,
+    },
+    {
+      id: 'ninja',
+      name: 'NinjaTrader',
+      description: t('brokerNinjaDesc'),
+      fileTypes: 'CSV',
+      available: false,
+    },
+    {
+      id: 'ibkr',
+      name: 'Interactive Brokers',
+      description: t('brokerIbkrDesc'),
+      fileTypes: 'CSV',
+      available: false,
+    },
+  ]
+}
 
 type Step = 'broker' | 'preview' | 'done'
 
@@ -70,6 +73,8 @@ interface Props {
 }
 
 export default function ImportModal({ onClose, existingExternalIds = new Set(), profileStartCapital }: Props) {
+  const t = useTranslations('journal.importModal')
+  const brokers = getBrokers(t)
   const [selected, setSelected] = useState<string | null>(null)
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -102,7 +107,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
         const html = ev.target?.result as string
         const trades = parseMT5Html(html)
         if (trades.length === 0) {
-          setParseError('Keine Positionen gefunden. Bitte eine MT5-Kontohistorie im HTML-Format hochladen.')
+          setParseError(t('noFileFound'))
           return
         }
         // Balance-Abgleich
@@ -113,7 +118,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
         setParsed(trades)
         setStep('preview')
       } catch {
-        setParseError('Datei konnte nicht gelesen werden. Bitte eine gültige MT5-HTML-Datei verwenden.')
+        setParseError(t('fileReadError'))
       }
     }
     reader.readAsText(file, 'utf-8')
@@ -171,14 +176,14 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
             )}
             <div>
               <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>
-                {step === 'broker' && 'Trades importieren'}
-                {step === 'preview' && 'Vorschau'}
-                {step === 'done' && 'Import abgeschlossen'}
+                {step === 'broker' && t('titleBroker')}
+                {step === 'preview' && t('titlePreview')}
+                {step === 'done' && t('titleDone')}
               </h2>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
-                {step === 'broker' && 'Broker auswählen um Export-Datei einzulesen'}
-                {step === 'preview' && `${parsed.length} Positionen gefunden`}
-                {step === 'done' && 'Trades wurden ins Journal übertragen'}
+                {step === 'broker' && t('subtitleBroker')}
+                {step === 'preview' && t('subtitlePreview', { count: parsed.length })}
+                {step === 'done' && t('subtitleDone')}
               </p>
             </div>
           </div>
@@ -205,7 +210,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                 className="px-4 py-4 flex flex-col gap-2"
               >
                 <p className="text-xs font-semibold uppercase tracking-wide px-1 mb-1" style={{ color: 'var(--text-3)' }}>
-                  Broker / Plattform
+                  {t('brokerPlatformLabel')}
                 </p>
 
                 {parseError && (
@@ -218,7 +223,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   </div>
                 )}
 
-                {BROKERS.map(broker => (
+                {brokers.map(broker => (
                   <button
                     key={broker.id}
                     type="button"
@@ -275,7 +280,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                         className="text-xs font-medium px-2 py-1 rounded shrink-0"
                         style={{ background: 'rgba(255,165,0,0.1)', color: '#f59e0b', border: '1px solid rgba(255,165,0,0.2)' }}
                       >
-                        Bald
+                        {t('comingSoon')}
                       </span>
                     )}
                   </button>
@@ -302,12 +307,12 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                       <AlertCircle size={14} className="shrink-0 mt-0.5" style={{ color: '#f59e0b' }} />
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold" style={{ color: '#f59e0b' }}>
-                          Startkapital stimmt nicht uberein
+                          {t('balanceMismatchTitle')}
                         </p>
                         <p className="text-xs mt-0.5" style={{ color: 'var(--text-2)' }}>
-                          Bericht: <span className="font-mono font-semibold">{balanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
+                          {t('reportLabel')} <span className="font-mono font-semibold">{balanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
                           {' · '}
-                          Profil: <span className="font-mono font-semibold">{profileStartCapital?.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
+                          {t('profileLabel')} <span className="font-mono font-semibold">{profileStartCapital?.toLocaleString('de-DE', { minimumFractionDigits: 2 })}</span>
                         </p>
                       </div>
                     </div>
@@ -318,14 +323,14 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                         className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
                         style={{ background: '#f59e0b', color: '#fff', opacity: isPending ? 0.7 : 1 }}
                       >
-                        Ja, auf {balanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 })} anpassen
+                        {t('acceptBalance', { balance: balanceMismatch.reportBalance.toLocaleString('de-DE', { minimumFractionDigits: 2 }) })}
                       </button>
                       <button
                         onClick={() => setBalanceMismatch(null)}
                         className="px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer"
                         style={{ color: 'var(--text-3)' }}
                       >
-                        Nein, beibehalten
+                        {t('keepBalance')}
                       </button>
                     </div>
                   </div>
@@ -337,7 +342,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                     style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)' }}
                   >
                     <Check size={13} style={{ color: '#22c55e' }} />
-                    <p className="text-xs" style={{ color: '#22c55e' }}>Startkapital im Profil aktualisiert</p>
+                    <p className="text-xs" style={{ color: '#22c55e' }}>{t('capitalUpdated')}</p>
                   </div>
                 )}
 
@@ -347,14 +352,14 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
                 >
                   <span className="text-xs" style={{ color: 'var(--text-2)' }}>
-                    <span className="font-bold" style={{ color: 'var(--text-1)' }}>{parsed.length}</span> Positionen gefunden
+                    <span className="font-bold" style={{ color: 'var(--text-1)' }}>{parsed.length}</span> {t('positionsFoundSuffix')}
                   </span>
                   <span className="text-xs font-semibold" style={{ color: '#22c55e' }}>
-                    {newCount} neu
+                    {newCount} {t('newSuffix')}
                   </span>
                   {duplicateCount > 0 && (
                     <span className="text-xs" style={{ color: 'var(--text-3)' }}>
-                      {duplicateCount} bereits vorhanden (werden übersprungen)
+                      {duplicateCount} {t('alreadyExistsSuffix')}
                     </span>
                   )}
                 </div>
@@ -364,7 +369,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   <table className="w-full text-xs">
                     <thead>
                       <tr style={{ background: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
-                        {['Symbol', 'Richtung', 'Datum', 'Entry', 'Exit', 'P&L', 'Lot', 'Status'].map(h => (
+                        {[t('tableSymbol'), t('tableDirection'), t('tableDate'), t('tableEntry'), t('tableExit'), t('tablePnl'), t('tableLot'), t('tableStatus')].map(h => (
                           <th key={h} className="px-3 py-2 text-left font-semibold" style={{ color: 'var(--text-3)' }}>
                             {h}
                           </th>
@@ -372,8 +377,8 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                       </tr>
                     </thead>
                     <tbody>
-                      {parsed.map((t, i) => {
-                        const isDupe = t.externalId ? existingExternalIds.has(t.externalId) : false
+                      {parsed.map((trade, i) => {
+                        const isDupe = trade.externalId ? existingExternalIds.has(trade.externalId) : false
                         return (
                           <tr
                             key={i}
@@ -383,53 +388,53 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                             }}
                           >
                             <td className="px-3 py-2 font-mono font-medium" style={{ color: 'var(--text-1)' }}>
-                              {t.instrument}
+                              {trade.instrument}
                             </td>
                             <td className="px-3 py-2">
                               <span
                                 className="px-1.5 py-0.5 rounded text-xs font-semibold"
                                 style={{
-                                  background: t.type === 'long' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
-                                  color: t.type === 'long' ? '#22c55e' : '#ef4444',
+                                  background: trade.type === 'long' ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
+                                  color: trade.type === 'long' ? '#22c55e' : '#ef4444',
                                 }}
                               >
-                                {t.type === 'long' ? 'Long' : 'Short'}
+                                {trade.type === 'long' ? t('long') : t('short')}
                               </span>
                             </td>
                             <td className="px-3 py-2" style={{ color: 'var(--text-2)' }}>
-                              {new Date(t.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' })}
+                              {new Date(trade.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' })}
                             </td>
                             <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>
-                              {t.entry}
+                              {trade.entry}
                             </td>
                             <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>
-                              {t.exit ?? '-'}
+                              {trade.exit ?? '-'}
                             </td>
                             <td
                               className="px-3 py-2 font-mono font-semibold"
                               style={{
-                                color: t.pnl !== undefined
-                                  ? (t.pnl >= 0 ? '#22c55e' : '#ef4444')
+                                color: trade.pnl !== undefined
+                                  ? (trade.pnl >= 0 ? '#22c55e' : '#ef4444')
                                   : 'var(--text-3)',
                               }}
                             >
-                              {t.pnl !== undefined ? (t.pnl >= 0 ? '+' : '') + t.pnl.toFixed(2) : '-'}
+                              {trade.pnl !== undefined ? (trade.pnl >= 0 ? '+' : '') + trade.pnl.toFixed(2) : '-'}
                             </td>
                             <td className="px-3 py-2 font-mono" style={{ color: 'var(--text-2)' }}>
-                              {t.size}
+                              {trade.size}
                             </td>
                             <td className="px-3 py-2">
                               {isDupe ? (
-                                <span className="text-xs" style={{ color: 'var(--text-3)' }}>vorhanden</span>
+                                <span className="text-xs" style={{ color: 'var(--text-3)' }}>{t('existing')}</span>
                               ) : (
                                 <span
                                   className="px-1.5 py-0.5 rounded text-xs font-medium"
                                   style={{
-                                    background: t.status === 'open' ? 'rgba(249,115,22,0.1)' : 'rgba(34,197,94,0.1)',
-                                    color: t.status === 'open' ? '#f97316' : '#22c55e',
+                                    background: trade.status === 'open' ? 'rgba(249,115,22,0.1)' : 'rgba(34,197,94,0.1)',
+                                    color: trade.status === 'open' ? '#f97316' : '#22c55e',
                                   }}
                                 >
-                                  {t.status === 'open' ? 'Offen' : 'Geschlossen'}
+                                  {trade.status === 'open' ? t('statusOpen') : t('statusClosed')}
                                 </span>
                               )}
                             </td>
@@ -458,11 +463,11 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                 </div>
                 <div className="text-center">
                   <p className="text-base font-bold" style={{ color: 'var(--text-1)' }}>
-                    {result.imported} Trade{result.imported !== 1 ? 's' : ''} importiert
+                    {result.imported === 1 ? t('importedOne', { count: result.imported }) : t('importedMany', { count: result.imported })}
                   </p>
                   {result.skipped > 0 && (
                     <p className="text-sm mt-1" style={{ color: 'var(--text-3)' }}>
-                      {result.skipped} bereits vorhandene übersprungen
+                      {t('skippedCount', { count: result.skipped })}
                     </p>
                   )}
                 </div>
@@ -481,8 +486,8 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
             <>
               <p className="text-xs" style={{ color: 'var(--text-3)' }}>
                 {selected
-                  ? `${BROKERS.find(b => b.id === selected)?.name} ausgewählt`
-                  : 'Keinen Broker ausgewählt'}
+                  ? t('selectedBroker', { name: brokers.find(b => b.id === selected)?.name ?? '' })
+                  : t('noBrokerSelected')}
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -491,7 +496,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
                   style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
                 >
-                  Abbrechen
+                  {t('cancelBtn')}
                 </button>
                 <button
                   type="button"
@@ -507,7 +512,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   }}
                 >
                   <FileText size={14} />
-                  Datei auswählen
+                  {t('selectFileBtn')}
                   <ChevronRight size={13} />
                 </button>
                 <input
@@ -524,7 +529,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
           {step === 'preview' && (
             <>
               <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-                {newCount} von {parsed.length} werden importiert
+                {t('willImportOf', { newCount, total: parsed.length })}
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -533,7 +538,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
                   style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
                 >
-                  Zurück
+                  {t('backBtn')}
                 </button>
                 <button
                   type="button"
@@ -549,7 +554,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   }}
                 >
                   <Upload size={14} />
-                  {isPending ? 'Importiere...' : `${newCount} Trade${newCount !== 1 ? 's' : ''} importieren`}
+                  {isPending ? t('importingBtn') : (newCount === 1 ? t('importBtnOne', { count: newCount }) : t('importBtnMany', { count: newCount }))}
                 </button>
               </div>
             </>
@@ -563,7 +568,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                 className="px-5 py-2 rounded-lg text-sm font-semibold cursor-pointer"
                 style={{ background: 'var(--accent)', color: '#fff' }}
               >
-                Fertig
+                {t('doneBtn')}
               </button>
             </div>
           )}
