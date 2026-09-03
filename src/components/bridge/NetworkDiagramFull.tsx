@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Globe, Cpu, Monitor, Bot as BotIcon, RotateCcw } from 'lucide-react'
 import { useBotStatus } from '@/context/BotStatusContext'
 import type { BotWithStatus } from '@/types/bot'
+import { useTranslations } from 'next-intl'
 
 type Status = 'online' | 'warning' | 'offline'
 
@@ -42,6 +43,7 @@ interface NodeData {
 }
 
 export default function NetworkDiagramFull() {
+  const t = useTranslations('netzwerk.diagram')
   const { bots, lastUpdated } = useBotStatus()
 
   const bridge  = bots.find(b => !b.bot.type || b.bot.type === 'bridge') ?? null
@@ -131,15 +133,15 @@ export default function NetworkDiagramFull() {
       id: 'at', ...(positions.at ?? DEFAULT_POS.at),
       status: 'online', accent: ACCENT.at, Icon: Globe,
       label: 'AlphaTrack',
-      sub: showBridge ? 'Bridge verbunden' : 'Keine Verbindung',
+      sub: showBridge ? t('bridgeConnectedSub') : t('noConnectionSub'),
     },
     ...(showBridge ? [{
       id: 'bridge', ...(positions.bridge ?? DEFAULT_POS.bridge),
       status: bridgeS, accent: ACCENT.bridge, Icon: Cpu,
       label: bridge?.bot.name ?? 'Bridge',
       sub: bridgeS === 'online'
-        ? `${bridge?.status?.openPositions ?? 0} offene Positionen`
-        : 'Verbindungsproblem',
+        ? t('bridgeOpenPositions', { count: bridge?.status?.openPositions ?? 0 })
+        : t('connectionProblemSub'),
     } as NodeData] : []),
     ...(showMt5 ? [{
       id: 'mt5', ...(positions.mt5 ?? DEFAULT_POS.mt5),
@@ -147,7 +149,7 @@ export default function NetworkDiagramFull() {
       label: 'MetaTrader 5',
       sub: mt5S === 'online' && bridge?.status?.balance != null
         ? `${bridge.status.balance.toFixed(2)} ${bridge.status.currency ?? ''}`
-        : mt5S === 'online' ? 'Verbunden' : 'Nicht eingeloggt',
+        : mt5S === 'online' ? t('mt5ConnectedSub') : t('mt5NotLoggedInSub'),
     } as NodeData] : []),
     ...botList.map((bw, i): NodeData => {
       const id  = `bot-${bw.bot.id}`
@@ -156,8 +158,8 @@ export default function NetworkDiagramFull() {
       return {
         id, ...pos, status: bs, accent: ACCENT.bot, Icon: BotIcon,
         label: bw.bot.name,
-        sub: bs === 'online' ? `${bw.status?.openPositions ?? 0} Positionen`
-          : bw.status?.state === 'paused' ? 'Pausiert' : 'Gestoppt',
+        sub: bs === 'online' ? t('botPositions', { count: bw.status?.openPositions ?? 0 })
+          : bw.status?.state === 'paused' ? t('botPausedSub') : t('botStoppedSub'),
       }
     }),
   ]
@@ -195,7 +197,7 @@ export default function NetworkDiagramFull() {
                 boxShadow: s === 'online' ? `0 0 5px ${SC[s]}` : 'none',
               }} />
               <span className="text-xs font-medium" style={{ color: 'var(--text-3)' }}>
-                {s === 'online' ? 'Online' : s === 'warning' ? 'Warnung' : 'Offline'}
+                {s === 'online' ? t('statusOnline') : s === 'warning' ? t('statusWarning') : t('statusOffline')}
               </span>
             </div>
           ))}
@@ -208,12 +210,12 @@ export default function NetworkDiagramFull() {
           )}
           <button
             onClick={resetPositions}
-            title="Positionen zurücksetzen"
+            title={t('resetTitle')}
             className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer"
             style={{ color: 'var(--text-3)', border: '1px solid var(--border)', background: 'transparent' }}
           >
             <RotateCcw size={10} />
-            Reset
+            {t('resetLabel')}
           </button>
         </div>
       </div>
