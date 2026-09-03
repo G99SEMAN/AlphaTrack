@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BotWithStatus } from '@/types/bot'
 import { Trade } from '@/types/trade'
 import BotPerfCard from '@/components/bots/BotPerfCard'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   botsWithStatus: BotWithStatus[]
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function BotPerformanceClient({ botsWithStatus, profileId }: Props) {
+  const t = useTranslations('bots.performance')
   const [trackedBotIds, setTrackedBotIds] = useState<string[]>([])
   const [allBotTrades, setAllBotTrades] = useState<Trade[]>([])
   const [loading, setLoading] = useState(true)
@@ -66,9 +68,9 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
     <>
       <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bot Performance</h1>
+          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
           <p className="text-sm mt-0.5" style={{ color: 'var(--text-3)' }}>
-            Kumulierter P&L und Kennzahlen pro Bot
+            {t('subtitle')}
           </p>
         </div>
         <button
@@ -77,13 +79,13 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
           style={{ background: 'var(--accent)', color: '#fff' }}
         >
           <Plus size={16} />
-          Bot hinzufügen
+          {t('addBotBtn')}
         </button>
       </div>
 
       {loading ? (
         <div className="flex items-center justify-center h-48">
-          <p style={{ color: 'var(--text-3)' }}>Lädt…</p>
+          <p style={{ color: 'var(--text-3)' }}>{t('loadingText')}</p>
         </div>
       ) : trackedBots.length === 0 ? (
         <div
@@ -91,10 +93,10 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
           style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
         >
           <p className="font-medium mb-2" style={{ color: 'var(--text-2)' }}>
-            Noch keine Bots zur Performance-Messung hinzugefügt
+            {t('emptyTitle')}
           </p>
           <p className="text-sm" style={{ color: 'var(--text-3)' }}>
-            Klicke auf "Bot hinzufügen", um einen verbundenen Bot zu überwachen.
+            {t('emptyDescription')}
           </p>
         </div>
       ) : (
@@ -133,15 +135,15 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
               }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-bold text-lg" style={{ color: 'var(--text-1)' }}>Bot hinzufügen</h2>
-                <button onClick={() => setShowAddModal(false)} aria-label="Schließen">
+                <h2 className="font-bold text-lg" style={{ color: 'var(--text-1)' }}>{t('addBotBtn')}</h2>
+                <button onClick={() => setShowAddModal(false)} aria-label={t('closeModalAriaLabel')}>
                   <X size={18} style={{ color: 'var(--text-3)' }} />
                 </button>
               </div>
 
               {connectedBots.length === 0 ? (
                 <p className="text-sm py-4 text-center" style={{ color: 'var(--text-3)' }}>
-                  Keine verbundenen Bots gefunden.
+                  {t('noConnectedBots')}
                 </p>
               ) : (
                 <div className="flex flex-col gap-2" style={{ maxHeight: 280, overflowY: 'auto' }}>
@@ -165,10 +167,10 @@ export default function BotPerformanceClient({ botsWithStatus, profileId }: Prop
                         </p>
                         <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
                           {alreadyTracked
-                            ? 'Bereits hinzugefügt'
+                            ? t('alreadyAdded')
                             : bw.status?.connectionState === 'connected'
-                              ? 'Verbunden'
-                              : 'Verbindung schwach'}
+                              ? t('connectedStatus')
+                              : t('weakConnectionStatus')}
                         </p>
                       </button>
                     )
