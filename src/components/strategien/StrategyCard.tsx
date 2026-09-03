@@ -4,10 +4,11 @@ import { useState, useTransition } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Pencil, Trash2, Loader2, Clock, Shield } from 'lucide-react'
 import { currencySymbol } from '@/lib/currency'
-import { Strategy, TIMEFRAME_LABELS, normalizeRules } from '@/types/strategy'
+import { Strategy, getTimeframeLabels, normalizeRules } from '@/types/strategy'
 import { Trade } from '@/types/trade'
 import { deleteStrategyAction } from '@/lib/actions'
 import StrategyModal from './StrategyModal'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   strategy: Strategy
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export default function StrategyCard({ strategy, trades, currency, onOpen }: Props) {
+  const t = useTranslations('strategien.card')
+  const timeframeLabels = getTimeframeLabels(useTranslations('strategien.timeframes'))
   const [showEdit, setShowEdit] = useState(false)
   const [isPending, startTransition] = useTransition()
 
@@ -27,7 +30,7 @@ export default function StrategyCard({ strategy, trades, currency, onOpen }: Pro
   const allLinked = trades.filter(t => t.strategyId === strategy.id)
 
   function handleDelete() {
-    if (!confirm(`Strategie "${strategy.name}" wirklich löschen?`)) return
+    if (!confirm(t('deleteConfirm', { name: strategy.name }))) return
     startTransition(() => deleteStrategyAction(strategy.id))
   }
 
@@ -104,14 +107,14 @@ export default function StrategyCard({ strategy, trades, currency, onOpen }: Pro
             >
               <Clock size={10} />
               {strategy.timeframe}
-              <span style={{ color: 'var(--text-3)' }}>- {TIMEFRAME_LABELS[strategy.timeframe]}</span>
+              <span style={{ color: 'var(--text-3)' }}>- {timeframeLabels[strategy.timeframe]}</span>
             </span>
             <span
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium"
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
               <Shield size={10} />
-              {strategy.riskPerTrade}% Risiko
+              {strategy.riskPerTrade}% {t('riskLabel')}
             </span>
           </div>
 
@@ -133,7 +136,7 @@ export default function StrategyCard({ strategy, trades, currency, onOpen }: Pro
               ))}
               {normalizeRules(strategy.rules).length > 3 && (
                 <li className="text-xs" style={{ color: 'var(--text-3)' }}>
-                  +{normalizeRules(strategy.rules).length - 3} weitere
+                  {t('moreRules', { count: normalizeRules(strategy.rules).length - 3 })}
                 </li>
               )}
             </ul>
@@ -145,13 +148,13 @@ export default function StrategyCard({ strategy, trades, currency, onOpen }: Pro
             style={{ borderTop: '1px solid var(--border)' }}
           >
             <div className="text-center">
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Trades</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colTrades')}</p>
               <p className="text-sm font-bold font-mono" style={{ color: 'var(--text-1)' }}>
                 {allLinked.length}
               </p>
             </div>
             <div className="text-center">
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Win Rate</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colWinRate')}</p>
               <p
                 className="text-sm font-bold font-mono"
                 style={{
@@ -162,7 +165,7 @@ export default function StrategyCard({ strategy, trades, currency, onOpen }: Pro
               </p>
             </div>
             <div className="text-center">
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>P&L</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colPnl')}</p>
               <p
                 className="text-sm font-bold font-mono"
                 style={{
