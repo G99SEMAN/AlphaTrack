@@ -4,18 +4,23 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ScrollText, RefreshCw } from 'lucide-react'
 import { BridgeLogEntry } from '@/types/bot'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   botId: string
 }
 
-const LEVEL_STYLE = {
-  info:  { label: 'INFO', color: '#60a5fa', bg: 'rgba(96,165,250,0.1)' },
-  warn:  { label: 'WARN', color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
-  error: { label: 'ERR',  color: '#ef4444', bg: 'rgba(239,68,68,0.1)' },
+function getLevelStyle(t: ReturnType<typeof useTranslations<'bridge.logPanel'>>) {
+  return {
+    info:  { label: t('levelInfo'), color: '#60a5fa', bg: 'rgba(96,165,250,0.1)' },
+    warn:  { label: t('levelWarn'), color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
+    error: { label: t('levelErr'),  color: '#ef4444', bg: 'rgba(239,68,68,0.1)' },
+  }
 }
 
 export default function BridgeLogPanel({ botId }: Props) {
+  const t = useTranslations('bridge.logPanel')
+  const levelStyle = getLevelStyle(t)
   const [log, setLog] = useState<BridgeLogEntry[]>([])
   const [loading, setLoading] = useState(true)
   const [autoScroll, setAutoScroll] = useState(true)
@@ -46,24 +51,24 @@ export default function BridgeLogPanel({ botId }: Props) {
       <div className="flex items-center justify-between px-5 pt-4 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="flex items-center gap-2">
           <ScrollText size={15} style={{ color: 'var(--text-3)' }} />
-          <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>Bridge Log</p>
+          <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>{t('heading')}</p>
           <span className="text-xs px-1.5 py-0.5 rounded font-mono" style={{ background: 'var(--surface-2)', color: 'var(--text-3)' }}>{log.length}</span>
         </div>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-1.5 cursor-pointer select-none">
             <input type="checkbox" checked={autoScroll} onChange={e => setAutoScroll(e.target.checked)} className="rounded" />
-            <span className="text-xs" style={{ color: 'var(--text-3)' }}>Auto-Scroll</span>
+            <span className="text-xs" style={{ color: 'var(--text-3)' }}>{t('autoScroll')}</span>
           </label>
-          <button onClick={() => poll()} className="cursor-pointer" title="Aktualisieren">
+          <button onClick={() => poll()} className="cursor-pointer" title={t('refreshTooltip')}>
             <RefreshCw size={13} style={{ color: 'var(--text-3)' }} />
           </button>
         </div>
       </div>
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-3 flex flex-col gap-0.5 font-mono" style={{ maxHeight: 360 }}>
-        {loading && <p className="text-xs p-4 text-center" style={{ color: 'var(--text-3)' }}>Lade Log...</p>}
-        {!loading && log.length === 0 && <p className="text-xs p-4 text-center" style={{ color: 'var(--text-3)' }}>Noch keine Einträge.</p>}
+        {loading && <p className="text-xs p-4 text-center" style={{ color: 'var(--text-3)' }}>{t('loading')}</p>}
+        {!loading && log.length === 0 && <p className="text-xs p-4 text-center" style={{ color: 'var(--text-3)' }}>{t('noEntries')}</p>}
         {log.map(entry => {
-          const style = LEVEL_STYLE[entry.level]
+          const style = levelStyle[entry.level]
           const time = new Date(entry.timestamp).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
           return (
             <div key={entry.id} className="flex items-start gap-2 px-2 py-1.5 rounded-lg text-xs min-w-0"
