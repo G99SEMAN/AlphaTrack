@@ -4,15 +4,15 @@ import { useEffect, useRef, useState, useTransition } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { X, Loader2, Check, Plus, Trash2 } from 'lucide-react'
-import { Strategy, STRATEGY_COLORS, TIMEFRAME_LABELS, Timeframe, normalizeRules } from '@/types/strategy'
+import { Strategy, STRATEGY_COLORS, TIMEFRAME_KEYS, getTimeframeLabels, normalizeRules } from '@/types/strategy'
 import { createStrategyAction, updateStrategyAction } from '@/lib/actions'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   strategy?: Strategy
   onClose: () => void
 }
 
-const TIMEFRAMES = Object.keys(TIMEFRAME_LABELS) as Timeframe[]
 const MIN_RULES = 3
 
 function initRules(strategy?: Strategy): string[] {
@@ -22,6 +22,8 @@ function initRules(strategy?: Strategy): string[] {
 }
 
 export default function StrategyModal({ strategy, onClose }: Props) {
+  const t = useTranslations('strategien.modal')
+  const timeframeLabels = getTimeframeLabels(useTranslations('strategien.timeframes'))
   const [mounted, setMounted] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [saveError, setSaveError] = useState<string | null>(null)
@@ -59,7 +61,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
         }
         onClose()
       } catch {
-        setSaveError('Strategie konnte nicht gespeichert werden.')
+        setSaveError(t('saveError'))
       }
     })
   }
@@ -108,10 +110,10 @@ export default function StrategyModal({ strategy, onClose }: Props) {
         >
           <div>
             <h2 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>
-              {isEdit ? 'Strategie bearbeiten' : 'Neue Strategie'}
+              {isEdit ? t('editTitle') : t('newTitle')}
             </h2>
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
-              {isEdit ? `ID: ${strategy!.id}` : 'Strategie definieren und speichern'}
+              {isEdit ? t('idLabel', { id: strategy!.id }) : t('createSubtitle')}
             </p>
           </div>
           <button
@@ -135,13 +137,13 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             {/* Name */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Name *
+                {t('nameLabel')}
               </label>
               <input
                 name="name"
                 type="text"
                 defaultValue={strategy?.name ?? ''}
-                placeholder='z.B. "Breakout London Open"'
+                placeholder={t('namePlaceholder')}
                 required
                 className={inputClass}
                 style={inputStyle}
@@ -151,13 +153,13 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             {/* Beschreibung */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Beschreibung
+                {t('descriptionLabel')}
               </label>
               <input
                 name="description"
                 type="text"
                 defaultValue={strategy?.description ?? ''}
-                placeholder="Kurze Zusammenfassung der Strategie"
+                placeholder={t('descriptionPlaceholder')}
                 className={inputClass}
                 style={inputStyle}
               />
@@ -167,7 +169,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Zeitrahmen *
+                  {t('timeframeLabel')}
                 </label>
                 <select
                   name="timeframe"
@@ -176,16 +178,16 @@ export default function StrategyModal({ strategy, onClose }: Props) {
                   className={inputClass}
                   style={{ ...inputStyle, cursor: 'pointer' }}
                 >
-                  {TIMEFRAMES.map(tf => (
+                  {TIMEFRAME_KEYS.map(tf => (
                     <option key={tf} value={tf}>
-                      {tf} - {TIMEFRAME_LABELS[tf]}
+                      {tf} - {timeframeLabels[tf]}
                     </option>
                   ))}
                 </select>
               </div>
               <div>
                 <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                  Risiko pro Trade (%)
+                  {t('riskLabel')}
                 </label>
                 <div className="relative">
                   <input
@@ -214,7 +216,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className={labelClass} style={{ color: 'var(--text-3)', marginBottom: 0 }}>
-                  Setup-Regeln
+                  {t('rulesLabel')}
                 </label>
                 <button
                   type="button"
@@ -223,7 +225,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
                   style={{ background: 'var(--accent-bg)', color: 'var(--accent)', border: '1px solid var(--accent)' }}
                 >
                   <Plus size={11} />
-                  Regel hinzufügen
+                  {t('addRuleBtn')}
                 </button>
               </div>
               <div className="flex flex-col gap-2">
@@ -239,7 +241,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
                       type="text"
                       value={rule}
                       onChange={e => updateRule(index, e.target.value)}
-                      placeholder={`Regel ${index + 1}`}
+                      placeholder={t('rulePlaceholder', { n: index + 1 })}
                       className={inputClass}
                       style={inputStyle}
                     />
@@ -267,12 +269,12 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             {/* Notizen */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Notizen / Detailinhalt
+                {t('notesLabel')}
               </label>
               <textarea
                 name="notes"
                 defaultValue={strategy?.notes ?? ''}
-                placeholder="Ausführliche Beschreibung, Tagesablauf, Regeln... Abschnitte mit --- trennen."
+                placeholder={t('notesPlaceholder')}
                 rows={8}
                 className={inputClass + ' resize-y'}
                 style={inputStyle}
@@ -282,7 +284,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
             {/* Farbe */}
             <div>
               <label className={labelClass} style={{ color: 'var(--text-3)' }}>
-                Farbe
+                {t('colorLabel')}
               </label>
               <div className="flex gap-2 flex-wrap">
                 {STRATEGY_COLORS.map(c => (
@@ -315,7 +317,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
               className="px-4 py-2 rounded-lg text-sm font-medium cursor-pointer"
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
-              Abbrechen
+              {t('cancelBtn')}
             </button>
             <button
               type="submit"
@@ -328,7 +330,7 @@ export default function StrategyModal({ strategy, onClose }: Props) {
               }}
             >
               {isPending && <Loader2 size={14} className="animate-spin" />}
-              {isEdit ? 'Speichern' : 'Strategie erstellen'}
+              {isEdit ? t('saveBtn') : t('createBtn')}
             </button>
           </div>
           {saveError && (
