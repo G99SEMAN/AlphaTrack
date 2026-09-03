@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Zap, ChevronDown, ChevronUp, Check, AlertCircle, Loader2, ShieldOff } from 'lucide-react'
 import { ConnectionState, BotState, TradeOrderResult } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   botId: string
@@ -17,6 +18,7 @@ const FALLBACK_SYMBOLS = ['EURUSDp', 'GBPUSDp', 'XAUUSDp', 'USDJPYp', 'GBPJPYp',
 const LOT_PRESETS = [0.01, 0.05, 0.1, 0.25, 0.5, 1.0]
 
 export default function TradeExecutorPanel({ botId, connectionState, botState, activeSymbols }: Props) {
+  const t = useTranslations('bridge.executor')
   const { isUnlocked } = useTradingLock()
   const [symbol, setSymbol] = useState('')
   const [customSymbol, setCustomSymbol] = useState('')
@@ -77,7 +79,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
       } else {
         setLastResult({
           success: false,
-          error: data.error ?? 'Unbekannter Fehler',
+          error: data.error ?? t('unknownErrorLong'),
           symbol: effectiveSymbol,
           direction: direction!,
           lots: lotsNum,
@@ -88,7 +90,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
     } catch (e) {
       setLastResult({
         success: false,
-        error: 'Netzwerkfehler',
+        error: t('networkError'),
         symbol: effectiveSymbol,
         direction: direction!,
         lots: lotsNum,
@@ -109,25 +111,25 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
           <Zap size={15} style={{ color: '#ef4444' }} />
         </div>
         <div>
-          <h3 className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Trade-Executor</h3>
-          <p className="text-xs" style={{ color: 'var(--text-3)' }}>Trade direkt in MT5 ausführen</p>
+          <h3 className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('heading')}</h3>
+          <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('subtitle')}</p>
         </div>
         {!isUnlocked ? (
           <span className="ml-auto flex items-center gap-1 text-xs px-2 py-1 rounded-lg font-semibold"
             style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444' }}>
-            <ShieldOff size={11} /> Trading gesperrt
+            <ShieldOff size={11} /> {t('tradingLocked')}
           </span>
         ) : (isOffline || isNotRunning) && (
           <span className="ml-auto text-xs px-2 py-1 rounded-lg font-semibold"
             style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444' }}>
-            {isOffline ? 'Bot offline' : 'Bot nicht aktiv'}
+            {isOffline ? t('botOffline') : t('botNotActive')}
           </span>
         )}
       </div>
 
       {/* Symbol */}
       <div className="mb-4">
-        <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--text-3)' }}>Symbol</label>
+        <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--text-3)' }}>{t('symbolLabel')}</label>
         <div className="flex flex-wrap gap-1.5">
           {symbols.map(s => (
             <button key={s} onClick={() => { setSymbol(s); setCustomSymbol('') }}
@@ -149,7 +151,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
               border: symbol === '__custom__' ? '1px solid rgba(239,68,68,0.5)' : '1px solid var(--border)',
               color: symbol === '__custom__' ? '#ef4444' : 'var(--text-2)',
             }}>
-            Manuell
+            {t('manualBtn')}
           </button>
         </div>
         {symbol === '__custom__' && (
@@ -157,7 +159,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
             type="text"
             value={customSymbol}
             onChange={e => setCustomSymbol(e.target.value)}
-            placeholder="z.B. BTCUSD"
+            placeholder={t('customSymbolPlaceholder')}
             disabled={disabled}
             className="mt-2 w-full px-3 py-2 rounded-xl text-sm font-mono outline-none disabled:opacity-40"
             style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
@@ -167,7 +169,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
 
       {/* Direction */}
       <div className="mb-4">
-        <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--text-3)' }}>Richtung</label>
+        <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--text-3)' }}>{t('directionLabel')}</label>
         <div className="grid grid-cols-2 gap-2">
           <button onClick={() => setDirection('buy')}
             disabled={disabled}
@@ -195,9 +197,9 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
       {/* Lot Size */}
       <div className="mb-4">
         <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--text-3)' }}>
-          Lot-Größe
+          {t('lotSizeLabel')}
           <span className="ml-2 font-normal" style={{ color: 'var(--text-3)' }}>
-            ({lotsNum > 0 ? `${lotsNum} Lot` : 'ungültig'})
+            ({lotsNum > 0 ? `${lotsNum} ${t('lotUnit')}` : t('invalidLabel')})
           </span>
         </label>
         <div className="flex gap-1.5 mb-2 flex-wrap">
@@ -229,7 +231,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
         className="flex items-center gap-1.5 text-xs font-semibold mb-3 cursor-pointer opacity-70 hover:opacity-100 transition-opacity disabled:cursor-not-allowed"
         style={{ color: 'var(--text-3)' }}>
         {showSlTp ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-        Stop-Loss / Take-Profit (optional)
+        {t('slTpToggle')}
       </button>
 
       <AnimatePresence>
@@ -248,7 +250,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
                     border: slTpMode === mode ? '1px solid rgba(239,68,68,0.5)' : '1px solid var(--border)',
                     color: slTpMode === mode ? '#ef4444' : 'var(--text-3)',
                   }}>
-                  {mode === 'price' ? 'Preis' : 'Pips'}
+                  {mode === 'price' ? t('modePrice') : t('modePips')}
                 </button>
               ))}
             </div>
@@ -256,7 +258,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-3)' }}>
-                  Stop-Loss {slTpMode === 'pips' ? '(Pips)' : '(Preis)'}
+                  {t('slLabel')} {slTpMode === 'pips' ? t('pipsUnit') : t('priceUnit')}
                 </label>
                 <input
                   type="number"
@@ -264,7 +266,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
                   min="0"
                   value={sl}
                   onChange={e => setSl(e.target.value)}
-                  placeholder={slTpMode === 'pips' ? 'z.B. 20' : '0 = kein SL'}
+                  placeholder={slTpMode === 'pips' ? t('slPlaceholderPips') : t('slPlaceholderPrice')}
                   disabled={disabled}
                   className="w-full px-3 py-2 rounded-xl text-sm font-mono outline-none disabled:opacity-40"
                   style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
@@ -272,7 +274,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
               </div>
               <div>
                 <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-3)' }}>
-                  Take-Profit {slTpMode === 'pips' ? '(Pips)' : '(Preis)'}
+                  {t('tpLabel')} {slTpMode === 'pips' ? t('pipsUnit') : t('priceUnit')}
                 </label>
                 <input
                   type="number"
@@ -280,7 +282,7 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
                   min="0"
                   value={tp}
                   onChange={e => setTp(e.target.value)}
-                  placeholder={slTpMode === 'pips' ? 'z.B. 40' : '0 = kein TP'}
+                  placeholder={slTpMode === 'pips' ? t('tpPlaceholderPips') : t('tpPlaceholderPrice')}
                   disabled={disabled}
                   className="w-full px-3 py-2 rounded-xl text-sm font-mono outline-none disabled:opacity-40"
                   style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
@@ -308,12 +310,12 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
             : 'none',
         }}>
         {status === 'loading' ? (
-          <><Loader2 size={15} className="animate-spin" /> Wird ausgeführt...</>
+          <><Loader2 size={15} className="animate-spin" /> {t('executing')}</>
         ) : (
           <><Zap size={15} />
             {direction && effectiveSymbol
               ? `${direction.toUpperCase()} ${lotsNum} ${effectiveSymbol}`
-              : 'Trade ausführen'}
+              : t('executeTradeBtn')}
           </>
         )}
       </button>
@@ -333,11 +335,11 @@ export default function TradeExecutorPanel({ botId, connectionState, botState, a
             <div className="min-w-0">
               {lastResult.success ? (
                 <p className="text-xs font-bold" style={{ color: '#22c55e' }}>
-                  Order ausgeführt{lastResult.ticket ? ` · Ticket #${lastResult.ticket}` : ''}
+                  {t('orderExecuted')}{lastResult.ticket ? ` ${t('orderTicket', { ticket: lastResult.ticket })}` : ''}
                 </p>
               ) : (
                 <p className="text-xs font-bold" style={{ color: '#ef4444' }}>
-                  Fehler: {lastResult.error ?? 'Unbekannt'}
+                  {t('errorPrefix')} {lastResult.error ?? t('unknownError')}
                 </p>
               )}
               <p className="text-xs mt-0.5 font-mono" style={{ color: 'var(--text-3)' }}>
