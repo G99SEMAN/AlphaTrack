@@ -6,6 +6,7 @@ import { Activity, TrendingUp, TrendingDown, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { Trade } from '@/types/trade'
 import { BotEntry } from '@/types/bot'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   profileId: string
@@ -14,13 +15,14 @@ interface Props {
 }
 
 export default function LiveTradeFeed({ profileId, bots = [], initialTrades = [] }: Props) {
+  const t = useTranslations('bridge.tradeFeed')
   const botNames = new Map(bots.map(b => [b.id, b.name]))
 
   function resolveSourceLabel(trade: Trade): string | null {
     if (!trade.sourceId && !trade.botId) return null
     const sid = trade.sourceId ?? trade.botId
     if (sid === 'bridge/tradeexecuter') return 'Bridge'
-    return botNames.get(sid!) ?? 'Bot'
+    return botNames.get(sid!) ?? t('botFallback')
   }
   const [trades, setTrades] = useState<Trade[]>(initialTrades)
 
@@ -61,12 +63,12 @@ export default function LiveTradeFeed({ profileId, bots = [], initialTrades = []
       <div className="flex items-center gap-2 px-5 pt-4 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
         <Activity size={14} style={{ color: 'var(--text-3)' }} />
         <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Letzte Aktivität
+          {t('heading')}
         </p>
         <Link href="/bridge/trades"
           className="ml-auto flex items-center gap-1 text-xs font-semibold cursor-pointer transition-opacity hover:opacity-80"
           style={{ color: '#ef4444' }}>
-          Alle Trades
+          {t('allTradesLink')}
           <ExternalLink size={11} />
         </Link>
       </div>
@@ -76,7 +78,7 @@ export default function LiveTradeFeed({ profileId, bots = [], initialTrades = []
         {recent.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-28">
             <Activity size={22} style={{ color: 'var(--text-3)', marginBottom: 8 }} />
-            <p className="text-xs" style={{ color: 'var(--text-3)' }}>Noch keine Bot-Trades</p>
+            <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('noTrades')}</p>
           </div>
         ) : (
           <div className="flex flex-col">
@@ -109,7 +111,7 @@ export default function LiveTradeFeed({ profileId, bots = [], initialTrades = []
                           background: isOpen ? 'rgba(245,158,11,0.1)' : 'var(--bg)',
                           color: isOpen ? '#f59e0b' : 'var(--text-3)',
                         }}>
-                        {isOpen ? 'OFFEN' : 'CLOSED'}
+                        {isOpen ? t('statusOpen') : t('statusClosed')}
                       </span>
                       {sourceLabel && (
                         <span className="text-xs px-1.5 rounded font-medium leading-none py-0.5"
