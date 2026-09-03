@@ -5,11 +5,13 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Refere
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface DataPoint { month: string; pnl: number; trades: number }
 interface Props { data: DataPoint[]; currency: string }
 
 function CustomTooltip({ active, payload, label, currency }: { active?: boolean; payload?: { value: number; payload: DataPoint }[]; label?: string; currency: string }) {
+  const t = useTranslations('statistiken.monthlyPnlChart')
   if (!active || !payload?.length) return null
   const { pnl, trades } = payload[0].payload
   return (
@@ -18,12 +20,13 @@ function CustomTooltip({ active, payload, label, currency }: { active?: boolean;
       <p className="font-mono font-bold" style={{ color: pnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
         {pnl >= 0 ? '+' : ''}{pnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {currencySymbol(currency)}
       </p>
-      <p style={{ color: 'var(--text-3)' }}>{trades} Trades</p>
+      <p style={{ color: 'var(--text-3)' }}>{trades} {t('tooltipTradesSuffix')}</p>
     </div>
   )
 }
 
 export default function MonthlyPnlChart({ data, currency }: Props) {
+  const t = useTranslations('statistiken.monthlyPnlChart')
   const formatTick = useCallback((v: number) => `${v >= 0 ? '+' : ''}${v}€`, [])
 
   if (data.length === 0) return null
@@ -40,17 +43,17 @@ export default function MonthlyPnlChart({ data, currency }: Props) {
         <div>
           <div className="flex items-center gap-1.5">
             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-              Monatlicher P&L
+              {t('title')}
             </p>
-            <InfoTooltip text="Brutto-P&L pro Kalendermonat. Balken zeigen Gewinne (grün) und Verluste (rot)." />
+            <InfoTooltip text={t('tooltip')} />
           </div>
           <p className="text-sm font-semibold mt-0.5" style={{ color: 'var(--text-2)' }}>
-            {data.length} {data.length === 1 ? 'Monat' : 'Monate'}
+            {data.length} {data.length === 1 ? t('monthSingular') : t('monthPlural')}
           </p>
         </div>
         <div className="hidden xs:flex items-center gap-3 text-xs" style={{ color: 'var(--text-3)' }}>
-          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: 'var(--green)' }} /> Gewinn</span>
-          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: 'var(--red)' }} /> Verlust</span>
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: 'var(--green)' }} /> {t('legendGain')}</span>
+          <span className="flex items-center gap-1"><span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: 'var(--red)' }} /> {t('legendLoss')}</span>
         </div>
         <div className="flex xs:hidden items-center gap-2 text-xs" style={{ color: 'var(--text-3)' }}>
           <span className="inline-block w-2 h-2 rounded-sm" style={{ background: 'var(--green)' }} />
