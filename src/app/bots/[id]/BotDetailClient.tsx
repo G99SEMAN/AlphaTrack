@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Bot, Edit2, Check, X, Wifi, WifiOff, AlertTriangle } from 'lucide-react'
 import { BotEntry, BotStatusWithConnection, BridgeLogEntry, ConnectionState, BotState } from '@/types/bot'
 import { Profile } from '@/types/profile'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   bot: BotEntry
@@ -15,22 +16,23 @@ interface Props {
 }
 
 function ConnBadge({ state }: { state: ConnectionState | undefined }) {
+  const t = useTranslations('bots.detail')
   if (!state || state === 'offline') return (
     <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
       style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
-      <WifiOff size={9} /> Offline
+      <WifiOff size={9} /> {t('connOffline')}
     </span>
   )
   if (state === 'warning') return (
     <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
       style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.2)' }}>
-      <AlertTriangle size={9} /> Schwach
+      <AlertTriangle size={9} /> {t('connWarning')}
     </span>
   )
   return (
     <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
       style={{ background: 'rgba(0,217,126,0.1)', color: 'var(--green)', border: '1px solid rgba(0,217,126,0.2)' }}>
-      <Wifi size={9} /> Online
+      <Wifi size={9} /> {t('connOnline')}
     </span>
   )
 }
@@ -44,6 +46,7 @@ const STATE_COLORS: Record<BotState, string> = {
 }
 
 export default function BotDetailClient({ bot, status, log: initialLog, profiles }: Props) {
+  const t = useTranslations('bots.detail')
   const [editingName, setEditingName] = useState(false)
   const [nameInput, setNameInput] = useState(bot.name)
   const [currentName, setCurrentName] = useState(bot.name)
@@ -98,7 +101,7 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
       {/* Back + Header */}
       <div className="mb-5 flex items-center gap-3">
         <Link href="/bots" className="flex items-center gap-1 text-xs" style={{ color: 'var(--text-3)' }}>
-          <ArrowLeft size={14} /> Bots
+          <ArrowLeft size={14} /> {t('breadcrumbBots')}
         </Link>
         <span style={{ color: 'var(--text-3)' }}>/</span>
         <div className="flex items-center gap-2">
@@ -128,7 +131,7 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
               <div className="flex items-center gap-1.5">
                 <h1 className="text-base font-bold" style={{ color: 'var(--text-1)' }}>{currentName}</h1>
                 <button onClick={() => { setNameInput(currentName); setEditingName(true) }}
-                  className="opacity-40 hover:opacity-80" title="Name aendern (nur in AlphaTrack)">
+                  className="opacity-40 hover:opacity-80" title={t('editNameTooltip')}>
                   <Edit2 size={12} />
                 </button>
               </div>
@@ -150,13 +153,13 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
       {/* Identity + Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
         {[
-          { label: 'Bot-ID',         value: bot.id },
-          { label: 'Name',           value: currentName },
-          { label: 'Status',         value: status?.state ?? '—' },
-          { label: 'Offene Trades',  value: String(status?.openPositions ?? 0) },
-          { label: 'Profil',         value: profile?.name ?? '—' },
-          { label: 'Balance',        value: status?.balance != null ? `${status.balance.toFixed(2)} ${status.currency ?? ''}` : '—' },
-          { label: 'Uptime',         value: status?.uptime ? `${Math.floor(status.uptime / 60)}m` : '—' },
+          { label: t('idLabel'),         value: bot.id },
+          { label: t('nameLabel'),       value: currentName },
+          { label: t('statusLabel'),     value: status?.state ?? '—' },
+          { label: t('openTradesLabel'), value: String(status?.openPositions ?? 0) },
+          { label: t('profileLabel'),    value: profile?.name ?? '—' },
+          { label: t('balanceLabel'),    value: status?.balance != null ? `${status.balance.toFixed(2)} ${status.currency ?? ''}` : '—' },
+          { label: t('uptimeLabel'),     value: status?.uptime ? `${Math.floor(status.uptime / 60)}m` : '—' },
         ].map(s => (
           <div key={s.label} className="rounded-xl p-3"
             style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
@@ -169,15 +172,15 @@ export default function BotDetailClient({ bot, status, log: initialLog, profiles
       {/* Bot-Log (gespiegelt vom Bot-Terminal, C6.3) */}
       <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
         <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
-          <h2 className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Bot-Log</h2>
+          <h2 className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('botLogHeading')}</h2>
           <button onClick={refreshLog} className="text-[11px] px-2 py-1 rounded"
             style={{ background: 'var(--bg)', color: 'var(--text-3)', border: '1px solid var(--border)' }}>
-            Aktualisieren
+            {t('refreshBtn')}
           </button>
         </div>
         <div className="overflow-y-auto max-h-80 p-4 space-y-1 flex flex-col-reverse">
           {log.length === 0 ? (
-            <p className="text-xs text-center py-6" style={{ color: 'var(--text-3)' }}>Keine Log-Eintraege</p>
+            <p className="text-xs text-center py-6" style={{ color: 'var(--text-3)' }}>{t('noLogEntries')}</p>
           ) : (
             log.map(entry => (
               <div key={entry.id} className="flex items-start gap-2 text-xs font-mono">
