@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Bot, Check, Wifi, WifiOff } from 'lucide-react'
 import { BotWithStatus, BotStatus } from '@/types/bot'
 import { Profile } from '@/types/profile'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   initialBots: BotWithStatus[]
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function BotsSettingsClient({ initialBots, profiles }: Props) {
+  const t = useTranslations('bots.settingsPage')
   const filterBots = (list: BotWithStatus[]) =>
     list.filter(b => b.bot.type === 'bot' && b.status?.connectionState !== 'offline')
   const [bots] = useState<BotWithStatus[]>(filterBots(initialBots))
@@ -40,7 +42,7 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
     if (!parameters || Object.keys(parameters).length === 0) {
       return (
         <p className="text-[11px]" style={{ color: 'var(--text-3)' }}>
-          Dieser Bot unterstützt keine konfigurierbaren Parameter.
+          {t('noParametersMessage')}
         </p>
       )
     }
@@ -105,7 +107,7 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
           className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold cursor-pointer disabled:opacity-60 mt-1 self-start"
           style={{ background: 'var(--accent)', color: '#fff' }}>
           <Check size={12} />
-          {sending === botId ? 'Senden...' : 'Parameter senden'}
+          {sending === botId ? t('sendingBtn') : t('sendParamsBtn')}
         </button>
       </div>
     )
@@ -116,8 +118,8 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
 
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bot Einstellungen</h1>
-        <p className="text-sm" style={{ color: 'var(--text-3)' }}>Konfiguriere Parameter der verbundenen Bots</p>
+        <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
+        <p className="text-sm" style={{ color: 'var(--text-3)' }}>{t('subtitle')}</p>
       </div>
 
       {/* Leer-Zustand */}
@@ -129,9 +131,9 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
             style={{ background: 'var(--accent-bg)' }}>
             <Bot size={26} style={{ color: 'var(--accent)' }} />
           </div>
-          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>Kein Bot verbunden</h3>
+          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>{t('emptyTitle')}</h3>
           <p className="text-sm max-w-sm" style={{ color: 'var(--text-3)' }}>
-            Verbinde einen Bot über die Bridge — verbundene Bots erscheinen hier zur Konfiguration.
+            {t('emptyDescription')}
           </p>
         </motion.div>
       )}
@@ -170,8 +172,8 @@ export default function BotsSettingsClient({ initialBots, profiles }: Props) {
                     {profile && <span>{profile.name}</span>}
                     <span className="flex items-center gap-1">
                       {conn === 'connected'
-                        ? <><Wifi size={11} style={{ color: 'var(--green)' }} /> Online</>
-                        : <><WifiOff size={11} style={{ color: '#ef4444' }} /> Offline</>}
+                        ? <><Wifi size={11} style={{ color: 'var(--green)' }} /> {t('connOnline')}</>
+                        : <><WifiOff size={11} style={{ color: '#ef4444' }} /> {t('connOffline')}</>}
                     </span>
                   </div>
                 </div>
