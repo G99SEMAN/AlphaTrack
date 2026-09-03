@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, TrendingUp, Search, Edit2, Check, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { BotWithStatus } from '@/types/bot'
 import { Profile } from '@/types/profile'
 import WatchdogPanel from '@/components/bridge/WatchdogPanel'
@@ -22,6 +23,7 @@ interface Props {
 const filterBridge = (list: BotWithStatus[]) => list.filter(b => !b.bot.type || b.bot.type === 'bridge')
 
 export default function BridgeClient({ botsWithStatus: initial, profiles, tradesByProfile }: Props) {
+  const t = useTranslations('bridge.client')
   const { bots: allBots, lastUpdated, refresh } = useBotStatus()
 
   const contextBots = filterBridge(allBots)
@@ -77,8 +79,12 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
             <Bot size={20} style={{ color: '#ef4444' }} />
           </div>
           <div>
-            <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bridge</h1>
-            <p className="text-xs" style={{ color: 'var(--text-3)' }}>{bots.length} Bot{bots.length !== 1 ? 's' : ''} konfiguriert</p>
+            <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
+            <p className="text-xs" style={{ color: 'var(--text-3)' }}>
+              {bots.length === 1
+                ? t('botsConfiguredOne', { count: bots.length })
+                : t('botsConfiguredMany', { count: bots.length })}
+            </p>
           </div>
         </div>
         <button
@@ -89,7 +95,7 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
             border: '1px solid rgba(168,85,247,0.25)',
             color: '#a855f7',
           }}>
-          <Search size={13} />Bridge suchen
+          <Search size={13} />{t('searchBridgeBtn')}
         </button>
       </div>
 
@@ -109,9 +115,9 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
             style={{ background: 'rgba(239,68,68,0.1)' }}>
             <Bot size={28} style={{ color: '#ef4444' }} />
           </div>
-          <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-1)' }}>Kein Bot verbunden</h3>
+          <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-1)' }}>{t('noBotTitle')}</h3>
           <p className="text-sm max-w-sm" style={{ color: 'var(--text-3)' }}>
-            Starte die Python-Bridge - sie verbindet sich automatisch mit AlphaTrack.
+            {t('noBotDescription')}
           </p>
         </motion.div>
       )}
@@ -147,11 +153,11 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
               <div className="rounded-xl p-4 mb-4 flex flex-wrap items-center gap-4"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                 <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Bridge-ID</span>
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>{t('bridgeIdLabel')}</span>
                   <span className="font-mono text-xs font-semibold" style={{ color: 'var(--text-2)' }}>{selected.bot.id}</span>
                 </div>
                 <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Name</span>
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>{t('nameLabel')}</span>
                   {editingName ? (
                     <div className="flex items-center gap-1">
                       <input
@@ -176,7 +182,7 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                       <span className="text-xs font-semibold" style={{ color: 'var(--text-1)' }}>{selected.bot.name}</span>
                       <button
                         onClick={() => { setNameInput(selected.bot.name); setEditingName(true) }}
-                        className="opacity-40 hover:opacity-80" title="Name aendern (nur in AlphaTrack)">
+                        className="opacity-40 hover:opacity-80" title={t('editNameTooltip')}>
                         <Edit2 size={11} />
                       </button>
                     </div>
@@ -184,12 +190,12 @@ export default function BridgeClient({ botsWithStatus: initial, profiles, trades
                 </div>
                 {selectedProfile && (
                   <div className="flex flex-col gap-0.5">
-                    <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Profil</span>
+                    <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>{t('profileLabel')}</span>
                     <span className="text-xs" style={{ color: 'var(--text-2)' }}>{selectedProfile.name} · {selectedProfile.broker}</span>
                   </div>
                 )}
                 <div className="flex flex-col gap-0.5 min-w-0 ml-auto">
-                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>Bridge-URL</span>
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>{t('bridgeUrlLabel')}</span>
                   <span className="font-mono text-[11px]" style={{ color: 'var(--text-3)' }}>{selected.bot.url}</span>
                 </div>
               </div>
