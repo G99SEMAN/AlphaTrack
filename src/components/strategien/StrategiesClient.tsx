@@ -8,6 +8,7 @@ import { Trade } from '@/types/trade'
 import StrategyCard from './StrategyCard'
 import StrategyModal from './StrategyModal'
 import StrategyDetailPanel from './StrategyDetailPanel'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   strategies: Strategy[]
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function StrategiesClient({ strategies, trades, currency }: Props) {
+  const t = useTranslations('strategien.client')
   const [showModal, setShowModal] = useState(false)
   const [editStrategy, setEditStrategy] = useState<Strategy | null>(null)
   const [detailStrategyId, setDetailStrategyId] = useState<string | null>(null)
@@ -46,8 +48,13 @@ export default function StrategiesClient({ strategies, trades, currency }: Props
         <div>
           <p className="text-sm" style={{ color: 'var(--text-3)' }}>
             {strategies.length === 0
-              ? 'Noch keine Strategien definiert'
-              : `${strategies.length} ${strategies.length === 1 ? 'Strategie' : 'Strategien'} · ${totalWithStrategy} von ${totalClosed} Trades zugeordnet`
+              ? t('noStrategiesYet')
+              : t('summary', {
+                  count: strategies.length,
+                  countLabel: strategies.length === 1 ? t('countOne') : t('countMany'),
+                  withStrategy: totalWithStrategy,
+                  totalClosed,
+                })
             }
           </p>
         </div>
@@ -59,7 +66,7 @@ export default function StrategiesClient({ strategies, trades, currency }: Props
           onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
         >
           <Plus size={15} />
-          Neue Strategie
+          {t('newStrategyBtn')}
         </button>
       </div>
 
@@ -79,10 +86,10 @@ export default function StrategiesClient({ strategies, trades, currency }: Props
           </div>
           <div className="text-center">
             <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-1)' }}>
-              Keine Strategien vorhanden
+              {t('emptyTitle')}
             </p>
             <p className="text-sm max-w-xs" style={{ color: 'var(--text-3)' }}>
-              Definiere deine Trading-Strategien, um sie beim Eintragen von Trades auszuwählen und ihre Performance zu verfolgen.
+              {t('emptyDescription')}
             </p>
           </div>
           <button
@@ -91,7 +98,7 @@ export default function StrategiesClient({ strategies, trades, currency }: Props
             style={{ background: 'var(--accent)', color: '#fff' }}
           >
             <Plus size={15} />
-            Erste Strategie anlegen
+            {t('createFirstBtn')}
           </button>
         </motion.div>
       ) : (
