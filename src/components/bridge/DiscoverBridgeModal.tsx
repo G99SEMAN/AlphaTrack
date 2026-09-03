@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Search, CheckCircle, Loader2, WifiOff, Cpu } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   onClose: () => void
@@ -12,6 +13,7 @@ interface Props {
 type Step = 'input' | 'scanning' | 'searching' | 'success' | 'error'
 
 export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
+  const t = useTranslations('bridge.discover')
   const [url, setUrl] = useState('http://192.168.1.x:8765')
   const [step, setStep] = useState<Step>('scanning')
   const [error, setError] = useState<string | null>(null)
@@ -54,7 +56,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error ?? 'Unbekannter Fehler')
+        setError(data.error ?? t('unknownError'))
         setStep('error')
         return
       }
@@ -62,7 +64,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
       setStep('success')
       setTimeout(() => { onDiscovered(); onClose() }, 1800)
     } catch {
-      setError('Netzwerkfehler')
+      setError(t('networkError'))
       setStep('error')
     }
   }
@@ -86,8 +88,8 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                 <Search size={16} style={{ color: '#a855f7' }} />
               </div>
               <div>
-                <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Bridge suchen</p>
-                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Bridge automatisch suchen</p>
+                <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</p>
+                <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('subtitle')}</p>
               </div>
             </div>
             <button onClick={onClose} className="cursor-pointer w-8 h-8 flex items-center justify-center rounded-lg"
@@ -101,16 +103,16 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
             <div className="flex flex-col items-center py-6 gap-3">
               <Loader2 size={28} className="animate-spin" style={{ color: '#a855f7' }} />
               <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>
-                Suche Bridge im Netzwerk...
+                {t('scanningTitle')}
               </p>
               <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-                Scanne lokales Netzwerk : 8765
+                {t('scanningSubtitle')}
               </p>
               <button
                 onClick={() => setStep('input')}
                 className="mt-2 text-xs cursor-pointer underline"
                 style={{ color: 'var(--text-3)' }}>
-                Manuell eingeben
+                {t('manualEntryLink')}
               </button>
             </div>
           )}
@@ -121,7 +123,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
               <div className="mb-4">
                 <label className="block text-xs font-semibold mb-1.5 uppercase tracking-wide"
                   style={{ color: 'var(--text-3)' }}>
-                  Bridge-URL (Flask Command-Server)
+                  {t('urlLabel')}
                 </label>
                 <input
                   type="text"
@@ -134,7 +136,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                   autoFocus
                 />
                 <p className="mt-1 text-[10px]" style={{ color: 'var(--text-3)' }}>
-                  IP-Adresse des Trading-Rechners + Port 8765
+                  {t('urlHelper')}
                 </p>
               </div>
 
@@ -150,14 +152,14 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                 <button onClick={onClose}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
                   style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}>
-                  Abbrechen
+                  {t('cancelBtn')}
                 </button>
                 <button onClick={handleDiscover}
                   disabled={!url.trim()}
                   className="flex-1 py-2.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
                   style={{ background: '#a855f7', color: '#fff' }}>
                   <Search size={14} />
-                  Suchen
+                  {t('searchBtn')}
                 </button>
               </div>
             </>
@@ -167,7 +169,7 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
           {step === 'searching' && (
             <div className="flex flex-col items-center py-6 gap-3">
               <Loader2 size={28} className="animate-spin" style={{ color: '#a855f7' }} />
-              <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>Verbinde mit Bridge...</p>
+              <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>{t('searchingTitle')}</p>
               <p className="text-xs font-mono" style={{ color: 'var(--text-3)' }}>{url}</p>
             </div>
           )}
@@ -179,13 +181,13 @@ export default function DiscoverBridgeModal({ onClose, onDiscovered }: Props) {
                 style={{ background: 'rgba(0,217,126,0.12)' }}>
                 <CheckCircle size={24} style={{ color: '#00d97e' }} />
               </div>
-              <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Bridge gefunden!</p>
+              <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('successTitle')}</p>
               <div className="flex items-center gap-2 px-3 py-2 rounded-xl"
                 style={{ background: 'var(--surface-2)' }}>
                 <Cpu size={13} style={{ color: '#a855f7' }} />
                 <p className="text-xs font-semibold" style={{ color: 'var(--text-2)' }}>{foundName}</p>
               </div>
-              <p className="text-xs" style={{ color: 'var(--text-3)' }}>Wird hinzugefügt...</p>
+              <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('addingText')}</p>
             </div>
           )}
 
