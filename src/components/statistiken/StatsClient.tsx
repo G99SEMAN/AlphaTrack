@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { BarChart2 } from 'lucide-react'
 import { ExtendedStats } from '@/lib/statsExtended'
 import { useStatsSettings } from '@/hooks/useStatsSettings'
+import { useTranslations } from 'next-intl'
 import KpiRow from './KpiRow'
 import DirectionCards from './DirectionCards'
 import InstrumentTable from './InstrumentTable'
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export default function StatsClient({ stats, currency }: Props) {
+  const t = useTranslations('statistiken.client')
   const { settings } = useStatsSettings()
   const activeStats = stats
 
@@ -40,9 +42,9 @@ export default function StatsClient({ stats, currency }: Props) {
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style={{ background: 'var(--surface-2)' }}>
           <BarChart2 size={22} style={{ color: 'var(--text-3)' }} />
         </div>
-        <h3 className="font-semibold mb-2" style={{ color: 'var(--text-1)' }}>Noch keine Auswertung</h3>
+        <h3 className="font-semibold mb-2" style={{ color: 'var(--text-1)' }}>{t('emptyTitle')}</h3>
         <p className="text-sm max-w-xs" style={{ color: 'var(--text-2)' }}>
-          Trage mindestens einen abgeschlossenen Trade ein um die Statistiken zu sehen.
+          {t('emptyDescription')}
         </p>
       </motion.div>
     )
