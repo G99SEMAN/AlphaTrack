@@ -7,16 +7,19 @@ import {
   ChevronDown, AlertTriangle, Info, X,
 } from 'lucide-react'
 import { BotEntry, BotStatus, BridgeLogEntry } from '@/types/bot'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   bots: BotEntry[]
   initialLogs: Record<string, BridgeLogEntry[]>
 }
 
-const LEVEL_STYLE = {
-  info:  { label: 'INFO', color: '#60a5fa', bg: 'rgba(96,165,250,0.08)'  },
-  warn:  { label: 'WARN', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)'  },
-  error: { label: 'ERR',  color: '#ef4444', bg: 'rgba(239,68,68,0.08)'   },
+function getLevelStyle(t: ReturnType<typeof useTranslations<'bridge.logPanel'>>) {
+  return {
+    info:  { label: t('levelInfo'), color: '#60a5fa', bg: 'rgba(96,165,250,0.08)'  },
+    warn:  { label: t('levelWarn'), color: '#f59e0b', bg: 'rgba(245,158,11,0.08)'  },
+    error: { label: t('levelErr'),  color: '#ef4444', bg: 'rgba(239,68,68,0.08)'   },
+  }
 }
 
 type LevelFilter = 'all' | 'info' | 'warn' | 'error'
@@ -61,6 +64,8 @@ function exportCSV(entries: BridgeLogEntry[], filename: string) {
 }
 
 export default function BridgeLogClient({ bots, initialLogs }: Props) {
+  const t = useTranslations('bridge.logPage')
+  const levelStyle = getLevelStyle(useTranslations('bridge.logPanel'))
   const [logs, setLogs] = useState<Record<string, BridgeLogEntry[]>>(initialLogs)
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all')
   const [search, setSearch] = useState('')
@@ -167,12 +172,12 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
             <ScrollText size={17} style={{ color: '#60a5fa' }} />
           </div>
           <div>
-            <h1 className="text-lg font-bold" style={{ color: 'var(--text-1)' }}>Bridge Log</h1>
+            <h1 className="text-lg font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
             <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-              Systemzeit · alle Meldungen aller Bots
+              {t('subtitleBase')}
               {lastTradeSync && (
                 <span className="ml-3" style={{ color: 'var(--accent)' }}>
-                  Letzter Sync:{' '}
+                  {t('lastSyncLabel')}{' '}
                   {new Date(lastTradeSync).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
                 </span>
               )}
@@ -184,16 +189,16 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
       {bots.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
           <ScrollText size={36} style={{ color: 'var(--text-3)', opacity: 0.4 }} />
-          <p className="text-sm" style={{ color: 'var(--text-3)' }}>Keine Bridge aktiv.</p>
+          <p className="text-sm" style={{ color: 'var(--text-3)' }}>{t('noBridgeActive')}</p>
         </div>
       ) : (
         <>
           {/* KPI-Zeile */}
           <div className="grid grid-cols-3 gap-3 mb-5">
             {[
-              { label: 'Einträge gesamt', value: totalEntries, color: 'var(--text-1)' },
-              { label: 'Warnungen', value: warnCount,  color: '#f59e0b' },
-              { label: 'Fehler',    value: errorCount, color: '#ef4444' },
+              { label: t('kpiTotalEntries'), value: totalEntries, color: 'var(--text-1)' },
+              { label: t('kpiWarnings'), value: warnCount,  color: '#f59e0b' },
+              { label: t('kpiErrors'),   value: errorCount, color: '#ef4444' },
             ].map(({ label, value, color }) => (
               <div
                 key={label}
@@ -216,7 +221,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Suche in Nachrichten, Details, Bot-Name..."
+                placeholder={t('searchPlaceholder')}
                 className="w-full pl-9 pr-4 py-2 rounded-xl text-sm outline-none"
                 style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
               />
@@ -240,16 +245,16 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     onClick={() => setLevelFilter(lvl)}
                     className="px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer transition-all"
                     style={levelFilter === lvl ? {
-                      background: lvl === 'all' ? 'var(--accent-bg)' : LEVEL_STYLE[lvl]?.bg,
-                      color: lvl === 'all' ? 'var(--accent)' : LEVEL_STYLE[lvl]?.color,
-                      border: `1px solid ${lvl === 'all' ? 'var(--accent)' : LEVEL_STYLE[lvl]?.color}44`,
+                      background: lvl === 'all' ? 'var(--accent-bg)' : levelStyle[lvl]?.bg,
+                      color: lvl === 'all' ? 'var(--accent)' : levelStyle[lvl]?.color,
+                      border: `1px solid ${lvl === 'all' ? 'var(--accent)' : levelStyle[lvl]?.color}44`,
                     } : {
                       background: 'var(--bg)',
                       color: 'var(--text-3)',
                       border: '1px solid var(--border)',
                     }}
                   >
-                    {lvl === 'all' ? 'Alle Level' : LEVEL_STYLE[lvl].label}
+                    {lvl === 'all' ? t('levelAll') : levelStyle[lvl].label}
                   </button>
                 ))}
               </div>
@@ -260,7 +265,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                   onClick={fetchAll}
                   className="w-8 h-8 flex items-center justify-center rounded-lg cursor-pointer transition-colors"
                   style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-3)' }}
-                  title="Aktualisieren"
+                  title={t('refreshTooltip')}
                 >
                   <RefreshCw size={13} />
                 </button>
@@ -272,7 +277,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all"
                     style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-2)' }}
                   >
-                    <Download size={13} /> Export <ChevronDown size={11} />
+                    <Download size={13} /> {t('exportBtn')} <ChevronDown size={11} />
                   </button>
                   <AnimatePresence>
                     {showExport && (
@@ -290,7 +295,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                           onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface-2)')}
                           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                         >
-                          <Download size={12} /> Als JSON
+                          <Download size={12} /> {t('exportJson')}
                         </button>
                         <button
                           onClick={() => { exportCSV(filtered, `${exportFilename}.csv`); setShowExport(false) }}
@@ -299,7 +304,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                           onMouseEnter={e => (e.currentTarget.style.background = 'var(--surface-2)')}
                           onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                         >
-                          <Download size={12} /> Als CSV
+                          <Download size={12} /> {t('exportCsv')}
                         </button>
                       </motion.div>
                     )}
@@ -316,10 +321,10 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                       border: '1px solid rgba(239,68,68,0.25)',
                       color: '#ef4444',
                     }}
-                    title="Log löschen"
+                    title={t('deleteLogTooltip')}
                   >
                     <Trash2 size={13} />
-                    Alle löschen
+                    {t('deleteAllBtn')}
                   </button>
                 </div>
               </div>
@@ -330,9 +335,11 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
           <div className="rounded-2xl overflow-hidden" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
             <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-                {filtered.length} Einträge
+                {filtered.length === 1
+                  ? t('entriesOne', { count: filtered.length })
+                  : t('entriesMany', { count: filtered.length })}
                 {(levelFilter !== 'all' || !!search) && (
-                  <span className="ml-1.5" style={{ color: 'var(--accent)' }}>(gefiltert)</span>
+                  <span className="ml-1.5" style={{ color: 'var(--accent)' }}>{t('filteredSuffix')}</span>
                 )}
               </p>
             </div>
@@ -340,7 +347,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
             <div className="font-mono overflow-y-auto" style={{ maxHeight: 'calc(100vh - 380px)', minHeight: 200 }}>
               {filtered.length === 0 ? (
                 <p className="text-xs p-8 text-center" style={{ color: 'var(--text-3)' }}>
-                  {allEntries.length === 0 ? 'Noch keine Log-Einträge vorhanden.' : 'Keine Einträge für diesen Filter.'}
+                  {allEntries.length === 0 ? t('noEntriesAtAll') : t('noEntriesForFilter')}
                 </p>
               ) : (
                 grouped.map(({ date, entries: dayEntries }) => (
@@ -351,12 +358,14 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     >
                       <span className="text-xs font-bold" style={{ color: 'var(--text-3)' }}>{date}</span>
                       <span className="text-xs" style={{ color: 'var(--text-3)' }}>
-                        {dayEntries.length} Einträge
+                        {dayEntries.length === 1
+                          ? t('entriesOne', { count: dayEntries.length })
+                          : t('entriesMany', { count: dayEntries.length })}
                       </span>
                     </div>
 
                     {dayEntries.map(entry => {
-                      const style = LEVEL_STYLE[entry.level]
+                      const style = levelStyle[entry.level]
                       const timeStr = new Date(entry.timestamp).toLocaleTimeString('de-DE', {
                         hour: '2-digit', minute: '2-digit', second: '2-digit',
                       })
@@ -447,11 +456,11 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     <AlertTriangle size={18} style={{ color: '#ef4444' }} />
                   </div>
                   <div>
-                    <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>Log löschen?</p>
+                    <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('clearConfirmTitle')}</p>
                     <p className="text-xs" style={{ color: 'var(--text-3)' }}>
                       {confirmClear === '__all__'
-                        ? 'Alle Bridge-Logs werden unwiderruflich gelöscht.'
-                        : `Log von "${bots.find(b => b.id === confirmClear)?.name ?? confirmClear}" löschen.`}
+                        ? t('clearConfirmAll')
+                        : t('clearConfirmOne', { name: bots.find(b => b.id === confirmClear)?.name ?? confirmClear })}
                     </p>
                   </div>
                 </div>
@@ -459,7 +468,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                   style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)' }}>
                   <Info size={12} style={{ color: '#ef4444', flexShrink: 0 }} />
                   <p className="text-xs" style={{ color: '#ef4444' }}>
-                    Diese Aktion kann nicht rückgängig gemacht werden.
+                    {t('clearWarning')}
                   </p>
                 </div>
                 <div className="flex gap-2">
@@ -468,7 +477,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     className="flex-1 py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
                     style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
                   >
-                    Abbrechen
+                    {t('cancelBtn')}
                   </button>
                   <button
                     onClick={async () => {
@@ -482,7 +491,7 @@ export default function BridgeLogClient({ bots, initialLogs }: Props) {
                     className="flex-1 py-2.5 rounded-xl text-sm font-black cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
                     style={{ background: '#ef4444', color: '#fff' }}
                   >
-                    {clearing ? 'Löschen...' : 'Löschen'}
+                    {clearing ? t('clearingBtn') : t('clearBtn')}
                   </button>
                 </div>
               </div>
