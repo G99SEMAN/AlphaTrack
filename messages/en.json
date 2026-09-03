@@ -457,5 +457,151 @@
       "riskRewardLabel": "Risk / Reward",
       "lotsLabel": "Lots"
     }
+  },
+  "statistiken": {
+    "page": {
+      "title": "Statistics",
+      "subtitle": "{name} · {count} closed trades"
+    },
+    "client": {
+      "emptyTitle": "No data yet",
+      "emptyDescription": "Log at least one closed trade to see your statistics."
+    },
+    "infoTooltip": {
+      "ariaLabel": "Show explanation"
+    },
+    "kpiRow": {
+      "pfLabel": "Profit Factor",
+      "pfSubGood": "Very good (target: >1.5)",
+      "pfSubOk": "Solid (target: >1.5)",
+      "pfSubBad": "Below break-even",
+      "pfTooltip": "Sum of all gains ÷ sum of all losses. Target: >1.5. >2.0 is considered excellent.",
+      "expLabel": "Expectancy",
+      "expSub": "Expected profit per trade",
+      "expTooltip": "Average expected profit per trade. Positive = the system earns money over time.",
+      "wlLabel": "Win / Loss",
+      "wlTooltip": "Average win ÷ average loss (absolute). >1.5 recommended.",
+      "costLabel": "Cost Ratio",
+      "costSub": "Commission+swap / |gross P&L|",
+      "costTooltip": "Commission + swap + spread as % of gross P&L. <10% is very good.",
+      "roiLabel": "Total ROI",
+      "roiSub": "Net P&L / capital deployed",
+      "roiTooltip": "Net P&L ÷ starting capital deployed × 100.",
+      "tpdLabel": "Trades / Day",
+      "tpdSub": "Avg trades per calendar day",
+      "tpdTooltip": "Average trades per calendar day since the first trade."
+    },
+    "directionCards": {
+      "longLabel": "Long Trades",
+      "shortLabel": "Short Trades",
+      "longTooltip": "Performance of all long positions (buy). Win rate and P&L overview.",
+      "shortTooltip": "Performance of all short positions (sell/short-sell).",
+      "noTrades": "No trades",
+      "winRateLabel": "Win Rate",
+      "tradesLabel": "Trades",
+      "totalPnlLabel": "Total P&L",
+      "avgPerTradeLabel": "Avg per trade",
+      "currencyLabel": "Currency"
+    },
+    "drawdownCard": {
+      "maxDrawdownLabel": "Max Drawdown",
+      "tooltip": "Largest cumulative loss from equity peak to trough. Measures your system's maximum risk.",
+      "ddSubGood": "Very good (<10%)",
+      "ddSubOk": "Acceptable (<25%)",
+      "ddSubBad": "High (>25%)",
+      "recoveryFactorLabel": "Recovery Factor",
+      "rfSubGood": "Very good (≥2.0)",
+      "rfSubOk": "Good (≥1.0)",
+      "rfSubWeak": "Weak (<1.0)",
+      "rfSubNA": "N/A"
+    },
+    "consistencyCard": {
+      "title": "Consistency Score",
+      "tooltip": "Share of weeks with positive P&L. 70%+ counts as consistently profitable.",
+      "weeksLabel": "{profitable}/{total} weeks",
+      "statusGood": "Consistently profitable",
+      "statusOk": "Moderately consistent",
+      "statusBad": "Inconsistent"
+    },
+    "durationCard": {
+      "title": "Trade Duration",
+      "tooltip": "Average holding time of your trades (from closeTime - openTime). Split by long/short.",
+      "totalAvgLabel": "Total avg",
+      "longAvgLabel": "Long avg",
+      "shortAvgLabel": "Short avg",
+      "footnote": "Only trades with a close time are counted",
+      "minutesUnit": "min",
+      "hoursUnit": "hr",
+      "daysUnit": "days"
+    },
+    "monthlyPnlChart": {
+      "title": "Monthly P&L",
+      "tooltip": "Gross P&L per calendar month. Bars show gains (green) and losses (red).",
+      "monthSingular": "month",
+      "monthPlural": "months",
+      "legendGain": "Gain",
+      "legendLoss": "Loss",
+      "tooltipTradesSuffix": "trades"
+    },
+    "weekdayChart": {
+      "title": "Weekday Analysis — Avg P&L per Day",
+      "tooltip": "Performance by weekday. Shows which days you trade most profitably.",
+      "tooltipTradesSuffix": "trades",
+      "winRateLabel": "Win Rate:"
+    },
+    "hourlyChart": {
+      "title": "Hourly Analysis — Total P&L per Hour",
+      "tooltip": "Cumulative P&L by time of day (trade close hour). Shows which trading hours are most profitable overall.",
+      "tooltipTradesSuffix": "trades",
+      "totalLabel": "Total:",
+      "avgPerTradeLabel": "Avg/trade:",
+      "winRateLabel": "Win Rate:",
+      "winRateAndCountLabel": "Win Rate & Trade Count"
+    },
+    "rMultipleChart": {
+      "title": "R-Multiple Distribution",
+      "tooltip": "Distribution of trades as a multiple of the initially risked amount (1R). >+1R means more was won than risked.",
+      "tradesWithSlLabel": "Trades with stop-loss:",
+      "tooltipTradesSuffix": "trades",
+      "footnote": "Ideal: few losses on the left, many gains on the right"
+    },
+    "instrumentTable": {
+      "title": "Performance by Instrument",
+      "tooltip": "P&L overview by traded instrument, sorted by total return.",
+      "colInstrument": "Instrument",
+      "colTrades": "Trades",
+      "colWinPct": "Win%",
+      "colTotal": "Total",
+      "colAvgTrade": "Avg Trade",
+      "noData": "No data",
+      "allValuesIn": "All values in {currency}"
+    },
+    "topAssetsCard": {
+      "title": "Top 5 Assets by Trades",
+      "tooltip": "Your 5 most-traded instruments by trade count.",
+      "colAsset": "Asset",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L",
+      "mobileWinSuffix": "Win",
+      "mobileTradesSuffix": "Trades",
+      "noTrades": "No trades available"
+    },
+    "strategyTable": {
+      "title": "Performance by Strategy",
+      "tooltip": "Performance comparison of your defined trading strategies.",
+      "colStrategy": "Strategy",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colProfitFactor": "Profit Factor",
+      "colAvgRR": "Avg RR",
+      "colPnl": "P&L",
+      "colRoi": "ROI",
+      "noStrategyTrades": "No trades with a strategy"
+    },
+    "topTradesCard": {
+      "title": "Best Trades",
+      "tooltip": "The 7 most profitable individual closed trades."
+    }
   }
 }

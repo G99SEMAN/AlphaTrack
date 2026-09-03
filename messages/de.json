@@ -457,5 +457,151 @@
       "riskRewardLabel": "Risk / Reward",
       "lotsLabel": "Lots"
     }
+  },
+  "statistiken": {
+    "page": {
+      "title": "Statistiken",
+      "subtitle": "{name} · {count} abgeschlossene Trades"
+    },
+    "client": {
+      "emptyTitle": "Noch keine Auswertung",
+      "emptyDescription": "Trage mindestens einen abgeschlossenen Trade ein um die Statistiken zu sehen."
+    },
+    "infoTooltip": {
+      "ariaLabel": "Erklärung anzeigen"
+    },
+    "kpiRow": {
+      "pfLabel": "Profit Factor",
+      "pfSubGood": "Sehr gut (Ziel: >1.5)",
+      "pfSubOk": "Solide (Ziel: >1.5)",
+      "pfSubBad": "Unter Break-even",
+      "pfTooltip": "Summe aller Gewinne ÷ Summe aller Verluste. Ziel: >1.5. >2.0 gilt als exzellent.",
+      "expLabel": "Erwartungswert",
+      "expSub": "Erwarteter Gewinn je Trade",
+      "expTooltip": "Durchschnittlicher erwarteter Gewinn pro Trade. Positiv = System verdient langfristig.",
+      "wlLabel": "Gewinn / Verlust",
+      "wlTooltip": "Durchschnittlicher Gewinn ÷ durchschnittlicher Verlust (absolut). >1.5 empfohlen.",
+      "costLabel": "Kosten-Quote",
+      "costSub": "Provision+Swap / |Brutto-P&L|",
+      "costTooltip": "Provision + Swap + Spread als % des Brutto-P&L. <10% ist sehr gut.",
+      "roiLabel": "Gesamt-ROI",
+      "roiSub": "Netto-P&L / eingesetztes Kapital",
+      "roiTooltip": "Netto-P&L ÷ eingesetztes Startkapital × 100.",
+      "tpdLabel": "Trades / Tag",
+      "tpdSub": "Ø Trades pro Kalendertag",
+      "tpdTooltip": "Durchschnittliche Trades pro Kalendertag seit dem ersten Trade."
+    },
+    "directionCards": {
+      "longLabel": "Long-Trades",
+      "shortLabel": "Short-Trades",
+      "longTooltip": "Performance aller Long-Positionen (Kauf). Winrate und P&L-Übersicht.",
+      "shortTooltip": "Performance aller Short-Positionen (Verkauf/Leerverkauf).",
+      "noTrades": "Keine Trades",
+      "winRateLabel": "Win Rate",
+      "tradesLabel": "Trades",
+      "totalPnlLabel": "Gesamt P&L",
+      "avgPerTradeLabel": "Ø pro Trade",
+      "currencyLabel": "Währung"
+    },
+    "drawdownCard": {
+      "maxDrawdownLabel": "Max Drawdown",
+      "tooltip": "Größter kumulativer Verlust vom Equity-Höchststand bis zum Tief. Misst das maximale Risiko deines Systems.",
+      "ddSubGood": "Sehr gut (<10%)",
+      "ddSubOk": "Akzeptabel (<25%)",
+      "ddSubBad": "Hoch (>25%)",
+      "recoveryFactorLabel": "Recovery Factor",
+      "rfSubGood": "Sehr gut (≥2.0)",
+      "rfSubOk": "Gut (≥1.0)",
+      "rfSubWeak": "Schwach (<1.0)",
+      "rfSubNA": "N/A"
+    },
+    "consistencyCard": {
+      "title": "Konsistenz-Score",
+      "tooltip": "Anteil der Wochen mit positivem P&L. 70%+ gilt als konsistent profitabel.",
+      "weeksLabel": "{profitable}/{total} Wochen",
+      "statusGood": "Konsistent profitabel",
+      "statusOk": "Mäßig konsistent",
+      "statusBad": "Inkonsistent"
+    },
+    "durationCard": {
+      "title": "Trade-Dauer",
+      "tooltip": "Durchschnittliche Haltedauer deiner Trades (aus closeTime - openTime). Getrennt nach Long/Short.",
+      "totalAvgLabel": "Gesamt Ø",
+      "longAvgLabel": "Long Ø",
+      "shortAvgLabel": "Short Ø",
+      "footnote": "Nur Trades mit closeTime werden berechnet",
+      "minutesUnit": "Min",
+      "hoursUnit": "Std",
+      "daysUnit": "Tage"
+    },
+    "monthlyPnlChart": {
+      "title": "Monatlicher P&L",
+      "tooltip": "Brutto-P&L pro Kalendermonat. Balken zeigen Gewinne (grün) und Verluste (rot).",
+      "monthSingular": "Monat",
+      "monthPlural": "Monate",
+      "legendGain": "Gewinn",
+      "legendLoss": "Verlust",
+      "tooltipTradesSuffix": "Trades"
+    },
+    "weekdayChart": {
+      "title": "Wochentags-Analyse — Ø P&L pro Tag",
+      "tooltip": "Performance nach Wochentag. Zeigt an welchen Tagen du am profitabelsten tradest.",
+      "tooltipTradesSuffix": "Trades",
+      "winRateLabel": "Win Rate:"
+    },
+    "hourlyChart": {
+      "title": "Stunden-Analyse — Gesamt-P&L pro Stunde",
+      "tooltip": "Kumulierter P&L nach Tageszeit (Schlussstunde des Trades). Zeigt welche Handelsstunden insgesamt am profitabelsten sind.",
+      "tooltipTradesSuffix": "Trades",
+      "totalLabel": "Gesamt:",
+      "avgPerTradeLabel": "Ø/Trade:",
+      "winRateLabel": "Win Rate:",
+      "winRateAndCountLabel": "Win-Rate & Anzahl Trades"
+    },
+    "rMultipleChart": {
+      "title": "R-Multiple Verteilung",
+      "tooltip": "Verteilung der Trades als Vielfaches des initial riskierten Betrags (1R). >+1R bedeutet mehr gewonnen als riskiert.",
+      "tradesWithSlLabel": "Trades mit Stop-Loss:",
+      "tooltipTradesSuffix": "Trades",
+      "footnote": "Ideal: wenige Verluste links, viele Gewinne rechts"
+    },
+    "instrumentTable": {
+      "title": "Performance nach Instrument",
+      "tooltip": "P&L-Übersicht nach gehandeltem Instrument, sortiert nach Gesamtertrag.",
+      "colInstrument": "Instrument",
+      "colTrades": "Trades",
+      "colWinPct": "Win%",
+      "colTotal": "Gesamt",
+      "colAvgTrade": "Ø Trade",
+      "noData": "Keine Daten",
+      "allValuesIn": "Alle Werte in {currency}"
+    },
+    "topAssetsCard": {
+      "title": "Top 5 Assets nach Trades",
+      "tooltip": "Deine 5 meist-gehandelten Instrumente nach Trade-Anzahl.",
+      "colAsset": "Asset",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L",
+      "mobileWinSuffix": "Win",
+      "mobileTradesSuffix": "Trades",
+      "noTrades": "Keine Trades vorhanden"
+    },
+    "strategyTable": {
+      "title": "Performance nach Strategie",
+      "tooltip": "Performance-Vergleich deiner definierten Handelsstrategien.",
+      "colStrategy": "Strategie",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colProfitFactor": "Profit Factor",
+      "colAvgRR": "Ø RR",
+      "colPnl": "P&L",
+      "colRoi": "ROI",
+      "noStrategyTrades": "Keine Trades mit Strategie"
+    },
+    "topTradesCard": {
+      "title": "Beste Trades",
+      "tooltip": "Die 7 profitabelsten abgeschlossenen Einzeltrades."
+    }
   }
 }
