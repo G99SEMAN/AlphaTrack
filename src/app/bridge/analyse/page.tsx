@@ -5,6 +5,7 @@ import Sidebar from '@/components/layout/Sidebar'
 import AnalyseClient from '@/components/analyse/AnalyseClient'
 import { getProfiles, getActiveProfile, setActiveProfileId } from '@/lib/profiles'
 import { getBots } from '@/lib/bot-data'
+import { getTranslations } from 'next-intl/server'
 
 export default async function BridgeAnalysePage() {
   const profiles = getProfiles()
@@ -17,15 +18,16 @@ export default async function BridgeAnalysePage() {
   }
 
   const bots = getBots()
+  const t = await getTranslations('analyse.page')
 
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       <Sidebar profiles={profiles} activeProfile={activeProfile} />
       <main className="flex-1 min-w-0 p-4 md:p-6">
         <div className="mb-5">
-          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Trade Analyzer</h1>
+          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
           <p className="text-sm mt-0.5" style={{ color: 'var(--text-3)' }}>
-            EUR/USD - KI-Analyse mit direkter Bot-Ausführung
+            {t('subtitle')}
           </p>
         </div>
         <AnalyseClient bots={bots} />
