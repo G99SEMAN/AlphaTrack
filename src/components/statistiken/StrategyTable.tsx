@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { StrategyStats } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   data: StrategyStats[]
@@ -23,6 +24,7 @@ function PfBadge({ pf }: { pf: number }) {
 }
 
 export default function StrategyTable({ data }: Props) {
+  const t = useTranslations('statistiken.strategyTable')
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -34,9 +36,9 @@ export default function StrategyTable({ data }: Props) {
       <div className="px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Performance nach Strategie
+            {t('title')}
           </p>
-          <InfoTooltip text="Performance-Vergleich deiner definierten Handelsstrategien." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
       </div>
 
@@ -46,25 +48,25 @@ export default function StrategyTable({ data }: Props) {
           <thead>
             <tr style={{ background: 'var(--surface-2)', borderBottom: '1px solid var(--border)' }}>
               <th className="text-left px-5 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Strategie
+                {t('colStrategy')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Trades
+                {t('colTrades')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Win Rate
+                {t('colWinRate')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Profit Factor
+                {t('colProfitFactor')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Ø RR
+                {t('colAvgRR')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                P&amp;L
+                {t('colPnl')}
               </th>
               <th className="text-right px-5 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                ROI
+                {t('colRoi')}
               </th>
             </tr>
           </thead>
@@ -131,29 +133,29 @@ export default function StrategyTable({ data }: Props) {
             {/* Stats Grid 2x3 */}
             <div className="grid grid-cols-3 gap-2">
               <div className="rounded-lg px-2.5 py-2" style={{ background: 'var(--surface-2)' }}>
-                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Trades</p>
+                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colTrades')}</p>
                 <p className="text-sm font-mono font-semibold" style={{ color: 'var(--text-1)' }}>{row.trades}</p>
               </div>
               <div className="rounded-lg px-2.5 py-2" style={{ background: 'var(--surface-2)' }}>
-                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Win Rate</p>
+                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colWinRate')}</p>
                 <p className="text-sm font-mono font-semibold" style={{ color: row.winRate >= 50 ? 'var(--green)' : 'var(--red)' }}>
                   {row.winRate.toFixed(1)}%
                 </p>
               </div>
               <div className="rounded-lg px-2.5 py-2" style={{ background: 'var(--surface-2)' }}>
-                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Ø RR</p>
+                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colAvgRR')}</p>
                 <p className="text-sm font-mono font-semibold" style={{ color: row.avgRR > 0 ? 'var(--text-2)' : 'var(--text-3)' }}>
                   {row.avgRR > 0 ? `1:${row.avgRR.toFixed(1)}` : '-'}
                 </p>
               </div>
               <div className="rounded-lg px-2.5 py-2 col-span-2" style={{ background: 'var(--surface-2)' }}>
-                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>P&amp;L</p>
+                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colPnl')}</p>
                 <p className="text-sm font-mono font-semibold" style={{ color: row.totalPnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
                   {row.totalPnl >= 0 ? '+' : ''}{row.totalPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
                 </p>
               </div>
               <div className="rounded-lg px-2.5 py-2" style={{ background: 'var(--surface-2)' }}>
-                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>ROI</p>
+                <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('colRoi')}</p>
                 <p className="text-sm font-mono font-semibold" style={{ color: row.roi >= 0 ? 'var(--green)' : 'var(--red)' }}>
                   {row.roi !== 0 ? `${row.roi >= 0 ? '+' : ''}${row.roi.toFixed(1)}%` : '-'}
                 </p>
@@ -164,7 +166,7 @@ export default function StrategyTable({ data }: Props) {
       </div>
 
       {data.length === 0 && (
-        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>Keine Trades mit Strategie</p>
+        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>{t('noStrategyTrades')}</p>
       )}
     </motion.div>
   )
