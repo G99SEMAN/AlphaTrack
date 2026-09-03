@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { TrendingDown } from 'lucide-react'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   maxDrawdown: number
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function DrawdownCard({ maxDrawdown, recoveryFactor }: Props) {
+  const t = useTranslations('statistiken.drawdownCard')
   const ddColor = maxDrawdown <= 10 ? 'var(--green)' : maxDrawdown <= 25 ? '#f59e0b' : 'var(--red)'
   const rfColor = recoveryFactor >= 2 ? 'var(--green)' : recoveryFactor >= 1 ? '#f59e0b' : 'var(--red)'
 
@@ -24,9 +26,9 @@ export default function DrawdownCard({ maxDrawdown, recoveryFactor }: Props) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Max Drawdown
+            {t('maxDrawdownLabel')}
           </p>
-          <InfoTooltip text="Größter kumulativer Verlust vom Equity-Höchststand bis zum Tief. Misst das maximale Risiko deines Systems." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--red-bg)' }}>
           <TrendingDown size={15} style={{ color: 'var(--red)' }} />
@@ -35,21 +37,21 @@ export default function DrawdownCard({ maxDrawdown, recoveryFactor }: Props) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Max Drawdown</p>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('maxDrawdownLabel')}</p>
           <p className="text-2xl font-bold font-mono" style={{ color: ddColor }}>
             -{maxDrawdown.toFixed(1)}%
           </p>
           <p className="text-xs mt-1" style={{ color: 'var(--text-3)' }}>
-            {maxDrawdown <= 10 ? 'Sehr gut (<10%)' : maxDrawdown <= 25 ? 'Akzeptabel (<25%)' : 'Hoch (>25%)'}
+            {maxDrawdown <= 10 ? t('ddSubGood') : maxDrawdown <= 25 ? t('ddSubOk') : t('ddSubBad')}
           </p>
         </div>
         <div>
-          <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Recovery Factor</p>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('recoveryFactorLabel')}</p>
           <p className="text-2xl font-bold font-mono" style={{ color: rfColor }}>
             {recoveryFactor > 0 ? recoveryFactor.toFixed(2) : '-'}
           </p>
           <p className="text-xs mt-1" style={{ color: 'var(--text-3)' }}>
-            {recoveryFactor >= 2 ? 'Sehr gut (≥2.0)' : recoveryFactor >= 1 ? 'Gut (≥1.0)' : recoveryFactor > 0 ? 'Schwach (<1.0)' : 'N/A'}
+            {recoveryFactor >= 2 ? t('rfSubGood') : recoveryFactor >= 1 ? t('rfSubOk') : recoveryFactor > 0 ? t('rfSubWeak') : t('rfSubNA')}
           </p>
         </div>
       </div>
