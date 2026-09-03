@@ -870,5 +870,81 @@
       "closeConfirmWarning": "This action cannot be undone.",
       "cancelBtn": "Cancel"
     }
+  },
+  "bots": {
+    "client": {
+      "title": "Bots",
+      "botsActiveOne": "{count} bot active",
+      "botsActiveMany": "{count} bots active",
+      "emptyTitle": "No bot active",
+      "emptyDescription": "Start a bot on the trading PC — it will appear here automatically once it connects to the Bridge.",
+      "summaryTotalLabel": "Total",
+      "summaryOnlineLabel": "Online",
+      "summaryActiveLabel": "Active",
+      "statPnl": "P&L",
+      "statPositions": "Positions",
+      "statTrades": "Trades",
+      "statUptime": "Uptime",
+      "noProfileFallback": "No profile",
+      "detailLink": "Details",
+      "connOffline": "Offline",
+      "connWarning": "Weak",
+      "connOnline": "Online",
+      "stateRunning": "Running",
+      "statePaused": "Paused",
+      "stateStopped": "Stopped",
+      "stateError": "Error"
+    },
+    "detail": {
+      "breadcrumbBots": "Bots",
+      "editNameTooltip": "Change name (in AlphaTrack only)",
+      "idLabel": "Bot ID",
+      "nameLabel": "Name",
+      "statusLabel": "Status",
+      "openTradesLabel": "Open Trades",
+      "profileLabel": "Profile",
+      "balanceLabel": "Balance",
+      "uptimeLabel": "Uptime",
+      "botLogHeading": "Bot Log",
+      "refreshBtn": "Refresh",
+      "noLogEntries": "No log entries",
+      "connOffline": "Offline",
+      "connWarning": "Weak",
+      "connOnline": "Online"
+    },
+    "performance": {
+      "title": "Bot Performance",
+      "subtitle": "Cumulative P&L and metrics per bot",
+      "addBotBtn": "Add Bot",
+      "loadingText": "Loading…",
+      "emptyTitle": "No bots added for performance tracking yet",
+      "emptyDescription": "Click \"Add Bot\" to track a connected bot.",
+      "closeModalAriaLabel": "Close",
+      "noConnectedBots": "No connected bots found.",
+      "alreadyAdded": "Already added",
+      "connectedStatus": "Connected",
+      "weakConnectionStatus": "Weak connection"
+    },
+    "perfCard": {
+      "tradeOne": "Trade",
+      "tradeMany": "Trades",
+      "removeBotTooltip": "Remove bot",
+      "noTradesYet": "No trades yet",
+      "startLabel": "Start",
+      "kpiWinRate": "Win Rate",
+      "kpiPnl": "P&L",
+      "kpiTradesLabel": "Trades"
+    },
+    "settingsPage": {
+      "title": "Bot Settings",
+      "subtitle": "Configure parameters of connected bots",
+      "emptyTitle": "No bot connected",
+      "emptyDescription": "Connect a bot via the Bridge — connected bots will appear here for configuration.",
+      "noParametersMessage": "This bot does not support configurable parameters.",
+      "sendingBtn": "Sending...",
+      "sendParamsBtn": "Send Parameters",
+      "connOnline": "Online",
+      "connOffline": "Offline"
+    }
   }
 }
