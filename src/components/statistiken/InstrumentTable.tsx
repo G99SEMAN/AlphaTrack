@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { InstrumentStats } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 type SortKey = 'totalPnl' | 'winRate' | 'trades' | 'avgPnl'
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function InstrumentTable({ data, currency }: Props) {
+  const t = useTranslations('statistiken.instrumentTable')
   const [sortKey, setSortKey] = useState<SortKey>('totalPnl')
   const [sortAsc, setSortAsc] = useState(false)
 
@@ -42,9 +44,9 @@ export default function InstrumentTable({ data, currency }: Props) {
       <div className="px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Performance nach Instrument
+            {t('title')}
           </p>
-          <InfoTooltip text="P&L-Übersicht nach gehandeltem Instrument, sortiert nach Gesamtertrag." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
       </div>
 
@@ -57,35 +59,35 @@ export default function InstrumentTable({ data, currency }: Props) {
                 className="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wide"
                 style={{ color: 'var(--text-3)', position: 'sticky', left: 0, background: 'var(--surface-2)', zIndex: 1 }}
               >
-                Instrument
+                {t('colInstrument')}
               </th>
               <th
                 className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide"
                 style={thStyle('trades')}
                 onClick={() => toggleSort('trades')}
               >
-                Trades {sortKey === 'trades' ? (sortAsc ? '↑' : '↓') : ''}
+                {t('colTrades')} {sortKey === 'trades' ? (sortAsc ? '↑' : '↓') : ''}
               </th>
               <th
                 className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide"
                 style={thStyle('winRate')}
                 onClick={() => toggleSort('winRate')}
               >
-                Win% {sortKey === 'winRate' ? (sortAsc ? '↑' : '↓') : ''}
+                {t('colWinPct')} {sortKey === 'winRate' ? (sortAsc ? '↑' : '↓') : ''}
               </th>
               <th
                 className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide"
                 style={thStyle('totalPnl')}
                 onClick={() => toggleSort('totalPnl')}
               >
-                Gesamt {sortKey === 'totalPnl' ? (sortAsc ? '↑' : '↓') : ''}
+                {t('colTotal')} {sortKey === 'totalPnl' ? (sortAsc ? '↑' : '↓') : ''}
               </th>
               <th
                 className="text-right px-4 py-2.5 text-xs font-semibold uppercase tracking-wide"
                 style={thStyle('avgPnl')}
                 onClick={() => toggleSort('avgPnl')}
               >
-                Ø Trade {sortKey === 'avgPnl' ? (sortAsc ? '↑' : '↓') : ''}
+                {t('colAvgTrade')} {sortKey === 'avgPnl' ? (sortAsc ? '↑' : '↓') : ''}
               </th>
             </tr>
           </thead>
@@ -120,11 +122,11 @@ export default function InstrumentTable({ data, currency }: Props) {
       </div>
 
       {sorted.length === 0 && (
-        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>Keine Daten</p>
+        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>{t('noData')}</p>
       )}
 
       <div className="px-5 py-2 text-xs" style={{ color: 'var(--text-3)', borderTop: '1px solid var(--border)' }}>
-        Alle Werte in {currency}
+        {t('allValuesIn', { currency })}
       </div>
     </motion.div>
   )
