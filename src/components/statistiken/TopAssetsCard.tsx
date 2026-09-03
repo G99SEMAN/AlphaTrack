@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { InstrumentStats } from '@/lib/statsExtended'
 import { currencySymbol } from '@/lib/currency'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   data: InstrumentStats[]
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function TopAssetsCard({ data, currency }: Props) {
+  const t = useTranslations('statistiken.topAssetsCard')
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -22,9 +24,9 @@ export default function TopAssetsCard({ data, currency }: Props) {
       <div className="px-5 py-4" style={{ borderBottom: '1px solid var(--border)' }}>
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Top 5 Assets nach Trades
+            {t('title')}
           </p>
-          <InfoTooltip text="Deine 5 meist-gehandelten Instrumente nach Trade-Anzahl." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
       </div>
 
@@ -37,16 +39,16 @@ export default function TopAssetsCard({ data, currency }: Props) {
                 #
               </th>
               <th className="text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Asset
+                {t('colAsset')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Trades
+                {t('colTrades')}
               </th>
               <th className="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                Win Rate
+                {t('colWinRate')}
               </th>
               <th className="text-right px-5 py-2.5 text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                P&amp;L
+                {t('colPnl')}
               </th>
             </tr>
           </thead>
@@ -100,7 +102,7 @@ export default function TopAssetsCard({ data, currency }: Props) {
                 {row.instrument}
               </p>
               <p className="text-xs mt-0.5" style={{ color: row.winRate >= 50 ? 'var(--green)' : 'var(--red)' }}>
-                {row.winRate.toFixed(1)}% Win · {row.trades} Trades
+                {row.winRate.toFixed(1)}% {t('mobileWinSuffix')} · {row.trades} {t('mobileTradesSuffix')}
               </p>
             </div>
             {/* P&L */}
@@ -115,7 +117,7 @@ export default function TopAssetsCard({ data, currency }: Props) {
       </div>
 
       {data.length === 0 && (
-        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>Keine Trades vorhanden</p>
+        <p className="px-5 py-8 text-sm text-center" style={{ color: 'var(--text-3)' }}>{t('noTrades')}</p>
       )}
     </motion.div>
   )
