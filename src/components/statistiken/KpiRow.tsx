@@ -4,6 +4,7 @@ import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   profitFactor: number
@@ -52,6 +53,7 @@ function KpiCard({ label, value, sub, color, delay, tooltip }: KpiCardProps) {
 }
 
 function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costRatio, roi, avgTradesPerDay, currency }: Props) {
+  const t = useTranslations('statistiken.kpiRow')
   const pfLabel = profitFactor >= 99 ? '∞' : profitFactor.toFixed(2)
   const pfColor = profitFactor >= 1.5 ? 'var(--green)' : profitFactor >= 1 ? '#f59e0b' : 'var(--red)'
 
@@ -68,52 +70,52 @@ function KpiRow({ profitFactor, expectancy, avgWin, avgLoss, winLossRatio, costR
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
       <KpiCard
-        label="Profit Factor"
+        label={t('pfLabel')}
         value={pfLabel}
-        sub={profitFactor >= 1.5 ? 'Sehr gut (Ziel: >1.5)' : profitFactor >= 1 ? 'Solide (Ziel: >1.5)' : 'Unter Break-even'}
+        sub={profitFactor >= 1.5 ? t('pfSubGood') : profitFactor >= 1 ? t('pfSubOk') : t('pfSubBad')}
         color={pfColor}
         delay={0}
-        tooltip="Summe aller Gewinne ÷ Summe aller Verluste. Ziel: >1.5. >2.0 gilt als exzellent."
+        tooltip={t('pfTooltip')}
       />
       <KpiCard
-        label="Erwartungswert"
+        label={t('expLabel')}
         value={`${expSign}${expectancy.toLocaleString('de-DE', { minimumFractionDigits: 2 })} ${currencySymbol(currency)}`}
-        sub="Erwarteter Gewinn je Trade"
+        sub={t('expSub')}
         color={expColor}
         delay={0.04}
-        tooltip="Durchschnittlicher erwarteter Gewinn pro Trade. Positiv = System verdient langfristig."
+        tooltip={t('expTooltip')}
       />
       <KpiCard
-        label="Gewinn / Verlust"
+        label={t('wlLabel')}
         value={`${winLossRatio.toFixed(2)}`}
         sub={`Ø+${avgWin.toLocaleString('de-DE', { minimumFractionDigits: 2 })} / Ø${avgLoss.toLocaleString('de-DE', { minimumFractionDigits: 2 })} ${currencySymbol(currency)}`}
         color={ratioColor}
         delay={0.08}
-        tooltip="Durchschnittlicher Gewinn ÷ durchschnittlicher Verlust (absolut). >1.5 empfohlen."
+        tooltip={t('wlTooltip')}
       />
       <KpiCard
-        label="Kosten-Quote"
+        label={t('costLabel')}
         value={`${costRatio.toFixed(1)}%`}
-        sub="Provision+Swap / |Brutto-P&L|"
+        sub={t('costSub')}
         color={costColor}
         delay={0.12}
-        tooltip="Provision + Swap + Spread als % des Brutto-P&L. <10% ist sehr gut."
+        tooltip={t('costTooltip')}
       />
       <KpiCard
-        label="Gesamt-ROI"
+        label={t('roiLabel')}
         value={`${roiSign}${roi.toFixed(2)}%`}
-        sub="Netto-P&L / eingesetztes Kapital"
+        sub={t('roiSub')}
         color={roiColor}
         delay={0.16}
-        tooltip="Netto-P&L ÷ eingesetztes Startkapital × 100."
+        tooltip={t('roiTooltip')}
       />
       <KpiCard
-        label="Trades / Tag"
+        label={t('tpdLabel')}
         value={avgTradesPerDay.toFixed(2)}
-        sub="Ø Trades pro Kalendertag"
+        sub={t('tpdSub')}
         color="var(--text-1)"
         delay={0.20}
-        tooltip="Durchschnittliche Trades pro Kalendertag seit dem ersten Trade."
+        tooltip={t('tpdTooltip')}
       />
     </div>
   )
