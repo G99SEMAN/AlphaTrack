@@ -2,6 +2,7 @@
 
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   text: string
@@ -11,6 +12,7 @@ interface Props {
 const TOOLTIP_WIDTH = 224 // w-56
 
 export default function InfoTooltip({ text, className }: Props) {
+  const t = useTranslations('statistiken.infoTooltip')
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null)
@@ -61,7 +63,7 @@ export default function InfoTooltip({ text, className }: Props) {
       <button
         ref={btnRef}
         type="button"
-        aria-label="Erklärung anzeigen"
+        aria-label={t('ariaLabel')}
         aria-expanded={visible}
         onClick={() => setOpen(o => !o)}
         onMouseEnter={() => setHovered(true)}
