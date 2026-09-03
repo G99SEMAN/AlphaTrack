@@ -7,6 +7,7 @@ import { BotWithStatus, ConnectionState, BotState, BotStats } from '@/types/bot'
 import { Profile } from '@/types/profile'
 import Link from 'next/link'
 import { currencySymbol } from '@/lib/currency'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   initialBots: BotWithStatus[]
@@ -14,11 +15,12 @@ interface Props {
 }
 
 function ConnectionBadge({ state }: { state: ConnectionState | undefined }) {
+  const t = useTranslations('bots.client')
   if (!state || state === 'offline') {
     return (
       <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
         style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}>
-        <WifiOff size={9} /> Offline
+        <WifiOff size={9} /> {t('connOffline')}
       </span>
     )
   }
@@ -26,25 +28,26 @@ function ConnectionBadge({ state }: { state: ConnectionState | undefined }) {
     return (
       <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
         style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.2)' }}>
-        <AlertTriangle size={9} /> Schwach
+        <AlertTriangle size={9} /> {t('connWarning')}
       </span>
     )
   }
   return (
     <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
       style={{ background: 'rgba(0,217,126,0.1)', color: 'var(--green)', border: '1px solid rgba(0,217,126,0.2)' }}>
-      <Wifi size={9} /> Online
+      <Wifi size={9} /> {t('connOnline')}
     </span>
   )
 }
 
 function StateBadge({ state }: { state: BotState | undefined }) {
+  const t = useTranslations('bots.client')
   if (!state || state === 'disconnected') return null
   const map: Record<Exclude<BotState, 'disconnected'>, { label: string; color: string; bg: string }> = {
-    running: { label: 'Läuft',     color: 'var(--green)', bg: 'rgba(0,217,126,0.08)' },
-    paused:  { label: 'Pausiert',  color: '#f59e0b',      bg: 'rgba(245,158,11,0.08)' },
-    stopped: { label: 'Gestoppt', color: '#64748b',      bg: 'rgba(100,116,139,0.1)' },
-    error:   { label: 'Fehler',    color: '#ef4444',      bg: 'rgba(239,68,68,0.08)' },
+    running: { label: t('stateRunning'), color: 'var(--green)', bg: 'rgba(0,217,126,0.08)' },
+    paused:  { label: t('statePaused'),  color: '#f59e0b',      bg: 'rgba(245,158,11,0.08)' },
+    stopped: { label: t('stateStopped'), color: '#64748b',      bg: 'rgba(100,116,139,0.1)' },
+    error:   { label: t('stateError'),   color: '#ef4444',      bg: 'rgba(239,68,68,0.08)' },
   }
   const s = map[state as Exclude<BotState, 'disconnected'>]
   if (!s) return null
@@ -72,6 +75,7 @@ function formatPnl(realizedPnl: number | null, currency: string): { value: strin
 }
 
 export default function BotsClient({ initialBots, profiles }: Props) {
+  const t = useTranslations('bots.client')
   const filterBots = (list: BotWithStatus[]) =>
     list.filter(b => b.bot.type === 'bot' && b.status != null && b.status.connectionState !== 'offline')
   const [bots, setBots] = useState<BotWithStatus[]>(filterBots(initialBots))
@@ -125,9 +129,11 @@ export default function BotsClient({ initialBots, profiles }: Props) {
 
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Bots</h1>
+        <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
         <p className="text-sm" style={{ color: 'var(--text-3)' }}>
-          {bots.length} Bot{bots.length !== 1 ? 's' : ''} aktiv
+          {bots.length === 1
+            ? t('botsActiveOne', { count: bots.length })
+            : t('botsActiveMany', { count: bots.length })}
         </p>
       </div>
 
@@ -140,9 +146,9 @@ export default function BotsClient({ initialBots, profiles }: Props) {
             style={{ background: 'var(--accent-bg)' }}>
             <Bot size={26} style={{ color: 'var(--accent)' }} />
           </div>
-          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>Kein Bot aktiv</h3>
+          <h3 className="font-semibold text-lg mb-2" style={{ color: 'var(--text-1)' }}>{t('emptyTitle')}</h3>
           <p className="text-sm max-w-sm" style={{ color: 'var(--text-3)' }}>
-            Starte einen Bot auf dem Trading-Rechner — er erscheint automatisch hier sobald er sich mit der Bridge verbindet.
+            {t('emptyDescription')}
           </p>
         </motion.div>
       )}
@@ -152,9 +158,9 @@ export default function BotsClient({ initialBots, profiles }: Props) {
           {/* Summary */}
           <div className="grid grid-cols-3 gap-3 mb-5">
             {[
-              { label: 'Gesamt',  value: bots.length, color: 'var(--text-1)' },
-              { label: 'Online',  value: connected,   color: 'var(--green)' },
-              { label: 'Aktiv',   value: running,     color: '#3b82f6' },
+              { label: t('summaryTotalLabel'),  value: bots.length, color: 'var(--text-1)' },
+              { label: t('summaryOnlineLabel'), value: connected,   color: 'var(--green)' },
+              { label: t('summaryActiveLabel'), value: running,     color: '#3b82f6' },
             ].map(s => (
               <div key={s.label} className="rounded-xl p-3 text-center"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
@@ -197,10 +203,10 @@ export default function BotsClient({ initialBots, profiles }: Props) {
 
                   {/* Stats-Grid */}
                   <div className="grid grid-cols-2 gap-2">
-                    <Stat label="P&L" value={pnl.value} valueColor={pnl.color} />
-                    <Stat label="Positionen" value={botStats?.openCount?.toString() ?? '-'} />
-                    <Stat label="Trades"     value={botStats?.tradeCount?.toString() ?? '-'} />
-                    <Stat label="Uptime"     value={status?.uptime ? formatUptime(status.uptime) : '-'} />
+                    <Stat label={t('statPnl')} value={pnl.value} valueColor={pnl.color} />
+                    <Stat label={t('statPositions')} value={botStats?.openCount?.toString() ?? '-'} />
+                    <Stat label={t('statTrades')}     value={botStats?.tradeCount?.toString() ?? '-'} />
+                    <Stat label={t('statUptime')}     value={status?.uptime ? formatUptime(status.uptime) : '-'} />
                   </div>
 
                   {/* Bot-ID (Spec: ID + Name anzeigen) */}
@@ -212,12 +218,12 @@ export default function BotsClient({ initialBots, profiles }: Props) {
                   <div className="flex items-center justify-between pt-1 border-t" style={{ borderColor: 'var(--border)' }}>
                     <p className="text-[11px] truncate" style={{ color: 'var(--text-3)' }}>
                       <TrendingUp size={10} className="inline mr-1" />
-                      {profile?.name ?? 'Kein Profil'}
+                      {profile?.name ?? t('noProfileFallback')}
                     </p>
                     <Link href={`/bots/${bot.id}`}
                       className="flex items-center gap-1 text-[11px] font-semibold"
                       style={{ color: 'var(--accent)' }}>
-                      Detail <ExternalLink size={10} />
+                      {t('detailLink')} <ExternalLink size={10} />
                     </Link>
                   </div>
                 </motion.div>
