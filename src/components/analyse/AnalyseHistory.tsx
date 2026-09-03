@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { TrendingUp, TrendingDown, Minus, ChevronDown, ChevronUp, Info, Clock } from 'lucide-react'
 import { AnalyseHistoryEntry } from '@/lib/analyse-data'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   entries: AnalyseHistoryEntry[]
@@ -18,6 +19,7 @@ const BIAS_STYLE = {
 const CONF_COLOR = { Hoch: '#22c55e', Mittel: '#f59e0b', Niedrig: '#ef4444' }
 
 export default function AnalyseHistory({ entries }: Props) {
+  const t = useTranslations('analyse.history')
   const [expanded, setExpanded] = useState<string | null>(null)
 
   if (entries.length === 0) return null
@@ -25,7 +27,7 @@ export default function AnalyseHistory({ entries }: Props) {
   return (
     <div>
       <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-3)' }}>
-        Analyse-History
+        {t('historyHeading')}
         <span className="ml-2 px-1.5 py-0.5 rounded font-mono text-xs"
           style={{ background: 'var(--surface)', color: 'var(--text-3)' }}>
           {entries.length}
@@ -37,6 +39,11 @@ export default function AnalyseHistory({ entries }: Props) {
           const bias = BIAS_STYLE[entry.bias]
           const BiasIcon = bias.icon
           const isOpen = expanded === entry.id
+          const confidenceLabel = entry.confidence === 'Hoch'
+            ? t('confidenceHigh')
+            : entry.confidence === 'Mittel'
+              ? t('confidenceMedium')
+              : t('confidenceLow')
           const date = new Date(entry.timestamp).toLocaleString('de-DE', {
             day: '2-digit', month: '2-digit', year: '2-digit',
             hour: '2-digit', minute: '2-digit',
@@ -69,7 +76,7 @@ export default function AnalyseHistory({ entries }: Props) {
                   </span>
                   <span className="text-xs font-semibold px-1.5 py-0.5 rounded"
                     style={{ background: 'var(--bg)', color: CONF_COLOR[entry.confidence] }}>
-                    {entry.confidence}
+                    {confidenceLabel}
                   </span>
                   <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-2)' }}>
@@ -118,15 +125,15 @@ export default function AnalyseHistory({ entries }: Props) {
                       {/* Preise Grid (mobile sichtbar) */}
                       <div className="grid grid-cols-3 gap-2 mt-3 md:hidden text-xs font-mono">
                         <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Entry</p>
+                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('entryLabel')}</p>
                           <p style={{ color: 'var(--text-1)' }}>{entry.entry_zone}</p>
                         </div>
                         <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Stop-Loss</p>
+                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('stopLossLabel')}</p>
                           <p style={{ color: '#f87171' }}>{entry.stop_loss}</p>
                         </div>
                         <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Take-Profit</p>
+                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('takeProfitLabel')}</p>
                           <p style={{ color: '#4ade80' }}>{entry.take_profit}</p>
                         </div>
                       </div>
@@ -144,7 +151,7 @@ export default function AnalyseHistory({ entries }: Props) {
                       <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--text-3)' }}>
                         <span>RR: <span className="font-mono" style={{ color: 'var(--text-2)' }}>{entry.risk_reward}</span></span>
                         {entry.currentPrice && (
-                          <span>Kurs bei Analyse: <span className="font-mono" style={{ color: 'var(--text-2)' }}>{entry.currentPrice}</span></span>
+                          <span>{t('priceAtAnalysisLabel')} <span className="font-mono" style={{ color: 'var(--text-2)' }}>{entry.currentPrice}</span></span>
                         )}
                       </div>
                     </div>
