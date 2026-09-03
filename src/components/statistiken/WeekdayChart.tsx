@@ -6,26 +6,29 @@ import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { WeekdayStats } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props { data: WeekdayStats[]; currency: string }
 
 function CustomTooltip({ active, payload, label, currency }: { active?: boolean; payload?: { value: number; dataKey: string; payload: WeekdayStats }[]; label?: string; currency: string }) {
+  const t = useTranslations('statistiken.weekdayChart')
   if (!active || !payload?.length) return null
   const row = payload[0].payload
   return (
     <div className="px-3 py-2 rounded-lg text-xs" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}>
-      <p className="font-semibold mb-1" style={{ color: 'var(--text-2)' }}>{label} ({row.trades} Trades)</p>
+      <p className="font-semibold mb-1" style={{ color: 'var(--text-2)' }}>{label} ({row.trades} {t('tooltipTradesSuffix')})</p>
       <p className="font-mono" style={{ color: row.avgPnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
         Ø {row.avgPnl >= 0 ? '+' : ''}{row.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {currencySymbol(currency)}
       </p>
       <p className="font-mono mt-0.5" style={{ color: 'var(--accent)' }}>
-        Win Rate: {row.winRate.toFixed(1)}%
+        {t('winRateLabel')} {row.winRate.toFixed(1)}%
       </p>
     </div>
   )
 }
 
 export default function WeekdayChart({ data, currency }: Props) {
+  const t = useTranslations('statistiken.weekdayChart')
   const formatTick = useCallback((v: number) => `${v >= 0 ? '+' : ''}${v}€`, [])
 
   return (
@@ -38,9 +41,9 @@ export default function WeekdayChart({ data, currency }: Props) {
     >
       <div className="flex items-center gap-1.5">
         <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Wochentags-Analyse — Ø P&L pro Tag
+          {t('title')}
         </p>
-        <InfoTooltip text="Performance nach Wochentag. Zeigt an welchen Tagen du am profitabelsten tradest." />
+        <InfoTooltip text={t('tooltip')} />
       </div>
 
       <div className="flex-1" style={{ minHeight: 'clamp(120px, 28vw, 160px)' }}>
