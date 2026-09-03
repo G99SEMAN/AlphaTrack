@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Target } from 'lucide-react'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   consistencyScore: number
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function ConsistencyCard({ consistencyScore, profitableWeeks, totalWeeks }: Props) {
+  const t = useTranslations('statistiken.consistencyCard')
   const color = consistencyScore >= 70 ? 'var(--green)' : consistencyScore >= 50 ? '#f59e0b' : 'var(--red)'
   const bgColor = consistencyScore >= 70 ? 'var(--green-bg)' : consistencyScore >= 50 ? 'rgba(245,158,11,0.1)' : 'var(--red-bg)'
 
@@ -25,9 +27,9 @@ export default function ConsistencyCard({ consistencyScore, profitableWeeks, tot
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            Konsistenz-Score
+            {t('title')}
           </p>
-          <InfoTooltip text="Anteil der Wochen mit positivem P&L. 70%+ gilt als konsistent profitabel." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: bgColor }}>
           <Target size={15} style={{ color }} />
@@ -39,7 +41,7 @@ export default function ConsistencyCard({ consistencyScore, profitableWeeks, tot
           {totalWeeks > 0 ? `${consistencyScore.toFixed(0)}%` : '-'}
         </p>
         <p className="text-sm mb-1" style={{ color: 'var(--text-3)' }}>
-          {profitableWeeks}/{totalWeeks} Wochen
+          {t('weeksLabel', { profitable: profitableWeeks, total: totalWeeks })}
         </p>
       </div>
 
@@ -54,7 +56,7 @@ export default function ConsistencyCard({ consistencyScore, profitableWeeks, tot
           />
         </div>
         <p className="text-xs mt-1.5" style={{ color: 'var(--text-3)' }}>
-          {consistencyScore >= 70 ? 'Konsistent profitabel' : consistencyScore >= 50 ? 'Mäßig konsistent' : 'Inkonsistent'}
+          {consistencyScore >= 70 ? t('statusGood') : consistencyScore >= 50 ? t('statusOk') : t('statusBad')}
         </p>
       </div>
     </motion.div>
