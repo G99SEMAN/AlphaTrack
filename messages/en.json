@@ -946,5 +946,56 @@
       "connOnline": "Online",
       "connOffline": "Offline"
     }
+  },
+  "analyse": {
+    "page": {
+      "title": "Trade Analyzer",
+      "subtitle": "EUR/USD - AI analysis with direct bot execution"
+    },
+    "client": {
+      "currencyPairLabel": "Currency Pair",
+      "durationLabel": "Trading Duration",
+      "riskManagementLabel": "Risk Management",
+      "balanceUnavailable": "Balance unavailable",
+      "riskLabel": "Risk",
+      "analyzingBtn": "Analyzing...",
+      "startAnalysisBtn": "Start AI Analysis",
+      "analysisFailedFallback": "Analysis failed",
+      "fetchFailedFallback": "The analysis could not be retrieved.",
+      "sendToBotHeading": "Send to Bot",
+      "lotSizeLabel": "Lot Size",
+      "calculatedSuffix": "(calculated)",
+      "botLabel": "Bot",
+      "unlockToSendTooltip": "Unlock trading first",
+      "sendingBtn": "Executing...",
+      "executeBtnSuffix": "execute",
+      "tradeExecutedMsg": "Trade executed",
+      "ticketSuffix": "· Ticket #{ticket}",
+      "executeErrorFallback": "Execution failed",
+      "networkErrorMsg": "Network error"
+    },
+    "result": {
+      "resultHeading": "Analysis Result",
+      "currentPriceLabel": "Current Price (Live)",
+      "marketBiasLabel": "Market Bias",
+      "confidenceLabel": "Confidence",
+      "confidenceHigh": "High",
+      "confidenceMedium": "Medium",
+      "confidenceLow": "Low",
+      "entryZoneLabel": "Entry Zone",
+      "stopLossLabel": "Stop Loss",
+      "takeProfitLabel": "Take Profit",
+      "riskRewardLabel": "Risk/Reward"
+    },
+    "history": {
+      "historyHeading": "Analysis History",
+      "entryLabel": "Entry",
+      "stopLossLabel": "Stop Loss",
+      "takeProfitLabel": "Take Profit",
+      "priceAtAnalysisLabel": "Price at analysis:",
+      "confidenceHigh": "High",
+      "confidenceMedium": "Medium",
+      "confidenceLow": "Low"
+    }
   }
 }
