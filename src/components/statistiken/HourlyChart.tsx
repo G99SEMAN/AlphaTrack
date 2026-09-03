@@ -6,30 +6,33 @@ import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { HourlyStats } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props { data: HourlyStats[]; currency: string }
 
 function CustomTooltip({ active, payload, currency }: { active?: boolean; payload?: { value: number; payload: HourlyStats }[]; currency: string }) {
+  const t = useTranslations('statistiken.hourlyChart')
   if (!active || !payload?.length) return null
   const row = payload[0].payload
   const sym = currencySymbol(currency)
   return (
     <div className="px-3 py-2 rounded-lg text-xs" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}>
-      <p className="font-semibold mb-1.5" style={{ color: 'var(--text-2)' }}>{row.label} · {row.trades} Trades</p>
+      <p className="font-semibold mb-1.5" style={{ color: 'var(--text-2)' }}>{row.label} · {row.trades} {t('tooltipTradesSuffix')}</p>
       <p className="font-mono" style={{ color: row.totalPnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
-        Gesamt: {row.totalPnl >= 0 ? '+' : ''}{row.totalPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {sym}
+        {t('totalLabel')} {row.totalPnl >= 0 ? '+' : ''}{row.totalPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {sym}
       </p>
       <p className="font-mono" style={{ color: 'var(--text-3)' }}>
-        Ø/Trade: {row.avgPnl >= 0 ? '+' : ''}{row.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {sym}
+        {t('avgPerTradeLabel')} {row.avgPnl >= 0 ? '+' : ''}{row.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {sym}
       </p>
       <p className="font-mono mt-0.5" style={{ color: row.winRate >= 50 ? 'var(--green)' : 'var(--red)' }}>
-        Win Rate: {row.winRate.toFixed(1)}%
+        {t('winRateLabel')} {row.winRate.toFixed(1)}%
       </p>
     </div>
   )
 }
 
 export default function HourlyChart({ data, currency }: Props) {
+  const t = useTranslations('statistiken.hourlyChart')
   const sym = currencySymbol(currency)
 
   const formatTick = useCallback((v: number) => {
@@ -53,9 +56,9 @@ export default function HourlyChart({ data, currency }: Props) {
     >
       <div className="flex items-center gap-1.5">
         <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Stunden-Analyse — Gesamt-P&amp;L pro Stunde
+          {t('title')}
         </p>
-        <InfoTooltip text="Kumulierter P&L nach Tageszeit (Schlussstunde des Trades). Zeigt welche Handelsstunden insgesamt am profitabelsten sind." />
+        <InfoTooltip text={t('tooltip')} />
       </div>
 
       {/* Balkendiagramm */}
@@ -93,7 +96,7 @@ export default function HourlyChart({ data, currency }: Props) {
       {/* Win-Rate + Trade-Anzahl pro Stunde */}
       <div style={{ borderTop: '1px solid var(--border)', paddingTop: 12 }}>
         <p className="text-[9px] font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--text-3)' }}>
-          Win-Rate &amp; Anzahl Trades
+          {t('winRateAndCountLabel')}
         </p>
         <div className="flex flex-wrap gap-1.5">
           {data.map(d => {
