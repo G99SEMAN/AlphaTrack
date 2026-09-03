@@ -5,8 +5,9 @@ import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { currencySymbol } from '@/lib/currency'
 import { X, Pencil, Clock, Shield } from 'lucide-react'
-import { Strategy, TIMEFRAME_LABELS, normalizeRules } from '@/types/strategy'
+import { Strategy, getTimeframeLabels, normalizeRules } from '@/types/strategy'
 import { Trade } from '@/types/trade'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   strategy: Strategy
@@ -60,6 +61,8 @@ function renderNotes(text: string) {
 }
 
 export default function StrategyDetailPanel({ strategy, trades, currency, onClose, onEdit }: Props) {
+  const t = useTranslations('strategien.detailPanel')
+  const timeframeLabels = getTimeframeLabels(useTranslations('strategien.timeframes'))
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -116,7 +119,7 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)'; (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)' }}
               >
                 <Pencil size={12} />
-                Bearbeiten
+                {t('editBtn')}
               </button>
               <button
                 onClick={onClose}
@@ -140,14 +143,14 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
               <Clock size={11} />
-              {strategy.timeframe} - {TIMEFRAME_LABELS[strategy.timeframe]}
+              {strategy.timeframe} - {timeframeLabels[strategy.timeframe]}
             </span>
             <span
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium"
               style={{ background: 'var(--surface-2)', color: 'var(--text-2)', border: '1px solid var(--border)' }}
             >
               <Shield size={11} />
-              {strategy.riskPerTrade}% Risiko pro Trade
+              {strategy.riskPerTrade}% {t('riskPerTradeSuffix')}
             </span>
           </div>
         </div>
@@ -161,11 +164,11 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
             style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
           >
             <div className="text-center">
-              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Trades</p>
+              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('colTrades')}</p>
               <p className="text-lg font-bold font-mono" style={{ color: 'var(--text-1)' }}>{allLinked.length}</p>
             </div>
             <div className="text-center">
-              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>Win Rate</p>
+              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('colWinRate')}</p>
               <p
                 className="text-lg font-bold font-mono"
                 style={{ color: winRate === null ? 'var(--text-3)' : winRate >= 50 ? 'var(--green)' : 'var(--red)' }}
@@ -174,7 +177,7 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
               </p>
             </div>
             <div className="text-center">
-              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>P&L</p>
+              <p className="text-xs mb-1" style={{ color: 'var(--text-3)' }}>{t('colPnl')}</p>
               <p
                 className="text-lg font-bold font-mono"
                 style={{ color: linked.length === 0 ? 'var(--text-3)' : totalPnl >= 0 ? 'var(--green)' : 'var(--red)' }}
@@ -188,7 +191,10 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
           {rules.length > 0 && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-3)' }}>
-                Checkliste - {rules.length} {rules.length === 1 ? 'Bedingung' : 'Bedingungen'}
+                {t('checklistLabel', {
+                  count: rules.length,
+                  conditionLabel: rules.length === 1 ? t('conditionOne') : t('conditionMany'),
+                })}
               </p>
               <ul
                 className="flex flex-col gap-2"
@@ -215,7 +221,7 @@ export default function StrategyDetailPanel({ strategy, trades, currency, onClos
           {strategy.notes && (
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-3)' }}>
-                Details
+                {t('detailsHeading')}
               </p>
               <div
                 className="rounded-xl p-4 flex flex-col gap-0.5"
