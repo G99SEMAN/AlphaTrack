@@ -22,7 +22,35 @@ interface Candle {
   close: string
 }
 
-const SYSTEM_PROMPT = `Du bist ein erfahrener Forex-Trader und Marktanalyst.
+function buildSystemPrompt(lang: 'de' | 'en'): string {
+  if (lang === 'en') {
+    return `You are an experienced forex trader and market analyst.
+You receive real, current price data (OHLC candles) for a currency pair and analyze the market based on it.
+
+Always respond ONLY with a valid JSON object - no markdown, no code blocks, no text before or after:
+{
+  "bias": "Long" | "Short" | "Neutral",
+  "entry_zone": "Price range based on real price data, e.g. '1.0820 - 1.0835'",
+  "stop_loss": "Stop loss price as a string, e.g. '1.0795'",
+  "take_profit": "Take profit price as a string, e.g. '1.0870'",
+  "risk_reward": "Ratio as a string, e.g. '1:2.0'",
+  "confidence": "Hoch" | "Mittel" | "Niedrig" (always use these exact German values, regardless of response language),
+  "reasoning": "Reasoning in 2-3 sentences in English, reference concrete price levels from the data",
+  "timeframe": "Timeframe as a string, e.g. 'M5 (Scalping)'"
+}
+
+Analyze the real price data based on:
+- Current market structure (Higher Highs/Lower Lows) from the candle data
+- Important support and resistance zones from the candle highs/lows
+- Liquidity zones and Fair Value Gaps (Smart Money Concepts)
+- Current market session (London/New York/Asia) based on the time
+- Entry, SL and TP must have realistic distances to the current price
+
+Entry zone: close to the current price or at a clear retracement zone.
+Stop loss: behind the next structural low/high.
+Take profit: at the next relevant resistance/support.`
+  }
+  return `Du bist ein erfahrener Forex-Trader und Marktanalyst.
 Du erhältst echte aktuelle Kursdaten (OHLC-Kerzen) für ein Währungspaar und analysierst darauf basierend den Markt.
 
 Antworte IMMER ausschließlich mit einem validen JSON-Objekt - kein Markdown, keine Codeblöcke, kein Text davor oder danach:
@@ -47,6 +75,7 @@ Analysiere die echten Kursdaten anhand von:
 Entry-Zone: nah am aktuellen Kurs oder an einer klaren Rückkehrzone.
 Stop Loss: hinter dem nächsten strukturellen Tief/Hoch.
 Take Profit: am nächsten relevanten Widerstand/Unterstützung.`
+}
 
 const VALID_SYMBOLS = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'USD/CHF', 'AUD/USD', 'NZD/USD', 'USD/CAD', 'EUR/GBP']
 const BOT_INTERVAL_MAP: Record<string, string> = { '5min': 'M5', '1h': 'H1' }
@@ -122,7 +151,8 @@ export async function POST(req: Request) {
     }
     const client = new Anthropic({ apiKey })
 
-    const { duration, symbol: rawSymbol } = await req.json()
+    const { duration, symbol: rawSymbol, lang: rawLang } = await req.json()
+    const lang: 'de' | 'en' = rawLang === 'en' ? 'en' : 'de'
 
     if (!duration || !['scalping', 'intraday'].includes(duration)) {
       return NextResponse.json({ error: 'Ungültige Handelsdauer' }, { status: 400 })
@@ -130,7 +160,9 @@ export async function POST(req: Request) {
 
     const symbol = VALID_SYMBOLS.includes(rawSymbol) ? rawSymbol : 'EUR/USD'
     const interval = duration === 'scalping' ? '5min' : '1h'
-    const durationLabel = duration === 'scalping' ? 'Scalping (unter 30 Minuten, M5-Chart)' : 'Intraday (1-8 Stunden, H1-Chart)'
+    const durationLabel = lang === 'en'
+      ? (duration === 'scalping' ? 'Scalping (under 30 minutes, M5 chart)' : 'Intraday (1-8 hours, H1 chart)')
+      : (duration === 'scalping' ? 'Scalping (unter 30 Minuten, M5-Chart)' : 'Intraday (1-8 Stunden, H1-Chart)')
     const timeframeLabel = duration === 'scalping' ? 'M5 (Scalping)' : 'H1 (Intraday)'
 
     const candles = await fetchCandlesFromBot(symbol, interval)
@@ -143,7 +175,18 @@ export async function POST(req: Request) {
     const now = new Date()
     const timeStr = now.toLocaleString('de-DE', { timeZone: 'Europe/Berlin', dateStyle: 'full', timeStyle: 'short' })
 
-    const userMessage = `Analysiere ${symbol} für einen ${durationLabel}-Trade.
+    const userMessage = lang === 'en'
+      ? `Analyze ${symbol} for a ${durationLabel} trade.
+
+Current date and time (Berlin): ${timeStr}
+Current price ${symbol}: ${currentPrice}
+Candle timeframe: ${timeframeLabel}
+
+Last 30 candles (newest first):
+${candleText}
+
+Give me a precise trading recommendation based on this real price data.`
+      : `Analysiere ${symbol} für einen ${durationLabel}-Trade.
 
 Aktuelles Datum und Uhrzeit (Berlin): ${timeStr}
 Aktueller Kurs ${symbol}: ${currentPrice}
@@ -160,7 +203,7 @@ Gib mir eine präzise Handelsempfehlung basierend auf diesen echten Kursdaten.`
       system: [
         {
           type: 'text',
-          text: SYSTEM_PROMPT,
+          text: buildSystemPrompt(lang),
           cache_control: { type: 'ephemeral' },
         },
       ],
