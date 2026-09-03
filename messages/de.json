@@ -966,7 +966,7 @@
       "lotSizeLabel": "Lot-Größe",
       "calculatedSuffix": "(berechnet)",
       "botLabel": "Bot",
-      "unlockToSendTooltip": "Unlock trading first",
+      "unlockToSendTooltip": "Trading-Schutzschalter aktivieren",
       "sendingBtn": "Wird ausgeführt...",
       "executeBtnSuffix": "ausführen",
       "tradeExecutedMsg": "Trade ausgeführt",
