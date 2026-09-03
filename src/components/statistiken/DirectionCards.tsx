@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { DirectionStats } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   long: DirectionStats
@@ -12,6 +13,7 @@ interface Props {
 }
 
 function DirCard({ dir, stats, currency, delay }: { dir: 'long' | 'short'; stats: DirectionStats; currency: string; delay: number }) {
+  const t = useTranslations('statistiken.directionCards')
   const isLong = dir === 'long'
   const color = isLong ? 'var(--green)' : 'var(--red)'
   const bgColor = isLong ? 'var(--green-bg)' : 'var(--red-bg)'
@@ -28,12 +30,9 @@ function DirCard({ dir, stats, currency, delay }: { dir: 'long' | 'short'; stats
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            {isLong ? 'Long-Trades' : 'Short-Trades'}
+            {isLong ? t('longLabel') : t('shortLabel')}
           </p>
-          <InfoTooltip text={isLong
-            ? "Performance aller Long-Positionen (Kauf). Winrate und P&L-Übersicht."
-            : "Performance aller Short-Positionen (Verkauf/Leerverkauf)."
-          } />
+          <InfoTooltip text={isLong ? t('longTooltip') : t('shortTooltip')} />
         </div>
         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: bgColor }}>
           {isLong ? <TrendingUp size={15} style={{ color }} /> : <TrendingDown size={15} style={{ color }} />}
@@ -41,13 +40,13 @@ function DirCard({ dir, stats, currency, delay }: { dir: 'long' | 'short'; stats
       </div>
 
       {stats.trades === 0 ? (
-        <p className="text-sm" style={{ color: 'var(--text-3)' }}>Keine Trades</p>
+        <p className="text-sm" style={{ color: 'var(--text-3)' }}>{t('noTrades')}</p>
       ) : (
         <div className="flex flex-col gap-3">
           {/* Win Rate Balken */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs" style={{ color: 'var(--text-2)' }}>Win Rate</span>
+              <span className="text-xs" style={{ color: 'var(--text-2)' }}>{t('winRateLabel')}</span>
               <span className="text-sm font-bold font-mono" style={{ color }}>
                 {stats.winRate.toFixed(1)}%
               </span>
@@ -65,23 +64,23 @@ function DirCard({ dir, stats, currency, delay }: { dir: 'long' | 'short'; stats
 
           <div className="grid grid-cols-2 gap-2 pt-1" style={{ borderTop: '1px solid var(--border)' }}>
             <div>
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Trades</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('tradesLabel')}</p>
               <p className="text-base font-bold font-mono" style={{ color: 'var(--text-1)' }}>{stats.trades}</p>
             </div>
             <div>
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Gesamt P&L</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('totalPnlLabel')}</p>
               <p className="text-base font-bold font-mono" style={{ color: pnlColor }}>
                 {stats.totalPnl >= 0 ? '+' : ''}{stats.totalPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div>
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Ø pro Trade</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('avgPerTradeLabel')}</p>
               <p className="text-sm font-semibold font-mono" style={{ color: stats.avgPnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
                 {stats.avgPnl >= 0 ? '+' : ''}{stats.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div>
-              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>Währung</p>
+              <p className="text-xs mb-0.5" style={{ color: 'var(--text-3)' }}>{t('currencyLabel')}</p>
               <p className="text-sm font-semibold font-mono" style={{ color: 'var(--text-2)' }}>{currency}</p>
             </div>
           </div>
