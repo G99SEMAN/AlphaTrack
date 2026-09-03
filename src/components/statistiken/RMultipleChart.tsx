@@ -4,20 +4,23 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import { motion } from 'framer-motion'
 import { RMultipleBucket } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props { data: RMultipleBucket[]; totalTrades: number }
 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: { value: number }[]; label?: string }) {
+  const t = useTranslations('statistiken.rMultipleChart')
   if (!active || !payload?.length) return null
   return (
     <div className="px-3 py-2 rounded-lg text-xs" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}>
       <p className="font-semibold" style={{ color: 'var(--text-2)' }}>{label}</p>
-      <p className="font-mono mt-0.5" style={{ color: 'var(--text-1)' }}>{payload[0].value} Trades</p>
+      <p className="font-mono mt-0.5" style={{ color: 'var(--text-1)' }}>{payload[0].value} {t('tooltipTradesSuffix')}</p>
     </div>
   )
 }
 
 export default function RMultipleChart({ data, totalTrades }: Props) {
+  const t = useTranslations('statistiken.rMultipleChart')
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -29,12 +32,12 @@ export default function RMultipleChart({ data, totalTrades }: Props) {
       <div>
         <div className="flex items-center gap-1.5">
           <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-            R-Multiple Verteilung
+            {t('title')}
           </p>
-          <InfoTooltip text="Verteilung der Trades als Vielfaches des initial riskierten Betrags (1R). >+1R bedeutet mehr gewonnen als riskiert." />
+          <InfoTooltip text={t('tooltip')} />
         </div>
         <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
-          Trades mit Stop-Loss: {totalTrades}
+          {t('tradesWithSlLabel')} {totalTrades}
         </p>
       </div>
 
@@ -69,7 +72,7 @@ export default function RMultipleChart({ data, totalTrades }: Props) {
       </div>
 
       <p className="text-xs" style={{ color: 'var(--text-3)', borderTop: '1px solid var(--border)', paddingTop: 10 }}>
-        Ideal: wenige Verluste links, viele Gewinne rechts
+        {t('footnote')}
       </p>
     </motion.div>
   )
