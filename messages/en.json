@@ -603,5 +603,95 @@
       "title": "Best Trades",
       "tooltip": "The 7 most profitable individual closed trades."
     }
+  },
+  "strategien": {
+    "page": {
+      "title": "Strategies",
+      "subtitle": "{name} - Define trading strategies and track performance"
+    },
+    "timeframes": {
+      "m1": "1 minute",
+      "m5": "5 minutes",
+      "m15": "15 minutes",
+      "m30": "30 minutes",
+      "h1": "1 hour",
+      "h4": "4 hours",
+      "d1": "Daily",
+      "w1": "Weekly",
+      "mn": "Monthly"
+    },
+    "client": {
+      "noStrategiesYet": "No strategies defined yet",
+      "countOne": "Strategy",
+      "countMany": "Strategies",
+      "summary": "{count} {countLabel} · {withStrategy} of {totalClosed} trades assigned",
+      "newStrategyBtn": "New Strategy",
+      "emptyTitle": "No strategies yet",
+      "emptyDescription": "Define your trading strategies to select them when logging trades and track their performance.",
+      "createFirstBtn": "Create first strategy"
+    },
+    "card": {
+      "deleteConfirm": "Really delete strategy \"{name}\"?",
+      "riskLabel": "Risk",
+      "moreRules": "+{count} more",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L"
+    },
+    "modal": {
+      "editTitle": "Edit Strategy",
+      "newTitle": "New Strategy",
+      "idLabel": "ID: {id}",
+      "createSubtitle": "Define and save strategy",
+      "nameLabel": "Name *",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Short summary of the strategy",
+      "namePlaceholder": "e.g. \"Breakout London Open\"",
+      "timeframeLabel": "Timeframe *",
+      "riskLabel": "Risk per Trade (%)",
+      "rulesLabel": "Setup Rules",
+      "addRuleBtn": "Add Rule",
+      "rulePlaceholder": "Rule {n}",
+      "notesLabel": "Notes / Details",
+      "notesPlaceholder": "Detailed description, daily routine, rules... Separate sections with ---.",
+      "colorLabel": "Color",
+      "cancelBtn": "Cancel",
+      "saveBtn": "Save",
+      "createBtn": "Create Strategy",
+      "saveError": "Strategy could not be saved."
+    },
+    "detailPanel": {
+      "editBtn": "Edit",
+      "riskPerTradeSuffix": "Risk per Trade",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L",
+      "checklistLabel": "Checklist - {count} {conditionLabel}",
+      "conditionOne": "Condition",
+      "conditionMany": "Conditions",
+      "detailsHeading": "Details"
+    }
+  },
+  "netzwerk": {
+    "page": {
+      "title": "Network",
+      "subtitle": "Live overview of all connections — updates automatically every 5 seconds"
+    },
+    "diagram": {
+      "statusOnline": "Online",
+      "statusWarning": "Warning",
+      "statusOffline": "Offline",
+      "bridgeConnectedSub": "Bridge connected",
+      "noConnectionSub": "No connection",
+      "bridgeOpenPositions": "{count} open positions",
+      "connectionProblemSub": "Connection problem",
+      "mt5ConnectedSub": "Connected",
+      "mt5NotLoggedInSub": "Not logged in",
+      "botPositions": "{count} positions",
+      "botPausedSub": "Paused",
+      "botStoppedSub": "Stopped",
+      "resetTitle": "Reset positions",
+      "resetLabel": "Reset"
+    }
   }
 }

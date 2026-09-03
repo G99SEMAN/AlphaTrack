@@ -603,5 +603,95 @@
       "title": "Beste Trades",
       "tooltip": "Die 7 profitabelsten abgeschlossenen Einzeltrades."
     }
+  },
+  "strategien": {
+    "page": {
+      "title": "Strategien",
+      "subtitle": "{name} - Trading-Strategien definieren und Performance verfolgen"
+    },
+    "timeframes": {
+      "m1": "1 Minute",
+      "m5": "5 Minuten",
+      "m15": "15 Minuten",
+      "m30": "30 Minuten",
+      "h1": "1 Stunde",
+      "h4": "4 Stunden",
+      "d1": "Daily",
+      "w1": "Weekly",
+      "mn": "Monthly"
+    },
+    "client": {
+      "noStrategiesYet": "Noch keine Strategien definiert",
+      "countOne": "Strategie",
+      "countMany": "Strategien",
+      "summary": "{count} {countLabel} · {withStrategy} von {totalClosed} Trades zugeordnet",
+      "newStrategyBtn": "Neue Strategie",
+      "emptyTitle": "Keine Strategien vorhanden",
+      "emptyDescription": "Definiere deine Trading-Strategien, um sie beim Eintragen von Trades auszuwählen und ihre Performance zu verfolgen.",
+      "createFirstBtn": "Erste Strategie anlegen"
+    },
+    "card": {
+      "deleteConfirm": "Strategie \"{name}\" wirklich löschen?",
+      "riskLabel": "Risiko",
+      "moreRules": "+{count} weitere",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L"
+    },
+    "modal": {
+      "editTitle": "Strategie bearbeiten",
+      "newTitle": "Neue Strategie",
+      "idLabel": "ID: {id}",
+      "createSubtitle": "Strategie definieren und speichern",
+      "nameLabel": "Name *",
+      "descriptionLabel": "Beschreibung",
+      "descriptionPlaceholder": "Kurze Zusammenfassung der Strategie",
+      "namePlaceholder": "z.B. \"Breakout London Open\"",
+      "timeframeLabel": "Zeitrahmen *",
+      "riskLabel": "Risiko pro Trade (%)",
+      "rulesLabel": "Setup-Regeln",
+      "addRuleBtn": "Regel hinzufügen",
+      "rulePlaceholder": "Regel {n}",
+      "notesLabel": "Notizen / Detailinhalt",
+      "notesPlaceholder": "Ausführliche Beschreibung, Tagesablauf, Regeln... Abschnitte mit --- trennen.",
+      "colorLabel": "Farbe",
+      "cancelBtn": "Abbrechen",
+      "saveBtn": "Speichern",
+      "createBtn": "Strategie erstellen",
+      "saveError": "Strategie konnte nicht gespeichert werden."
+    },
+    "detailPanel": {
+      "editBtn": "Bearbeiten",
+      "riskPerTradeSuffix": "Risiko pro Trade",
+      "colTrades": "Trades",
+      "colWinRate": "Win Rate",
+      "colPnl": "P&L",
+      "checklistLabel": "Checkliste - {count} {conditionLabel}",
+      "conditionOne": "Bedingung",
+      "conditionMany": "Bedingungen",
+      "detailsHeading": "Details"
+    }
+  },
+  "netzwerk": {
+    "page": {
+      "title": "Netzwerk",
+      "subtitle": "Live-Übersicht aller Verbindungen — aktualisiert automatisch alle 5 Sekunden"
+    },
+    "diagram": {
+      "statusOnline": "Online",
+      "statusWarning": "Warnung",
+      "statusOffline": "Offline",
+      "bridgeConnectedSub": "Bridge verbunden",
+      "noConnectionSub": "Keine Verbindung",
+      "bridgeOpenPositions": "{count} offene Positionen",
+      "connectionProblemSub": "Verbindungsproblem",
+      "mt5ConnectedSub": "Verbunden",
+      "mt5NotLoggedInSub": "Nicht eingeloggt",
+      "botPositions": "{count} Positionen",
+      "botPausedSub": "Pausiert",
+      "botStoppedSub": "Gestoppt",
+      "resetTitle": "Positionen zurücksetzen",
+      "resetLabel": "Reset"
+    }
   }
 }
