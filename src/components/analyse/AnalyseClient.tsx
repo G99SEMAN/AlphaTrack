@@ -12,6 +12,7 @@ import { AnalyseResult } from '@/app/api/analyse/route'
 import { AnalyseHistoryEntry } from '@/lib/analyse-data'
 import { BotEntry } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
+import { useTranslations, useLocale } from 'next-intl'
 
 interface Props {
   bots?: BotEntry[]
@@ -68,6 +69,8 @@ function calcLotSize(
 }
 
 export default function AnalyseClient({ bots = [] }: Props) {
+  const t = useTranslations('analyse.client')
+  const locale = useLocale()
   const { isUnlocked } = useTradingLock()
   const { resolvedTheme } = useTheme()
   const [duration, setDuration] = useState<Duration>('scalping')
@@ -122,11 +125,11 @@ export default function AnalyseClient({ bots = [] }: Props) {
       const res = await fetch('/api/analyse', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ duration, symbol: pair.apiSymbol }),
+        body: JSON.stringify({ duration, symbol: pair.apiSymbol, lang: locale }),
       })
       if (!res.ok) {
         const errData = await res.json().catch(() => ({})) as { error?: string }
-        throw new Error(errData.error ?? 'Analyse fehlgeschlagen')
+        throw new Error(errData.error ?? t('analysisFailedFallback'))
       }
       const data: AnalyseResult = await res.json()
       setResult(data)
@@ -152,7 +155,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
         })
         .catch(() => {})
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Die Analyse konnte nicht abgerufen werden.')
+      setError(err instanceof Error ? err.message : t('fetchFailedFallback'))
     } finally {
       setLoading(false)
     }
@@ -187,12 +190,12 @@ export default function AnalyseClient({ bots = [] }: Props) {
       const data = await res.json()
       if (res.ok && (data.ok || data.result?.success)) {
         const ticket = data.result?.ticket
-        setSendResult({ success: true, msg: `Trade ausgeführt${ticket ? ` · Ticket #${ticket}` : ''}` })
+        setSendResult({ success: true, msg: `${t('tradeExecutedMsg')}${ticket ? ` ${t('ticketSuffix', { ticket })}` : ''}` })
       } else {
-        setSendResult({ success: false, msg: data.result?.error ?? data.error ?? 'Fehler beim Ausführen' })
+        setSendResult({ success: false, msg: data.result?.error ?? data.error ?? t('executeErrorFallback') })
       }
     } catch {
-      setSendResult({ success: false, msg: 'Netzwerkfehler' })
+      setSendResult({ success: false, msg: t('networkErrorMsg') })
     }
     setSending(false)
   }
@@ -218,7 +221,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
       {/* Währungspaar-Auswahl */}
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Währungspaar
+          {t('currencyPairLabel')}
         </p>
         <div className="flex flex-wrap gap-2">
           {CURRENCY_PAIRS.map(p => (
@@ -245,7 +248,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
       {/* Dauer-Auswahl */}
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-          Handelsdauer
+          {t('durationLabel')}
         </p>
         <DurationSelector value={duration} onChange={handleDurationChange} disabled={loading} />
       </div>
@@ -259,7 +262,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
           <div className="flex items-center gap-2 mb-3">
             <Wallet size={13} style={{ color: 'var(--text-3)' }} />
             <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-              Risk Management
+              {t('riskManagementLabel')}
             </p>
             {account && (
               <span className="ml-auto text-xs font-mono font-bold" style={{ color: 'var(--text-1)' }}>
@@ -267,14 +270,14 @@ export default function AnalyseClient({ bots = [] }: Props) {
               </span>
             )}
             {!account && (
-              <span className="ml-auto text-xs" style={{ color: 'var(--text-3)' }}>Balance nicht verfügbar</span>
+              <span className="ml-auto text-xs" style={{ color: 'var(--text-3)' }}>{t('balanceUnavailable')}</span>
             )}
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 rounded-xl px-3 py-2 flex-1"
               style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
               <Percent size={13} style={{ color: 'var(--text-3)' }} />
-              <span className="text-xs font-semibold" style={{ color: 'var(--text-3)' }}>Risiko</span>
+              <span className="text-xs font-semibold" style={{ color: 'var(--text-3)' }}>{t('riskLabel')}</span>
               <input
                 type="number" min="0.1" max="10" step="0.1"
                 value={riskPct}
@@ -310,12 +313,12 @@ export default function AnalyseClient({ bots = [] }: Props) {
               transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
               className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
             />
-            Analyse läuft...
+            {t('analyzingBtn')}
           </>
         ) : (
           <>
             <Sparkles size={15} />
-            KI-Analyse starten
+            {t('startAnalysisBtn')}
           </>
         )}
       </button>
@@ -353,7 +356,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
                     <Zap size={15} style={{ color: '#ef4444' }} />
                   </div>
                   <div>
-                    <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>An Bot senden</p>
+                    <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{t('sendToBotHeading')}</p>
                     <p className="text-xs" style={{ color: 'var(--text-3)' }}>
                       {result.bias === 'Long' ? 'BUY' : 'SELL'} {pair.botSymbol}
                       {parsePrice(result.stop_loss) > 0 && ` · SL ${parsePrice(result.stop_loss).toFixed(pair.decimals)}`}
@@ -389,7 +392,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
                   {/* Bot-Auswahl */}
                   {bots.length > 1 && (
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-3)' }}>Bot</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-3)' }}>{t('botLabel')}</label>
                       <select
                         value={sendBotId}
                         onChange={e => setSendBotId(e.target.value)}
@@ -405,8 +408,8 @@ export default function AnalyseClient({ bots = [] }: Props) {
                   {/* Lots */}
                   <div>
                     <label className="block text-xs font-semibold mb-1.5" style={{ color: 'var(--text-3)' }}>
-                      Lot-Größe
-                      {lotCalc && <span className="ml-1 font-normal" style={{ color: 'var(--text-3)' }}>(berechnet)</span>}
+                      {t('lotSizeLabel')}
+                      {lotCalc && <span className="ml-1 font-normal" style={{ color: 'var(--text-3)' }}>{t('calculatedSuffix')}</span>}
                     </label>
                     <input
                       type="number" step="0.01" min="0.01" max="100"
@@ -421,7 +424,7 @@ export default function AnalyseClient({ bots = [] }: Props) {
                 <button
                   onClick={handleSendToBot}
                   disabled={sending || !isUnlocked}
-                  title={!isUnlocked ? 'Trading-Schutzschalter aktivieren' : undefined}
+                  title={!isUnlocked ? t('unlockToSendTooltip') : undefined}
                   className="w-full py-3 rounded-xl text-sm font-black tracking-wider cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   style={{
                     background: result.bias === 'Long'
@@ -434,8 +437,8 @@ export default function AnalyseClient({ bots = [] }: Props) {
                   }}
                 >
                   {sending
-                    ? <><Loader2 size={15} className="animate-spin" /> Wird ausgeführt...</>
-                    : <><Zap size={15} /> {result.bias === 'Long' ? 'BUY' : 'SELL'} {sendLots} {pair.botSymbol} ausführen</>
+                    ? <><Loader2 size={15} className="animate-spin" /> {t('sendingBtn')}</>
+                    : <><Zap size={15} /> {result.bias === 'Long' ? 'BUY' : 'SELL'} {sendLots} {pair.botSymbol} {t('executeBtnSuffix')}</>
                   }
                 </button>
 
