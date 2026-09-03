@@ -8,6 +8,7 @@ import {
 } from 'recharts'
 import { BotEntry } from '@/types/bot'
 import { Trade } from '@/types/trade'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   botEntry: BotEntry
@@ -31,6 +32,7 @@ function fmtDateTime(s: string): string {
 }
 
 export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
+  const t = useTranslations('bots.perfCard')
   const closedTrades = useMemo(
     () =>
       trades
@@ -42,7 +44,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
   const { totalPnl, winRate, chartData } = useMemo(() => {
     let running = 0
     let wins = 0
-    const points: { date: string; value: number }[] = [{ date: 'Start', value: 0 }]
+    const points: { date: string; value: number }[] = [{ date: t('startLabel'), value: 0 }]
 
     for (const t of closedTrades) {
       const pnl = t.pnl ?? 0
@@ -63,9 +65,9 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
   const gradId = `pg-${botEntry.id}`
 
   const kpis = [
-    { label: 'Win Rate', value: `${winRate.toFixed(1)}%`, color: winRate >= 50 ? 'var(--green)' : 'var(--red)' },
-    { label: 'P&L', value: `${totalPnl >= 0 ? '+' : ''}${totalPnl.toLocaleString('de-DE', { maximumFractionDigits: 2 })}€`, color },
-    { label: 'Trades', value: String(closedTrades.length), color: 'var(--text-1)' },
+    { label: t('kpiWinRate'), value: `${winRate.toFixed(1)}%`, color: winRate >= 50 ? 'var(--green)' : 'var(--red)' },
+    { label: t('kpiPnl'), value: `${totalPnl >= 0 ? '+' : ''}${totalPnl.toLocaleString('de-DE', { maximumFractionDigits: 2 })}€`, color },
+    { label: t('kpiTradesLabel'), value: String(closedTrades.length), color: 'var(--text-1)' },
   ]
 
   return (
@@ -83,15 +85,15 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
         <div>
           <p className="font-semibold" style={{ color: 'var(--text-1)' }}>{botEntry.name}</p>
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            {closedTrades.length} {closedTrades.length === 1 ? 'Trade' : 'Trades'}
+            {closedTrades.length} {closedTrades.length === 1 ? t('tradeOne') : t('tradeMany')}
           </p>
         </div>
         <button
           onClick={onRemove}
           className="p-1.5 rounded-lg transition-colors"
           style={{ color: 'var(--text-3)' }}
-          title="Bot entfernen"
-          aria-label="Bot entfernen"
+          title={t('removeBotTooltip')}
+          aria-label={t('removeBotTooltip')}
         >
           <X size={15} />
         </button>
@@ -102,7 +104,7 @@ export default function BotPerfCard({ botEntry, trades, onRemove }: Props) {
           className="flex items-center justify-center rounded-xl"
           style={{ height: 140, background: 'var(--bg)' }}
         >
-          <p className="text-sm" style={{ color: 'var(--text-3)' }}>Noch keine Trades</p>
+          <p className="text-sm" style={{ color: 'var(--text-3)' }}>{t('noTradesYet')}</p>
         </div>
       ) : (
         <>
