@@ -9,6 +9,7 @@ import {
 import { BotEntry, LivePosition as BridgeLivePosition } from '@/types/bot'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { BOT_COLORS, getBotColor } from '@/lib/bot-colors'
+import { useTranslations } from 'next-intl'
 
 interface LivePosition extends BridgeLivePosition {
   botName?: string
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function BridgeTradesClient({ bots, strategyBots }: Props) {
+  const t = useTranslations('bridge.tradesPage')
   const { isUnlocked } = useTradingLock()
   const [selectedBotIds, setSelectedBotIds] = useState<Set<string>>(
     new Set(bots.map(b => b.id))
@@ -118,12 +120,12 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
       setCloseResult({
         success,
         msg: success
-          ? `Position #${closeTarget.ticket} geschlossen`
-          : (data.result?.error ?? data.error ?? 'Fehler beim Schließen'),
+          ? t('closeResultSuccess', { ticket: closeTarget.ticket })
+          : (data.result?.error ?? data.error ?? t('closeResultError')),
       })
       if (data.success) await fetchPositions()
     } catch {
-      setCloseResult({ success: false, msg: 'Netzwerkfehler' })
+      setCloseResult({ success: false, msg: t('networkError') })
     }
     setClosingTicket(null)
     setTimeout(() => setCloseResult(null), 5000)
@@ -150,9 +152,9 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
           <Activity size={20} style={{ color: '#ef4444' }} />
         </div>
         <div>
-          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>Live Trades</h1>
+          <h1 className="text-xl font-bold" style={{ color: 'var(--text-1)' }}>{t('title')}</h1>
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            Aktive offene Positionen in Echtzeit
+            {t('subtitle')}
           </p>
         </div>
       </div>
@@ -161,7 +163,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
       {bots.length > 1 && (
         <div className="flex gap-2 mb-5 flex-wrap items-center">
           <span className="text-xs font-semibold uppercase tracking-wider mr-1" style={{ color: 'var(--text-3)' }}>
-            Filter
+            {t('filterLabel')}
           </span>
           <button onClick={selectAll}
             className="px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer transition-all"
@@ -170,7 +172,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
               border: allSelected ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--border)',
               color: allSelected ? '#ef4444' : 'var(--text-2)',
             }}>
-            Alle
+            {t('allBtn')}
           </button>
           {bots.map((bot, i) => {
             const active = selectedBotIds.has(bot.id)
@@ -195,20 +197,20 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
         <div className="rounded-2xl p-10 flex flex-col items-center text-center"
           style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
           <Activity size={28} style={{ color: 'var(--text-3)', marginBottom: 12 }} />
-          <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-1)' }}>Bridge nicht verbunden</p>
-          <p className="text-xs" style={{ color: 'var(--text-3)' }}>Die Bridge läuft nicht oder hat seit über 2 Minuten keinen Heartbeat gesendet.</p>
+          <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-1)' }}>{t('bridgeNotConnectedTitle')}</p>
+          <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('bridgeNotConnectedDescription')}</p>
         </div>
       ) : (
         <>
           <div className="mb-5 rounded-2xl px-5 py-4 flex items-center gap-6"
               style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-3)' }}>Positionen</p>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-3)' }}>{t('positionsLabel')}</p>
                 <p className="text-2xl font-black font-mono" style={{ color: 'var(--text-1)' }}>{positions.length}</p>
               </div>
               <div className="w-px self-stretch" style={{ background: 'var(--border)' }} />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-3)' }}>Gesamt P&L</p>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: 'var(--text-3)' }}>{t('totalPnlLabel')}</p>
                 <p className="text-2xl font-black font-mono" style={{ color: totalPnl >= 0 ? '#22c55e' : '#ef4444' }}>
                   {totalPnl >= 0 ? '+' : ''}{totalPnl.toFixed(2)}
                 </p>
@@ -218,7 +220,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                   className="flex items-center gap-1.5 text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
                   style={{ color: 'var(--text-3)' }}>
                   <RefreshCw size={12} className={loadingPositions ? 'animate-spin' : ''} />
-                  Live (5s)
+                  {t('liveBtn')}
                 </button>
               </div>
             </div>
@@ -226,7 +228,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
           <section className="mb-6">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-                Offene Positionen
+                {t('openPositionsHeading')}
                 <span className="ml-2 px-1.5 py-0.5 rounded text-xs font-mono"
                   style={{ background: 'var(--surface)', color: 'var(--text-3)' }}>
                   {positions.length}
@@ -237,7 +239,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                   className="flex items-center gap-1.5 text-xs cursor-pointer opacity-60 hover:opacity-100 transition-opacity"
                   style={{ color: 'var(--text-3)' }}>
                   <RefreshCw size={12} className={loadingPositions ? 'animate-spin' : ''} />
-                  Live (5s)
+                  {t('liveBtn')}
                 </button>
               )}
             </div>
@@ -246,8 +248,8 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
               <div className="rounded-2xl px-6 py-12 flex flex-col items-center text-center"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                 <Layers size={28} style={{ color: 'var(--text-3)', marginBottom: 10 }} />
-                <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-2)' }}>Keine offenen Positionen</p>
-                <p className="text-xs" style={{ color: 'var(--text-3)' }}>Die ausgewählten Bots haben aktuell keine aktiven Trades.</p>
+                <p className="text-sm font-bold mb-1" style={{ color: 'var(--text-2)' }}>{t('noOpenPositionsTitle')}</p>
+                <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('noOpenPositionsDescription')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -301,7 +303,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>P&L</p>
+                          <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('totalPnlLabel')}</p>
                           <p className="text-base font-black font-mono" style={{ color: pnlColor }}>
                             {pnlPositive ? '+' : ''}{pos.pnl.toFixed(2)}
                           </p>
@@ -315,20 +317,20 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
 
                       <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
                         <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Entry</p>
+                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('entryLabel')}</p>
                           <p className="font-mono font-bold" style={{ color: 'var(--text-1)' }}>
                             {pos.entry.toFixed(5)}
                           </p>
                         </div>
                         <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Aktuell</p>
+                          <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('currentLabel')}</p>
                           <p className="font-mono font-bold" style={{ color: pnlColor }}>
                             {pos.currentPrice.toFixed(5)}
                           </p>
                         </div>
                         {pos.sl ? (
                           <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                            <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Stop-Loss</p>
+                            <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('slLabel')}</p>
                             <p className="font-mono font-bold" style={{ color: '#f87171' }}>
                               {pos.sl.toFixed(5)}
                             </p>
@@ -336,7 +338,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                         ) : null}
                         {pos.tp ? (
                           <div className="rounded-lg px-3 py-2" style={{ background: 'var(--bg)' }}>
-                            <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>Take-Profit</p>
+                            <p className="font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('tpLabel')}</p>
                             <p className="font-mono font-bold" style={{ color: '#4ade80' }}>
                               {pos.tp.toFixed(5)}
                             </p>
@@ -347,7 +349,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                       {pos.swap !== 0 && (
                         <div className="rounded-lg px-3 py-2 mb-3 flex items-center justify-between text-xs"
                           style={{ background: 'var(--bg)' }}>
-                          <span className="font-semibold" style={{ color: 'var(--text-3)' }}>Swap</span>
+                          <span className="font-semibold" style={{ color: 'var(--text-3)' }}>{t('swapLabel')}</span>
                           <span className="font-mono font-bold"
                             style={{ color: pos.swap >= 0 ? '#22c55e' : '#f87171' }}>
                             {pos.swap >= 0 ? '+' : ''}{pos.swap.toFixed(2)}
@@ -359,7 +361,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                         <div className="flex flex-col gap-0.5">
                           {openedAt && (
                             <p className="text-xs font-mono" style={{ color: 'var(--text-3)' }}>
-                              Eröffnet {openedAt}
+                              {t('openedAtPrefix', { time: openedAt })}
                             </p>
                           )}
                           <div className="flex items-center gap-1 text-xs" style={{ color: 'var(--text-3)' }}>
@@ -373,7 +375,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                         <button
                           onClick={() => setCloseTarget(pos)}
                           disabled={isClosing || !isUnlocked}
-                          title={!isUnlocked ? 'Trading-Schutzschalter aktivieren' : undefined}
+                          title={!isUnlocked ? t('unlockToCloseTooltip') : undefined}
                           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition-all disabled:opacity-40"
                           style={{
                             background: 'rgba(239,68,68,0.1)',
@@ -381,7 +383,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                             color: '#ef4444',
                           }}>
                           {isClosing ? <RefreshCw size={11} className="animate-spin" /> : <X size={11} />}
-                          {isClosing ? 'Schließt...' : 'Schließen'}
+                          {isClosing ? t('closingBtn') : t('closeBtn')}
                         </button>
                       </div>
                     </motion.div>
@@ -428,8 +430,8 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                     <AlertTriangle size={18} style={{ color: '#ef4444' }} />
                   </div>
                   <div>
-                    <p className="text-sm font-black" style={{ color: 'var(--text-1)' }}>Position schließen?</p>
-                    <p className="text-xs" style={{ color: 'var(--text-3)' }}>Diese Aktion kann nicht rückgängig gemacht werden.</p>
+                    <p className="text-sm font-black" style={{ color: 'var(--text-1)' }}>{t('closeConfirmTitle')}</p>
+                    <p className="text-xs" style={{ color: 'var(--text-3)' }}>{t('closeConfirmWarning')}</p>
                   </div>
                 </div>
                 <div className="rounded-xl p-3 mb-5 text-xs font-mono"
@@ -450,13 +452,13 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                   <button onClick={() => setCloseTarget(null)}
                     className="py-2.5 rounded-xl text-sm font-semibold cursor-pointer"
                     style={{ background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text-2)' }}>
-                    Abbrechen
+                    {t('cancelBtn')}
                   </button>
                   <button onClick={confirmClose}
                     disabled={!isUnlocked}
                     className="py-2.5 rounded-xl text-sm font-black cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
                     style={{ background: '#ef4444', color: '#fff' }}>
-                    Schließen
+                    {t('closeBtn')}
                   </button>
                 </div>
               </div>
