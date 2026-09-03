@@ -849,6 +849,7 @@
       "bridgeNotConnectedDescription": "The bridge is not running or has not sent a heartbeat in over 2 minutes.",
       "positionsLabel": "Positions",
       "totalPnlLabel": "Total P&L",
+      "pnlLabel": "P&L",
       "liveBtn": "Live (5s)",
       "openPositionsHeading": "Open Positions",
       "noOpenPositionsTitle": "No open positions",

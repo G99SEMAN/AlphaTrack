@@ -303,7 +303,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('totalPnlLabel')}</p>
+                          <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--text-3)' }}>{t('pnlLabel')}</p>
                           <p className="text-base font-black font-mono" style={{ color: pnlColor }}>
                             {pnlPositive ? '+' : ''}{pos.pnl.toFixed(2)}
                           </p>
