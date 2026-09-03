@@ -958,6 +958,7 @@
       "riskManagementLabel": "Risk Management",
       "balanceUnavailable": "Balance unavailable",
       "riskLabel": "Risk",
+      "atLabel": "at",
       "analyzingBtn": "Analyzing...",
       "startAnalysisBtn": "Start AI Analysis",
       "analysisFailedFallback": "Analysis failed",

@@ -958,6 +958,7 @@
       "riskManagementLabel": "Risk Management",
       "balanceUnavailable": "Balance nicht verfügbar",
       "riskLabel": "Risiko",
+      "atLabel": "bei",
       "analyzingBtn": "Analyse läuft...",
       "startAnalysisBtn": "KI-Analyse starten",
       "analysisFailedFallback": "Analyse fehlgeschlagen",

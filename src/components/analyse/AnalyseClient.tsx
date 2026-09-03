@@ -371,12 +371,12 @@ export default function AnalyseClient({ bots = [] }: Props) {
                     style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)' }}>
                     <Percent size={12} style={{ color: '#ef4444' }} />
                     <span style={{ color: 'var(--text-2)' }}>
-                      <span className="font-bold" style={{ color: '#ef4444' }}>{riskPct}% Risiko</span>
+                      <span className="font-bold" style={{ color: '#ef4444' }}>{riskPct}% {t('riskLabel')}</span>
                       {' = '}
                       <span className="font-mono font-bold" style={{ color: 'var(--text-1)' }}>
                         {lotCalc.riskAmount.toFixed(2)} {account.currency}
                       </span>
-                      {' bei '}
+                      {' '}{t('atLabel')}{' '}
                       <span className="font-mono font-bold" style={{ color: 'var(--text-1)' }}>
                         {lotCalc.slPips} Pips SL
                       </span>
