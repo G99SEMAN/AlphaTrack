@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Trophy } from 'lucide-react'
 import { TopTradeEntry } from '@/lib/statsExtended'
 import InfoTooltip from './InfoTooltip'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   trades: TopTradeEntry[]
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function TopTradesCard({ trades, currency }: Props) {
+  const t = useTranslations('statistiken.topTradesCard')
   if (trades.length === 0) return null
 
   return (
@@ -28,9 +30,9 @@ export default function TopTradesCard({ trades, currency }: Props) {
           <Trophy size={16} style={{ color: 'var(--green)' }} />
         </div>
         <h3 className="font-semibold text-sm" style={{ color: 'var(--text-1)' }}>
-          Beste Trades
+          {t('title')}
         </h3>
-        <InfoTooltip text="Die 7 profitabelsten abgeschlossenen Einzeltrades." />
+        <InfoTooltip text={t('tooltip')} />
       </div>
 
       <div className="flex flex-col gap-2">
