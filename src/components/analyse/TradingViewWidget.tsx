@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useLocale } from 'next-intl'
 import { Duration } from './DurationSelector'
 
 const TIMEFRAME: Record<Duration, string> = {
@@ -16,6 +17,7 @@ interface Props {
 
 export default function TradingViewWidget({ duration, theme, symbol = 'FX:EURUSD' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const locale = useLocale()
 
   useEffect(() => {
     const container = containerRef.current
@@ -34,7 +36,7 @@ export default function TradingViewWidget({ duration, theme, symbol = 'FX:EURUSD
       timezone: 'Europe/Berlin',
       theme: theme,
       style: '1',
-      locale: 'de_DE',
+      locale: locale === 'en' ? 'en' : 'de_DE',
       allow_symbol_change: false,
       calendar: false,
       support_host: 'https://www.tradingview.com',
@@ -45,7 +47,7 @@ export default function TradingViewWidget({ duration, theme, symbol = 'FX:EURUSD
     return () => {
       container.innerHTML = ''
     }
-  }, [duration, theme, symbol])
+  }, [duration, theme, symbol, locale])
 
   return (
     <div

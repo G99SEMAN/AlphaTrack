@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 export type Duration = 'scalping' | 'intraday'
 
 interface Props {
@@ -8,15 +10,19 @@ interface Props {
   disabled?: boolean
 }
 
-const OPTIONS: { value: Duration; label: string; sub: string }[] = [
-  { value: 'scalping', label: 'Scalping', sub: '< 30 Min - M5 Chart' },
-  { value: 'intraday', label: 'Intraday', sub: '1-8 Std - H1 Chart' },
-]
+function getOptions(t: ReturnType<typeof useTranslations<'analyse.duration'>>): { value: Duration; label: string; sub: string }[] {
+  return [
+    { value: 'scalping', label: 'Scalping', sub: t('scalpingSub') },
+    { value: 'intraday', label: 'Intraday', sub: t('intradaySub') },
+  ]
+}
 
 export default function DurationSelector({ value, onChange, disabled }: Props) {
+  const t = useTranslations('analyse.duration')
+  const options = getOptions(t)
   return (
     <div className="flex gap-2">
-      {OPTIONS.map((opt) => {
+      {options.map((opt) => {
         const active = value === opt.value
         return (
           <button

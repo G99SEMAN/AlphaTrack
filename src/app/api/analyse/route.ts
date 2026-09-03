@@ -224,6 +224,7 @@ Gib mir eine präzise Handelsempfehlung basierend auf diesen echten Kursdaten.`
     if (missingFields.length > 0) {
       throw new Error(`Analyse-Antwort unvollständig: Felder fehlen (${missingFields.join(', ')})`)
     }
+    if (!['Hoch', 'Mittel', 'Niedrig'].includes(result.confidence)) result.confidence = 'Mittel'
 
     result.risk_reward = calcRR(result)
 

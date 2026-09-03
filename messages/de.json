@@ -975,6 +975,10 @@
       "executeErrorFallback": "Fehler beim Ausführen",
       "networkErrorMsg": "Netzwerkfehler"
     },
+    "duration": {
+      "scalpingSub": "< 30 Min - M5 Chart",
+      "intradaySub": "1-8 Std - H1 Chart"
+    },
     "result": {
       "resultHeading": "Analyse-Ergebnis",
       "currentPriceLabel": "Aktueller Kurs (Echtzeit)",
