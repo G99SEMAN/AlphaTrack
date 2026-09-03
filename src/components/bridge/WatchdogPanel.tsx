@@ -4,25 +4,30 @@ import { motion } from 'framer-motion'
 import { Wifi, WifiOff, AlertTriangle, Bot, Cpu, Clock, TrendingUp } from 'lucide-react'
 import { ConnectionState } from '@/types/bot'
 import { useBotStatus } from '@/context/BotStatusContext'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   botId: string
   botName: string
 }
 
-const STATE_LABEL = {
-  running: 'Aktiv', paused: 'Pausiert', stopped: 'Gestoppt', error: 'Fehler', disconnected: 'Getrennt',
-} as const
+function getStateLabels(t: ReturnType<typeof useTranslations<'bridge.watchdog'>>) {
+  return {
+    running: t('stateRunning'), paused: t('statePaused'), stopped: t('stateStopped'),
+    error: t('stateError'), disconnected: t('stateDisconnected'),
+  } as const
+}
 
 const STATE_COLOR = {
   running: 'var(--green)', paused: '#f59e0b', stopped: 'var(--text-3)', error: 'var(--red)', disconnected: 'var(--text-3)',
 } as const
 
 function ConnectionBadge({ state }: { state: ConnectionState }) {
+  const t = useTranslations('bridge.watchdog')
   const cfg = {
-    connected: { Icon: Wifi,          label: 'Verbunden', color: 'var(--green)', glow: 'rgba(0,217,126,0.4)' },
-    warning:   { Icon: AlertTriangle, label: 'Verzögert', color: '#f59e0b',      glow: 'rgba(245,158,11,0.4)' },
-    offline:   { Icon: WifiOff,       label: 'Offline',   color: '#ef4444',      glow: 'rgba(239,68,68,0.4)'  },
+    connected: { Icon: Wifi,          label: t('connConnected'), color: 'var(--green)', glow: 'rgba(0,217,126,0.4)' },
+    warning:   { Icon: AlertTriangle, label: t('connWarning'),   color: '#f59e0b',      glow: 'rgba(245,158,11,0.4)' },
+    offline:   { Icon: WifiOff,       label: t('connOffline'),   color: '#ef4444',      glow: 'rgba(239,68,68,0.4)'  },
   }[state]
   const Icon = cfg.Icon
   return (
@@ -43,6 +48,8 @@ function fmt(s: number) {
 }
 
 export default function WatchdogPanel({ botId, botName }: Props) {
+  const t = useTranslations('bridge.watchdog')
+  const stateLabels = getStateLabels(t)
   const { bots, lastUpdated } = useBotStatus()
   const botEntry = bots.find(b => b.bot.id === botId)
 
@@ -60,7 +67,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
           <div>
             <p className="text-sm font-bold" style={{ color: 'var(--text-1)' }}>{botName}</p>
             <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-              {lastUpdated ? `Zuletzt: ${lastUpdated.toLocaleTimeString('de-DE')}` : 'Wartet auf Verbindung...'}
+              {lastUpdated ? `${t('lastUpdatedPrefix')} ${lastUpdated.toLocaleTimeString('de-DE')}` : t('waitingForConnection')}
             </p>
           </div>
         </div>
@@ -71,14 +78,14 @@ export default function WatchdogPanel({ botId, botName }: Props) {
         <>
           <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-xl" style={{ background: 'var(--surface-2)' }}>
             <span className="rounded-full shrink-0" style={{ width: 8, height: 8, background: STATE_COLOR[status.state], boxShadow: `0 0 6px ${STATE_COLOR[status.state]}` }} />
-            <span className="text-sm font-bold" style={{ color: STATE_COLOR[status.state] }}>{STATE_LABEL[status.state]}</span>
+            <span className="text-sm font-bold" style={{ color: STATE_COLOR[status.state] }}>{stateLabels[status.state]}</span>
             <span className="ml-auto text-xs font-mono" style={{ color: 'var(--text-3)' }}>v{status.bridgeVersion}</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { Icon: Cpu,        label: 'MT5',      value: status.mt5Connected ? 'Verbunden' : 'Getrennt', color: status.mt5Connected ? 'var(--green)' : 'var(--red)' },
-              { Icon: Clock,      label: 'Laufzeit', value: fmt(status.uptime), color: 'var(--text-1)' },
-              { Icon: TrendingUp, label: 'Offen',    value: `${status.openPositions} Position${status.openPositions !== 1 ? 'en' : ''}`, color: status.openPositions > 0 ? '#f59e0b' : 'var(--text-1)' },
+              { Icon: Cpu,        label: t('mt5Label'),    value: status.mt5Connected ? t('mt5Connected') : t('mt5Disconnected'), color: status.mt5Connected ? 'var(--green)' : 'var(--red)' },
+              { Icon: Clock,      label: t('uptimeLabel'), value: fmt(status.uptime), color: 'var(--text-1)' },
+              { Icon: TrendingUp, label: t('openLabel'),   value: status.openPositions === 1 ? t('positionOne', { count: status.openPositions }) : t('positionMany', { count: status.openPositions }), color: status.openPositions > 0 ? '#f59e0b' : 'var(--text-1)' },
             ].map(({ Icon, label, value, color }) => (
               <div key={label} className="rounded-xl px-3 py-2.5" style={{ background: 'var(--surface-2)', border: '1px solid var(--border-subtle)' }}>
                 <div className="flex items-center gap-1.5 mb-1">
@@ -103,7 +110,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
             <div className="mt-3 flex items-center gap-2 px-3 py-2 rounded-lg"
               style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)' }}>
               <AlertTriangle size={13} className="shrink-0" style={{ color: '#ef4444' }} />
-              <p className="text-xs font-semibold" style={{ color: '#ef4444' }}>MT5-Verbindung unterbrochen - Bot kann nicht traden!</p>
+              <p className="text-xs font-semibold" style={{ color: '#ef4444' }}>{t('mt5Warning')}</p>
             </div>
           )}
           <p className="text-xs mt-3 font-mono" style={{ color: 'var(--text-3)' }}>ID: {botId}</p>
@@ -111,7 +118,7 @@ export default function WatchdogPanel({ botId, botName }: Props) {
       ) : (
         <div className="flex flex-col items-center justify-center py-6 text-center">
           <WifiOff size={28} style={{ color: 'var(--text-3)', marginBottom: 10 }} />
-          <p className="text-sm font-semibold" style={{ color: 'var(--text-2)' }}>Kein Heartbeat empfangen</p>
+          <p className="text-sm font-semibold" style={{ color: 'var(--text-2)' }}>{t('noHeartbeat')}</p>
           <p className="text-xs mt-1 font-mono" style={{ color: 'var(--text-3)' }}>ID: {botId}</p>
         </div>
       )}
