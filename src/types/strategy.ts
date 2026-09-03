@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 export type Timeframe = 'M1' | 'M5' | 'M15' | 'M30' | 'H1' | 'H4' | 'D1' | 'W1' | 'MN'
 
 export interface Strategy {
@@ -29,14 +31,18 @@ export const STRATEGY_COLORS = [
   '#ec4899',
 ]
 
-export const TIMEFRAME_LABELS: Record<Timeframe, string> = {
-  M1:  '1 Minute',
-  M5:  '5 Minuten',
-  M15: '15 Minuten',
-  M30: '30 Minuten',
-  H1:  '1 Stunde',
-  H4:  '4 Stunden',
-  D1:  'Daily',
-  W1:  'Weekly',
-  MN:  'Monthly',
+export const TIMEFRAME_KEYS: Timeframe[] = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1', 'MN']
+
+export function getTimeframeLabels(t: ReturnType<typeof useTranslations<'strategien.timeframes'>>): Record<Timeframe, string> {
+  return {
+    M1: t('m1'),
+    M5: t('m5'),
+    M15: t('m15'),
+    M30: t('m30'),
+    H1: t('h1'),
+    H4: t('h4'),
+    D1: t('d1'),
+    W1: t('w1'),
+    MN: t('mn'),
+  }
 }
