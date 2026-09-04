@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import { currencySymbol } from '@/lib/currency'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload, Download } from 'lucide-react'
+import { Plus, Search, SlidersHorizontal, TrendingUp, TrendingDown, BookOpen, Upload, Download, X } from 'lucide-react'
 import { Trade } from '@/types/trade'
 import { Strategy } from '@/types/strategy'
 import { BotEntry } from '@/types/bot'
@@ -14,6 +14,7 @@ import TradeModal from './TradeModal'
 import ImportModal from './ImportModal'
 import ExportModal from './ExportModal'
 import BotFilterDropdown, { MANUAL_FILTER_VALUE } from './BotFilterDropdown'
+import StrategyFilterDropdown, { NO_STRATEGY_VALUE } from './StrategyFilterDropdown'
 import { useTranslations } from 'next-intl'
 
 interface Props {
@@ -40,6 +41,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
   const [filterDir, setFilterDir] = useState<FilterDir>('all')
   const [selectedBots, setSelectedBots] = useState<Set<string>>(
     () => new Set([...bots.map(b => b.id), MANUAL_FILTER_VALUE])
+  )
+  const [selectedStrategies, setSelectedStrategies] = useState<Set<string>>(
+    () => new Set([...strategies.map(s => s.id), NO_STRATEGY_VALUE])
   )
   const [sortKey, setSortKey] = useState<SortKey>('date')
   const [sortAsc, setSortAsc] = useState(false)
@@ -70,6 +74,19 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
 
   function resetPage() { setPage(1) }
 
+  const allBotsSelected = selectedBots.size === bots.length + 1
+  const allStrategiesSelected = selectedStrategies.size === strategies.length + 1
+  const isFiltered = search !== '' || filterStatus !== 'all' || filterDir !== 'all' || !allBotsSelected || !allStrategiesSelected
+
+  function resetFilters() {
+    setSearch('')
+    setFilterStatus('all')
+    setFilterDir('all')
+    setSelectedBots(new Set([...bots.map(b => b.id), MANUAL_FILTER_VALUE]))
+    setSelectedStrategies(new Set([...strategies.map(s => s.id), NO_STRATEGY_VALUE]))
+    resetPage()
+  }
+
   function resolveSourceLabel(trade: Trade): string | undefined {
     return resolveBotLabel(trade.sourceId, bots)
   }
@@ -86,6 +103,11 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       if (isRegisteredBot) {
         if (!selectedBots.has(t.botId as string)) return false
       } else if (!selectedBots.has(MANUAL_FILTER_VALUE)) {
+        return false
+      }
+      if (t.strategyId) {
+        if (!selectedStrategies.has(t.strategyId)) return false
+      } else if (!selectedStrategies.has(NO_STRATEGY_VALUE)) {
         return false
       }
       if (search) {
@@ -115,7 +137,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       else if (sortKey === 'instrument') diff = a.instrument.localeCompare(b.instrument)
       return sortAsc ? diff : -diff
     }),
-    [trades, filterStatus, filterDir, selectedBots, search, sortKey, sortAsc]
+    [trades, filterStatus, filterDir, selectedBots, selectedStrategies, search, sortKey, sortAsc]
   )
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
@@ -123,8 +145,8 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
   const paginated = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
 
   const { totalPnl, winRate, allClosedCount, openCount } = useMemo(() => {
-    const closed = trades.filter(t => t.status === 'closed' && t.pnl !== undefined)
-    const paper = trades.filter(t => t.pnl === undefined && t.outcome !== undefined)
+    const closed = filtered.filter(t => t.status === 'closed' && t.pnl !== undefined)
+    const paper = filtered.filter(t => t.pnl === undefined && t.outcome !== undefined)
     const pnl = closed.reduce((s, t) => s + (t.pnl ?? 0), 0)
     const wins = closed.filter(t => (t.pnl ?? 0) > 0).length
     const paperWins = paper.filter(t => t.outcome === 'win').length
@@ -133,9 +155,9 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
       totalPnl: pnl,
       winRate: allClosed > 0 ? Math.round(((wins + paperWins) / allClosed) * 100) : 0,
       allClosedCount: allClosed,
-      openCount: trades.filter(t => t.status === 'open').length,
+      openCount: filtered.filter(t => t.status === 'open').length,
     }
-  }, [trades])
+  }, [filtered])
 
   const summaryCards = [
     {
@@ -150,7 +172,7 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
     },
     {
       label: t('summaryTradesTotal'),
-      value: `${allClosedCount} / ${trades.length}`,
+      value: `${allClosedCount} / ${filtered.length}`,
       color: 'var(--text-1)',
       sub: t('summaryTradesSub'),
     },
@@ -273,6 +295,33 @@ export default function JournalClient({ trades: initialTrades, strategies, curre
                   onChange={next => { setSelectedBots(next); resetPage() }}
                 />
               </>
+            )}
+
+            {strategies.length > 0 && (
+              <>
+                {/* Trennlinie */}
+                <span style={{ width: 1, height: 14, background: 'var(--border)', margin: '0 2px', flexShrink: 0 }} />
+
+                {/* Strategie-Filter */}
+                <StrategyFilterDropdown
+                  strategies={strategies}
+                  selected={selectedStrategies}
+                  onChange={next => { setSelectedStrategies(next); resetPage() }}
+                />
+              </>
+            )}
+
+            {isFiltered && (
+              <button
+                onClick={resetFilters}
+                className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium cursor-pointer transition-all"
+                style={{ color: 'var(--text-3)' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--red)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-3)' }}
+              >
+                <X size={11} />
+                {t('resetFiltersBtn')}
+              </button>
             )}
 
             {/* Action-Buttons rechtsbündig */}

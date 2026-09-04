@@ -272,7 +272,8 @@
       "summaryWinRate": "Win Rate",
       "summaryTradesTotal": "Trades gesamt",
       "summaryTradesSub": "geschlossen / alle",
-      "summaryOpenTrades": "Offene Trades"
+      "summaryOpenTrades": "Offene Trades",
+      "resetFiltersBtn": "Filter zurücksetzen"
     },
     "tradeRow": {
       "statusOpen": "Offen",
@@ -312,6 +313,12 @@
       "noBots": "Keine Bots",
       "selectedCount": "{count} ausgewählt",
       "manual": "Manuell"
+    },
+    "strategyFilter": {
+      "allStrategies": "Alle Strategien",
+      "noStrategies": "Keine Strategien",
+      "selectedCount": "{count} ausgewählt",
+      "noStrategyOption": "Ohne Strategie"
     },
     "livePositions": {
       "title": "Offene Positionen",
