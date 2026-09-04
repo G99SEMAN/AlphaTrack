@@ -116,8 +116,10 @@ interface GridProps {
 
 function CalendarGrid({ year, month, start, end, hovered, onDayClick, onDayHover, onPrev, onNext, onChangeMonth }: GridProps) {
   const t = useTranslations('dashboard.dateRange')
-  const MONTH_SHORT = t.raw('monthsShort') as string[]
-  const DAY_LABELS = t.raw('daysShort') as string[]
+  const rawMonthsShort = t.raw('monthsShort')
+  const MONTH_SHORT = Array.isArray(rawMonthsShort) ? rawMonthsShort as string[] : []
+  const rawDaysShort = t.raw('daysShort')
+  const DAY_LABELS = Array.isArray(rawDaysShort) ? rawDaysShort as string[] : []
 
   const firstDay = new Date(year, month, 1)
   const lastDay  = new Date(year, month + 1, 0)
