@@ -160,7 +160,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
       const stops = await stopBotsForProfileAction(id)
 
       if (stops.length > 0) {
-        setDeleteStatusMsg('Bots werden gestoppt…')
+        setDeleteStatusMsg(t('profile.stoppingBotsMsg'))
         // Max 5 Sekunden auf Acknowledgment warten
         const deadline = Date.now() + 5000
         while (Date.now() < deadline) {
@@ -171,7 +171,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
       }
 
       // Schritt 2: Profil und alle Daten löschen
-      setDeleteStatusMsg('Profil wird gelöscht…')
+      setDeleteStatusMsg(t('profile.deletingProfileMsg'))
       await deleteProfileAction(id)
       router.refresh()
     } finally {
@@ -461,15 +461,15 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
         {activeTab === 'profile' && (
           <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
             <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
-              Profile
+              {t('profile.profileHeading')}
             </p>
             <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-              Verwalte deine Trading-Konten. Klicke auf ein Profil um es zu aktivieren.
+              {t('profile.profileDescription')}
             </p>
 
             {profiles.length === 0 ? (
               <p className="text-sm py-4 text-center" style={{ color: 'var(--text-3)' }}>
-                Noch keine Profile vorhanden.
+                {t('profile.noProfilesYet')}
               </p>
             ) : (
               <div className="space-y-2 mb-4">
@@ -516,7 +516,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                               color: profile.type === 'live' ? 'var(--green)' : 'var(--accent)',
                             }}
                           >
-                            {profile.type === 'live' ? 'Live' : 'Demo'}
+                            {profile.type === 'live' ? t('profile.liveLabel') : t('profile.demoLabel')}
                           </span>
                         </div>
                         <div className="flex items-center gap-1 mt-0.5">
@@ -544,7 +544,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                             (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-3)'
                             ;(e.currentTarget as HTMLButtonElement).style.background = 'transparent'
                           }}
-                          title="Profil bearbeiten"
+                          title={t('profile.editProfileTooltip')}
                         >
                           <Pencil size={13} />
                         </button>
@@ -560,7 +560,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                             (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-3)'
                             ;(e.currentTarget as HTMLButtonElement).style.background = 'transparent'
                           }}
-                          title="Profil löschen"
+                          title={t('profile.deleteProfileTooltip')}
                         >
                           <Trash2 size={13} />
                         </button>
@@ -593,7 +593,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-2)' }}
             >
               <Plus size={14} />
-              Neues Profil erstellen
+              {t('profile.newProfileBtn')}
             </button>
           </div>
         )}
@@ -841,9 +841,9 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     <AlertTriangle size={20} style={{ color: '#ef4444' }} />
                   </div>
                   <div>
-                    <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>Profil löschen?</p>
+                    <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>{t('profile.deleteConfirmTitle')}</p>
                     <p className="text-sm mt-1" style={{ color: 'var(--text-2)' }}>
-                      Das Profil <span className="font-semibold" style={{ color: 'var(--text-1)' }}>"{deleteConfirm.name}"</span> und alle zugehörigen Trades werden unwiderruflich gelöscht.
+                      {t('profile.deleteConfirmBody', { name: deleteConfirm.name })}
                     </p>
                   </div>
                 </div>
@@ -854,7 +854,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
                     style={{ background: 'var(--surface-2)', color: 'var(--text-1)', border: '1px solid var(--border)' }}
                   >
-                    Abbrechen
+                    {t('profile.cancelBtn')}
                   </button>
                   <button
                     onClick={handleDelete}
@@ -863,7 +863,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     style={{ background: '#ef4444', color: '#fff', opacity: deleting ? 0.6 : 1 }}
                   >
                     <Trash2 size={14} />
-                    {deleting ? 'Wird gelöscht...' : 'Löschen'}
+                    {deleting ? t('profile.deletingBtnLabel') : t('profile.deleteBtnLabel')}
                   </button>
                 </div>
               </motion.div>
