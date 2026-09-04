@@ -214,15 +214,15 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   ]
 
   const STATS_PANELS: { key: keyof StatsSettings; label: string }[] = [
-    { key: 'showKpiRow',          label: 'KPI-Leiste (Profit Factor, Expectancy, ...)' },
-    { key: 'showMonthlyPnl',      label: 'Monatlicher P&L Chart' },
-    { key: 'showDirectionCards',  label: 'Long / Short Aufteilung' },
-    { key: 'showTopAssets',       label: 'Top 5 Assets' },
-    { key: 'showStrategyTable',   label: 'Strategie-Tabelle' },
-    { key: 'showInstrumentTable', label: 'Instrumente nach P&L' },
-    { key: 'showWeekdayChart',    label: 'Wochentagsanalyse' },
-    { key: 'showRMultipleChart',  label: 'R-Multiple Verteilung' },
-    { key: 'showTopTrades',       label: 'Beste Trades' },
+    { key: 'showKpiRow',          label: t('dashboard.panelKpiRow') },
+    { key: 'showMonthlyPnl',      label: t('dashboard.panelMonthlyPnl') },
+    { key: 'showDirectionCards',  label: t('dashboard.panelDirectionCards') },
+    { key: 'showTopAssets',       label: t('dashboard.panelTopAssets') },
+    { key: 'showStrategyTable',   label: t('dashboard.panelStrategyTable') },
+    { key: 'showInstrumentTable', label: t('dashboard.panelInstrumentTable') },
+    { key: 'showWeekdayChart',    label: t('dashboard.panelWeekdayChart') },
+    { key: 'showRMultipleChart',  label: t('dashboard.panelRMultipleChart') },
+    { key: 'showTopTrades',       label: t('dashboard.panelTopTrades') },
   ]
 
   const TABS: { id: Tab; label: string }[] = [
@@ -377,11 +377,11 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
               <div className="flex items-center gap-2 mb-1">
                 <BarChart2 size={15} style={{ color: 'var(--text-3)' }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-                  Statistik-Panels
+                  {t('dashboard.statsPanelsHeading')}
                 </p>
               </div>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                Wähle welche Auswertungen auf der Statistik-Seite angezeigt werden.
+                {t('dashboard.statsPanelsDescription')}
               </p>
               <div className="space-y-2">
                 {mounted && STATS_PANELS.map(({ key, label }) => (
@@ -412,18 +412,18 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
               <div className="flex items-center gap-2 mb-1">
                 <Clock size={15} style={{ color: 'var(--text-3)' }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-                  Börsen-Sessions
+                  {t('dashboard.exchangeSessionsHeading')}
                 </p>
               </div>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                Wähle welche Börsen in der Sidebar angezeigt werden. Forex ist immer sichtbar.
+                {t('dashboard.exchangeSessionsDescription')}
               </p>
               <div className="space-y-2">
                 {mounted && [
-                  { id: 'nyse',  label: 'NYSE (New York)' },
-                  { id: 'lse',   label: 'LSE (London)' },
-                  { id: 'xetra', label: 'XETRA (Frankfurt)' },
-                  { id: 'tse',   label: 'Tokio (TSE)' },
+                  { id: 'nyse',  label: t('dashboard.exchangeNyse') },
+                  { id: 'lse',   label: t('dashboard.exchangeLse') },
+                  { id: 'xetra', label: t('dashboard.exchangeXetra') },
+                  { id: 'tse',   label: t('dashboard.exchangeTse') },
                 ].map(({ id, label }) => {
                   const visible = sessionSettings.visibleExchanges.includes(id)
                   return (
