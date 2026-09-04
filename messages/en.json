@@ -1077,6 +1077,7 @@
       "profileCountMany": "{count} profiles",
       "screenshotsLabel": "Screenshots",
       "importFailedTitle": "Import failed",
+      "fileProcessingFailedMsg": "The file could not be processed.",
       "dangerZoneHeading": "Danger Zone",
       "dangerZoneWarning": "These actions cannot be undone.",
       "resetTradesHeading": "Reset Trades",
@@ -1097,6 +1098,7 @@
       "resetConfirmBodyPart1": "All closed journal and bridge trades of the active profile will be",
       "resetConfirmBodyEmphasis": "permanently deleted",
       "resetConfirmBodyPart2": "The bridge sync cutoff will be set to now.",
+      "cancelBtn": "Cancel",
       "resetNowBtn": "Delete now"
     }
   }

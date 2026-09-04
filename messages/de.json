@@ -1077,6 +1077,7 @@
       "profileCountMany": "{count} Profile",
       "screenshotsLabel": "Screenshots",
       "importFailedTitle": "Import fehlgeschlagen",
+      "fileProcessingFailedMsg": "Die Datei konnte nicht verarbeitet werden.",
       "dangerZoneHeading": "Gefahrenzone",
       "dangerZoneWarning": "Diese Aktionen können nicht rückgängig gemacht werden.",
       "resetTradesHeading": "Trades zurücksetzen",
@@ -1097,6 +1098,7 @@
       "resetConfirmBodyPart1": "Alle geschlossenen Journal- und Bridge-Trades des aktiven Profils werden",
       "resetConfirmBodyEmphasis": "unwiderruflich gelöscht",
       "resetConfirmBodyPart2": "Der Bridge-Sync-Cutoff wird auf jetzt gesetzt.",
+      "cancelBtn": "Abbrechen",
       "resetNowBtn": "Jetzt löschen"
     }
   }

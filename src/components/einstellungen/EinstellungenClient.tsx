@@ -129,10 +129,10 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
         })
         router.refresh()
       } else {
-        setImportStatus({ type: 'error', message: result.error ?? 'Import fehlgeschlagen.' })
+        setImportStatus({ type: 'error', message: result.error ?? t('daten.importFailedTitle') })
       }
     } catch {
-      setImportStatus({ type: 'error', message: 'Die Datei konnte nicht verarbeitet werden.' })
+      setImportStatus({ type: 'error', message: t('daten.fileProcessingFailedMsg') })
     } finally {
       setImporting(false)
     }
@@ -604,15 +604,15 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
             {/* Export */}
             <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
-                Daten exportieren
+                {t('daten.exportHeading')}
               </p>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                Erstellt ein vollständiges ZIP-Backup der gewählten Profile inkl. Trades, Strategien und Screenshots.
+                {t('daten.exportDescription')}
               </p>
 
               <div className="mb-4 space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--text-3)' }}>
-                  Profile auswählen
+                  {t('daten.selectProfilesLabel')}
                 </p>
                 {profiles.map(profile => (
                   <label
@@ -640,7 +640,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                         color: profile.type === 'live' ? 'var(--green)' : 'var(--accent)',
                       }}
                     >
-                      {profile.type === 'live' ? 'Live' : 'Demo'}
+                      {profile.type === 'live' ? t('profile.liveLabel') : t('profile.demoLabel')}
                     </span>
                   </label>
                 ))}
@@ -659,10 +659,12 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   <Download size={15} />
                 </motion.span>
                 {exporting
-                  ? 'Exportiere...'
+                  ? t('daten.exportingBtn')
                   : selectedIds.size === 0
-                  ? 'Kein Profil ausgewählt'
-                  : `${selectedIds.size} ${selectedIds.size === 1 ? 'Profil' : 'Profile'} als ZIP exportieren`
+                  ? t('daten.noProfileSelectedBtn')
+                  : selectedIds.size === 1
+                  ? t('daten.exportBtnOne', { count: selectedIds.size })
+                  : t('daten.exportBtnMany', { count: selectedIds.size })
                 }
               </button>
             </div>
@@ -670,10 +672,10 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
             {/* Import */}
             <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
-                Backup importieren
+                {t('daten.importHeading')}
               </p>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                ZIP-Backup wiederherstellen. Importierte Profile werden hinzugefügt oder aktualisiert — andere Profile bleiben unverändert.
+                {t('daten.importDescription')}
               </p>
               <input ref={fileRef} type="file" accept=".zip" className="hidden" onChange={handleImport} />
               <button
@@ -683,7 +685,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                 style={{ background: 'var(--surface-2)', color: 'var(--text-1)', border: '1px solid var(--border)' }}
               >
                 <Upload size={15} />
-                {importing ? 'Importiere...' : 'ZIP-Backup hochladen'}
+                {importing ? t('daten.importingBtn') : t('daten.uploadBtn')}
               </button>
 
               <AnimatePresence>
@@ -703,15 +705,17 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                       <>
                         <CheckCircle size={16} className="shrink-0 mt-0.5" />
                         <div className="space-y-1">
-                          <p className="font-semibold">Import erfolgreich</p>
+                          <p className="font-semibold">{t('daten.importSuccessTitle')}</p>
                           <div className="flex flex-wrap gap-3 opacity-80 text-xs mt-1">
                             <span className="flex items-center gap-1">
                               <Package size={12} />
-                              {importStatus.profileCount} {importStatus.profileCount === 1 ? 'Profil' : 'Profile'}
+                              {importStatus.profileCount === 1
+                                ? t('daten.profileCountOne', { count: importStatus.profileCount })
+                                : t('daten.profileCountMany', { count: importStatus.profileCount })}
                             </span>
                             <span className="flex items-center gap-1">
                               <Image size={12} />
-                              {importStatus.screenshotCount} Screenshots
+                              {importStatus.screenshotCount} {t('daten.screenshotsLabel')}
                             </span>
                           </div>
                         </div>
@@ -720,7 +724,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                       <>
                         <XCircle size={16} className="shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-semibold">Import fehlgeschlagen</p>
+                          <p className="font-semibold">{t('daten.importFailedTitle')}</p>
                           <p className="opacity-80 mt-0.5">{importStatus.message}</p>
                         </div>
                       </>
@@ -735,18 +739,18 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
               <div className="flex items-center gap-2 mb-1">
                 <ShieldAlert size={15} style={{ color: '#ef4444' }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#ef4444' }}>
-                  Gefahrenzone
+                  {t('daten.dangerZoneHeading')}
                 </p>
               </div>
               <p className="text-sm mb-3" style={{ color: 'var(--text-2)' }}>
-                Diese Aktionen können nicht rückgängig gemacht werden.
+                {t('daten.dangerZoneWarning')}
               </p>
 
               <div className="flex items-start justify-between gap-4 py-3" style={{ borderTop: '1px solid var(--border)' }}>
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>Trades zurücksetzen</p>
+                  <p className="text-sm font-semibold" style={{ color: 'var(--text-1)' }}>{t('daten.resetTradesHeading')}</p>
                   <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
-                    Löscht alle geschlossenen Journal- und Bridge-Trades des aktiven Profils und setzt den Bridge-Sync-Cutoff auf jetzt.
+                    {t('daten.resetTradesDescription')}
                   </p>
                 </div>
                 <button
@@ -756,7 +760,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   style={{ background: 'rgba(239,68,68,0.12)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.3)' }}
                 >
                   <RotateCcw size={13} />
-                  {resetting ? 'Wird gelöscht…' : 'Zurücksetzen'}
+                  {resetting ? t('daten.resettingBtn') : t('daten.resetBtn')}
                 </button>
               </div>
 
@@ -777,18 +781,24 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                       <>
                         <CheckCircle size={16} className="shrink-0 mt-0.5" />
                         <div className="space-y-0.5">
-                          <p className="font-semibold">Trades zurückgesetzt</p>
+                          <p className="font-semibold">{t('daten.resetSuccessTitle')}</p>
                           <p className="text-xs opacity-80">
-                            {resetResult.deletedJournal} Journal-Trade{resetResult.deletedJournal !== 1 ? 's' : ''} und{' '}
-                            {resetResult.deletedBridge} Bridge-Trade{resetResult.deletedBridge !== 1 ? 's' : ''} gelöscht.
-                            {' '}{resetResult.cutoffSet ? 'Bridge-Cutoff gesetzt.' : resetResult.bridgeOffline ? 'Bridge offline — Cutoff nicht gesetzt.' : ''}
+                            {resetResult.deletedJournal === 1
+                              ? t('daten.journalTradesOne', { count: resetResult.deletedJournal })
+                              : t('daten.journalTradesMany', { count: resetResult.deletedJournal })}
+                            {' '}{t('daten.andConnector')}{' '}
+                            {resetResult.deletedBridge === 1
+                              ? t('daten.bridgeTradesOne', { count: resetResult.deletedBridge })
+                              : t('daten.bridgeTradesMany', { count: resetResult.deletedBridge })}
+                            {' '}{t('daten.deletedSuffix')}
+                            {' '}{resetResult.cutoffSet ? t('daten.cutoffSetMsg') : resetResult.bridgeOffline ? t('daten.bridgeOfflineCutoffMsg') : ''}
                           </p>
                         </div>
                       </>
                     ) : (
                       <>
                         <XCircle size={16} className="shrink-0 mt-0.5" />
-                        <p className="font-semibold">Zurücksetzen fehlgeschlagen</p>
+                        <p className="font-semibold">{t('daten.resetFailedTitle')}</p>
                       </>
                     )}
                   </motion.div>
@@ -899,11 +909,11 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     <AlertTriangle size={20} style={{ color: '#ef4444' }} />
                   </div>
                   <div>
-                    <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>Trades zurücksetzen?</p>
+                    <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>{t('daten.resetConfirmTitle')}</p>
                     <p className="text-sm mt-1" style={{ color: 'var(--text-2)' }}>
-                      Alle geschlossenen Journal- und Bridge-Trades des aktiven Profils werden{' '}
-                      <span className="font-semibold" style={{ color: '#ef4444' }}>unwiderruflich gelöscht</span>.
-                      Der Bridge-Sync-Cutoff wird auf jetzt gesetzt.
+                      {t('daten.resetConfirmBodyPart1')}{' '}
+                      <span className="font-semibold" style={{ color: '#ef4444' }}>{t('daten.resetConfirmBodyEmphasis')}</span>.
+                      {t('daten.resetConfirmBodyPart2')}
                     </p>
                   </div>
                 </div>
@@ -913,7 +923,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     className="px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer"
                     style={{ background: 'var(--surface-2)', color: 'var(--text-1)', border: '1px solid var(--border)' }}
                   >
-                    Abbrechen
+                    {t('daten.cancelBtn')}
                   </button>
                   <button
                     onClick={handleResetTrades}
@@ -921,7 +931,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     style={{ background: '#ef4444', color: '#fff' }}
                   >
                     <RotateCcw size={14} />
-                    Jetzt löschen
+                    {t('daten.resetNowBtn')}
                   </button>
                 </div>
               </motion.div>
