@@ -912,7 +912,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     <p className="text-base font-semibold" style={{ color: 'var(--text-1)' }}>{t('daten.resetConfirmTitle')}</p>
                     <p className="text-sm mt-1" style={{ color: 'var(--text-2)' }}>
                       {t('daten.resetConfirmBodyPart1')}{' '}
-                      <span className="font-semibold" style={{ color: '#ef4444' }}>{t('daten.resetConfirmBodyEmphasis')}</span>.
+                      <span className="font-semibold" style={{ color: '#ef4444' }}>{t('daten.resetConfirmBodyEmphasis')}</span>.{' '}
                       {t('daten.resetConfirmBodyPart2')}
                     </p>
                   </div>

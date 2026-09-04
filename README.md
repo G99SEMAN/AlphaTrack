@@ -18,6 +18,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 - [Features](#features)
 - [Navigation](#navigation)
+- [Sprachen](#sprachen)
 - [Screenshots](#screenshots)
 - [Schnellstart](#schnellstart)
 - [Docker / NAS-Deployment](#docker--nas-deployment)
@@ -78,6 +79,12 @@ Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
 **Schutzschalter:** Neben dem Logo in der Sidebar - `ShieldCheck` (grün = gesperrt/sicher) / `ShieldOff` (rot = Trading aktiv). Standard: gesperrt.
 
 **Farbthemen:** 3 wählbare Akzentfarben - Blau (Standard), Crimson (`#f43f5e`), Violett (`#a855f7`)
+
+---
+
+## Sprachen
+
+Die App ist vollständig zweisprachig (Deutsch/Englisch) - Cookie-basierte Umschaltung in den Einstellungen, kein URL-Routing. Ausnahme: Die Profil-Erstellung/-Bearbeitung (`src/app/setup/`, `src/components/profile/ProfileSetupForm.tsx`, `ProfileEditModal.tsx`, `ProfileSetupModal.tsx` - ca. 1284 Zeilen) ist noch nicht übersetzt und bleibt bewusst deutsch, bis dafür ein eigener Teilplan umgesetzt wird.
 
 ---
 
