@@ -352,7 +352,7 @@ export default function ImportModal({ onClose, existingExternalIds = new Set(), 
                   style={{ background: 'var(--surface-2)', border: '1px solid var(--border)' }}
                 >
                   <span className="text-xs" style={{ color: 'var(--text-2)' }}>
-                    <span className="font-bold" style={{ color: 'var(--text-1)' }}>{parsed.length}</span> {t('positionsFoundSuffix')}
+                    <span className="font-bold" style={{ color: 'var(--text-1)' }}>{parsed.length}</span> {parsed.length === 1 ? t('positionsFoundSuffixOne') : t('positionsFoundSuffixMany')}
                   </span>
                   <span className="text-xs font-semibold" style={{ color: '#22c55e' }}>
                     {newCount} {t('newSuffix')}
