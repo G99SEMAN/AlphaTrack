@@ -298,7 +298,7 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                               )}
                             </div>
                             <p className="text-xs font-semibold" style={{ color: isLong ? '#22c55e' : '#ef4444' }}>
-                              {isLong ? 'LONG' : 'SHORT'} · {pos.size} Lot
+                              {isLong ? 'LONG' : 'SHORT'} · {pos.size} {t('lotUnit')}
                             </p>
                           </div>
                         </div>
@@ -440,8 +440,8 @@ export default function BridgeTradesClient({ bots, strategyBots }: Props) {
                     {closeTarget.type === 'long' ? 'LONG' : 'SHORT'}
                   </span>
                   {' '}{closeTarget.size} {closeTarget.instrument}
-                  {' · '}Entry {closeTarget.entry.toFixed(5)}
-                  {' · '}PnL <span style={{ color: closeTarget.pnl >= 0 ? '#22c55e' : '#ef4444' }}>
+                  {' · '}{t('entryLabel')} {closeTarget.entry.toFixed(5)}
+                  {' · '}{t('pnlLabel')} <span style={{ color: closeTarget.pnl >= 0 ? '#22c55e' : '#ef4444' }}>
                     {closeTarget.pnl >= 0 ? '+' : ''}{closeTarget.pnl.toFixed(2)}
                   </span>
                   {closeTarget.botName && (

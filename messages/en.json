@@ -851,6 +851,7 @@
       "positionsLabel": "Positions",
       "totalPnlLabel": "Total P&L",
       "pnlLabel": "P&L",
+      "lotUnit": "Lot",
       "liveBtn": "Live (5s)",
       "openPositionsHeading": "Open Positions",
       "noOpenPositionsTitle": "No open positions",
