@@ -25,7 +25,7 @@ function Show-Banner {
     try { Clear-Host } catch {}
     Write-Host ""
     Write-Host "  ╔══════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "  ║          A L P H A T R A C K   S E T U P            ║" -ForegroundColor Cyan
+    Write-Host "  ║            A L P H A T R A C K   S E T U P           ║" -ForegroundColor Cyan
     Write-Host "  ╚══════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
 }
@@ -454,7 +454,7 @@ function Step-CreateEnvLocal {
     Write-FileUtf8NoBom $envPath ($lines -join "`n")
 
     Write-Nl
-    Write-Ok ".env.local $$(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
+    Write-Ok ".env.local $(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
     Write-Note $envPath
 
     Wait-Enter
@@ -557,7 +557,7 @@ function Step-CreateBridgeConfig {
     Write-FileUtf8NoBom $configPath ($cfg | ConvertTo-Json -Depth 5)
 
     Write-Nl
-    Write-Ok "bridge/config.json $$(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
+    Write-Ok "bridge/config.json $(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
 
     if ($profileId -eq "SET_AFTER_FIRST_START") {
         Write-Nl
@@ -654,7 +654,7 @@ function Step-CreateDeployConfig {
     Write-FileUtf8NoBom $configPath ($cfg | ConvertTo-Json -Depth 3)
 
     Write-Nl
-    Write-Ok "deploy.config.json $$(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
+    Write-Ok "deploy.config.json $(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
     Write-Note $configPath
 
     Wait-Enter
@@ -840,18 +840,18 @@ function Step-Summary {
     param([string]$Scenario, [string[]]$CreatedFiles)
 
     Show-Banner
-    Write-Host "  $$(if ($LANG -eq 'DE') { 'Einrichtung abgeschlossen!' } else { 'Setup Complete!' })" -ForegroundColor Green
+    Write-Host "  $(if ($LANG -eq 'DE') { 'Einrichtung abgeschlossen!' } else { 'Setup Complete!' })" -ForegroundColor Green
     Write-Nl
     Write-Host ("  " + ("═" * 56)) -ForegroundColor DarkCyan
     Write-Nl
 
     if ($CreatedFiles.Count -gt 0) {
-        Write-Host "  $$(if ($LANG -eq 'DE') { 'Erstellte Dateien:' } else { 'Created files:' })" -ForegroundColor White
+        Write-Host "  $(if ($LANG -eq 'DE') { 'Erstellte Dateien:' } else { 'Created files:' })" -ForegroundColor White
         foreach ($f in $CreatedFiles) { Write-Ok $f }
         Write-Nl
     }
 
-    Write-Host "  $$(if ($LANG -eq 'DE') { 'Nächste Schritte:' } else { 'Next Steps:' })" -ForegroundColor White
+    Write-Host "  $(if ($LANG -eq 'DE') { 'Nächste Schritte:' } else { 'Next Steps:' })" -ForegroundColor White
     Write-Nl
 
     switch ($Scenario) {
@@ -912,7 +912,7 @@ function Step-Summary {
     Write-Nl
     Write-Host ("  " + ("═" * 56)) -ForegroundColor DarkCyan
     Write-Nl
-    Write-Host "  $$(if ($LANG -eq 'DE') { 'Viel Erfolg beim Trading!' } else { 'Happy trading!' })" -ForegroundColor Cyan
+    Write-Host "  $(if ($LANG -eq 'DE') { 'Viel Erfolg beim Trading!' } else { 'Happy trading!' })" -ForegroundColor Cyan
     Write-Nl
 
     Wait-Enter $(if ($LANG -eq "DE") { "ENTER zum Beenden ..." } else { "Press ENTER to exit ..." })
