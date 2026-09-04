@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 import { getActiveProfile, getProfileTrades } from '@/lib/profiles'
 import { getProfileStrategies } from '@/lib/strategies'
 import { getBots } from '@/lib/bot-data'
 import { buildTradeCsv } from '@/lib/trade-export-csv'
 import { buildTradePdf } from '@/lib/trade-export-pdf'
+import { SUPPORTED_LOCALES, type AppLocale } from '@/i18n/request'
 
 export async function POST(req: Request) {
   try {
@@ -42,12 +44,19 @@ export async function POST(req: Request) {
       })
     }
 
-    const yearLabel = body.year === undefined || body.year === 'all' ? 'Alle Jahre' : String(body.year)
-    const pdfBuffer = await buildTradePdf(trades, profile, yearLabel)
+    const cookieStore = await cookies()
+    const rawLocale = cookieStore.get('NEXT_LOCALE')?.value
+    const locale: AppLocale = SUPPORTED_LOCALES.includes(rawLocale as AppLocale) ? (rawLocale as AppLocale) : 'de'
+
+    const yearLabel = body.year === undefined || body.year === 'all'
+      ? (locale === 'de' ? 'Alle Jahre' : 'All years')
+      : String(body.year)
+    const pdfBuffer = await buildTradePdf(trades, profile, yearLabel, locale)
+    const filenamePrefix = locale === 'de' ? 'alphatrack-steuerreport' : 'alphatrack-trade-report'
     return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="alphatrack-steuerreport-${date}.pdf"`,
+        'Content-Disposition': `attachment; filename="${filenamePrefix}-${date}.pdf"`,
       },
     })
   } catch (err) {

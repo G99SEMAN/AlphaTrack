@@ -25,9 +25,6 @@ const EquityChart = dynamic(() => import('@/components/dashboard/EquityChart'), 
 const RecentTradesCard = dynamic(() => import('@/components/dashboard/RecentTradesCard'), {
   loading: () => <div style={{ minHeight: 200 }} />,
 })
-const AccountBalanceCard = dynamic(() => import('@/components/dashboard/AccountBalanceCard'), {
-  loading: () => <div style={{ minHeight: 180 }} />,
-})
 
 export default async function DashboardPage({
   searchParams,
@@ -131,16 +128,15 @@ export default async function DashboardPage({
             {/* Haupt-Bereich: linkes Panel | Kalender (Mitte) | rechtes Panel — unter xl gestapelt */}
             <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
 
-              {/* Linkes Panel: Recent Trades + Account Balance */}
+              {/* Linkes Panel: Recent Trades + Equity Chart */}
               <div className="flex w-full flex-col gap-3 xl:w-[380px] xl:shrink-0">
                 <RecentTradesCard
                   trades={allTrades}
                   currency={activeProfile.currency}
                   strategyBots={strategyBots}
                 />
-                <AccountBalanceCard
-                  equityCurve={allStats.equityCurve}
-                  depositCurve={allStats.depositCurve}
+                <EquityChart
+                  data={allStats.equityCurve}
                   startCapital={activeProfile.startCapital}
                   currency={activeProfile.currency}
                 />
@@ -155,7 +151,7 @@ export default async function DashboardPage({
                 />
               </div>
 
-              {/* Rechtes Panel: Alpha Score + Equity Chart */}
+              {/* Rechtes Panel: Alpha Score */}
               <div className="flex w-full flex-col gap-3 xl:w-[330px] xl:shrink-0">
                 <AlphaScoreChart
                   winRate={allStats.winRate}
@@ -166,12 +162,6 @@ export default async function DashboardPage({
                   maxDrawdownAbs={allStats.maxDrawdownAbs}
                   netPnl={allStats.netPnl}
                   trades={allTrades}
-                />
-
-                <EquityChart
-                  data={allStats.equityCurve}
-                  startCapital={activeProfile.startCapital}
-                  currency={activeProfile.currency}
                 />
               </div>
             </div>
