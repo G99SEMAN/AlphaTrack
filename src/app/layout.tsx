@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Outfit, DM_Mono } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { NextIntlClientProvider } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
+import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import SplashScreen from '@/components/layout/SplashScreen'
 import SwRegister from '@/components/layout/SwRegister'
 import { TradingLockProvider } from '@/context/TradingLockContext'
@@ -30,19 +30,22 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 }
 
-export const metadata: Metadata = {
-  title: 'AlphaTrack',
-  description: 'Dein persönliches Trading Journal',
-  manifest: '/manifest.json',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'black-translucent',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('common')
+  return {
     title: 'AlphaTrack',
-  },
-  icons: {
-    icon: '/icons/icon.svg',
-    apple: '/icons/icon.svg',
-  },
+    description: t('metaDescription'),
+    manifest: '/manifest.json',
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: 'black-translucent',
+      title: 'AlphaTrack',
+    },
+    icons: {
+      icon: '/icons/icon.svg',
+      apple: '/icons/icon.svg',
+    },
+  }
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

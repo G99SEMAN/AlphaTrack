@@ -3,7 +3,8 @@
     "settings": "Einstellungen",
     "language": "Sprache",
     "german": "Deutsch",
-    "english": "English"
+    "english": "English",
+    "metaDescription": "Dein persönliches Trading Journal"
   },
   "sidebar": {
     "tagline": "Trading Journal",

@@ -9,7 +9,10 @@ import { fetchWirtschaftskalender } from '@/lib/wirtschaftskalender'
 import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
 import { getTranslations } from 'next-intl/server'
 
-export const metadata: Metadata = { title: 'Wirtschaftskalender - AlphaTrack' }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('kalender.page')
+  return { title: `${t('title')} - AlphaTrack` }
+}
 
 export const revalidate = 1800
 

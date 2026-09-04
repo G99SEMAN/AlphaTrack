@@ -2,12 +2,16 @@ export const dynamic = 'force-dynamic'
 
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import Sidebar from '@/components/layout/Sidebar'
 import { getProfiles, getActiveProfile } from '@/lib/profiles'
 import { getAllBotsWithStatus } from '@/lib/bot-data'
 import BotPerformanceClient from './BotPerformanceClient'
 
-export const metadata: Metadata = { title: 'Bot Performance - AlphaTrack' }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('bots.performance')
+  return { title: `${t('title')} - AlphaTrack` }
+}
 
 export default async function BotPerformancePage() {
   const profiles = getProfiles()
