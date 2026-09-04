@@ -2,7 +2,7 @@
 title AlphaTrack Setup Wizard
 color 0B
 cls
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\windows\setup-wizard.ps1" -RepoRoot "%~dp0"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\windows\setup-wizard.ps1" -RepoRoot "%~dp0\"
 if %errorlevel% neq 0 (
     echo.
     echo  Einrichtung fehlgeschlagen / Setup failed.

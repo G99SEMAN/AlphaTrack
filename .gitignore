@@ -98,6 +98,9 @@ CLAUDE.md
 bots/CLAUDE.md
 /.superpowers/brainstorm/
 
+# Docker-Build-Konfiguration - nicht oeffentlich sichtbar
+.dockerignore
+
 # nach GitHub-Wiki migriert (Setup, Deployment, Bridge-Protocol) - lokal weiter gepflegt,
 # aber nicht mehr im Repo getrackt
 /SETUP.md

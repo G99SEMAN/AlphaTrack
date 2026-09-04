@@ -422,7 +422,7 @@ function Step-CreateEnvLocal {
             if ($_ -match '^ANTHROPIC_API_KEY=(.+)')    { $existingAnthropicKey   = $Matches[1] }
             if ($_ -match '^TWELVE_DATA_API_KEY=(.+)')  { $existingTwelveKey      = $Matches[1] }
         }
-        $overwrite = Ask-YesNo $(if ($LANG -eq "DE") { ".env.local existiert bereits — überschreiben?" } else { ".env.local already exists — overwrite?" }) $true
+        $overwrite = Ask-YesNo $(if ($LANG -eq "DE") { ".env.local existiert bereits — überschreiben?" } else { ".env.local already exists — overwrite?" }) $false
         if (-not $overwrite) {
             Write-Info $(if ($LANG -eq "DE") { ".env.local unverändert." } else { ".env.local left unchanged." })
             Wait-Enter
@@ -478,6 +478,15 @@ function Step-CreateBridgeConfig {
     $ex = $null
     if (Test-Path $configPath) {
         try { $ex = Get-Content $configPath -Raw | ConvertFrom-Json } catch {}
+    }
+
+    if ($ex) {
+        $overwrite = Ask-YesNo $(if ($LANG -eq "DE") { "bridge\config.json existiert bereits — überschreiben?" } else { "bridge\config.json already exists — overwrite?" }) $false
+        if (-not $overwrite) {
+            Write-Info $(if ($LANG -eq "DE") { "bridge\config.json unverändert." } else { "bridge\config.json left unchanged." })
+            Wait-Enter
+            return $ex.alphatrack_url
+        }
     }
 
     $detectedIp = Get-LocalIpAddress
@@ -583,6 +592,15 @@ function Step-CreateDeployConfig {
     $ex = $null
     if (Test-Path $configPath) {
         try { $ex = Get-Content $configPath -Raw | ConvertFrom-Json } catch {}
+    }
+
+    if ($ex) {
+        $overwrite = Ask-YesNo $(if ($LANG -eq "DE") { "deploy.config.json existiert bereits — überschreiben?" } else { "deploy.config.json already exists — overwrite?" }) $false
+        if (-not $overwrite) {
+            Write-Info $(if ($LANG -eq "DE") { "deploy.config.json unverändert." } else { "deploy.config.json left unchanged." })
+            Wait-Enter
+            return $ex
+        }
     }
 
     function GetEx ([string]$p, [string]$fb = "") {
@@ -763,7 +781,7 @@ function Step-NasDeploy {
         Write-Note "Prerequisite: SSH key must be added to the NAS (previous step)."
     }
 
-    $doDeploy = Ask-YesNo $(if ($LANG -eq "DE") { "Jetzt auf NAS deployen?" } else { "Deploy to NAS now?" }) $true
+    $doDeploy = Ask-YesNo $(if ($LANG -eq "DE") { "Jetzt auf NAS deployen?" } else { "Deploy to NAS now?" }) $false
 
     if ($doDeploy) {
         $deployBat = Join-Path $RepoRoot "scripts\windows\deploy.bat"

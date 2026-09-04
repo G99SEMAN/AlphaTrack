@@ -16,6 +16,7 @@ import { Profile, PROFILE_ICON_MAP } from '@/types/profile'
 import { useTradingLock } from '@/context/TradingLockContext'
 import { useBotStatus } from '@/context/BotStatusContext'
 import LogoMark from './LogoMark'
+import { FlagDE, FlagUS } from './FlagIcons'
 import { useTranslations, useLocale } from 'next-intl'
 import { setLocaleAction } from '@/lib/locale'
 import type { AppLocale } from '@/i18n/request'
@@ -355,11 +356,11 @@ function SidebarInner({ profiles, activeProfile, onNav, collapsed, onToggleColla
           style={{
             width: 30, height: 30, flexShrink: 0,
             borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer', fontSize: 10, fontWeight: 700,
+            cursor: 'pointer',
             background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)',
           }}
         >
-          {locale === 'de' ? 'EN' : 'DE'}
+          {locale === 'de' ? <FlagDE size={20} /> : <FlagUS size={20} />}
         </button>
       </div>
 
