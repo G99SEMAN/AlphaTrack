@@ -18,7 +18,7 @@ function CustomTooltip({ active, payload, label, currency }: { active?: boolean;
     <div className="px-3 py-2 rounded-lg text-xs" style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: 'var(--card-shadow)' }}>
       <p className="font-semibold mb-1" style={{ color: 'var(--text-2)' }}>{label} ({row.trades} {t('tooltipTradesSuffix')})</p>
       <p className="font-mono" style={{ color: row.avgPnl >= 0 ? 'var(--green)' : 'var(--red)' }}>
-        Ø {row.avgPnl >= 0 ? '+' : ''}{row.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {currencySymbol(currency)}
+        {t('avgPrefix')} {row.avgPnl >= 0 ? '+' : ''}{row.avgPnl.toLocaleString('de-DE', { minimumFractionDigits: 2 })} {currencySymbol(currency)}
       </p>
       <p className="font-mono mt-0.5" style={{ color: 'var(--accent)' }}>
         {t('winRateLabel')} {row.winRate.toFixed(1)}%

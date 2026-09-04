@@ -548,7 +548,8 @@
       "title": "Weekday Analysis — Avg P&L per Day",
       "tooltip": "Performance by weekday. Shows which days you trade most profitably.",
       "tooltipTradesSuffix": "trades",
-      "winRateLabel": "Win Rate:"
+      "winRateLabel": "Win Rate:",
+      "avgPrefix": "Avg"
     },
     "hourlyChart": {
       "title": "Hourly Analysis — Total P&L per Hour",
@@ -585,7 +586,7 @@
       "colWinRate": "Win Rate",
       "colPnl": "P&L",
       "mobileWinSuffix": "Win",
-      "mobileTradesSuffix": "Trades",
+      "mobileTradesSuffix": "trades",
       "noTrades": "No trades available"
     },
     "strategyTable": {

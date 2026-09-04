@@ -548,7 +548,8 @@
       "title": "Wochentags-Analyse — Ø P&L pro Tag",
       "tooltip": "Performance nach Wochentag. Zeigt an welchen Tagen du am profitabelsten tradest.",
       "tooltipTradesSuffix": "Trades",
-      "winRateLabel": "Win Rate:"
+      "winRateLabel": "Win Rate:",
+      "avgPrefix": "Ø"
     },
     "hourlyChart": {
       "title": "Stunden-Analyse — Gesamt-P&L pro Stunde",
@@ -557,7 +558,7 @@
       "totalLabel": "Gesamt:",
       "avgPerTradeLabel": "Ø/Trade:",
       "winRateLabel": "Win Rate:",
-      "winRateAndCountLabel": "Win-Rate & Anzahl Trades"
+      "winRateAndCountLabel": "Win Rate & Anzahl Trades"
     },
     "rMultipleChart": {
       "title": "R-Multiple Verteilung",
