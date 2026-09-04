@@ -17,7 +17,8 @@ interface Props {
 
 export default function ImpactBadge({ impact, compact = false }: Props) {
   const t = useTranslations('kalender.impact')
-  const cfg = getImpactConfig(t)[impact] ?? getImpactConfig(t).Low
+  const config = getImpactConfig(t)
+  const cfg = config[impact] ?? config.Low
 
   if (compact) {
     return (

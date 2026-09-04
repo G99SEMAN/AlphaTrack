@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import type { useTranslations } from 'next-intl'
 
 export type Timeframe = 'M1' | 'M5' | 'M15' | 'M30' | 'H1' | 'H4' | 'D1' | 'W1' | 'MN'
 
@@ -31,7 +31,7 @@ export const STRATEGY_COLORS = [
   '#ec4899',
 ]
 
-export const TIMEFRAME_KEYS: Timeframe[] = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1', 'MN']
+export const TIMEFRAME_KEYS: readonly Timeframe[] = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1', 'MN']
 
 export function getTimeframeLabels(t: ReturnType<typeof useTranslations<'strategien.timeframes'>>): Record<Timeframe, string> {
   return {

@@ -23,7 +23,7 @@ function clamp(v: number, min = 0, max = 100): number {
   return Math.max(min, Math.min(max, v))
 }
 
-export function computeAlphaScore(props: Props, t: ReturnType<typeof useTranslations<'dashboard.alphaScore'>>): {
+function computeAlphaScore(props: Props, t: ReturnType<typeof useTranslations<'dashboard.alphaScore'>>): {
   scores: { axis: string; value: number; tooltip: string }[]
   overall: number
   tradeCount: number
