@@ -12,7 +12,7 @@ interface Props {
 const TOOLTIP_WIDTH = 224 // w-56
 
 export default function InfoTooltip({ text, className }: Props) {
-  const t = useTranslations('statistiken.infoTooltip')
+  const t = useTranslations('common')
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null)
@@ -63,7 +63,7 @@ export default function InfoTooltip({ text, className }: Props) {
       <button
         ref={btnRef}
         type="button"
-        aria-label={t('ariaLabel')}
+        aria-label={t('infoTooltipAriaLabel')}
         aria-expanded={visible}
         onClick={() => setOpen(o => !o)}
         onMouseEnter={() => setHovered(true)}

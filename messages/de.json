@@ -4,7 +4,8 @@
     "language": "Sprache",
     "german": "Deutsch",
     "english": "English",
-    "metaDescription": "Dein persönliches Trading Journal"
+    "metaDescription": "Dein persönliches Trading Journal",
+    "infoTooltipAriaLabel": "Erklärung anzeigen"
   },
   "sidebar": {
     "tagline": "Trading Journal",
@@ -467,9 +468,6 @@
     "client": {
       "emptyTitle": "Noch keine Auswertung",
       "emptyDescription": "Trage mindestens einen abgeschlossenen Trade ein um die Statistiken zu sehen."
-    },
-    "infoTooltip": {
-      "ariaLabel": "Erklärung anzeigen"
     },
     "kpiRow": {
       "pfLabel": "Profit Factor",
