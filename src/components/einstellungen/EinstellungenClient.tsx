@@ -202,14 +202,15 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   const { settings, updateSetting } = useStatsSettings()
   const { accent, setAccent } = useAccentTheme()
   const tCommon = useTranslations('common')
+  const t = useTranslations('einstellungen')
   const locale = useLocale() as AppLocale
   const { settings: sessionSettings, updateExchanges } = useSessionSettings()
   const isDark = mounted ? theme === 'dark' : true
 
   const ACCENT_THEMES: { id: AccentTheme; label: string; color: string; darkBg: string; lightBg: string }[] = [
-    { id: 'blue',   label: 'Blau',    color: '#3b82f6', darkBg: '#080b12', lightBg: '#f0f4f8' },
-    { id: 'red',    label: 'Crimson', color: '#f43f5e', darkBg: '#110810', lightBg: '#fff0f3' },
-    { id: 'violet', label: 'Violett', color: '#a855f7', darkBg: '#09080f', lightBg: '#f5f0fe' },
+    { id: 'blue',   label: t('darstellung.accentBlue'),    color: '#3b82f6', darkBg: '#080b12', lightBg: '#f0f4f8' },
+    { id: 'red',    label: t('darstellung.accentCrimson'), color: '#f43f5e', darkBg: '#110810', lightBg: '#fff0f3' },
+    { id: 'violet', label: t('darstellung.accentViolet'),  color: '#a855f7', darkBg: '#09080f', lightBg: '#f5f0fe' },
   ]
 
   const STATS_PANELS: { key: keyof StatsSettings; label: string }[] = [
@@ -225,10 +226,10 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   ]
 
   const TABS: { id: Tab; label: string }[] = [
-    { id: 'darstellung', label: 'Darstellung' },
-    { id: 'dashboard',   label: 'Dashboard' },
-    { id: 'profile',     label: 'Profile' },
-    { id: 'daten',       label: 'Daten' },
+    { id: 'darstellung', label: t('tabs.darstellung') },
+    { id: 'dashboard',   label: t('tabs.dashboard') },
+    { id: 'profile',     label: t('tabs.profile') },
+    { id: 'daten',       label: t('tabs.daten') },
   ]
 
   return (
@@ -264,11 +265,11 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
               <div className="flex items-center gap-2 mb-1">
                 <Palette size={15} style={{ color: 'var(--text-3)' }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
-                  Farbschema
+                  {t('darstellung.colorSchemeHeading')}
                 </p>
               </div>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                Wähle ein Farbschema für die gesamte Oberfläche.
+                {t('darstellung.colorSchemeDescription')}
               </p>
               {mounted && (
                 <div className="flex gap-3">
@@ -333,10 +334,10 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
             {/* Erscheinungsbild */}
             <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
-                Erscheinungsbild
+                {t('darstellung.appearanceHeading')}
               </p>
               <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
-                Wähle zwischen hellem und dunklem Design.
+                {t('darstellung.appearanceDescription')}
               </p>
               <div className="flex gap-3">
                 <button
@@ -349,7 +350,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   }}
                 >
                   <Sun size={16} />
-                  Hell
+                  {t('darstellung.lightMode')}
                 </button>
                 <button
                   onClick={() => setTheme('dark')}
@@ -361,7 +362,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                   }}
                 >
                   <Moon size={16} />
-                  Dunkel
+                  {t('darstellung.darkMode')}
                 </button>
               </div>
             </div>
