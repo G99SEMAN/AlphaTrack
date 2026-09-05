@@ -830,6 +830,7 @@ function Step-StartApp {
     }
 
     Wait-Enter
+    return $doStart
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -837,7 +838,7 @@ function Step-StartApp {
 # ═══════════════════════════════════════════════════════════════════════════════
 
 function Step-Summary {
-    param([string]$Scenario, [string[]]$CreatedFiles)
+    param([string]$Scenario, [string[]]$CreatedFiles, [bool]$AppStarted = $false)
 
     Show-Banner
     Write-Host "  $(if ($LANG -eq 'DE') { 'Einrichtung abgeschlossen!' } else { 'Setup Complete!' })" -ForegroundColor Green
@@ -856,7 +857,13 @@ function Step-Summary {
 
     switch ($Scenario) {
         "journal" {
-            if ($LANG -eq "DE") {
+            if ($AppStarted) {
+                if ($LANG -eq "DE") {
+                    Write-Note "1. Profil anlegen und loslegen!"
+                } else {
+                    Write-Note "1. Create a profile and start journaling!"
+                }
+            } elseif ($LANG -eq "DE") {
                 Write-Note "1. App starten:         npm run dev"
                 Write-Note "2. Browser öffnen:      http://localhost:3000"
                 Write-Note "3. Profil anlegen und loslegen!"
@@ -867,7 +874,17 @@ function Step-Summary {
             }
         }
         "bots-single" {
-            if ($LANG -eq "DE") {
+            if ($AppStarted) {
+                if ($LANG -eq "DE") {
+                    Write-Note "1. Profil anlegen"
+                    Write-Note "2. Profil-ID in bridge\config.json eintragen  (profile_id)"
+                    Write-Note "3. Bridge starten:      bridge\start_bridge.bat"
+                } else {
+                    Write-Note "1. Create a profile"
+                    Write-Note "2. Enter profile ID in bridge\config.json  (profile_id)"
+                    Write-Note "3. Start bridge:        bridge\start_bridge.bat"
+                }
+            } elseif ($LANG -eq "DE") {
                 Write-Note "1. App starten:         npm run dev"
                 Write-Note "2. Browser öffnen:      http://localhost:3000"
                 Write-Note "3. Profil anlegen"
@@ -945,9 +962,9 @@ if ($scenario -eq 1) {
 
     Step-NpmInstall
 
-    Step-StartApp -AppUrl "http://localhost:3000"
+    $appStarted = Step-StartApp -AppUrl "http://localhost:3000"
 
-    Step-Summary -Scenario "journal" -CreatedFiles $createdFiles
+    Step-Summary -Scenario "journal" -CreatedFiles $createdFiles -AppStarted $appStarted
     exit 0
 }
 
@@ -970,9 +987,9 @@ if ($setupType -eq 1) {
     Step-NpmInstall
     Step-PipInstall
 
-    Step-StartApp -AppUrl "http://localhost:3000"
+    $appStarted = Step-StartApp -AppUrl "http://localhost:3000"
 
-    Step-Summary -Scenario "bots-single" -CreatedFiles $createdFiles
+    Step-Summary -Scenario "bots-single" -CreatedFiles $createdFiles -AppStarted $appStarted
     exit 0
 }
 
