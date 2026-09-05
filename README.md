@@ -20,14 +20,17 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 - [Navigation](#navigation)
 - [Sprachen](#sprachen)
 - [Screenshots](#screenshots)
-- [Schnellstart](#schnellstart)
-- [Docker / NAS-Deployment](#docker--nas-deployment)
+- [Installation](#installation)
+  - [Setup-Assistent (empfohlen)](#setup-assistent-empfohlen)
+  - [Manuelle Installation](#manuelle-installation)
+  - [Docker / NAS-Deployment](#docker--nas-deployment)
 - [Konfiguration](#konfiguration)
 - [Projektstruktur](#projektstruktur)
 - [Datenspeicherung](#datenspeicherung)
 - [Backtesting](#backtesting)
 - [Tech Stack](#tech-stack)
 - [PWA / Mobile](#pwa--mobile)
+- [Heimnetz-Infrastruktur](#heimnetz-infrastruktur-empfehlung)
 - [Lizenz](#lizenz)
 - [Disclaimer](#disclaimer)
 
@@ -108,7 +111,32 @@ Die App ist vollständig zweisprachig (Deutsch/Englisch) - Cookie-basierte Umsch
 
 ---
 
-## Schnellstart
+## Installation
+
+Drei Wege, AlphaTrack zum Laufen zu bringen — der Setup-Assistent ist der schnellste und wird empfohlen.
+
+### Setup-Assistent (empfohlen)
+
+> **Nur Windows** — der Assistent ist ein PowerShell-Skript. Unter macOS/Linux direkt mit der [manuellen Installation](#manuelle-installation) starten.
+
+```bash
+git clone https://github.com/G99SEMAN/AlphaTrack.git
+cd AlphaTrack
+setup.bat
+```
+
+`setup.bat` startet einen interaktiven Assistenten, der durch die komplette Einrichtung führt:
+
+1. **Sprache wählen** (Deutsch/Englisch)
+2. **Nutzungsart wählen** — nur Trading-Journal, oder Journal + automatisierte Bots
+3. **Voraussetzungen prüfen** — Git, Node.js 18+, bei Bot-Nutzung zusätzlich Python 3.10+ (fehlende Pakete werden automatisch per `winget` installiert)
+4. **Konfiguration erstellen** — `.env.local` (inkl. zufällig generiertem `BOT_API_KEY`), bei Bot-Nutzung zusätzlich `bridge/config.json` mit den MT5-Zugangsdaten
+5. **Abhängigkeiten installieren** — `npm install`, bei Bot-Nutzung zusätzlich `pip install -r bridge/requirements.txt`
+6. **App starten** — öffnet automatisch `http://localhost:3000` im Browser
+
+Bei einem verteilten Setup (Dashboard auf NAS/Server, MetaTrader + Bots auf separatem PC) führt der Assistent zusätzlich durch SSH-Key-Einrichtung und Deployment — dafür `setup.bat` einmal auf jedem der beiden Rechner ausführen.
+
+### Manuelle Installation
 
 **Voraussetzungen:** [Node.js](https://nodejs.org/) >= 18
 
@@ -132,13 +160,11 @@ App läuft unter: **http://localhost:3000**
 
 > Beim allerersten Aufruf einer Seite kompiliert Next.js die Route erst im Hintergrund — das kann beim ersten Laden 20-40 Sekunden dauern. Kein Fehler, danach ist es schnell.
 
----
-
-## Docker / NAS-Deployment
+### Docker / NAS-Deployment
 
 AlphaTrack läuft als Docker-Container - getestet auf **Synology NAS**.
 
-### Starten
+#### Starten
 
 ```bash
 docker compose up -d
@@ -146,7 +172,7 @@ docker compose up -d
 
 App erreichbar unter: **http://\<NAS-IP\>:3002**
 
-### docker-compose.yml
+#### docker-compose.yml
 
 ```yaml
 version: '3.8'
@@ -165,7 +191,7 @@ services:
 
 > Das `data/`-Volume sichert alle Trades, Profile, Bot-Daten und gecachte KI-Erklärungen persistent ausserhalb des Containers.
 
-### Deploy (NAS + Trading-Rechner)
+#### Deploy (NAS + Trading-Rechner)
 
 `scripts\windows\deploy.bat` startet das interaktive Deploy:
 
@@ -184,7 +210,7 @@ Features → "OpenSSH-Server", dann `Set-Service sshd -StartupType Automatic` +
 `Start-Service sshd` als Admin). Der SSH-Benutzer braucht Admin-Rechte
 (Firewall/Aufgabenplanung). MetaTrader 5 und Python müssen installiert sein.
 
-#### SSH-Key einrichten (kein Passwort beim Deploy)
+##### SSH-Key einrichten (kein Passwort beim Deploy)
 
 ```
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\windows\setup-ssh-key.ps1

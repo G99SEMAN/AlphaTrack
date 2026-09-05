@@ -151,7 +151,7 @@ function Install-WithWinGet {
         return $false
     }
 
-    & winget install --id $PackageId --silent --accept-package-agreements --accept-source-agreements 2>&1 |
+    & winget install --id $PackageId --silent --accept-package-agreements --accept-source-agreements |
         ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
 
     if ($LASTEXITCODE -eq 0) {
@@ -675,7 +675,7 @@ function Step-NpmInstall {
 
     Push-Location $RepoRoot
     try {
-        & npm install 2>&1 | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
+        & npm install | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
         if ($LASTEXITCODE -ne 0) { throw "npm install exit $LASTEXITCODE" }
         Write-Nl
         Write-Ok $(if ($LANG -eq "DE") { "npm install abgeschlossen." } else { "npm install completed." })
@@ -712,7 +712,7 @@ function Step-PipInstall {
     Write-Info $(if ($LANG -eq "DE") { "Installiert Python-Abhängigkeiten für die Bridge ..." } else { "Installing Python dependencies for the bridge ..." })
     Write-Nl
 
-    & python -m pip install -r $reqFile 2>&1 | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
+    & python -m pip install -r $reqFile | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
     if ($LASTEXITCODE -ne 0) {
         Write-Nl
         Write-Warn $(if ($LANG -eq "DE") {
