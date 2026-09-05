@@ -17,6 +17,19 @@ const nextConfig: NextConfig = {
     },
     optimizePackageImports: ['lucide-react', 'recharts', 'framer-motion'],
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // Bridge/Bots schreiben mehrmals pro Minute in data/, bridge/, bots/ (Heartbeat,
+      // Trade-Sync, Logs) — ohne Ausschluss loest jeder Schreibvorgang eine Neukompilierung
+      // aus, was im Dev-Server als Full-Reload ankommt und clientseitigen State zuruecksetzt
+      // (z.B. Monatsauswahl im Dashboard-Kalender).
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: ['**/node_modules/**', '**/.git/**', '**/data/**', '**/data-dev/**', '**/bridge/**', '**/bots/**'],
+      };
+    }
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);
