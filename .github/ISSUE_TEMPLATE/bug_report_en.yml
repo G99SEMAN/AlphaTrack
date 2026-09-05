@@ -1,0 +1,67 @@
+name: 🐛 Bug Report (English)
+description: Something isn't working as expected
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! The more detail you provide, the faster the issue can be tracked down.
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Before you submit
+      options:
+        - label: I checked the [existing issues](https://github.com/G99SEMAN/AlphaTrack/issues) to see if this has already been reported
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What did you expect to happen instead?
+      placeholder: Short description of the problem and the expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can the bug be triggered?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Error occurs at '...'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: setup-type
+    attributes:
+      label: How do you run AlphaTrack?
+      options:
+        - Setup wizard (setup.bat)
+        - Manual installation (npm)
+        - Docker / NAS deployment
+        - Don't know / not relevant
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, operating system, AlphaTrack version if known
+      placeholder: e.g. Chrome 128, Windows 11, AlphaTrack v1.0.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots / Logs
+      description: A screenshot, browser console output, bridge log, or error message helps a lot in narrowing this down. Files can be dragged and dropped in.
+    validations:
+      required: false

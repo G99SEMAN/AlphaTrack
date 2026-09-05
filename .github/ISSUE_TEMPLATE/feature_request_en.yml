@@ -1,0 +1,42 @@
+name: 💡 Feature Request (English)
+description: Suggest an idea or a missing feature
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! A short description is all it takes.
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Before you submit
+      options:
+        - label: I checked the [existing issues](https://github.com/G99SEMAN/AlphaTrack/issues) to see if this has already been suggested
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's missing?
+      description: What would you like to be able to do that isn't possible right now?
+      placeholder: Short description of the desired feature
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why does this matter?
+      description: What problem does this solve for you, or what use case does it cover?
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current alternatives / workarounds
+      description: Are you currently working around this some other way? (optional)
+    validations:
+      required: false
