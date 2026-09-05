@@ -1,0 +1,42 @@
+name: 💡 Feature-Wunsch
+description: Eine Idee oder ein fehlendes Feature vorschlagen
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für deinen Vorschlag! Kurz beschreiben reicht völlig.
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Vorab-Check
+      options:
+        - label: Ich habe in den [bestehenden Issues](https://github.com/G99SEMAN/AlphaTrack/issues) nachgesehen, ob der Wunsch schon vorgeschlagen wurde
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Was fehlt dir?
+      description: Was möchtest du tun können, das aktuell nicht geht?
+      placeholder: Kurze Beschreibung des gewünschten Features
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Warum ist das wichtig?
+      description: Welches Problem löst das für dich, oder welchen Anwendungsfall deckt es ab?
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Aktuelle Alternativen / Workarounds
+      description: Behilfst du dir aktuell anders? (optional)
+    validations:
+      required: false

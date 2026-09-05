@@ -1,0 +1,67 @@
+name: 🐛 Fehler melden
+description: Etwas funktioniert nicht wie erwartet
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke, dass du dir die Zeit nimmst, einen Fehler zu melden! Je genauer die Angaben, desto schneller lässt sich das Problem finden.
+
+  - type: checkboxes
+    id: duplicate-check
+    attributes:
+      label: Vorab-Check
+      options:
+        - label: Ich habe in den [bestehenden Issues](https://github.com/G99SEMAN/AlphaTrack/issues) nachgesehen, ob das Problem schon gemeldet wurde
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Was ist passiert?
+      description: Was hättest du stattdessen erwartet?
+      placeholder: Kurze Beschreibung des Problems und des erwarteten Verhaltens
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Schritte zum Reproduzieren
+      description: Wie kann man den Fehler selbst auslösen?
+      placeholder: |
+        1. Gehe zu '...'
+        2. Klicke auf '...'
+        3. Fehler tritt auf bei '...'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: setup-type
+    attributes:
+      label: Wie läuft AlphaTrack bei dir?
+      options:
+        - Setup-Assistent (setup.bat)
+        - Manuelle Installation (npm)
+        - Docker / NAS-Deployment
+        - Weiß ich nicht / nicht relevant
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Umgebung
+      description: Browser, Betriebssystem, ggf. AlphaTrack-Version
+      placeholder: z.B. Chrome 128, Windows 11, AlphaTrack v1.0.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots / Logs
+      description: Screenshot, Browser-Konsole, Bridge-Log oder Fehlermeldung — hilft enorm bei der Eingrenzung. Dateien können per Drag & Drop eingefügt werden.
+    validations:
+      required: false
