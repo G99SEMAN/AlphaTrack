@@ -1,8 +1,10 @@
 # AlphaTrack
 
-**Lokales Trading Journal + Bot-Analyser - läuft auf deinem PC oder NAS, kein Cloud-Account nötig.**
+*[🇩🇪 Deutsche Version](README.de.md)*
 
-Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Performance mit KI-Unterstützung.
+**Local trading journal + bot analyzer - runs on your PC or NAS, no cloud account needed.**
+
+Log every trade, connect your MT5 bot via the bridge, and analyze your performance with AI support.
 
 ---
 
@@ -14,24 +16,24 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 ---
 
-## Inhaltsverzeichnis
+## Table of Contents
 
 - [Features](#features)
 - [Navigation](#navigation)
-- [Sprachen](#sprachen)
+- [Languages](#languages)
 - [Screenshots](#screenshots)
 - [Installation](#installation)
-  - [Setup-Assistent (empfohlen)](#setup-assistent-empfohlen)
-  - [Manuelle Installation](#manuelle-installation)
-  - [Docker / NAS-Deployment](#docker--nas-deployment)
-- [Konfiguration](#konfiguration)
-- [Projektstruktur](#projektstruktur)
-- [Datenspeicherung](#datenspeicherung)
+  - [Setup Wizard (recommended)](#setup-wizard-recommended)
+  - [Manual Installation](#manual-installation)
+  - [Docker / NAS Deployment](#docker--nas-deployment)
+- [Configuration](#configuration)
+- [Project Structure](#project-structure)
+- [Data Storage](#data-storage)
 - [Backtesting](#backtesting)
 - [Tech Stack](#tech-stack)
 - [PWA / Mobile](#pwa--mobile)
-- [Heimnetz-Infrastruktur](#heimnetz-infrastruktur-empfehlung)
-- [Lizenz](#lizenz)
+- [Home Network Infrastructure](#home-network-infrastructure-recommendation)
+- [License](#license)
 - [Disclaimer](#disclaimer)
 
 ---
@@ -40,84 +42,84 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 
 ### Trading Journal
 
-| Feature | Beschreibung |
+| Feature | Description |
 |---|---|
-| **Dashboard** | PnL-Karten, Win-Rate, Risk/Reward, Equity-Kurve, letzte Trades, Warnungen bei langen offenen Positionen |
-| **Trading Journal** | Trades vollständig erfassen mit Einstieg, Ausstieg, SL/TP, Gebühren, Strategie, Tags, Notizen und Chart-Screenshots |
-| **Statistiken** | Tiefgehende Auswertungen nach Strategie und Instrument, R-Multiple-Verteilung, Wochentagsanalyse, monatliches PnL-Chart |
-| **Strategien** | Trading-Strategien anlegen, mit Trades verknüpfen und Performance je Strategie automatisch auswerten |
-| **Wirtschaftskalender** | Wirtschaftsdaten der nächsten 2 Wochen (via Tradays/MQL5), filterbar nach Wichtigkeit und Währung |
-| **KI-Marktanalyse** | Echtzeit-Kerzenanalyse via MT5-Bot - Bias, Entry, SL/TP und R/R Empfehlung per Claude AI |
-| **KI-Erklärungen** | Klick auf ein Ereignis im Wirtschaftskalender liefert eine Erklärung auf Deutsch (was gemessen wird, warum relevant, Einfluss auf die Währung). Braucht `ANTHROPIC_API_KEY`, läuft über Claude Haiku mit knapp bemessenem Tokenlimit und wird pro Ereignis gecacht — Tokenverbrauch bleibt dadurch minimal |
-| **Multi-Profile** | Mehrere Konten parallel verwalten (Live, Demo) mit eigenem Startkapital, Broker und Währung |
-| **Backup & Restore** | Vollständige Datensicherung als ZIP-Bundle inkl. Screenshots; Import zum Wiederherstellen |
-| **PWA-fähig** | Als App auf dem Smartphone oder Tablet installierbar |
-| **Lokale Datenspeicherung** | Alle Daten bleiben lokal als JSON-Dateien - keine Cloud, keine Abhängigkeiten |
+| **Dashboard** | PnL cards, win rate, risk/reward, equity curve, recent trades, warnings for long-running open positions |
+| **Trading Journal** | Log trades in full detail: entry, exit, SL/TP, fees, strategy, tags, notes, and chart screenshots |
+| **Statistics** | In-depth breakdowns by strategy and instrument, R-multiple distribution, weekday analysis, monthly PnL chart |
+| **Strategies** | Create trading strategies, link them to trades, and automatically evaluate performance per strategy |
+| **Economic Calendar** | Economic events for the next 2 weeks (via Tradays/MQL5), filterable by importance and currency |
+| **AI Market Analysis** | Real-time candle analysis via the MT5 bot - bias, entry, SL/TP, and R/R recommendation powered by Claude AI |
+| **AI Explanations** | Clicking an event in the economic calendar gives you an explanation (what's being measured, why it matters, impact on the currency). Requires `ANTHROPIC_API_KEY`, runs on Claude Haiku with a tight token budget, and is cached per event - keeping token usage minimal |
+| **Multi-Profile** | Manage multiple accounts in parallel (live, demo), each with its own starting capital, broker, and currency |
+| **Backup & Restore** | Full data backup as a ZIP bundle including screenshots; import to restore |
+| **PWA-capable** | Installable as an app on your phone or tablet |
+| **Local Data Storage** | All data stays local as JSON files - no cloud, no external dependencies |
 
-### Bot-Analyser (Bridge)
+### Bot Analyzer (Bridge)
 
-| Feature | Beschreibung |
+| Feature | Description |
 |---|---|
-| **Bridge Dashboard** | Live-Status aller verbundenen Bots mit Verbindungsanzeige (MT5, Bridge, AlphaTrack) |
-| **Live Trades** | Offene Positionen des Bots in Echtzeit, inkl. Schliessen-Funktion |
-| **Trade Analyzer** | KI-gestützte Marktanalyse auf Basis echter MT5-Kerzen (M5 Scalping / H1 Intraday) |
-| **Bridge Log** | Bridge-Logs nach Level (INFO/WARN/ERR) filterbar, mit CSV/JSON-Export |
-| **Bot Performance** | Bot-Statistiken, Equity-Kurve und Performance-Metriken je Bot |
-| **Bot Einstellungen** | Bot konfigurieren, Parameter anpassen, Zustand steuern |
-| **Trade-Executor** | Trades direkt in MT5 ausführen (Symbol, Richtung, Lots, SL/TP) |
-| **Watchdog-Panel** | Bridge-Status, Neustart-Funktion und Bot-Steuerung (Start/Pause/Stop) |
-| **Netzwerk (Auto-Discovery)** | Bridge und Bots automatisch im lokalen Netzwerk erkennen und registrieren |
-| **TradingLockContext** | Sicherheits-Schutzschalter in der Sidebar - sperrt alle Trade-Buttons standardmäßig |
+| **Bridge Dashboard** | Live status of all connected bots with connection indicators (MT5, Bridge, AlphaTrack) |
+| **Live Trades** | The bot's open positions in real time, including a close function |
+| **Trade Analyzer** | AI-powered market analysis based on real MT5 candles (M5 scalping / H1 intraday) |
+| **Bridge Log** | Bridge logs filterable by level (INFO/WARN/ERR), with CSV/JSON export |
+| **Bot Performance** | Bot statistics, equity curve, and performance metrics per bot |
+| **Bot Settings** | Configure the bot, adjust parameters, control its state |
+| **Trade Executor** | Execute trades directly in MT5 (symbol, direction, lots, SL/TP) |
+| **Watchdog Panel** | Bridge status, restart function, and bot control (start/pause/stop) |
+| **Network (Auto-Discovery)** | Automatically detect and register the bridge and bots on the local network |
+| **TradingLockContext** | Safety kill switch in the sidebar - locks all trade buttons by default |
 
 ---
 
 ## Navigation
 
-Eine einzige Navigation, immer sichtbar - kein Moduswechsel.
+A single navigation, always visible - no mode switching.
 
-**Trading Journal:** Dashboard - Trades - Statistiken - Strategien - Kalender - Analyse - TPC
+**Trading Journal:** Dashboard - Trades - Statistics - Strategies - Calendar - Analysis - TPC
 
-**Bot-Analyser:** Bridge (Analyse / Log / Trades) - Bots (Performance / Einstellungen) - Netzwerk
+**Bot Analyzer:** Bridge (Analysis / Log / Trades) - Bots (Performance / Settings) - Network
 
-**Schutzschalter:** Neben dem Logo in der Sidebar - `ShieldCheck` (grün = gesperrt/sicher) / `ShieldOff` (rot = Trading aktiv). Standard: gesperrt.
+**Kill switch:** Next to the logo in the sidebar - `ShieldCheck` (green = locked/safe) / `ShieldOff` (red = trading active). Default: locked.
 
-**Farbthemen:** 3 wählbare Akzentfarben - Blau (Standard), Crimson (`#f43f5e`), Violett (`#a855f7`)
+**Color themes:** 3 selectable accent colors - Blue (default), Crimson (`#f43f5e`), Violet (`#a855f7`)
 
 ---
 
-## Sprachen
+## Languages
 
-Die App ist vollständig zweisprachig (Deutsch/Englisch) - Cookie-basierte Umschaltung in den Einstellungen, kein URL-Routing. Ausnahme: Die Profil-Erstellung/-Bearbeitung (`src/app/setup/`, `src/components/profile/ProfileSetupForm.tsx`, `ProfileEditModal.tsx`, `ProfileSetupModal.tsx` - ca. 1284 Zeilen) ist noch nicht übersetzt und bleibt bewusst deutsch, bis dafür ein eigener Teilplan umgesetzt wird.
+The app is fully bilingual (German/English) - cookie-based switching in Settings, no URL routing. Exception: profile creation/editing (`src/app/setup/`, `src/components/profile/ProfileSetupForm.tsx`, `ProfileEditModal.tsx`, `ProfileSetupModal.tsx` - roughly 1284 lines) isn't translated yet and stays German on purpose until a dedicated sub-plan covers it.
 
 ---
 
 ## Screenshots
 
-| Dashboard | Trading Journal | Bridge-Übersicht |
+| Dashboard | Trading Journal | Bridge Overview |
 |---|---|---|
 | ![Dashboard](public/screenshots/readme/dashboard.png) | ![Journal](public/screenshots/readme/journal.png) | ![Bridge](public/screenshots/readme/bridge.png) |
 
-| Statistiken | Kalender | Strategien |
+| Statistics | Calendar | Strategies |
 |---|---|---|
-| ![Statistiken](public/screenshots/readme/statistiken.png) | ![Kalender](public/screenshots/readme/kalender.png) | ![Strategien](public/screenshots/readme/strategien.png) |
+| ![Statistics](public/screenshots/readme/statistiken.png) | ![Calendar](public/screenshots/readme/kalender.png) | ![Strategies](public/screenshots/readme/strategien.png) |
 
-| Bot Performance | Netzwerk | Tagesdetails |
+| Bot Performance | Network | Day Details |
 |---|---|---|
-| ![Bot Performance](public/screenshots/readme/bot-performance.png) | ![Netzwerk](public/screenshots/readme/netzwerk.png) | ![Tagesdetails](public/screenshots/readme/tagesdetails.png) |
+| ![Bot Performance](public/screenshots/readme/bot-performance.png) | ![Network](public/screenshots/readme/netzwerk.png) | ![Day Details](public/screenshots/readme/tagesdetails.png) |
 
-| Wirtschaftskalender: KI-Erklärung |
+| Economic Calendar: AI Explanation |
 |---|
-| ![KI-Erklärung](public/screenshots/readme/ki-erklaerung.png) |
+| ![AI Explanation](public/screenshots/readme/ki-erklaerung.png) |
 
 ---
 
 ## Installation
 
-Drei Wege, AlphaTrack zum Laufen zu bringen — der Setup-Assistent ist der schnellste und wird empfohlen.
+Three ways to get AlphaTrack running — the setup wizard is the fastest and is recommended.
 
-### Setup-Assistent (empfohlen)
+### Setup Wizard (recommended)
 
-> **Nur Windows** — der Assistent ist ein PowerShell-Skript. Unter macOS/Linux direkt mit der [manuellen Installation](#manuelle-installation) starten.
+> **Windows only** — the wizard is a PowerShell script. On macOS/Linux, go straight to the [manual installation](#manual-installation).
 
 ```bash
 git clone https://github.com/G99SEMAN/AlphaTrack.git
@@ -125,52 +127,52 @@ cd AlphaTrack
 setup.bat
 ```
 
-`setup.bat` startet einen interaktiven Assistenten, der durch die komplette Einrichtung führt:
+`setup.bat` launches an interactive wizard that walks you through the entire setup:
 
-1. **Sprache wählen** (Deutsch/Englisch)
-2. **Nutzungsart wählen** — nur Trading-Journal, oder Journal + automatisierte Bots
-3. **Voraussetzungen prüfen** — Git, Node.js 18+, bei Bot-Nutzung zusätzlich Python 3.10+ (fehlende Pakete werden automatisch per `winget` installiert)
-4. **Konfiguration erstellen** — `.env.local` (inkl. zufällig generiertem `BOT_API_KEY`), bei Bot-Nutzung zusätzlich `bridge/config.json` mit den MT5-Zugangsdaten
-5. **Abhängigkeiten installieren** — `npm install`, bei Bot-Nutzung zusätzlich `pip install -r bridge/requirements.txt`
-6. **App starten** — öffnet automatisch `http://localhost:3000` im Browser
+1. **Choose language** (German/English)
+2. **Choose usage mode** — trading journal only, or journal + automated bots
+3. **Check prerequisites** — Git, Node.js 18+, and for bot usage also Python 3.10+ (missing packages are installed automatically via `winget`)
+4. **Create configuration** — `.env.local` (including a randomly generated `BOT_API_KEY`), and for bot usage also `bridge/config.json` with your MT5 credentials
+5. **Install dependencies** — `npm install`, and for bot usage also `pip install -r bridge/requirements.txt`
+6. **Start the app** — automatically opens `http://localhost:3000` in your browser
 
-Bei einem verteilten Setup (Dashboard auf NAS/Server, MetaTrader + Bots auf separatem PC) führt der Assistent zusätzlich durch SSH-Key-Einrichtung und Deployment — dafür `setup.bat` einmal auf jedem der beiden Rechner ausführen.
+For a distributed setup (dashboard on a NAS/server, MetaTrader + bots on a separate PC), the wizard also walks you through SSH key setup and deployment — run `setup.bat` once on each of the two machines for that.
 
-### Manuelle Installation
+### Manual Installation
 
-**Voraussetzungen:** [Node.js](https://nodejs.org/) >= 18
+**Requirements:** [Node.js](https://nodejs.org/) >= 18
 
 ```bash
-# 1. Repository klonen
+# 1. Clone the repository
 git clone https://github.com/G99SEMAN/AlphaTrack.git
 cd AlphaTrack
 
-# 2. Abhängigkeiten installieren
+# 2. Install dependencies
 npm install
 
-# 3. Umgebungsvariablen einrichten
+# 3. Set up environment variables
 cp .env.example .env.local
-# .env.local mit deinen Keys befüllen
+# fill in your keys in .env.local
 
-# 4. Entwicklungsserver starten
+# 4. Start the dev server
 npm run dev
 ```
 
-App läuft unter: **http://localhost:3000**
+App runs at: **http://localhost:3000**
 
-> Beim allerersten Aufruf einer Seite kompiliert Next.js die Route erst im Hintergrund — das kann beim ersten Laden 20-40 Sekunden dauern. Kein Fehler, danach ist es schnell.
+> On the very first request to a page, Next.js compiles the route in the background — this can take 20-40 seconds on first load. Not an error, it's fast after that.
 
-### Docker / NAS-Deployment
+### Docker / NAS Deployment
 
-AlphaTrack läuft als Docker-Container - getestet auf **Synology NAS**.
+AlphaTrack runs as a Docker container - tested on **Synology NAS**.
 
-#### Starten
+#### Start
 
 ```bash
 docker compose up -d
 ```
 
-App erreichbar unter: **http://\<NAS-IP\>:3002**
+App reachable at: **http://\<NAS-IP\>:3002**
 
 #### docker-compose.yml
 
@@ -189,128 +191,128 @@ services:
       - ./data:/app/data
 ```
 
-> Das `data/`-Volume sichert alle Trades, Profile, Bot-Daten und gecachte KI-Erklärungen persistent ausserhalb des Containers.
+> The `data/` volume persists all trades, profiles, bot data, and cached AI explanations outside the container.
 
-#### Deploy (NAS + Trading-Rechner)
+#### Deploy (NAS + trading PC)
 
-`scripts\windows\deploy.bat` startet das interaktive Deploy:
+`scripts\windows\deploy.bat` starts the interactive deploy:
 
-1. **Konfigurationsabfrage** — NAS-Zugang, Trading-Rechner-Zugang, MT5-Logindaten.
-   Antworten werden in `scripts/windows/deploy.config.json` gespeichert (gitignored);
-   Enter übernimmt beim nächsten Lauf den gespeicherten Wert.
-2. **NAS** — git push, `.env.local` mit `BOT_API_KEY` sicherstellen, Container-Rebuild,
-   Auswahl des Trading-Profils vom NAS.
-3. **Trading-Rechner** — `bridge/` + `bots/` per SSH kopieren, Configs generieren,
-   Firewall-Regel (TCP 8765) und geplante Aufgabe "AlphaTrack Bridge" (Start bei
-   Anmeldung). Bots werden nur kopiert — Start manuell per `start.bat`.
-4. **Check** — wartet, bis die Bridge sich beim NAS-AlphaTrack registriert hat.
+1. **Configuration prompt** — NAS access, trading PC access, MT5 login credentials.
+   Answers are saved to `scripts/windows/deploy.config.json` (gitignored);
+   pressing Enter reuses the saved value on the next run.
+2. **NAS** — git push, ensures `.env.local` has `BOT_API_KEY`, container rebuild,
+   selecting the trading profile from the NAS.
+3. **Trading PC** — copies `bridge/` + `bots/` via SSH, generates configs,
+   firewall rule (TCP 8765), and a scheduled task "AlphaTrack Bridge" (start on
+   login). Bots are only copied — start manually via `start.bat`.
+4. **Check** — waits until the bridge has registered with the NAS's AlphaTrack.
 
-**Einmalig auf dem Trading-Rechner:** OpenSSH-Server aktivieren (Einstellungen → Optionale
-Features → "OpenSSH-Server", dann `Set-Service sshd -StartupType Automatic` +
-`Start-Service sshd` als Admin). Der SSH-Benutzer braucht Admin-Rechte
-(Firewall/Aufgabenplanung). MetaTrader 5 und Python müssen installiert sein.
+**One-time on the trading PC:** enable the OpenSSH server (Settings → Optional
+Features → "OpenSSH Server", then `Set-Service sshd -StartupType Automatic` +
+`Start-Service sshd` as admin). The SSH user needs admin rights
+(firewall/task scheduler). MetaTrader 5 and Python must be installed.
 
-##### SSH-Key einrichten (kein Passwort beim Deploy)
+##### Set up an SSH key (no password on deploy)
 
 ```
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\windows\setup-ssh-key.ps1
 ```
 
-Das Script erzeugt ein ed25519-Schlüsselpaar unter `%USERPROFILE%\.ssh\alphatrack_deploy`
-und gibt den Public Key mit Kopierbefehlen für den Trading-Rechner aus.
-Da Windows-OpenSSH keine leeren Passwörter erlaubt, muss der Public Key **einmalig manuell**
-auf dem Trading-Rechner eingetragen werden (physisch oder per Remote Desktop):
+The script generates an ed25519 key pair under `%USERPROFILE%\.ssh\alphatrack_deploy`
+and prints the public key with copy commands for the trading PC.
+Since Windows OpenSSH doesn't allow empty passwords, the public key must be entered
+**once, manually**, on the trading PC (physically or via Remote Desktop):
 
 ```powershell
-# Auf dem Trading-Rechner ausführen:
-Add-Content "$env:USERPROFILE\.ssh\authorized_keys" "ssh-ed25519 AAAA... (Public Key einfügen)"
+# Run on the trading PC:
+Add-Content "$env:USERPROFILE\.ssh\authorized_keys" "ssh-ed25519 AAAA... (paste public key)"
 icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:USERNAME}:F"
 ```
 
-Beim nächsten `deploy.bat`-Lauf den angezeigten Key-Pfad bei **"Trading-Rechner SSH-Key-Pfad"** eingeben —
-danach läuft der Deploy passwortlos.
+On the next `deploy.bat` run, enter the displayed key path at **"Trading PC SSH key path"** —
+after that the deploy runs passwordlessly.
 
 ---
 
-## Konfiguration
+## Configuration
 
-Erstelle eine `.env.local` im Projektroot:
+Create a `.env.local` in the project root:
 
 ```env
-# Anthropic API - für KI-Marktanalyse und Wirtschaftskalender-Erklärungen
+# Anthropic API - for AI market analysis and economic calendar explanations
 ANTHROPIC_API_KEY=sk-ant-...
 
-# Twelve Data API - für Kursdaten in der Analyse
+# Twelve Data API - for price data in the analysis
 TWELVE_DATA_API_KEY=...
 
-# Bot-Authentifizierung - muss mit der Python-Bridge übereinstimmen
-BOT_API_KEY=<dein-api-key>
+# Bot authentication - must match the Python bridge
+BOT_API_KEY=<your-api-key>
 
-# Nur falls die Bridge-Auto-Discovery nicht funktioniert (anderes Subnetz als 192.168.178.x)
+# Only if bridge auto-discovery doesn't work (a subnet other than 192.168.178.x)
 LAN_SUBNET_PREFIX=192.168.1
 ```
 
-| Variable | Pflicht | Zweck |
+| Variable | Required | Purpose |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Optional | KI-Marktanalyse, Wirtschaftskalender-Erklärungen |
-| `TWELVE_DATA_API_KEY` | Optional | Kursdaten |
-| `BOT_API_KEY` | Nur mit Bridge | Authentifizierung der Python-Bridge gegen AlphaTrack |
-| `LAN_SUBNET_PREFIX` | Optional | Subnetz-Präfix für die Bridge-Auto-Discovery im Docker-Container (Standard: `192.168.178`) |
+| `ANTHROPIC_API_KEY` | Optional | AI market analysis, economic calendar explanations |
+| `TWELVE_DATA_API_KEY` | Optional | Price data |
+| `BOT_API_KEY` | Only with the bridge | Authenticates the Python bridge against AlphaTrack |
+| `LAN_SUBNET_PREFIX` | Optional | Subnet prefix for bridge auto-discovery inside the Docker container (default: `192.168.178`) |
 
-> Auf dem NAS importierte API-Keys werden in `data/api-keys.json` persistiert und überleben Container-Rebuilds.
+> API keys imported on the NAS are persisted to `data/api-keys.json` and survive container rebuilds.
 
 ---
 
-## Projektstruktur
+## Project Structure
 
 ```
 AlphaTrack/
 +-- src/
-|   +-- app/                      # Next.js App Router - Seiten
-|   |   +-- dashboard/            # Dashboard mit PnL, Equity-Kurve
-|   |   +-- journal/              # Trading Journal
-|   |   +-- statistiken/          # Performance-Auswertung
-|   |   +-- strategien/           # Strategien-Verwaltung
-|   |   +-- kalender/             # Wirtschaftskalender
-|   |   +-- analyse/              # KI-Marktanalyse
+|   +-- app/                      # Next.js App Router - pages
+|   |   +-- dashboard/            # Dashboard with PnL, equity curve
+|   |   +-- journal/              # Trading journal
+|   |   +-- statistiken/          # Performance breakdown
+|   |   +-- strategien/           # Strategy management
+|   |   +-- kalender/             # Economic calendar
+|   |   +-- analyse/              # AI market analysis
 |   |   +-- tpc/                  # Trading Performance Calendar
-|   |   +-- netzwerk/             # Auto-Discovery von Bridge und Bots
-|   |   +-- einstellungen/        # App-Einstellungen & Backup
-|   |   +-- bridge/               # Bot-Analyser (analyse/, log/, trades/)
-|   |   +-- bots/                 # Bot-Management ([id]/, performance/, settings/)
-|   |   +-- setup/                # Ersteinrichtung / Profil anlegen
-|   |   +-- api/                  # API-Routen (bot/*, analyse/*, kalender/*)
-|   +-- components/               # Wiederverwendbare UI-Komponenten
+|   |   +-- netzwerk/             # Auto-discovery of bridge and bots
+|   |   +-- einstellungen/        # App settings & backup
+|   |   +-- bridge/               # Bot analyzer (analyse/, log/, trades/)
+|   |   +-- bots/                 # Bot management ([id]/, performance/, settings/)
+|   |   +-- setup/                # Initial setup / create profile
+|   |   +-- api/                  # API routes (bot/*, analyse/*, kalender/*)
+|   +-- components/               # Reusable UI components
 |   |   +-- layout/               # Sidebar, BottomNav, MarketSessions
-|   |   +-- dashboard/            # Dashboard-Karten und Charts
-|   |   +-- journal/              # Trade-Modal, Trade-Liste, Import
-|   |   +-- statistiken/          # Statistik-Panels und Diagramme
-|   |   +-- strategien/           # Strategie-Verwaltung
-|   |   +-- bot/                  # Bot-Komponenten (Controls, Watchdog, LiveFeed)
-|   |   +-- bridge/               # Bridge-Komponenten (Status, Discovery)
-|   |   +-- analyse/              # Analyse-Komponenten
-|   |   +-- profile/              # Profil-Switcher, Profil-Modal
-|   +-- context/                  # React Contexts
-|   |   +-- TradingLockContext.tsx # Schutzschalter (gesperrt/entsperrt)
-|   |   +-- BotStatusContext.tsx  # Zentrales Bot-Status-Polling (5s)
-|   +-- lib/                      # Datenlogik & Hilfsfunktionen
-|   |   +-- data.ts               # Trade CRUD + Stats-Berechnung
-|   |   +-- bot-data.ts           # Bot/Bridge Datenzugriff (atomicWrite)
-|   |   +-- profiles.ts           # Profil CRUD
-|   |   +-- strategies.ts         # Strategien CRUD
-|   |   +-- api-keys.ts           # API-Key Verwaltung (env + data/ Fallback)
-|   |   +-- analyse-data.ts       # Analyse-History
-|   +-- types/                    # TypeScript-Typdefinitionen
-+-- bots/                         # Python-Bots (testbot2 aktiv, scaffold als Vorlage)
-|   +-- testbot2/                 # Aktiver Test-Bot
-|   +-- scalpingv1/               # EMA-Crossover + RSI Scalping Bot (EURUSDp M5)
-|   +-- scaffold/                 # Bot-Vorlage für neue Bots
-|   +-- backtest/                 # Generischer Backtest-Runner (runner.py)
-+-- bridge/                       # Python-Bridge (gateway.py, main.py, trade_executor.py)
+|   |   +-- dashboard/            # Dashboard cards and charts
+|   |   +-- journal/              # Trade modal, trade list, import
+|   |   +-- statistiken/          # Statistics panels and charts
+|   |   +-- strategien/           # Strategy management
+|   |   +-- bot/                  # Bot components (controls, watchdog, live feed)
+|   |   +-- bridge/               # Bridge components (status, discovery)
+|   |   +-- analyse/              # Analysis components
+|   |   +-- profile/              # Profile switcher, profile modal
+|   +-- context/                  # React contexts
+|   |   +-- TradingLockContext.tsx # Kill switch (locked/unlocked)
+|   |   +-- BotStatusContext.tsx  # Central bot status polling (5s)
+|   +-- lib/                      # Data logic & helpers
+|   |   +-- data.ts               # Trade CRUD + stats calculation
+|   |   +-- bot-data.ts           # Bot/bridge data access (atomicWrite)
+|   |   +-- profiles.ts           # Profile CRUD
+|   |   +-- strategies.ts         # Strategy CRUD
+|   |   +-- api-keys.ts           # API key management (env + data/ fallback)
+|   |   +-- analyse-data.ts       # Analysis history
+|   +-- types/                    # TypeScript type definitions
++-- bots/                         # Python bots (testbot2 active, scaffold as template)
+|   +-- testbot2/                 # Active test bot
+|   +-- scalpingv1/               # EMA crossover + RSI scalping bot (EURUSDp M5)
+|   +-- scaffold/                 # Bot template for new bots
+|   +-- backtest/                 # Generic backtest runner (runner.py)
++-- bridge/                       # Python bridge (gateway.py, main.py, trade_executor.py)
 +-- scripts/
-|   +-- docker-entrypoint.sh      # Docker-Startskript (erstellt data/)
-|   +-- nas-update.sh             # NAS-Update via SSH
-+-- data/                         # Lokale JSON-Datenspeicherung (in Git getrackt)
+|   +-- docker-entrypoint.sh      # Docker startup script (creates data/)
+|   +-- nas-update.sh             # NAS update via SSH
++-- data/                         # Local JSON data storage (tracked in git)
 +-- Dockerfile
 +-- docker-compose.yml
 +-- package.json
@@ -318,78 +320,78 @@ AlphaTrack/
 
 ---
 
-## Datenspeicherung
+## Data Storage
 
-Alle Daten liegen lokal im `data/` Ordner als JSON-Dateien. Kein Server, keine Datenbank, kein Account.
+All data lives locally in the `data/` folder as JSON files. No server, no database, no account.
 
 ```
 data/
-+-- profiles.json                     # Alle angelegten Profile
-+-- active.json                       # ID des aktiven Profils
-+-- trades-[PROFIL-ID].json           # Trades je Profil
-+-- strategies-[PROFIL-ID].json       # Strategien je Profil
-+-- bots.json                         # Bot-Konfigurationen
-+-- bot-status-[BOT-ID].json          # Letzter Bot-Status (Heartbeat)
-+-- bot-log-[BOT-ID].json             # Bridge-Log-Einträge (max 5000)
-+-- bot-commands-[BOT-ID].json        # Ausstehende Bot-Commands
-+-- bot-events-[BOT-ID].json          # Bot-Ereignisse (Trades, Signale)
-+-- bot-trades-[PROFIL-ID].json       # Vom Bot synchronisierte Trades
-+-- performance-bots.json             # Aggregierte Bot-Performance-Daten
-+-- event-explanations.json           # KI-Erklärungen zu Wirtschaftsereignissen (Cache)
-+-- api-keys.json                     # Via UI importierte API-Keys (NAS-persistent)
-+-- analyse-history.json              # Letzte 10 KI-Marktanalysen
++-- profiles.json                     # All created profiles
++-- active.json                       # ID of the active profile
++-- trades-[PROFILE-ID].json          # Trades per profile
++-- strategies-[PROFILE-ID].json      # Strategies per profile
++-- bots.json                         # Bot configurations
++-- bot-status-[BOT-ID].json          # Last bot status (heartbeat)
++-- bot-log-[BOT-ID].json             # Bridge log entries (max 5000)
++-- bot-commands-[BOT-ID].json        # Pending bot commands
++-- bot-events-[BOT-ID].json          # Bot events (trades, signals)
++-- bot-trades-[PROFILE-ID].json      # Trades synced from the bot
++-- performance-bots.json             # Aggregated bot performance data
++-- event-explanations.json           # AI explanations for economic events (cache)
++-- api-keys.json                     # API keys imported via the UI (persisted on the NAS)
++-- analyse-history.json              # Last 10 AI market analyses
 ```
 
-> Alle Schreibvorgänge nutzen atomares Schreiben (tmp-Datei + rename) - kein korruptes JSON bei gleichzeitigen Requests.
+> All writes use atomic writes (tmp file + rename) - no corrupted JSON under concurrent requests.
 
-Trade-Screenshots werden unter `data/screenshots/` gespeichert.
+Trade screenshots are stored under `data/screenshots/`.
 
-> Der `data/`-Ordner ist bewusst in Git getrackt (Multi-Device-Sync ohne separate Datenbank). Die hier enthaltenen Daten sind ein Demo-Profil ohne echte Trades. **Wenn du AlphaTrack für deine eigenen, echten Trades nutzt, halte deinen Fork/deine Kopie privat** — sonst werden deine Handelsdaten bei jedem `git push` öffentlich sichtbar.
+> The `data/` folder is intentionally tracked in git (multi-device sync without a separate database). The data included here is a demo profile with no real trades. **If you use AlphaTrack for your own real trades, keep your fork/copy private** — otherwise your trading data becomes publicly visible on every `git push`.
 
 ### Backup & Restore
 
-Über die Einstellungen lässt sich ein vollständiges Backup als `.zip` exportieren (inkl. Screenshots) und auf einem anderen Gerät wieder importieren.
+Settings lets you export a full backup as a `.zip` (including screenshots) and import it again on another device.
 
 ---
 
 ## Backtesting
 
-Bots können gegen echte MetaTrader-Daten zurückgetestet werden — ohne Live-Trading-Risiko. Die Daten kommen ausschliesslich über die Bridge aus MT5, es wird kein externer Datenfeed benötigt.
+Bots can be backtested against real MetaTrader data — with no live-trading risk. The data comes exclusively from MT5 via the bridge; no external data feed is needed.
 
-### Voraussetzungen
+### Requirements
 
-- **Bridge läuft** auf dem Trading-Rechner (MT5 verbunden, Port 8765 erreichbar)
-- **Python** + `requests` auf dem ausführenden Computer installiert
-- Bot hat eine gültige `config.json` mit `bridge_url` und `api_key`
+- **Bridge is running** on the trading PC (MT5 connected, port 8765 reachable)
+- **Python** + `requests` installed on the machine running the backtest
+- The bot has a valid `config.json` with `bridge_url` and `api_key`
 
-### Backtest starten
+### Running a backtest
 
 ```bash
-# Vom AlphaTrack-Projektverzeichnis aus:
+# From the AlphaTrack project directory:
 python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14
 
-# Mit expliziter Bridge-URL (falls abweichend von config.json):
-python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://<TRADING-RECHNER-IP>:8765
+# With an explicit bridge URL (if different from config.json):
+python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-14 --bridge http://<TRADING-PC-IP>:8765
 ```
 
-**Parameter:**
+**Parameters:**
 
-| Parameter | Pflicht | Beschreibung |
+| Parameter | Required | Description |
 |---|---|---|
-| `--bot` | Ja | Name des Bot-Ordners unter `bots/` (z.B. `scalpingv1`) |
-| `--from` | Ja | Start-Datum im Format `YYYY-MM-DD` |
-| `--to` | Ja | End-Datum im Format `YYYY-MM-DD` (inklusive) |
-| `--bridge` | Nein | Bridge-URL — Standard: Wert aus `config.json` des Bots |
+| `--bot` | Yes | Name of the bot folder under `bots/` (e.g. `scalpingv1`) |
+| `--from` | Yes | Start date in `YYYY-MM-DD` format |
+| `--to` | Yes | End date in `YYYY-MM-DD` format (inclusive) |
+| `--bridge` | No | Bridge URL — default: the value from the bot's `config.json` |
 
-### Ablauf
+### How it works
 
-1. Runner liest `bots/<botname>/config.json` (Symbol, Timeframe, Parameter)
-2. Lädt historische Kerzen vom Bridge-Endpoint `/historical_candles` (MT5 als Quelle)
-3. Simuliert die `on_tick()`-Schleife des Bots über die Kerzen im Sliding-Window
-4. SL/TP werden gegen High/Low der jeweils nächsten Kerze geprüft
-5. Noch offene Positionen am Ende werden zum letzten Close-Preis geschlossen
+1. The runner reads `bots/<botname>/config.json` (symbol, timeframe, parameters)
+2. Loads historical candles from the bridge endpoint `/historical_candles` (MT5 as the source)
+3. Simulates the bot's `on_tick()` loop over the candles in a sliding window
+4. SL/TP are checked against the high/low of each following candle
+5. Any positions still open at the end are closed at the last close price
 
-### Beispiel-Output
+### Example Output
 
 ```
 [Bridge] Lade Kerzen: EURUSDp M5 | 2026-01-01 → 2026-06-14 ...
@@ -417,87 +419,86 @@ python bots/backtest/runner.py --bot scalpingv1 --from 2026-01-01 --to 2026-06-1
 ==============================================================
 ```
 
-> **Hinweis:** P&L-Werte sind Rohschätzungen (kein Spread, keine Kommission). Der Spread deines Brokers reduziert die Realrendite — typisch 1–2 Pips bei EURUSD.
+> **Note:** the runner's console output is currently German (as shown above), regardless of the app's UI language. PnL values are rough estimates (no spread, no commission). Your broker's spread will reduce real returns — typically 1–2 pips on EURUSD.
 
-### Neuen Bot backtest-fähig machen
+### Making a new bot backtest-capable
 
-**Pflicht:** Zeit-Checks in `on_tick()` müssen `self._now()` statt `datetime.now()` nutzen:
+**Required:** time checks in `on_tick()` must use `self._now()` instead of `datetime.now()`:
 
 ```python
-# Richtig — im Backtest wird self._now() auf die Kerzenzeit gesetzt:
+# Correct — during backtesting, self._now() is set to the candle time:
 now_utc = self._now()
 
-# Falsch — gibt immer die echte Systemzeit zurück, Session-Filter bricht:
+# Wrong — always returns the real system time, breaking session filters:
 now_utc = datetime.now(timezone.utc)
 ```
 
-`self._now()` ist in `BaseBot` definiert und gibt live `datetime.now(timezone.utc)` zurück. Der Backtest-Runner überschreibt sie automatisch. Bots ohne Zeit-Checks (kein Session-Filter) brauchen nichts zu ändern.
+`self._now()` is defined on `BaseBot` and returns live `datetime.now(timezone.utc)`. The backtest runner overrides it automatically. Bots without time checks (no session filter) don't need any changes.
 
 ---
 
 ## Tech Stack
 
-| Technologie | Version | Zweck |
+| Technology | Version | Purpose |
 |---|---|---|
-| [Next.js](https://nextjs.org/) | 15 | React Framework mit App Router und Server Components |
-| [React](https://react.dev/) | 19 | UI-Bibliothek |
-| [TypeScript](https://www.typescriptlang.org/) | 5 | Typsichere Entwicklung |
-| [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-First Styling |
-| [Framer Motion](https://www.framer.com/motion/) | 12 | Animationen und UI-Übergänge |
-| [Recharts](https://recharts.org/) | 3 | Equity-Kurven und Statistik-Diagramme |
-| [Lucide React](https://lucide.dev/) | 1 | Icon-Bibliothek |
-| [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-typescript) | 0.92 | Claude KI-Integration |
-| [JSZip](https://stuk.github.io/jszip/) | 3 | Backup-Bundle erstellen und importieren |
-| [html2canvas](https://html2canvas.hertzen.com/) | 1 | Screenshot-Export |
-| [nanoid](https://github.com/ai/nanoid) | 5 | ID-Generierung |
-| [Docker](https://www.docker.com/) | - | Container-Deployment für NAS |
+| [Next.js](https://nextjs.org/) | 15 | React framework with App Router and Server Components |
+| [React](https://react.dev/) | 19 | UI library |
+| [TypeScript](https://www.typescriptlang.org/) | 5 | Type-safe development |
+| [Tailwind CSS](https://tailwindcss.com/) | v4 | Utility-first styling |
+| [Framer Motion](https://www.framer.com/motion/) | 12 | Animations and UI transitions |
+| [Recharts](https://recharts.org/) | 3 | Equity curves and statistics charts |
+| [Lucide React](https://lucide.dev/) | 1 | Icon library |
+| [Anthropic SDK](https://github.com/anthropics/anthropic-sdk-typescript) | 0.92 | Claude AI integration |
+| [JSZip](https://stuk.github.io/jszip/) | 3 | Create and import backup bundles |
+| [html2canvas](https://html2canvas.hertzen.com/) | 1 | Screenshot export |
+| [nanoid](https://github.com/ai/nanoid) | 5 | ID generation |
+| [Docker](https://www.docker.com/) | - | Container deployment for the NAS |
 
 ---
 
 ## PWA / Mobile
 
-AlphaTrack ist als **Progressive Web App (PWA)** konfiguriert:
+AlphaTrack is configured as a **Progressive Web App (PWA)**:
 
-- Installierbar auf iOS (Safari: "Zum Home-Bildschirm") und Android (Chrome: "App installieren")
-- Service Worker für Offline-Fähigkeit
-- Native App-Feeling ohne App Store
+- Installable on iOS (Safari: "Add to Home Screen") and Android (Chrome: "Install app")
+- Service worker for offline capability
+- Native app feel without an app store
 
-**Mobile Navigation:**
-- Smartphone/Tablet: fixe Bottom-Navigation
-- Vollständige Navigation über die Sidebar
-- Responsive Layout optimiert für alle Bildschirmgrößen
+**Mobile navigation:**
+- Phone/tablet: fixed bottom navigation
+- Full navigation available via the sidebar
+- Responsive layout optimized for all screen sizes
 
 ---
 
-## Heimnetz-Infrastruktur (Empfehlung)
+## Home Network Infrastructure (Recommendation)
 
 ```
 PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
                              ^
                              | Heartbeat / Commands
                              |
-                        Trading-Rechner (MT5 + Python-Bridge)
+                        Trading PC (MT5 + Python bridge)
 ```
 
-**Warum eine Bridge?** MetaTrader 5 läuft nur unter Windows und muss dauerhaft mit dem Broker verbunden bleiben. Die Bridge kapselt diese Verbindung in einem eigenständigen Python-Prozess auf dem Trading-Rechner. Dadurch bleibt die eigentliche AlphaTrack-App plattformunabhängig (läuft z. B. problemlos in Docker auf einem NAS) und braucht selbst nie direkten Zugriff auf MT5 oder Windows.
+**Why a bridge?** MetaTrader 5 only runs on Windows and needs to stay permanently connected to the broker. The bridge encapsulates this connection in a standalone Python process on the trading PC. That keeps the actual AlphaTrack app platform-independent (it runs, for example, without issues in Docker on a NAS) and means it never needs direct access to MT5 or Windows itself.
 
-Das bringt handfeste Vorteile: Trading läuft weiter, auch wenn die App neu startet oder kurzzeitig nicht erreichbar ist. MT5-Zugangsdaten bleiben ausschließlich lokal auf dem Trading-Rechner. Und App und Trading-Setup lassen sich unabhängig voneinander aktualisieren.
+This has real practical benefits: trading keeps running even if the app restarts or is briefly unreachable. MT5 credentials stay exclusively local on the trading PC. And the app and the trading setup can be updated independently of each other.
 
-- **AlphaTrack** läuft auf dem NAS (Docker) oder lokal auf dem PC
-- **Python-Bridge** läuft auf dem Bot-PC neben MT5 und sendet Heartbeats an AlphaTrack
-- **Kommunikation** ausschliesslich im lokalen Netzwerk - kein Internet nötig
+- **AlphaTrack** runs on the NAS (Docker) or locally on a PC
+- **The Python bridge** runs on the bot PC alongside MT5 and sends heartbeats to AlphaTrack
+- **Communication** happens exclusively on the local network - no internet required
 
 ---
 
-## Lizenz
+## License
 
-MIT License — siehe [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+MIT License — see [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
 
 ---
 
 ## Disclaimer
 
-AlphaTrack wurde unter anderem mit Hilfe von KI entwickelt. Fehler sind
-nicht ausgeschlossen. Nutzung auf eigene Gefahr — es wird keine Haftung
-für Schäden oder Handelsverluste übernommen. Ausschließlich für den
-Privatgebrauch gedacht.
+AlphaTrack was developed with the help of AI, among other things. Errors
+are not excluded. Use at your own risk — no liability is assumed for
+damages or trading losses. Intended exclusively for personal use.
