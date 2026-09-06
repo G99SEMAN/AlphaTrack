@@ -1079,6 +1079,13 @@
       "deletingBtnLabel": "Wird gelöscht..."
     },
     "daten": {
+      "bridgeKeyHeading": "Bridge-Verbindung",
+      "bridgeKeyDescription": "Dieser Schlüssel wird beim Einrichten eines Bot-Rechners benötigt (Setup-Assistent, Feld \"BOT_API_KEY\"). Er muss auf allen Rechnern identisch sein.",
+      "bridgeKeyNotSet": "Noch kein Schlüssel gesetzt — lege eine .env.local an oder führe den Setup-Assistenten aus.",
+      "bridgeKeyShow": "Anzeigen",
+      "bridgeKeyHide": "Verbergen",
+      "bridgeKeyCopy": "Kopieren",
+      "bridgeKeyCopied": "Kopiert!",
       "exportHeading": "Daten exportieren",
       "exportDescription": "Erstellt ein vollständiges ZIP-Backup der gewählten Profile inkl. Trades, Strategien und Screenshots.",
       "selectProfilesLabel": "Profile auswählen",

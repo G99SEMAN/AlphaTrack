@@ -1079,6 +1079,13 @@
       "deletingBtnLabel": "Deleting..."
     },
     "daten": {
+      "bridgeKeyHeading": "Bridge Connection",
+      "bridgeKeyDescription": "This key is needed when setting up a bot machine (setup wizard, \"BOT_API_KEY\" field). It must be identical on all machines.",
+      "bridgeKeyNotSet": "No key set yet — create a .env.local or run the setup wizard.",
+      "bridgeKeyShow": "Show",
+      "bridgeKeyHide": "Hide",
+      "bridgeKeyCopy": "Copy",
+      "bridgeKeyCopied": "Copied!",
       "exportHeading": "Export Data",
       "exportDescription": "Creates a complete ZIP backup of the selected profiles incl. trades, strategies and screenshots.",
       "selectProfilesLabel": "Select profiles",

@@ -335,13 +335,15 @@ function Step-SelectScenario {
     if ($LANG -eq "DE") {
         $opts = @(
             "Nur Trading-Journal   (kein automatischer Bot-Betrieb)",
-            "Trading-Journal + Bots   (automatisierter Handel mit MetaTrader 5)"
+            "Trading-Journal + Bots   (automatisierter Handel mit MetaTrader 5)",
+            "Online-Update   (bestehende Installation auf neue Version bringen)"
         )
         return Ask-Choice "Wie möchtest du AlphaTrack nutzen?" $opts
     } else {
         $opts = @(
             "Trading Journal only   (no automated bot operation)",
-            "Trading Journal + Bots   (automated trading with MetaTrader 5)"
+            "Trading Journal + Bots   (automated trading with MetaTrader 5)",
+            "Online update   (bring an existing installation to the latest version)"
         )
         return Ask-Choice "How would you like to use AlphaTrack?" $opts
     }
@@ -456,6 +458,17 @@ function Step-CreateEnvLocal {
     Write-Nl
     Write-Ok ".env.local $(if ($LANG -eq 'DE') { 'wurde erstellt' } else { 'created' })"
     Write-Note $envPath
+
+    Write-Nl
+    Write-Host "  ┌────────────────────────────────────────────────────────┐" -ForegroundColor Yellow
+    Write-Host "  │ $(if ($LANG -eq 'DE') { 'WICHTIG — notiere dir diesen Key:' } else { 'IMPORTANT — write this key down:' })" -ForegroundColor Yellow
+    Write-Host "  │ BOT_API_KEY = $botKey" -ForegroundColor White
+    Write-Host "  └────────────────────────────────────────────────────────┘" -ForegroundColor Yellow
+    Write-Note $(if ($LANG -eq "DE") {
+        "Brauchst du beim Einrichten eines Bot-Rechners (verteiltes Setup). Findest du auch später jederzeit unter Einstellungen → Daten → Bridge-Verbindung, sobald die App läuft."
+    } else {
+        "You'll need this when setting up a bot machine (distributed setup). You can also find it later anytime under Settings → Data → Bridge Connection, once the app is running."
+    })
 
     Wait-Enter
     return $botKey
@@ -769,6 +782,8 @@ function Step-SshKeySetup {
 # ═══════════════════════════════════════════════════════════════════════════════
 
 function Step-NasDeploy {
+    param([bool]$IsFirstRun = $false)
+
     Show-Banner
     $title = if ($LANG -eq "DE") { "Deployment  —  AlphaTrack auf NAS installieren" } else { "Deployment  —  Install AlphaTrack on NAS" }
     Show-StepHeader $title
@@ -780,8 +795,21 @@ function Step-NasDeploy {
         Write-Note "AlphaTrack can now be deployed to your NAS via SSH."
         Write-Note "Prerequisite: SSH key must be added to the NAS (previous step)."
     }
+    Write-Nl
+    Write-Host "  $(if ($LANG -eq 'DE') { 'Bevor es losgeht — auf dem NAS pruefen:' } else { 'Before you start — check on the NAS:' })" -ForegroundColor Yellow
+    if ($LANG -eq "DE") {
+        Write-Note "  • Docker ist installiert (Synology: Paket-Zentrum → 'Container Manager' / 'Docker')"
+        Write-Note "  • SSH-Dienst ist aktiviert (Systemsteuerung → Terminal & SNMP → 'SSH-Dienst aktivieren')"
+    } else {
+        Write-Note "  • Docker is installed (Synology: Package Center → 'Container Manager' / 'Docker')"
+        Write-Note "  • SSH service is enabled (Control Panel → Terminal & SNMP → 'Enable SSH service')"
+    }
+    Write-Nl
 
-    $doDeploy = Ask-YesNo $(if ($LANG -eq "DE") { "Jetzt auf NAS deployen?" } else { "Deploy to NAS now?" }) $false
+    # Erststart (noch keine deploy.config.json vorhanden): Deploy ist das eigentliche Ziel des Laufs,
+    # Default daher "Ja". Wiederholter Lauf (Config existiert schon, evtl. laufendes Produktiv-NAS):
+    # Default "Nein" als Schutz vor versehentlichem Re-Deploy.
+    $doDeploy = Ask-YesNo $(if ($LANG -eq "DE") { "Jetzt auf NAS deployen?" } else { "Deploy to NAS now?" }) $IsFirstRun
 
     if ($doDeploy) {
         $deployBat = Join-Path $RepoRoot "scripts\windows\deploy.bat"
@@ -801,6 +829,113 @@ function Step-NasDeploy {
         })
         Wait-Enter
     }
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STEP: ONLINE UPDATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+function Step-OnlineUpdate {
+    Show-Banner
+    $title = if ($LANG -eq "DE") { "Online-Update" } else { "Online Update" }
+    Show-StepHeader $title
+
+    if (-not (Test-Command "git")) {
+        Write-Fail $(if ($LANG -eq "DE") { "Git nicht gefunden — kann nicht aktualisieren." } else { "Git not found — cannot update." })
+        Wait-Enter
+        exit 1
+    }
+
+    Push-Location $RepoRoot
+    $null = & git rev-parse --is-inside-work-tree 2>$null
+    $isGitRepo = ($LASTEXITCODE -eq 0)
+
+    if (-not $isGitRepo) {
+        Write-Warn $(if ($LANG -eq "DE") {
+            "Dieser Ordner ist kein Git-Repository (z.B. per ZIP heruntergeladen statt geklont)."
+        } else {
+            "This folder is not a Git repository (e.g. downloaded as a ZIP instead of cloned)."
+        })
+        Write-Note $(if ($LANG -eq "DE") {
+            "Bitte die neueste Version manuell von GitHub laden und den Ordner ersetzen — vorher .env.local, bridge\config.json und deploy.config.json sichern."
+        } else {
+            "Please download the latest version from GitHub manually and replace this folder — back up .env.local, bridge\config.json and deploy.config.json first."
+        })
+        Wait-Enter
+        Pop-Location
+        exit 1
+    }
+
+    # Sicherheitscheck: data/ ist bewusst in Git getrackt (Multi-Device-Sync, siehe README) und kann
+    # eigene Trade-Daten enthalten. Ein "git pull" bei nicht committeten lokalen Aenderungen wuerde
+    # entweder fehlschlagen oder ungewollt mergen — deshalb vorher abbrechen statt zu riskieren.
+    $statusOutput = & git status --porcelain
+    if ($statusOutput) {
+        Write-Warn $(if ($LANG -eq "DE") {
+            "Es gibt lokale, nicht committete Aenderungen in diesem Ordner (z.B. eigene Trade-Daten in data/)."
+        } else {
+            "There are local, uncommitted changes in this folder (e.g. your own trade data in data/)."
+        })
+        Write-Note $(if ($LANG -eq "DE") {
+            "Ein Update wuerde diese ueberschreiben oder zu Konflikten fuehren. Bitte zuerst sichern oder committen (git status)."
+        } else {
+            "An update would overwrite these or cause conflicts. Please back up or commit first (git status)."
+        })
+        Wait-Enter
+        Pop-Location
+        exit 1
+    }
+
+    Write-Info $(if ($LANG -eq "DE") { "Hole neueste Version von GitHub ..." } else { "Fetching latest version from GitHub ..." })
+    Write-Nl
+    & git pull | ForEach-Object { Write-Host "   $_" -ForegroundColor DarkGray }
+    if ($LASTEXITCODE -ne 0) {
+        Write-Nl
+        Write-Fail $(if ($LANG -eq "DE") { "git pull fehlgeschlagen. Bitte manuell pruefen (git status)." } else { "git pull failed. Please check manually (git status)." })
+        Wait-Enter
+        Pop-Location
+        exit 1
+    }
+    Write-Nl
+    Write-Ok $(if ($LANG -eq "DE") { "Code aktualisiert." } else { "Code updated." })
+    Pop-Location
+    Wait-Enter
+
+    $hasDeployConfig = Test-Path (Join-Path $RepoRoot "scripts\windows\deploy.config.json")
+    $hasBridgeConfig = Test-Path (Join-Path $RepoRoot "bridge\config.json")
+    $hasEnvLocal     = Test-Path (Join-Path $RepoRoot ".env.local")
+
+    if ($hasDeployConfig) {
+        Show-Banner
+        Show-StepHeader $(if ($LANG -eq "DE") { "Verteiltes Setup erkannt" } else { "Distributed setup detected" })
+        Write-Note $(if ($LANG -eq "DE") {
+            "deploy.config.json vorhanden — dieser Rechner steuert den Deploy auf NAS + Trading-Rechner."
+        } else {
+            "deploy.config.json found — this machine drives the deploy to the NAS + trading PC."
+        })
+        $doDeploy = Ask-YesNo $(if ($LANG -eq "DE") { "NAS + Trading-Rechner jetzt aktualisieren (deploy.bat)?" } else { "Update the NAS + trading PC now (deploy.bat)?" }) $true
+        if ($doDeploy) {
+            $deployBat = Join-Path $RepoRoot "scripts\windows\deploy.bat"
+            if (Test-Path $deployBat) { & "$deployBat" }
+            else { Write-Warn $(if ($LANG -eq "DE") { "deploy.bat nicht gefunden." } else { "deploy.bat not found." }) }
+        } else {
+            Write-Info $(if ($LANG -eq "DE") { "Uebersprungen. Manuell: scripts\windows\deploy.bat" } else { "Skipped. Manually: scripts\windows\deploy.bat" })
+            Wait-Enter
+        }
+    } elseif ($hasEnvLocal) {
+        Step-NpmInstall
+        Write-Note $(if ($LANG -eq "DE") { "Fertig. App neu starten: npm run dev" } else { "Done. Restart the app: npm run dev" })
+    }
+
+    if ($hasBridgeConfig) {
+        Step-PipInstall
+        Write-Note $(if ($LANG -eq "DE") { "Bridge neu starten: bridge\start_bridge.bat" } else { "Restart the bridge: bridge\start_bridge.bat" })
+    }
+
+    Show-Banner
+    Write-Host "  $(if ($LANG -eq 'DE') { 'Update abgeschlossen!' } else { 'Update complete!' })" -ForegroundColor Green
+    Wait-Enter $(if ($LANG -eq "DE") { "ENTER zum Beenden ..." } else { "Press ENTER to exit ..." })
+    exit 0
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -901,12 +1036,14 @@ function Step-Summary {
         "bots-nas" {
             if ($LANG -eq "DE") {
                 Write-Note "1. Dashboard läuft auf dem NAS (Port aus deploy.config.json)"
-                Write-Note "2. Setup auf dem Bot-PC ebenfalls ausführen"
+                Write-Note "2. Setup auf dem Bot-PC ebenfalls ausführen — dort nach dem BOT_API_KEY gefragt"
+                Write-Note "   (siehe oben, oder auf dem NAS unter Einstellungen → Daten → Bridge-Verbindung)"
                 Write-Note "3. Profil anlegen → Profil-ID in bridge\config.json auf Bot-PC eintragen"
                 Write-Note "4. Bridge starten:      bridge\start_bridge.bat  (auf Bot-PC)"
             } else {
                 Write-Note "1. Dashboard runs on the NAS (port from deploy.config.json)"
-                Write-Note "2. Run the setup wizard on the Bot PC as well"
+                Write-Note "2. Run the setup wizard on the Bot PC as well — it will ask for the BOT_API_KEY"
+                Write-Note "   (see above, or on the NAS under Settings → Data → Bridge Connection)"
                 Write-Note "3. Create a profile → enter profile ID in bridge\config.json on Bot PC"
                 Write-Note "4. Start bridge:        bridge\start_bridge.bat  (on Bot PC)"
             }
@@ -948,7 +1085,12 @@ Step-SelectLanguage
 Step-Welcome
 
 # ── Scenario ──────────────────────────────────────────────────────────────────
-$scenario = Step-SelectScenario   # 1 = journal, 2 = bots
+$scenario = Step-SelectScenario   # 1 = journal, 2 = bots, 3 = online update
+
+if ($scenario -eq 3) {
+    Step-OnlineUpdate
+    exit 0
+}
 
 # ═════════════════════════════════════════════════════════════════════════════
 #  PATH A: JOURNAL ONLY
@@ -1004,13 +1146,14 @@ if ($whichPc -eq 1) {
     $botKey = Step-CreateEnvLocal
     $createdFiles += ".env.local"
 
+    $isFirstNasRun = -not (Test-Path (Join-Path $RepoRoot "scripts\windows\deploy.config.json"))
     Step-CreateDeployConfig | Out-Null
     $createdFiles += "scripts\windows\deploy.config.json"
 
     Step-NpmInstall
 
     Step-SshKeySetup
-    Step-NasDeploy
+    Step-NasDeploy -IsFirstRun $isFirstNasRun
 
     Step-Summary -Scenario "bots-nas" -CreatedFiles $createdFiles
     exit 0
@@ -1024,9 +1167,19 @@ Show-StepHeader $title
 if ($LANG -eq "DE") {
     Write-Note "Der Bot-PC benötigt nur die Bridge-Konfiguration und Python-Pakete."
     Write-Note "Der BOT_API_KEY muss mit dem Wert auf dem NAS/Server übereinstimmen."
+    Write-Nl
+    Write-Note "Wo finde ich den Key?"
+    Write-Note "  • Hast du ihn dir beim Setup auf dem NAS notiert (wurde dort hervorgehoben angezeigt)?"
+    Write-Note "  • Sonst: AlphaTrack im Browser öffnen (auf dem NAS laufend) → Einstellungen → Daten"
+    Write-Note "    → Bridge-Verbindung → Key anzeigen/kopieren."
 } else {
     Write-Note "The Bot PC only needs the bridge configuration and Python packages."
     Write-Note "The BOT_API_KEY must match the value configured on the NAS/server."
+    Write-Nl
+    Write-Note "Where do I find the key?"
+    Write-Note "  • Did you write it down during setup on the NAS (it was highlighted there)?"
+    Write-Note "  • Otherwise: open AlphaTrack in a browser (running on the NAS) → Settings → Data"
+    Write-Note "    → Bridge Connection → show/copy the key."
 }
 Write-Nl
 

@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert, CalendarDays } from 'lucide-react'
+import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert, CalendarDays, KeyRound, Eye, EyeOff, Copy } from 'lucide-react'
 import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
 import { useCalendarSettings, CalendarSettings } from '@/hooks/useCalendarSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
@@ -53,6 +53,9 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   >(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const [bridgeKey, setBridgeKey] = useState<string | null>(null)
+  const [showBridgeKey, setShowBridgeKey] = useState(false)
+  const [bridgeKeyCopied, setBridgeKeyCopied] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -61,6 +64,20 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
       setActiveTab(hash)
     }
   }, [])
+
+  useEffect(() => {
+    fetch('/api/einstellungen/bridge-key')
+      .then(res => res.ok ? res.json() : { apiKey: null })
+      .then(data => setBridgeKey(data.apiKey))
+      .catch(() => setBridgeKey(null))
+  }, [])
+
+  function copyBridgeKey() {
+    if (!bridgeKey) return
+    void navigator.clipboard.writeText(bridgeKey)
+    setBridgeKeyCopied(true)
+    setTimeout(() => setBridgeKeyCopied(false), 1500)
+  }
 
   useEffect(() => {
     if (deleteConfirm) {
@@ -641,6 +658,55 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
         {/* ── Tab: Daten ── */}
         {activeTab === 'daten' && (
           <>
+            {/* Bridge-Verbindung */}
+            <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <KeyRound size={15} style={{ color: 'var(--text-3)' }} />
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+                  {t('daten.bridgeKeyHeading')}
+                </p>
+              </div>
+              <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
+                {t('daten.bridgeKeyDescription')}
+              </p>
+              {mounted && (
+                bridgeKey ? (
+                  <div className="flex items-center gap-2">
+                    <code
+                      className="flex-1 px-3 py-2.5 rounded-lg text-sm font-mono truncate"
+                      style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-1)' }}
+                    >
+                      {showBridgeKey ? bridgeKey : '•'.repeat(Math.min(bridgeKey.length, 32))}
+                    </code>
+                    <button
+                      type="button"
+                      onClick={() => setShowBridgeKey(v => !v)}
+                      title={showBridgeKey ? t('daten.bridgeKeyHide') : t('daten.bridgeKeyShow')}
+                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 cursor-pointer"
+                      style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--text-2)' }}
+                    >
+                      {showBridgeKey ? <EyeOff size={15} /> : <Eye size={15} />}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={copyBridgeKey}
+                      title={bridgeKeyCopied ? t('daten.bridgeKeyCopied') : t('daten.bridgeKeyCopy')}
+                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 cursor-pointer"
+                      style={{
+                        background: bridgeKeyCopied ? 'var(--green-bg)' : 'var(--surface-2)',
+                        border: `1px solid ${bridgeKeyCopied ? 'var(--green)' : 'var(--border)'}`,
+                        color: bridgeKeyCopied ? 'var(--green)' : 'var(--text-2)',
+                      }}
+                    >
+                      {bridgeKeyCopied ? <Check size={15} /> : <Copy size={15} />}
+                    </button>
+                  </div>
+                ) : (
+                  <p className="text-sm" style={{ color: 'var(--text-3)' }}>{t('daten.bridgeKeyNotSet')}</p>
+                )
+              )}
+            </div>
+
             {/* Export */}
             <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
               <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--text-3)' }}>
