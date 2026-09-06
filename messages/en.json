@@ -961,6 +961,11 @@
       "title": "Trade Analyzer",
       "subtitle": "EUR/USD - AI analysis with direct bot execution"
     },
+    "paused": {
+      "title": "Trade Analyzer Paused",
+      "message": "This feature isn't needed right now and is temporarily disabled. Work on it will resume at a later point.",
+      "backButton": "Back to Dashboard"
+    },
     "client": {
       "currencyPairLabel": "Currency Pair",
       "durationLabel": "Trading Duration",

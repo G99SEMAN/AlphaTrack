@@ -961,6 +961,11 @@
       "title": "Trade Analyzer",
       "subtitle": "EUR/USD - KI-Analyse mit direkter Bot-Ausführung"
     },
+    "paused": {
+      "title": "Trade Analyzer pausiert",
+      "message": "Dieses Feature wird aktuell nicht benötigt und ist vorübergehend deaktiviert. Die Arbeit daran wird zu einem späteren Zeitpunkt fortgesetzt.",
+      "backButton": "Zurück zum Dashboard"
+    },
     "client": {
       "currencyPairLabel": "Währungspaar",
       "durationLabel": "Handelsdauer",

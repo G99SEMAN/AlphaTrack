@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, BarChart2, Settings, Menu, X, Target,
   CalendarDays, Bot, Activity, ScrollText, SlidersHorizontal,
-  Sparkles, ShieldCheck, ShieldOff, Network, Cpu,
+  ShieldCheck, ShieldOff, Network, Cpu,
   Eye, EyeOff, ChevronLeft, ChevronRight,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -26,7 +26,6 @@ const UEBERSICHT_NAV = [
   { href: '/journal',        labelKey: 'navTrades',         icon: BookOpen },
   { href: '/bridge/trades',  labelKey: 'navLiveTrades',     icon: Activity },
   { href: '/strategien',     labelKey: 'navStrategies',     icon: Target },
-  { href: '/bridge/analyse', labelKey: 'navTradeAnalyzer',  icon: Sparkles },
   { href: '/statistiken',    labelKey: 'navStatistics',     icon: BarChart2 },
   { href: '/kalender',       labelKey: 'navCalendar',       icon: CalendarDays },
   { href: '/netzwerk',       labelKey: 'navNetwork',        icon: Network },
