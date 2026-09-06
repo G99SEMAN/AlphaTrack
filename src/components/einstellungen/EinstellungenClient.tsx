@@ -5,8 +5,9 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert } from 'lucide-react'
+import { Sun, Moon, Download, Upload, CheckCircle, XCircle, Package, Image, BarChart2, Palette, Clock, Banknote, Gamepad2, Check, Pencil, Trash2, AlertTriangle, Plus, RotateCcw, ShieldAlert, CalendarDays } from 'lucide-react'
 import { useStatsSettings, StatsSettings } from '@/hooks/useStatsSettings'
+import { useCalendarSettings, CalendarSettings } from '@/hooks/useCalendarSettings'
 import { useAccentTheme, AccentTheme } from '@/hooks/useAccentTheme'
 import { useTranslations, useLocale } from 'next-intl'
 import { setLocaleAction } from '@/lib/locale'
@@ -200,6 +201,7 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
   }
 
   const { settings, updateSetting } = useStatsSettings()
+  const { settings: calendarSettings, updateSetting: updateCalendarSetting } = useCalendarSettings()
   const { accent, setAccent } = useAccentTheme()
   const tCommon = useTranslations('common')
   const t = useTranslations('einstellungen')
@@ -452,6 +454,44 @@ export default function EinstellungenClient({ profiles, activeProfile }: Props) 
                     </label>
                   )
                 })}
+              </div>
+            </div>
+
+            {/* Dashboard-Kalender */}
+            <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              <div className="flex items-center gap-2 mb-1">
+                <CalendarDays size={15} style={{ color: 'var(--text-3)' }} />
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-3)' }}>
+                  {t('dashboard.calendarHeading')}
+                </p>
+              </div>
+              <p className="text-sm mb-4" style={{ color: 'var(--text-2)' }}>
+                {t('dashboard.calendarDescription')}
+              </p>
+              <div className="space-y-2">
+                {mounted && ([
+                  { key: 'showBotDots' as const,        label: t('dashboard.calendarShowBotDots') },
+                  { key: 'showEconomicEvents' as const, label: t('dashboard.calendarShowEvents') },
+                ] satisfies { key: keyof CalendarSettings; label: string }[]).map(({ key, label }) => (
+                  <label
+                    key={key}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer transition-all"
+                    style={{
+                      background: calendarSettings[key] ? 'var(--accent-bg)' : 'var(--surface-2)',
+                      border: `1px solid ${calendarSettings[key] ? 'var(--accent)' : 'var(--border)'}`,
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={calendarSettings[key]}
+                      onChange={e => updateCalendarSetting(key, e.target.checked)}
+                      className="w-4 h-4 rounded accent-[var(--accent)] cursor-pointer"
+                    />
+                    <span className="text-sm font-medium flex-1" style={{ color: 'var(--text-1)' }}>
+                      {label}
+                    </span>
+                  </label>
+                ))}
               </div>
             </div>
           </>

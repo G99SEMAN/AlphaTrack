@@ -65,16 +65,20 @@ function SkeletonRows() {
 interface Props {
   initialEvents: WirtschaftsEvent[]
   initialFetchedAt: string
+  targetDate?: string
 }
 
-export default function KalenderClient({ initialEvents, initialFetchedAt }: Props) {
+export default function KalenderClient({ initialEvents, initialFetchedAt, targetDate }: Props) {
   const t = useTranslations('kalender.client')
   const [events, setEvents] = useState<WirtschaftsEvent[]>(initialEvents)
   const [fetchedAt, setFetchedAt] = useState(initialFetchedAt)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>('rolling')
+  // Ein direkt verlinktes Datum (aus dem Dashboard-Kalender) kann ausserhalb des
+  // rollierenden Standardfensters liegen — dann auf "Alle" stellen, damit der Tag sicher
+  // sichtbar ist, statt scrollToTarget ins Leere laufen zu lassen.
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>(targetDate ? 'all' : 'rolling')
   const [currencies, setCurrencies] = useState<Set<string>>(new Set())
   const [impactFilter, setImpactFilter] = useState<Set<EventImpact>>(new Set())
   const [expandedId, setExpandedId] = useState<string | null>(null)
@@ -138,16 +142,27 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
     if (target) dayRefs.current[target[0]]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  const [highlightedDate, setHighlightedDate] = useState<string | null>(null)
+
   useEffect(() => {
     if (hasScrolled.current || grouped.length === 0) return
-    const target = grouped.find(([date]) => date >= today)
+    const target = targetDate
+      ? grouped.find(([date]) => date === targetDate)
+      : grouped.find(([date]) => date >= today)
     if (!target) return
     const timer = setTimeout(() => {
       dayRefs.current[target[0]]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      if (targetDate) {
+        setHighlightedDate(targetDate)
+        setTimeout(() => setHighlightedDate(null), 2500)
+      }
+      // Erst hier als "gescrollt" markieren (nicht synchron oben) — sonst verhindert React
+      // Strict Mode's Mount/Cleanup/Remount im Dev-Modus den zweiten, tatsaechlichen Lauf:
+      // das Cleanup wuerde den ersten Timer canceln, aber das Flag bliebe faelschlich gesetzt.
+      hasScrolled.current = true
     }, 120)
-    hasScrolled.current = true
     return () => clearTimeout(timer)
-  }, [grouped, today])
+  }, [grouped, today, targetDate])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -199,14 +214,18 @@ export default function KalenderClient({ initialEvents, initialFetchedAt }: Prop
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {grouped.map(([date, evs]) => {
             const isToday = date === today
+            const isHighlighted = date === highlightedDate
             return (
               <motion.div
                 key={date}
                 ref={el => { dayRefs.current[date] = el as HTMLDivElement | null }}
                 initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                style={{ scrollMarginTop: '72px' }}
+                animate={{
+                  opacity: 1, y: 0,
+                  backgroundColor: isHighlighted ? 'rgba(59,130,246,0.1)' : 'rgba(59,130,246,0)',
+                }}
+                transition={{ duration: 0.2, backgroundColor: { duration: 0.6 } }}
+                style={{ scrollMarginTop: '72px', borderRadius: 12 }}
               >
                 {/* Datum-Trennbalken */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>

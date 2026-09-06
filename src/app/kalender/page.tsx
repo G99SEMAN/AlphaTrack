@@ -16,7 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const revalidate = 1800
 
-export default async function KalenderPage() {
+export default async function KalenderPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ date?: string }>
+}) {
+  const { date: targetDate } = await searchParams
   const profiles = getProfiles()
   if (profiles.length === 0) redirect('/setup')
 
@@ -52,6 +57,7 @@ export default async function KalenderPage() {
         <KalenderClient
           initialEvents={initialEvents}
           initialFetchedAt={initialFetchedAt}
+          targetDate={targetDate}
         />
       </main>
     </div>

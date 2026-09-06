@@ -1050,7 +1050,11 @@
       "exchangeNyse": "NYSE (New York)",
       "exchangeLse": "LSE (London)",
       "exchangeXetra": "XETRA (Frankfurt)",
-      "exchangeTse": "Tokio (TSE)"
+      "exchangeTse": "Tokio (TSE)",
+      "calendarHeading": "Dashboard-Kalender",
+      "calendarDescription": "Zusätzliche Anzeigen im Kalender auf dem Dashboard.",
+      "calendarShowBotDots": "Bot-Punkte anzeigen (welcher Bot an dem Tag gehandelt hat)",
+      "calendarShowEvents": "Wichtige Wirtschaftstermine anzeigen (Uhrzeit + Währung)"
     },
     "profile": {
       "profileHeading": "Profile",

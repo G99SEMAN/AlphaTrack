@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment, memo, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Flame, TriangleAlert } from 'lucide-react'
 import { Trade } from '@/types/trade'
@@ -8,6 +9,7 @@ import { BotEntry } from '@/types/bot'
 import { WirtschaftsEvent } from '@/types/wirtschaftskalender'
 import { currencySymbol } from '@/lib/currency'
 import { getBotColor } from '@/lib/bot-colors'
+import { useCalendarSettings } from '@/hooks/useCalendarSettings'
 import DayModal from './DayModal'
 import TradeDetailModal from './TradeDetailModal'
 import YearHeatmap from './YearHeatmap'
@@ -42,6 +44,8 @@ function fmtPnl(val: number): string {
 function TradingCalendar({ trades, currency, strategyBots }: Props) {
   const t = useTranslations('dashboard.calendar')
   const tDate = useTranslations('dashboard.dateRange')
+  const router = useRouter()
+  const { settings: calendarSettings } = useCalendarSettings()
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth()) // 0-indexed
@@ -139,7 +143,6 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
 
   // Monthly totals
   const monthlyPnl = weekSummaries.reduce((s, w) => s + w.pnl, 0)
-  const monthlyTradingDays = weekSummaries.reduce((s, w) => s + w.tradingDays, 0)
 
   // Streaks: aufeinanderfolgende Handelstage mit gleichem Vorzeichen (nur innerhalb des sichtbaren Monats,
   // handelsfreie Tage unterbrechen die Serie nicht — siehe Spec Abschnitt 4). Map enthält nur den jeweils
@@ -269,13 +272,6 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
               }}>
                 {monthlyPnl >= 0 ? '+' : ''}{monthlyPnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
               </span>
-              <span style={{
-                fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 8,
-                background: 'linear-gradient(135deg, rgba(59,130,246,0.18), rgba(59,130,246,0.08))',
-                border: '1px solid rgba(59,130,246,0.25)', color: 'var(--accent)',
-              }}>
-                {monthlyTradingDays} {monthlyTradingDays === 1 ? t('day') : t('days')}
-              </span>
             </div>
           </>
         ) : (
@@ -404,21 +400,25 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                       <span style={{ fontSize: 9, fontWeight: 600, color: isToday ? 'var(--accent)' : 'var(--text-3)' }}>
                         {day}
                       </span>
-                      {dayNews && (
-                        <span
-                          title={dayNews.map(e => `${e.title} (${e.time})`).join(', ')}
-                          style={{
-                            width: 5, height: 5, borderRadius: '50%',
-                            background: '#ff4560', flexShrink: 0,
-                            boxShadow: '0 0 4px rgba(255,69,96,0.6)',
-                          }}
-                        />
-                      )}
                     </div>
+                    {calendarSettings.showEconomicEvents && dayNews && dayNews.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={e => { e.stopPropagation(); router.push(`/kalender?date=${key}`) }}
+                        title={dayNews.map(e => `${e.title} (${e.time})`).join(', ')}
+                        style={{
+                          fontSize: 7.5, fontWeight: 700, color: '#ff4560', textAlign: 'left',
+                          background: 'none', border: 'none', padding: 0, margin: '-2px 0 1px',
+                          cursor: 'pointer', lineHeight: 1.2, fontFamily: 'var(--font-dm-mono)',
+                        }}
+                      >
+                        {dayNews[0].time} {dayNews[0].country}{dayNews.length > 1 ? ` +${dayNews.length - 1}` : ''}
+                      </button>
+                    )}
                     {data && (
                       <>
                         <span style={{
-                          fontSize: 9, fontWeight: 700,
+                          fontSize: 11, fontWeight: 700,
                           color: pnlPos ? 'var(--green)' : 'var(--red)',
                           fontFamily: 'var(--font-dm-mono)',
                           lineHeight: 1.1,
@@ -434,7 +434,7 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                               {winPct}%
                             </span>
                           )}
-                          {dayBotIds.length > 0 && (
+                          {calendarSettings.showBotDots && dayBotIds.length > 0 && (
                             <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 2 }}>
                               {dayBotIds.slice(0, 4).map(botId => (
                                 <span
@@ -491,27 +491,19 @@ function TradingCalendar({ trades, currency, strategyBots }: Props) {
                   border: `1px solid ${ws.tradingDays > 0 ? (ws.pnl >= 0 ? 'rgba(0,217,126,0.15)' : 'rgba(255,69,96,0.15)') : 'var(--border-subtle)'}`,
                   padding: '8px 10px',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
+                  justifyContent: 'center',
+                  gap: 4,
                 }}
               >
                 <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-3)' }}>{t('weekLabel', { number: ws.isoWeek })}</span>
                 {ws.tradingDays > 0 ? (
-                  <>
-                    <span style={{
-                      fontSize: 12, fontWeight: 700,
-                      color: ws.pnl >= 0 ? 'var(--green)' : 'var(--red)',
-                      fontFamily: 'var(--font-dm-mono)',
-                    }}>
-                      {ws.pnl >= 0 ? '+' : ''}{ws.pnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
-                    </span>
-                    <span style={{
-                      fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 5,
-                      background: 'var(--accent-bg)', color: 'var(--accent)',
-                      alignSelf: 'flex-start',
-                    }}>
-                      {ws.tradingDays} {ws.tradingDays === 1 ? t('day') : t('days')}
-                    </span>
-                  </>
+                  <span style={{
+                    fontSize: 15, fontWeight: 700,
+                    color: ws.pnl >= 0 ? 'var(--green)' : 'var(--red)',
+                    fontFamily: 'var(--font-dm-mono)',
+                  }}>
+                    {ws.pnl >= 0 ? '+' : ''}{ws.pnl.toLocaleString('de-DE', { maximumFractionDigits: 0 })} {sym}
+                  </span>
                 ) : (
                   <span style={{ fontSize: 10, color: 'var(--text-3)' }}>0 €</span>
                 )}
