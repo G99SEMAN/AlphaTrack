@@ -12,7 +12,7 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm--NC-blue.svg?style=flat-square)](LICENSE)
 
 ---
 
@@ -493,7 +493,9 @@ This has real practical benefits: trading keeps running even if the app restarts
 
 ## License
 
-MIT License — see [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0) — see [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+
+Free to use, modify, and share for any noncommercial purpose (personal use, learning, contributing back). **Commercial use — including selling AlphaTrack or a modified version of it, or offering it as a paid service — is not permitted.**
 
 ---
 

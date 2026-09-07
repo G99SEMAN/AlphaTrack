@@ -12,7 +12,7 @@ Erfasse jeden Trade, verbinde deinen MT5-Bot via Bridge und analysiere deine Per
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm--NC-blue.svg?style=flat-square)](LICENSE)
 
 ---
 
@@ -493,7 +493,9 @@ Das bringt handfeste Vorteile: Trading läuft weiter, auch wenn die App neu star
 
 ## Lizenz
 
-MIT License — siehe [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0) — siehe [LICENSE](LICENSE). Copyright (c) 2026 G99SEMAN.
+
+Frei nutzbar, veränderbar und teilbar für jeden nicht-kommerziellen Zweck (privater Gebrauch, Lernen, Beiträge zurück ans Projekt). **Kommerzielle Nutzung — inklusive Verkauf von AlphaTrack oder einer veränderten Version davon, oder als kostenpflichtiger Dienst — ist nicht erlaubt.**
 
 ---
 

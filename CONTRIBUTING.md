@@ -3,6 +3,11 @@
 Danke für dein Interesse an AlphaTrack. Fehler, Ideen, direkte Fixes: hier steht,
 wie das am einfachsten läuft.
 
+> **Lizenz-Hinweis:** AlphaTrack steht unter der [PolyForm Noncommercial License 1.0.0](LICENSE) —
+> nicht-kommerzielle Nutzung/Änderung/Weitergabe frei, kommerzieller Verkauf (auch verändert)
+> nicht erlaubt. Mit einem Pull Request stellst du deinen Beitrag unter denselben Bedingungen
+> zur Verfügung.
+
 ## Fehler melden
 
 Fehler gefunden? Öffne ein [Issue](https://github.com/G99SEMAN/AlphaTrack/issues/new)
