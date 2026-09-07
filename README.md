@@ -8,7 +8,7 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
 
 ---
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack/releases)
+[![Version](https://img.shields.io/badge/version-1.1.2-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack/releases)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
@@ -26,6 +26,7 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
   - [Setup Wizard (recommended)](#setup-wizard-recommended)
   - [Manual Installation](#manual-installation)
   - [Docker / NAS Deployment](#docker--nas-deployment)
+- [Getting Started](#getting-started)
 - [Configuration](#configuration)
 - [Project Structure](#project-structure)
 - [Data Storage](#data-storage)
@@ -33,6 +34,7 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
 - [Tech Stack](#tech-stack)
 - [PWA / Mobile](#pwa--mobile)
 - [Home Network Infrastructure](#home-network-infrastructure-recommendation)
+- [Contributing](#contributing)
 - [License](#license)
 - [Disclaimer](#disclaimer)
 
@@ -231,6 +233,19 @@ icacls "$env:USERPROFILE\.ssh\authorized_keys" /inheritance:r /grant:r "${env:US
 
 On the next `deploy.bat` run, enter the displayed key path at **"Trading PC SSH key path"** —
 after that the deploy runs passwordlessly.
+
+---
+
+## Getting Started
+
+Once AlphaTrack is running, here's the fastest way to see it in action:
+
+1. **Open the app** — `http://localhost:3000` (or your NAS address) and create your first profile (broker, starting capital, currency)
+2. **Log a trade** — either by hand in the [Journal](#features) (entry, exit, SL/TP, notes, screenshot), or import an MT5 account history via the built-in HTML importer
+3. **Connect a bot** *(optional)* — start the [bridge](#installation) on your trading PC; every MT5 trade, manual or bot-driven, syncs into the journal automatically from that point on
+4. **Check the Dashboard** — PnL, win rate, equity curve, and the trading calendar update live as trades come in
+
+That's it — no further configuration is required to start journaling.
 
 ---
 
@@ -473,12 +488,25 @@ AlphaTrack is configured as a **Progressive Web App (PWA)**:
 
 ## Home Network Infrastructure (Recommendation)
 
-```
-PC (Dev/Journal)  <-->  NAS (AlphaTrack Docker :3002)
-                             ^
-                             | Heartbeat / Commands
-                             |
-                        Trading PC (MT5 + Python bridge)
+```mermaid
+flowchart LR
+    Browser(["Your Browser"]) -->|HTTP| App
+
+    subgraph NAS["NAS / Server"]
+        App["AlphaTrack<br/>UI + API Routes"]
+        Data[("data/*.json")]
+        App <--> Data
+    end
+
+    subgraph PC["Trading PC"]
+        Bridge["Python Bridge<br/>FastAPI :8765"]
+        MT5["MetaTrader 5"]
+        Bots["Trading Bots"]
+        Bridge <--> MT5
+        Bridge <-->|WebSocket| Bots
+    end
+
+    App <-->|Heartbeat, Commands,<br/>Trade-Sync| Bridge
 ```
 
 **Why a bridge?** MetaTrader 5 only runs on Windows and needs to stay permanently connected to the broker. The bridge encapsulates this connection in a standalone Python process on the trading PC. That keeps the actual AlphaTrack app platform-independent (it runs, for example, without issues in Docker on a NAS) and means it never needs direct access to MT5 or Windows itself.
@@ -488,6 +516,12 @@ This has real practical benefits: trading keeps running even if the app restarts
 - **AlphaTrack** runs on the NAS (Docker) or locally on a PC
 - **The Python bridge** runs on the bot PC alongside MT5 and sends heartbeats to AlphaTrack
 - **Communication** happens exclusively on the local network - no internet required
+
+---
+
+## Contributing
+
+Found a bug or have a feature idea? Check [CONTRIBUTING.md](CONTRIBUTING.md) — bug reports, feature requests, and pull requests are welcome. Note that contributions are accepted under the same [license](#license) as the project.
 
 ---
 
