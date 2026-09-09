@@ -9,6 +9,7 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
 ---
 
 [![Version](https://img.shields.io/badge/version-1.1.2-blue?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/G99SEMAN/AlphaTrack?style=flat-square)](https://github.com/G99SEMAN/AlphaTrack/stargazers)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
@@ -16,8 +17,19 @@ Log every trade, connect your MT5 bot via the bridge, and analyze your performan
 
 ---
 
+![AlphaTrack Dashboard](public/screenshots/readme/hero.png)
+
+---
+
+## Why I Built This
+
+I trade through MetaTrader 5 and wanted a journal that keeps every trade, screenshot, and note on my own hardware — not in someone else's cloud behind a monthly subscription. The tools I found were either SaaS-only, disconnected from my own bots, or both. AlphaTrack is my answer: a local-first journal that runs on a NAS or any PC, talks directly to MT5 through a small bridge, and only calls out to an AI when I explicitly ask it to.
+
+---
+
 ## Table of Contents
 
+- [Why I Built This](#why-i-built-this)
 - [Features](#features)
 - [Navigation](#navigation)
 - [Languages](#languages)
